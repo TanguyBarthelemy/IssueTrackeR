@@ -28,14 +28,14 @@ Format the issue in a simpler format
 \examples{
 
 raw_issues <- gh::gh(
-    repo = "dplyr",
-    username = "tidyverse",
+    repo = "rjdemetra",
+    username = "rjdverse",
     endpoint = "/repos/:username/:repo/issues",
     .limit = Inf
 )
 raw_comments <- gh::gh(
-    repo = "dplyr",
-    username = "tidyverse",
+    repo = "rjdemetra",
+    username = "rjdverse",
     endpoint = "/repos/:username/:repo/issues/comments",
     .limit = Inf
 )

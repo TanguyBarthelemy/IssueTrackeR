@@ -92,14 +92,14 @@ get_issues <- function(type = c("local", "online"),
 #' @examples
 #'
 #' raw_issues <- gh::gh(
-#'     repo = "dplyr",
-#'     username = "tidyverse",
+#'     repo = "rjdemetra",
+#'     username = "rjdverse",
 #'     endpoint = "/repos/:username/:repo/issues",
 #'     .limit = Inf
 #' )
 #' raw_comments <- gh::gh(
-#'     repo = "dplyr",
-#'     username = "tidyverse",
+#'     repo = "rjdemetra",
+#'     username = "rjdverse",
 #'     endpoint = "/repos/:username/:repo/issues/comments",
 #'     .limit = Inf
 #' )
@@ -201,9 +201,6 @@ write_issues_to_dataset <- function(
         issues,
         type = c("local", "online"),
         ...) {
-    if (!dir.exists(path_dataset)) {
-        dir.create(path_dataset)
-    }
     if (missing(issues) || is.null(issues)) {
         type <- match.arg(type)
         issues <- get_issues(type = type, ...)
@@ -220,6 +217,9 @@ write_issues_to_dataset.IssuesTB <- function(
         type,
         path_dataset = getOption("IssueTrackeR.dataset.path"),
         ...) {
+    if (!dir.exists(path_dataset)) {
+        dir.create(path_dataset)
+    }
     path_dataset_issues <- file.path(path_dataset, "list_issues.yaml")
     yaml::write_yaml(x = issues, file = path_dataset_issues)
     return(invisible(TRUE))

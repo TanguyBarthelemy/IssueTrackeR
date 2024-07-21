@@ -5,6 +5,6 @@
         normalizePath(mustWork = FALSE)
 
     options(IssueTrackeR.dataset.path = dataset_path)
-    options(IssueTrackeR.username = "tidyverse")
-    options(IssueTrackeR.repo = "dplyr")
+    options(IssueTrackeR.username = "rjdverse")
+    options(IssueTrackeR.repo = "rjdemetra")
 }

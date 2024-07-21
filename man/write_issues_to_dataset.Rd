@@ -4,12 +4,7 @@
 \alias{write_issues_to_dataset}
 \title{Save issue dataset in a yaml format}
 \usage{
-write_issues_to_dataset(
-  issues,
-  type = c("local", "online"),
-  path_dataset = getOption("IssueTrackeR.dataset.path"),
-  ...
-)
+write_issues_to_dataset(issues, type = c("local", "online"), ...)
 }
 \arguments{
 \item{issues}{a \code{IssuesTB} object.}
@@ -18,11 +13,11 @@ write_issues_to_dataset(
 you want to fetch information from github or \code{"local"} if you want to
 fetch information locally.}
 
+\item{...}{Additional arguments for the function \code{get_issues}}
+
 \item{path_dataset}{A character string specifying the path which will contain
 the datasets. Defaults to the package option
 \code{IssueTrackeR.dataset.path}.}
-
-\item{...}{Additional arguments for the function \code{get_issues}}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was

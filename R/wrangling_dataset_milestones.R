@@ -34,7 +34,6 @@ get_milestones <- function(
     type <- match.arg(type)
 
     if (type == "online") {
-
         milestones <- gh::gh(
             repo = repo,
             username = username,
@@ -72,8 +71,8 @@ get_milestones <- function(
 #' @examples
 #' # With milestones
 #' raw_milestones <- gh::gh(
-#'     repo = "dplyr",
-#'     username = "tidyverse",
+#'     repo = "rjdemetra",
+#'     username = "rjdverse",
 #'     endpoint = "/repos/:username/:repo/milestones",
 #'     .limit = Inf
 #' )
@@ -81,18 +80,17 @@ get_milestones <- function(
 #'
 format_milestones <- function(raw_milestones) {
     new_mlst_structure <- raw_milestones |>
-        lapply(
-            FUN = base::`[`,
-            c("title", "description", "due_on")
-        ) |>
-        lapply(FUN = as.data.frame) |>
+        lapply(FUN = \(x) data.frame(
+            title = x$title,
+            description = x$description,
+            due_on = ifelse(test = is.null(x$due_on),
+                            yes = as.POSIXct(NA_integer_),
+                            no = x$due_on |>
+                                as.POSIXct() |>
+                                as.integer() |>
+                                as.POSIXct())
+        )) |>
         do.call(what = rbind)
-
-    new_mlst_structure[["due_on"]]  <- new_mlst_structure[["due_on"]] |>
-        as.POSIXct() |>
-        as.integer() |>
-        as.POSIXct()
-
     return(new_mlst_structure)
 }
 
