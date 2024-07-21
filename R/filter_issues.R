@@ -23,6 +23,8 @@ logical_reducer <- function(...,
     }
 }
 
+vgrepl <- Vectorize(grepl, "pattern")
+
 #' @title Text in issue(s)
 #'
 #' @description
@@ -157,7 +159,7 @@ contains.IssueTB <- function(x,
     values_logic_gate <- match.arg(values_logic_gate)
     fields_logic_gate <- match.arg(fields_logic_gate)
 
-    if (length(fields) > 1) {
+    if (length(fields) > 1L) {
         text_in_issue <- vapply(
             X = fields,
             FUN = function(field) {
@@ -184,8 +186,8 @@ contains.IssueTB <- function(x,
         text_in_issue <- FALSE
     } else if (fields %in% c("title", "body")) {
         text_in_issue <- logical_reducer(
-            x = grepl(
-                pattern = paste(values, collapse = " | "),
+            x = vgrepl(
+                pattern = values,
                 x = field_content,
                 fixed = FALSE,
                 perl = TRUE,

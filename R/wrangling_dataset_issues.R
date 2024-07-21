@@ -242,3 +242,10 @@ write_issues_to_dataset.default <- function(issues, type, ...) {
 `[.IssuesTB` <- function(x, ...) {
     return(`class<-`(NextMethod(), "IssuesTB"))
 }
+
+#' @exportS3Method c IssuesTB
+#' @method c IssuesTB
+#' @export
+c.IssuesTB <- function(..) {
+    return(`class<-`(NextMethod(), "IssuesTB"))
+}
