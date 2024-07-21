@@ -80,16 +80,18 @@ get_milestones <- function(
 #'
 format_milestones <- function(raw_milestones) {
     new_mlst_structure <- raw_milestones |>
-        lapply(FUN = \(x) data.frame(
-            title = x$title,
-            description = x$description,
-            due_on = ifelse(test = is.null(x$due_on),
-                            yes = as.POSIXct(NA_integer_),
-                            no = x$due_on |>
-                                as.POSIXct() |>
-                                as.integer() |>
-                                as.POSIXct())
-        )) |>
+        lapply(FUN = function(x) {
+            data.frame(
+                title = x[["title"]],
+                description = x[["description"]],
+                due_on = ifelse(test = is.null(x[["due_on"]]),
+                                yes = as.POSIXct(NA_integer_),
+                                no = x[["due_on"]] |>
+                                    as.POSIXct() |>
+                                    as.integer() |>
+                                    as.POSIXct())
+            )
+        }) |>
         do.call(what = rbind)
     return(new_mlst_structure)
 }

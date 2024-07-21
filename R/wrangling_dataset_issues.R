@@ -197,6 +197,8 @@ format_issues <- function(raw_issues,
 #' # Without issues
 #' write_issues_to_dataset(type = "online")
 #'
+#' @rdname write_issues_to_dataset
+#'
 write_issues_to_dataset <- function(
         issues,
         type = c("local", "online"),
@@ -209,6 +211,7 @@ write_issues_to_dataset <- function(
     UseMethod(generic = "write_issues_to_dataset", object = issues)
 }
 
+#' @rdname write_issues_to_dataset
 #' @exportS3Method write_issues_to_dataset IssuesTB
 #' @method write_issues_to_dataset IssuesTB
 #' @export
@@ -225,9 +228,17 @@ write_issues_to_dataset.IssuesTB <- function(
     return(invisible(TRUE))
 }
 
+#' @rdname write_issues_to_dataset
 #' @exportS3Method write_issues_to_dataset default
 #' @method write_issues_to_dataset default
 #' @export
 write_issues_to_dataset.default <- function(issues, type, ...) {
     stop("This function requires a IssuesTB object.")
+}
+
+#' @exportS3Method `[` IssuesTB
+#' @method `[` IssuesTB
+#' @export
+`[.IssuesTB` <- function(x, ...) {
+    return(`class<-`(NextMethod(), "IssuesTB"))
 }

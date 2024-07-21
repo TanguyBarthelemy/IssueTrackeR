@@ -2,9 +2,20 @@
 % Please edit documentation in R/wrangling_dataset_issues.R
 \name{write_issues_to_dataset}
 \alias{write_issues_to_dataset}
+\alias{write_issues_to_dataset.IssuesTB}
+\alias{write_issues_to_dataset.default}
 \title{Save issue dataset in a yaml format}
 \usage{
 write_issues_to_dataset(issues, type = c("local", "online"), ...)
+
+\method{write_issues_to_dataset}{IssuesTB}(
+  issues,
+  type,
+  path_dataset = getOption("IssueTrackeR.dataset.path"),
+  ...
+)
+
+\method{write_issues_to_dataset}{default}(issues, type, ...)
 }
 \arguments{
 \item{issues}{a \code{IssuesTB} object.}

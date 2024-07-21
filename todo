@@ -1,21 +1,9 @@
 
-print("Faire une fonction `contains` qui est générique pour chacun des title, bodu=y, labels.. et qui march avec un switch")
-print("Dans la fonction `contains`, peut êtr qu'il n'y aura même pas besoin d'appeler les 4 foncions mais que 2 fonctions différentes ?")
-
-Des que l'on met un chemin relatif, il fuat qu'il soiut en parametre de la fonction (mais aussi par défaut).
-Ces arguments relatif à l'environement de l'utilisateur doivent être liés à des options.
-Ces options sont gérés dans le .Rprofile de chaque projet et les arguments par défaut de ces foctions sont alors des getOptions
-
-
-Faire une fonction qui superseed subset(`[`) pour créer un subset d'issue et garder la bonne classe.
-
-Sur la fonction de write et read data yaml, mettre un chemin où on écrit les données (et faire en sorte que c'est une option pour ne pas avoir à le repréciser à chaque appel + chaque ouverture de session). (et à cette occasion, retirer les dir.create...)
-
-add readme
-
 Missing steps:
-
 - Faire la liste à partir de (voir la liste af creation de projets et le projet technical book)
 - pkgdown
 - NEWS.md
 - ...
+
+Etudier la difference entre NULL, NA et missing (pour une issue d'abord puis label et milestone.)
+Comment créer des objets vides mais avec la bonne structure ?
