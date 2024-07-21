@@ -1,0 +1,54 @@
+#' @title Display object
+#'
+#' @param x a \code{IssueTB} or \code{IssuesTB} object.
+#' @param ... Unused argument
+#'
+#' @details
+#' This function displays an issue (\code{IssueTB} object) or a list of issues
+#' (\code{IssuesTB} object) with a formatted output.
+#'
+#' @returns invisibly (with \code{invisible()}) \code{NULL}.
+#' @export
+#'
+#' @examples
+#' all_issues <- get_issues(type = "online", verbose = FALSE)
+#'
+#' # Display one issue
+#' print(all_issues[[1]])
+#'
+#' # Display several issues
+#' print(all_issues[1:10])
+#'
+#' @rdname print
+#'
+#' @exportS3Method print IssueTB
+#' @method print IssueTB
+#'
+#' @export
+print.IssueTB <- function(x, ...) {
+    issue <- x
+
+    cat(crayon::bold("Issue #", issue[["number"]], "\n", sep = ""))
+    cat(crayon::underline("Labels:"),
+        paste(issue[["labels"]], sep = ", "), "\n")
+    cat(crayon::underline("Milestone:"), issue[["milestone"]], "\n")
+    cat(crayon::underline("Title:"), issue[["title"]], "\n")
+    cat(crayon::underline("Text:\n"))
+    cat(issue[["body"]], "\n")
+    cat("\n")
+
+    return(invisible(issue))
+}
+
+#' @rdname print
+#' @exportS3Method print IssuesTB
+#' @method print IssuesTB
+#' @export
+print.IssuesTB <- function(x, ...) {
+    issues <- x
+    for (issue in issues) {
+        print(issue)
+        cat("\n")
+    }
+    return(invisible(issues))
+}

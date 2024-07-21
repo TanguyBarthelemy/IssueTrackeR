@@ -1,0 +1,23 @@
+Package: IssueTrackeR
+Type: Package
+Title: List Things To Do
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given = "Tanguy", 
+           family = "Barthelemy", role = c("aut","cre"),
+           email ="tanguy.barthelemy@insee.fr"))
+Description: Manage a GitHub problem using R: store, prioritise, display, add,
+    delete, select issues, label and milestone.
+License: GPL (>= 3)
+Depends:
+    R (>= 4.1.0)
+Imports:
+    gh, 
+    yaml, 
+    crayon
+URL: https://github.com/TanguyBarthelemy/TODO
+LazyData: TRUE
+RoxygenNote: 7.3.2
+Roxygen: list(markdown = TRUE)
+BugReports: https://github.com/TanguyBarthelemy/TODO/issues
+Encoding: UTF-8
