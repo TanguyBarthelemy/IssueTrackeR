@@ -21,8 +21,8 @@ Format the label in a simpler format
 \examples{
 # With labels
 raw_labels <- gh::gh(
-   repo = "TODO",
-   username = "TanguyBarthelemy",
+   repo = "dplyr",
+   username = "tidyverse",
    endpoint = "/repos/:username/:repo/labels",
    .limit = Inf
 )

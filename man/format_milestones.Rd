@@ -21,8 +21,8 @@ Format the milestone in a simpler format
 \examples{
 # With milestones
 raw_milestones <- gh::gh(
-    repo = "TODO",
-    username = "TanguyBarthelemy",
+    repo = "dplyr",
+    username = "tidyverse",
     endpoint = "/repos/:username/:repo/milestones",
     .limit = Inf
 )

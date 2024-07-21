@@ -53,7 +53,7 @@ aggregate_vector <- function(x, y, logic_gate = c("AND", "OR")) {
 #'     logic_gate = "AND"
 #' )
 #'
-body_contains <- function(x, ...){
+body_contains <- function(x, ...) {
     UseMethod("body_contains", x)
 }
 
@@ -140,7 +140,7 @@ body_contains.default <- function(x, ...) {
 #'     logic_gate = "AND"
 #' )
 #'
-title_contains <- function(x, ...){
+title_contains <- function(x, ...) {
     UseMethod("title_contains", x)
 }
 
@@ -148,7 +148,10 @@ title_contains <- function(x, ...){
 #' @exportS3Method title_contains IssueTB
 #' @method title_contains IssueTB
 #' @export
-title_contains.IssueTB <- function(x, values, logic_gate = c("AND", "OR"), ...) {
+title_contains.IssueTB <- function(x,
+                                   values,
+                                   logic_gate = c("AND", "OR"),
+                                   ...) {
     issue <- x
 
     logic_gate <- match.arg(logic_gate)
@@ -172,7 +175,7 @@ title_contains.IssueTB <- function(x, values, logic_gate = c("AND", "OR"), ...) 
 #' @exportS3Method title_contains IssuesTB
 #' @method title_contains IssuesTB
 #' @export
-title_contains.IssuesTB <- function(x,...) {
+title_contains.IssuesTB <- function(x, ...) {
     issues <- x
 
     text_in_titles <- vapply(
@@ -226,7 +229,7 @@ title_contains.default <- function(x, ...) {
 #'     logic_gate = "AND"
 #' )
 #'
-labels_contains <- function(x, ...){
+labels_contains <- function(x, ...) {
     UseMethod("labels_contains", x)
 }
 
@@ -234,7 +237,10 @@ labels_contains <- function(x, ...){
 #' @exportS3Method labels_contains IssueTB
 #' @method labels_contains IssueTB
 #' @export
-labels_contains.IssueTB <- function(x, values, logic_gate = c("AND", "OR"), ...) {
+labels_contains.IssueTB <- function(x,
+                                    values,
+                                    logic_gate = c("AND", "OR"),
+                                    ...) {
     issue <- x
 
     logic_gate <- match.arg(logic_gate)
@@ -310,7 +316,7 @@ labels_contains.IssuesTB <- function(x, ...) {
 #'     logic_gate = "AND"
 #' )
 #'
-milestone_contains <- function(x, ...){
+milestone_contains <- function(x, ...) {
     UseMethod("milestone_contains", x)
 }
 
@@ -318,7 +324,10 @@ milestone_contains <- function(x, ...){
 #' @exportS3Method milestone_contains IssueTB
 #' @method milestone_contains IssueTB
 #' @export
-milestone_contains.IssueTB <- function(x, values, logic_gate = c("AND", "OR"), ...) {
+milestone_contains.IssueTB <- function(x,
+                                       values,
+                                       logic_gate = c("AND", "OR"),
+                                       ...) {
     issue <- x
 
     logic_gate <- match.arg(logic_gate)
@@ -336,7 +345,7 @@ milestone_contains.IssueTB <- function(x, values, logic_gate = c("AND", "OR"), .
 #' @exportS3Method milestone_contains IssuesTB
 #' @method milestone_contains IssuesTB
 #' @export
-milestone_contains.IssuesTB <- function(x,...) {
+milestone_contains.IssuesTB <- function(x, ...) {
     issues <- x
 
     milestone_in_issues <- vapply(
@@ -471,8 +480,11 @@ filter_issues <- function(values,
     }
 
     if ("milestone" %in% fields) {
-        assertion_milestone <- milestone_contains(x = x, values = values,
-                                            logic_gate = values_logic_gate)
+        assertion_milestone <- milestone_contains(
+            x = x,
+            values = values,
+            logic_gate = values_logic_gate
+        )
 
         filtering <- filtering |>
             aggregate_vector(
@@ -497,4 +509,3 @@ no_milestones <- function(issues = get_issues()) {
         vapply(FUN = is.null, FUN.VALUE = logical(1L))
     return(issues[without_milestone])
 }
-

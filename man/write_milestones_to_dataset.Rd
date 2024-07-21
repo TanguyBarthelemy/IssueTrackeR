@@ -4,7 +4,11 @@
 \alias{write_milestones_to_dataset}
 \title{Save milestone dataset in a yaml format}
 \usage{
-write_milestones_to_dataset(milestones, type = "online")
+write_milestones_to_dataset(
+  milestones,
+  type = "online",
+  path_dataset = getOption("IssueTrackeR.dataset.path")
+)
 }
 \arguments{
 \item{milestones}{a list representing milestones with simpler structure (with
@@ -13,6 +17,10 @@ title, description and due_on).}
 \item{type}{a character string that is either \code{"online"} (by default) if
 you want to fetch information from github or \code{"local"} if you want to
 fetch information locally.}
+
+\item{path_dataset}{A character string specifying the path which will contain
+the datasets. Defaults to the package option
+\code{IssueTrackeR.dataset.path}.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was

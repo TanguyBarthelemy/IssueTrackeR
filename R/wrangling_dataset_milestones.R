@@ -4,6 +4,15 @@
 #' @param type a character string that is either \code{"online"} if you want to
 #' fetch information from github or \code{"local"} if you want to fetch
 #' information locally.
+#' @param path_dataset A character string specifying the path which contains the
+#' datasets (only used if type is \code{"local"}). Defaults to the package
+#' option \code{IssueTrackeR.dataset.path}.
+#' @param repo A character string specifying the GitHub repository name (only
+#' used if type is \code{"online"}). Defaults to the package option
+#' \code{IssueTrackeR.repo}.
+#' @param username A character string specifying the GitHub username (only used
+#' if type is \code{"online"}). Defaults to the package option
+#' \code{IssueTrackeR.username}.
 #'
 #' @returns
 #' a list representing milestones with simpler structure (with title,
@@ -17,19 +26,25 @@
 #' }
 #' get_milestones(type = "online")
 #'
-get_milestones <- function(type = c("local", "online")) {
+get_milestones <- function(
+        type = c("local", "online"),
+        path_dataset = getOption("IssueTrackeR.dataset.path"),
+        repo = getOption("IssueTrackeR.repo"),
+        username = getOption("IssueTrackeR.username")) {
     type <- match.arg(type)
 
     if (type == "online") {
 
         milestones <- gh::gh(
-            repo = "TODO",
-            username = "TanguyBarthelemy",
+            repo = repo,
+            username = username,
             endpoint = "/repos/:username/:repo/milestones",
             .limit = Inf
         ) |>
             format_milestones()
     } else if (type == "local") {
+        path_dataset_milestones <- file.path(path_dataset,
+                                             "list_milestones.yaml")
         if (file.exists(path_dataset_milestones)) {
             milestones <- yaml::read_yaml(file = path_dataset_milestones)
             milestones[["due_on"]]  <- as.POSIXct(milestones[["due_on"]])
@@ -57,8 +72,8 @@ get_milestones <- function(type = c("local", "online")) {
 #' @examples
 #' # With milestones
 #' raw_milestones <- gh::gh(
-#'     repo = "TODO",
-#'     username = "TanguyBarthelemy",
+#'     repo = "dplyr",
+#'     username = "tidyverse",
 #'     endpoint = "/repos/:username/:repo/milestones",
 #'     .limit = Inf
 #' )
@@ -88,6 +103,9 @@ format_milestones <- function(raw_milestones) {
 #' @param type a character string that is either \code{"online"} (by default) if
 #' you want to fetch information from github or \code{"local"} if you want to
 #' fetch information locally.
+#' @param path_dataset A character string specifying the path which will contain
+#' the datasets. Defaults to the package option
+#' \code{IssueTrackeR.dataset.path}.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
@@ -101,11 +119,16 @@ format_milestones <- function(raw_milestones) {
 #' # Without milestones
 #' write_milestones_to_dataset(type = "online")
 #'
-write_milestones_to_dataset <- function(milestones, type = "online") {
-    if (!dir.exists("data")) {
-        dir.create("data")
+write_milestones_to_dataset <- function(
+        milestones,
+        type = "online",
+        path_dataset = getOption("IssueTrackeR.dataset.path")) {
+
+    if (!dir.exists(path_dataset)) {
+        dir.create(path_dataset)
     }
     type <- match.arg(type)
+    path_dataset_milestones <- file.path(path_dataset, "list_milestones.yaml")
     if (missing(milestones)) {
         milestones <- get_milestones(type = type)
     }

@@ -4,6 +4,15 @@
 #' @param type a character string that is either \code{"online"} if you want to
 #' fetch information from github or \code{"local"} if you want to fetch
 #' information locally.
+#' @param path_dataset A character string specifying the path which contains the
+#' datasets (only used if type is \code{"local"}). Defaults to the package
+#' option \code{IssueTrackeR.dataset.path}.
+#' @param repo A character string specifying the GitHub repository name (only
+#' used if type is \code{"online"}). Defaults to the package option
+#' \code{IssueTrackeR.repo}.
+#' @param username A character string specifying the GitHub username (only used
+#' if type is \code{"online"}). Defaults to the package option
+#' \code{IssueTrackeR.username}.
 #'
 #' @returns
 #' a list representing labels with simpler structure (with name,
@@ -17,18 +26,22 @@
 #' }
 #' get_labels(type = "online")
 #'
-get_labels <- function(type = c("local", "online")) {
+get_labels <- function(type = c("local", "online"),
+                       path_dataset = getOption("IssueTrackeR.dataset.path"),
+                       repo = getOption("IssueTrackeR.repo"),
+                       username = getOption("IssueTrackeR.username")) {
     type <- match.arg(type)
 
     if (type == "online") {
         labels <- gh::gh(
-            repo = "TODO",
-            username = "TanguyBarthelemy",
+            repo = repo,
+            username = username,
             endpoint = "/repos/:username/:repo/labels",
             .limit = Inf
         ) |>
             format_labels()
     } else if (type == "local") {
+        path_dataset_labels <- file.path(path_dataset, "list_labels.yaml")
         if (file.exists(path_dataset_labels)) {
             labels <- yaml::read_yaml(file = path_dataset_labels)
         } else {
@@ -55,8 +68,8 @@ get_labels <- function(type = c("local", "online")) {
 #' @examples
 #' # With labels
 #' raw_labels <- gh::gh(
-#'    repo = "TODO",
-#'    username = "TanguyBarthelemy",
+#'    repo = "dplyr",
+#'    username = "tidyverse",
 #'    endpoint = "/repos/:username/:repo/labels",
 #'    .limit = Inf
 #' )
@@ -78,6 +91,9 @@ format_labels <- function(raw_labels) {
 #' @param type a character string that is either \code{"online"} (by default) if
 #' you want to fetch information from github or \code{"local"} if you want to
 #' fetch information locally.
+#' @param path_dataset A character string specifying the path which will contain
+#' the datasets. Defaults to the package option
+#' \code{IssueTrackeR.dataset.path}.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
@@ -91,11 +107,15 @@ format_labels <- function(raw_labels) {
 #' # Without labels
 #' write_labels_to_dataset()
 #'
-write_labels_to_dataset <- function(labels, type = "online") {
-    if (!dir.exists("data")) {
-        dir.create("data")
+write_labels_to_dataset <- function(
+        labels,
+        type = "online",
+        path_dataset = getOption("IssueTrackeR.dataset.path")) {
+    if (!dir.exists(path_dataset)) {
+        dir.create(path_dataset)
     }
     type <- match.arg(type)
+    path_dataset_labels <- file.path(path_dataset, "list_labels.yaml")
     if (missing(labels)) {
         labels <- get_labels(type = type)
     }

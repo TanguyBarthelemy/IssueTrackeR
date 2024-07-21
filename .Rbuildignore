@@ -27,3 +27,4 @@ cran-comments.md
 ^pom\.xml$
 
 ^data$
+^todo$

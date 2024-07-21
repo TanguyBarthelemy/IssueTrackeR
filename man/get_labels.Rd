@@ -4,12 +4,29 @@
 \alias{get_labels}
 \title{Retrieve the labels from github}
 \usage{
-get_labels(type = c("local", "online"))
+get_labels(
+  type = c("local", "online"),
+  path_dataset = getOption("IssueTrackeR.dataset.path"),
+  repo = getOption("IssueTrackeR.repo"),
+  username = getOption("IssueTrackeR.username")
+)
 }
 \arguments{
 \item{type}{a character string that is either \code{"online"} if you want to
 fetch information from github or \code{"local"} if you want to fetch
 information locally.}
+
+\item{path_dataset}{A character string specifying the path which contains the
+datasets (only used if type is \code{"local"}). Defaults to the package
+option \code{IssueTrackeR.dataset.path}.}
+
+\item{repo}{A character string specifying the GitHub repository name (only
+used if type is \code{"online"}). Defaults to the package option
+\code{IssueTrackeR.repo}.}
+
+\item{username}{A character string specifying the GitHub username (only used
+if type is \code{"online"}). Defaults to the package option
+\code{IssueTrackeR.username}.}
 }
 \value{
 a list representing labels with simpler structure (with name,
