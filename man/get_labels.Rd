@@ -5,27 +5,27 @@
 \title{Retrieve the labels from github}
 \usage{
 get_labels(
-  type = c("local", "online"),
+  source = c("local", "online"),
   path_dataset = getOption("IssueTrackeR.dataset.path"),
   repo = getOption("IssueTrackeR.repo"),
   username = getOption("IssueTrackeR.username")
 )
 }
 \arguments{
-\item{type}{a character string that is either \code{"online"} if you want to
+\item{source}{a character string that is either \code{"online"} if you want to
 fetch information from github or \code{"local"} if you want to fetch
 information locally.}
 
 \item{path_dataset}{A character string specifying the path which contains the
-datasets (only used if type is \code{"local"}). Defaults to the package
+datasets (only used if source is \code{"local"}). Defaults to the package
 option \code{IssueTrackeR.dataset.path}.}
 
 \item{repo}{A character string specifying the GitHub repository name (only
-used if type is \code{"online"}). Defaults to the package option
+used if source is \code{"online"}). Defaults to the package option
 \code{IssueTrackeR.repo}.}
 
 \item{username}{A character string specifying the GitHub username (only used
-if type is \code{"online"}). Defaults to the package option
+if source is \code{"online"}). Defaults to the package option
 \code{IssueTrackeR.username}.}
 }
 \value{
@@ -38,8 +38,8 @@ Retrieve the labels from github
 \examples{
 \dontrun{
 get_labels()
-get_labels(type = "local")
+get_labels(source = "local")
 }
-get_labels(type = "online")
+get_labels(source = "online")
 
 }

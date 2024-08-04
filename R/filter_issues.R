@@ -106,7 +106,7 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' @export
 #'
 #' @examples
-#' all_issues <- get_issues(type = "online", verbose = FALSE)
+#' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' issue_1 <- all_issues[[1L]]
 #'
 #' # This will return TRUE if the issue contains either "README" or "package"
@@ -237,7 +237,7 @@ contains.default <- function(x, ...) {
 #' @export
 #'
 #' @examples
-#' all_issues <- get_issues(type = "online", verbose = FALSE)
+#' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' # Condition: issues containing "README" in its body OR title
 #' filtered_issues <- filter_issues(
 #'     x = all_issues,

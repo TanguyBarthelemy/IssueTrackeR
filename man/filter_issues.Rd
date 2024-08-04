@@ -24,7 +24,7 @@ More informations on the filtering in the documentation of the function
 \code{\link[IssueTrackeR]{contains}}.
 }
 \examples{
-all_issues <- get_issues(type = "online", verbose = FALSE)
+all_issues <- get_issues(source = "online", verbose = FALSE)
 # Condition: issues containing "README" in its body OR title
 filtered_issues <- filter_issues(
     x = all_issues,

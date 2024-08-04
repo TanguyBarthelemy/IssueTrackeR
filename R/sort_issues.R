@@ -94,7 +94,7 @@ simple_sort <- function(issues, sorting_variables) {
 #'
 #' @export
 #' @examples
-#' all_issues <- get_issues(type = "online", verbose = FALSE)
+#' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' sort(
 #'     x = all_issues,
 #'     sorting_variables = list(list(object = "milestones", field = "due_on"),

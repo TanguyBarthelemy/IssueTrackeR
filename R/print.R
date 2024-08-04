@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' all_issues <- get_issues(type = "online", verbose = FALSE)
+#' all_issues <- get_issues(source = "online", verbose = FALSE)
 #'
 #' # Display one issue
 #' print(all_issues[[1]])
@@ -46,9 +46,14 @@ print.IssueTB <- function(x, ...) {
 #' @export
 print.IssuesTB <- function(x, ...) {
     issues <- x
+    cat(crayon::bold(ifelse(
+        test = length(issues) > 0L,
+        yes = paste("There are", length(issues), "issues."),
+        no = "No issues"
+    ), "\n"))
     for (issue in issues) {
-        print(issue)
         cat("\n")
+        print(issue)
     }
     return(invisible(issues))
 }

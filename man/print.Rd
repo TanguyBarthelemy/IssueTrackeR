@@ -25,7 +25,7 @@ This function displays an issue (\code{IssueTB} object) or a list of issues
 (\code{IssuesTB} object) with a formatted output.
 }
 \examples{
-all_issues <- get_issues(type = "online", verbose = FALSE)
+all_issues <- get_issues(source = "online", verbose = FALSE)
 
 # Display one issue
 print(all_issues[[1]])

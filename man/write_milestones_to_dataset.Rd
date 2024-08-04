@@ -6,7 +6,7 @@
 \usage{
 write_milestones_to_dataset(
   milestones,
-  type = "online",
+  source = "online",
   path_dataset = getOption("IssueTrackeR.dataset.path")
 )
 }
@@ -14,7 +14,7 @@ write_milestones_to_dataset(
 \item{milestones}{a list representing milestones with simpler structure (with
 title, description and due_on).}
 
-\item{type}{a character string that is either \code{"online"} (by default) if
+\item{source}{a character string that is either \code{"online"} (by default) if
 you want to fetch information from github or \code{"local"} if you want to
 fetch information locally.}
 
@@ -35,6 +35,6 @@ milestones <- get_milestones()
 write_milestones_to_dataset(milestones)
 
 # Without milestones
-write_milestones_to_dataset(type = "online")
+write_milestones_to_dataset(source = "online")
 
 }

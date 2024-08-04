@@ -6,21 +6,21 @@
 \alias{write_issues_to_dataset.default}
 \title{Save issue dataset in a yaml format}
 \usage{
-write_issues_to_dataset(issues, type = c("local", "online"), ...)
+write_issues_to_dataset(issues, source = c("local", "online"), ...)
 
 \method{write_issues_to_dataset}{IssuesTB}(
   issues,
-  type,
+  source,
   path_dataset = getOption("IssueTrackeR.dataset.path"),
   ...
 )
 
-\method{write_issues_to_dataset}{default}(issues, type, ...)
+\method{write_issues_to_dataset}{default}(issues, source, ...)
 }
 \arguments{
 \item{issues}{a \code{IssuesTB} object.}
 
-\item{type}{a character string that is either \code{"online"} (by default) if
+\item{source}{a character string that is either \code{"online"} (by default) if
 you want to fetch information from github or \code{"local"} if you want to
 fetch information locally.}
 
@@ -39,10 +39,10 @@ Save issue dataset in a yaml format
 }
 \examples{
 # With issues
-all_issues <- get_issues(type = "online", verbose = FALSE)
+all_issues <- get_issues(source = "online", verbose = FALSE)
 write_issues_to_dataset(all_issues)
 
 # Without issues
-write_issues_to_dataset(type = "online")
+write_issues_to_dataset(source = "online")
 
 }

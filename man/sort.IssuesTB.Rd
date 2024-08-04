@@ -71,7 +71,7 @@ from \code{x}) to the \code{\link[IssueTrackeR]{filter_issues}}
 \code{values_logic_gate} and \code{negate}).
 }
 \examples{
-all_issues <- get_issues(type = "online", verbose = FALSE)
+all_issues <- get_issues(source = "online", verbose = FALSE)
 sort(
     x = all_issues,
     sorting_variables = list(list(object = "milestones", field = "due_on"),

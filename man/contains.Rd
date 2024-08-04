@@ -108,7 +108,7 @@ not taken into account.
 This function is not case-sensitive.
 }
 \examples{
-all_issues <- get_issues(type = "online", verbose = FALSE)
+all_issues <- get_issues(source = "online", verbose = FALSE)
 issue_1 <- all_issues[[1L]]
 
 # This will return TRUE if the issue contains either "README" or "package"

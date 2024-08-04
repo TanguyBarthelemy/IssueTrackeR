@@ -1,17 +1,17 @@
 
 #' @title Retrieve the issues from github
 #'
-#' @param type a character string that is either \code{"online"} if you want to
-#' fetch information from github or \code{"local"} if you want to fetch
+#' @param source a character string that is either \code{"online"} if you want
+#' to fetch information from github or \code{"local"} if you want to fetch
 #' information locally.
 #' @param path_dataset A character string specifying the path which contains the
-#' datasets (only used if type is \code{"local"}). Defaults to the package
+#' datasets (only used if source is \code{"local"}). Defaults to the package
 #' option \code{IssueTrackeR.dataset.path}.
 #' @param repo A character string specifying the GitHub repository name (only
-#' used if type is \code{"online"}). Defaults to the package option
+#' used if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.repo}.
 #' @param username A character string specifying the GitHub username (only used
-#' if type is \code{"online"}). Defaults to the package option
+#' if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.username}.
 #' @param ... Additional arguments for the function \code{format_issues}
 #'
@@ -26,18 +26,18 @@
 #' @examples
 #' \dontrun{
 #' get_issues()
-#' get_issues(type = "local")
+#' get_issues(source = "local")
 #' }
-#' get_issues(type = "online")
+#' get_issues(source = "online")
 #'
-get_issues <- function(type = c("local", "online"),
+get_issues <- function(source = c("local", "online"),
                        path_dataset = getOption("IssueTrackeR.dataset.path"),
                        repo = getOption("IssueTrackeR.repo"),
                        username = getOption("IssueTrackeR.username"),
                        ...) {
-    type <- match.arg(type)
+    source <- match.arg(source)
 
-    if (type == "online") {
+    if (source == "online") {
         raw_issues <- gh::gh(
             repo = repo,
             username = username,
@@ -52,7 +52,7 @@ get_issues <- function(type = c("local", "online"),
         )
         issues <- format_issues(raw_issues = raw_issues,
                                 raw_comments = raw_comments, ...)
-    } else if (type == "local") {
+    } else if (source == "local") {
         path_dataset_issues <- file.path(path_dataset, "list_issues.yaml")
         if (file.exists(path_dataset_issues)) {
             issues <- yaml::read_yaml(file = path_dataset_issues)
@@ -68,7 +68,7 @@ get_issues <- function(type = c("local", "online"),
                  " to write a set of issues in the repo.")
         }
     } else {
-        stop("wrong type")
+        stop("wrong source")
     }
 
     return(issues)
@@ -173,8 +173,8 @@ format_issues <- function(raw_issues,
 #' @title Save issue dataset in a yaml format
 #'
 #' @param issues a \code{IssuesTB} object.
-#' @param type a character string that is either \code{"online"} (by default) if
-#' you want to fetch information from github or \code{"local"} if you want to
+#' @param source a character string that is either \code{"online"} (by default)
+#' if you want to fetch information from github or \code{"local"} if you want to
 #' fetch information locally.
 #' @param path_dataset A character string specifying the path which will contain
 #' the datasets. Defaults to the package option
@@ -187,21 +187,21 @@ format_issues <- function(raw_issues,
 #'
 #' @examples
 #' # With issues
-#' all_issues <- get_issues(type = "online", verbose = FALSE)
+#' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' write_issues_to_dataset(all_issues)
 #'
 #' # Without issues
-#' write_issues_to_dataset(type = "online")
+#' write_issues_to_dataset(source = "online")
 #'
 #' @rdname write_issues_to_dataset
 #'
 write_issues_to_dataset <- function(
         issues,
-        type = c("local", "online"),
+        source = c("local", "online"),
         ...) {
     if (missing(issues) || is.null(issues)) {
-        type <- match.arg(type)
-        issues <- get_issues(type = type, ...)
+        source <- match.arg(source)
+        issues <- get_issues(source = source, ...)
         return(write_issues_to_dataset(issues = issues, ...))
     }
     UseMethod(generic = "write_issues_to_dataset", object = issues)
@@ -213,7 +213,7 @@ write_issues_to_dataset <- function(
 #' @export
 write_issues_to_dataset.IssuesTB <- function(
         issues,
-        type,
+        source,
         path_dataset = getOption("IssueTrackeR.dataset.path"),
         ...) {
     if (!dir.exists(path_dataset)) {
@@ -228,7 +228,7 @@ write_issues_to_dataset.IssuesTB <- function(
 #' @exportS3Method write_issues_to_dataset default
 #' @method write_issues_to_dataset default
 #' @export
-write_issues_to_dataset.default <- function(issues, type, ...) {
+write_issues_to_dataset.default <- function(issues, source, ...) {
     stop("This function requires a IssuesTB object.")
 }
 

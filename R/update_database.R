@@ -14,9 +14,9 @@
 #' update_database()
 #'
 update_database <- function(...) {
-    write_issues_to_dataset(type = "online", ...)
-    write_labels_to_dataset(type = "online", ...)
-    write_milestones_to_dataset(type = "online", ...)
+    write_issues_to_dataset(source = "online", ...)
+    write_labels_to_dataset(source = "online", ...)
+    write_milestones_to_dataset(source = "online", ...)
 
     return(invisible(TRUE))
 }
