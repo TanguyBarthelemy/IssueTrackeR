@@ -13,13 +13,13 @@ filter_issues(x = get_issues(), ...)
 \code{\link[IssueTrackeR]{contains}}}
 }
 \value{
-the list of issues that contain the \code{pattern}
+a \code{IssuesTB} object filtered
 }
 \description{
 Filtering issues with some constraint on the labels, the title and the body.
 }
 \details{
-This function relies on the function contains.
+This function relies on the function \code{\link[IssueTrackeR]{contains}}.
 More informations on the filtering in the documentation of the function
 \code{\link[IssueTrackeR]{contains}}.
 }

@@ -228,9 +228,9 @@ contains.default <- function(x, ...) {
 #' @param ... Additional arguments for the functions
 #' \code{\link[IssueTrackeR]{contains}}
 #'
-#' @returns the list of issues that contain the \code{pattern}
+#' @returns a \code{IssuesTB} object filtered
 #' @details
-#' This function relies on the function contains.
+#' This function relies on the function \code{\link[IssueTrackeR]{contains}}.
 #' More informations on the filtering in the documentation of the function
 #' \code{\link[IssueTrackeR]{contains}}.
 #'

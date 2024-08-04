@@ -1,9 +1,0 @@
-
-Missing steps:
-- Faire la liste à partir de (voir la liste af creation de projets et le projet technical book)
-- pkgdown
-- NEWS.md
-- ...
-
-Etudier la difference entre NULL, NA et missing (pour une issue d'abord puis label et milestone.)
-Comment créer des objets vides mais avec la bonne structure ?

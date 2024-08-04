@@ -123,7 +123,7 @@ format_issues <- function(raw_issues,
             matches <- regmatches(text, numbers) |> unlist()
             as.integer(matches)
         }
-        comments_issue_nbr <- vapply(
+        comments_nbr <- vapply(
             X = raw_comments,
             FUN = base::`[[`,
             "issue_url",
@@ -131,47 +131,43 @@ format_issues <- function(raw_issues,
         ) |> aux()
     }
 
-    new_issues_structure <- list()
+    issues <- new_issues()
     for (index in seq_along(raw_issues)) {
         if (verbose) {
             cat("Issue n\u00B0", index, "\n")
         }
-        issue <- raw_issues[[index]]
+        raw_issue <- raw_issues[[index]]
 
         body_comment <- ifelse(
             test = missing(raw_comments)
-            || all(comments_issue_nbr != issue[["number"]]),
+            || all(comments_nbr != raw_issue[["number"]]),
             yes = "",
             no = paste0(
-                comments_body[which(comments_issue_nbr == issue[["number"]])],
+                comments_body[which(comments_nbr == raw_issue[["number"]])],
                 collapse = "\n\nComment:\n"
             )
         )
-        body <- paste0(issue[["body"]],
+        body <- paste0(raw_issue[["body"]],
                        body_comment,
                        collapse = "\n\nComment:\n")
 
-        new_issue <- list(
-            title = issue[["title"]],
+        issue <- new_issue(
+            title = raw_issue[["title"]],
             body = body,
-            number = as.integer(issue[["number"]]),
-            created_at = issue[["created_at"]] |>
-                as.POSIXct() |>
-                as.integer() |>
-                as.POSIXct(),
+            number = raw_issue[["number"]],
+            created_at = raw_issue[["created_at"]],
             labels = vapply(
-                X = issue[["labels"]],
+                X = raw_issue[["labels"]],
                 FUN = `[[`, ... = "name",
                 FUN.VALUE = character(1L)
             ),
-            milestone = issue[["milestone"]][["title"]]
+            milestone = raw_issue[["milestone"]][["title"]]
         )
-        class(new_issue) <- "IssueTB"
-        new_issues_structure[[index]] <- new_issue
+        issues[[index]] <- issue
     }
-    class(new_issues_structure) <- "IssuesTB"
+    class(issues) <- "IssuesTB"
 
-    return(new_issues_structure)
+    return(issues)
 }
 
 #' @title Save issue dataset in a yaml format
