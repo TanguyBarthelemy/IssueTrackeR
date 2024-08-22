@@ -159,13 +159,17 @@ contains.IssueTB <- function(x,
                     fields = field,
                     values_logic_gate = values_logic_gate,
                     values = values,
-                    negate = negate,
+                    negate = FALSE,
                     ...
                 )
             },
             FUN.VALUE = logical(1L)
         ) |> logical_reducer(orientation = "overall",
                              logic_gate = fields_logic_gate)
+
+        if (negate) {
+            text_in_issue <- !text_in_issue
+        }
         return(text_in_issue)
     }
 
