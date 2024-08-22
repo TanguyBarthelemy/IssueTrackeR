@@ -13,6 +13,7 @@
 #' @param username A character string specifying the GitHub username (only used
 #' if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.username}.
+#' @param ... Additional arguments for the function \code{format_labels}
 #'
 #' @returns
 #' a list representing labels with simpler structure (with name,
@@ -29,7 +30,8 @@
 get_labels <- function(source = c("local", "online"),
                        path_dataset = getOption("IssueTrackeR.dataset.path"),
                        repo = getOption("IssueTrackeR.repo"),
-                       username = getOption("IssueTrackeR.username")) {
+                       username = getOption("IssueTrackeR.username"),
+                       ...) {
     source <- match.arg(source)
 
     if (source == "online") {
@@ -39,11 +41,12 @@ get_labels <- function(source = c("local", "online"),
             endpoint = "/repos/:username/:repo/labels",
             .limit = Inf
         ) |>
-            format_labels()
+            format_labels(...)
     } else if (source == "local") {
         path_dataset_labels <- file.path(path_dataset, "list_labels.yaml")
         if (file.exists(path_dataset_labels)) {
-            labels <- yaml::read_yaml(file = path_dataset_labels)
+            labels <- yaml::read_yaml(file = path_dataset_labels) |>
+                as.data.frame()
         } else {
             stop("The file doesn't exist. Run `write_labels_to_dataset()`",
                  " to write a set of issues in the repo.")
@@ -60,6 +63,8 @@ get_labels <- function(source = c("local", "online"),
 #' @param raw_labels a \code{gh_response} object output from the function
 #' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
 #' labels.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
 #'
 #' @returns a list representing labels with simpler structure (with name,
 #' description, color)
@@ -75,12 +80,22 @@ get_labels <- function(source = c("local", "online"),
 #' )
 #' format_labels(raw_labels)
 #'
-format_labels <- function(raw_labels) {
+format_labels <- function(raw_labels, verbose = TRUE) {
+
+    if (verbose) {
+        cat("Reading labels... ")
+    }
     new_labels_structure <- lapply(
         X = raw_labels,
         FUN = base::`[`,
         c("name", "description", "color")
-    )
+    ) |>
+        do.call(what = rbind) |>
+        as.data.frame()
+    if (verbose) {
+        cat("Done!\n",
+            length(new_labels_structure), " labels found.\n", sep = "")
+    }
     return(new_labels_structure)
 }
 

@@ -57,12 +57,9 @@ get_issues <- function(source = c("local", "online"),
         if (file.exists(path_dataset_issues)) {
             issues <- yaml::read_yaml(file = path_dataset_issues)
             for (id_issue in seq_along(issues)) {
-                formated_date <- issues[[id_issue]][["created_at"]] |>
-                    as.POSIXct()
-                issues[[id_issue]][["created_at"]] <- formated_date
-                class(issues[[id_issue]]) <- "IssueTB"
+                issues[[id_issue]] <- new_issue(issue = issues[[id_issue]])
             }
-            class(issues) <- "IssuesTB"
+            issues <- new_issues(issues)
         } else {
             stop("The file doesn't exist. Run `write_issues_to_dataset()`",
                  " to write a set of issues in the repo.")
@@ -131,10 +128,13 @@ format_issues <- function(raw_issues,
         ) |> aux()
     }
 
+    if (verbose) {
+        cat("Reading issues...\n")
+    }
     issues <- new_issues()
     for (index in seq_along(raw_issues)) {
         if (verbose) {
-            cat("Issue n\u00B0", index, "\n")
+            cat("Issue n\u00B0 ", index, "... Done!\n", sep = "")
         }
         raw_issue <- raw_issues[[index]]
 
@@ -165,8 +165,9 @@ format_issues <- function(raw_issues,
         )
         issues[[index]] <- issue
     }
-    class(issues) <- "IssuesTB"
-
+    if (verbose) {
+        cat(length(issue), " issues found.\n", sep = "")
+    }
     return(issues)
 }
 
@@ -230,18 +231,4 @@ write_issues_to_dataset.IssuesTB <- function(
 #' @export
 write_issues_to_dataset.default <- function(issues, source, ...) {
     stop("This function requires a IssuesTB object.")
-}
-
-#' @exportS3Method `[` IssuesTB
-#' @method `[` IssuesTB
-#' @export
-`[.IssuesTB` <- function(x, ...) {
-    return(`class<-`(NextMethod(), "IssuesTB"))
-}
-
-#' @exportS3Method c IssuesTB
-#' @method c IssuesTB
-#' @export
-c.IssuesTB <- function(...) {
-    return(`class<-`(NextMethod(), "IssuesTB"))
 }
