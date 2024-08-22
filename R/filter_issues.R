@@ -37,11 +37,19 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' which to search for the pattern (among \code{"title"}, \code{"body"},
 #' \code{"labels"} and \code{"milestone"}).
 #' @param fields_logic_gate the logic operator which will aggregate the
-#' different assertion related to fields (by default \code{"OR"}).
+#' different assertion related to fields: \code{"OR"} (by default) or
+#' \code{"AND"}.
 #' @param values_logic_gate the logic operator which will aggregate the
-#' different assertion related to values (by default \code{"AND"}).
+#' different assertion related to values: \code{"OR"} or \code{"AND"} (by
+#' default).
 #' @param negate a boolean indicate the negation of the assertion.
-#' @param \dots Unused argument
+#' @param \dots If \code{x} is a \code{IssueTB} object then the argument \dots
+#' are unused conversely, if x a \code{IssueTB} object then the \dots are used
+#' to pass the same arguments as for \code{contains.IssueTB}:
+#' * \code{fields}
+#' * \code{fields_logic_gate}
+#' * \code{values_logic_gate}
+#' * \code{negate}
 #'
 #' @returns a boolean (of length egal to 1 if the class of \code{x} is
 #' \code{IssueTB} and length superior to 1 if \code{x} if of class
@@ -128,22 +136,6 @@ contains <- function(x, ...) {
 }
 
 #' @rdname contains
-#' @exportS3Method contains IssuesTB
-#' @method contains IssuesTB
-#' @export
-contains.IssuesTB <- function(x, values, ...) {
-    text_in_issues <- vapply(
-        X = x,
-        FUN = contains,
-        values = values,
-        ...,
-        FUN.VALUE = logical(1L)
-    )
-
-    return(text_in_issues)
-}
-
-#' @rdname contains
 #' @exportS3Method contains IssueTB
 #' @method contains IssueTB
 #' @export
@@ -211,6 +203,22 @@ contains.IssueTB <- function(x,
 }
 
 #' @rdname contains
+#' @exportS3Method contains IssuesTB
+#' @method contains IssuesTB
+#' @export
+contains.IssuesTB <- function(x, values, ...) {
+    text_in_issues <- vapply(
+        X = x,
+        FUN = contains,
+        values = values,
+        ...,
+        FUN.VALUE = logical(1L)
+    )
+
+    return(text_in_issues)
+}
+
+#' @rdname contains
 #' @exportS3Method contains default
 #' @method contains default
 #' @export
@@ -231,9 +239,11 @@ contains.default <- function(x, ...) {
 #' which to search for the pattern (among \code{"title"}, \code{"body"},
 #' \code{"labels"} and \code{"milestone"})
 #' * \code{fields_logic_gate}: the logic operator which will aggregate the
-#' different assertion related to fields (by default \code{"OR"}).
+#' different assertion related to fields: \code{"OR"} (by default) or
+#' \code{"AND"}.
 #' * \code{values_logic_gate}: the logic operator which will aggregate the
-#' different assertion related to values (by default \code{"AND"}).
+#' different assertion related to values: \code{"OR"} or \code{"AND"} (by
+#' default).
 #' * \code{negate}: a boolean indicate the negation of the assertion.
 #'
 #' @rdname filter_issues
@@ -278,6 +288,14 @@ filter_issues.IssuesTB <- function(x, ...) {
     filtering <- contains(x, ...)
     issues_output <- x[filtering]
     return(issues_output)
+}
+
+#' @rdname filter_issues
+#' @exportS3Method filter_issues default
+#' @method filter_issues default
+#' @export
+filter_issues.default <- function(x, ...) {
+    stop("This function requires a IssuesTB object.")
 }
 
 no_milestones <- function(issues = get_issues()) {

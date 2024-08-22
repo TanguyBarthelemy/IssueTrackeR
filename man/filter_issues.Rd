@@ -3,11 +3,14 @@
 \name{filter_issues}
 \alias{filter_issues}
 \alias{filter_issues.IssuesTB}
+\alias{filter_issues.default}
 \title{Filter issue or issues}
 \usage{
 filter_issues(x = get_issues(), ...)
 
 \method{filter_issues}{IssuesTB}(x, ...)
+
+\method{filter_issues}{default}(x, ...)
 }
 \arguments{
 \item{x}{a \code{IssuesTB} object.}
@@ -20,9 +23,11 @@ fields and values. Passed on to \code{\link[IssueTrackeR]{contains}} as:
 which to search for the pattern (among \code{"title"}, \code{"body"},
 \code{"labels"} and \code{"milestone"})
 \item \code{fields_logic_gate}: the logic operator which will aggregate the
-different assertion related to fields (by default \code{"OR"}).
+different assertion related to fields: \code{"OR"} (by default) or
+\code{"AND"}.
 \item \code{values_logic_gate}: the logic operator which will aggregate the
-different assertion related to values (by default \code{"AND"}).
+different assertion related to values: \code{"OR"} or \code{"AND"} (by
+default).
 \item \code{negate}: a boolean indicate the negation of the assertion.
 }}
 }

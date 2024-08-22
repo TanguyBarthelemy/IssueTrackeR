@@ -7,7 +7,8 @@
 write_milestones_to_dataset(
   milestones,
   source = "online",
-  path_dataset = getOption("IssueTrackeR.dataset.path")
+  path_dataset = getOption("IssueTrackeR.dataset.path"),
+  ...
 )
 }
 \arguments{
@@ -21,6 +22,9 @@ fetch information locally.}
 \item{path_dataset}{A character string specifying the path which will contain
 the datasets. Defaults to the package option
 \code{IssueTrackeR.dataset.path}.}
+
+\item{\dots}{Additional arguments for the function
+\code{\link[IssueTrackeR]{get_milestones}}.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was

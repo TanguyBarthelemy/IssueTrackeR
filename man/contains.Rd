@@ -2,14 +2,12 @@
 % Please edit documentation in R/filter_issues.R
 \name{contains}
 \alias{contains}
-\alias{contains.IssuesTB}
 \alias{contains.IssueTB}
+\alias{contains.IssuesTB}
 \alias{contains.default}
 \title{Text in issue(s)}
 \usage{
 contains(x, ...)
-
-\method{contains}{IssuesTB}(x, values, ...)
 
 \method{contains}{IssueTB}(
   x,
@@ -21,12 +19,22 @@ contains(x, ...)
   ...
 )
 
+\method{contains}{IssuesTB}(x, values, ...)
+
 \method{contains}{default}(x, ...)
 }
 \arguments{
 \item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
 
-\item{\dots}{Unused argument}
+\item{\dots}{If \code{x} is a \code{IssueTB} object then the argument \dots
+are unused conversely, if x a \code{IssueTB} object then the \dots are used
+to pass the same arguments as for \code{contains.IssueTB}:
+\itemize{
+\item \code{fields}
+\item \code{fields_logic_gate}
+\item \code{values_logic_gate}
+\item \code{negate}
+}}
 
 \item{values}{a vector \code{string}. Patterns to look for in the outcome.}
 
@@ -35,10 +43,12 @@ which to search for the pattern (among \code{"title"}, \code{"body"},
 \code{"labels"} and \code{"milestone"}).}
 
 \item{values_logic_gate}{the logic operator which will aggregate the
-different assertion related to values (by default \code{"AND"}).}
+different assertion related to values: \code{"OR"} or \code{"AND"} (by
+default).}
 
 \item{fields_logic_gate}{the logic operator which will aggregate the
-different assertion related to fields (by default \code{"OR"}).}
+different assertion related to fields: \code{"OR"} (by default) or
+\code{"AND"}.}
 
 \item{negate}{a boolean indicate the negation of the assertion.}
 }

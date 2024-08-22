@@ -29,7 +29,8 @@ used if source is \code{"online"}). Defaults to the package option
 if source is \code{"online"}). Defaults to the package option
 \code{IssueTrackeR.username}.}
 
-\item{\dots}{Additional arguments for the function \code{format_issues}}
+\item{\dots}{Additional arguments for the function
+\code{\link[IssueTrackeR]{format_issues}}.}
 }
 \value{
 The function returns an object of class \code{IssuesTB}. It is a list

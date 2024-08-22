@@ -13,7 +13,8 @@
 #' @param username A character string specifying the GitHub username (only used
 #' if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.username}.
-#' @param \dots Additional arguments for the function \code{format_labels}
+#' @param \dots Additional arguments for the function
+#' \code{\link[IssueTrackeR]{format_labels}}.
 #'
 #' @returns
 #' a list representing labels with simpler structure (with name,
@@ -109,6 +110,8 @@ format_labels <- function(raw_labels, verbose = TRUE) {
 #' @param path_dataset A character string specifying the path which will contain
 #' the datasets. Defaults to the package option
 #' \code{IssueTrackeR.dataset.path}.
+#' @param \dots Additional arguments for the function
+#' \code{\link[IssueTrackeR]{get_labels}}.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
@@ -125,14 +128,15 @@ format_labels <- function(raw_labels, verbose = TRUE) {
 write_labels_to_dataset <- function(
         labels,
         source = "online",
-        path_dataset = getOption("IssueTrackeR.dataset.path")) {
+        path_dataset = getOption("IssueTrackeR.dataset.path"),
+        ...) {
     if (!dir.exists(path_dataset)) {
         dir.create(path_dataset)
     }
     source <- match.arg(source)
     path_dataset_labels <- file.path(path_dataset, "list_labels.yaml")
     if (missing(labels)) {
-        labels <- get_labels(source = source)
+        labels <- get_labels(source = source, ...)
     }
     yaml::write_yaml(x = labels, file = path_dataset_labels)
     return(invisible(TRUE))

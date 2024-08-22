@@ -13,7 +13,8 @@
 #' @param username A character string specifying the GitHub username (only used
 #' if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.username}.
-#' @param \dots Additional arguments for the function \code{format_milestones}
+#' @param \dots Additional arguments for the function
+#' \code{\link[IssueTrackeR]{format_milestones}}.
 #'
 #' @returns
 #' a list representing milestones with simpler structure (with title,
@@ -126,6 +127,8 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
 #' @param path_dataset A character string specifying the path which will contain
 #' the datasets. Defaults to the package option
 #' \code{IssueTrackeR.dataset.path}.
+#' @param \dots Additional arguments for the function
+#' \code{\link[IssueTrackeR]{get_milestones}}.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
@@ -142,7 +145,8 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
 write_milestones_to_dataset <- function(
         milestones,
         source = "online",
-        path_dataset = getOption("IssueTrackeR.dataset.path")) {
+        path_dataset = getOption("IssueTrackeR.dataset.path"),
+        ...) {
 
     if (!dir.exists(path_dataset)) {
         dir.create(path_dataset)
@@ -150,7 +154,7 @@ write_milestones_to_dataset <- function(
     source <- match.arg(source)
     path_dataset_milestones <- file.path(path_dataset, "list_milestones.yaml")
     if (missing(milestones)) {
-        milestones <- get_milestones(source = source)
+        milestones <- get_milestones(source = source, ...)
     }
     yaml::write_yaml(
         x = milestones,

@@ -13,7 +13,8 @@
 #' @param username A character string specifying the GitHub username (only used
 #' if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.username}.
-#' @param \dots Additional arguments for the function \code{format_issues}
+#' @param \dots Additional arguments for the function
+#' \code{\link[IssueTrackeR]{format_issues}}.
 #'
 #' @returns
 #' The function returns an object of class \code{IssuesTB}. It is a list
@@ -180,7 +181,8 @@ format_issues <- function(raw_issues,
 #' @param path_dataset A character string specifying the path which will contain
 #' the datasets. Defaults to the package option
 #' \code{IssueTrackeR.dataset.path}.
-#' @param \dots Additional arguments for the function \code{get_issues}
+#' @param \dots Additional arguments for the function
+#' \code{\link[IssueTrackeR]{get_issues}}.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.

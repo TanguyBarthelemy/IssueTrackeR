@@ -29,7 +29,8 @@ used if source is \code{"online"}). Defaults to the package option
 if source is \code{"online"}). Defaults to the package option
 \code{IssueTrackeR.username}.}
 
-\item{\dots}{Additional arguments for the function \code{format_milestones}}
+\item{\dots}{Additional arguments for the function
+\code{\link[IssueTrackeR]{format_milestones}}.}
 }
 \value{
 a list representing milestones with simpler structure (with title,
