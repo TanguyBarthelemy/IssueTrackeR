@@ -8,7 +8,7 @@
 \usage{
 filter_issues(x = get_issues(), ...)
 
-\method{filter_issues}{IssuesTB}(x, ...)
+\method{filter_issues}{IssuesTB}(x = get_issues(), ...)
 
 \method{filter_issues}{default}(x, ...)
 }

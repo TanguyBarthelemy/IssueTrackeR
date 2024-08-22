@@ -57,6 +57,7 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' \code{field} of the issue.
 #'
 #' @details
+#'
 #' The contains function in R is designed to check if specific fields of GitHub
 #' issues contain certain values, offering a flexible mechanism for constructing
 #' complex assertions. The function operates with two main logical gates:
@@ -112,6 +113,28 @@ vgrepl <- Vectorize(grepl, "pattern")
 #'
 #' This function is not case-sensitive.
 #'
+#' @section How assertions with multiple values and multiple fields are built:
+#'
+#' For the order of logical assertions, as it is easy to add assertions linked
+#' by an AND (by piping a new filter_issues), it has been decided that
+#' assertions containing ANDs will be distributed and assertions containing ORs
+#' will be factorised. The assertions used by filter_issues will therefore have
+#' the following format:
+#' $(P1 AND Q1) OR (P2 AND Q2)$
+#'
+#' Thus the following call to filter_issue:
+#' \code{
+#'      filter(..., values = c("v1", "v2"), fields = c("f1", "f2"),
+#'             values_logic_gate = "AND", fields_logic_gate = "OR",
+#'             ...
+#'      )
+#' }
+#' will be represented by the following logical proposition:
+#' $(v1 in f1 AND v2 in f1) OR (v1 in f2 AND v2 in f2)$.
+#'
+#' This makes it possible to create more complex logical forms by combining ANDs
+#' and ORs.
+#'
 #' @export
 #'
 #' @examples
@@ -150,53 +173,70 @@ contains.IssueTB <- function(x,
     values_logic_gate <- match.arg(values_logic_gate)
     fields_logic_gate <- match.arg(fields_logic_gate)
 
-    if (length(fields) > 1L) {
-        text_in_issue <- vapply(
-            X = fields,
-            FUN = function(field) {
-                contains(
-                    x = x,
-                    fields = field,
-                    values_logic_gate = values_logic_gate,
-                    values = values,
-                    negate = FALSE,
-                    ...
-                )
-            },
-            FUN.VALUE = logical(1L)
-        ) |> logical_reducer(orientation = "overall",
-                             logic_gate = fields_logic_gate)
+    # Cas 1 seul champ
+    if (length(fields) == 1L) {
 
-        if (negate) {
-            text_in_issue <- !text_in_issue
-        }
-        return(text_in_issue)
-    }
+        fields <- match.arg(fields)
+        field_content <- x[[fields]]
 
-    fields <- match.arg(fields)
-
-    field_content <- x[[fields]]
-
-    if (is.null(field_content)) {
-        text_in_issue <- FALSE
-    } else if (fields %in% c("title", "body")) {
-        text_in_issue <- logical_reducer(
-            x = vgrepl(
+        if (is.null(field_content)) {
+            text_in_issue <- FALSE
+        } else if (fields %in% c("title", "body")) {
+            text_in_issue <- vgrepl(
                 pattern = values,
                 x = field_content,
                 fixed = FALSE,
                 perl = TRUE,
                 ignore.case = TRUE
-            ),
-            orientation = "overall",
-            logic_gate = values_logic_gate
-        )
-    } else if (fields %in% c("labels", "milestone")) {
+            )
+        } else if (fields %in% c("labels", "milestone")) {
+            text_in_issue <- values %in% field_content
+        }
+
         text_in_issue <- logical_reducer(
-            x = (values %in% field_content),
+            x = text_in_issue,
             orientation = "overall",
             logic_gate = values_logic_gate
         )
+
+        # Cas plusieurs champs
+    } else if (length(values) > 1L
+               && values_logic_gate == "OR"
+               && fields_logic_gate == "AND") {
+
+        text_in_issue <- values |>
+            vapply(
+                FUN = function(value) {
+                    contains(
+                        x = x,
+                        values = value,
+                        fields = fields,
+                        fields_logic_gate = fields_logic_gate,
+                        negate = FALSE,
+                        ...
+                    )
+                },
+                FUN.VALUE = logical(1L)
+            ) |> logical_reducer(orientation = "overall",
+                                 logic_gate = values_logic_gate)
+
+        # Autres cas
+    } else {
+        text_in_issue <- fields |>
+            vapply(
+                FUN = function(field) {
+                    contains(
+                        x = x,
+                        fields = field,
+                        values_logic_gate = values_logic_gate,
+                        values = values,
+                        negate = FALSE,
+                        ...
+                    )
+                },
+                FUN.VALUE = logical(1L)
+            ) |> logical_reducer(orientation = "overall",
+                                 logic_gate = fields_logic_gate)
     }
 
     if (negate) {
@@ -288,7 +328,7 @@ filter_issues <- function(x = get_issues(), ...) {
 #' @exportS3Method filter_issues IssuesTB
 #' @method filter_issues IssuesTB
 #' @export
-filter_issues.IssuesTB <- function(x, ...) {
+filter_issues.IssuesTB <- function(x = get_issues(), ...) {
     filtering <- contains(x, ...)
     issues_output <- x[filtering]
     return(issues_output)

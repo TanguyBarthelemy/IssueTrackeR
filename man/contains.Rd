@@ -118,6 +118,30 @@ not taken into account.
 
 This function is not case-sensitive.
 }
+\section{How assertions with multiple values and multiple fields are built}{
+
+
+For the order of logical assertions, as it is easy to add assertions linked
+by an AND (by piping a new filter_issues), it has been decided that
+assertions containing ANDs will be distributed and assertions containing ORs
+will be factorised. The assertions used by filter_issues will therefore have
+the following format:
+$(P1 AND Q1) OR (P2 AND Q2)$
+
+Thus the following call to filter_issue:
+\code{
+     filter(..., values = c("v1", "v2"), fields = c("f1", "f2"),
+            values_logic_gate = "AND", fields_logic_gate = "OR",
+            ...
+     )
+}
+will be represented by the following logical proposition:
+$(v1 in f1 AND v2 in f1) OR (v1 in f2 AND v2 in f2)$.
+
+This makes it possible to create more complex logical forms by combining ANDs
+and ORs.
+}
+
 \examples{
 all_issues <- get_issues(source = "online", verbose = FALSE)
 issue_1 <- all_issues[[1L]]
