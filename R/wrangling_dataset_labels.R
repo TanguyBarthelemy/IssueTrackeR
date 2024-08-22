@@ -13,7 +13,7 @@
 #' @param username A character string specifying the GitHub username (only used
 #' if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.username}.
-#' @param ... Additional arguments for the function \code{format_labels}
+#' @param \dots Additional arguments for the function \code{format_labels}
 #'
 #' @returns
 #' a list representing labels with simpler structure (with name,

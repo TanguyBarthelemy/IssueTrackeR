@@ -2,8 +2,8 @@
 #' @title Retrieve the issues from github
 #'
 #' @param source a character string that is either \code{"online"} if you want
-#' to fetch information from github or \code{"local"} if you want to fetch
-#' information locally.
+#' to fetch information from github or \code{"local"} (by default) if you want
+#' to fetch information locally.
 #' @param path_dataset A character string specifying the path which contains the
 #' datasets (only used if source is \code{"local"}). Defaults to the package
 #' option \code{IssueTrackeR.dataset.path}.
@@ -13,7 +13,7 @@
 #' @param username A character string specifying the GitHub username (only used
 #' if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.username}.
-#' @param ... Additional arguments for the function \code{format_issues}
+#' @param \dots Additional arguments for the function \code{format_issues}
 #'
 #' @returns
 #' The function returns an object of class \code{IssuesTB}. It is a list
@@ -180,7 +180,7 @@ format_issues <- function(raw_issues,
 #' @param path_dataset A character string specifying the path which will contain
 #' the datasets. Defaults to the package option
 #' \code{IssueTrackeR.dataset.path}.
-#' @param ... Additional arguments for the function \code{get_issues}
+#' @param \dots Additional arguments for the function \code{get_issues}
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
@@ -198,7 +198,7 @@ format_issues <- function(raw_issues,
 #'
 write_issues_to_dataset <- function(
         issues,
-        source = c("local", "online"),
+        source = c("online", "local"),
         ...) {
     if (missing(issues) || is.null(issues)) {
         source <- match.arg(source)

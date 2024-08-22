@@ -7,8 +7,9 @@
 update_database(...)
 }
 \arguments{
-\item{...}{Additional arguments for the functions \code{write_XXX_to_dataset}
-where XXX is \code{"issues"}, \code{"labels"} or \code{"milestones"}.}
+\item{\dots}{Additional arguments for the functions
+\code{write_XXX_to_dataset} where XXX is \code{"issues"}, \code{"labels"} or
+\code{"milestones"}.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE}.

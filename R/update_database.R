@@ -4,8 +4,9 @@
 #' Update the different local database (issues, labels and milestones) with the
 #' online reference.
 #'
-#' @param ... Additional arguments for the functions \code{write_XXX_to_dataset}
-#' where XXX is \code{"issues"}, \code{"labels"} or \code{"milestones"}.
+#' @param \dots Additional arguments for the functions
+#' \code{write_XXX_to_dataset} where XXX is \code{"issues"}, \code{"labels"} or
+#' \code{"milestones"}.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE}.
 #' @export

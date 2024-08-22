@@ -26,11 +26,12 @@ contains(x, ...)
 \arguments{
 \item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
 
-\item{...}{Unused argument}
+\item{\dots}{Unused argument}
 
-\item{values}{a vector \code{string}}
+\item{values}{a vector \code{string}. Patterns to look for in the outcome.}
 
-\item{fields}{a vector \code{string} (among \code{"title"}, \code{"body"},
+\item{fields}{a vector \code{string}. The different fields of the issue in
+which to search for the pattern (among \code{"title"}, \code{"body"},
 \code{"labels"} and \code{"milestone"}).}
 
 \item{values_logic_gate}{the logic operator which will aggregate the

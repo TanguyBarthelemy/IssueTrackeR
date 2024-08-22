@@ -53,7 +53,7 @@ simple_sort <- function(issues, sorting_variables) {
 #' the issues. The filters are applied in the order of the variables supplied.
 #' @param filtering_factors a list containing constraints for sorting issues by
 #' sub-group in order of priority
-#' @param ... Unused argument
+#' @param \dots Unused argument
 #'
 #' @returns a \code{IssuesTB} object sorted.
 #' @details

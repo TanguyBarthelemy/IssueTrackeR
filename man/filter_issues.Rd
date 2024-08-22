@@ -2,15 +2,29 @@
 % Please edit documentation in R/filter_issues.R
 \name{filter_issues}
 \alias{filter_issues}
+\alias{filter_issues.IssuesTB}
 \title{Filter issue or issues}
 \usage{
 filter_issues(x = get_issues(), ...)
+
+\method{filter_issues}{IssuesTB}(x, ...)
 }
 \arguments{
-\item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
+\item{x}{a \code{IssuesTB} object.}
 
-\item{...}{Additional arguments for the functions
-\code{\link[IssueTrackeR]{contains}}}
+\item{\dots}{Other options used to control filtering behavior with differents
+fields and values. Passed on to \code{\link[IssueTrackeR]{contains}} as:
+\itemize{
+\item \code{values}: a vector \code{string}. Patterns to look for in the outcome.
+\item \code{fields}: a vector \code{string}. The different fields of the issue in
+which to search for the pattern (among \code{"title"}, \code{"body"},
+\code{"labels"} and \code{"milestone"})
+\item \code{fields_logic_gate}: the logic operator which will aggregate the
+different assertion related to fields (by default \code{"OR"}).
+\item \code{values_logic_gate}: the logic operator which will aggregate the
+different assertion related to values (by default \code{"AND"}).
+\item \code{negate}: a boolean indicate the negation of the assertion.
+}}
 }
 \value{
 a \code{IssuesTB} object filtered

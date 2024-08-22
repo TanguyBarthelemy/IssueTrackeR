@@ -32,15 +32,16 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' milestone.
 #'
 #' @param x a \code{IssueTB} or \code{IssuesTB} object.
-#' @param values a vector \code{string}
-#' @param fields a vector \code{string} (among \code{"title"}, \code{"body"},
+#' @param values a vector \code{string}. Patterns to look for in the outcome.
+#' @param fields a vector \code{string}. The different fields of the issue in
+#' which to search for the pattern (among \code{"title"}, \code{"body"},
 #' \code{"labels"} and \code{"milestone"}).
 #' @param fields_logic_gate the logic operator which will aggregate the
 #' different assertion related to fields (by default \code{"OR"}).
 #' @param values_logic_gate the logic operator which will aggregate the
 #' different assertion related to values (by default \code{"AND"}).
 #' @param negate a boolean indicate the negation of the assertion.
-#' @param ... Unused argument
+#' @param \dots Unused argument
 #'
 #' @returns a boolean (of length egal to 1 if the class of \code{x} is
 #' \code{IssueTB} and length superior to 1 if \code{x} if of class
@@ -222,9 +223,20 @@ contains.default <- function(x, ...) {
 #' @description
 #' Filtering issues with some constraint on the labels, the title and the body.
 #'
-#' @param x a \code{IssueTB} or \code{IssuesTB} object.
-#' @param ... Additional arguments for the functions
-#' \code{\link[IssueTrackeR]{contains}}
+#' @param x a \code{IssuesTB} object.
+#' @param \dots Other options used to control filtering behavior with differents
+#' fields and values. Passed on to \code{\link[IssueTrackeR]{contains}} as:
+#' * \code{values}: a vector \code{string}. Patterns to look for in the outcome.
+#' * \code{fields}: a vector \code{string}. The different fields of the issue in
+#' which to search for the pattern (among \code{"title"}, \code{"body"},
+#' \code{"labels"} and \code{"milestone"})
+#' * \code{fields_logic_gate}: the logic operator which will aggregate the
+#' different assertion related to fields (by default \code{"OR"}).
+#' * \code{values_logic_gate}: the logic operator which will aggregate the
+#' different assertion related to values (by default \code{"AND"}).
+#' * \code{negate}: a boolean indicate the negation of the assertion.
+#'
+#' @rdname filter_issues
 #'
 #' @returns a \code{IssuesTB} object filtered
 #' @details
@@ -255,6 +267,14 @@ contains.default <- function(x, ...) {
 #' )
 #'
 filter_issues <- function(x = get_issues(), ...) {
+    UseMethod("filter_issues", x)
+}
+
+#' @rdname filter_issues
+#' @exportS3Method filter_issues IssuesTB
+#' @method filter_issues IssuesTB
+#' @export
+filter_issues.IssuesTB <- function(x, ...) {
     filtering <- contains(x, ...)
     issues_output <- x[filtering]
     return(issues_output)

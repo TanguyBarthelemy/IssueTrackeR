@@ -6,7 +6,7 @@
 \alias{write_issues_to_dataset.default}
 \title{Save issue dataset in a yaml format}
 \usage{
-write_issues_to_dataset(issues, source = c("local", "online"), ...)
+write_issues_to_dataset(issues, source = c("online", "local"), ...)
 
 \method{write_issues_to_dataset}{IssuesTB}(
   issues,
@@ -24,7 +24,7 @@ write_issues_to_dataset(issues, source = c("local", "online"), ...)
 if you want to fetch information from github or \code{"local"} if you want to
 fetch information locally.}
 
-\item{...}{Additional arguments for the function \code{get_issues}}
+\item{\dots}{Additional arguments for the function \code{get_issues}}
 
 \item{path_dataset}{A character string specifying the path which will contain
 the datasets. Defaults to the package option

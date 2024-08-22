@@ -23,7 +23,7 @@ the issues. The filters are applied in the order of the variables supplied.}
 \item{filtering_factors}{a list containing constraints for sorting issues by
 sub-group in order of priority}
 
-\item{...}{Unused argument}
+\item{\dots}{Unused argument}
 }
 \value{
 a \code{IssuesTB} object sorted.

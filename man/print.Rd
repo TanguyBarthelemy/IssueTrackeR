@@ -12,7 +12,7 @@
 \arguments{
 \item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
 
-\item{...}{Unused argument}
+\item{\dots}{Unused argument}
 }
 \value{
 invisibly (with \code{invisible()}) \code{NULL}.

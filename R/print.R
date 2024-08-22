@@ -1,7 +1,7 @@
 #' @title Display object
 #'
 #' @param x a \code{IssueTB} or \code{IssuesTB} object.
-#' @param ... Unused argument
+#' @param \dots Unused argument
 #'
 #' @details
 #' This function displays an issue (\code{IssueTB} object) or a list of issues

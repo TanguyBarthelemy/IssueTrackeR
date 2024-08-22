@@ -14,8 +14,8 @@ get_issues(
 }
 \arguments{
 \item{source}{a character string that is either \code{"online"} if you want
-to fetch information from github or \code{"local"} if you want to fetch
-information locally.}
+to fetch information from github or \code{"local"} (by default) if you want
+to fetch information locally.}
 
 \item{path_dataset}{A character string specifying the path which contains the
 datasets (only used if source is \code{"local"}). Defaults to the package
@@ -29,7 +29,7 @@ used if source is \code{"online"}). Defaults to the package option
 if source is \code{"online"}). Defaults to the package option
 \code{IssueTrackeR.username}.}
 
-\item{...}{Additional arguments for the function \code{format_issues}}
+\item{\dots}{Additional arguments for the function \code{format_issues}}
 }
 \value{
 The function returns an object of class \code{IssuesTB}. It is a list
