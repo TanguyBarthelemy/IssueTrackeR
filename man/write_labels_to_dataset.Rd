@@ -14,8 +14,8 @@ write_labels_to_dataset(
 \item{labels}{a list representing all labels with simpler structure (with
 name, description, color)}
 
-\item{source}{a character string that is either \code{"online"} (by default) if
-you want to fetch information from github or \code{"local"} if you want to
+\item{source}{a character string that is either \code{"online"} (by default)
+if you want to fetch information from github or \code{"local"} if you want to
 fetch information locally.}
 
 \item{path_dataset}{A character string specifying the path which will contain

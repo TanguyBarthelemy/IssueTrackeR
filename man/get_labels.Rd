@@ -8,12 +8,13 @@ get_labels(
   source = c("local", "online"),
   path_dataset = getOption("IssueTrackeR.dataset.path"),
   repo = getOption("IssueTrackeR.repo"),
-  username = getOption("IssueTrackeR.username")
+  username = getOption("IssueTrackeR.username"),
+  ...
 )
 }
 \arguments{
-\item{source}{a character string that is either \code{"online"} if you want to
-fetch information from github or \code{"local"} if you want to fetch
+\item{source}{a character string that is either \code{"online"} if you want
+to fetch information from github or \code{"local"} if you want to fetch
 information locally.}
 
 \item{path_dataset}{A character string specifying the path which contains the
@@ -27,6 +28,8 @@ used if source is \code{"online"}). Defaults to the package option
 \item{username}{A character string specifying the GitHub username (only used
 if source is \code{"online"}). Defaults to the package option
 \code{IssueTrackeR.username}.}
+
+\item{...}{Additional arguments for the function \code{format_labels}}
 }
 \value{
 a list representing labels with simpler structure (with name,

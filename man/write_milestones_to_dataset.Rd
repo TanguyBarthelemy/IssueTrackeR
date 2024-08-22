@@ -14,8 +14,8 @@ write_milestones_to_dataset(
 \item{milestones}{a list representing milestones with simpler structure (with
 title, description and due_on).}
 
-\item{source}{a character string that is either \code{"online"} (by default) if
-you want to fetch information from github or \code{"local"} if you want to
+\item{source}{a character string that is either \code{"online"} (by default)
+if you want to fetch information from github or \code{"local"} if you want to
 fetch information locally.}
 
 \item{path_dataset}{A character string specifying the path which will contain

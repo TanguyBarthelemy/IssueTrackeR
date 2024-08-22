@@ -71,6 +71,7 @@ from \code{x}) to the \code{\link[IssueTrackeR]{filter_issues}}
 \code{values_logic_gate} and \code{negate}).
 }
 \examples{
+write_milestones_to_dataset()
 all_issues <- get_issues(source = "online", verbose = FALSE)
 sort(
     x = all_issues,

@@ -20,8 +20,8 @@ write_issues_to_dataset(issues, source = c("local", "online"), ...)
 \arguments{
 \item{issues}{a \code{IssuesTB} object.}
 
-\item{source}{a character string that is either \code{"online"} (by default) if
-you want to fetch information from github or \code{"local"} if you want to
+\item{source}{a character string that is either \code{"online"} (by default)
+if you want to fetch information from github or \code{"local"} if you want to
 fetch information locally.}
 
 \item{...}{Additional arguments for the function \code{get_issues}}

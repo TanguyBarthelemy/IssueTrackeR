@@ -4,12 +4,15 @@
 \alias{format_milestones}
 \title{Format the milestone in a simpler format}
 \usage{
-format_milestones(raw_milestones)
+format_milestones(raw_milestones, verbose = TRUE)
 }
 \arguments{
 \item{raw_milestones}{a \code{gh_response} object output from the function
 \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
 milestones.}
+
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 a list representing milestones with simpler structure (with title,

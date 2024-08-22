@@ -4,12 +4,15 @@
 \alias{format_labels}
 \title{Format the label in a simpler format}
 \usage{
-format_labels(raw_labels)
+format_labels(raw_labels, verbose = TRUE)
 }
 \arguments{
 \item{raw_labels}{a \code{gh_response} object output from the function
 \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
 labels.}
+
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 a list representing labels with simpler structure (with name,

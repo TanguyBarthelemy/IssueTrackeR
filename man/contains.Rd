@@ -110,14 +110,12 @@ This function is not case-sensitive.
 \examples{
 all_issues <- get_issues(source = "online", verbose = FALSE)
 issue_1 <- all_issues[[1L]]
-
 # This will return TRUE if the issue contains either "README" or "package"
 # in its body.
 contains(x = issue_1,
          fields = "body",
          values = c("README", "package"),
          values_logic_gate = "OR")
-
 # This will return TRUE if the issue contains "README" in its body AND its
 # title.
 contains(x = issue_1,
