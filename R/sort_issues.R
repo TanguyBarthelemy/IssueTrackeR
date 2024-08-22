@@ -33,6 +33,8 @@ simple_sort <- function(issues, sorting_variables) {
                 FUN.VALUE = integer(1L)
             ))
             sorted_issues <- sorted_issues[sorted_index]
+        } else {
+            stop("Object non accepted.")
         }
     }
 
@@ -94,6 +96,7 @@ simple_sort <- function(issues, sorting_variables) {
 #'
 #' @export
 #' @examples
+#' write_milestones_to_dataset()
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' sort(
 #'     x = all_issues,
