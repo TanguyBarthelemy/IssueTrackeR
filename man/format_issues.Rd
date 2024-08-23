@@ -4,7 +4,13 @@
 \alias{format_issues}
 \title{Format the issue in a simpler format}
 \usage{
-format_issues(raw_issues, raw_comments, verbose = TRUE)
+format_issues(
+  raw_issues,
+  raw_comments,
+  repo = getOption("IssueTrackeR.repo"),
+  username = getOption("IssueTrackeR.username"),
+  verbose = TRUE
+)
 }
 \arguments{
 \item{raw_issues}{a \code{gh_response} object output from the function
@@ -14,6 +20,14 @@ issues.}
 \item{raw_comments}{a \code{gh_response} object output from the function
 \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
 comments.}
+
+\item{repo}{A character string specifying the GitHub repository name (only
+used if source is \code{"online"}). Defaults to the package option
+\code{IssueTrackeR.repo}.}
+
+\item{username}{A character string specifying the GitHub username (only used
+if source is \code{"online"}). Defaults to the package option
+\code{IssueTrackeR.username}.}
 
 \item{verbose}{A logical value indicating whether to print additional
 information. Default is \code{TRUE}.}

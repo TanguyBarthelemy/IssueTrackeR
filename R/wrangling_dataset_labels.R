@@ -42,7 +42,9 @@ get_labels <- function(source = c("local", "online"),
             endpoint = "/repos/:username/:repo/labels",
             .limit = Inf
         ) |>
-            format_labels(...)
+            format_labels(...) |>
+            cbind(repo = repo,
+                  username = username)
     } else if (source == "local") {
         path_dataset_labels <- file.path(path_dataset, "list_labels.yaml")
         if (file.exists(path_dataset_labels)) {

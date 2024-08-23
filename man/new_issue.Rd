@@ -11,23 +11,34 @@ new_issue(
   created_at = Sys.Date(),
   labels = NULL,
   milestone = NULL,
-  issue = list()
+  issue = list(),
+  repo = NULL,
+  username = NULL,
+  ...
 )
 }
 \arguments{
-\item{title}{a string. The title of the issue}
+\item{title}{a string. The title of the issue.}
 
-\item{body}{a string. The title of the issue}
+\item{body}{a string. The title of the issue.}
 
-\item{number}{a string. The title of the issue}
+\item{number}{a string. The title of the issue.}
 
-\item{created_at}{a date. The title of the issue}
+\item{created_at}{a date. The title of the issue.}
 
-\item{labels}{a vector string (or missing). The labels of the issue}
+\item{labels}{a vector string (or missing). The labels of the issue.}
 
-\item{milestone}{a string (or missing). The milestone of the issue}
+\item{milestone}{a string (or missing). The milestone of the issue.}
 
-\item{issue}{a list representing the object}
+\item{issue}{a list representing the object.}
+
+\item{repo}{a string. The name of the GitHub repository to which the issue
+belongs.}
+
+\item{username}{a string. The name of the owner of the GitHub repository to
+which the issue belongs.}
+
+\item{\dots}{Other information we would like to add to the issue.}
 }
 \value{
 a \code{IssueTB} object.

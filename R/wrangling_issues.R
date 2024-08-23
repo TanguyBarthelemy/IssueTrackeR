@@ -1,12 +1,17 @@
 #' @title Create a new \code{IssueTB} object
 #'
-#' @param title a string. The title of the issue
-#' @param body a string. The title of the issue
-#' @param number a string. The title of the issue
-#' @param created_at a date. The title of the issue
-#' @param labels a vector string (or missing). The labels of the issue
-#' @param milestone a string (or missing). The milestone of the issue
-#' @param issue a list representing the object
+#' @param title a string. The title of the issue.
+#' @param body a string. The title of the issue.
+#' @param number a string. The title of the issue.
+#' @param created_at a date. The title of the issue.
+#' @param labels a vector string (or missing). The labels of the issue.
+#' @param milestone a string (or missing). The milestone of the issue.
+#' @param issue a list representing the object.
+#' @param repo a string. The name of the GitHub repository to which the issue
+#' belongs.
+#' @param username a string. The name of the owner of the GitHub repository to
+#' which the issue belongs.
+#' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssueTB} object.
 #' @export
@@ -32,7 +37,10 @@ new_issue <- function(title,
                       created_at = Sys.Date(),
                       labels = NULL,
                       milestone = NULL,
-                      issue = list()) {
+                      issue = list(),
+                      repo = NULL,
+                      username = NULL,
+                      ...) {
     if (!(missing(title)
           || missing(body)
           || missing(number))) {
@@ -44,7 +52,9 @@ new_issue <- function(title,
                           as.integer() |>
                           as.POSIXct(),
                       labels = labels,
-                      milestone = milestone)
+                      milestone = milestone,
+                      repo = repo,
+                      username = username)
     } else if (!missing(issue)) {
         issue[["created_at"]] <- issue[["created_at"]] |>
             as.POSIXct() |>

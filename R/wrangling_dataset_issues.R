@@ -52,7 +52,10 @@ get_issues <- function(source = c("local", "online"),
             .limit = Inf
         )
         issues <- format_issues(raw_issues = raw_issues,
-                                raw_comments = raw_comments, ...)
+                                raw_comments = raw_comments,
+                                repo = repo,
+                                username = username,
+                                ...)
     } else if (source == "local") {
         path_dataset_issues <- file.path(path_dataset, "list_issues.yaml")
         if (file.exists(path_dataset_issues)) {
@@ -80,6 +83,12 @@ get_issues <- function(source = c("local", "online"),
 #' @param raw_comments a \code{gh_response} object output from the function
 #' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
 #' comments.
+#' @param repo A character string specifying the GitHub repository name (only
+#' used if source is \code{"online"}). Defaults to the package option
+#' \code{IssueTrackeR.repo}.
+#' @param username A character string specifying the GitHub username (only used
+#' if source is \code{"online"}). Defaults to the package option
+#' \code{IssueTrackeR.username}.
 #' @param verbose A logical value indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #'
@@ -107,6 +116,8 @@ get_issues <- function(source = c("local", "online"),
 #'
 format_issues <- function(raw_issues,
                           raw_comments,
+                          repo = getOption("IssueTrackeR.repo"),
+                          username = getOption("IssueTrackeR.username"),
                           verbose = TRUE) {
 
     if (!missing(raw_comments)) {

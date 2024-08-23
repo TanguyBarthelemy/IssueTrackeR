@@ -43,7 +43,9 @@ get_milestones <- function(
             endpoint = "/repos/:username/:repo/milestones",
             .limit = Inf
         ) |>
-            format_milestones(...)
+            format_milestones(...) |>
+            cbind(repo = repo,
+                  username = username)
     } else if (source == "local") {
         path_dataset_milestones <- file.path(path_dataset,
                                              "list_milestones.yaml")

@@ -217,8 +217,9 @@ contains.IssueTB <- function(x,
                     )
                 },
                 FUN.VALUE = logical(1L)
-            ) |> logical_reducer(orientation = "overall",
-                                 logic_gate = values_logic_gate)
+            ) |>
+            logical_reducer(orientation = "overall",
+                            logic_gate = values_logic_gate)
 
         # Autres cas
     } else {
@@ -235,8 +236,9 @@ contains.IssueTB <- function(x,
                     )
                 },
                 FUN.VALUE = logical(1L)
-            ) |> logical_reducer(orientation = "overall",
-                                 logic_gate = fields_logic_gate)
+            ) |>
+            logical_reducer(orientation = "overall",
+                            logic_gate = fields_logic_gate)
     }
 
     if (negate) {
