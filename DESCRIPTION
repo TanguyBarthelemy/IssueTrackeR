@@ -1,7 +1,7 @@
 Package: IssueTrackeR
 Type: Package
 Title: List Things To Do
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: c(
     person(given = "Tanguy", 
            family = "Barthelemy", role = c("aut","cre"),
