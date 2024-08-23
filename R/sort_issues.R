@@ -15,16 +15,18 @@ simple_sort <- function(issues, sorting_variables, milestones) {
             }
 
             if (nrow(milestones) > 0L) {
-                index_milestones <- order(milestones[[sorting_variable[["field"]]]])
-                sorted_milestones_titles <- milestones[["title"]][index_milestones]
+
+                field <- sorting_variable[["field"]]
+                index_milestones <- order(milestones[[field]])
+                sorted_titles <- milestones[["title"]][index_milestones]
 
                 ref_issues <- sorted_issues
                 sorted_issues <- new_issues()
-                for (milestone in sorted_milestones_titles) {
+                for (title in sorted_titles) {
                     sorted_group <- ref_issues |>
                         IssueTrackeR::filter_issues(
                             fields = "milestone",
-                            values = milestone
+                            values = title
                         )
                     sorted_issues <- c(sorted_issues, sorted_group)
                 }
