@@ -6,7 +6,7 @@
 \usage{
 write_milestones_to_dataset(
   milestones,
-  source = "online",
+  source = c("online", "local"),
   path_dataset = getOption("IssueTrackeR.dataset.path"),
   ...
 )

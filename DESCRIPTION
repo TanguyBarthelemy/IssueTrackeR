@@ -12,8 +12,8 @@ License: GPL (>= 3)
 Depends:
     R (>= 4.1.0)
 Imports:
-    gh, 
-    yaml, 
+    gh,
+    yaml,
     crayon
 URL: https://github.com/TanguyBarthelemy/TODO
 LazyData: TRUE

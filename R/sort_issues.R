@@ -1,5 +1,5 @@
 
-simple_sort <- function(issues, sorting_variables) {
+simple_sort <- function(issues, sorting_variables, milestones) {
 
     if (length(issues) == 0L) {
         return(new_issues())
@@ -10,21 +10,27 @@ simple_sort <- function(issues, sorting_variables) {
     for (sorting_variable in rev(sorting_variables)) {
         if (sorting_variable[["object"]] == "milestones") {
 
-            milestones <- get_milestones()
-            index_milestones <- order(milestones[[sorting_variable[["field"]]]])
-            sorted_milestones_titles <- milestones[["title"]][index_milestones]
-
-            ref_issues <- sorted_issues
-            sorted_issues <- new_issues()
-            for (milestone in sorted_milestones_titles) {
-                sorted_group <- ref_issues |>
-                    IssueTrackeR::filter_issues(
-                        fields = "milestone",
-                        values = milestone
-                    )
-                sorted_issues <- c(sorted_issues, sorted_group)
+            if (missing(milestones)) {
+                milestones <- get_milestones()
             }
-            sorted_issues <- c(sorted_issues, no_milestones(ref_issues))
+
+            if (nrow(milestones) > 0L) {
+                index_milestones <- order(milestones[[sorting_variable[["field"]]]])
+                sorted_milestones_titles <- milestones[["title"]][index_milestones]
+
+                ref_issues <- sorted_issues
+                sorted_issues <- new_issues()
+                for (milestone in sorted_milestones_titles) {
+                    sorted_group <- ref_issues |>
+                        IssueTrackeR::filter_issues(
+                            fields = "milestone",
+                            values = milestone
+                        )
+                    sorted_issues <- c(sorted_issues, sorted_group)
+                }
+                sorted_issues <- c(sorted_issues, no_milestones(ref_issues))
+            }
+
         } else if (sorting_variable[["object"]] == "issues") {
             sorted_index <- order(vapply(
                 X = sorted_issues,
@@ -53,7 +59,7 @@ simple_sort <- function(issues, sorting_variables) {
 #' the issues. The filters are applied in the order of the variables supplied.
 #' @param filtering_factors a list containing constraints for sorting issues by
 #' sub-group in order of priority
-#' @param \dots Unused argument
+#' @param \dots Additional arguments for the function \code{simple_sort}.
 #'
 #' @returns a \code{IssuesTB} object sorted.
 #' @details
@@ -126,7 +132,7 @@ sort.IssuesTB <- function(x, decreasing = FALSE,
             args = c(list(x = remaining_issues), filtering_factor)
         )
         sorted_issues <- simple_sort(filtered_issues, sorting_variables)
-        selected_issues <- c(selected_issues, sorted_issues)
+        selected_issues <- c(selected_issues, sorted_issues, ...)
         filtering_factor[["negate"]] <- !filtering_factor[["negate"]]
         remaining_issues <- do.call(
             what = filter_issues,

@@ -43,16 +43,22 @@ get_milestones <- function(
             endpoint = "/repos/:username/:repo/milestones",
             .limit = Inf
         ) |>
-            format_milestones(...) |>
-            cbind(repo = repo,
-                  username = username)
+            format_milestones(...)
+
+        if (nrow(milestones) > 0L) {
+            milestones <- cbind(milestones, repo = repo,
+                                username = username)
+        }
+
     } else if (source == "local") {
         path_dataset_milestones <- file.path(path_dataset,
                                              "list_milestones.yaml")
         if (file.exists(path_dataset_milestones)) {
             milestones <- yaml::read_yaml(file = path_dataset_milestones) |>
                 as.data.frame()
-            milestones[["due_on"]]  <- as.POSIXct(milestones[["due_on"]])
+            if (nrow(milestones) > 0L) {
+                milestones[["due_on"]]  <- as.POSIXct(milestones[["due_on"]])
+            }
         } else {
             stop("The file doesn't exist. Run `write_milestones_to_dataset()`",
                  " to write a set of issues in the repo.")
@@ -107,14 +113,11 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
                                     as.POSIXct())
             )
         }) |>
-        do.call(what = rbind)
+        do.call(what = rbind) |>
+        as.data.frame()
     if (verbose) {
-        cat("Done!\n",
-            ifelse(
-                test = is.null(new_mlst_structure),
-                yes = 0L,
-                no = nrow(new_mlst_structure)
-            ), " milestones found.\n", sep = "")
+        cat("Done!\n", nrow(new_mlst_structure),
+            " milestones found.\n", sep = "")
     }
     return(new_mlst_structure)
 }
@@ -146,7 +149,7 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
 #'
 write_milestones_to_dataset <- function(
         milestones,
-        source = "online",
+        source = c("online", "local"),
         path_dataset = getOption("IssueTrackeR.dataset.path"),
         ...) {
 
