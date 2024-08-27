@@ -16,7 +16,7 @@ new_issues(x = list())
 \method{new_issues}{default}(x = list())
 }
 \arguments{
-\item{issues}{a list containing \code{IssueTB} objects}
+\item{x}{a list containing \code{IssueTB} objects}
 }
 \value{
 a \code{IssuesTB} object.
@@ -30,7 +30,16 @@ Create a new \code{IssuesTB} object
 issues1 <- new_issues()
 
 # Custom issue
-issues2 <- new_issues(list(
+issues2 <- new_issues(
+    x = new_issue(
+        title = "Une autre issue",
+        body = "J'ai une question au sujet de...",
+        number = 2,
+        created_at = Sys.Date()
+    )
+)
+
+issues3 <- new_issues(x = list(
     new_issue(
         title = "Nouvelle issue",
         body = "Un nouveau bug pour la fonction...",

@@ -95,12 +95,12 @@ get_milestones <- function(
 format_milestones <- function(raw_milestones, verbose = TRUE) {
 
     if (verbose) {
-        cat("Reading milestones... ")
+        cat("Reading milestones... \n")
     }
     new_mlst_structure <- raw_milestones |>
         lapply(FUN = function(x) {
             if (verbose) {
-                cat("Milestone ", x[["title"]], "... Done!\n")
+                cat("\t- ", x[["title"]], "... Done!\n")
             }
             data.frame(
                 title = x[["title"]],
@@ -116,8 +116,8 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
         do.call(what = rbind) |>
         as.data.frame()
     if (verbose) {
-        cat("Done!\n", nrow(new_mlst_structure),
-            " milestones found.\n", sep = "")
+        cat("Done!", nrow(new_mlst_structure),
+            "milestones found.\n", sep = " ")
     }
     return(new_mlst_structure)
 }

@@ -68,7 +68,7 @@ new_issue <- function(title,
 
 #' @title Create a new \code{IssuesTB} object
 #'
-#' @param issues a list containing \code{IssueTB} objects
+#' @param x a list containing \code{IssueTB} objects
 #'
 #' @returns a \code{IssuesTB} object.
 #' @export
@@ -79,7 +79,16 @@ new_issue <- function(title,
 #' issues1 <- new_issues()
 #'
 #' # Custom issue
-#' issues2 <- new_issues(list(
+#' issues2 <- new_issues(
+#'     x = new_issue(
+#'         title = "Une autre issue",
+#'         body = "J'ai une question au sujet de...",
+#'         number = 2,
+#'         created_at = Sys.Date()
+#'     )
+#' )
+#'
+#' issues3 <- new_issues(x = list(
 #'     new_issue(
 #'         title = "Nouvelle issue",
 #'         body = "Un nouveau bug pour la fonction...",
@@ -169,21 +178,26 @@ new_issues <- function(x = list()) {
 }
 
 #' @export
-append <- function(x, values, ...) {
+#' @rdname append
+#' @inherit base::append
+append <- function(x, values, after = length(x)) {
     UseMethod("append")
 }
 
+#' @rdname append
 #' @exportS3Method append default
 #' @method append default
 #' @export
-append.default <- function(x, values, ...) {
-    base::append(x, values, ...)
+append.default <- function(x, values, after) {
+    base::append(x, values, after)
 }
 
+#' @rdname append
 #' @exportS3Method append IssuesTB
+#' @param values a \code{IssueTB} or a \code{IssuesTB} object.
 #' @method append IssuesTB
 #' @export
-append.IssuesTB <- function(x, values, ...) {
+append.IssuesTB <- function(x, values, after) {
     if (inherits(values, "IssuesTB")) {
         return(new_issues(NextMethod()))
     } else if (inherits(values, "IssueTB")) {
