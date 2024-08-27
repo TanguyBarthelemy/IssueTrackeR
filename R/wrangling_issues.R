@@ -93,11 +93,38 @@ new_issue <- function(title,
 #'         created_at = Sys.Date()
 #'     )
 #' ))
+#' @rdname new_issues
 #'
-new_issues <- function(issues = list()) {
-    class(issues) <- "IssuesTB"
-    return(issues)
+new_issues <- function(x = list()) {
+    UseMethod("new_issues", x)
 }
+
+#' @rdname new_issues
+#' @exportS3Method new_issues IssueTB
+#' @method new_issues IssueTB
+#' @export
+new_issues.IssueTB <- function(x) {
+    issues <- list(x)
+    return(new_issues(x = issues))
+}
+
+#' @rdname new_issues
+#' @exportS3Method new_issues IssuesTB
+#' @method new_issues IssuesTB
+#' @export
+new_issues.IssuesTB <- function(x) {
+    return(x)
+}
+
+#' @rdname new_issues
+#' @exportS3Method new_issues default
+#' @method new_issues default
+#' @export
+new_issues.default <- function(x = list()) {
+    class(x) <- "IssuesTB"
+    return(x)
+}
+
 
 #' @exportS3Method `[[` IssuesTB
 #' @method `[[` IssuesTB
@@ -137,6 +164,32 @@ c.IssuesTB <- function(...) {
 #' @exportS3Method append IssuesTB
 #' @method append IssuesTB
 #' @export
-append.IssuesTB <- function(...) {
-    return(new_issues(NextMethod()))
+new_issues <- function(x = list()) {
+    UseMethod("new_issues", x)
+}
+
+#' @export
+append <- function(x, values, ...) {
+    UseMethod("append")
+}
+
+#' @exportS3Method append default
+#' @method append default
+#' @export
+append.default <- function(x, values, ...) {
+    base::append(x, values, ...)
+}
+
+#' @exportS3Method append IssuesTB
+#' @method append IssuesTB
+#' @export
+append.IssuesTB <- function(x, values, ...) {
+    if (inherits(values, "IssuesTB")) {
+        return(new_issues(NextMethod()))
+    } else if (inherits(values, "IssueTB")) {
+        return(append(x, new_issues(values)))
+    } else {
+        stop("This function requires a IssueTB or IssuesTB object ",
+             "for `values` argument.")
+    }
 }

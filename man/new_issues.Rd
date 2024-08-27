@@ -2,9 +2,18 @@
 % Please edit documentation in R/wrangling_issues.R
 \name{new_issues}
 \alias{new_issues}
+\alias{new_issues.IssueTB}
+\alias{new_issues.IssuesTB}
+\alias{new_issues.default}
 \title{Create a new \code{IssuesTB} object}
 \usage{
-new_issues(issues = list())
+new_issues(x = list())
+
+\method{new_issues}{IssueTB}(x)
+
+\method{new_issues}{IssuesTB}(x)
+
+\method{new_issues}{default}(x = list())
 }
 \arguments{
 \item{issues}{a list containing \code{IssueTB} objects}
@@ -35,5 +44,4 @@ issues2 <- new_issues(list(
         created_at = Sys.Date()
     )
 ))
-
 }

@@ -65,8 +65,11 @@ get_issues <- function(source = c("local", "online"),
             }
             issues <- new_issues(issues)
         } else {
-            stop("The file doesn't exist. Run `write_issues_to_dataset()`",
-                 " to write a set of issues in the repo.")
+            stop(
+                "The file doesn't exist. Run `write_issues_to_dataset()`",
+                " to write a set of issues in the repo.\n",
+                "Or call get_issues() with the argument `source` to \"online\"."
+            )
         }
     } else {
         stop("wrong source")
