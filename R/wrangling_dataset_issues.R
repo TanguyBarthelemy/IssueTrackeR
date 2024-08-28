@@ -158,13 +158,13 @@ format_issues <- function(raw_issues,
             || all(comments_nbr != raw_issue[["number"]]),
             yes = "",
             no = paste0(
+                "\n\nComment:\n",
                 comments_body[which(comments_nbr == raw_issue[["number"]])],
-                collapse = "\n\nComment:\n"
+                collapse = ""
             )
         )
-        body <- paste0(raw_issue[["body"]],
-                       body_comment,
-                       collapse = "\n\nComment:\n")
+        body <- paste(raw_issue[["body"]],
+                      body_comment)
 
         issue <- new_issue(
             title = raw_issue[["title"]],
