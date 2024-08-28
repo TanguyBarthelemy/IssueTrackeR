@@ -1,5 +1,5 @@
 
-simple_sort <- function(issues, sorting_variables, milestones) {
+simple_sort <- function(issues, sorting_variables, milestones, ...) {
 
     if (length(issues) == 0L) {
         return(new_issues())
@@ -11,7 +11,7 @@ simple_sort <- function(issues, sorting_variables, milestones) {
         if (sorting_variable[["object"]] == "milestones") {
 
             if (missing(milestones)) {
-                milestones <- get_milestones()
+                milestones <- get_milestones(...)
             }
 
             if (nrow(milestones) > 0L) {
@@ -61,7 +61,8 @@ simple_sort <- function(issues, sorting_variables, milestones) {
 #' the issues. The filters are applied in the order of the variables supplied.
 #' @param filtering_factors a list containing constraints for sorting issues by
 #' sub-group in order of priority
-#' @param \dots Additional arguments for the function \code{simple_sort}.
+#' @param \dots Additional arguments related to milestones for the function
+#' \code{simple_sort}.
 #'
 #' @returns a \code{IssuesTB} object sorted.
 #' @details
@@ -104,7 +105,11 @@ simple_sort <- function(issues, sorting_variables, milestones) {
 #'
 #' @export
 #' @examples
-#' write_milestones_to_dataset()
+#'
+#' # Get the milestones of the prject
+#' milestones <- get_milestones("online")
+#' write_milestones_to_dataset(milestones)
+#'
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' sort(
 #'     x = all_issues,
@@ -113,7 +118,8 @@ simple_sort <- function(issues, sorting_variables, milestones) {
 #'     filtering_factors = list(list(values = "bug",
 #'                                   fields = "labels",
 #'                                   values_logic_gate = "OR"),
-#'                              list(values = "package", fields = "title"))
+#'                              list(values = "package", fields = "title")),
+#'     milestones = milestones
 #' )
 #'
 #' @exportS3Method sort IssuesTB

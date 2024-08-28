@@ -6,25 +6,26 @@
 \usage{
 write_labels_to_dataset(
   labels,
-  source = "online",
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-  ...
+  dataset_name = "list_labels.yaml",
+  verbose = TRUE
 )
 }
 \arguments{
 \item{labels}{a list representing all labels with simpler structure (with
 name, description, color)}
 
-\item{source}{a character string that is either \code{"online"} (by default)
-if you want to fetch information from github or \code{"local"} if you want to
-fetch information locally.}
+\item{dataset_dir}{A character string specifying the path which contains the
+datasets (only taken into account if \code{source} is set to \code{"local"}).
+Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
 
-\item{dataset_dir}{A character string specifying the path which will contain
-the datasets. Defaults to the package option
-\code{IssueTrackeR.dataset.dir}.}
+\item{dataset_name}{A character string specifying the name of the datasets
+which will be written (only taken into account if \code{source} is set to
+\code{"local"}).
+Defaults to \code{"list_issues.yaml"}.}
 
-\item{\dots}{Additional arguments for the function
-\code{\link[IssueTrackeR]{get_labels}}.}
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was
@@ -33,12 +34,12 @@ successful and an error otherwise.
 \description{
 Save label dataset in a yaml format
 }
+\details{
+The defaults value of the argument \code{dataset_name} is
+\code{"list_labels.yaml"}.
+}
 \examples{
-# With labels
-labels <- get_labels()
+labels <- get_labels(source = "online")
 write_labels_to_dataset(labels)
-
-# Without labels
-write_labels_to_dataset()
 
 }

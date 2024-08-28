@@ -4,12 +4,41 @@
 \alias{update_database}
 \title{Update database}
 \usage{
-update_database(...)
+update_database(
+  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+  datasets_name = c(open = "open_issues.yaml", closed = "closed_issues.yaml", labels =
+    "list_labels.yaml", milestones = "list_milestones.yaml"),
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
-\item{\dots}{Additional arguments for the functions
-\code{write_XXX_to_dataset} where XXX is \code{"issues"}, \code{"labels"} or
-\code{"milestones"}.}
+\item{dataset_dir}{A character string specifying the path which contains the
+datasets (only taken into account if \code{source} is set to \code{"local"}).
+Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
+
+\item{datasets_name}{A named character string fo length 4, specifying the
+names of the different datasets which will be written. The names
+\code{datasets_name} have to be \code{"open"}, \code{"closed"},
+\code{"labels"} and \code{"milestones"}.
+Defaults to \code{
+c(open = "open_issues.yaml",
+  closed = "closed_issues.yaml",
+  labels = "list_labels.yaml",
+  milestones = "list_milestones.yaml")
+}.}
+
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
+
+\item{\dots}{Additional arguments for connecting to the GitHub repository:
+\itemize{
+\item \code{repo} A character string specifying the GitHub repository name.
+Defaults to the package option \code{IssueTrackeR.repo}.
+\item \code{owner} A character string specifying the GitHub owner.
+Defaults to the package option \code{IssueTrackeR.owner}.
+(See the documentation of \code{\link[IssueTrackeR]{get}} to have more information on theses parameters):
+}}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE}.

@@ -27,7 +27,7 @@ contains(x, ...)
 \item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
 
 \item{\dots}{If \code{x} is a \code{IssueTB} object then the argument \dots
-are unused conversely, if x a \code{IssueTB} object then the \dots are used
+are unused. Conversely, if x a \code{IssueTB} object then the \dots are used
 to pass the same arguments as for \code{contains.IssueTB}:
 \itemize{
 \item \code{fields}

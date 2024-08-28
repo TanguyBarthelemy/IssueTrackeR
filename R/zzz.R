@@ -6,7 +6,7 @@
 
     # nolint start undesirable_function_linter
     options(IssueTrackeR.dataset.dir = dataset_dir)
-    options(IssueTrackeR.username = "rjdverse")
+    options(IssueTrackeR.owner = "rjdverse")
     options(IssueTrackeR.repo = "rjdemetra")
     # nolint end
 }

@@ -1,5 +1,5 @@
 
-#' @title Retrieve the issues from GitHub
+#' @title Retrieve information from the issues of GitHub
 #'
 #' @param source a character string that is either \code{"online"} if you want
 #' to fetch information from GitHub or \code{"local"} (by default) if you want
@@ -14,9 +14,9 @@
 #' @param repo A character string specifying the GitHub repository name (only
 #' taken into account if \code{source} is set to \code{"online"}).
 #' Defaults to the package option \code{IssueTrackeR.repo}.
-#' @param username A character string specifying the GitHub username (only taken
+#' @param owner A character string specifying the GitHub owner (only taken
 #' into account if \code{source} is set to \code{"online"}).
-#' Defaults to the package option \code{IssueTrackeR.username}.
+#' Defaults to the package option \code{IssueTrackeR.owner}.
 #' @param state a character string that is either \code{"open"} (by default) if
 #' you want to fetch only open issues from GitHub, \code{"closed"} if you want
 #' to fetch only closed issues from GitHub or \code{"all"} if you want to fetch
@@ -25,26 +25,62 @@
 #' @param verbose A logical value indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #'
+#' @details
+#' The functions of get type are usefull to retrieve object related to issues
+#' from GitHub. So it's possible to retrieve issues, labels and milestones.
+#'
+#' The defaults value for the argument \code{dataset_name} depends on the
+#' function:
+#' * defaults is \code{"list_issues.yaml"} for \code{get_issues()}
+#' * defaults is \code{"list_milestones.yaml"} for \code{get_milestones()}
+#' * defaults is \code{"list_labels.yaml"} for \code{get_labels()}
+#'
 #' @returns
-#' The function returns an object of class \code{IssuesTB}. It is a list
-#' composed by object of class \code{IssueTB}. An object of class \code{IssueTB}
-#' represents an issue with simpler structure (with number, title, body and
-#' labels).
+#' The function \code{get_issues} returns an object of class \code{IssuesTB}. It
+#' is a list composed by object of class \code{IssueTB}. An object of class
+#' \code{IssueTB} represents an issue with simpler structure (with number,
+#' title, body and labels).
+#'
+#' The function \code{get_labels} returns a list representing labels with
+#' simpler structure (with name, description, color).
+#'
+#' The function \code{get_milestones} returns a list representing milestones
+#' with simpler structure (with title, description and due_on).
 #'
 #' @export
 #'
+#' @rdname get
+#'
 #' @examples
-#' \dontrun{
-#' get_issues()
-#' get_issues(source = "local")
-#' }
-#' get_issues(source = "online")
+#'
+#' # From online
+#'
+#' issues <- get_issues(source = "online")
+#' print(issues)
+#'
+#' labels <- get_labels(source = "online")
+#' print(labels)
+#'
+#' milestones <- get_milestones(source = "online")
+#' print(milestones)
+#'
+#'
+#' # From local
+#'
+#' # First update the local database
+#' update_database(verbose = TRUE)
+#'
+#' issues <- get_issues(source = "local",
+#'                      dataset_name = "open_issues.yaml",
+#'                      state = "open")
+#' labels <- get_labels(source = "local")
+#' milestones <- get_milestones(source = "local")
 #'
 get_issues <- function(source = c("local", "online"),
                        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
                        dataset_name = "list_issues.yaml",
                        repo = getOption("IssueTrackeR.repo"),
-                       username = getOption("IssueTrackeR.username"),
+                       owner = getOption("IssueTrackeR.owner"),
                        state = c("open", "closed", "all"),
                        verbose = TRUE) {
 
@@ -54,21 +90,21 @@ get_issues <- function(source = c("local", "online"),
     if (source == "online") {
         raw_issues <- gh::gh(
             repo = repo,
-            username = username,
-            endpoint = "/repos/:username/:repo/issues",
+            owner = owner,
+            endpoint = "/repos/:owner/:repo/issues",
             state = state,
             .limit = Inf
         )
         raw_comments <- gh::gh(
             repo = repo,
-            username = username,
-            endpoint = "/repos/:username/:repo/issues/comments",
+            owner = owner,
+            endpoint = "/repos/:owner/:repo/issues/comments",
             .limit = Inf
         )
         issues <- format_issues(raw_issues = raw_issues,
                                 raw_comments = raw_comments,
                                 repo = repo,
-                                username = username,
+                                owner = owner,
                                 verbose = verbose)
     } else if (source == "local") {
 
@@ -88,8 +124,9 @@ get_issues <- function(source = c("local", "online"),
             issues <- new_issues(issues)
         } else {
             stop(
-                "The file doesn't exist. Run `write_issues_to_dataset()`",
-                " to write a set of issues in the repo.\n",
+                "The file ", paste0(input_file, ".yaml"),
+                "doesn't exist. Run `write_issues_to_dataset()`",
+                " to write a set of issues in the directory.\n",
                 "Or call get_issues() with the argument `source` to \"online\"."
             )
         }
@@ -109,14 +146,7 @@ get_issues <- function(source = c("local", "online"),
 #' @param raw_comments a \code{gh_response} object output from the function
 #' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
 #' comments.
-#' @param repo A character string specifying the GitHub repository name (only
-#' used if source is \code{"online"}). Defaults to the package option
-#' \code{IssueTrackeR.repo}.
-#' @param username A character string specifying the GitHub username (only used
-#' if source is \code{"online"}). Defaults to the package option
-#' \code{IssueTrackeR.username}.
-#' @param verbose A logical value indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#' @inheritParams get_issues
 #'
 #' @returns a list representing an issue with simpler structure (with number,
 #' title, body and labels) of all issues.
@@ -126,14 +156,14 @@ get_issues <- function(source = c("local", "online"),
 #'
 #' raw_issues <- gh::gh(
 #'     repo = "rjdemetra",
-#'     username = "rjdverse",
-#'     endpoint = "/repos/:username/:repo/issues",
+#'     owner = "rjdverse",
+#'     endpoint = "/repos/:owner/:repo/issues",
 #'     .limit = Inf
 #' )
 #' raw_comments <- gh::gh(
 #'     repo = "rjdemetra",
-#'     username = "rjdverse",
-#'     endpoint = "/repos/:username/:repo/issues/comments",
+#'     owner = "rjdverse",
+#'     endpoint = "/repos/:owner/:repo/issues/comments",
 #'     .limit = Inf
 #' )
 #' all_issues <- format_issues(raw_issues = raw_issues,
@@ -143,7 +173,7 @@ get_issues <- function(source = c("local", "online"),
 format_issues <- function(raw_issues,
                           raw_comments,
                           repo = getOption("IssueTrackeR.repo"),
-                          username = getOption("IssueTrackeR.username"),
+                          owner = getOption("IssueTrackeR.owner"),
                           verbose = TRUE) {
 
     if (!missing(raw_comments)) {
@@ -213,12 +243,12 @@ format_issues <- function(raw_issues,
 #' @title Save issue dataset in a yaml format
 #'
 #' @param issues a \code{IssuesTB} object.
-#' @param dataset_dir A character string specifying the path to the directory
-#' which will contain the datasets. Defaults to the package option
-#' \code{IssueTrackeR.dataset.dir}.
-#' @param dataset_name A named character string specifying the name of the
-#' datasets which will be written. Defaults to \code{"list_issues.yaml"}.
-#' @param \dots Unused argument.
+#' @inheritParams get_issues
+#' @param \dots Unused parameter.
+#'
+#' @details
+#' The defaults value of the argument \code{dataset_name} is
+#' \code{"list_issues.yaml"}.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
@@ -261,7 +291,10 @@ write_issues_to_dataset.IssuesTB <- function(
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)
     }
-    yaml::write_yaml(x = issues, file = output_path)
+    yaml::write_yaml(
+        x = issues,
+        file = output_path
+    )
     return(invisible(TRUE))
 }
 

@@ -1,67 +1,52 @@
 
-#' @title Retrieve the milestones from github
-#'
-#' @param source a character string that is either \code{"online"} if you want
-#' to fetch information from github or \code{"local"} if you want to fetch
-#' information locally.
-#' @param dataset_dir A character string specifying the path which contains the
-#' datasets (only used if source is \code{"local"}). Defaults to the package
-#' option \code{IssueTrackeR.dataset.dir}.
-#' @param repo A character string specifying the GitHub repository name (only
-#' used if source is \code{"online"}). Defaults to the package option
-#' \code{IssueTrackeR.repo}.
-#' @param username A character string specifying the GitHub username (only used
-#' if source is \code{"online"}). Defaults to the package option
-#' \code{IssueTrackeR.username}.
-#' @param \dots Additional arguments for the function
-#' \code{\link[IssueTrackeR]{format_milestones}}.
-#'
-#' @returns
-#' a list representing milestones with simpler structure (with title,
-#' description and due_on)
+#' @rdname get
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' get_milestones()
-#' get_milestones(source = "local")
-#' }
-#' get_milestones(source = "online")
-#'
 get_milestones <- function(
         source = c("local", "online"),
         dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+        dataset_name = "list_milestones.yaml",
         repo = getOption("IssueTrackeR.repo"),
-        username = getOption("IssueTrackeR.username"),
-        ...) {
+        owner = getOption("IssueTrackeR.owner"),
+        verbose = TRUE) {
     source <- match.arg(source)
 
     if (source == "online") {
         milestones <- gh::gh(
             repo = repo,
-            username = username,
-            endpoint = "/repos/:username/:repo/milestones",
+            owner = owner,
+            endpoint = "/repos/:owner/:repo/milestones",
+            state = "all",
             .limit = Inf
         ) |>
-            format_milestones(...)
+            format_milestones(verbose = verbose)
 
         if (nrow(milestones) > 0L) {
             milestones <- cbind(milestones, repo = repo,
-                                username = username)
+                                owner = owner)
         }
 
     } else if (source == "local") {
-        dataset_dir_milestones <- file.path(dataset_dir,
-                                             "list_milestones.yaml")
-        if (file.exists(dataset_dir_milestones)) {
-            milestones <- yaml::read_yaml(file = dataset_dir_milestones) |>
+
+        input_file <- tools::file_path_sans_ext(dataset_name)
+        input_path <- file.path(dataset_dir, input_file) |>
+            normalizePath(mustWork = FALSE) |>
+            paste0(... = _, ".yaml")
+
+        if (file.exists(input_path)) {
+            if (verbose) {
+                message("The milestones will be read from ", input_path, ".")
+            }
+            milestones <- yaml::read_yaml(file = input_path) |>
                 as.data.frame()
             if (nrow(milestones) > 0L) {
                 milestones[["due_on"]]  <- as.POSIXct(milestones[["due_on"]])
             }
         } else {
-            stop("The file doesn't exist. Run `write_milestones_to_dataset()`",
-                 " to write a set of issues in the repo.")
+            stop(
+                "The file doesn't exist. Run `write_milestones_to_dataset()`",
+                " to write a set of milestones in the directory\n",
+                "Or call get_milestones() with the argument `source` to \"online\"."
+            )
         }
     } else {
         stop("wrong source")
@@ -86,8 +71,8 @@ get_milestones <- function(
 #' # With milestones
 #' raw_milestones <- gh::gh(
 #'     repo = "rjdemetra",
-#'     username = "rjdverse",
-#'     endpoint = "/repos/:username/:repo/milestones",
+#'     owner = "rjdverse",
+#'     endpoint = "/repos/:owner/:repo/milestones",
 #'     .limit = Inf
 #' )
 #' format_milestones(raw_milestones)
@@ -126,44 +111,44 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
 #'
 #' @param milestones a list representing milestones with simpler structure (with
 #' title, description and due_on).
-#' @param source a character string that is either \code{"online"} (by default)
-#' if you want to fetch information from github or \code{"local"} if you want to
-#' fetch information locally.
-#' @param dataset_dir A character string specifying the path which will contain
-#' the datasets. Defaults to the package option
-#' \code{IssueTrackeR.dataset.dir}.
-#' @param \dots Additional arguments for the function
-#' \code{\link[IssueTrackeR]{get_milestones}}.
+#' @inheritParams get_issues
+#'
+#' @details
+#' The defaults value of the argument \code{dataset_name} is
+#' \code{"list_milestones.yaml"}.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
 #' @export
 #'
 #' @examples
-#' # With milestones
-#' milestones <- get_milestones()
+#' milestones <- get_milestones(source = "online")
 #' write_milestones_to_dataset(milestones)
-#'
-#' # Without milestones
-#' write_milestones_to_dataset(source = "online")
 #'
 write_milestones_to_dataset <- function(
         milestones,
-        source = c("online", "local"),
         dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-        ...) {
+        dataset_name = "list_milestones.yaml",
+        verbose = TRUE) {
+
+    output_file <- tools::file_path_sans_ext(dataset_name)
+    output_path <- file.path(dataset_dir, output_file) |>
+        normalizePath(mustWork = FALSE) |>
+        paste0(... = _, ".yaml")
 
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)
     }
-    source <- match.arg(source)
-    dataset_dir_milestones <- file.path(dataset_dir, "list_milestones.yaml")
-    if (missing(milestones)) {
-        milestones <- get_milestones(source = source, ...)
+    if (verbose) {
+        message("The datasets will be exported to ", output_path, ".")
+        if (file.exists(output_path)) {
+            message("The file already exists and will be overwritten.")
+        }
     }
+
     yaml::write_yaml(
         x = milestones,
-        file = dataset_dir_milestones
+        file = output_path
     )
     return(invisible(TRUE))
 }

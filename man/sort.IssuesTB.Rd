@@ -23,7 +23,8 @@ the issues. The filters are applied in the order of the variables supplied.}
 \item{filtering_factors}{a list containing constraints for sorting issues by
 sub-group in order of priority}
 
-\item{\dots}{Additional arguments for the function \code{simple_sort}.}
+\item{\dots}{Additional arguments related to milestones for the function
+\code{simple_sort}.}
 }
 \value{
 a \code{IssuesTB} object sorted.
@@ -71,7 +72,11 @@ from \code{x}) to the \code{\link[IssueTrackeR]{filter_issues}}
 \code{values_logic_gate} and \code{negate}).
 }
 \examples{
-write_milestones_to_dataset()
+
+# Get the milestones of the prject
+milestones <- get_milestones("online")
+write_milestones_to_dataset(milestones)
+
 all_issues <- get_issues(source = "online", verbose = FALSE)
 sort(
     x = all_issues,
@@ -80,7 +85,8 @@ sort(
     filtering_factors = list(list(values = "bug",
                                   fields = "labels",
                                   values_logic_gate = "OR"),
-                             list(values = "package", fields = "title"))
+                             list(values = "package", fields = "title")),
+    milestones = milestones
 )
 
 }

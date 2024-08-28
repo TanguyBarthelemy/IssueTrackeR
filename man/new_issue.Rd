@@ -14,7 +14,7 @@ new_issue(
   milestone = NULL,
   issue = list(),
   repo = NULL,
-  username = NULL,
+  owner = NULL,
   ...
 )
 }
@@ -36,11 +36,13 @@ the issue is still open or \code{"closed"} if the issue is now closed.}
 
 \item{issue}{a list representing the object.}
 
-\item{repo}{a string. The name of the GitHub repository to which the issue
-belongs.}
+\item{repo}{A character string specifying the GitHub repository name (only
+taken into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.repo}.}
 
-\item{username}{a string. The name of the owner of the GitHub repository to
-which the issue belongs.}
+\item{owner}{A character string specifying the GitHub owner (only taken
+into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.owner}.}
 
 \item{\dots}{Other information we would like to add to the issue.}
 }

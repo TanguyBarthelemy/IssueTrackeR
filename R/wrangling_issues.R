@@ -9,10 +9,7 @@
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.
 #' @param issue a list representing the object.
-#' @param repo a string. The name of the GitHub repository to which the issue
-#' belongs.
-#' @param username a string. The name of the owner of the GitHub repository to
-#' which the issue belongs.
+#' @inheritParams get_issues
 #' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssueTB} object.
@@ -42,7 +39,7 @@ new_issue <- function(title,
                       milestone = NULL,
                       issue = list(),
                       repo = NULL,
-                      username = NULL,
+                      owner = NULL,
                       ...) {
 
     state <- match.arg(state)
@@ -60,7 +57,7 @@ new_issue <- function(title,
                       labels = labels,
                       milestone = milestone,
                       repo = repo,
-                      username = username)
+                      owner = owner)
     } else if (!missing(issue)) {
         issue[["created_at"]] <- issue[["created_at"]] |>
             as.POSIXct() |>

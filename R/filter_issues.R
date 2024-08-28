@@ -44,7 +44,7 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' default).
 #' @param negate a boolean indicate the negation of the assertion.
 #' @param \dots If \code{x} is a \code{IssueTB} object then the argument \dots
-#' are unused conversely, if x a \code{IssueTB} object then the \dots are used
+#' are unused. Conversely, if x a \code{IssueTB} object then the \dots are used
 #' to pass the same arguments as for \code{contains.IssueTB}:
 #' * \code{fields}
 #' * \code{fields_logic_gate}

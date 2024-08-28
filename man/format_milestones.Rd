@@ -25,8 +25,8 @@ Format the milestone in a simpler format
 # With milestones
 raw_milestones <- gh::gh(
     repo = "rjdemetra",
-    username = "rjdverse",
-    endpoint = "/repos/:username/:repo/milestones",
+    owner = "rjdverse",
+    endpoint = "/repos/:owner/:repo/milestones",
     .limit = Inf
 )
 format_milestones(raw_milestones)

@@ -8,7 +8,7 @@ format_issues(
   raw_issues,
   raw_comments,
   repo = getOption("IssueTrackeR.repo"),
-  username = getOption("IssueTrackeR.username"),
+  owner = getOption("IssueTrackeR.owner"),
   verbose = TRUE
 )
 }
@@ -22,12 +22,12 @@ issues.}
 comments.}
 
 \item{repo}{A character string specifying the GitHub repository name (only
-used if source is \code{"online"}). Defaults to the package option
-\code{IssueTrackeR.repo}.}
+taken into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.repo}.}
 
-\item{username}{A character string specifying the GitHub username (only used
-if source is \code{"online"}). Defaults to the package option
-\code{IssueTrackeR.username}.}
+\item{owner}{A character string specifying the GitHub owner (only taken
+into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.owner}.}
 
 \item{verbose}{A logical value indicating whether to print additional
 information. Default is \code{TRUE}.}
@@ -43,14 +43,14 @@ Format the issue in a simpler format
 
 raw_issues <- gh::gh(
     repo = "rjdemetra",
-    username = "rjdverse",
-    endpoint = "/repos/:username/:repo/issues",
+    owner = "rjdverse",
+    endpoint = "/repos/:owner/:repo/issues",
     .limit = Inf
 )
 raw_comments <- gh::gh(
     repo = "rjdemetra",
-    username = "rjdverse",
-    endpoint = "/repos/:username/:repo/issues/comments",
+    owner = "rjdverse",
+    endpoint = "/repos/:owner/:repo/issues/comments",
     .limit = Inf
 )
 all_issues <- format_issues(raw_issues = raw_issues,

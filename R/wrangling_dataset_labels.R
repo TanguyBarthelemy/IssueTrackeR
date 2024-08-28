@@ -1,62 +1,46 @@
 
-#' @title Retrieve the labels from github
-#'
-#' @param source a character string that is either \code{"online"} if you want
-#' to fetch information from github or \code{"local"} if you want to fetch
-#' information locally.
-#' @param dataset_dir A character string specifying the path which contains the
-#' datasets (only used if source is \code{"local"}). Defaults to the package
-#' option \code{IssueTrackeR.dataset.dir}.
-#' @param repo A character string specifying the GitHub repository name (only
-#' used if source is \code{"online"}). Defaults to the package option
-#' \code{IssueTrackeR.repo}.
-#' @param username A character string specifying the GitHub username (only used
-#' if source is \code{"online"}). Defaults to the package option
-#' \code{IssueTrackeR.username}.
-#' @param \dots Additional arguments for the function
-#' \code{\link[IssueTrackeR]{format_labels}}.
-#'
-#' @returns
-#' a list representing labels with simpler structure (with name,
-#' description, color)
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' get_labels()
-#' get_labels(source = "local")
-#' }
-#' get_labels(source = "online")
-#'
+#' @rdname get
 get_labels <- function(source = c("local", "online"),
                        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+                       dataset_name = "list_labels.yaml",
                        repo = getOption("IssueTrackeR.repo"),
-                       username = getOption("IssueTrackeR.username"),
-                       ...) {
+                       owner = getOption("IssueTrackeR.owner"),
+                       verbose = TRUE) {
     source <- match.arg(source)
 
     if (source == "online") {
         labels <- gh::gh(
             repo = repo,
-            username = username,
-            endpoint = "/repos/:username/:repo/labels",
+            owner = owner,
+            endpoint = "/repos/:owner/:repo/labels",
             .limit = Inf
         ) |>
-            format_labels(...)
+            format_labels(verbose = verbose)
 
         if (!is.null(labels)) {
             labels <- cbind(labels, repo = repo,
-                            username = username)
+                            owner = owner)
         }
 
     } else if (source == "local") {
-        dataset_dir_labels <- file.path(dataset_dir, "list_labels.yaml")
-        if (file.exists(dataset_dir_labels)) {
-            labels <- yaml::read_yaml(file = dataset_dir_labels) |>
+        input_file <- tools::file_path_sans_ext(dataset_name)
+        input_path <- file.path(dataset_dir, input_file) |>
+            normalizePath(mustWork = FALSE) |>
+            paste0(... = _, ".yaml")
+
+        if (file.exists(input_path)) {
+            if (verbose) {
+                message("The labels will be read from ", input_path, ".")
+            }
+            labels <- yaml::read_yaml(file = input_path) |>
                 as.data.frame()
         } else {
-            stop("The file doesn't exist. Run `write_labels_to_dataset()`",
-                 " to write a set of issues in the repo.")
+            stop(
+                "The file doesn't exist. Run `write_labels_to_dataset()`",
+                " to write a set of labels in the directory\n",
+                "Or call get_labels() with the argument `source` to \"online\"."
+            )
         }
     } else {
         stop("wrong source")
@@ -70,8 +54,7 @@ get_labels <- function(source = c("local", "online"),
 #' @param raw_labels a \code{gh_response} object output from the function
 #' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
 #' labels.
-#' @param verbose A logical value indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#' @inheritParams get_issues
 #'
 #' @returns a list representing labels with simpler structure (with name,
 #' description, color)
@@ -81,8 +64,8 @@ get_labels <- function(source = c("local", "online"),
 #' # With labels
 #' raw_labels <- gh::gh(
 #'    repo = "rjdemetra",
-#'    username = "rjdverse",
-#'    endpoint = "/repos/:username/:repo/labels",
+#'    owner = "rjdverse",
+#'    endpoint = "/repos/:owner/:repo/labels",
 #'    .limit = Inf
 #' )
 #' format_labels(raw_labels)
@@ -110,40 +93,44 @@ format_labels <- function(raw_labels, verbose = TRUE) {
 #'
 #' @param labels a list representing all labels with simpler structure (with
 #' name, description, color)
-#' @param source a character string that is either \code{"online"} (by default)
-#' if you want to fetch information from github or \code{"local"} if you want to
-#' fetch information locally.
-#' @param dataset_dir A character string specifying the path which will contain
-#' the datasets. Defaults to the package option
-#' \code{IssueTrackeR.dataset.dir}.
-#' @param \dots Additional arguments for the function
-#' \code{\link[IssueTrackeR]{get_labels}}.
+#' @inheritParams get_issues
+#'
+#' @details
+#' The defaults value of the argument \code{dataset_name} is
+#' \code{"list_labels.yaml"}.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
 #' @export
 #'
 #' @examples
-#' # With labels
-#' labels <- get_labels()
+#' labels <- get_labels(source = "online")
 #' write_labels_to_dataset(labels)
-#'
-#' # Without labels
-#' write_labels_to_dataset()
 #'
 write_labels_to_dataset <- function(
         labels,
-        source = "online",
         dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-        ...) {
+        dataset_name = "list_labels.yaml",
+        verbose = TRUE) {
+
+    output_file <- tools::file_path_sans_ext(dataset_name)
+    output_path <- file.path(dataset_dir, output_file) |>
+        normalizePath(mustWork = FALSE) |>
+        paste0(... = _, ".yaml")
+
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)
     }
-    source <- match.arg(source)
-    dataset_dir_labels <- file.path(dataset_dir, "list_labels.yaml")
-    if (missing(labels)) {
-        labels <- get_labels(source = source, ...)
+    if (verbose) {
+        message("The datasets will be exported to ", output_path, ".")
+        if (file.exists(output_path)) {
+            message("The file already exists and will be overwritten.")
+        }
     }
-    yaml::write_yaml(x = labels, file = dataset_dir_labels)
+
+    yaml::write_yaml(
+        x = labels,
+        file = output_path
+    )
     return(invisible(TRUE))
 }

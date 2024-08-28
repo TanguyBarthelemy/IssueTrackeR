@@ -25,8 +25,8 @@ Format the label in a simpler format
 # With labels
 raw_labels <- gh::gh(
    repo = "rjdemetra",
-   username = "rjdverse",
-   endpoint = "/repos/:username/:repo/labels",
+   owner = "rjdverse",
+   endpoint = "/repos/:owner/:repo/labels",
    .limit = Inf
 )
 format_labels(raw_labels)

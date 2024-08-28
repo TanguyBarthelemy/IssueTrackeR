@@ -21,14 +21,19 @@ write_issues_to_dataset(issues, ...)
 \arguments{
 \item{issues}{a \code{IssuesTB} object.}
 
-\item{\dots}{Unused argument.}
+\item{\dots}{Unused parameter.}
 
-\item{dataset_dir}{A character string specifying the path to the directory
-which will contain the datasets. Defaults to the package option
-\code{IssueTrackeR.dataset.dir}.}
+\item{dataset_dir}{A character string specifying the path which contains the
+datasets (only taken into account if \code{source} is set to \code{"local"}).
+Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
 
-\item{dataset_name}{A named character string specifying the name of the
-datasets which will be written. Defaults to \code{"list_issues.yaml"}.}
+\item{dataset_name}{A character string specifying the name of the datasets
+which will be written (only taken into account if \code{source} is set to
+\code{"local"}).
+Defaults to \code{"list_issues.yaml"}.}
+
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was
@@ -36,6 +41,10 @@ successful and an error otherwise.
 }
 \description{
 Save issue dataset in a yaml format
+}
+\details{
+The defaults value of the argument \code{dataset_name} is
+\code{"list_issues.yaml"}.
 }
 \examples{
 
