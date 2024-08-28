@@ -1,6 +1,8 @@
 #' @title Create a new \code{IssueTB} object
 #'
 #' @param title a string. The title of the issue.
+#' @param state a character string that is either \code{"open"} (by default) if
+#' the issue is still open or \code{"closed"} if the issue is now closed.
 #' @param body a string. The title of the issue.
 #' @param number a string. The title of the issue.
 #' @param created_at a date. The title of the issue.
@@ -32,6 +34,7 @@
 #' issue3 <- new_issue(issue = issue2)
 #'
 new_issue <- function(title,
+                      state = c("open", "closed"),
                       body,
                       number,
                       created_at = Sys.Date(),
@@ -41,6 +44,9 @@ new_issue <- function(title,
                       repo = NULL,
                       username = NULL,
                       ...) {
+
+    state <- match.arg(state)
+
     if (!(missing(title)
           || missing(body)
           || missing(number))) {
@@ -92,12 +98,14 @@ new_issue <- function(title,
 #'     new_issue(
 #'         title = "Nouvelle issue",
 #'         body = "Un nouveau bug pour la fonction...",
+#'         state = "open",
 #'         number = 1,
 #'         created_at = Sys.Date()
 #'     ),
 #'     new_issue(
 #'         title = "Une autre issue",
 #'         body = "J'ai une question au sujet de...",
+#'         state = "closed",
 #'         number = 2,
 #'         created_at = Sys.Date()
 #'     )

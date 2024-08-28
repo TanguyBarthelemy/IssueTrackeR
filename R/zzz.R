@@ -1,11 +1,11 @@
 
 #' @keywords internal
 .onLoad <- function(libname, pkgname) {
-    dataset_path <- file.path(tempdir(), "data") |>
+    dataset_dir <- file.path(tempdir(), "data") |>
         normalizePath(mustWork = FALSE)
 
     # nolint start undesirable_function_linter
-    options(IssueTrackeR.dataset.path = dataset_path)
+    options(IssueTrackeR.dataset.dir = dataset_dir)
     options(IssueTrackeR.username = "rjdverse")
     options(IssueTrackeR.repo = "rjdemetra")
     # nolint end

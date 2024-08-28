@@ -43,12 +43,14 @@ issues3 <- new_issues(x = list(
     new_issue(
         title = "Nouvelle issue",
         body = "Un nouveau bug pour la fonction...",
+        state = "open",
         number = 1,
         created_at = Sys.Date()
     ),
     new_issue(
         title = "Une autre issue",
         body = "J'ai une question au sujet de...",
+        state = "closed",
         number = 2,
         created_at = Sys.Date()
     )

@@ -6,7 +6,7 @@
 \usage{
 get_milestones(
   source = c("local", "online"),
-  path_dataset = getOption("IssueTrackeR.dataset.path"),
+  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   repo = getOption("IssueTrackeR.repo"),
   username = getOption("IssueTrackeR.username"),
   ...
@@ -17,9 +17,9 @@ get_milestones(
 to fetch information from github or \code{"local"} if you want to fetch
 information locally.}
 
-\item{path_dataset}{A character string specifying the path which contains the
+\item{dataset_dir}{A character string specifying the path which contains the
 datasets (only used if source is \code{"local"}). Defaults to the package
-option \code{IssueTrackeR.dataset.path}.}
+option \code{IssueTrackeR.dataset.dir}.}
 
 \item{repo}{A character string specifying the GitHub repository name (only
 used if source is \code{"online"}). Defaults to the package option

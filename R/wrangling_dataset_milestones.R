@@ -4,9 +4,9 @@
 #' @param source a character string that is either \code{"online"} if you want
 #' to fetch information from github or \code{"local"} if you want to fetch
 #' information locally.
-#' @param path_dataset A character string specifying the path which contains the
+#' @param dataset_dir A character string specifying the path which contains the
 #' datasets (only used if source is \code{"local"}). Defaults to the package
-#' option \code{IssueTrackeR.dataset.path}.
+#' option \code{IssueTrackeR.dataset.dir}.
 #' @param repo A character string specifying the GitHub repository name (only
 #' used if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.repo}.
@@ -30,7 +30,7 @@
 #'
 get_milestones <- function(
         source = c("local", "online"),
-        path_dataset = getOption("IssueTrackeR.dataset.path"),
+        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
         repo = getOption("IssueTrackeR.repo"),
         username = getOption("IssueTrackeR.username"),
         ...) {
@@ -51,10 +51,10 @@ get_milestones <- function(
         }
 
     } else if (source == "local") {
-        path_dataset_milestones <- file.path(path_dataset,
+        dataset_dir_milestones <- file.path(dataset_dir,
                                              "list_milestones.yaml")
-        if (file.exists(path_dataset_milestones)) {
-            milestones <- yaml::read_yaml(file = path_dataset_milestones) |>
+        if (file.exists(dataset_dir_milestones)) {
+            milestones <- yaml::read_yaml(file = dataset_dir_milestones) |>
                 as.data.frame()
             if (nrow(milestones) > 0L) {
                 milestones[["due_on"]]  <- as.POSIXct(milestones[["due_on"]])
@@ -129,9 +129,9 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
 #' @param source a character string that is either \code{"online"} (by default)
 #' if you want to fetch information from github or \code{"local"} if you want to
 #' fetch information locally.
-#' @param path_dataset A character string specifying the path which will contain
+#' @param dataset_dir A character string specifying the path which will contain
 #' the datasets. Defaults to the package option
-#' \code{IssueTrackeR.dataset.path}.
+#' \code{IssueTrackeR.dataset.dir}.
 #' @param \dots Additional arguments for the function
 #' \code{\link[IssueTrackeR]{get_milestones}}.
 #'
@@ -150,20 +150,20 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
 write_milestones_to_dataset <- function(
         milestones,
         source = c("online", "local"),
-        path_dataset = getOption("IssueTrackeR.dataset.path"),
+        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
         ...) {
 
-    if (!dir.exists(path_dataset)) {
-        dir.create(path_dataset)
+    if (!dir.exists(dataset_dir)) {
+        dir.create(dataset_dir)
     }
     source <- match.arg(source)
-    path_dataset_milestones <- file.path(path_dataset, "list_milestones.yaml")
+    dataset_dir_milestones <- file.path(dataset_dir, "list_milestones.yaml")
     if (missing(milestones)) {
         milestones <- get_milestones(source = source, ...)
     }
     yaml::write_yaml(
         x = milestones,
-        file = path_dataset_milestones
+        file = dataset_dir_milestones
     )
     return(invisible(TRUE))
 }

@@ -7,7 +7,7 @@
 write_milestones_to_dataset(
   milestones,
   source = c("online", "local"),
-  path_dataset = getOption("IssueTrackeR.dataset.path"),
+  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   ...
 )
 }
@@ -19,9 +19,9 @@ title, description and due_on).}
 if you want to fetch information from github or \code{"local"} if you want to
 fetch information locally.}
 
-\item{path_dataset}{A character string specifying the path which will contain
+\item{dataset_dir}{A character string specifying the path which will contain
 the datasets. Defaults to the package option
-\code{IssueTrackeR.dataset.path}.}
+\code{IssueTrackeR.dataset.dir}.}
 
 \item{\dots}{Additional arguments for the function
 \code{\link[IssueTrackeR]{get_milestones}}.}

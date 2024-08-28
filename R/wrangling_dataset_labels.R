@@ -4,9 +4,9 @@
 #' @param source a character string that is either \code{"online"} if you want
 #' to fetch information from github or \code{"local"} if you want to fetch
 #' information locally.
-#' @param path_dataset A character string specifying the path which contains the
+#' @param dataset_dir A character string specifying the path which contains the
 #' datasets (only used if source is \code{"local"}). Defaults to the package
-#' option \code{IssueTrackeR.dataset.path}.
+#' option \code{IssueTrackeR.dataset.dir}.
 #' @param repo A character string specifying the GitHub repository name (only
 #' used if source is \code{"online"}). Defaults to the package option
 #' \code{IssueTrackeR.repo}.
@@ -29,7 +29,7 @@
 #' get_labels(source = "online")
 #'
 get_labels <- function(source = c("local", "online"),
-                       path_dataset = getOption("IssueTrackeR.dataset.path"),
+                       dataset_dir = getOption("IssueTrackeR.dataset.dir"),
                        repo = getOption("IssueTrackeR.repo"),
                        username = getOption("IssueTrackeR.username"),
                        ...) {
@@ -50,9 +50,9 @@ get_labels <- function(source = c("local", "online"),
         }
 
     } else if (source == "local") {
-        path_dataset_labels <- file.path(path_dataset, "list_labels.yaml")
-        if (file.exists(path_dataset_labels)) {
-            labels <- yaml::read_yaml(file = path_dataset_labels) |>
+        dataset_dir_labels <- file.path(dataset_dir, "list_labels.yaml")
+        if (file.exists(dataset_dir_labels)) {
+            labels <- yaml::read_yaml(file = dataset_dir_labels) |>
                 as.data.frame()
         } else {
             stop("The file doesn't exist. Run `write_labels_to_dataset()`",
@@ -113,9 +113,9 @@ format_labels <- function(raw_labels, verbose = TRUE) {
 #' @param source a character string that is either \code{"online"} (by default)
 #' if you want to fetch information from github or \code{"local"} if you want to
 #' fetch information locally.
-#' @param path_dataset A character string specifying the path which will contain
+#' @param dataset_dir A character string specifying the path which will contain
 #' the datasets. Defaults to the package option
-#' \code{IssueTrackeR.dataset.path}.
+#' \code{IssueTrackeR.dataset.dir}.
 #' @param \dots Additional arguments for the function
 #' \code{\link[IssueTrackeR]{get_labels}}.
 #'
@@ -134,16 +134,16 @@ format_labels <- function(raw_labels, verbose = TRUE) {
 write_labels_to_dataset <- function(
         labels,
         source = "online",
-        path_dataset = getOption("IssueTrackeR.dataset.path"),
+        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
         ...) {
-    if (!dir.exists(path_dataset)) {
-        dir.create(path_dataset)
+    if (!dir.exists(dataset_dir)) {
+        dir.create(dataset_dir)
     }
     source <- match.arg(source)
-    path_dataset_labels <- file.path(path_dataset, "list_labels.yaml")
+    dataset_dir_labels <- file.path(dataset_dir, "list_labels.yaml")
     if (missing(labels)) {
         labels <- get_labels(source = source, ...)
     }
-    yaml::write_yaml(x = labels, file = path_dataset_labels)
+    yaml::write_yaml(x = labels, file = dataset_dir_labels)
     return(invisible(TRUE))
 }

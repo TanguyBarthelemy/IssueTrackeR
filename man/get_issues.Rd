@@ -2,35 +2,48 @@
 % Please edit documentation in R/wrangling_dataset_issues.R
 \name{get_issues}
 \alias{get_issues}
-\title{Retrieve the issues from github}
+\title{Retrieve the issues from GitHub}
 \usage{
 get_issues(
   source = c("local", "online"),
-  path_dataset = getOption("IssueTrackeR.dataset.path"),
+  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+  dataset_name = "list_issues.yaml",
   repo = getOption("IssueTrackeR.repo"),
   username = getOption("IssueTrackeR.username"),
-  ...
+  state = c("open", "closed", "all"),
+  verbose = TRUE
 )
 }
 \arguments{
 \item{source}{a character string that is either \code{"online"} if you want
-to fetch information from github or \code{"local"} (by default) if you want
+to fetch information from GitHub or \code{"local"} (by default) if you want
 to fetch information locally.}
 
-\item{path_dataset}{A character string specifying the path which contains the
-datasets (only used if source is \code{"local"}). Defaults to the package
-option \code{IssueTrackeR.dataset.path}.}
+\item{dataset_dir}{A character string specifying the path which contains the
+datasets (only taken into account if \code{source} is set to \code{"local"}).
+Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
+
+\item{dataset_name}{A character string specifying the name of the datasets
+which will be written (only taken into account if \code{source} is set to
+\code{"local"}).
+Defaults to \code{"list_issues.yaml"}.}
 
 \item{repo}{A character string specifying the GitHub repository name (only
-used if source is \code{"online"}). Defaults to the package option
-\code{IssueTrackeR.repo}.}
+taken into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.repo}.}
 
-\item{username}{A character string specifying the GitHub username (only used
-if source is \code{"online"}). Defaults to the package option
-\code{IssueTrackeR.username}.}
+\item{username}{A character string specifying the GitHub username (only taken
+into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.username}.}
 
-\item{\dots}{Additional arguments for the function
-\code{\link[IssueTrackeR]{format_issues}}.}
+\item{state}{a character string that is either \code{"open"} (by default) if
+you want to fetch only open issues from GitHub, \code{"closed"} if you want
+to fetch only closed issues from GitHub or \code{"all"} if you want to fetch
+all issues from GitHub (closed and open).
+Only taken into account if \code{source} is set to \code{"online"}.}
+
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 The function returns an object of class \code{IssuesTB}. It is a list
@@ -39,7 +52,7 @@ represents an issue with simpler structure (with number, title, body and
 labels).
 }
 \description{
-Retrieve the issues from github
+Retrieve the issues from GitHub
 }
 \examples{
 \dontrun{

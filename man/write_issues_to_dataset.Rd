@@ -6,30 +6,29 @@
 \alias{write_issues_to_dataset.default}
 \title{Save issue dataset in a yaml format}
 \usage{
-write_issues_to_dataset(issues, source = c("online", "local"), ...)
+write_issues_to_dataset(issues, ...)
 
 \method{write_issues_to_dataset}{IssuesTB}(
   issues,
-  source,
-  path_dataset = getOption("IssueTrackeR.dataset.path"),
+  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+  dataset_name = "list_issues.yaml",
+  verbose = TRUE,
   ...
 )
 
-\method{write_issues_to_dataset}{default}(issues, source, ...)
+\method{write_issues_to_dataset}{default}(issues, ...)
 }
 \arguments{
 \item{issues}{a \code{IssuesTB} object.}
 
-\item{source}{a character string that is either \code{"online"} (by default)
-if you want to fetch information from github or \code{"local"} if you want to
-fetch information locally.}
+\item{\dots}{Unused argument.}
 
-\item{\dots}{Additional arguments for the function
-\code{\link[IssueTrackeR]{get_issues}}.}
+\item{dataset_dir}{A character string specifying the path to the directory
+which will contain the datasets. Defaults to the package option
+\code{IssueTrackeR.dataset.dir}.}
 
-\item{path_dataset}{A character string specifying the path which will contain
-the datasets. Defaults to the package option
-\code{IssueTrackeR.dataset.path}.}
+\item{dataset_name}{A named character string specifying the name of the
+datasets which will be written. Defaults to \code{"list_issues.yaml"}.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was
@@ -39,11 +38,8 @@ successful and an error otherwise.
 Save issue dataset in a yaml format
 }
 \examples{
-# With issues
+
 all_issues <- get_issues(source = "online", verbose = FALSE)
 write_issues_to_dataset(all_issues)
-
-# Without issues
-write_issues_to_dataset(source = "online")
 
 }

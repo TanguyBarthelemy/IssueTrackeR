@@ -6,6 +6,7 @@
 \usage{
 new_issue(
   title,
+  state = c("open", "closed"),
   body,
   number,
   created_at = Sys.Date(),
@@ -19,6 +20,9 @@ new_issue(
 }
 \arguments{
 \item{title}{a string. The title of the issue.}
+
+\item{state}{a character string that is either \code{"open"} (by default) if
+the issue is still open or \code{"closed"} if the issue is now closed.}
 
 \item{body}{a string. The title of the issue.}
 

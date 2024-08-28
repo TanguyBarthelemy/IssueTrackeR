@@ -1,20 +1,29 @@
 
-#' @title Retrieve the issues from github
+#' @title Retrieve the issues from GitHub
 #'
 #' @param source a character string that is either \code{"online"} if you want
-#' to fetch information from github or \code{"local"} (by default) if you want
+#' to fetch information from GitHub or \code{"local"} (by default) if you want
 #' to fetch information locally.
-#' @param path_dataset A character string specifying the path which contains the
-#' datasets (only used if source is \code{"local"}). Defaults to the package
-#' option \code{IssueTrackeR.dataset.path}.
+#' @param dataset_dir A character string specifying the path which contains the
+#' datasets (only taken into account if \code{source} is set to \code{"local"}).
+#' Defaults to the package option \code{IssueTrackeR.dataset.dir}.
+#' @param dataset_name A character string specifying the name of the datasets
+#' which will be written (only taken into account if \code{source} is set to
+#' \code{"local"}).
+#' Defaults to \code{"list_issues.yaml"}.
 #' @param repo A character string specifying the GitHub repository name (only
-#' used if source is \code{"online"}). Defaults to the package option
-#' \code{IssueTrackeR.repo}.
-#' @param username A character string specifying the GitHub username (only used
-#' if source is \code{"online"}). Defaults to the package option
-#' \code{IssueTrackeR.username}.
-#' @param \dots Additional arguments for the function
-#' \code{\link[IssueTrackeR]{format_issues}}.
+#' taken into account if \code{source} is set to \code{"online"}).
+#' Defaults to the package option \code{IssueTrackeR.repo}.
+#' @param username A character string specifying the GitHub username (only taken
+#' into account if \code{source} is set to \code{"online"}).
+#' Defaults to the package option \code{IssueTrackeR.username}.
+#' @param state a character string that is either \code{"open"} (by default) if
+#' you want to fetch only open issues from GitHub, \code{"closed"} if you want
+#' to fetch only closed issues from GitHub or \code{"all"} if you want to fetch
+#' all issues from GitHub (closed and open).
+#' Only taken into account if \code{source} is set to \code{"online"}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
 #'
 #' @returns
 #' The function returns an object of class \code{IssuesTB}. It is a list
@@ -32,17 +41,22 @@
 #' get_issues(source = "online")
 #'
 get_issues <- function(source = c("local", "online"),
-                       path_dataset = getOption("IssueTrackeR.dataset.path"),
+                       dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+                       dataset_name = "list_issues.yaml",
                        repo = getOption("IssueTrackeR.repo"),
                        username = getOption("IssueTrackeR.username"),
-                       ...) {
+                       state = c("open", "closed", "all"),
+                       verbose = TRUE) {
+
     source <- match.arg(source)
+    state <- match.arg(state)
 
     if (source == "online") {
         raw_issues <- gh::gh(
             repo = repo,
             username = username,
             endpoint = "/repos/:username/:repo/issues",
+            state = state,
             .limit = Inf
         )
         raw_comments <- gh::gh(
@@ -55,11 +69,19 @@ get_issues <- function(source = c("local", "online"),
                                 raw_comments = raw_comments,
                                 repo = repo,
                                 username = username,
-                                ...)
+                                verbose = verbose)
     } else if (source == "local") {
-        path_dataset_issues <- file.path(path_dataset, "list_issues.yaml")
-        if (file.exists(path_dataset_issues)) {
-            issues <- yaml::read_yaml(file = path_dataset_issues)
+
+        input_file <- tools::file_path_sans_ext(dataset_name)
+        input_path <- file.path(dataset_dir, input_file) |>
+            normalizePath(mustWork = FALSE) |>
+            paste0(... = _, ".yaml")
+
+        if (file.exists(input_path)) {
+            if (verbose) {
+                message("The issues will be read from ", input_path, ".")
+            }
+            issues <- yaml::read_yaml(file = input_path)
             for (id_issue in seq_along(issues)) {
                 issues[[id_issue]] <- new_issue(issue = issues[[id_issue]])
             }
@@ -71,6 +93,7 @@ get_issues <- function(source = c("local", "online"),
                 "Or call get_issues() with the argument `source` to \"online\"."
             )
         }
+
     } else {
         stop("wrong source")
     }
@@ -168,6 +191,7 @@ format_issues <- function(raw_issues,
 
         issue <- new_issue(
             title = raw_issue[["title"]],
+            state = raw_issue[["state"]],
             body = body,
             number = raw_issue[["number"]],
             created_at = raw_issue[["created_at"]],
@@ -189,38 +213,25 @@ format_issues <- function(raw_issues,
 #' @title Save issue dataset in a yaml format
 #'
 #' @param issues a \code{IssuesTB} object.
-#' @param source a character string that is either \code{"online"} (by default)
-#' if you want to fetch information from github or \code{"local"} if you want to
-#' fetch information locally.
-#' @param path_dataset A character string specifying the path which will contain
-#' the datasets. Defaults to the package option
-#' \code{IssueTrackeR.dataset.path}.
-#' @param \dots Additional arguments for the function
-#' \code{\link[IssueTrackeR]{get_issues}}.
+#' @param dataset_dir A character string specifying the path to the directory
+#' which will contain the datasets. Defaults to the package option
+#' \code{IssueTrackeR.dataset.dir}.
+#' @param dataset_name A named character string specifying the name of the
+#' datasets which will be written. Defaults to \code{"list_issues.yaml"}.
+#' @param \dots Unused argument.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
 #' @export
 #'
 #' @examples
-#' # With issues
+#'
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' write_issues_to_dataset(all_issues)
 #'
-#' # Without issues
-#' write_issues_to_dataset(source = "online")
-#'
 #' @rdname write_issues_to_dataset
 #'
-write_issues_to_dataset <- function(
-        issues,
-        source = c("online", "local"),
-        ...) {
-    if (missing(issues) || is.null(issues)) {
-        source <- match.arg(source)
-        issues <- get_issues(source = source, ...)
-        return(write_issues_to_dataset(issues = issues, ...))
-    }
+write_issues_to_dataset <- function(issues, ...) {
     UseMethod(generic = "write_issues_to_dataset", object = issues)
 }
 
@@ -230,14 +241,27 @@ write_issues_to_dataset <- function(
 #' @export
 write_issues_to_dataset.IssuesTB <- function(
         issues,
-        source,
-        path_dataset = getOption("IssueTrackeR.dataset.path"),
+        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+        dataset_name = "list_issues.yaml",
+        verbose = TRUE,
         ...) {
-    if (!dir.exists(path_dataset)) {
-        dir.create(path_dataset)
+
+    output_file <- tools::file_path_sans_ext(dataset_name)
+    output_path <- file.path(dataset_dir, output_file) |>
+        normalizePath(mustWork = FALSE) |>
+        paste0(... = _, ".yaml")
+
+    if (verbose) {
+        message("The datasets will be exported to ", output_path, ".")
+        if (file.exists(output_path)) {
+            message("The file already exists and will be overwritten.")
+        }
     }
-    path_dataset_issues <- file.path(path_dataset, "list_issues.yaml")
-    yaml::write_yaml(x = issues, file = path_dataset_issues)
+
+    if (!dir.exists(dataset_dir)) {
+        dir.create(dataset_dir)
+    }
+    yaml::write_yaml(x = issues, file = output_path)
     return(invisible(TRUE))
 }
 
@@ -245,6 +269,6 @@ write_issues_to_dataset.IssuesTB <- function(
 #' @exportS3Method write_issues_to_dataset default
 #' @method write_issues_to_dataset default
 #' @export
-write_issues_to_dataset.default <- function(issues, source, ...) {
+write_issues_to_dataset.default <- function(issues, ...) {
     stop("This function requires a IssuesTB object.")
 }
