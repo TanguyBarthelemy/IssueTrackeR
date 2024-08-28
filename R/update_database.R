@@ -15,7 +15,13 @@
 #' update_database()
 #'
 update_database <- function(...) {
-    write_issues_to_dataset(source = "online", ...)
+    get_issues(source = "online", state = "open", ...) |>
+        write_issues_to_dataset(source = "online",
+                                dataset_name = "open_issues.yaml", ...)
+    get_issues(source = "online", state = "closed", ...) |>
+        write_issues_to_dataset(source = "online",
+                                dataset_name = "closed_issues.yaml", ...)
+
     write_labels_to_dataset(source = "online", ...)
     write_milestones_to_dataset(source = "online", ...)
 
