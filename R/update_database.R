@@ -20,7 +20,8 @@
 #' Defaults to the package option \code{IssueTrackeR.repo}.
 #' * \code{owner} A character string specifying the GitHub owner.
 #' Defaults to the package option \code{IssueTrackeR.owner}.
-#' (See the documentation of \code{\link[IssueTrackeR]{get}} to have more information on theses parameters):
+#' (See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+#' information on theses parameters):
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE}.
 #' @export
@@ -37,24 +38,43 @@ update_database <- function(
         verbose = TRUE,
         ...) {
 
-    issues_open <- get_issues(source = "online", state = "open", verbose = verbose, ...)
-    write_issues_to_dataset(issues = issues_open,
-                            source = "online",
-                            dataset_dir = dataset_dir,
-                            dataset_name = datasets_name["open"], verbose = verbose)
+    issues_open <- get_issues(source = "online",
+                              state = "open",
+                              verbose = verbose,
+                              ...)
+    write_issues_to_dataset(
+        issues = issues_open,
+        source = "online",
+        dataset_dir = dataset_dir,
+        dataset_name = datasets_name[["open"]],
+        verbose = verbose
+    )
 
-    issues_closed <-  get_issues(source = "online", state = "closed", verbose = verbose, ...)
-    write_issues_to_dataset(issues = issues_closed, source = "online",
-                            dataset_dir = dataset_dir,
-                            dataset_name = datasets_name["closed"], verbose = verbose)
+    issues_closed <-  get_issues(source = "online",
+                                 state = "closed",
+                                 verbose = verbose, ...)
+    write_issues_to_dataset(
+        issues = issues_closed,
+        source = "online",
+        dataset_dir = dataset_dir,
+        dataset_name = datasets_name[["closed"]],
+        verbose = verbose
+    )
 
     labels <- get_labels(source = "online", verbose = verbose, ...)
-    write_labels_to_dataset(labels = labels,
-                            dataset_name = datasets_name["labels"], verbose = verbose)
+    write_labels_to_dataset(
+        labels = labels,
+        dataset_name = datasets_name[["labels"]],
+        verbose = verbose
+    )
 
     milestones <- get_milestones(source = "online", verbose = verbose, ...)
-    write_milestones_to_dataset(milestones = milestones, dataset_dir = dataset_dir,
-                                dataset_name = datasets_name["milestones"], verbose = verbose)
+    write_milestones_to_dataset(
+        milestones = milestones,
+        dataset_dir = dataset_dir,
+        dataset_name = datasets_name[["milestones"]],
+        verbose = verbose
+    )
 
     return(invisible(TRUE))
 }

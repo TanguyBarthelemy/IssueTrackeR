@@ -31,9 +31,9 @@
 #' issue3 <- new_issue(issue = issue2)
 #'
 new_issue <- function(title,
-                      state = c("open", "closed"),
                       body,
                       number,
+                      state = c("open", "closed"),
                       created_at = Sys.Date(),
                       labels = NULL,
                       milestone = NULL,
