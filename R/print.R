@@ -1,4 +1,7 @@
-#' @title Display object
+#' @title Display IssueTB and IssuesTB object
+#'
+#' @description
+#' Display IssueTB and IssuesTB with formatted output in the console
 #'
 #' @param x a \code{IssueTB} or \code{IssuesTB} object.
 #' @param \dots Unused argument

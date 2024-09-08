@@ -74,14 +74,14 @@ vgrepl <- Vectorize(grepl, "pattern")
 #'
 #' The \code{values_logic_gate} specifies how conditions on multiple values are
 #' combined within each field (either "OR" or "AND"). For example the call
-#' \code{
+#' \preformatted{
 #' contains(x = issue_1,
 #'          fields = "body",
 #'          values = c("README", "package"),
 #'          values_logic_gate = "OR")
 #' } will say whether the issue \code{issue_1} contains the string
 #' \code{"README"} OR \code{"package"} in its body. Whereas the call
-#' \code{
+#' \preformatted{
 #' contains(x = issue_1,
 #'          fields = "title",
 #'          values = c("README", "package"),
@@ -93,7 +93,7 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' effectively allowing users to negate an assertion.
 #'
 #' The following example:
-#' \code{
+#' \preformatted{
 #' contains(
 #'     x = all_issues,
 #'     fields = "labels",
@@ -123,11 +123,11 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' $(P1 AND Q1) OR (P2 AND Q2)$
 #'
 #' Thus the following call to filter_issue:
-#' \code{
-#'      filter(..., values = c("v1", "v2"), fields = c("f1", "f2"),
-#'             values_logic_gate = "AND", fields_logic_gate = "OR",
-#'             ...
-#'      )
+#' \preformatted{
+#' filter(..., values = c("v1", "v2"), fields = c("f1", "f2"),
+#'        values_logic_gate = "AND", fields_logic_gate = "OR",
+#'        ...
+#' )
 #' }
 #' will be represented by the following logical proposition:
 #' $(v1 in f1 AND v2 in f1) OR (v1 in f2 AND v2 in f2)$.

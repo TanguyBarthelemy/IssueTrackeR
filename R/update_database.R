@@ -44,7 +44,6 @@ update_database <- function(
                               ...)
     write_issues_to_dataset(
         issues = issues_open,
-        source = "online",
         dataset_dir = dataset_dir,
         dataset_name = datasets_name[["open"]],
         verbose = verbose
@@ -55,7 +54,6 @@ update_database <- function(
                                  verbose = verbose, ...)
     write_issues_to_dataset(
         issues = issues_closed,
-        source = "online",
         dataset_dir = dataset_dir,
         dataset_name = datasets_name[["closed"]],
         verbose = verbose

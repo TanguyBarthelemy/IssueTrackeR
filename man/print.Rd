@@ -3,7 +3,7 @@
 \name{print.IssueTB}
 \alias{print.IssueTB}
 \alias{print.IssuesTB}
-\title{Display object}
+\title{Display IssueTB and IssuesTB object}
 \usage{
 \method{print}{IssueTB}(x, ...)
 
@@ -18,7 +18,7 @@
 invisibly (with \code{invisible()}) \code{NULL}.
 }
 \description{
-Display object
+Display IssueTB and IssuesTB with formatted output in the console
 }
 \details{
 This function displays an issue (\code{IssueTB} object) or a list of issues

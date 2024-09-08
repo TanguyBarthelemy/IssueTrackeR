@@ -73,7 +73,7 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
 #'
 #' For example, the following call:
 #'
-#' \code{
+#' \preformatted{
 #' sort(
 #'     x = issues,
 #'     sorting_variables = list(list(object = "milestones", field = "due_on"),

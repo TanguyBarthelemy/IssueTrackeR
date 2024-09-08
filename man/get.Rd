@@ -79,7 +79,8 @@ The function \code{get_milestones} returns a list representing milestones
 with simpler structure (with title, description and due_on).
 }
 \description{
-Retrieve information from the issues of GitHub
+use \code{\link[gh]{gh}} to ask the API of GitHub and et a list of issues
+with their labels and milestones.
 }
 \details{
 The functions of get type are usefull to retrieve object related to issues

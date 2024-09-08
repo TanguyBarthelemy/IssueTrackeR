@@ -6,9 +6,9 @@
 \usage{
 new_issue(
   title,
-  state = c("open", "closed"),
   body,
   number,
+  state = c("open", "closed"),
   created_at = Sys.Date(),
   labels = NULL,
   milestone = NULL,
@@ -21,12 +21,12 @@ new_issue(
 \arguments{
 \item{title}{a string. The title of the issue.}
 
-\item{state}{a character string that is either \code{"open"} (by default) if
-the issue is still open or \code{"closed"} if the issue is now closed.}
-
 \item{body}{a string. The title of the issue.}
 
 \item{number}{a string. The title of the issue.}
+
+\item{state}{a character string that is either \code{"open"} (by default) if
+the issue is still open or \code{"closed"} if the issue is now closed.}
 
 \item{created_at}{a date. The title of the issue.}
 

@@ -1,6 +1,10 @@
 
 #' @title Retrieve information from the issues of GitHub
 #'
+#' @description
+#' use \code{\link[gh]{gh}} to ask the API of GitHub and et a list of issues
+#' with their labels and milestones.
+#'
 #' @param source a character string that is either \code{"online"} if you want
 #' to fetch information from GitHub or \code{"local"} (by default) if you want
 #' to fetch information locally.
@@ -125,7 +129,7 @@ get_issues <- function(source = c("local", "online"),
         } else {
             stop(
                 "The file ", input_file, ".yaml",
-                "doesn't exist. Run `write_issues_to_dataset()`",
+                " doesn't exist. Run `write_issues_to_dataset()`",
                 " to write a set of issues in the directory.\n",
                 "Or call get_issues() with the argument `source` to \"online\"."
             )

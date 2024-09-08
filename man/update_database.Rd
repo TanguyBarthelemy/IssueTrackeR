@@ -37,7 +37,8 @@ information. Default is \code{TRUE}.}
 Defaults to the package option \code{IssueTrackeR.repo}.
 \item \code{owner} A character string specifying the GitHub owner.
 Defaults to the package option \code{IssueTrackeR.owner}.
-(See the documentation of \code{\link[IssueTrackeR]{get}} to have more information on theses parameters):
+(See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+information on theses parameters):
 }}
 }
 \value{
