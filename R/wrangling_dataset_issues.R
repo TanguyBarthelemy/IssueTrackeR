@@ -14,7 +14,7 @@
 #' @param dataset_name A character string specifying the name of the datasets
 #' which will be written (only taken into account if \code{source} is set to
 #' \code{"local"}).
-#' Defaults to \code{"list_issues.yaml"}.
+#' Defaults to \code{"open_issues.yaml"}.
 #' @param repo A character string specifying the GitHub repository name (only
 #' taken into account if \code{source} is set to \code{"online"}).
 #' Defaults to the package option \code{IssueTrackeR.repo}.
@@ -82,7 +82,7 @@
 #'
 get_issues <- function(source = c("local", "online"),
                        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-                       dataset_name = "list_issues.yaml",
+                       dataset_name = "open_issues.yaml",
                        repo = getOption("IssueTrackeR.repo"),
                        owner = getOption("IssueTrackeR.owner"),
                        state = c("open", "closed", "all"),
@@ -234,7 +234,9 @@ format_issues <- function(raw_issues,
                 FUN = `[[`, ... = "name",
                 FUN.VALUE = character(1L)
             ),
-            milestone = raw_issue[["milestone"]][["title"]]
+            milestone = raw_issue[["milestone"]][["title"]],
+            repo = repo,
+            owner = owner
         )
         issues[[index]] <- issue
     }

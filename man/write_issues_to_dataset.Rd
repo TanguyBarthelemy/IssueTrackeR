@@ -30,7 +30,7 @@ Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
 \item{dataset_name}{A character string specifying the name of the datasets
 which will be written (only taken into account if \code{source} is set to
 \code{"local"}).
-Defaults to \code{"list_issues.yaml"}.}
+Defaults to \code{"open_issues.yaml"}.}
 
 \item{verbose}{A logical value indicating whether to print additional
 information. Default is \code{TRUE}.}

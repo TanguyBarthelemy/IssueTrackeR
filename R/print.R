@@ -32,6 +32,7 @@ print.IssueTB <- function(x, ...) {
     issue <- x
 
     cat(crayon::bold("Issue #", issue[["number"]], "\n", sep = ""))
+    cat(issue[["owner"]], "/", issue[["repo"]], "\n", sep = "")
     cat(crayon::underline("Labels:"),
         paste(issue[["labels"]], sep = ", "), "\n")
     cat(crayon::underline("Milestone:"), issue[["milestone"]], "\n")
