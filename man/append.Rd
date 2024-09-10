@@ -8,7 +8,7 @@
 \usage{
 append(x, values, after = length(x))
 
-\method{append}{default}(x, values, after)
+\method{append}{default}(x, values, after = length(x))
 
 \method{append}{IssuesTB}(x, values, after)
 }

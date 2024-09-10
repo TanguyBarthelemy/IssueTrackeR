@@ -212,3 +212,22 @@ append.IssuesTB <- function(x, values, after) {
              "for `values` argument.")
     }
 }
+
+#' @exportS3Method unique IssuesTB
+#' @method unique IssuesTB
+#' @export
+unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
+    saved_issues <- new_issues()
+    for (issue in x) {
+        is_in <- FALSE
+        for (already in saved_issues) {
+            if (identical(issue, already)) {
+                is_in <- TRUE
+            }
+        }
+        if (!is_in) {
+            saved_issues <- append(saved_issues, issue)
+        }
+    }
+    return(saved_issues)
+}
