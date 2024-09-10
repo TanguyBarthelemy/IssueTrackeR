@@ -241,7 +241,7 @@ format_issues <- function(raw_issues,
         issues[[index]] <- issue
     }
     if (verbose) {
-        cat(length(issue), " issues found.\n", sep = "")
+        cat(length(issues), " issues found.\n", sep = "")
     }
     return(issues)
 }

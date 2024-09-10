@@ -139,8 +139,8 @@ sort.IssuesTB <- function(x, decreasing = FALSE,
             what = filter_issues,
             args = c(list(x = remaining_issues), filtering_factor)
         )
-        sorted_issues <- simple_sort(filtered_issues, sorting_variables)
-        selected_issues <- c(selected_issues, sorted_issues, ...)
+        sorted_issues <- simple_sort(filtered_issues, sorting_variables, ...)
+        selected_issues <- c(selected_issues, sorted_issues)
         filtering_factor[["negate"]] <- !filtering_factor[["negate"]]
         remaining_issues <- do.call(
             what = filter_issues,

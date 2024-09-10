@@ -322,7 +322,10 @@ contains.default <- function(x, ...) {
 #'     fields_logic_gate = "AND"
 #' )
 #'
-filter_issues <- function(x = get_issues(), ...) {
+filter_issues <- function(x, ...) {
+    if (missing(x)) {
+        return(filter_issues(x = get_issues(), ...))
+    }
     UseMethod("filter_issues", x)
 }
 
@@ -330,7 +333,7 @@ filter_issues <- function(x = get_issues(), ...) {
 #' @exportS3Method filter_issues IssuesTB
 #' @method filter_issues IssuesTB
 #' @export
-filter_issues.IssuesTB <- function(x = get_issues(), ...) {
+filter_issues.IssuesTB <- function(x, ...) {
     filtering <- contains(x, ...)
     issues_output <- x[filtering]
     return(issues_output)

@@ -83,8 +83,7 @@ format_labels <- function(raw_labels, verbose = TRUE) {
         do.call(what = rbind) |>
         as.data.frame()
     if (verbose) {
-        cat("Done!\n",
-            length(new_labels_structure), " labels found.\n", sep = "")
+        cat("Done!\n", nrow(new_labels_structure), " labels found.\n", sep = "")
     }
     return(new_labels_structure)
 }

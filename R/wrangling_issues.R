@@ -193,7 +193,7 @@ append <- function(x, values, after = length(x)) {
 #' @exportS3Method append default
 #' @method append default
 #' @export
-append.default <- function(x, values, after) {
+append.default <- function(x, values, after = length(x)) {
     base::append(x, values, after)
 }
 
@@ -206,7 +206,7 @@ append.IssuesTB <- function(x, values, after) {
     if (inherits(values, "IssuesTB")) {
         return(new_issues(NextMethod()))
     } else if (inherits(values, "IssueTB")) {
-        return(append(x, new_issues(values)))
+        return(append(x, values = new_issues(values)))
     } else {
         stop("This function requires a IssueTB or IssuesTB object ",
              "for `values` argument.")
