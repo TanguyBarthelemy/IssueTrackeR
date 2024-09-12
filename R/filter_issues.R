@@ -1,3 +1,83 @@
+#' @title Compute assertion
+#'
+#' @description
+#' This function allows the user to summarise a set of booleans into a single
+#' boolean via a logic gate.
+#'
+#' @param ... Boolean objects that will be reduced into a single Boolean
+#' @param orientation a character string that is either \code{"vector-wise"}
+#' (by default) if you want to compute the assertion element by element (is
+#' \dots contains vector of same length) or \code{"overall"} if you want to
+#' compute the assertion with all the element contained in \dots.
+#' @param logic_gate the logic operator which will aggregate the
+#' different assertion related to values: \code{"OR"} or \code{"AND"} (by
+#' default).
+#'
+#' @return a Boolean vector of length 1 if \code{orientation} is
+#' \code{"overall"} and of the same length as the elements contained in \dots
+#' if \code{orientation} is \code{"vector-wise"}.
+#'
+#' @details
+#' Logic gates work with Booleans in the following way:
+#'
+#' | AND gate | TRUE  | FALSE |
+#' | -------- | ----- | ----- |
+#' | TRUE     | TRUE  | FALSE |
+#' | FALSE    | FALSE | FALSE |
+#'
+#' | OR gate | TRUE | FALSE |
+#' | ------- | ---- | ----- |
+#' | TRUE    | TRUE | TRUE  |
+#' | FALSE   | TRUE | FALSE |
+#'
+#' If the argument \code{orientation} is \code{"overall"}, then all the element
+#' of ... will be computed together with logic gate provided by the argument
+#' \code{logic_gate}.
+#'
+#' For example, the following call:
+#' \preformatted{
+#' logical_reducer(
+#'     TRUE, FALSE, c(TRUE, TRUE, TRUE),
+#'     logic_gate = "AND", orientation = "overall"
+#' )
+#' }
+#' will be return \code{FALSE} because the second argument (in \dots) has the
+#' value \code{FALSE} and with the logic gate AND, the results is \code{FALSE}.
+#'
+#' On the other hand, if the argument \code{orientation} is \code{"vector-wise"}
+#' then the element of \dots must have the same length and their first element
+#' will be computed together then their second... and at the end their last
+#' element will be computed together  with logic gate provided by the argument
+#' \code{logic_gate}.
+#'
+#' For example, the following call:
+#' \preformatted{
+#' logical_reducer(
+#'     c(TRUE, TRUE, FALSE), c(FALSE, TRUE, FALSE),
+#'     logic_gate = "OR", orientation = "vector-wise"
+#' )
+#' }
+#' will be return \code{c(TRUE, TRUE, FALSE)} because the first argument (in
+#' \dots) contains \code{c(TRUE, TRUE)} as first and second argument (so with
+#' the logic gate OR, the result is \code{TRUE}) and the third value of all
+#' element in \dots is \code{FALSE} so the result is \code{FALSE}.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' logical_reducer(
+#'     c(TRUE, FALSE, TRUE, FALSE), c(FALSE, TRUE, FALSE, FALSE),
+#'     logic_gate = "AND",
+#'     orientation = "vector-wise"
+#' )
+#' logical_reducer(
+#'     FALSE, c(TRUE, FALSE, TRUE), c(FALSE, TRUE, FALSE),
+#'     logic_gate = "OR",
+#'     orientation = "overall"
+#' )
+#'
+#'
 logical_reducer <- function(...,
                             orientation = c("vector-wise", "overall"),
                             logic_gate = c("AND", "OR")) {
@@ -23,6 +103,39 @@ logical_reducer <- function(...,
     }
 }
 
+#' Vectorize grepl
+#'
+#' @param pattern character string containing a regular expression (or
+#' character string for fixed = TRUE) to be matched in the given character
+#' vector. Coerced by as.character to a character string if possible. Missing
+#' values are allowed except for regexpr, gregexpr and regexec.
+#' @inheritParams base::grepl
+#'
+#' @return a matrix with as many rows as \code{length(x)} and as many columns
+#' as \code{length(pattern)} containg TRUE or FALSE. Each column is the result
+#' of call to \code{\link[base]{grepl}}.
+#'
+#' @details
+#' This function works the same way as \code{\link[base]{grepl}} but with a
+#' vectorize pattern. This means that if the argument \code{pattern} has a
+#' length >= 2 then the output will be calculated iteratively by pattern. So
+#' instead of having a vector as output, we get a matrix with
+#' \code{length(pattern)} rows and \code{length(pattern)} columns.
+#'
+#' For more informations, see the function \code{\link[base]{grepl}}.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' # Same result with one pattern
+#' vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"), pattern = "Bon")[, 1]
+#' grepl(x = c("Bonne nuit", "Au revoir", "Bonjour"), pattern = "Bon")
+#'
+#' # With multiple patterns
+#' vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"),
+#'        pattern = c("Bon", "voir"))
+#'
 vgrepl <- Vectorize(grepl, "pattern")
 
 #' @title Text in issue(s)
@@ -124,9 +237,11 @@ vgrepl <- Vectorize(grepl, "pattern")
 #'
 #' Thus the following call to filter_issue:
 #' \preformatted{
-#' filter(..., values = c("v1", "v2"), fields = c("f1", "f2"),
-#'        values_logic_gate = "AND", fields_logic_gate = "OR",
-#'        ...
+#' filter_issues(
+#'     ...,
+#'     values = c("v1", "v2"), fields = c("f1", "f2"),
+#'     values_logic_gate = "AND", fields_logic_gate = "OR",
+#'     ...
 #' )
 #' }
 #' will be represented by the following logical proposition:

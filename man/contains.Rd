@@ -130,9 +130,11 @@ $(P1 AND Q1) OR (P2 AND Q2)$
 
 Thus the following call to filter_issue:
 \preformatted{
-filter(..., values = c("v1", "v2"), fields = c("f1", "f2"),
-       values_logic_gate = "AND", fields_logic_gate = "OR",
-       ...
+filter_issues(
+    ...,
+    values = c("v1", "v2"), fields = c("f1", "f2"),
+    values_logic_gate = "AND", fields_logic_gate = "OR",
+    ...
 )
 }
 will be represented by the following logical proposition:
