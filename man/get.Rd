@@ -73,7 +73,7 @@ is a list composed by object of class \code{IssueTB}. An object of class
 title, body and labels).
 
 The function \code{get_labels} returns a list representing labels with
-simpler structure (with name, description, color).
+simpler structure (with name, description, colour).
 
 The function \code{get_milestones} returns a list representing milestones
 with simpler structure (with title, description and due_on).
@@ -83,7 +83,7 @@ use \code{\link[gh]{gh}} to ask the API of GitHub and et a list of issues
 with their labels and milestones.
 }
 \details{
-The functions of get type are usefull to retrieve object related to issues
+The functions of get type are useful to retrieve object related to issues
 from GitHub. So it's possible to retrieve issues, labels and milestones.
 
 The defaults value for the argument \code{dataset_name} depends on the

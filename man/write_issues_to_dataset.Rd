@@ -4,7 +4,7 @@
 \alias{write_issues_to_dataset}
 \alias{write_issues_to_dataset.IssuesTB}
 \alias{write_issues_to_dataset.default}
-\title{Save issue dataset in a yaml format}
+\title{Save issue dataset in a yaml file}
 \usage{
 write_issues_to_dataset(issues, ...)
 
@@ -40,7 +40,7 @@ invisibly (with \code{invisible()}) \code{TRUE} if the export was
 successful and an error otherwise.
 }
 \description{
-Save issue dataset in a yaml format
+Save issue dataset in a yaml file
 }
 \details{
 The defaults value of the argument \code{dataset_name} is

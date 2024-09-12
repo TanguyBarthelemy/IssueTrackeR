@@ -16,7 +16,7 @@ information. Default is \code{TRUE}.}
 }
 \value{
 a list representing labels with simpler structure (with name,
-description, color)
+description, colour)
 }
 \description{
 Format the label in a simpler format

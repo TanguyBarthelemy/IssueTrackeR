@@ -17,7 +17,7 @@ update_database(
 datasets (only taken into account if \code{source} is set to \code{"local"}).
 Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
 
-\item{datasets_name}{A named character string fo length 4, specifying the
+\item{datasets_name}{A named character string of length 4, specifying the
 names of the different datasets which will be written. The names
 \code{datasets_name} have to be \code{"open"}, \code{"closed"},
 \code{"labels"} and \code{"milestones"}.

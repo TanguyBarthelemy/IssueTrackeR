@@ -15,7 +15,7 @@ filter_issues(x, ...)
 \arguments{
 \item{x}{a \code{IssuesTB} object.}
 
-\item{\dots}{Other options used to control filtering behavior with differents
+\item{\dots}{Other options used to control filtering behaviour with different
 fields and values. Passed on to \code{\link[IssueTrackeR]{contains}} as:
 \itemize{
 \item \code{values}: a vector \code{string}. Patterns to look for in the outcome.

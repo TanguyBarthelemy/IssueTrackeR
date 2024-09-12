@@ -57,7 +57,7 @@ get_labels <- function(source = c("local", "online"),
 #' @inheritParams get_issues
 #'
 #' @returns a list representing labels with simpler structure (with name,
-#' description, color)
+#' description, colour)
 #' @export
 #'
 #' @examples
@@ -88,10 +88,10 @@ format_labels <- function(raw_labels, verbose = TRUE) {
     return(new_labels_structure)
 }
 
-#' @title Save label dataset in a yaml format
+#' @title Save label dataset in a yaml file
 #'
 #' @param labels a list representing all labels with simpler structure (with
-#' name, description, color)
+#' name, description, colour)
 #' @inheritParams get_issues
 #'
 #' @details

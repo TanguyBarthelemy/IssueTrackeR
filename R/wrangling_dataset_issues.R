@@ -30,7 +30,7 @@
 #' information. Default is \code{TRUE}.
 #'
 #' @details
-#' The functions of get type are usefull to retrieve object related to issues
+#' The functions of get type are useful to retrieve object related to issues
 #' from GitHub. So it's possible to retrieve issues, labels and milestones.
 #'
 #' The defaults value for the argument \code{dataset_name} depends on the
@@ -46,7 +46,7 @@
 #' title, body and labels).
 #'
 #' The function \code{get_labels} returns a list representing labels with
-#' simpler structure (with name, description, color).
+#' simpler structure (with name, description, colour).
 #'
 #' The function \code{get_milestones} returns a list representing milestones
 #' with simpler structure (with title, description and due_on).
@@ -246,7 +246,7 @@ format_issues <- function(raw_issues,
     return(issues)
 }
 
-#' @title Save issue dataset in a yaml format
+#' @title Save issue dataset in a yaml file
 #'
 #' @param issues a \code{IssuesTB} object.
 #' @inheritParams get_issues

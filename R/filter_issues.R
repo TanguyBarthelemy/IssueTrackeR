@@ -51,7 +51,7 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' * \code{values_logic_gate}
 #' * \code{negate}
 #'
-#' @returns a boolean (of length egal to 1 if the class of \code{x} is
+#' @returns a boolean (of length equals 1 if the class of \code{x} is
 #' \code{IssueTB} and length superior to 1 if \code{x} if of class
 #' \code{IssuesTB}) specifying if the \code{pattern} is contained in the field
 #' \code{field} of the issue.
@@ -117,9 +117,9 @@ vgrepl <- Vectorize(grepl, "pattern")
 #'
 #' For the order of logical assertions, as it is easy to add assertions linked
 #' by an AND (by piping a new filter_issues), it has been decided that
-#' assertions containing ANDs will be distributed and assertions containing ORs
-#' will be factorised. The assertions used by filter_issues will therefore have
-#' the following format:
+#' assertions containing AND gates will be distributed and assertions containing
+#' OR gates will be factorised. The assertions used by filter_issues will
+#' therefore have the following format:
 #' $(P1 AND Q1) OR (P2 AND Q2)$
 #'
 #' Thus the following call to filter_issue:
@@ -132,8 +132,8 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' will be represented by the following logical proposition:
 #' $(v1 in f1 AND v2 in f1) OR (v1 in f2 AND v2 in f2)$.
 #'
-#' This makes it possible to create more complex logical forms by combining ANDs
-#' and ORs.
+#' This makes it possible to create more complex logical forms by combining AND
+#' gates and OR gates.
 #'
 #' @export
 #'
@@ -278,7 +278,7 @@ contains.default <- function(x, ...) {
 #' Filtering issues with some constraint on the labels, the title and the body.
 #'
 #' @param x a \code{IssuesTB} object.
-#' @param \dots Other options used to control filtering behavior with differents
+#' @param \dots Other options used to control filtering behaviour with different
 #' fields and values. Passed on to \code{\link[IssueTrackeR]{contains}} as:
 #' * \code{values}: a vector \code{string}. Patterns to look for in the outcome.
 #' * \code{fields}: a vector \code{string}. The different fields of the issue in

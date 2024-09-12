@@ -109,7 +109,7 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
     return(new_mlst_structure)
 }
 
-#' @title Save milestone dataset in a yaml format
+#' @title Save milestone dataset in a yaml file
 #'
 #' @param milestones a list representing milestones with simpler structure (with
 #' title, description and due_on).

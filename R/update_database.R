@@ -4,7 +4,7 @@
 #' Update the different local database (issues, labels and milestones) with the
 #' online reference.
 #'
-#' @param datasets_name A named character string fo length 4, specifying the
+#' @param datasets_name A named character string of length 4, specifying the
 #' names of the different datasets which will be written. The names
 #' \code{datasets_name} have to be \code{"open"}, \code{"closed"},
 #' \code{"labels"} and \code{"milestones"}.

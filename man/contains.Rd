@@ -53,7 +53,7 @@ different assertion related to fields: \code{"OR"} (by default) or
 \item{negate}{a boolean indicate the negation of the assertion.}
 }
 \value{
-a boolean (of length egal to 1 if the class of \code{x} is
+a boolean (of length equals 1 if the class of \code{x} is
 \code{IssueTB} and length superior to 1 if \code{x} if of class
 \code{IssuesTB}) specifying if the \code{pattern} is contained in the field
 \code{field} of the issue.
@@ -123,9 +123,9 @@ This function is not case-sensitive.
 
 For the order of logical assertions, as it is easy to add assertions linked
 by an AND (by piping a new filter_issues), it has been decided that
-assertions containing ANDs will be distributed and assertions containing ORs
-will be factorised. The assertions used by filter_issues will therefore have
-the following format:
+assertions containing AND gates will be distributed and assertions containing
+OR gates will be factorised. The assertions used by filter_issues will
+therefore have the following format:
 $(P1 AND Q1) OR (P2 AND Q2)$
 
 Thus the following call to filter_issue:
@@ -138,8 +138,8 @@ filter(..., values = c("v1", "v2"), fields = c("f1", "f2"),
 will be represented by the following logical proposition:
 $(v1 in f1 AND v2 in f1) OR (v1 in f2 AND v2 in f2)$.
 
-This makes it possible to create more complex logical forms by combining ANDs
-and ORs.
+This makes it possible to create more complex logical forms by combining AND
+gates and OR gates.
 }
 
 \examples{

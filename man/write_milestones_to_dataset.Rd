@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrangling_dataset_milestones.R
 \name{write_milestones_to_dataset}
 \alias{write_milestones_to_dataset}
-\title{Save milestone dataset in a yaml format}
+\title{Save milestone dataset in a yaml file}
 \usage{
 write_milestones_to_dataset(
   milestones,
@@ -32,7 +32,7 @@ invisibly (with \code{invisible()}) \code{TRUE} if the export was
 successful and an error otherwise.
 }
 \description{
-Save milestone dataset in a yaml format
+Save milestone dataset in a yaml file
 }
 \details{
 The defaults value of the argument \code{dataset_name} is

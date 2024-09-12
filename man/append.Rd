@@ -2,15 +2,15 @@
 % Please edit documentation in R/wrangling_issues.R
 \name{append}
 \alias{append}
-\alias{append.default}
 \alias{append.IssuesTB}
+\alias{append.default}
 \title{Vector Merging}
 \usage{
 append(x, values, after = length(x))
 
-\method{append}{default}(x, values, after = length(x))
-
 \method{append}{IssuesTB}(x, values, after)
+
+\method{append}{default}(x, values, after = length(x))
 }
 \arguments{
 \item{x}{the vector the values are to be appended to.}

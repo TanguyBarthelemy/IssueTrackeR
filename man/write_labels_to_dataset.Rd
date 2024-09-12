@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrangling_dataset_labels.R
 \name{write_labels_to_dataset}
 \alias{write_labels_to_dataset}
-\title{Save label dataset in a yaml format}
+\title{Save label dataset in a yaml file}
 \usage{
 write_labels_to_dataset(
   labels,
@@ -13,7 +13,7 @@ write_labels_to_dataset(
 }
 \arguments{
 \item{labels}{a list representing all labels with simpler structure (with
-name, description, color)}
+name, description, colour)}
 
 \item{dataset_dir}{A character string specifying the path which contains the
 datasets (only taken into account if \code{source} is set to \code{"local"}).
@@ -32,7 +32,7 @@ invisibly (with \code{invisible()}) \code{TRUE} if the export was
 successful and an error otherwise.
 }
 \description{
-Save label dataset in a yaml format
+Save label dataset in a yaml file
 }
 \details{
 The defaults value of the argument \code{dataset_name} is
