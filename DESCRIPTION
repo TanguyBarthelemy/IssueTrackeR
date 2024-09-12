@@ -1,7 +1,7 @@
 Type: Package
 Package: IssueTrackeR
 Title: List Things To Do
-Version: 0.0.1.9000
+Version: 1.0.0
 Authors@R: 
     person("Tanguy", "Barthelemy", , "tanguy.barthelemy@insee.fr", role = c("aut", "cre"))
 Description: Manage a GitHub problem using R: store, prioritise, display,
