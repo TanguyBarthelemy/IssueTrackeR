@@ -44,8 +44,8 @@ For example, the following call:
 \preformatted{
 sort(
     x = issues,
-    sorting_variables = list(list(object = "milestones", field = "due_on"),
-                             list(object = "issues", field = "created_at")),
+    sorting_variables = list(c(object = "milestones", field = "due_on"),
+                             c(object = "issues", field = "created_at")),
     filtering_factors = list(list(values = "bug",
                                   fields = "labels",
                                   values_logic_gate = "OR"),

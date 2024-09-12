@@ -1,4 +1,45 @@
 
+#' Sorting issues
+#'
+#' @description
+#' Sort issues based on quantitative variables
+#'
+#' @inheritParams write_issues_to_dataset
+#' @inheritParams write_milestones_to_dataset
+#' @param sorting_variables a list of variable (represented by couples of
+#' \code{object} and \code{field} in the form
+#' \code{c(object = "object_1", field = "field_1")})
+#' @param \dots Additional arguments passed to \code{\link{get_milestones}}.
+#' Only used if \code{milestones} is missing.
+#'
+#' @returns the same list of issues as \code{issues} (class \code{IssuesTB})
+#' but in a sorted order.
+#'
+#' @examples
+#'
+#' all_issues <- get_issues()
+#' all_milestones <- get_milestones()
+#'
+#' # with milestones
+#' IssueTrackeR:::simple_sort(
+#'     issues = all_issues,
+#'     milestones = all_milestones,
+#'     sorting_variables = list(
+#'         c(object = "milestones", field = "due_on"),
+#'         c(object = "issues", field = "created_at")
+#'     )
+#' )
+#'
+#' # without milestones
+#' IssueTrackeR:::simple_sort(
+#'     issues = all_issues,
+#'     sorting_variables = list(
+#'         c(object = "milestones", field = "due_on"),
+#'         c(object = "issues", field = "created_at")
+#'     ),
+#'     source = "local"
+#' )
+#'
 simple_sort <- function(issues, sorting_variables, milestones, ...) {
 
     if (length(issues) == 0L) {
@@ -76,8 +117,8 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
 #' \preformatted{
 #' sort(
 #'     x = issues,
-#'     sorting_variables = list(list(object = "milestones", field = "due_on"),
-#'                              list(object = "issues", field = "created_at")),
+#'     sorting_variables = list(c(object = "milestones", field = "due_on"),
+#'                              c(object = "issues", field = "created_at")),
 #'     filtering_factors = list(list(values = "bug",
 #'                                   fields = "labels",
 #'                                   values_logic_gate = "OR"),

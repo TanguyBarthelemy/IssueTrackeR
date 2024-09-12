@@ -78,12 +78,12 @@ element in \dots is \code{FALSE} so the result is \code{FALSE}.
 }
 \examples{
 
-logical_reducer(
+IssueTrackeR:::logical_reducer(
     c(TRUE, FALSE, TRUE, FALSE), c(FALSE, TRUE, FALSE, FALSE),
     logic_gate = "AND",
     orientation = "vector-wise"
 )
-logical_reducer(
+IssueTrackeR:::logical_reducer(
     FALSE, c(TRUE, FALSE, TRUE), c(FALSE, TRUE, FALSE),
     logic_gate = "OR",
     orientation = "overall"

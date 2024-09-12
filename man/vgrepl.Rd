@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_issues.R
 \name{vgrepl}
 \alias{vgrepl}
-\title{Vectorize grepl}
+\title{Vectorize \code{grepl}}
 \usage{
 vgrepl(
   pattern,
@@ -17,7 +17,11 @@ vgrepl(
 \item{pattern}{character string containing a regular expression (or
 character string for fixed = TRUE) to be matched in the given character
 vector. Coerced by as.character to a character string if possible. Missing
-values are allowed except for regexpr, gregexpr and regexec.}
+values are allowed except for \code{regexpr}, \code{gregexpr} and
+\code{regexec}.}
+
+\item{x}{a character vector where matches are sought, or an object which can
+be coerced by as.character to a character vector. Long vectors are supported.}
 
 \item{ignore.case}{if \code{FALSE}, the pattern matching is \emph{case
       sensitive} and if \code{TRUE}, case is ignored during matching.}
@@ -33,11 +37,11 @@ values are allowed except for regexpr, gregexpr and regexec.}
 }
 \value{
 a matrix with as many rows as \code{length(x)} and as many columns
-as \code{length(pattern)} containg TRUE or FALSE. Each column is the result
+as \code{length(pattern)} containing TRUE or FALSE. Each column is the result
 of call to \code{\link[base]{grepl}}.
 }
 \description{
-Vectorize grepl
+Vectorize \code{grepl}
 }
 \details{
 This function works the same way as \code{\link[base]{grepl}} but with a
@@ -51,11 +55,14 @@ For more informations, see the function \code{\link[base]{grepl}}.
 \examples{
 
 # Same result with one pattern
-vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"), pattern = "Bon")[, 1]
+IssueTrackeR:::vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"),
+                      pattern = "Bon")[, 1]
 grepl(x = c("Bonne nuit", "Au revoir", "Bonjour"), pattern = "Bon")
 
 # With multiple patterns
-vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"),
-       pattern = c("Bon", "voir"))
+IssueTrackeR:::vgrepl(
+    x = c("Bonne nuit", "Au revoir", "Bonjour"),
+    pattern = c("Bon", "voir")
+)
 
 }

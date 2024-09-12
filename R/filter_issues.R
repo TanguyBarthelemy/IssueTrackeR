@@ -62,16 +62,14 @@
 #' the logic gate OR, the result is \code{TRUE}) and the third value of all
 #' element in \dots is \code{FALSE} so the result is \code{FALSE}.
 #'
-#' @export
-#'
 #' @examples
 #'
-#' logical_reducer(
+#' IssueTrackeR:::logical_reducer(
 #'     c(TRUE, FALSE, TRUE, FALSE), c(FALSE, TRUE, FALSE, FALSE),
 #'     logic_gate = "AND",
 #'     orientation = "vector-wise"
 #' )
-#' logical_reducer(
+#' IssueTrackeR:::logical_reducer(
 #'     FALSE, c(TRUE, FALSE, TRUE), c(FALSE, TRUE, FALSE),
 #'     logic_gate = "OR",
 #'     orientation = "overall"
@@ -103,16 +101,19 @@ logical_reducer <- function(...,
     }
 }
 
-#' Vectorize grepl
+#' @title Vectorize \code{grepl}
 #'
 #' @param pattern character string containing a regular expression (or
 #' character string for fixed = TRUE) to be matched in the given character
 #' vector. Coerced by as.character to a character string if possible. Missing
-#' values are allowed except for regexpr, gregexpr and regexec.
+#' values are allowed except for \code{regexpr}, \code{gregexpr} and
+#' \code{regexec}.
+#' @param x a character vector where matches are sought, or an object which can
+#' be coerced by as.character to a character vector. Long vectors are supported.
 #' @inheritParams base::grepl
 #'
 #' @return a matrix with as many rows as \code{length(x)} and as many columns
-#' as \code{length(pattern)} containg TRUE or FALSE. Each column is the result
+#' as \code{length(pattern)} containing TRUE or FALSE. Each column is the result
 #' of call to \code{\link[base]{grepl}}.
 #'
 #' @details
@@ -124,17 +125,18 @@ logical_reducer <- function(...,
 #'
 #' For more informations, see the function \code{\link[base]{grepl}}.
 #'
-#' @export
-#'
 #' @examples
 #'
 #' # Same result with one pattern
-#' vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"), pattern = "Bon")[, 1]
+#' IssueTrackeR:::vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"),
+#'                       pattern = "Bon")[, 1]
 #' grepl(x = c("Bonne nuit", "Au revoir", "Bonjour"), pattern = "Bon")
 #'
 #' # With multiple patterns
-#' vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"),
-#'        pattern = c("Bon", "voir"))
+#' IssueTrackeR:::vgrepl(
+#'     x = c("Bonne nuit", "Au revoir", "Bonjour"),
+#'     pattern = c("Bon", "voir")
+#' )
 #'
 vgrepl <- Vectorize(grepl, "pattern")
 
@@ -462,6 +464,19 @@ filter_issues.default <- function(x, ...) {
     stop("This function requires a IssuesTB object.")
 }
 
+#' @title Check issues without milestones
+#'
+#' @description
+#' Filter all the issues without milestones from a list of issues.
+#'
+#' @param issues a \code{IssuesTB} object.
+#'
+#' @return a list of issues without milestones.
+#'
+#' @examples
+#'
+#' IssueTrackeR:::no_milestones()
+#'
 no_milestones <- function(issues = get_issues()) {
     without_milestone <- issues |>
         lapply(FUN = base::`[[`, "milestone") |>

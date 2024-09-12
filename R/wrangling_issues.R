@@ -139,8 +139,6 @@ new_issues.default <- function(x = list()) {
     return(x)
 }
 
-#' @rdname Extract
-#' @inherit base::Extract
 #' @exportS3Method `[[` IssuesTB
 #' @method `[[` IssuesTB
 #' @export
@@ -148,7 +146,6 @@ new_issues.default <- function(x = list()) {
     return(new_issue(issue = NextMethod()))
 }
 
-#' @rdname Extract
 #' @exportS3Method `[` IssuesTB
 #' @method `[` IssuesTB
 #' @export
@@ -156,7 +153,6 @@ new_issues.default <- function(x = list()) {
     return(new_issues(NextMethod()))
 }
 
-#' @rdname Extract
 #' @exportS3Method `[` IssuesTB
 #' @method `[` IssuesTB
 #' @export
@@ -164,7 +160,6 @@ new_issues.default <- function(x = list()) {
     return(new_issues(NextMethod()))
 }
 
-#' @rdname Extract
 #' @exportS3Method `[<-` IssuesTB
 #' @method `[<-` IssuesTB
 #' @export
@@ -172,7 +167,6 @@ new_issues.default <- function(x = list()) {
     return(new_issues(NextMethod()))
 }
 
-#' @rdname Extract
 #' @exportS3Method `[[<-` IssuesTB
 #' @method `[[<-` IssuesTB
 #' @export
@@ -180,8 +174,6 @@ new_issues.default <- function(x = list()) {
     return(new_issues(NextMethod()))
 }
 
-#' @rdname c
-#' @inherit base::c
 #' @exportS3Method c IssuesTB
 #' @method c IssuesTB
 #' @export
@@ -212,7 +204,6 @@ append.IssuesTB <- function(x, values, after) {
     }
 }
 
-#' @rdname append
 #' @exportS3Method append default
 #' @method append default
 #' @export
@@ -220,8 +211,6 @@ append.default <- function(x, values, after = length(x)) {
     base::append(x, values, after)
 }
 
-#' @rdname unique
-#' @inherit base::unique
 #' @exportS3Method unique IssuesTB
 #' @method unique IssuesTB
 #' @export
