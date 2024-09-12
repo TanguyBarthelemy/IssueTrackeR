@@ -125,7 +125,8 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
 #' @exportS3Method sort IssuesTB
 #' @method sort IssuesTB
 #'
-sort.IssuesTB <- function(x, decreasing = FALSE,
+sort.IssuesTB <- function(x,
+                          decreasing = FALSE,
                           sorting_variables = list(),
                           filtering_factors = list(),
                           ...) {
@@ -148,7 +149,7 @@ sort.IssuesTB <- function(x, decreasing = FALSE,
         )
     }
 
-    sorted_issues <- simple_sort(remaining_issues, sorting_variables)
+    sorted_issues <- simple_sort(remaining_issues, sorting_variables, ...)
     selected_issues <- c(selected_issues, sorted_issues)
 
     if (decreasing) {

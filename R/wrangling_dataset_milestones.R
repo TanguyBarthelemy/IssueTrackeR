@@ -43,7 +43,8 @@ get_milestones <- function(
             }
         } else {
             stop(
-                "The file doesn't exist. Run `write_milestones_to_dataset()`",
+                "The file ", input_path, " doesn't exist.\n",
+                "Run `write_milestones_to_dataset()`",
                 " to write a set of milestones in the directory\n",
                 "Or call get_milestones() with the argument",
                 " `source` to \"online\"."
