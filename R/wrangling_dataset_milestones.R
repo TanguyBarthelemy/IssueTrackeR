@@ -91,13 +91,19 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
             }
             data.frame(
                 title = x[["title"]],
-                description = x[["description"]],
-                due_on = ifelse(test = is.null(x[["due_on"]]),
-                                yes = as.POSIXct(NA_integer_),
-                                no = x[["due_on"]] |>
-                                    as.POSIXct() |>
-                                    as.integer() |>
-                                    as.POSIXct())
+                description = ifelse(
+                    test = is.null(x[["description"]]),
+                    yes = NA_character_,
+                    no = x[["description"]]
+                ),
+                due_on = ifelse(
+                    test = is.null(x[["due_on"]]),
+                    yes = as.POSIXct(NA_integer_),
+                    no = x[["due_on"]] |>
+                        as.POSIXct() |>
+                        as.integer() |>
+                        as.POSIXct()
+                )
             )
         }) |>
         do.call(what = rbind) |>

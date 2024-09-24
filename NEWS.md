@@ -7,7 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [v1.0.0] - 2024-09-12
+### Fixed
+
+* Bug fixed when milestones description is missing
+
+## [1.0.0] - 2024-09-12
 
 ### Added
 
