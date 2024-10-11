@@ -26,7 +26,12 @@ devtools::install_github("TanguyBarthelemy/IssueTrackeR")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-library(IssueTrackeR)
+library("IssueTrackeR")
+#> 
+#> Attaching package: 'IssueTrackeR'
+#> The following object is masked from 'package:base':
+#> 
+#>     append
 ## basic example code
 ```
 

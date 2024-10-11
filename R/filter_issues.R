@@ -111,6 +111,7 @@ logical_reducer <- function(...,
 #' @param x a character vector where matches are sought, or an object which can
 #' be coerced by as.character to a character vector. Long vectors are supported.
 #' @inheritParams base::grepl
+#' @param \dots Arguments passed on to \code{\link[base]{grepl}}
 #'
 #' @return a matrix with as many rows as \code{length(x)} and as many columns
 #' as \code{length(pattern)} containing TRUE or FALSE. Each column is the result
@@ -138,7 +139,20 @@ logical_reducer <- function(...,
 #'     pattern = c("Bon", "voir")
 #' )
 #'
-vgrepl <- Vectorize(grepl, "pattern")
+vgrepl <- Vectorize(
+    FUN = function(pattern,
+                   x,
+                   fixed = TRUE,
+                   perl = FALSE,
+                   ...) {
+        grepl(pattern = pattern,
+              x = x,
+              fixed = fixed,
+              perl = perl,
+              ...)
+    },
+    vectorize.args = "pattern"
+)
 
 #' @title Text in issue(s)
 #'
@@ -158,13 +172,8 @@ vgrepl <- Vectorize(grepl, "pattern")
 #' different assertion related to values: \code{"OR"} or \code{"AND"} (by
 #' default).
 #' @param negate a boolean indicate the negation of the assertion.
-#' @param \dots If \code{x} is a \code{IssueTB} object then the argument \dots
-#' are unused. Conversely, if x a \code{IssueTB} object then the \dots are used
-#' to pass the same arguments as for \code{contains.IssueTB}:
-#' * \code{fields}
-#' * \code{fields_logic_gate}
-#' * \code{values_logic_gate}
-#' * \code{negate}
+#' @param \dots Arguments passed on to \code{\link[IssueTrackeR]{vgrepl}} and
+#' therefore to \code{\link[base]{grepl}}
 #'
 #' @returns a boolean (of length equals 1 if the class of \code{x} is
 #' \code{IssueTB} and length superior to 1 if \code{x} if of class
@@ -302,8 +311,8 @@ contains.IssueTB <- function(x,
             text_in_issue <- vgrepl(
                 pattern = values,
                 x = field_content,
-                fixed = FALSE,
-                perl = TRUE,
+                fixed = TRUE,
+                perl = FALSE,
                 ignore.case = TRUE
             )
         } else if (fields %in% c("labels", "milestone")) {

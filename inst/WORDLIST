@@ -8,6 +8,7 @@ yaml
 CMD
 Wilks
 regexps
+grep
 
 behavior
 signaled

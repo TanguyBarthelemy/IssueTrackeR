@@ -26,15 +26,8 @@ contains(x, ...)
 \arguments{
 \item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
 
-\item{\dots}{If \code{x} is a \code{IssueTB} object then the argument \dots
-are unused. Conversely, if x a \code{IssueTB} object then the \dots are used
-to pass the same arguments as for \code{contains.IssueTB}:
-\itemize{
-\item \code{fields}
-\item \code{fields_logic_gate}
-\item \code{values_logic_gate}
-\item \code{negate}
-}}
+\item{\dots}{Arguments passed on to \code{\link[IssueTrackeR]{vgrepl}} and
+therefore to \code{\link[base]{grepl}}}
 
 \item{values}{a vector \code{string}. Patterns to look for in the outcome.}
 

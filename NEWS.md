@@ -7,9 +7,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+* internal function `vgrepl()` uses `fixed = TRUE` and `perl = FALSE` as default argument
+* 
+
 ### Fixed
 
-* Bug fixed when milestones description is missing
+* Bug fixed when milestones description is missing (commit 9b4832)
 
 ## [1.0.0] - 2024-09-12
 
