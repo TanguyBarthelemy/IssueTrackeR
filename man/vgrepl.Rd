@@ -4,7 +4,14 @@
 \alias{vgrepl}
 \title{Vectorize \code{grepl}}
 \usage{
-vgrepl(pattern, x, fixed = TRUE, perl = FALSE, ...)
+vgrepl(
+  pattern,
+  x,
+  ignore.case = TRUE,
+  perl = FALSE,
+  fixed = FALSE,
+  useBytes = FALSE
+)
 }
 \arguments{
 \item{pattern}{character string containing a regular expression (or
@@ -16,12 +23,17 @@ values are allowed except for \code{regexpr}, \code{gregexpr} and
 \item{x}{a character vector where matches are sought, or an object which can
 be coerced by as.character to a character vector. Long vectors are supported.}
 
-\item{fixed}{logical.  If \code{TRUE}, \code{pattern} is a string to be
-    matched as is.  Overrides all conflicting arguments.}
+\item{ignore.case}{if \code{FALSE}, the pattern matching is \emph{case
+      sensitive} and if \code{TRUE}, case is ignored during matching.}
 
 \item{perl}{logical.  Should Perl-compatible regexps be used?}
 
-\item{\dots}{Arguments passed on to \code{\link[base]{grepl}}}
+\item{fixed}{logical.  If \code{TRUE}, \code{pattern} is a string to be
+    matched as is.  Overrides all conflicting arguments.}
+
+\item{useBytes}{logical.  If \code{TRUE} the matching is done
+    byte-by-byte rather than character-by-character.  See
+    \sQuote{Details}.}
 }
 \value{
 a matrix with as many rows as \code{length(x)} and as many columns

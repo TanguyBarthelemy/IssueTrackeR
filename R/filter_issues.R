@@ -111,7 +111,6 @@ logical_reducer <- function(...,
 #' @param x a character vector where matches are sought, or an object which can
 #' be coerced by as.character to a character vector. Long vectors are supported.
 #' @inheritParams base::grepl
-#' @param \dots Arguments passed on to \code{\link[base]{grepl}}
 #'
 #' @return a matrix with as many rows as \code{length(x)} and as many columns
 #' as \code{length(pattern)} containing TRUE or FALSE. Each column is the result
@@ -142,14 +141,16 @@ logical_reducer <- function(...,
 vgrepl <- Vectorize(
     FUN = function(pattern,
                    x,
-                   fixed = TRUE,
+                   ignore.case = TRUE,
                    perl = FALSE,
-                   ...) {
+                   fixed = FALSE,
+                   useBytes = FALSE) {
         grepl(pattern = pattern,
               x = x,
-              fixed = fixed,
+              ignore.case = ignore.case,
               perl = perl,
-              ...)
+              fixed = fixed,
+              useBytes = useBytes)
     },
     vectorize.args = "pattern"
 )
@@ -311,9 +312,7 @@ contains.IssueTB <- function(x,
             text_in_issue <- vgrepl(
                 pattern = values,
                 x = field_content,
-                fixed = TRUE,
-                perl = FALSE,
-                ignore.case = TRUE
+                ...
             )
         } else if (fields %in% c("labels", "milestone")) {
             text_in_issue <- values %in% field_content
