@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+* Additionnal argument ... to functions `filter_issues` and `contains` to custom `vgrepl` (and therefore to `grepl`)
+
 ### Changed
 
 * internal function `vgrepl()` uses `fixed = TRUE` and `perl = FALSE` as default argument
@@ -14,7 +18,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Fixed
 
 * Bug fixed when milestones description is missing (commit 9b4832)
-* Bug fixed :missing argument ... in `vgrepl` call
+* Bug fixed :missing argument ... in `vgrepl` call (commit 490d00a)
+
+### Removed
+
+* `[.IssuesTB` was duplicated
+
 
 ## [1.0.0] - 2024-09-12
 

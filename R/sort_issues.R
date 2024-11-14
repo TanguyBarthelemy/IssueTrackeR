@@ -58,7 +58,7 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
             if (nrow(milestones) > 0L) {
 
                 field <- sorting_variable[["field"]]
-                index_milestones <- order(milestones[[field]])
+                index_milestones <- base::order(milestones[[field]])
                 sorted_titles <- milestones[["title"]][index_milestones]
 
                 ref_issues <- sorted_issues
@@ -75,7 +75,7 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
             }
 
         } else if (sorting_variable[["object"]] == "issues") {
-            sorted_index <- order(vapply(
+            sorted_index <- base::order(vapply(
                 X = sorted_issues,
                 FUN = base::`[[`,
                 sorting_variable[["field"]],

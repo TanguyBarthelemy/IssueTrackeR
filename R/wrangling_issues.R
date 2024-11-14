@@ -153,13 +153,6 @@ new_issues.default <- function(x = list()) {
     return(new_issues(NextMethod()))
 }
 
-#' @exportS3Method `[` IssuesTB
-#' @method `[` IssuesTB
-#' @export
-`[.IssuesTB` <- function(x, ...) {
-    return(new_issues(NextMethod()))
-}
-
 #' @exportS3Method `[<-` IssuesTB
 #' @method `[<-` IssuesTB
 #' @export
