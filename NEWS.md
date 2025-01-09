@@ -13,7 +13,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-* Additionnal argument ... to functions `filter_issues` and `contains` to custom `vgrepl` (and therefore to `grepl`)
+* Additional argument ... to functions `filter_issues` and `contains` to custom `vgrepl` (and therefore to `grepl`)
 
 ### Changed
 
