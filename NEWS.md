@@ -23,6 +23,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Removed
 
 * `[.IssuesTB` was duplicated
+* removed `... = _` in paste0 for R version before 4.2
 
 
 ## [1.0.0] - 2024-09-12

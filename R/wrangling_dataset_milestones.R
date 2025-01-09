@@ -30,7 +30,7 @@ get_milestones <- function(
         input_file <- tools::file_path_sans_ext(dataset_name)
         input_path <- file.path(dataset_dir, input_file) |>
             normalizePath(mustWork = FALSE) |>
-            paste0(... = _, ".yaml")
+            paste0(".yaml")
 
         if (file.exists(input_path)) {
             if (verbose) {
@@ -142,7 +142,7 @@ write_milestones_to_dataset <- function(
     output_file <- tools::file_path_sans_ext(dataset_name)
     output_path <- file.path(dataset_dir, output_file) |>
         normalizePath(mustWork = FALSE) |>
-        paste0(... = _, ".yaml")
+        paste0(".yaml")
 
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)

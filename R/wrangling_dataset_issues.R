@@ -115,7 +115,7 @@ get_issues <- function(source = c("local", "online"),
         input_file <- tools::file_path_sans_ext(dataset_name)
         input_path <- file.path(dataset_dir, input_file) |>
             normalizePath(mustWork = FALSE) |>
-            paste0(... = _, ".yaml")
+            paste0(".yaml")
 
         if (file.exists(input_path)) {
             if (verbose) {
@@ -285,7 +285,7 @@ write_issues_to_dataset.IssuesTB <- function(
     output_file <- tools::file_path_sans_ext(dataset_name)
     output_path <- file.path(dataset_dir, output_file) |>
         normalizePath(mustWork = FALSE) |>
-        paste0(... = _, ".yaml")
+        paste0(".yaml")
 
     if (verbose) {
         message("The datasets will be exported to ", output_path, ".")
