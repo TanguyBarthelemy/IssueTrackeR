@@ -6,7 +6,7 @@ Authors@R:
     person("Tanguy", "Barthelemy", , "tanguy.barthelemy@insee.fr", role = c("aut", "cre"))
 Description: Manage a GitHub problem using R: store, prioritise, display,
     add, delete, select issues, label and milestone.
-License: GPL (>= 3)
+License: MIT + file LICENSE
 URL: https://github.com/TanguyBarthelemy/TODO
 BugReports: https://github.com/TanguyBarthelemy/TODO/issues
 Depends:
