@@ -11,7 +11,7 @@
 coverage](https://codecov.io/gh/TanguyBarthelemy/IssueTrackeR/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/IssueTrackeR)
 <!-- badges: end -->
 
-The goal of IssueTrackeR is to …
+The goal of IssueTrackeR is to…
 
 ## Installation
 
