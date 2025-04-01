@@ -51,18 +51,18 @@ new_issue <- function(title,
                       body = body,
                       number = as.integer(number),
                       created_at = created_at |>
-                          as.POSIXct() |>
+                          as.POSIXct(origin = "1970-01-01") |>
                           as.integer() |>
-                          as.POSIXct(),
+                          as.POSIXct(origin = "1970-01-01"),
                       labels = labels,
                       milestone = milestone,
                       repo = repo,
                       owner = owner)
     } else if (!missing(issue)) {
         issue[["created_at"]] <- issue[["created_at"]] |>
-            as.POSIXct() |>
+            as.POSIXct(origin = "1970-01-01") |>
             as.integer() |>
-            as.POSIXct()
+            as.POSIXct(origin = "1970-01-01")
         issue[["number"]] <- as.integer(issue[["number"]])
     }
     class(issue) <- "IssueTB"
