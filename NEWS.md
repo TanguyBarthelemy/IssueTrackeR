@@ -11,6 +11,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 * New function to format Milestones
+* New function to
 
 ### Changed
 

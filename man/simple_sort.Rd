@@ -52,3 +52,4 @@ IssueTrackeR:::simple_sort(
 )
 
 }
+\keyword{internal}

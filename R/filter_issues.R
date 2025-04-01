@@ -75,6 +75,7 @@
 #'     orientation = "overall"
 #' )
 #'
+#' @keywords internal
 #'
 logical_reducer <- function(...,
                             orientation = c("vector-wise", "overall"),
@@ -493,6 +494,8 @@ filter_issues.default <- function(x, ...) {
 #' @examples
 #'
 #' IssueTrackeR:::no_milestones()
+#'
+#' @keywords internal
 #'
 no_milestones <- function(issues = get_issues()) {
     without_milestone <- issues |>

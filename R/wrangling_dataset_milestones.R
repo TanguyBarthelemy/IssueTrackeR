@@ -1,4 +1,5 @@
 
+#' @keywords internal
 format_milestone <- function(raw_milestone, verbose = TRUE) {
     if (verbose) {
         cat("\t- ", raw_milestone[["title"]], "... Done!\n")
@@ -10,11 +11,8 @@ format_milestone <- function(raw_milestone, verbose = TRUE) {
     )
     due_on <- ifelse(
         test = is.null(raw_milestone[["due_on"]]),
-        yes = as.POSIXct(NA_integer_, origin = "1970-01-01"),
-        no = raw_milestone[["due_on"]] |>
-            as.POSIXct(origin = "1970-01-01") |>
-            as.integer() |>
-            as.POSIXct(origin = "1970-01-01")
+        yes = format_timestamp(NA_integer_),
+        no = format_timestamp(raw_milestone[["due_on"]])
     )
     output <- data.frame(
         title = raw_milestone[["title"]],
@@ -64,7 +62,7 @@ get_milestones <- function(
             milestones <- yaml::read_yaml(file = input_path) |>
                 as.data.frame()
             if (nrow(milestones) > 0L) {
-                milestones[["due_on"]]  <- as.POSIXct(milestones[["due_on"]], origin = "1970-01-01")
+                milestones[["due_on"]]  <- format_timestamp(milestones[["due_on"]])
             }
         } else {
             stop(

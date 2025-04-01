@@ -89,5 +89,5 @@ IssueTrackeR:::logical_reducer(
     orientation = "overall"
 )
 
-
 }
+\keyword{internal}

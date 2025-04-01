@@ -11,7 +11,6 @@
 #' (\code{IssuesTB} object) with a formatted output.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{NULL}.
-#' @export
 #'
 #' @examples
 #' all_issues <- get_issues(source = "online", verbose = FALSE)

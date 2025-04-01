@@ -1,5 +1,5 @@
 
-#' Sorting issues
+#' @title Sorting issues
 #'
 #' @description
 #' Sort issues based on quantitative variables
@@ -39,6 +39,8 @@
 #'     ),
 #'     source = "local"
 #' )
+#'
+#' @keywords internal
 #'
 simple_sort <- function(issues, sorting_variables, milestones, ...) {
 
