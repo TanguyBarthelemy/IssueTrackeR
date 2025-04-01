@@ -59,9 +59,9 @@ update_database <- function(
         verbose = verbose
     )
 
-    labels <- get_labels(source = "online", verbose = verbose, ...)
+    list_labels <- get_labels(source = "online", verbose = verbose, ...)
     write_labels_to_dataset(
-        labels = labels,
+        labels = list_labels,
         dataset_name = datasets_name[["labels"]],
         verbose = verbose
     )

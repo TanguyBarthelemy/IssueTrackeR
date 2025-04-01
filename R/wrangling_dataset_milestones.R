@@ -1,4 +1,29 @@
 
+format_milestone <- function(raw_milestone, verbose = TRUE) {
+    if (verbose) {
+        cat("\t- ", raw_milestone[["title"]], "... Done!\n")
+    }
+    description <- ifelse(
+        test = is.null(raw_milestone[["description"]]),
+        yes = NA_character_,
+        no = raw_milestone[["description"]]
+    )
+    due_on <- ifelse(
+        test = is.null(raw_milestone[["due_on"]]),
+        yes = as.POSIXct(NA_integer_),
+        no = raw_milestone[["due_on"]] |>
+            as.POSIXct() |>
+            as.integer() |>
+            as.POSIXct()
+    )
+    output <- data.frame(
+        title = raw_milestone[["title"]],
+        description = description,
+        due_on = due_on
+    )
+    return(output)
+}
+
 #' @rdname get
 #' @export
 get_milestones <- function(
@@ -47,11 +72,12 @@ get_milestones <- function(
                 "Run `write_milestones_to_dataset()`",
                 " to write a set of milestones in the directory\n",
                 "Or call get_milestones() with the argument",
-                " `source` to \"online\"."
+                " `source` to \"online\".",
+                call. = FALSE
             )
         }
     } else {
-        stop("wrong source")
+        stop("wrong argument source", call. = FALSE)
     }
 
     return(milestones)
@@ -85,27 +111,7 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
         cat("Reading milestones... \n")
     }
     new_mlst_structure <- raw_milestones |>
-        lapply(FUN = function(x) {
-            if (verbose) {
-                cat("\t- ", x[["title"]], "... Done!\n")
-            }
-            data.frame(
-                title = x[["title"]],
-                description = ifelse(
-                    test = is.null(x[["description"]]),
-                    yes = NA_character_,
-                    no = x[["description"]]
-                ),
-                due_on = ifelse(
-                    test = is.null(x[["due_on"]]),
-                    yes = as.POSIXct(NA_integer_),
-                    no = x[["due_on"]] |>
-                        as.POSIXct() |>
-                        as.integer() |>
-                        as.POSIXct()
-                )
-            )
-        }) |>
+        lapply(FUN = format_milestone, verbose = verbose) |>
         do.call(what = rbind) |>
         as.data.frame()
     if (verbose) {

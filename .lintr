@@ -2,14 +2,6 @@ linters: lintr::all_linters(
         indentation_linter = lintr::indentation_linter(indent = 4L),
         line_length_linter = lintr::line_length_linter(80L),
         undesirable_function_linter = lintr::undesirable_function_linter(symbol_is_undesirable = FALSE),
-        object_name_linter = NULL,
-        return_linter = NULL,
-        object_overwrite_linter = NULL,
-        condition_call_linter = NULL,
-        rep_len_linter = NULL,
-        if_switch_linter = NULL,
-        unnecessary_nesting_linter = NULL,
-        nested_pipe_linter = NULL,
-        one_call_pipe_linter = NULL
+        return_linter = NULL
     )
 encoding: "UTF-8"

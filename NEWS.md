@@ -8,6 +8,15 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+* New function to format Milestones
+
+### Changed
+
+* `ignore.case = FALSE` if `fixed = TRUE`
+* lint condition_call (with `call. = FALSE`)
+
 
 ## [1.1.0] - 2025-01-09
 

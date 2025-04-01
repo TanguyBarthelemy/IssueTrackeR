@@ -13,7 +13,7 @@
 #' different assertion related to values: \code{"OR"} or \code{"AND"} (by
 #' default).
 #'
-#' @return a Boolean vector of length 1 if \code{orientation} is
+#' @returns a Boolean vector of length 1 if \code{orientation} is
 #' \code{"overall"} and of the same length as the elements contained in \dots
 #' if \code{orientation} is \code{"vector-wise"}.
 #'
@@ -83,22 +83,21 @@ logical_reducer <- function(...,
     orientation <- match.arg(orientation)
 
     if (orientation == "vector-wise") {
-        return(
-            switch(
-                EXPR = logic_gate,
-                AND = pmin(...),
-                OR = pmax(...)
-            ) |> as.logical()
-        )
+        output <- switch(
+            EXPR = logic_gate,
+            AND = pmin(...),
+            OR = pmax(...)
+        ) |> as.logical()
     } else if (orientation == "overall") {
-        return(
-            switch(
-                EXPR = logic_gate,
-                AND = all(...),
-                OR = any(...)
-            )
+        output <- switch(
+            EXPR = logic_gate,
+            AND = all(...),
+            OR = any(...)
         )
+    } else {
+        stop("Wrong orientation parameter.", call. = FALSE)
     }
+    return(output)
 }
 
 #' @title Vectorize \code{grepl}
@@ -112,7 +111,7 @@ logical_reducer <- function(...,
 #' be coerced by as.character to a character vector. Long vectors are supported.
 #' @inheritParams base::grepl
 #'
-#' @return a matrix with as many rows as \code{length(x)} and as many columns
+#' @returns a matrix with as many rows as \code{length(x)} and as many columns
 #' as \code{length(pattern)} containing TRUE or FALSE. Each column is the result
 #' of call to \code{\link[base]{grepl}}.
 #'
@@ -145,12 +144,14 @@ vgrepl <- Vectorize(
                    perl = FALSE,
                    fixed = FALSE,
                    useBytes = FALSE) {
-        grepl(pattern = pattern,
-              x = x,
-              ignore.case = ignore.case,
-              perl = perl,
-              fixed = fixed,
-              useBytes = useBytes)
+        grepl(
+            pattern = pattern,
+            x = x,
+            ignore.case = ifelse(test = fixed, yes = FALSE, no = ignore.case),
+            perl = perl,
+            fixed = fixed,
+            useBytes = useBytes
+        )
     },
     vectorize.args = "pattern"
 )
@@ -257,10 +258,18 @@ vgrepl <- Vectorize(
 #' )
 #' }
 #' will be represented by the following logical proposition:
-#' $(v1 in f1 AND v2 in f1) OR (v1 in f2 AND v2 in f2)$.
+#' \eqn{(v1 in f1 AND v2 in f1) OR (v1 in f2 AND v2 in f2)}.
 #'
 #' This makes it possible to create more complex logical forms by combining AND
 #' gates and OR gates.
+#'
+#' @section Short names:
+#' \itemize{
+#' \item \code{fields = "b"} for \code{"body"};
+#' \item \code{fields = "t"} for \code{"title"};
+#' \item \code{fields = "l"} for \code{"labels"};
+#' \item \code{fields = "m"} for \code{"milestone"}.
+#' }
 #'
 #' @export
 #'
@@ -394,7 +403,7 @@ contains.IssuesTB <- function(x, values, ...) {
 #' @method contains default
 #' @export
 contains.default <- function(x, ...) {
-    stop("This function requires a IssueTB or IssuesTB object.")
+    stop("This function requires a IssueTB or IssuesTB object.", call. = FALSE)
 }
 
 #' @title Filter issue or issues
@@ -469,7 +478,7 @@ filter_issues.IssuesTB <- function(x, ...) {
 #' @method filter_issues default
 #' @export
 filter_issues.default <- function(x, ...) {
-    stop("This function requires a IssuesTB object.")
+    stop("This function requires a IssuesTB object.", call. = FALSE)
 }
 
 #' @title Check issues without milestones
@@ -479,7 +488,7 @@ filter_issues.default <- function(x, ...) {
 #'
 #' @param issues a \code{IssuesTB} object.
 #'
-#' @return a list of issues without milestones.
+#' @returns a list of issues without milestones.
 #'
 #' @examples
 #'

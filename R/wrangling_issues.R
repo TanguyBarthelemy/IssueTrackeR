@@ -193,7 +193,7 @@ append.IssuesTB <- function(x, values, after) {
         return(append(x, values = new_issues(values)))
     } else {
         stop("This function requires a IssueTB or IssuesTB object ",
-             "for `values` argument.")
+             "for `values` argument.", call. = FALSE)
     }
 }
 

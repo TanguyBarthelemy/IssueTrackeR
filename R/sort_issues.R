@@ -64,11 +64,11 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
                 ref_issues <- sorted_issues
                 sorted_issues <- new_issues()
                 for (title in sorted_titles) {
-                    sorted_group <- ref_issues |>
-                        IssueTrackeR::filter_issues(
-                            fields = "milestone",
-                            values = title
-                        )
+                    sorted_group <- IssueTrackeR::filter_issues(
+                        x = ref_issues,
+                        fields = "milestone",
+                        values = title
+                    )
                     sorted_issues <- c(sorted_issues, sorted_group)
                 }
                 sorted_issues <- c(sorted_issues, no_milestones(ref_issues))
@@ -83,7 +83,7 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
             ))
             sorted_issues <- sorted_issues[sorted_index]
         } else {
-            stop("Object non accepted.")
+            stop("Object non accepted.", call. = FALSE)
         }
     }
 

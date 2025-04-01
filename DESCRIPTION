@@ -10,7 +10,7 @@ License: MIT + file LICENSE
 URL: https://github.com/TanguyBarthelemy/TODO
 BugReports: https://github.com/TanguyBarthelemy/TODO/issues
 Depends:
-    R (>= 4.1.0)
+    R (>= 3.6)
 Imports:
     crayon,
     gh,

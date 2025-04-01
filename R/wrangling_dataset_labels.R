@@ -10,7 +10,7 @@ get_labels <- function(source = c("local", "online"),
     source <- match.arg(source)
 
     if (source == "online") {
-        labels <- gh::gh(
+        list_labels <- gh::gh(
             repo = repo,
             owner = owner,
             endpoint = "/repos/:owner/:repo/labels",
@@ -18,9 +18,9 @@ get_labels <- function(source = c("local", "online"),
         ) |>
             format_labels(verbose = verbose)
 
-        if (!is.null(labels)) {
-            labels <- cbind(labels, repo = repo,
-                            owner = owner)
+        if (!is.null(list_labels)) {
+            list_labels <- cbind(list_labels, repo = repo,
+                                 owner = owner)
         }
 
     } else if (source == "local") {
@@ -29,24 +29,25 @@ get_labels <- function(source = c("local", "online"),
             normalizePath(mustWork = FALSE) |>
             paste0(".yaml")
 
-        if (file.exists(input_path)) {
-            if (verbose) {
-                message("The labels will be read from ", input_path, ".")
-            }
-            labels <- yaml::read_yaml(file = input_path) |>
-                as.data.frame()
-        } else {
+        if (!file.exists(input_path)) {
             stop(
                 "The file doesn't exist. Run `write_labels_to_dataset()`",
                 " to write a set of labels in the directory\n",
-                "Or call get_labels() with the argument `source` to \"online\"."
+                "Or call get_labels() with ",
+                "the argument `source` to \"online\".",
+                call. = FALSE
             )
         }
+        if (verbose) {
+            message("The labels will be read from ", input_path, ".")
+        }
+        list_labels <- yaml::read_yaml(file = input_path) |>
+            as.data.frame()
     } else {
-        stop("wrong source")
+        stop("wrong argument source", call. = FALSE)
     }
 
-    return(labels)
+    return(list_labels)
 }
 
 #' @title Format the label in a simpler format

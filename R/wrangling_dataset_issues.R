@@ -117,26 +117,28 @@ get_issues <- function(source = c("local", "online"),
             normalizePath(mustWork = FALSE) |>
             paste0(".yaml")
 
-        if (file.exists(input_path)) {
-            if (verbose) {
-                message("The issues will be read from ", input_path, ".")
-            }
-            issues <- yaml::read_yaml(file = input_path)
-            for (id_issue in seq_along(issues)) {
-                issues[[id_issue]] <- new_issue(issue = issues[[id_issue]])
-            }
-            issues <- new_issues(issues)
-        } else {
+        if (!file.exists(input_path)) {
             stop(
                 "The file ", input_file, ".yaml",
                 " doesn't exist. Run `write_issues_to_dataset()`",
                 " to write a set of issues in the directory.\n",
-                "Or call get_issues() with the argument `source` to \"online\"."
+                "Or call get_issues() with ",
+                "the argument `source` to \"online\".",
+                call. = FALSE
             )
         }
 
+        if (verbose) {
+            message("The issues will be read from ", input_path, ".")
+        }
+        issues <- yaml::read_yaml(file = input_path)
+        for (id_issue in seq_along(issues)) {
+            issues[[id_issue]] <- new_issue(issue = issues[[id_issue]])
+        }
+        issues <- new_issues(issues)
+
     } else {
-        stop("wrong source")
+        stop("wrong source", call. = FALSE)
     }
 
     return(issues)
@@ -220,13 +222,13 @@ format_issues <- function(raw_issues,
                 collapse = ""
             )
         )
-        body <- paste(raw_issue[["body"]],
-                      body_comment)
+        body_content <- paste(raw_issue[["body"]],
+                              body_comment)
 
         issue <- new_issue(
             title = raw_issue[["title"]],
             state = raw_issue[["state"]],
-            body = body,
+            body = body_content,
             number = raw_issue[["number"]],
             created_at = raw_issue[["created_at"]],
             labels = vapply(
@@ -309,5 +311,5 @@ write_issues_to_dataset.IssuesTB <- function(
 #' @method write_issues_to_dataset default
 #' @export
 write_issues_to_dataset.default <- function(issues, ...) {
-    stop("This function requires a IssuesTB object.")
+    stop("This function requires a IssuesTB object.", call. = FALSE)
 }

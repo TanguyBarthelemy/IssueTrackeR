@@ -131,10 +131,20 @@ filter_issues(
 )
 }
 will be represented by the following logical proposition:
-$(v1 in f1 AND v2 in f1) OR (v1 in f2 AND v2 in f2)$.
+\eqn{(v1 in f1 AND v2 in f1) OR (v1 in f2 AND v2 in f2)}.
 
 This makes it possible to create more complex logical forms by combining AND
 gates and OR gates.
+}
+
+\section{Short names}{
+
+\itemize{
+\item \code{fields = "b"} for \code{"body"};
+\item \code{fields = "t"} for \code{"title"};
+\item \code{fields = "l"} for \code{"labels"};
+\item \code{fields = "m"} for \code{"milestone"}.
+}
 }
 
 \examples{
