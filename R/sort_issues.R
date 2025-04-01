@@ -81,7 +81,7 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
                 X = sorted_issues,
                 FUN = base::`[[`,
                 sorting_variable[["field"]],
-                FUN.VALUE = integer(1L)
+                FUN.VALUE = double(1L)
             ))
             sorted_issues <- sorted_issues[sorted_index]
         } else {
