@@ -62,7 +62,9 @@ get_milestones <- function(
             milestones <- yaml::read_yaml(file = input_path) |>
                 as.data.frame()
             if (nrow(milestones) > 0L) {
-                milestones[["due_on"]]  <- format_timestamp(milestones[["due_on"]])
+                milestones[["due_on"]]  <- format_timestamp(
+                    x = milestones[["due_on"]]
+                )
             }
         } else {
             stop(
