@@ -11,7 +11,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 * New function to format Milestones
-* New function to
+* New function to format timestamp
+* New argument accepted in `filter_issues()` : `"b"` for `"body"`, `"t"` for `"title"`, `"l"` for `"labels"` and `"m"` for `"milestones"`
 
 ### Changed
 

@@ -310,10 +310,24 @@ contains.IssueTB <- function(x,
     values_logic_gate <- match.arg(values_logic_gate)
     fields_logic_gate <- match.arg(fields_logic_gate)
 
+    fields <- match.arg(
+        arg = fields,
+        choices = c("body", "title", "labels", "milestone", "b", "t", "l", "m"),
+        several.ok = TRUE
+    )
+
     # Cas 1 seul champ
     if (length(fields) == 1L) {
 
-        fields <- match.arg(fields)
+        fields <- switch(
+            EXPR = fields,
+            "b" = "body",
+            "t" = "title",
+            "l" = "labels",
+            "m" = "milestone",
+            fields
+        )
+
         field_content <- x[[fields]]
 
         if (is.null(field_content)) {

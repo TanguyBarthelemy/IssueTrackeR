@@ -22,4 +22,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Language: en-GB
 Suggests: 
-    spelling
+    spelling,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
