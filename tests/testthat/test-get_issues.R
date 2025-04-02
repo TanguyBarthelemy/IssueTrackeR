@@ -1,5 +1,8 @@
 testthat::test_that("get_issues works", {
-    issues <- get_issues(source = "online", state = "all", owner = "rjdverse", repo = "rjd3toolkit")
+    issues <- get_issues(source = "online",
+                         state = "all",
+                         owner = "rjdverse",
+                         repo = "rjd3toolkit")
     testthat::expect_type(issues, "list")
     testthat::expect_s3_class(issues, "IssuesTB")
 })

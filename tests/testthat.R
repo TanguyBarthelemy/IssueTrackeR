@@ -6,7 +6,7 @@
 # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
 # * https://testthat.r-lib.org/articles/special-files.html
 
-library(testthat)
-library(IssueTrackeR)
+library("testthat") # nolint unused_import_linter undesirable_function_linter
+library("IssueTrackeR") # nolint unused_import_linter undesirable_function_linter
 
 test_check("IssueTrackeR")

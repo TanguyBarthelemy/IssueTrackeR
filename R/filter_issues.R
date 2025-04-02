@@ -321,10 +321,10 @@ contains.IssueTB <- function(x,
 
         fields <- switch(
             EXPR = fields,
-            "b" = "body",
-            "t" = "title",
-            "l" = "labels",
-            "m" = "milestone",
+            b = "body",
+            t = "title",
+            l = "labels",
+            m = "milestone",
             fields
         )
 
