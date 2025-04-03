@@ -152,24 +152,8 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
     return(new_mlst_structure)
 }
 
-#' @title Save milestone dataset in a yaml file
-#'
-#' @param milestones a list representing milestones with simpler structure (with
-#' title, description and due_on).
-#' @inheritParams get_issues
-#'
-#' @details
-#' The defaults value of the argument \code{dataset_name} is
-#' \code{"list_milestones.yaml"}.
-#'
-#' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
-#' successful and an error otherwise.
+#' @rdname write
 #' @export
-#'
-#' @examples
-#' milestones <- get_milestones(source = "online")
-#' write_milestones_to_dataset(milestones)
-#'
 write_milestones_to_dataset <- function(
         milestones,
         dataset_dir = getOption("IssueTrackeR.dataset.dir"),

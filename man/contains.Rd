@@ -5,7 +5,7 @@
 \alias{contains.IssueTB}
 \alias{contains.IssuesTB}
 \alias{contains.default}
-\title{Text in issue(s)}
+\title{Does the issue(s) contains this text?}
 \usage{
 contains(x, ...)
 
@@ -117,9 +117,9 @@ This function is not case-sensitive.
 For the order of logical assertions, as it is easy to add assertions linked
 by an AND (by piping a new filter_issues), it has been decided that
 assertions containing AND gates will be distributed and assertions containing
-OR gates will be factorised. The assertions used by filter_issues will
+OR gates will be factorised. The assertions used by \code{filter_issues} will
 therefore have the following format:
-$(P1 AND Q1) OR (P2 AND Q2)$
+\eqn{(P1 AND Q1) OR (P2 AND Q2)}
 
 Thus the following call to filter_issue:
 \preformatted{

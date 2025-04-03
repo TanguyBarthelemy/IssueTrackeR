@@ -130,14 +130,15 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
 #' }
 #'
 #' will behave as follows:
-#'     1) It will select all the issues that have "bug" as a label, then sort
+#'
+#' * 1) It will select all the issues that have "bug" as a label, then sort
 #'     them according to the chronological order of milestones (according to
 #'     deadlines) and the chronological order of issue creation dates
-#'     2) Among the remaining issues, it will filter the issues that have
+#' * 2) Among the remaining issues, it will filter the issues that have
 #'     \code{"package"} in the title and apply the same sorting.
-#'     3) Finally, among all the remaining issues (not sorted until now), the
+#' * 3) Finally, among all the remaining issues (not sorted until now), the
 #'     function will apply the same sorting.
-#'     4) The function returns the global list of sorted issues.
+#' * 4) The function returns the global list of sorted issues.
 #'
 #' The argument filtering_factors is a list of constraint following the same
 #' naming convention as the \code{\link[IssueTrackeR]{filter_issues}}. So the
@@ -154,7 +155,7 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
 #' write_milestones_to_dataset(milestones)
 #'
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
-#' sort(
+#' sorted_issues <- sort(
 #'     x = all_issues,
 #'     sorting_variables = list(list(object = "milestones", field = "due_on"),
 #'                              list(object = "issues", field = "created_at")),

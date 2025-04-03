@@ -248,15 +248,25 @@ format_issues <- function(raw_issues,
     return(issues)
 }
 
-#' @title Save issue dataset in a yaml file
+
+#' @title Save datasets in a yaml file
 #'
 #' @param issues a \code{IssuesTB} object.
+#' @param labels a list representing all labels with simpler structure (with
+#' name, description, colour)
+#' @param milestones a list representing milestones with simpler structure (with
+#' title, description and due_on).
 #' @inheritParams get_issues
 #' @param \dots Unused parameter.
 #'
 #' @details
-#' The defaults value of the argument \code{dataset_name} is
-#' \code{"list_issues.yaml"}.
+#' Depending on the object, the defaults value of the argument \code{dataset_name} is:
+#'
+#' \itemize{
+#' \item \code{"list_issues.yaml"} for issues;
+#' \item \code{"list_labels.yaml"} for labels;
+#' \item \code{"list_milestones.yaml"} for milestones.
+#' }
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.
@@ -267,13 +277,19 @@ format_issues <- function(raw_issues,
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' write_issues_to_dataset(all_issues)
 #'
-#' @rdname write_issues_to_dataset
+#' labels <- get_labels(source = "online")
+#' write_labels_to_dataset(labels)
+#'
+#' milestones <- get_milestones(source = "online")
+#' write_milestones_to_dataset(milestones)
+#'
+#' @rdname write
 #'
 write_issues_to_dataset <- function(issues, ...) {
     UseMethod(generic = "write_issues_to_dataset", object = issues)
 }
 
-#' @rdname write_issues_to_dataset
+#' @rdname write
 #' @exportS3Method write_issues_to_dataset IssuesTB
 #' @method write_issues_to_dataset IssuesTB
 #' @export
@@ -306,7 +322,7 @@ write_issues_to_dataset.IssuesTB <- function(
     return(invisible(TRUE))
 }
 
-#' @rdname write_issues_to_dataset
+#' @rdname write
 #' @exportS3Method write_issues_to_dataset default
 #' @method write_issues_to_dataset default
 #' @export

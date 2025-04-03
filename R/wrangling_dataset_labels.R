@@ -89,24 +89,8 @@ format_labels <- function(raw_labels, verbose = TRUE) {
     return(new_labels_structure)
 }
 
-#' @title Save label dataset in a yaml file
-#'
-#' @param labels a list representing all labels with simpler structure (with
-#' name, description, colour)
-#' @inheritParams get_issues
-#'
-#' @details
-#' The defaults value of the argument \code{dataset_name} is
-#' \code{"list_labels.yaml"}.
-#'
-#' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
-#' successful and an error otherwise.
+#' @rdname write
 #' @export
-#'
-#' @examples
-#' labels <- get_labels(source = "online")
-#' write_labels_to_dataset(labels)
-#'
 write_labels_to_dataset <- function(
         labels,
         dataset_dir = getOption("IssueTrackeR.dataset.dir"),

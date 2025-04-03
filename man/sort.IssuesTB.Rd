@@ -55,14 +55,28 @@ sort(
 }
 
 will behave as follows:
-1) It will select all the issues that have "bug" as a label, then sort
+\itemize{
+\item 
+\enumerate{
+\item It will select all the issues that have "bug" as a label, then sort
 them according to the chronological order of milestones (according to
 deadlines) and the chronological order of issue creation dates
-2) Among the remaining issues, it will filter the issues that have
+}
+\item 
+\enumerate{
+\item Among the remaining issues, it will filter the issues that have
 \code{"package"} in the title and apply the same sorting.
-3) Finally, among all the remaining issues (not sorted until now), the
+}
+\item 
+\enumerate{
+\item Finally, among all the remaining issues (not sorted until now), the
 function will apply the same sorting.
-4) The function returns the global list of sorted issues.
+}
+\item 
+\enumerate{
+\item The function returns the global list of sorted issues.
+}
+}
 
 The argument filtering_factors is a list of constraint following the same
 naming convention as the \code{\link[IssueTrackeR]{filter_issues}}. So the
@@ -78,7 +92,7 @@ milestones <- get_milestones("online")
 write_milestones_to_dataset(milestones)
 
 all_issues <- get_issues(source = "online", verbose = FALSE)
-sort(
+sorted_issues <- sort(
     x = all_issues,
     sorting_variables = list(list(object = "milestones", field = "due_on"),
                              list(object = "issues", field = "created_at")),
