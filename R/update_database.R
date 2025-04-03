@@ -1,4 +1,4 @@
-#' Update database
+#' @title Update database
 #'
 #' @description
 #' Update the different local database (issues, labels and milestones) with the

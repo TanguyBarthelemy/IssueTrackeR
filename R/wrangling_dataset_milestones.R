@@ -1,4 +1,34 @@
 
+#' @title Format the milestone in a simpler format
+#'
+#' @param raw_milestone Milestone. Subset of a \code{gh_response} object output
+#' from the function \code{\link[gh]{gh}} which contains all the data and
+#' metadata for a GitHub milestone.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#'
+#' @returns a data.frame with 3 entries:
+#'
+#' \itemize{
+#' \item Title: name of the milestone
+#' \item description: Description of the milestone
+#' \item due_on: date to with the issue is due
+#' }
+#'
+#' @export
+#'
+#' @examples
+#' # With milestones
+#' raw_milestones <- gh::gh(
+#'     repo = "jdplus-main",
+#'     owner = "jdemetra",
+#'     endpoint = "/repos/:owner/:repo/milestones",
+#'     state = "all",
+#'     .limit = Inf
+#' )
+#' raw_milestone <- raw_milestones[[5L]]
+#' format_milestone(raw_milestone)
+#'
 #' @keywords internal
 format_milestone <- function(raw_milestone, verbose = TRUE) {
     if (verbose) {
@@ -9,11 +39,11 @@ format_milestone <- function(raw_milestone, verbose = TRUE) {
         yes = NA_character_,
         no = raw_milestone[["description"]]
     )
-    due_on <- ifelse(
+    due_on <- format_timestamp(ifelse(
         test = is.null(raw_milestone[["due_on"]]),
-        yes = format_timestamp(NA_integer_),
-        no = format_timestamp(raw_milestone[["due_on"]])
-    )
+        yes = NA_integer_,
+        no = raw_milestone[["due_on"]]
+    ))
     output <- data.frame(
         title = raw_milestone[["title"]],
         description = description,
@@ -83,7 +113,7 @@ get_milestones <- function(
     return(milestones)
 }
 
-#' @title Format the milestone in a simpler format
+#' @title Format the milestones in a simpler format
 #'
 #' @param raw_milestones a \code{gh_response} object output from the function
 #' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
@@ -97,13 +127,14 @@ get_milestones <- function(
 #'
 #' @examples
 #' # With milestones
-#' raw_milestones <- gh::gh(
-#'     repo = "rjdemetra",
-#'     owner = "rjdverse",
+#' milestones_jdplus_main <- gh::gh(
+#'     repo = "jdplus-main",
+#'     owner = "jdemetra",
 #'     endpoint = "/repos/:owner/:repo/milestones",
+#'     state = "all",
 #'     .limit = Inf
-#' )
-#' format_milestones(raw_milestones)
+#'  )
+#' format_milestones(milestones_jdplus_main)
 #'
 format_milestones <- function(raw_milestones, verbose = TRUE) {
 

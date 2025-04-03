@@ -1,5 +1,30 @@
 
+#' @title Round a timestamp to the inferior integer
+#'
+#' @description
+#' This function round a timestamp ()
+#'
+#' @param x. An integer, a
+#'
+#' @details
+#' The accepted formats for the argument \code{x} are:
+#'
+#' \itemize{
+#' \item \code{Date} objects;
+#' \item numeric (\code{integer} or \code{double});
+#' \item date/times object (classes \code{POSIXct} and \code{POSIXlt})
+#' }
+#'
+#' @returns a \code{POSIXct} object with rounded \code{double} value.
+#'
+#' @examples
+#'
+#' IssueTrackeR:::format_timestamp(1743694674.9)
+#' IssueTrackeR:::format_timestamp(1743694674L)
+#' IssueTrackeR:::format_timestamp(Sys.time())
+#'
 #' @keywords internal
+#'
 format_timestamp <- function(x) {
     output <- x |>
         as.POSIXct(origin = "1970-01-01") |>

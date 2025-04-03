@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrangling_dataset_milestones.R
 \name{format_milestones}
 \alias{format_milestones}
-\title{Format the milestone in a simpler format}
+\title{Format the milestones in a simpler format}
 \usage{
 format_milestones(raw_milestones, verbose = TRUE)
 }
@@ -19,16 +19,17 @@ a list representing milestones with simpler structure (with title,
 description and due_on)
 }
 \description{
-Format the milestone in a simpler format
+Format the milestones in a simpler format
 }
 \examples{
 # With milestones
-raw_milestones <- gh::gh(
-    repo = "rjdemetra",
-    owner = "rjdverse",
+milestones_jdplus_main <- gh::gh(
+    repo = "jdplus-main",
+    owner = "jdemetra",
     endpoint = "/repos/:owner/:repo/milestones",
+    state = "all",
     .limit = Inf
-)
-format_milestones(raw_milestones)
+ )
+format_milestones(milestones_jdplus_main)
 
 }
