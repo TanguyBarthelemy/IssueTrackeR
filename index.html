@@ -66,18 +66,162 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="issuetracker">IssueTrackeR<a class="anchor" aria-label="anchor" href="#issuetracker"></a>
+<div class="page-header"><h1 id="issuetracker">{IssueTrackeR}<a class="anchor" aria-label="anchor" href="#issuetracker"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of IssueTrackeR is to…</p>
+<p><strong>{IssueTrackeR}</strong> is an R package designed to retrieve and manage GitHub issues directly within R. This package allows users to efficiently track and handle issues from their GitHub repositories.</p>
+<p>This package relies a lot on the package <a href="https://github.com/r-lib/gh" class="external-link">{gh}</a> to use the GitHub API and retrieve data from GitHub.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of IssueTrackeR from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version of {IssueTrackeR} from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"TanguyBarthelemy/IssueTrackeR"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
+</h2>
+<ul>
+<li>
+<strong>Retrieve Issues</strong>: Fetch issues from any (with sufficient rights) GitHub repository.</li>
+<li>
+<strong>Issue Management</strong>: Class S3 to manage the issues as a datasets within R.</li>
+<li>
+<strong>Filtering</strong>: Filter issues by labels, content and milestones.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/TanguyBarthelemy/TODO" class="external-link">"IssueTrackeR"</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'IssueTrackeR'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     append</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="retrieve-information-from-github">Retrieve information from GitHub<a class="anchor" aria-label="anchor" href="#retrieve-information-from-github"></a>
+</h3>
+<p>To get information from a repository, you can call the functions <code>get_issues</code>, <code>get_labels</code> and <code>get_milestones</code></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># From online</span></span>
+<span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_issues</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, owner <span class="op">=</span> <span class="st">"jdemetra"</span>, repo <span class="op">=</span> <span class="st">"jdplus-main"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Running gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query</span></span>
+<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 1s</span></span>
+<span><span class="va">my_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_labels</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, owner <span class="op">=</span> <span class="st">"jdemetra"</span>, repo <span class="op">=</span> <span class="st">"jdplus-main"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Reading labels... Done!</span></span>
+<span><span class="co">#&gt; 12 labels found.</span></span>
+<span><span class="va">my_milestones</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_milestones</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, owner <span class="op">=</span> <span class="st">"jdemetra"</span>, repo <span class="op">=</span> <span class="st">"jdplus-main"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Reading milestones... </span></span>
+<span><span class="co">#&gt;  -  backlog ... Done!</span></span>
+<span><span class="co">#&gt;  -  3.2.2 ... Done!</span></span>
+<span><span class="co">#&gt;  -  3.2.3 ... Done!</span></span>
+<span><span class="co">#&gt;  -  3.4.0 ... Done!</span></span>
+<span><span class="co">#&gt;  -  3.5.0 ... Done!</span></span>
+<span><span class="co">#&gt;  -  3.6.0 ... Done!</span></span>
+<span><span class="co">#&gt; Done! 6 milestones found.</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="save-issues-in-local">Save issues in local<a class="anchor" aria-label="anchor" href="#save-issues-in-local"></a>
+</h3>
+<p>You can also write the datasets in local with <code><a href="reference/write.html">write_issues_to_dataset()</a></code>, <code><a href="reference/write.html">write_labels_to_dataset()</a></code> and <code><a href="reference/write.html">write_milestones_to_dataset()</a></code>:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/write.html">write_issues_to_dataset</a></span><span class="op">(</span></span>
+<span>    issues <span class="op">=</span> <span class="va">my_issues</span>, </span>
+<span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpYd2N2A\list_issues.yaml.</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/write.html">write_labels_to_dataset</a></span><span class="op">(</span></span>
+<span>    labels <span class="op">=</span> <span class="va">my_labels</span>, </span>
+<span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpYd2N2A\list_labels.yaml.</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/write.html">write_milestones_to_dataset</a></span><span class="op">(</span></span>
+<span>    milestones <span class="op">=</span> <span class="va">my_milestones</span>, </span>
+<span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpYd2N2A\list_milestones.yaml.</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="options">Options<a class="anchor" aria-label="anchor" href="#options"></a>
+</h3>
+<p>It is also possible to set option for a R session:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># The directory containing the yaml files in local</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>IssueTrackeR.dataset.dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># The default GitHub owner</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>IssueTrackeR.owner <span class="op">=</span> <span class="st">"jdemetra"</span><span class="op">)</span></span>
+<span><span class="co"># the default GitHub repository</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>IssueTrackeR.repo <span class="op">=</span> <span class="st">"jdplus-main"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="retrieve-issues-from-local">Retrieve issues from local<a class="anchor" aria-label="anchor" href="#retrieve-issues-from-local"></a>
+</h3>
+<p>Then it’s possible to read Issues from local yaml files:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># From local</span></span>
+<span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_issues</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span>
+<span><span class="va">my_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_labels</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span>
+<span><span class="va">my_milestones</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_milestones</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="update-full-database">Update full database<a class="anchor" aria-label="anchor" href="#update-full-database"></a>
+</h3>
+<p>You can update your full database of issues, labels and milestones with <code><a href="reference/update_database.html">update_database()</a></code>:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># From online</span></span>
+<span><span class="fu"><a href="reference/update_database.html">update_database</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Running gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query</span></span>
+<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 1s Running gh query ■■■■■■■■■■■ 33% | ETA:</span></span>
+<span><span class="co">#&gt; 2sRunning gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 2sRunning gh query</span></span>
+<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 2sRunning gh query ■■■■■■■■■■■■■■■■■■■■■■■■■■</span></span>
+<span><span class="co">#&gt; 83% | ETA: 1s</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="filtering-and-sorting">Filtering and sorting<a class="anchor" aria-label="anchor" href="#filtering-and-sorting"></a>
+</h3>
+<p>There are plenty of different filtering ways.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Condition: issues containing "README" in its body OR title</span></span>
+<span><span class="va">filtered_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/filter_issues.html">filter_issues</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">my_issues</span>,</span>
+<span>    fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"body"</span>, <span class="st">"title"</span><span class="op">)</span>,</span>
+<span>    values <span class="op">=</span> <span class="st">"README"</span>,</span>
+<span>    fields_logic_gate <span class="op">=</span> <span class="st">"OR"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>See <code><a href="reference/filter_issues.html">?filter_issues</a></code> and <code><a href="reference/contains.html">?contains</a></code> to explore more options.</p>
+</div>
+<div class="section level3">
+<h3 id="sorting">Sorting<a class="anchor" aria-label="anchor" href="#sorting"></a>
+</h3>
+<p>Finally you can also sort your issues according to certain variable (quantitative) and impose sole filtering factors (conditions as in <code><a href="reference/filter_issues.html">filter_issues()</a></code>), which will be applied one after the other:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sorted_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">my_issues</span>,</span>
+<span>    sorting_variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>object <span class="op">=</span> <span class="st">"milestones"</span>, field <span class="op">=</span> <span class="st">"due_on"</span><span class="op">)</span>,</span>
+<span>                             <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>object <span class="op">=</span> <span class="st">"issues"</span>, field <span class="op">=</span> <span class="st">"created_at"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    filtering_factors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="st">"bug"</span>,</span>
+<span>                                  fields <span class="op">=</span> <span class="st">"labels"</span>,</span>
+<span>                                  values_logic_gate <span class="op">=</span> <span class="st">"OR"</span><span class="op">)</span>,</span>
+<span>                             <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="st">"package"</span>, fields <span class="op">=</span> <span class="st">"title"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    milestones <span class="op">=</span> <span class="va">my_milestones</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>Contributions are welcome! Please feel free to submit a pull request or report any issues.</p>
+</div>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
+<p>This project is licensed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for details.</p>
 </div>
 </div>
   </div>

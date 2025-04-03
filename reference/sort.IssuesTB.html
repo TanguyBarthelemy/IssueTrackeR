@@ -115,16 +115,19 @@ in <code>sorting_variables</code>.</p>
 <span>    decreasing <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 
-<p>will behave as follows:
-1) It will select all the issues that have "bug" as a label, then sort
+<p>will behave as follows:</p><ul><li><p></p><ol><li><p>It will select all the issues that have "bug" as a label, then sort
 them according to the chronological order of milestones (according to
-deadlines) and the chronological order of issue creation dates
-2) Among the remaining issues, it will filter the issues that have
-<code>"package"</code> in the title and apply the same sorting.
-3) Finally, among all the remaining issues (not sorted until now), the
-function will apply the same sorting.
-4) The function returns the global list of sorted issues.</p>
-<p>The argument filtering_factors is a list of constraint following the same
+deadlines) and the chronological order of issue creation dates</p></li>
+</ol></li>
+<li><p></p><ol><li><p>Among the remaining issues, it will filter the issues that have
+<code>"package"</code> in the title and apply the same sorting.</p></li>
+</ol></li>
+<li><p></p><ol><li><p>Finally, among all the remaining issues (not sorted until now), the
+function will apply the same sorting.</p></li>
+</ol></li>
+<li><p></p><ol><li><p>The function returns the global list of sorted issues.</p></li>
+</ol></li>
+</ul><p>The argument filtering_factors is a list of constraint following the same
 naming convention as the <code><a href="filter_issues.html">filter_issues</a></code>. So the
 constraints are represented by named lists with the various arguments (apart
 from <code>x</code>) to the <code><a href="filter_issues.html">filter_issues</a></code>
@@ -139,12 +142,12 @@ from <code>x</code>) to the <code><a href="filter_issues.html">filter_issues</a>
 <span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_milestones</a></span><span class="op">(</span><span class="st">"online"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading milestones... </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Done! 0 milestones found.</span>
-<span class="r-in"><span><span class="fu"><a href="write_milestones_to_dataset.html">write_milestones_to_dataset</a></span><span class="op">(</span><span class="va">milestones</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/Rtmptl1HoD/data/list_milestones.yaml.</span>
+<span class="r-in"><span><span class="fu"><a href="write.html">write_milestones_to_dataset</a></span><span class="op">(</span><span class="va">milestones</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpCTBq9Q/data/list_milestones.yaml.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The file already exists and will be overwritten.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">sorted_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    x <span class="op">=</span> <span class="va">all_issues</span>,</span></span>
 <span class="r-in"><span>    sorting_variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>object <span class="op">=</span> <span class="st">"milestones"</span>, field <span class="op">=</span> <span class="st">"due_on"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                             <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>object <span class="op">=</span> <span class="st">"issues"</span>, field <span class="op">=</span> <span class="st">"created_at"</span><span class="op">)</span><span class="op">)</span>,</span></span>
@@ -154,76 +157,6 @@ from <code>x</code>) to the <code><a href="filter_issues.html">filter_issues</a>
 <span class="r-in"><span>                             <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="st">"package"</span>, fields <span class="op">=</span> <span class="st">"title"</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    milestones <span class="op">=</span> <span class="va">milestones</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 4 issues. </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #76</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Leap Year Effect </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I am running into problems including the leap year:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/statistikat/persephone/issues/21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Am I missing some additional parameters that need to be set?  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #142</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Printing userdef variables with their name </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> When you display a model (obtained with the get_model function), the regression variables are not displayed with their real name but with a name given by jdemetra+:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ![image](https://github.com/jdemetra/rjdemetra/assets/112711017/2dc551f8-2c0a-4da0-bc12-d74285537247)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> However, their variable name does exist in the object:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ![image](https://github.com/jdemetra/rjdemetra/assets/112711017/7645a392-6e06-4480-b832-282b83ec77da)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Is it possible to modify the display to add these more meaningful variable names instead of the current names? </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> They do not come from the same object and there are some differences in the Java output. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In the first case the names comes from the results of the regarima model (&lt;https://github.com/rjdverse/rjdemetra/blob/develop/R/regarima_rslts.R#L52&gt;) and in the second case it comes from the specification (&lt;https://github.com/rjdverse/rjdemetra/blob/develop/R/spec_rjd.R#L193-L220&gt;). I think it would be complicated to do it in R since you would need to indentify your external regressors from all the regressions coefficients (outliers, easter, td, etc.), but maybe something can be done using the `context_dictionary`. Do you have a reproducible example? </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #156</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Possible to extract slidingspan main diagnostics ? </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I wondered if it was possible in rjdemetra to extract and save the main slidingspan diagnostics of % unstable observations (A% and MM%) that are calculated  and displayed (but not saved) in JDemetra+ ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I guess this is not an “issue”, but rather a (Christmas) wish</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Best regards </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Jørn Ivar Hamre</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Statistics Norway)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hi,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> it is indeed a wish ! We'll see...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merry Xmas </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #162</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> How to differentiate a WS in V2 and in V3? </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *related to rjdverse/rjd3workspace#53*</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> When I try to load a WS in v3 with **{RJDemetra}** (with `load_workspace()`), I get no error but I will get error when trying to access other elements.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> How to know if a WS is in V3 with **{RJDemetra}**? Is it possible?  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
