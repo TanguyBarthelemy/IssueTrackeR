@@ -17,7 +17,10 @@ Filter all the issues without milestones from a list of issues.
 }
 \examples{
 
+\donttest{
+all_issues <- get_issues(source = "online", verbose = FALSE)
 IssueTrackeR:::no_milestones()
+}
 
 }
 \keyword{internal}

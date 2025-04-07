@@ -514,7 +514,10 @@ filter_issues.default <- function(x, ...) {
 #'
 #' @examples
 #'
+#' \donttest{
+#' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' IssueTrackeR:::no_milestones()
+#' }
 #'
 #' @keywords internal
 #'
