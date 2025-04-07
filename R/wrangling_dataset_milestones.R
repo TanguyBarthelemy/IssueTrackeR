@@ -18,6 +18,8 @@
 #' @export
 #'
 #' @examples
+#'
+#' \donttest{
 #' # With milestones
 #' raw_milestones <- gh::gh(
 #'     repo = "jdplus-main",
@@ -28,6 +30,7 @@
 #' )
 #' raw_milestone <- raw_milestones[[5L]]
 #' format_milestone(raw_milestone)
+#' }
 #'
 #' @keywords internal
 format_milestone <- function(raw_milestone, verbose = TRUE) {
@@ -126,6 +129,8 @@ get_milestones <- function(
 #' @export
 #'
 #' @examples
+#'
+#' \donttest{
 #' # With milestones
 #' milestones_jdplus_main <- gh::gh(
 #'     repo = "jdplus-main",
@@ -135,6 +140,7 @@ get_milestones <- function(
 #'     .limit = Inf
 #'  )
 #' format_milestones(milestones_jdplus_main)
+#' }
 #'
 format_milestones <- function(raw_milestones, verbose = TRUE) {
 

@@ -96,6 +96,7 @@ function:
 }
 \examples{
 
+\donttest{
 # From online
 
 issues <- get_issues(source = "online")
@@ -118,5 +119,6 @@ issues <- get_issues(source = "local",
                      state = "open")
 labels <- get_labels(source = "local")
 milestones <- get_milestones(source = "local")
+}
 
 }

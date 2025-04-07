@@ -25,6 +25,8 @@ This function displays an issue (\code{IssueTB} object) or a list of issues
 (\code{IssuesTB} object) with a formatted output.
 }
 \examples{
+
+\donttest{
 all_issues <- get_issues(source = "online", verbose = FALSE)
 
 # Display one issue
@@ -32,5 +34,6 @@ print(all_issues[[1]])
 
 # Display several issues
 print(all_issues[1:10])
+}
 
 }

@@ -41,6 +41,7 @@ Format the issue in a simpler format
 }
 \examples{
 
+\donttest{
 raw_issues <- gh::gh(
     repo = "rjdemetra",
     owner = "rjdverse",
@@ -56,5 +57,6 @@ raw_comments <- gh::gh(
 all_issues <- format_issues(raw_issues = raw_issues,
                             raw_comments = raw_comments,
                             verbose = FALSE)
+}
 
 }

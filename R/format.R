@@ -4,7 +4,7 @@
 #' @description
 #' This function round a timestamp ()
 #'
-#' @param x. An integer, a
+#' @param x The timestamp. See detail section for more information.
 #'
 #' @details
 #' The accepted formats for the argument \code{x} are:

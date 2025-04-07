@@ -27,6 +27,8 @@ a data.frame with 3 entries:
 Format the milestone in a simpler format
 }
 \examples{
+
+\donttest{
 # With milestones
 raw_milestones <- gh::gh(
     repo = "jdplus-main",
@@ -37,6 +39,7 @@ raw_milestones <- gh::gh(
 )
 raw_milestone <- raw_milestones[[5L]]
 format_milestone(raw_milestone)
+}
 
 }
 \keyword{internal}

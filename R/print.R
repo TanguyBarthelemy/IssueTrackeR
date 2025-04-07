@@ -13,6 +13,8 @@
 #' @returns invisibly (with \code{invisible()}) \code{NULL}.
 #'
 #' @examples
+#'
+#' \donttest{
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
 #'
 #' # Display one issue
@@ -20,6 +22,7 @@
 #'
 #' # Display several issues
 #' print(all_issues[1:10])
+#' }
 #'
 #' @rdname print
 #'

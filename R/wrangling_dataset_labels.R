@@ -62,6 +62,8 @@ get_labels <- function(source = c("local", "online"),
 #' @export
 #'
 #' @examples
+#'
+#' \donttest{
 #' # With labels
 #' raw_labels <- gh::gh(
 #'    repo = "rjdemetra",
@@ -70,6 +72,7 @@ get_labels <- function(source = c("local", "online"),
 #'    .limit = Inf
 #' )
 #' format_labels(raw_labels)
+#' }
 #'
 format_labels <- function(raw_labels, verbose = TRUE) {
 

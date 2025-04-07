@@ -22,6 +22,8 @@ description and due_on)
 Format the milestones in a simpler format
 }
 \examples{
+
+\donttest{
 # With milestones
 milestones_jdplus_main <- gh::gh(
     repo = "jdplus-main",
@@ -31,5 +33,6 @@ milestones_jdplus_main <- gh::gh(
     .limit = Inf
  )
 format_milestones(milestones_jdplus_main)
+}
 
 }

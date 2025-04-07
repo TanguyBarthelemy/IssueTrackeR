@@ -22,6 +22,8 @@ description, colour)
 Format the label in a simpler format
 }
 \examples{
+
+\donttest{
 # With labels
 raw_labels <- gh::gh(
    repo = "rjdemetra",
@@ -30,5 +32,6 @@ raw_labels <- gh::gh(
    .limit = Inf
 )
 format_labels(raw_labels)
+}
 
 }

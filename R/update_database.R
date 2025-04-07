@@ -27,7 +27,10 @@
 #' @export
 #'
 #' @examples
+#'
+#' \donttest{
 #' update_database()
+#' }
 #'
 update_database <- function(
         dataset_dir = getOption("IssueTrackeR.dataset.dir"),

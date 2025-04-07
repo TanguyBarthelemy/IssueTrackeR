@@ -49,6 +49,9 @@ Update the different local database (issues, labels and milestones) with the
 online reference.
 }
 \examples{
+
+\donttest{
 update_database()
+}
 
 }

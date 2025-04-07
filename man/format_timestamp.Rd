@@ -7,7 +7,7 @@
 format_timestamp(x)
 }
 \arguments{
-\item{x.}{An integer, a}
+\item{x}{The timestamp. See detail section for more information.}
 }
 \value{
 a \code{POSIXct} object with rounded \code{double} value.

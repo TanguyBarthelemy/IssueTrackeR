@@ -275,6 +275,8 @@ vgrepl <- Vectorize(
 #' @export
 #'
 #' @examples
+#'
+#' \donttest{
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' issue_1 <- all_issues[[1L]]
 #' # This will return TRUE if the issue contains either "README" or "package"
@@ -289,6 +291,8 @@ vgrepl <- Vectorize(
 #'          values = "README",
 #'          fields = c("body", "title"),
 #'          fields_logic_gate = "AND")
+#' }
+#'
 #' @rdname contains
 #'
 contains <- function(x, ...) {
@@ -452,6 +456,8 @@ contains.default <- function(x, ...) {
 #' @export
 #'
 #' @examples
+#'
+#' \donttest{
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' # Condition: issues containing "README" in its body OR title
 #' filtered_issues <- filter_issues(
@@ -470,6 +476,7 @@ contains.default <- function(x, ...) {
 #'     negate = TRUE,
 #'     fields_logic_gate = "AND"
 #' )
+#' }
 #'
 filter_issues <- function(x, ...) {
     if (missing(x)) {

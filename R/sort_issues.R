@@ -17,6 +17,7 @@
 #'
 #' @examples
 #'
+#' \donttest{
 #' all_issues <- get_issues()
 #' all_milestones <- get_milestones()
 #'
@@ -39,6 +40,7 @@
 #'     ),
 #'     source = "local"
 #' )
+#' }
 #'
 #' @keywords internal
 #'
@@ -150,6 +152,7 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
 #' @export
 #' @examples
 #'
+#' \donttest{
 #' # Get the milestones of the prject
 #' milestones <- get_milestones("online")
 #' write_milestones_to_dataset(milestones)
@@ -165,6 +168,7 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
 #'                              list(values = "package", fields = "title")),
 #'     milestones = milestones
 #' )
+#' }
 #'
 #' @exportS3Method sort IssuesTB
 #' @method sort IssuesTB

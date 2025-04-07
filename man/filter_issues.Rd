@@ -43,6 +43,8 @@ More informations on the filtering in the documentation of the function
 \code{\link[IssueTrackeR]{contains}}.
 }
 \examples{
+
+\donttest{
 all_issues <- get_issues(source = "online", verbose = FALSE)
 # Condition: issues containing "README" in its body OR title
 filtered_issues <- filter_issues(
@@ -61,5 +63,6 @@ filtered_issues <- filter_issues(
     negate = TRUE,
     fields_logic_gate = "AND"
 )
+}
 
 }

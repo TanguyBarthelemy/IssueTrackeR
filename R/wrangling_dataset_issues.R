@@ -57,6 +57,7 @@
 #'
 #' @examples
 #'
+#' \donttest{
 #' # From online
 #'
 #' issues <- get_issues(source = "online")
@@ -79,6 +80,7 @@
 #'                      state = "open")
 #' labels <- get_labels(source = "local")
 #' milestones <- get_milestones(source = "local")
+#' }
 #'
 get_issues <- function(source = c("local", "online"),
                        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
@@ -160,6 +162,7 @@ get_issues <- function(source = c("local", "online"),
 #'
 #' @examples
 #'
+#' \donttest{
 #' raw_issues <- gh::gh(
 #'     repo = "rjdemetra",
 #'     owner = "rjdverse",
@@ -175,6 +178,7 @@ get_issues <- function(source = c("local", "online"),
 #' all_issues <- format_issues(raw_issues = raw_issues,
 #'                             raw_comments = raw_comments,
 #'                             verbose = FALSE)
+#' }
 #'
 format_issues <- function(raw_issues,
                           raw_comments,
@@ -260,7 +264,8 @@ format_issues <- function(raw_issues,
 #' @param \dots Unused parameter.
 #'
 #' @details
-#' Depending on the object, the defaults value of the argument \code{dataset_name} is:
+#' Depending on the object, the defaults value of the argument
+#' \code{dataset_name} is:
 #'
 #' \itemize{
 #' \item \code{"list_issues.yaml"} for issues;
@@ -273,7 +278,7 @@ format_issues <- function(raw_issues,
 #' @export
 #'
 #' @examples
-#'
+#' \donttest{
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
 #' write_issues_to_dataset(all_issues)
 #'
@@ -282,6 +287,7 @@ format_issues <- function(raw_issues,
 #'
 #' milestones <- get_milestones(source = "online")
 #' write_milestones_to_dataset(milestones)
+#' }
 #'
 #' @rdname write
 #'

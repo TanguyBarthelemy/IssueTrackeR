@@ -28,6 +28,7 @@ Sort issues based on quantitative variables
 }
 \examples{
 
+\donttest{
 all_issues <- get_issues()
 all_milestones <- get_milestones()
 
@@ -50,6 +51,7 @@ IssueTrackeR:::simple_sort(
     ),
     source = "local"
 )
+}
 
 }
 \keyword{internal}

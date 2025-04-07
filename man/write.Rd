@@ -66,7 +66,8 @@ successful and an error otherwise.
 Save datasets in a yaml file
 }
 \details{
-Depending on the object, the defaults value of the argument \code{dataset_name} is:
+Depending on the object, the defaults value of the argument
+\code{dataset_name} is:
 
 \itemize{
 \item \code{"list_issues.yaml"} for issues;
@@ -75,7 +76,7 @@ Depending on the object, the defaults value of the argument \code{dataset_name} 
 }
 }
 \examples{
-
+\donttest{
 all_issues <- get_issues(source = "online", verbose = FALSE)
 write_issues_to_dataset(all_issues)
 
@@ -84,5 +85,6 @@ write_labels_to_dataset(labels)
 
 milestones <- get_milestones(source = "online")
 write_milestones_to_dataset(milestones)
+}
 
 }

@@ -4,7 +4,7 @@
 \name{IssueTrackeR-package}
 \alias{IssueTrackeR}
 \alias{IssueTrackeR-package}
-\title{IssueTrackeR: List Things To Do}
+\title{IssueTrackeR: List Things to Do}
 \description{
 Manage a GitHub problem using R: store, prioritise, display, add, delete, select issues, label and milestone.
 }

@@ -87,6 +87,7 @@ from \code{x}) to the \code{\link[IssueTrackeR]{filter_issues}}
 }
 \examples{
 
+\donttest{
 # Get the milestones of the prject
 milestones <- get_milestones("online")
 write_milestones_to_dataset(milestones)
@@ -102,5 +103,6 @@ sorted_issues <- sort(
                              list(values = "package", fields = "title")),
     milestones = milestones
 )
+}
 
 }

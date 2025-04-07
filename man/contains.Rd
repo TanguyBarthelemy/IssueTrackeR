@@ -148,6 +148,8 @@ gates and OR gates.
 }
 
 \examples{
+
+\donttest{
 all_issues <- get_issues(source = "online", verbose = FALSE)
 issue_1 <- all_issues[[1L]]
 # This will return TRUE if the issue contains either "README" or "package"
@@ -162,4 +164,6 @@ contains(x = issue_1,
          values = "README",
          fields = c("body", "title"),
          fields_logic_gate = "AND")
+}
+
 }
