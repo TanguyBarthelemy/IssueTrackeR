@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">IssueTrackeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9003</span>
       </span>
     </div>
 
@@ -69,7 +69,10 @@
 <div class="page-header"><h1 id="issuetracker">{IssueTrackeR}<a class="anchor" aria-label="anchor" href="#issuetracker"></a>
 </h1></div>
 <!-- badges: start -->
-
+<!-- [![R-CMD-check](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/R-CMD-check.yaml) -->
+<!-- [![lint](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml) -->
+<!-- [![Codecov test coverage](https://codecov.io/gh/TanguyBarthelemy/IssueTrackeR/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/IssueTrackeR) -->
+<!-- badges: end -->
 <p><strong>{IssueTrackeR}</strong> is an R package designed to retrieve and manage GitHub issues directly within R. This package allows users to efficiently track and handle issues from their GitHub repositories.</p>
 <p>This package relies a lot on the package <a href="https://github.com/r-lib/gh" class="external-link">{gh}</a> to use the GitHub API and retrieve data from GitHub.</p>
 <div class="section level2">
@@ -133,19 +136,19 @@
 <span>    issues <span class="op">=</span> <span class="va">my_issues</span>, </span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpYd2N2A\list_issues.yaml.</span></span>
+<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpMBnd1Q\list_issues.yaml.</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/write.html">write_labels_to_dataset</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="va">my_labels</span>, </span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpYd2N2A\list_labels.yaml.</span></span>
+<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpMBnd1Q\list_labels.yaml.</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/write.html">write_milestones_to_dataset</a></span><span class="op">(</span></span>
 <span>    milestones <span class="op">=</span> <span class="va">my_milestones</span>, </span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpYd2N2A\list_milestones.yaml.</span></span></code></pre></div>
+<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpMBnd1Q\list_milestones.yaml.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="options">Options<a class="anchor" aria-label="anchor" href="#options"></a>
@@ -176,11 +179,9 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># From online</span></span>
 <span><span class="fu"><a href="reference/update_database.html">update_database</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Running gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 1s Running gh query ■■■■■■■■■■■ 33% | ETA:</span></span>
-<span><span class="co">#&gt; 2sRunning gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 2sRunning gh query</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 2sRunning gh query ■■■■■■■■■■■■■■■■■■■■■■■■■■</span></span>
-<span><span class="co">#&gt; 83% | ETA: 1s</span></span></code></pre></div>
+<span><span class="co">#&gt; Running gh query ■■■■■■■■■■■ 33% | ETA: 2sRunning gh query ■■■■■■■■■■■■■■■■ 50%</span></span>
+<span><span class="co">#&gt; | ETA: 2sRunning gh query ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 2sRunning gh query</span></span>
+<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA: 1s</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="filtering-and-sorting">Filtering and sorting<a class="anchor" aria-label="anchor" href="#filtering-and-sorting"></a>
@@ -258,14 +259,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml" class="external-link"><img src="https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml/badge.svg" alt="lint"></a></li>
-<li><a href="https://app.codecov.io/gh/TanguyBarthelemy/IssueTrackeR" class="external-link"><img src="https://codecov.io/gh/TanguyBarthelemy/IssueTrackeR/graph/badge.svg" alt="Codecov test coverage"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
