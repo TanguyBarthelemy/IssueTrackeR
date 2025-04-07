@@ -18,7 +18,7 @@ with their labels and milestones."><!-- mathjax --><script src="https://cdnjs.cl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">IssueTrackeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -30,7 +30,7 @@ with their labels and milestones."><!-- mathjax --><script src="https://cdnjs.cl
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/TanguyBarthelemy/TODO/" class="external-link">
+  <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
 
   </a>
@@ -45,7 +45,7 @@ with their labels and milestones."><!-- mathjax --><script src="https://cdnjs.cl
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Retrieve information from the issues of GitHub</h1>
-    <small class="dont-index">Source: <a href="https://github.com/TanguyBarthelemy/TODO/blob/main/R/wrangling_dataset_issues.R" class="external-link"><code>R/wrangling_dataset_issues.R</code></a>, <a href="https://github.com/TanguyBarthelemy/TODO/blob/main/R/wrangling_dataset_labels.R" class="external-link"><code>R/wrangling_dataset_labels.R</code></a>, <a href="https://github.com/TanguyBarthelemy/TODO/blob/main/R/wrangling_dataset_milestones.R" class="external-link"><code>R/wrangling_dataset_milestones.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/blob/main/R/wrangling_dataset_issues.R" class="external-link"><code>R/wrangling_dataset_issues.R</code></a>, <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/blob/main/R/wrangling_dataset_labels.R" class="external-link"><code>R/wrangling_dataset_labels.R</code></a>, <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/blob/main/R/wrangling_dataset_milestones.R" class="external-link"><code>R/wrangling_dataset_milestones.R</code></a></small>
     <div class="hidden name"><code>get.Rd</code></div>
     </div>
 
@@ -278,7 +278,7 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 3... Done!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 4... Done!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 issues found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpxTGdDz/data/open_issues.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpmIsARM/data/open_issues.yaml.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading issues...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 1... Done!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 2... Done!</span>
@@ -440,22 +440,22 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 158... Done!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 159... Done!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 159 issues found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpxTGdDz/data/closed_issues.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpmIsARM/data/closed_issues.yaml.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading labels... Done!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8 labels found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpxTGdDz/data/list_labels.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpmIsARM/data/list_labels.yaml.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading milestones... </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Done! 0 milestones found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpxTGdDz/data/list_milestones.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpmIsARM/data/list_milestones.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
 <span class="r-in"><span>                     dataset_name <span class="op">=</span> <span class="st">"open_issues.yaml"</span>,</span></span>
 <span class="r-in"><span>                     state <span class="op">=</span> <span class="st">"open"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /tmp/RtmpxTGdDz/data/open_issues.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /tmp/RtmpmIsARM/data/open_issues.yaml.</span>
 <span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The labels will be read from /tmp/RtmpxTGdDz/data/list_labels.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The labels will be read from /tmp/RtmpmIsARM/data/list_labels.yaml.</span>
 <span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu">get_milestones</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The milestones will be read from /tmp/RtmpxTGdDz/data/list_milestones.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The milestones will be read from /tmp/RtmpmIsARM/data/list_milestones.yaml.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
