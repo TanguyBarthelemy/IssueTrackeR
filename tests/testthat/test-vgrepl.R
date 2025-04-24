@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("vgrepl works", {
 
     # Same result with one pattern
     output <- IssueTrackeR:::vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"),

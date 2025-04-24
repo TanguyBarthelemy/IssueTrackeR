@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("logical_reducer works", {
 
     output <- IssueTrackeR:::logical_reducer(
         c(TRUE, FALSE, TRUE, FALSE), c(FALSE, TRUE, FALSE, FALSE),
