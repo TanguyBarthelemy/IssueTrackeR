@@ -62,19 +62,6 @@
 #' the logic gate OR, the result is \code{TRUE}) and the third value of all
 #' element in \dots is \code{FALSE} so the result is \code{FALSE}.
 #'
-#' @examples
-#'
-#' IssueTrackeR:::logical_reducer(
-#'     c(TRUE, FALSE, TRUE, FALSE), c(FALSE, TRUE, FALSE, FALSE),
-#'     logic_gate = "AND",
-#'     orientation = "vector-wise"
-#' )
-#' IssueTrackeR:::logical_reducer(
-#'     FALSE, c(TRUE, FALSE, TRUE), c(FALSE, TRUE, FALSE),
-#'     logic_gate = "OR",
-#'     orientation = "overall"
-#' )
-#'
 #' @keywords internal
 #'
 logical_reducer <- function(...,
@@ -125,18 +112,7 @@ logical_reducer <- function(...,
 #'
 #' For more informations, see the function \code{\link[base]{grepl}}.
 #'
-#' @examples
-#'
-#' # Same result with one pattern
-#' IssueTrackeR:::vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"),
-#'                       pattern = "Bon")[, 1]
-#' grepl(x = c("Bonne nuit", "Au revoir", "Bonjour"), pattern = "Bon")
-#'
-#' # With multiple patterns
-#' IssueTrackeR:::vgrepl(
-#'     x = c("Bonne nuit", "Au revoir", "Bonjour"),
-#'     pattern = c("Bon", "voir")
-#' )
+#' @keywords internal
 #'
 vgrepl <- Vectorize(
     FUN = function(pattern,
@@ -511,13 +487,6 @@ filter_issues.default <- function(x, ...) {
 #' @param issues a \code{IssuesTB} object.
 #'
 #' @returns a list of issues without milestones.
-#'
-#' @examples
-#'
-#' \donttest{
-#' all_issues <- get_issues(source = "online", verbose = FALSE)
-#' IssueTrackeR:::no_milestones()
-#' }
 #'
 #' @keywords internal
 #'

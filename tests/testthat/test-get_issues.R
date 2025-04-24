@@ -1,4 +1,6 @@
 testthat::test_that("get_issues works", {
+    skip_if_no_github()
+
     issues <- get_issues(source = "online",
                          state = "all",
                          owner = "rjdverse",
@@ -8,6 +10,8 @@ testthat::test_that("get_issues works", {
 })
 
 testthat::test_that("get_issues generates error", {
+    skip_if_no_github()
+
     testthat::expect_error(object = get_issues(
         source = "online",
         state = "all",

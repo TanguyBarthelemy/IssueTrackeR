@@ -17,12 +17,6 @@
 #'
 #' @returns a \code{POSIXct} object with rounded \code{double} value.
 #'
-#' @examples
-#'
-#' IssueTrackeR:::format_timestamp(1743694674.9)
-#' IssueTrackeR:::format_timestamp(1743694674L)
-#' IssueTrackeR:::format_timestamp(Sys.time())
-#'
 #' @keywords internal
 #'
 format_timestamp <- function(x) {

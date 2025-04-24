@@ -15,33 +15,6 @@
 #' @returns the same list of issues as \code{issues} (class \code{IssuesTB})
 #' but in a sorted order.
 #'
-#' @examples
-#'
-#' \donttest{
-#' all_issues <- get_issues()
-#' all_milestones <- get_milestones()
-#'
-#' # with milestones
-#' IssueTrackeR:::simple_sort(
-#'     issues = all_issues,
-#'     milestones = all_milestones,
-#'     sorting_variables = list(
-#'         c(object = "milestones", field = "due_on"),
-#'         c(object = "issues", field = "created_at")
-#'     )
-#' )
-#'
-#' # without milestones
-#' IssueTrackeR:::simple_sort(
-#'     issues = all_issues,
-#'     sorting_variables = list(
-#'         c(object = "milestones", field = "due_on"),
-#'         c(object = "issues", field = "created_at")
-#'     ),
-#'     source = "local"
-#' )
-#' }
-#'
 #' @keywords internal
 #'
 simple_sort <- function(issues, sorting_variables, milestones, ...) {
