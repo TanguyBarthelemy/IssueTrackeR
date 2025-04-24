@@ -6,12 +6,13 @@
 \alias{IssueTrackeR-package}
 \title{IssueTrackeR: List Things to Do}
 \description{
-Manage a GitHub problem using R: store, prioritise, display, add, delete, select issues, labels and milestones.
+Manage a 'GitHub' problem using R: wrangle issues, labels and milestones. It includes functions for storing, prioritizing (sorting), displaying, adding, deleting, and selecting (filtering) issues based on qualitative and quantitative information. Issues (labels and milestones) are written in lists and categorized into the S3 class to be easily manipulated as datasets in R.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/TanguyBarthelemy/IssueTrackeR}
+  \item \url{https://tanguybarthelemy.github.io/IssueTrackeR/}
   \item Report bugs at \url{https://github.com/TanguyBarthelemy/IssueTrackeR/issues}
 }
 
