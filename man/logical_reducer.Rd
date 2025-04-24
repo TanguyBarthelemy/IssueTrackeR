@@ -76,18 +76,4 @@ will be return \code{c(TRUE, TRUE, FALSE)} because the first argument (in
 the logic gate OR, the result is \code{TRUE}) and the third value of all
 element in \dots is \code{FALSE} so the result is \code{FALSE}.
 }
-\examples{
-
-IssueTrackeR:::logical_reducer(
-    c(TRUE, FALSE, TRUE, FALSE), c(FALSE, TRUE, FALSE, FALSE),
-    logic_gate = "AND",
-    orientation = "vector-wise"
-)
-IssueTrackeR:::logical_reducer(
-    FALSE, c(TRUE, FALSE, TRUE), c(FALSE, TRUE, FALSE),
-    logic_gate = "OR",
-    orientation = "overall"
-)
-
-}
 \keyword{internal}

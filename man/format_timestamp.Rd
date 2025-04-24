@@ -24,11 +24,4 @@ The accepted formats for the argument \code{x} are:
 \item date/times object (classes \code{POSIXct} and \code{POSIXlt})
 }
 }
-\examples{
-
-IssueTrackeR:::format_timestamp(1743694674.9)
-IssueTrackeR:::format_timestamp(1743694674L)
-IssueTrackeR:::format_timestamp(Sys.time())
-
-}
 \keyword{internal}

@@ -23,12 +23,12 @@ values are allowed except for \code{regexpr}, \code{gregexpr} and
 \item{x}{a character vector where matches are sought, or an object which can
 be coerced by as.character to a character vector. Long vectors are supported.}
 
-\item{ignore.case}{if \code{FALSE}, the pattern matching is \emph{case
+\item{ignore.case}{logical. if \code{FALSE}, the pattern matching is \emph{case
       sensitive} and if \code{TRUE}, case is ignored during matching.}
 
 \item{perl}{logical.  Should Perl-compatible regexps be used?}
 
-\item{fixed}{logical.  If \code{TRUE}, \code{pattern} is a string to be
+\item{fixed}{logical. If \code{TRUE}, \code{pattern} is a string to be
     matched as is.  Overrides all conflicting arguments.}
 
 \item{useBytes}{logical.  If \code{TRUE} the matching is done
@@ -52,17 +52,4 @@ instead of having a vector as output, we get a matrix with
 
 For more informations, see the function \code{\link[base]{grepl}}.
 }
-\examples{
-
-# Same result with one pattern
-IssueTrackeR:::vgrepl(x = c("Bonne nuit", "Au revoir", "Bonjour"),
-                      pattern = "Bon")[, 1]
-grepl(x = c("Bonne nuit", "Au revoir", "Bonjour"), pattern = "Bon")
-
-# With multiple patterns
-IssueTrackeR:::vgrepl(
-    x = c("Bonne nuit", "Au revoir", "Bonjour"),
-    pattern = c("Bon", "voir")
-)
-
-}
+\keyword{internal}

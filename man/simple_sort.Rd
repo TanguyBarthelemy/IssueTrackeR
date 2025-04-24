@@ -26,32 +26,4 @@ but in a sorted order.
 \description{
 Sort issues based on quantitative variables
 }
-\examples{
-
-\donttest{
-all_issues <- get_issues()
-all_milestones <- get_milestones()
-
-# with milestones
-IssueTrackeR:::simple_sort(
-    issues = all_issues,
-    milestones = all_milestones,
-    sorting_variables = list(
-        c(object = "milestones", field = "due_on"),
-        c(object = "issues", field = "created_at")
-    )
-)
-
-# without milestones
-IssueTrackeR:::simple_sort(
-    issues = all_issues,
-    sorting_variables = list(
-        c(object = "milestones", field = "due_on"),
-        c(object = "issues", field = "created_at")
-    ),
-    source = "local"
-)
-}
-
-}
 \keyword{internal}
