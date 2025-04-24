@@ -12,6 +12,6 @@ test_that("logical_reducer works", {
         logic_gate = "OR",
         orientation = "overall"
     )
-    expect_identical(output, TRUE)
+    expect_true(object = output)
 
 })

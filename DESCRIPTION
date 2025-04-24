@@ -24,5 +24,6 @@ Language: en-GB
 Suggests: 
     spelling,
     cli, 
+    rlang,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

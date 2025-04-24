@@ -7,17 +7,18 @@ skip_if_no_github <- function(has_scope = NULL) {
     }
 
     if (!is.null(has_scope) && !has_scope %in% test_scopes()) {
-        testthat::skip(cli::format_inline("Current token lacks '{has_scope}' scope"))
+        msg <- cli::format_inline("Current token lacks '{has_scope}' scope")
+        testthat::skip(msg)
     }
 }
 
 test_scopes <- function() {
     # whoami fails on GHA
-    whoami <- env_cache(cache, "whoami", tryCatch(
-        gh_whoami(),
+    whoami <- rlang::env_cache(cache, "whoami", tryCatch(
+        gh::gh_whoami(),
         error = function(err) list(scopes = "")
     ))
-    strsplit(whoami$scopes, ", ")[[1]]
+    strsplit(whoami$scopes, ", ", fixed = TRUE)[[1L]]
 }
 
 cache <- rlang::new_environment()
