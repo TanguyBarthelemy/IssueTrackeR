@@ -4,6 +4,6 @@ linters: lintr::all_linters(
         undesirable_function_linter = lintr::undesirable_function_linter(symbol_is_undesirable = FALSE),
         return_linter = NULL,
         object_name_linter = NULL,
-        undesirable_function_linter = NULL
+        undesirable_operator_linter = NULL
     )
 encoding: "UTF-8"
