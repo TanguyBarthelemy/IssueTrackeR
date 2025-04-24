@@ -10,6 +10,10 @@ skip_if_no_github <- function(has_scope = NULL) {
         msg <- cli::format_inline("Current token lacks '{has_scope}' scope")
         testthat::skip(msg)
     }
+
+    if (gh::gh_rate_limit()$remaining == 0L) {
+        testthat::skip("API rate limit exceeded")
+    }
 }
 
 test_scopes <- function() {
