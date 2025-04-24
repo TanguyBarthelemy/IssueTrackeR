@@ -115,24 +115,6 @@ the logic gate OR, the result is <code>TRUE</code>) and the third value of all
 element in ... is <code>FALSE</code> so the result is <code>FALSE</code>.</p>
     </div>
 
-    <div id="ref-examples">
-    <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">logical_reducer</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    logic_gate <span class="op">=</span> <span class="st">"AND"</span>,</span></span>
-<span class="r-in"><span>    orientation <span class="op">=</span> <span class="st">"vector-wise"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE FALSE FALSE FALSE</span>
-<span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">logical_reducer</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="cn">FALSE</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    logic_gate <span class="op">=</span> <span class="st">"OR"</span>,</span></span>
-<span class="r-in"><span>    orientation <span class="op">=</span> <span class="st">"overall"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
-    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
