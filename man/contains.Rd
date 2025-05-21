@@ -26,8 +26,8 @@ contains(x, ...)
 \arguments{
 \item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
 
-\item{\dots}{Arguments passed on to \code{\link[IssueTrackeR]{vgrepl}} and
-therefore to \code{\link[base]{grepl}}}
+\item{\dots}{Arguments passed on to a vectorised version of
+\code{\link[base]{grepl}}}
 
 \item{values}{a vector \code{string}. Patterns to look for in the outcome.}
 

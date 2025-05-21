@@ -185,8 +185,8 @@ vgrepl <- Vectorize(
 #' different assertion related to values: \code{"OR"} or \code{"AND"} (by
 #' default).
 #' @param negate a boolean indicate the negation of the assertion.
-#' @param \dots Arguments passed on to \code{\link[IssueTrackeR]{vgrepl}} and
-#' therefore to \code{\link[base]{grepl}}
+#' @param \dots Arguments passed on to a vectorised version of
+#' \code{\link[base]{grepl}}
 #'
 #' @returns a boolean (of length equals 1 if the class of \code{x} is
 #' \code{IssueTB} and length superior to 1 if \code{x} if of class
