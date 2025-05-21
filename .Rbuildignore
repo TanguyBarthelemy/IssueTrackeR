@@ -31,3 +31,5 @@ cran-comments.md
 ^dev$
 ^LICENSE\.md$
 ^codecov\.yml$
+^[\.]?air\.toml$
+^\.vscode$
