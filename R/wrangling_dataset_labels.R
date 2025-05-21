@@ -1,12 +1,13 @@
-
 #' @export
 #' @rdname get
-get_labels <- function(source = c("local", "online"),
-                       dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-                       dataset_name = "list_labels.yaml",
-                       repo = getOption("IssueTrackeR.repo"),
-                       owner = getOption("IssueTrackeR.owner"),
-                       verbose = TRUE) {
+get_labels <- function(
+    source = c("local", "online"),
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = "list_labels.yaml",
+    repo = getOption("IssueTrackeR.repo"),
+    owner = getOption("IssueTrackeR.owner"),
+    verbose = TRUE
+) {
     source <- match.arg(source)
 
     if (source == "online") {
@@ -19,10 +20,8 @@ get_labels <- function(source = c("local", "online"),
             format_labels(verbose = verbose)
 
         if (!is.null(list_labels)) {
-            list_labels <- cbind(list_labels, repo = repo,
-                                 owner = owner)
+            list_labels <- cbind(list_labels, repo = repo, owner = owner)
         }
-
     } else if (source == "local") {
         input_file <- tools::file_path_sans_ext(dataset_name)
         input_path <- file.path(dataset_dir, input_file) |>
@@ -75,7 +74,6 @@ get_labels <- function(source = c("local", "online"),
 #' }
 #'
 format_labels <- function(raw_labels, verbose = TRUE) {
-
     if (verbose) {
         cat("Reading labels... ")
     }
@@ -95,11 +93,11 @@ format_labels <- function(raw_labels, verbose = TRUE) {
 #' @rdname write
 #' @export
 write_labels_to_dataset <- function(
-        labels,
-        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-        dataset_name = "list_labels.yaml",
-        verbose = TRUE) {
-
+    labels,
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = "list_labels.yaml",
+    verbose = TRUE
+) {
     output_file <- tools::file_path_sans_ext(dataset_name)
     output_path <- file.path(dataset_dir, output_file) |>
         normalizePath(mustWork = FALSE) |>

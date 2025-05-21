@@ -35,8 +35,11 @@ print.IssueTB <- function(x, ...) {
 
     cat(crayon::bold("Issue #", issue[["number"]], "\n", sep = ""))
     cat(issue[["owner"]], "/", issue[["repo"]], "\n", sep = "")
-    cat(crayon::underline("Labels:"),
-        paste(issue[["labels"]], sep = ", "), "\n")
+    cat(
+        crayon::underline("Labels:"),
+        paste(issue[["labels"]], sep = ", "),
+        "\n"
+    )
     cat(crayon::underline("Milestone:"), issue[["milestone"]], "\n")
     cat(crayon::underline("Title:"), issue[["title"]], "\n")
     cat(crayon::underline("Text:\n"))
@@ -52,11 +55,14 @@ print.IssueTB <- function(x, ...) {
 #' @export
 print.IssuesTB <- function(x, ...) {
     issues <- x
-    cat(crayon::bold(ifelse(
-        test = length(issues) > 0L,
-        yes = paste("There are", length(issues), "issues."),
-        no = "No issues"
-    ), "\n"))
+    cat(crayon::bold(
+        ifelse(
+            test = length(issues) > 0L,
+            yes = paste("There are", length(issues), "issues."),
+            no = "No issues"
+        ),
+        "\n"
+    ))
     for (issue in issues) {
         cat("\n")
         print(issue)

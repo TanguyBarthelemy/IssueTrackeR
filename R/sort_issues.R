@@ -1,4 +1,3 @@
-
 #' @title Sorting issues
 #'
 #' @description
@@ -18,7 +17,6 @@
 #' @keywords internal
 #'
 simple_sort <- function(issues, sorting_variables, milestones, ...) {
-
     if (length(issues) == 0L) {
         return(new_issues())
     }
@@ -27,13 +25,11 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
 
     for (sorting_variable in rev(sorting_variables)) {
         if (sorting_variable[["object"]] == "milestones") {
-
             if (missing(milestones)) {
                 milestones <- get_milestones(...)
             }
 
             if (nrow(milestones) > 0L) {
-
                 field <- sorting_variable[["field"]]
                 index_milestones <- base::order(milestones[[field]])
                 sorted_titles <- milestones[["title"]][index_milestones]
@@ -50,7 +46,6 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
                 }
                 sorted_issues <- c(sorted_issues, no_milestones(ref_issues))
             }
-
         } else if (sorting_variable[["object"]] == "issues") {
             sorted_index <- base::order(vapply(
                 X = sorted_issues,
@@ -146,12 +141,13 @@ simple_sort <- function(issues, sorting_variables, milestones, ...) {
 #' @exportS3Method sort IssuesTB
 #' @method sort IssuesTB
 #'
-sort.IssuesTB <- function(x,
-                          decreasing = FALSE,
-                          sorting_variables = list(),
-                          filtering_factors = list(),
-                          ...) {
-
+sort.IssuesTB <- function(
+    x,
+    decreasing = FALSE,
+    sorting_variables = list(),
+    filtering_factors = list(),
+    ...
+) {
     remaining_issues <- x
     selected_issues <- new_issues()
 

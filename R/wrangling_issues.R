@@ -30,31 +30,32 @@
 #'
 #' issue3 <- new_issue(issue = issue2)
 #'
-new_issue <- function(title,
-                      body,
-                      number,
-                      state = c("open", "closed"),
-                      created_at = Sys.Date(),
-                      labels = NULL,
-                      milestone = NULL,
-                      issue = list(),
-                      repo = NULL,
-                      owner = NULL,
-                      ...) {
-
+new_issue <- function(
+    title,
+    body,
+    number,
+    state = c("open", "closed"),
+    created_at = Sys.Date(),
+    labels = NULL,
+    milestone = NULL,
+    issue = list(),
+    repo = NULL,
+    owner = NULL,
+    ...
+) {
     state <- match.arg(state)
 
-    if (!(missing(title)
-          || missing(body)
-          || missing(number))) {
-        issue <- list(title = title,
-                      body = body,
-                      number = as.integer(number),
-                      created_at = format_timestamp(created_at),
-                      labels = labels,
-                      milestone = milestone,
-                      repo = repo,
-                      owner = owner)
+    if (!(missing(title) || missing(body) || missing(number))) {
+        issue <- list(
+            title = title,
+            body = body,
+            number = as.integer(number),
+            created_at = format_timestamp(created_at),
+            labels = labels,
+            milestone = milestone,
+            repo = repo,
+            owner = owner
+        )
     } else if (!missing(issue)) {
         issue[["created_at"]] <- format_timestamp(issue[["created_at"]])
         issue[["number"]] <- as.integer(issue[["number"]])
@@ -186,8 +187,11 @@ append.IssuesTB <- function(x, values, after) {
     } else if (inherits(values, "IssueTB")) {
         return(append(x, values = new_issues(values)))
     } else {
-        stop("This function requires a IssueTB or IssuesTB object ",
-             "for `values` argument.", call. = FALSE)
+        stop(
+            "This function requires a IssueTB or IssuesTB object ",
+            "for `values` argument.",
+            call. = FALSE
+        )
     }
 }
 

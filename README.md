@@ -5,10 +5,15 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/IssueTrackeR)](https://CRAN.R-project.org/package=IssueTrackeR)
 [![R-CMD-check](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/R-CMD-check.yaml)
+[![GH Pages
+built](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/pkgdown.yaml)
+
 [![lint](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/TanguyBarthelemy/IssueTrackeR/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/IssueTrackeR)
+[![Coverage](https://codecov.io/gh/TanguyBarthelemy/IssueTrackeR/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/IssueTrackeR)
+[![CodeFactor](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker/badge)](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker)
 <!-- badges: end -->
 
 **{IssueTrackeR}** is an R package designed to retrieve and manage
@@ -83,19 +88,19 @@ write_issues_to_dataset(
     issues = my_issues, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpeiMGSd\list_issues.yaml.
+#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpUfaBSS\list_issues.yaml.
 
 write_labels_to_dataset(
     labels = my_labels, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpeiMGSd\list_labels.yaml.
+#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpUfaBSS\list_labels.yaml.
 
 write_milestones_to_dataset(
     milestones = my_milestones, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpeiMGSd\list_milestones.yaml.
+#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpUfaBSS\list_milestones.yaml.
 ```
 
 ### Options
@@ -131,10 +136,11 @@ You can update your full database of issues, labels and milestones with
 # From online
 update_database(verbose = FALSE)
 #> Running gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query
-#> ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 1s Running gh query ■■■■■■■■■■■ 33% | ETA:
-#> 3sRunning gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 2sRunning gh query
-#> ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 2sRunning gh query ■■■■■■■■■■■■■■■■■■■■■■■■■■
-#> 83% | ETA: 1s
+#> ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 1s ⠙ Running gh query 3 done (0.87/s) |
+#> 3.4s⠹ Running gh query 4 done (0.71/s) | 5.6s⠸ Running gh query 5 done (0.67/s)
+#> | 7.5s⠼ Running gh query 6 done (0.72/s) | 8.3s Running gh query
+#> ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query ■■■■■■■■■■■■■■■■■■■■■■■ 75% |
+#> ETA: 1s
 ```
 
 ### Filtering and sorting

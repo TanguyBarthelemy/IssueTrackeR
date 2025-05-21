@@ -1,4 +1,3 @@
-
 #' @title Round a timestamp to the inferior integer
 #'
 #' @description

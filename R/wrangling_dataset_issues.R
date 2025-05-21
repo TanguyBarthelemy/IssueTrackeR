@@ -1,4 +1,3 @@
-
 #' @title Retrieve information from the issues of GitHub
 #'
 #' @description
@@ -82,14 +81,15 @@
 #' milestones <- get_milestones(source = "local")
 #' }
 #'
-get_issues <- function(source = c("local", "online"),
-                       dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-                       dataset_name = "open_issues.yaml",
-                       repo = getOption("IssueTrackeR.repo"),
-                       owner = getOption("IssueTrackeR.owner"),
-                       state = c("open", "closed", "all"),
-                       verbose = TRUE) {
-
+get_issues <- function(
+    source = c("local", "online"),
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = "open_issues.yaml",
+    repo = getOption("IssueTrackeR.repo"),
+    owner = getOption("IssueTrackeR.owner"),
+    state = c("open", "closed", "all"),
+    verbose = TRUE
+) {
     source <- match.arg(source)
     state <- match.arg(state)
 
@@ -107,13 +107,14 @@ get_issues <- function(source = c("local", "online"),
             endpoint = "/repos/:owner/:repo/issues/comments",
             .limit = Inf
         )
-        issues <- format_issues(raw_issues = raw_issues,
-                                raw_comments = raw_comments,
-                                repo = repo,
-                                owner = owner,
-                                verbose = verbose)
+        issues <- format_issues(
+            raw_issues = raw_issues,
+            raw_comments = raw_comments,
+            repo = repo,
+            owner = owner,
+            verbose = verbose
+        )
     } else if (source == "local") {
-
         input_file <- tools::file_path_sans_ext(dataset_name)
         input_path <- file.path(dataset_dir, input_file) |>
             normalizePath(mustWork = FALSE) |>
@@ -121,7 +122,9 @@ get_issues <- function(source = c("local", "online"),
 
         if (!file.exists(input_path)) {
             stop(
-                "The file ", input_file, ".yaml",
+                "The file ",
+                input_file,
+                ".yaml",
                 " doesn't exist. Run `write_issues_to_dataset()`",
                 " to write a set of issues in the directory.\n",
                 "Or call get_issues() with ",
@@ -138,7 +141,6 @@ get_issues <- function(source = c("local", "online"),
             issues[[id_issue]] <- new_issue(issue = issues[[id_issue]])
         }
         issues <- new_issues(issues)
-
     } else {
         stop("wrong source", call. = FALSE)
     }
@@ -180,12 +182,13 @@ get_issues <- function(source = c("local", "online"),
 #'                             verbose = FALSE)
 #' }
 #'
-format_issues <- function(raw_issues,
-                          raw_comments,
-                          repo = getOption("IssueTrackeR.repo"),
-                          owner = getOption("IssueTrackeR.owner"),
-                          verbose = TRUE) {
-
+format_issues <- function(
+    raw_issues,
+    raw_comments,
+    repo = getOption("IssueTrackeR.repo"),
+    owner = getOption("IssueTrackeR.owner"),
+    verbose = TRUE
+) {
     if (!missing(raw_comments)) {
         comments_body <- vapply(
             X = raw_comments,
@@ -203,7 +206,8 @@ format_issues <- function(raw_issues,
             FUN = base::`[[`,
             "issue_url",
             FUN.VALUE = character(1L)
-        ) |> aux()
+        ) |>
+            aux()
     }
 
     if (verbose) {
@@ -217,8 +221,8 @@ format_issues <- function(raw_issues,
         raw_issue <- raw_issues[[index]]
 
         body_comment <- ifelse(
-            test = missing(raw_comments)
-            || all(comments_nbr != raw_issue[["number"]]),
+            test = missing(raw_comments) ||
+                all(comments_nbr != raw_issue[["number"]]),
             yes = "",
             no = paste0(
                 "\n\nComment:\n",
@@ -226,8 +230,7 @@ format_issues <- function(raw_issues,
                 collapse = ""
             )
         )
-        body_content <- paste(raw_issue[["body"]],
-                              body_comment)
+        body_content <- paste(raw_issue[["body"]], body_comment)
 
         issue <- new_issue(
             title = raw_issue[["title"]],
@@ -237,7 +240,8 @@ format_issues <- function(raw_issues,
             created_at = raw_issue[["created_at"]],
             labels = vapply(
                 X = raw_issue[["labels"]],
-                FUN = `[[`, ... = "name",
+                FUN = `[[`,
+                ... = "name",
                 FUN.VALUE = character(1L)
             ),
             milestone = raw_issue[["milestone"]][["title"]],
@@ -300,12 +304,12 @@ write_issues_to_dataset <- function(issues, ...) {
 #' @method write_issues_to_dataset IssuesTB
 #' @export
 write_issues_to_dataset.IssuesTB <- function(
-        issues,
-        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-        dataset_name = "list_issues.yaml",
-        verbose = TRUE,
-        ...) {
-
+    issues,
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = "list_issues.yaml",
+    verbose = TRUE,
+    ...
+) {
     output_file <- tools::file_path_sans_ext(dataset_name)
     output_path <- file.path(dataset_dir, output_file) |>
         normalizePath(mustWork = FALSE) |>

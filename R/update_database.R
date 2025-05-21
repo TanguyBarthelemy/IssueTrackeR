@@ -33,18 +33,22 @@
 #' }
 #'
 update_database <- function(
-        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-        datasets_name = c(open = "open_issues.yaml",
-                          closed = "closed_issues.yaml",
-                          labels = "list_labels.yaml",
-                          milestones = "list_milestones.yaml"),
-        verbose = TRUE,
-        ...) {
-
-    issues_open <- get_issues(source = "online",
-                              state = "open",
-                              verbose = verbose,
-                              ...)
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    datasets_name = c(
+        open = "open_issues.yaml",
+        closed = "closed_issues.yaml",
+        labels = "list_labels.yaml",
+        milestones = "list_milestones.yaml"
+    ),
+    verbose = TRUE,
+    ...
+) {
+    issues_open <- get_issues(
+        source = "online",
+        state = "open",
+        verbose = verbose,
+        ...
+    )
     write_issues_to_dataset(
         issues = issues_open,
         dataset_dir = dataset_dir,
@@ -52,9 +56,12 @@ update_database <- function(
         verbose = verbose
     )
 
-    issues_closed <-  get_issues(source = "online",
-                                 state = "closed",
-                                 verbose = verbose, ...)
+    issues_closed <- get_issues(
+        source = "online",
+        state = "closed",
+        verbose = verbose,
+        ...
+    )
     write_issues_to_dataset(
         issues = issues_closed,
         dataset_dir = dataset_dir,

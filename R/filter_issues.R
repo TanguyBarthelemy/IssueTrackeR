@@ -64,9 +64,11 @@
 #'
 #' @keywords internal
 #'
-logical_reducer <- function(...,
-                            orientation = c("vector-wise", "overall"),
-                            logic_gate = c("AND", "OR")) {
+logical_reducer <- function(
+    ...,
+    orientation = c("vector-wise", "overall"),
+    logic_gate = c("AND", "OR")
+) {
     logic_gate <- match.arg(logic_gate)
     orientation <- match.arg(orientation)
 
@@ -75,7 +77,8 @@ logical_reducer <- function(...,
             EXPR = logic_gate,
             AND = pmin(...),
             OR = pmax(...)
-        ) |> as.logical()
+        ) |>
+            as.logical()
     } else if (orientation == "overall") {
         output <- switch(
             EXPR = logic_gate,
@@ -115,12 +118,14 @@ logical_reducer <- function(...,
 #' @keywords internal
 #'
 vgrepl <- Vectorize(
-    FUN = function(pattern,
-                   x,
-                   ignore.case = TRUE,
-                   perl = FALSE,
-                   fixed = FALSE,
-                   useBytes = FALSE) {
+    FUN = function(
+        pattern,
+        x,
+        ignore.case = TRUE,
+        perl = FALSE,
+        fixed = FALSE,
+        useBytes = FALSE
+    ) {
         grepl(
             pattern = pattern,
             x = x,
@@ -279,14 +284,15 @@ contains <- function(x, ...) {
 #' @exportS3Method contains IssueTB
 #' @method contains IssueTB
 #' @export
-contains.IssueTB <- function(x,
-                             values,
-                             fields = c("body", "title", "labels", "milestone"),
-                             values_logic_gate = c("AND", "OR"),
-                             fields_logic_gate = c("OR", "AND"),
-                             negate = FALSE,
-                             ...) {
-
+contains.IssueTB <- function(
+    x,
+    values,
+    fields = c("body", "title", "labels", "milestone"),
+    values_logic_gate = c("AND", "OR"),
+    fields_logic_gate = c("OR", "AND"),
+    negate = FALSE,
+    ...
+) {
     values_logic_gate <- match.arg(values_logic_gate)
     fields_logic_gate <- match.arg(fields_logic_gate)
 
@@ -298,7 +304,6 @@ contains.IssueTB <- function(x,
 
     # Cas 1 seul champ
     if (length(fields) == 1L) {
-
         fields <- switch(
             EXPR = fields,
             b = "body",
@@ -329,10 +334,11 @@ contains.IssueTB <- function(x,
         )
 
         # Cas plusieurs champs
-    } else if (length(values) > 1L
-               && values_logic_gate == "OR"
-               && fields_logic_gate == "AND") {
-
+    } else if (
+        length(values) > 1L &&
+            values_logic_gate == "OR" &&
+            fields_logic_gate == "AND"
+    ) {
         text_in_issue <- values |>
             vapply(
                 FUN = function(value) {
@@ -347,8 +353,10 @@ contains.IssueTB <- function(x,
                 },
                 FUN.VALUE = logical(1L)
             ) |>
-            logical_reducer(orientation = "overall",
-                            logic_gate = values_logic_gate)
+            logical_reducer(
+                orientation = "overall",
+                logic_gate = values_logic_gate
+            )
 
         # Autres cas
     } else {
@@ -366,8 +374,10 @@ contains.IssueTB <- function(x,
                 },
                 FUN.VALUE = logical(1L)
             ) |>
-            logical_reducer(orientation = "overall",
-                            logic_gate = fields_logic_gate)
+            logical_reducer(
+                orientation = "overall",
+                logic_gate = fields_logic_gate
+            )
     }
 
     if (negate) {

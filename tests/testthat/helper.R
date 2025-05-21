@@ -18,10 +18,14 @@ skip_if_no_github <- function(has_scope = NULL) {
 
 test_scopes <- function() {
     # whoami fails on GHA
-    whoami <- rlang::env_cache(cache, "whoami", tryCatch(
-        gh::gh_whoami(),
-        error = function(err) list(scopes = "")
-    ))
+    whoami <- rlang::env_cache(
+        cache,
+        "whoami",
+        tryCatch(
+            gh::gh_whoami(),
+            error = function(err) list(scopes = "")
+        )
+    )
     strsplit(whoami$scopes, ", ", fixed = TRUE)[[1L]]
 }
 

@@ -1,4 +1,3 @@
-
 #' @keywords internal
 .onLoad <- function(libname, pkgname) {
     dataset_dir <- file.path(tempdir(), "data") |>

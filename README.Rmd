@@ -16,9 +16,13 @@ knitr::opts_chunk[["set"]](
 # {IssueTrackeR}
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/IssueTrackeR)](https://CRAN.R-project.org/package=IssueTrackeR)
 [![R-CMD-check](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/R-CMD-check.yaml)
+[![GH Pages built](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/pkgdown.yaml)
+
 [![lint](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml)
-[![Codecov test coverage](https://codecov.io/gh/TanguyBarthelemy/IssueTrackeR/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/IssueTrackeR)
+[![Coverage](https://codecov.io/gh/TanguyBarthelemy/IssueTrackeR/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/IssueTrackeR)
+[![CodeFactor](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker/badge)](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker)
 <!-- badges: end -->
 
 **{IssueTrackeR}** is an R package designed to retrieve and manage GitHub issues directly within R. This package allows users to efficiently track and handle issues from their GitHub repositories.

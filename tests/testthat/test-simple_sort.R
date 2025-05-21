@@ -1,13 +1,17 @@
 test_that("simple_sort works", {
     skip_if_no_github()
 
-    all_issues <- get_issues(source = "online",
-                             state = "all",
-                             owner = "jdemetra",
-                             repo = "jdplus-main")
-    all_milestones <- get_milestones(source = "online",
-                                     owner = "jdemetra",
-                                     repo = "jdplus-main")
+    all_issues <- get_issues(
+        source = "online",
+        state = "all",
+        owner = "jdemetra",
+        repo = "jdplus-main"
+    )
+    all_milestones <- get_milestones(
+        source = "online",
+        owner = "jdemetra",
+        repo = "jdplus-main"
+    )
 
     # with milestones
     issues_m <- IssueTrackeR:::simple_sort(
