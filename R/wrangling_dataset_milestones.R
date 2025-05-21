@@ -14,11 +14,11 @@
 #' \item due_on: date to with the issue is due
 #' }
 #'
-#' @export
+#' @keywords internal
+#' @noRd
 #'
 #' @examples
 #'
-#' \donttest{
 #' # With milestones
 #' raw_milestones <- gh::gh(
 #'     repo = "jdplus-main",
@@ -29,9 +29,7 @@
 #' )
 #' raw_milestone <- raw_milestones[[5L]]
 #' format_milestone(raw_milestone)
-#' }
 #'
-#' @keywords internal
 format_milestone <- function(raw_milestone, verbose = TRUE) {
     if (verbose) {
         cat("\t- ", raw_milestone[["title"]], "... Done!\n")

@@ -63,6 +63,23 @@
 #' element in \dots is \code{FALSE} so the result is \code{FALSE}.
 #'
 #' @keywords internal
+#' @noRd
+#'
+#' @examples
+#' IssueTrackeR:::logical_reducer(
+#'     c(TRUE, FALSE, TRUE, FALSE),
+#'     c(FALSE, TRUE, FALSE, FALSE),
+#'     logic_gate = "AND",
+#'     orientation = "vector-wise"
+#' )
+#'
+#' IssueTrackeR:::logical_reducer(
+#'     FALSE,
+#'     c(TRUE, FALSE, TRUE),
+#'     c(FALSE, TRUE, FALSE),
+#'     logic_gate = "OR",
+#'     orientation = "overall"
+#' )
 #'
 logical_reducer <- function(
     ...,
@@ -116,6 +133,18 @@ logical_reducer <- function(
 #' For more informations, see the function \code{\link[base]{grepl}}.
 #'
 #' @keywords internal
+#' @noRd
+#'
+#' @examples
+#' IssueTrackeR:::vgrepl(
+#'     x = c("Bonne nuit", "Au revoir", "Bonjour"),
+#'     pattern = "Bon"
+#' )
+#'
+#' IssueTrackeR:::vgrepl(
+#'     x = c("Bonne nuit", "Au revoir", "Bonjour"),
+#'     pattern = c("Bon", "voir")
+#' )
 #'
 vgrepl <- Vectorize(
     FUN = function(
@@ -499,6 +528,17 @@ filter_issues.default <- function(x, ...) {
 #' @returns a list of issues without milestones.
 #'
 #' @keywords internal
+#' @noRd
+#'
+#' @examples
+#'
+#' all_issues <- get_issues(
+#'     source = "online",
+#'     state = "all",
+#'     owner = "rjdverse",
+#'     repo = "rjd3toolkit"
+#' )
+#' IssueTrackeR:::no_milestones(all_issues)
 #'
 no_milestones <- function(issues = get_issues()) {
     without_milestone <- issues |>

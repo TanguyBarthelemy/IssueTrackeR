@@ -15,6 +15,30 @@
 #' but in a sorted order.
 #'
 #' @keywords internal
+#' @noRd
+#'
+#' @examples
+#'
+#' all_issues <- get_issues(
+#'     source = "online",
+#'     state = "all",
+#'     owner = "jdemetra",
+#'     repo = "jdplus-main"
+#' )
+#' all_milestones <- get_milestones(
+#'     source = "online",
+#'     owner = "jdemetra",
+#'     repo = "jdplus-main"
+#' )
+#'
+#' IssueTrackeR:::simple_sort(
+#'     issues = all_issues,
+#'     milestones = all_milestones,
+#'     sorting_variables = list(
+#'         c(object = "milestones", field = "due_on"),
+#'         c(object = "issues", field = "created_at")
+#'     )
+#' )
 #'
 simple_sort <- function(issues, sorting_variables, milestones, ...) {
     if (length(issues) == 0L) {
