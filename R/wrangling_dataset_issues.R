@@ -216,19 +216,20 @@ format_issues <- function(
         }
         raw_issue <- raw_issues[[index]]
 
+        id_comment <- which(comments_issue_nbr == raw_issue[["number"]])
         body_comment <- ifelse(
-            test = missing(raw_comments) ||
-                all(comments_issue_nbr != raw_issue[["number"]]),
+            test = missing(raw_comments) || length(id_comment) == 0L,
             yes = "",
             no = paste0(
                 "\n\nComment:\n",
-                comments_body[which(comments_issue_nbr == raw_issue[["number"]])],
+                comments_body[id_comment],
                 collapse = ""
             )
         )
         body_content <- paste(raw_issue[["body"]], body_comment)
 
-        repo_url <- strsplit(raw_issue[["repository_url"]], split = "/", fixed = TRUE) |>
+        repo_url <- raw_issue[["repository_url"]] |>
+            strsplit(split = "/", fixed = TRUE) |>
             unlist() |>
             Filter(f = nzchar)
 
