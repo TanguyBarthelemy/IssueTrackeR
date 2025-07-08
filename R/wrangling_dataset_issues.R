@@ -110,8 +110,6 @@ get_issues <- function(
         issues <- format_issues(
             raw_issues = raw_issues,
             raw_comments = raw_comments,
-            repo = repo,
-            owner = owner,
             verbose = verbose
         )
     } else if (source == "local") {
@@ -185,8 +183,6 @@ get_issues <- function(
 format_issues <- function(
     raw_issues,
     raw_comments,
-    repo = getOption("IssueTrackeR.repo"),
-    owner = getOption("IssueTrackeR.owner"),
     verbose = TRUE
 ) {
     if (!missing(raw_comments)) {
@@ -201,7 +197,7 @@ format_issues <- function(
             matches <- regmatches(text, numbers) |> unlist()
             as.integer(matches)
         }
-        comments_nbr <- vapply(
+        comments_issue_nbr <- vapply(
             X = raw_comments,
             FUN = base::`[[`,
             "issue_url",
@@ -222,15 +218,22 @@ format_issues <- function(
 
         body_comment <- ifelse(
             test = missing(raw_comments) ||
-                all(comments_nbr != raw_issue[["number"]]),
+                all(comments_issue_nbr != raw_issue[["number"]]),
             yes = "",
             no = paste0(
                 "\n\nComment:\n",
-                comments_body[which(comments_nbr == raw_issue[["number"]])],
+                comments_body[which(comments_issue_nbr == raw_issue[["number"]])],
                 collapse = ""
             )
         )
         body_content <- paste(raw_issue[["body"]], body_comment)
+
+        repo_url <- strsplit(raw_issue[["repository_url"]], split = "/", fixed = TRUE) |>
+            unlist() |>
+            Filter(f = nzchar)
+
+        repo <- repo_url[length(repo_url)]
+        owner <- repo_url[length(repo_url) - 1L]
 
         issue <- new_issue(
             title = raw_issue[["title"]],

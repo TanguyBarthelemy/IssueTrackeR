@@ -33,6 +33,15 @@
 print.IssueTB <- function(x, ...) {
     issue <- x
 
+    url <- paste("https://github.com", issue$owner, issue$repo, "issues", issue$number, sep = "/")
+
+    cli::cli_h2(paste0(
+        "{.href [Issue #",
+        issue$number,
+        "](",
+        url,
+        ")}"
+    ))
     cat(crayon::bold("Issue #", issue[["number"]], "\n", sep = ""))
     cat(issue[["owner"]], "/", issue[["repo"]], "\n", sep = "")
     cat(
