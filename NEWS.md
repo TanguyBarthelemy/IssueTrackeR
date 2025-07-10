@@ -16,6 +16,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * Remove sorting and filtering function (to use the tidyverse instead)
 
+=======
+### Added
+
+* Url link with Issues printed
+
 
 ## [1.1.1] - 2025-04-26
 
