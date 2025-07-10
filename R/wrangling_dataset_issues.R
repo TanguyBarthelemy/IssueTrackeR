@@ -110,8 +110,6 @@ get_issues <- function(
         issues <- format_issues(
             raw_issues = raw_issues,
             raw_comments = raw_comments,
-            repo = repo,
-            owner = owner,
             verbose = verbose
         )
     } else if (source == "local") {
@@ -136,16 +134,52 @@ get_issues <- function(
         if (verbose) {
             message("The issues will be read from ", input_path, ".")
         }
-        issues <- yaml::read_yaml(file = input_path)
-        for (id_issue in seq_along(issues)) {
-            issues[[id_issue]] <- new_issue(issue = issues[[id_issue]])
-        }
-        issues <- new_issues(issues)
+        issues <- do.call(
+            args = yaml::read_yaml(file = input_path),
+            what = new_issues
+        )
     } else {
         stop("wrong source", call. = FALSE)
     }
 
     return(issues)
+}
+
+format_comments <- function(
+    raw_comments,
+    urls,
+    verbose = TRUE
+) {
+    comments_urls <- vapply(
+        X = raw_comments,
+        FUN = `[[`,
+        "issue_url",
+        FUN.VALUE = character(1L)
+    )
+    comments_bodies <- vapply(
+        X = raw_comments,
+        FUN = `[[`,
+        "body",
+        FUN.VALUE = character(1L)
+    )
+
+    comments_list <- split(
+        x = comments_bodies,
+        f = comments_urls
+    )
+    no_comment <- setdiff(urls, comments_urls)
+    comments_list <- c(
+        comments_list,
+        setNames(
+            object = as.list(rep(NA_character_, length(no_comment))),
+            nm = no_comment
+        )
+    )
+
+    output <- comments_list[urls]
+    names(output) <- NULL
+
+    return(output)
 }
 
 #' @title Format the issue in a simpler format
@@ -185,77 +219,90 @@ get_issues <- function(
 format_issues <- function(
     raw_issues,
     raw_comments,
-    repo = getOption("IssueTrackeR.repo"),
-    owner = getOption("IssueTrackeR.owner"),
     verbose = TRUE
 ) {
-    if (!missing(raw_comments)) {
-        comments_body <- vapply(
-            X = raw_comments,
-            FUN = base::`[[`,
-            "body",
+    urls <- vapply(X = raw_issues, FUN = `[[`, "url", FUN.VALUE = character(1L))
+    structurel <- strcapture(
+        "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
+        urls,
+        proto = data.frame(
+            owners = character(),
+            repos = character(),
+            stringsAsFactors = FALSE
+        )
+    )
+
+    issues <- new_issues(
+        url = urls,
+        html_url = vapply(
+            X = raw_issues,
+            FUN = `[[`,
+            "html_url",
             FUN.VALUE = character(1L)
-        )
-        aux <- function(text) {
-            numbers <- gregexpr("\\d+$", text)
-            matches <- regmatches(text, numbers) |> unlist()
-            as.integer(matches)
-        }
-        comments_nbr <- vapply(
-            X = raw_comments,
-            FUN = base::`[[`,
-            "issue_url",
+        ),
+        title = vapply(
+            X = raw_issues,
+            FUN = `[[`,
+            "title",
             FUN.VALUE = character(1L)
-        ) |>
-            aux()
-    }
+        ),
+        state = vapply(
+            X = raw_issues,
+            FUN = `[[`,
+            "state",
+            FUN.VALUE = character(1L)
+        ),
+        body = vapply(
+            X = raw_issues,
+            FUN = function(x) if (is.null(x$body)) "" else x$body,
+            FUN.VALUE = character(1L)
+        ),
+        number = vapply(
+            X = raw_issues,
+            FUN = `[[`,
+            "number",
+            FUN.VALUE = integer(1L)
+        ),
+        labels = lapply(
+            X = raw_issues,
+            FUN = Reduce,
+            f = `[[`,
+            x = c("labels", "name"),
+        ),
+        milestone = vapply(
+            X = raw_issues,
+            FUN = function(x) {
+                if (is.null(x$milestone)) NA_character_ else x$milestone$title
+            },
+            FUN.VALUE = character(1L)
+        ),
+        comments = format_comments(raw_comments = raw_comments, urls = urls),
+        created_at = vapply(
+            X = raw_issues,
+            FUN = `[[`,
+            "created_at",
+            FUN.VALUE = character(1L)
+        ),
+        creator = vapply(
+            X = raw_issues,
+            FUN = Reduce,
+            f = `[[`,
+            x = c("user", "login"),
+            FUN.VALUE = character(1L)
+        ),
+        assignee = vapply(
+            X = raw_issues,
+            FUN = function(x) {
+                if (is.null(x$assignee)) NA_character_ else x$assignee$login
+            },
+            FUN.VALUE = character(1L)
+        ),
+        owner = structurel$owners,
+        repo = structurel$repos
+    )
 
-    if (verbose) {
-        cat("Reading issues...\n")
-    }
-    issues <- new_issues()
-    for (index in seq_along(raw_issues)) {
-        if (verbose) {
-            cat("Issue n\u00B0 ", index, "... Done!\n", sep = "")
-        }
-        raw_issue <- raw_issues[[index]]
-
-        body_comment <- ifelse(
-            test = missing(raw_comments) ||
-                all(comments_nbr != raw_issue[["number"]]),
-            yes = "",
-            no = paste0(
-                "\n\nComment:\n",
-                comments_body[which(comments_nbr == raw_issue[["number"]])],
-                collapse = ""
-            )
-        )
-        body_content <- paste(raw_issue[["body"]], body_comment)
-
-        issue <- new_issue(
-            title = raw_issue[["title"]],
-            state = raw_issue[["state"]],
-            body = body_content,
-            number = raw_issue[["number"]],
-            created_at = raw_issue[["created_at"]],
-            labels = vapply(
-                X = raw_issue[["labels"]],
-                FUN = `[[`,
-                ... = "name",
-                FUN.VALUE = character(1L)
-            ),
-            milestone = raw_issue[["milestone"]][["title"]],
-            repo = repo,
-            owner = owner
-        )
-        issues[[index]] <- issue
-    }
-    if (verbose) {
-        cat(length(issues), " issues found.\n", sep = "")
-    }
     return(issues)
 }
-
 
 #' @title Save datasets in a yaml file
 #'

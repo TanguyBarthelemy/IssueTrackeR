@@ -4,16 +4,39 @@
 \alias{new_issues}
 \alias{new_issues.IssueTB}
 \alias{new_issues.IssuesTB}
+\alias{new_issues.data.frame}
+\alias{new_issues.list}
 \alias{new_issues.default}
 \title{Create a new \code{IssuesTB} object}
 \usage{
-new_issues(x = list())
+new_issues(x = NULL, ...)
 
-\method{new_issues}{IssueTB}(x)
+\method{new_issues}{IssueTB}(x, ...)
 
-\method{new_issues}{IssuesTB}(x)
+\method{new_issues}{IssuesTB}(x, ...)
 
-\method{new_issues}{default}(x = list())
+\method{new_issues}{data.frame}(x, ...)
+
+\method{new_issues}{list}(x, ...)
+
+\method{new_issues}{default}(
+  x,
+  title,
+  body,
+  number,
+  state,
+  created_at = Sys.Date(),
+  labels = list(),
+  milestone = NA_character_,
+  repo = NA_character_,
+  owner = NA_character_,
+  url = NA_character_,
+  html_url = NA_character_,
+  comments = list(),
+  creator = NA_character_,
+  assignee = NA_character_,
+  ...
+)
 }
 \arguments{
 \item{x}{a list containing \code{IssueTB} objects}
@@ -25,34 +48,33 @@ a \code{IssuesTB} object.
 Create a new \code{IssuesTB} object
 }
 \examples{
-
-# Empty issue
+# Empty list of issues
 issues1 <- new_issues()
 
-# Custom issue
-issues2 <- new_issues(
-    x = new_issue(
-        title = "Une autre issue",
-        body = "J'ai une question au sujet de...",
-        number = 2,
-        created_at = Sys.Date()
-    )
+# List of issues from issue
+issue1 <- new_issue(
+    title = "Une autre issue",
+    state = "open",
+    body = "J'ai une question au sujet de...",
+    number = 2,
+    created_at = Sys.Date()
+)
+issues2 <- new_issues(x = issue1)
+
+# Custom issues
+issues3 <- new_issues(
+    title = "Une autre issue",
+    state = "open",
+    body = "J'ai une question au sujet de...",
+    number = 2,
+    created_at = Sys.Date()
 )
 
-issues3 <- new_issues(x = list(
-    new_issue(
-        title = "Nouvelle issue",
-        body = "Un nouveau bug pour la fonction...",
-        state = "open",
-        number = 1,
-        created_at = Sys.Date()
-    ),
-    new_issue(
-        title = "Une autre issue",
-        body = "J'ai une question au sujet de...",
-        state = "closed",
-        number = 2,
-        created_at = Sys.Date()
-    )
-))
+issues4 <- new_issues(
+    title = c("Nouvelle issue", "Une autre issue"),
+    body = c("Un nouveau bug pour la fonction...",  "J'ai une question au sujet de..."),
+    state = c("open", "closed"),
+    number = 1:2,
+    created_at = Sys.Date()
+)
 }

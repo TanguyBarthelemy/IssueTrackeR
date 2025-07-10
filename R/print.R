@@ -33,18 +33,21 @@
 print.IssueTB <- function(x, ...) {
     issue <- x
 
-    cat(crayon::bold("Issue #", issue[["number"]], "\n", sep = ""))
-    cat(issue[["owner"]], "/", issue[["repo"]], "\n", sep = "")
     cat(
-        crayon::underline("Labels:"),
-        paste(issue[["labels"]], sep = ", "),
-        "\n"
+        crayon::bold(
+            "Issue ", issue[["owner"]], "/",
+            issue[["repo"]], "#", issue[["number"]],
+            sep = ""
+        ),
+        "\n",
+        crayon::underline("Title: "),
+        substr(x = issue[["title"]], start = 1, stop = 80),
+        "\n",
+        crayon::underline("Text:\n"),
+        substr(x = issue[["body"]], start = 1, stop = 320),
+        "\n...\n\n",
+        sep = ""
     )
-    cat(crayon::underline("Milestone:"), issue[["milestone"]], "\n")
-    cat(crayon::underline("Title:"), issue[["title"]], "\n")
-    cat(crayon::underline("Text:\n"))
-    cat(issue[["body"]], "\n")
-    cat("\n")
 
     return(invisible(issue))
 }
@@ -57,15 +60,15 @@ print.IssuesTB <- function(x, ...) {
     issues <- x
     cat(crayon::bold(
         ifelse(
-            test = length(issues) > 0L,
-            yes = paste("There are", length(issues), "issues."),
+            test = nrow(issues) > 0L,
+            yes = paste("There are", nrow(issues), "issues."),
             no = "No issues"
         ),
         "\n"
     ))
-    for (issue in issues) {
+    for (id_issue in seq_len(nrow(issues))) {
         cat("\n")
-        print(issue)
+        print(issues[id_issue, , drop = TRUE])
     }
     return(invisible(issues))
 }

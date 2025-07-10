@@ -1,0 +1,125 @@
+number:
+- 164
+- 162
+- 156
+- 142
+- 76
+title:
+- Error on short series
+- How to differentiate a WS in V2 and in V3?
+- Possible to extract slidingspan main diagnostics ?
+- Printing userdef variables with their name
+- Leap Year Effect
+body:
+- |-
+  With short quaterly series, the estimation fails when beginning in 2023 but success in 2024.
+  In **RSA5c**, it may be related to the calendar regressor (because it doesn't fail with **RSA3**).
+
+  Here is a reproductible example:
+
+  ``` r
+  library("RJDemetra")
+
+  set.seed(3)
+  x <- rnorm(12)
+
+  mod1 <- x13(ts(x, frequency = 4L, start = 2024), spec = "RSA5c")
+  mod2 <- x13(ts(x, frequency = 4L, start = 2023), spec = "RSA5c")
+  #> Error in x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined): [preprocessing: failed]
+  ```
+
+  <sup>Created on 2025-05-27 with [reprex v2.1.1](https://reprex.tidyverse.org)</sup>
+
+  With 1 or 2 more points, the estimate succeds. Is this linked to the number of calendar regressors or to one in particular (LY?)?
+- |-
+  *related to rjdverse/rjd3workspace#53*
+
+  When I try to load a WS in v3 with **{RJDemetra}** (with `load_workspace()`), I get no error but I will get error when trying to access other elements.
+
+  How to know if a WS is in V3 with **{RJDemetra}**? Is it possible?
+- "I wondered if it was possible in rjdemetra to extract and save the main slidingspan
+  diagnostics of % unstable observations (A% and MM%) that are calculated  and displayed
+  (but not saved) in JDemetra+ ?\r\n\r\nI guess this is not an “issue”, but rather
+  a (Christmas) wish\r\n\r\nBest regards \r\nJørn Ivar Hamre\r\n(Statistics Norway)\r\n"
+- "When you display a model (obtained with the get_model function), the regression
+  variables are not displayed with their real name but with a name given by jdemetra+:\r\n\r\n![image](https://github.com/jdemetra/rjdemetra/assets/112711017/2dc551f8-2c0a-4da0-bc12-d74285537247)\r\n\r\nHowever,
+  their variable name does exist in the object:\r\n\r\n![image](https://github.com/jdemetra/rjdemetra/assets/112711017/7645a392-6e06-4480-b832-282b83ec77da)\r\n\r\nIs
+  it possible to modify the display to add these more meaningful variable names instead
+  of the current names?"
+- "I am running into problems including the leap year:\r\nhttps://github.com/statistikat/persephone/issues/21\r\n\r\nAm
+  I missing some additional parameters that need to be set?"
+state:
+- open
+- open
+- open
+- open
+- open
+url:
+- https://api.github.com/repos/rjdverse/rjdemetra/issues/164
+- https://api.github.com/repos/rjdverse/rjdemetra/issues/162
+- https://api.github.com/repos/rjdverse/rjdemetra/issues/156
+- https://api.github.com/repos/rjdverse/rjdemetra/issues/142
+- https://api.github.com/repos/rjdverse/rjdemetra/issues/76
+html_url:
+- https://github.com/rjdverse/rjdemetra/issues/164
+- https://github.com/rjdverse/rjdemetra/issues/162
+- https://github.com/rjdverse/rjdemetra/issues/156
+- https://github.com/rjdverse/rjdemetra/issues/142
+- https://github.com/rjdverse/rjdemetra/issues/76
+milestone:
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+created_at:
+- '2025-05-27T10:13:13Z'
+- '2025-02-03T16:14:19Z'
+- '2024-11-26T19:43:33Z'
+- '2024-05-07T15:08:56Z'
+- '2020-04-07T13:38:53Z'
+creator:
+- TanguyBarthelemy
+- TanguyBarthelemy
+- ham4ssb
+- TanguyBarthelemy
+- merangelik
+assignee:
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+owner:
+- rjdverse
+- rjdverse
+- rjdverse
+- rjdverse
+- rjdverse
+repo:
+- rjdemetra
+- rjdemetra
+- rjdemetra
+- rjdemetra
+- rjdemetra
+labels:
+- ~
+- ~
+- ~
+- ~
+- ~
+comments:
+  https://api.github.com/repos/rjdverse/rjdemetra/issues/164: Do you have the same
+    issue with the GUI? If so then it is a a JDemetra+ issue.
+  https://api.github.com/repos/rjdverse/rjdemetra/issues/162: .na.character
+  https://api.github.com/repos/rjdverse/rjdemetra/issues/156: "Hi,\r\n\r\nit is indeed
+    a wish ! We'll see...\r\n\r\nMerry Xmas"
+  https://api.github.com/repos/rjdverse/rjdemetra/issues/142: "They do not come from
+    the same object and there are some differences in the Java output. \r\nIn the
+    first case the names comes from the results of the regarima model (<https://github.com/rjdverse/rjdemetra/blob/develop/R/regarima_rslts.R#L52>)
+    and in the second case it comes from the specification (<https://github.com/rjdverse/rjdemetra/blob/develop/R/spec_rjd.R#L193-L220>).
+    I think it would be complicated to do it in R since you would need to indentify
+    your external regressors from all the regressions coefficients (outliers, easter,
+    td, etc.), but maybe something can be done using the `context_dictionary`. Do
+    you have a reproducible example?"
+  https://api.github.com/repos/rjdverse/rjdemetra/issues/76: .na.character

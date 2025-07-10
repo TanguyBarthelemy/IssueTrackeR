@@ -8,6 +8,15 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+* Changed structure of issue --> data.frame
+
+### Removed
+
+* Remove sorting and filtering function (to use the tidyverse instead)
+
+
 ## [1.1.1] - 2025-04-26
 
 

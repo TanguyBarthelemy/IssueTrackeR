@@ -2,23 +2,42 @@
 % Please edit documentation in R/wrangling_issues.R
 \name{new_issue}
 \alias{new_issue}
+\alias{new_issue.IssueTB}
+\alias{new_issue.list}
+\alias{new_issue.IssuesTB}
+\alias{new_issue.default}
 \title{Create a new \code{IssueTB} object}
 \usage{
-new_issue(
+new_issue(x = NULL, ...)
+
+\method{new_issue}{IssueTB}(x, ...)
+
+\method{new_issue}{list}(x, ...)
+
+\method{new_issue}{IssuesTB}(x, ...)
+
+\method{new_issue}{default}(
+  x,
   title,
   body,
   number,
   state = c("open", "closed"),
   created_at = Sys.Date(),
   labels = NULL,
-  milestone = NULL,
-  issue = list(),
-  repo = NULL,
-  owner = NULL,
+  milestone = NA_character_,
+  repo = NA_character_,
+  owner = NA_character_,
+  url = NA_character_,
+  html_url = NA_character_,
+  comments = NULL,
+  creator = NA_character_,
+  assignee = NA_character_,
   ...
 )
 }
 \arguments{
+\item{\dots}{Other information we would like to add to the issue.}
+
 \item{title}{a string. The title of the issue.}
 
 \item{body}{a string. The title of the issue.}
@@ -34,8 +53,6 @@ the issue is still open or \code{"closed"} if the issue is now closed.}
 
 \item{milestone}{a string (or missing). The milestone of the issue.}
 
-\item{issue}{a list representing the object.}
-
 \item{repo}{A character string specifying the GitHub repository name (only
 taken into account if \code{source} is set to \code{"online"}).
 Defaults to the package option \code{IssueTrackeR.repo}.}
@@ -44,7 +61,7 @@ Defaults to the package option \code{IssueTrackeR.repo}.}
 into account if \code{source} is set to \code{"online"}).
 Defaults to the package option \code{IssueTrackeR.owner}.}
 
-\item{\dots}{Other information we would like to add to the issue.}
+\item{issue}{a list representing the object.}
 }
 \value{
 a \code{IssueTB} object.
@@ -53,18 +70,16 @@ a \code{IssueTB} object.
 Create a new \code{IssueTB} object
 }
 \examples{
-
 # Empty issue
 issue1 <- new_issue()
 
 # Custom issue
-issue2 <- new_issue(
+issue1 <- new_issue(
     title = "Nouvelle issue",
     body = "Un nouveau bug pour la fonction...",
     number = 47,
     created_at = Sys.Date()
 )
 
-issue3 <- new_issue(issue = issue2)
-
+issue2 <- new_issue(x = issue1)
 }
