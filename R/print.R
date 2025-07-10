@@ -43,19 +43,22 @@ print.IssueTB <- function(x, ...) {
 
     cli::cli_h2(paste0(
         "{.href [Issue ",
-        issue[["owner"]], "/",
-        issue[["repo"]], "#", issue[["number"]],
+        issue[["owner"]],
+        "/",
+        issue[["repo"]],
+        "#",
+        issue[["number"]],
         "](",
         issue_url,
         ")}"
     ))
-  
+
     cat(
         crayon::underline("Title: "),
-        substr(x = issue[["title"]], start = 1, stop = 80),
+        substr(x = issue[["title"]], start = 1L, stop = 80L),
         "\n",
         crayon::underline("Text:\n"),
-        substr(x = issue[["body"]], start = 1, stop = 320),
+        substr(x = issue[["body"]], start = 1L, stop = 320L),
         "\n...\n\n",
         sep = ""
     )

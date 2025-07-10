@@ -267,7 +267,7 @@ format_issues <- function(
             X = raw_issues,
             FUN = Reduce,
             f = `[[`,
-            x = c("labels", "name"),
+            x = c("labels", "name")
         ),
         milestone = vapply(
             X = raw_issues,

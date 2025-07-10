@@ -64,7 +64,7 @@ new_issue.list <- function(x, ...) {
 #' @export
 new_issue.IssuesTB <- function(x, ...) {
     if (nrow(x) != 1L) {
-        stop("There are several issues in the object `x`.")
+        stop("There are several issues in the object `x`.", call. = FALSE)
     }
     return(NextMethod())
 }
@@ -163,7 +163,8 @@ new_issue.default <- function(
 #'
 #' issues4 <- new_issues(
 #'     title = c("Nouvelle issue", "Une autre issue"),
-#'     body = c("Un nouveau bug pour la fonction...",  "J'ai une question au sujet de..."),
+#'     body = c("Un nouveau bug pour la fonction...",
+#'              "J'ai une question au sujet de..."),
 #'     state = c("open", "closed"),
 #'     number = 1:2,
 #'     created_at = Sys.Date()
@@ -248,10 +249,10 @@ new_issues.default <- function(
         assignee <- character(0L)
     }
 
-    if (length(labels) == 0) {
+    if (length(labels) == 0L) {
         labels <- rep(list(NULL), times = length(title))
     }
-    if (length(comments) == 0) {
+    if (length(comments) == 0L) {
         comments <- rep(list(NULL), times = length(title))
     }
 
@@ -283,7 +284,7 @@ new_issues.default <- function(
 #' @export
 `[.IssuesTB` <- function(x, ..., drop = TRUE) {
     output <- new_issues(NextMethod(object = x, generic = "IssuesTB"))
-    if (drop == TRUE && nrow(output) == 1L) {
+    if (drop && nrow(output) == 1L) {
         return(new_issue(output))
     }
     return(output)
@@ -323,12 +324,15 @@ append <- function(x, values, after = length(x)) {
 #' @method append IssuesTB
 #' @export
 append.IssuesTB <- function(x, values, after = length(x)) {
-
     if (after > nrow(x)) after <- nrow(x)
     if (after < 0L) after <- 0L
 
     if (inherits(values, "IssuesTB")) {
-        return(rbind(x[seq_len(after), , drop = FALSE], values, x[-seq_len(after), , drop = FALSE]))
+        return(rbind(
+            x[seq_len(after), , drop = FALSE],
+            values,
+            x[-seq_len(after), , drop = FALSE]
+        ))
     } else if (inherits(values, "IssueTB")) {
         return(append(x, values = new_issues(values), after = after))
     } else {

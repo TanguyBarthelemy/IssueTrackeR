@@ -72,7 +72,8 @@ issues3 <- new_issues(
 
 issues4 <- new_issues(
     title = c("Nouvelle issue", "Une autre issue"),
-    body = c("Un nouveau bug pour la fonction...",  "J'ai une question au sujet de..."),
+    body = c("Un nouveau bug pour la fonction...",
+             "J'ai une question au sujet de..."),
     state = c("open", "closed"),
     number = 1:2,
     created_at = Sys.Date()

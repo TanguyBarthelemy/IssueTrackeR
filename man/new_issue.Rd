@@ -3,6 +3,7 @@
 \name{new_issue}
 \alias{new_issue}
 \alias{new_issue.IssueTB}
+\alias{new_issue.data.frame}
 \alias{new_issue.list}
 \alias{new_issue.IssuesTB}
 \alias{new_issue.default}
@@ -11,6 +12,8 @@
 new_issue(x = NULL, ...)
 
 \method{new_issue}{IssueTB}(x, ...)
+
+\method{new_issue}{data.frame}(x, ...)
 
 \method{new_issue}{list}(x, ...)
 
