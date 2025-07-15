@@ -160,24 +160,13 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-in"><span><span class="co"># From online</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Reading issues...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 1... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 2... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 3... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 4... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 5... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 issues found.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">issues</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 5 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #164 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/164&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue rjdverse/rjdemetra#164</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #164</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Error on short series </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Error on short series</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> With short quaterly series, the estimation fails when beginning in 2023 but success in 2024.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> In **RSA5c**, it may be related to the calendar regressor (because it doesn't fail with **RSA3**).</span>
@@ -190,41 +179,23 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> set.seed(3)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> x &lt;- rnorm(12)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mod1 &lt;- x13(ts(x, frequency = 4L, start = 2024), spec = "RSA5c")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mod2 &lt;- x13(ts(x, frequency = 4L, start = 2023), spec = "RSA5c")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Error in x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined): [preprocessing: failed]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;sup&gt;Created on 2025-05-27 with [reprex v2.1.1](https://reprex.tidyverse.org)&lt;/sup&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> With 1 or 2 more points, the estimate succeds. Is this linked to the number of calendar regressors or to one in particular (LY?)? </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Do you have the same issue with the GUI? If so then it is a a JDemetra+ issue. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mod1 &lt;- x13(ts(x, frequency = 4L, sta</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #162 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/162&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue rjdverse/rjdemetra#162</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #162</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> How to differentiate a WS in V2 and in V3? </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> How to differentiate a WS in V2 and in V3?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *related to rjdverse/rjd3workspace#53*</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> When I try to load a WS in v3 with **{RJDemetra}** (with `load_workspace()`), I get no error but I will get error when trying to access other elements.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> How to know if a WS is in V3 with **{RJDemetra}**? Is it possible?  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> How to know if a WS is in V3 with **{RJDemetra}**? Is it possible?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #156 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/156&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue rjdverse/rjdemetra#156</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #156</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Possible to extract slidingspan main diagnostics ? </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Possible to extract slidingspan main diagnostics ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> I wondered if it was possible in rjdemetra to extract and save the main slidingspan diagnostics of % unstable observations (A% and MM%) that are calculated  and displayed (but not saved) in JDemetra+ ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -232,53 +203,30 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Best regards </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Jørn Ivar Hamre</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Statistics Norway)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hi,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> it is indeed a wish ! We'll see...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merry Xmas </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Statistics Norway</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #142 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/142&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue rjdverse/rjdemetra#142</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #142</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Printing userdef variables with their name </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Printing userdef variables with their name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> When you display a model (obtained with the get_model function), the regression variables are not displayed with their real name but with a name given by jdemetra+:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ![image](https://github.com/jdemetra/rjdemetra/assets/112711017/2dc551f8-2c0a-4da0-bc12-d74285537247)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> However, their variable name does exist in the object:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ![image](https://github.com/jdemetra/rjdemetra/assets/112711017/7645a392-6e06-4480-b832-282b83ec77da)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Is it possible to modify the display to add these more meaningful variable names instead of the current names? </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> They do not come from the same object and there are some differences in the Java output. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In the first case the names comes from the results of the regarima model (&lt;https://github.com/rjdverse/rjdemetra/blob/develop/R/regarima_rslts.R#L52&gt;) and in the second case it comes from the specification (&lt;https://github.com/rjdverse/rjdemetra/blob/develop/R/spec_rjd.R#L193-L220&gt;). I think it would be complicated to do it in R since you would need to indentify your external regressors from all the regressions coefficients (outliers, easter, td, etc.), but maybe something can be done using the `context_dictionary`. Do you have a reproducible example? </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> However, their variable name does exist in the </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #76 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/76&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue rjdverse/rjdemetra#76</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #76</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Leap Year Effect </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Leap Year Effect</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> I am running into problems including the leap year:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/statistikat/persephone/issues/21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Am I missing some additional parameters that need to be set?  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Am I missing some additional parameters that need to be set?</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading labels... Done!</span>
@@ -308,201 +256,29 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> Done! 0 milestones found.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">milestones</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> data frame with 0 columns and 0 rows</span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># From local</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># First update the local database</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="update_database.html">update_database</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Reading issues...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 1... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 2... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 3... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 4... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 5... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 issues found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpL6mHIZ/data/open_issues.yaml.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Reading issues...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 1... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 2... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 3... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 4... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 5... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 6... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 7... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 8... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 9... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 10... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 11... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 12... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 13... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 14... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 15... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 16... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 17... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 18... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 19... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 20... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 21... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 22... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 23... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 24... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 25... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 26... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 27... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 28... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 29... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 30... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 31... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 32... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 33... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 34... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 35... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 36... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 37... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 38... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 39... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 40... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 41... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 42... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 43... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 44... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 45... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 46... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 47... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 48... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 49... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 50... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 51... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 52... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 53... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 54... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 55... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 56... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 57... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 58... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 59... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 60... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 61... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 62... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 63... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 64... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 65... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 66... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 67... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 68... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 69... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 70... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 71... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 72... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 73... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 74... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 75... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 76... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 77... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 78... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 79... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 80... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 81... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 82... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 83... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 84... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 85... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 86... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 87... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 88... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 89... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 90... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 91... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 92... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 93... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 94... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 95... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 96... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 97... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 98... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 99... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 100... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 101... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 102... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 103... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 104... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 105... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 106... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 107... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 108... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 109... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 110... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 111... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 112... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 113... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 114... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 115... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 116... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 117... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 118... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 119... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 120... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 121... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 122... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 123... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 124... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 125... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 126... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 127... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 128... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 129... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 130... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 131... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 132... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 133... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 134... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 135... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 136... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 137... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 138... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 139... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 140... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 141... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 142... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 143... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 144... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 145... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 146... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 147... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 148... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 149... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 150... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 151... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 152... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 153... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 154... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 155... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 156... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 157... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 158... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 159... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 160... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue n° 161... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 161 issues found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpL6mHIZ/data/closed_issues.yaml.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Reading labels... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8 labels found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpL6mHIZ/data/list_labels.yaml.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Reading milestones... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Done! 0 milestones found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpL6mHIZ/data/list_milestones.yaml.</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
-<span class="r-in"><span>                     dataset_name <span class="op">=</span> <span class="st">"open_issues.yaml"</span>,</span></span>
-<span class="r-in"><span>                     state <span class="op">=</span> <span class="st">"open"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /tmp/RtmpL6mHIZ/data/open_issues.yaml.</span>
-<span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The labels will be read from /tmp/RtmpL6mHIZ/data/list_labels.yaml.</span>
-<span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu">get_milestones</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The milestones will be read from /tmp/RtmpL6mHIZ/data/list_milestones.yaml.</span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
+<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="va">path</span>,</span></span>
+<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"list_issues.yaml"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
+<span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu">get_milestones</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
+<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="va">path</span>,</span></span>
+<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"list_milestones.yaml"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The milestones will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_milestones.yaml.</span>
+<span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
+<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="va">path</span>,</span></span>
+<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"list_labels.yaml"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The labels will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_labels.yaml.</span>
 </code></pre></div>
     </div>
   </div>

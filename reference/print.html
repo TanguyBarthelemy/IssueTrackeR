@@ -57,6 +57,12 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'IssuesTB'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'summary.IssueTB'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'summary.IssuesTB'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -84,169 +90,160 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
+<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"list_issues.yaml"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display one issue</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #164 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/164&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#104</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #164</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Error on short series </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Bump org.projectlombok:lombok from 1.18.28 to 1.18.30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> With short quaterly series, the estimation fails when beginning in 2023 but success in 2024.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In **RSA5c**, it may be related to the calendar regressor (because it doesn't fail with **RSA3**).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Here is a reproductible example:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ``` r</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> library("RJDemetra")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> set.seed(3)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x &lt;- rnorm(12)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mod1 &lt;- x13(ts(x, frequency = 4L, start = 2024), spec = "RSA5c")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mod2 &lt;- x13(ts(x, frequency = 4L, start = 2023), spec = "RSA5c")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Error in x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined): [preprocessing: failed]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;sup&gt;Created on 2025-05-27 with [reprex v2.1.1](https://reprex.tidyverse.org)&lt;/sup&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> With 1 or 2 more points, the estimate succeds. Is this linked to the number of calendar regressors or to one in particular (LY?)? </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Do you have the same issue with the GUI? If so then it is a a JDemetra+ issue. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bumps [org.projectlombok:lombok](https://github.com/projectlombok/lombok) from 1.18.28 to 1.18.30.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;details&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;summary&gt;Changelog&lt;/summary&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;p&gt;&lt;em&gt;Sourced from &lt;a href="https://github.com/projectlombok/lombok/blob/master/doc/changelog.markdown"&gt;org.projectlombok:lombok's changelog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;blockquote&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;h3&gt;v1.18.30 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display several issues</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #164 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/164&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#104</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #164</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Error on short series </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Bump org.projectlombok:lombok from 1.18.28 to 1.18.30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> With short quaterly series, the estimation fails when beginning in 2023 but success in 2024.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In **RSA5c**, it may be related to the calendar regressor (because it doesn't fail with **RSA3**).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Here is a reproductible example:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ``` r</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> library("RJDemetra")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> set.seed(3)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x &lt;- rnorm(12)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mod1 &lt;- x13(ts(x, frequency = 4L, start = 2024), spec = "RSA5c")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mod2 &lt;- x13(ts(x, frequency = 4L, start = 2023), spec = "RSA5c")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Error in x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined): [preprocessing: failed]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;sup&gt;Created on 2025-05-27 with [reprex v2.1.1](https://reprex.tidyverse.org)&lt;/sup&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> With 1 or 2 more points, the estimate succeds. Is this linked to the number of calendar regressors or to one in particular (LY?)? </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Do you have the same issue with the GUI? If so then it is a a JDemetra+ issue. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bumps [org.projectlombok:lombok](https://github.com/projectlombok/lombok) from 1.18.28 to 1.18.30.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;details&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;summary&gt;Changelog&lt;/summary&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;p&gt;&lt;em&gt;Sourced from &lt;a href="https://github.com/projectlombok/lombok/blob/master/doc/changelog.markdown"&gt;org.projectlombok:lombok's changelog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;blockquote&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;h3&gt;v1.18.30 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #162 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/162&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#236</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #162</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> How to differentiate a WS in V2 and in V3? </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Fix drag&amp;drop from Excel</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *related to rjdverse/rjd3workspace#53*</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> When I try to load a WS in v3 with **{RJDemetra}** (with `load_workspace()`), I get no error but I will get error when trying to access other elements.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> How to know if a WS is in V3 with **{RJDemetra}**? Is it possible?  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #156 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/156&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#238</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #156</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Possible to extract slidingspan main diagnostics ? </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Missing chart export to SVG</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I wondered if it was possible in rjdemetra to extract and save the main slidingspan diagnostics of % unstable observations (A% and MM%) that are calculated  and displayed (but not saved) in JDemetra+ ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I guess this is not an “issue”, but rather a (Christmas) wish</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Best regards </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Jørn Ivar Hamre</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Statistics Norway)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> JD+ v2 is able to export a chart to SVG but v3 is not.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hi,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> it is indeed a wish ! We'll see...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merry Xmas </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #142 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/142&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#51</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #142</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Printing userdef variables with their name </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> theil2 slightly adapted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> When you display a model (obtained with the get_model function), the regression variables are not displayed with their real name but with a name given by jdemetra+:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ![image](https://github.com/jdemetra/rjdemetra/assets/112711017/2dc551f8-2c0a-4da0-bc12-d74285537247)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> However, their variable name does exist in the object:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ![image](https://github.com/jdemetra/rjdemetra/assets/112711017/7645a392-6e06-4480-b832-282b83ec77da)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Is it possible to modify the display to add these more meaningful variable names instead of the current names? </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> They do not come from the same object and there are some differences in the Java output. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In the first case the names comes from the results of the regarima model (&lt;https://github.com/rjdverse/rjdemetra/blob/develop/R/regarima_rslts.R#L52&gt;) and in the second case it comes from the specification (&lt;https://github.com/rjdverse/rjdemetra/blob/develop/R/spec_rjd.R#L193-L220&gt;). I think it would be complicated to do it in R since you would need to indentify your external regressors from all the regressions coefficients (outliers, easter, td, etc.), but maybe something can be done using the `context_dictionary`. Do you have a reproducible example? </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue #76 (</span><span style="color: #0000BB; font-weight: bold; font-style: italic;">&lt;https://github.com/rjdverse/rjdemetra/issues/76&gt;</span><span style="font-weight: bold;">)</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#590</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Issue #76</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rjdverse/rjdemetra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Milestone:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Leap Year Effect </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Summary info on pre-specified outliers not clear</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I am running into problems including the leap year:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/statistikat/persephone/issues/21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Am I missing some additional parameters that need to be set?  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In the JD+ GUI, the user can insert 'pre-specified outliers' as shown below, and these can be fixed or non-fixed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ![Image](https://github.com/user-attachments/assets/d4a65a9a-3173-4e67-80a3-1e1f4cdd7ee7)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> If the user then looks at the **Summary** section of the **Main **results**** section in the output area for the s</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#38</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Improve CsvInformationFormatter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#610</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Mode is 'Multiplicative' when transform function is 'None'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> My additive series has regarima.transform.function = 'None', but x11.mode is 'Multiplicative':</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ![Image](https://github.com/user-attachments/assets/6934cd41-6613-43d7-8903-3f2deb923f70)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> This is the same series with regarima.transform.function = 'Log', and x11.mode is also 'Multiplicative':</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ![Image](https://github.com/u</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#658</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Migrate protobuf-maven-plugin from org.xolstice.maven.plugins to io.github.ascop</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> From https://github.com/xolstice/protobuf-maven-plugin/ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; This project is no longer being maintained, and no further contributions will be considered.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; Please consider switching to alternatives, such as:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; https://github.com/ascopes/protobuf-maven-plugin</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#57</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Bump protobuf-java from 3.21.12 to 3.23.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bumps [protobuf-java](https://github.com/protocolbuffers/protobuf) from 3.21.12 to 3.23.2.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;details&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;summary&gt;Commits&lt;/summary&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ul&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;li&gt;&lt;a href="https://github.com/protocolbuffers/protobuf/commit/a74f54b724bdc2fe0bfc271f4dc0ceb159805625"&gt;&lt;code&gt;a74f54b&lt;/code&gt;&lt;/a&gt; Updating version.json and repo version numbers to: 23.2&lt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#112</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> JWSACruncher and parameters `fullseriesname` and `refreshall`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I tried the following parameters files an a workspace with data created by an Excel file and it has no effect. Are the parameters `fullseriesname` and `refreshall` suppose to work in the JWSACruncher? Am I doing something wrong?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;wsaConfig bundle="10000" cs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Display the summary of one issue</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#236</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> 🟢 Open</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Fix drag&amp;drop from Excel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Comments:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Comment n°1 by charphi:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Fixes #197 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Display the summary of</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues:</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#104 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#236 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#238 ✔ Completed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#51 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#590 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#38 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#610 ✔ Completed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#658 ✔ Completed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#57 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#112 ♻ Re-opened </span>
 </code></pre></div>
     </div>
   </div>

@@ -53,16 +53,40 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_issues</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_issues</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'IssueTB'</span></span>
-<span><span class="fu">new_issues</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">new_issues</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'IssuesTB'</span></span>
-<span><span class="fu">new_issues</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">new_issues</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'data.frame'</span></span>
+<span><span class="fu">new_issues</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'list'</span></span>
+<span><span class="fu">new_issues</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Default S3 method</span></span>
-<span><span class="fu">new_issues</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">new_issues</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">title</span>,</span>
+<span>  <span class="va">body</span>,</span>
+<span>  <span class="va">number</span>,</span>
+<span>  <span class="va">state</span>,</span>
+<span>  created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  comments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  milestone <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  repo <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  owner <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  url <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  html_url <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  creator <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  assignee <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  state_reason <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -70,7 +94,82 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a list containing <code>IssueTB</code> objects</p></dd>
+<dd><p>a object representing a list of issues (<code>IssuesTB</code> object, a
+<code>list</code> or a <code>data.frame</code>)</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Other information we would like to add to the issue.</p></dd>
+
+
+<dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
+<dd><p>a vector of string. The titles of the issues.</p></dd>
+
+
+<dt id="arg-body">body<a class="anchor" aria-label="anchor" href="#arg-body"></a></dt>
+<dd><p>a vector of string. The bodies (text) of the issues.</p></dd>
+
+
+<dt id="arg-number">number<a class="anchor" aria-label="anchor" href="#arg-number"></a></dt>
+<dd><p>a vector of string. The numbers of the issues.</p></dd>
+
+
+<dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
+<dd><p>a vector of string that is either <code>"open"</code> (by default) if
+the issues are still open or <code>"closed"</code> if the issues are now closed.</p></dd>
+
+
+<dt id="arg-created-at">created_at<a class="anchor" aria-label="anchor" href="#arg-created-at"></a></dt>
+<dd><p>a vector of date (or timestamp). The creation dates of the
+issues.</p></dd>
+
+
+<dt id="arg-labels">labels<a class="anchor" aria-label="anchor" href="#arg-labels"></a></dt>
+<dd><p>a list of vector string (or missing). The labels of the issues.</p></dd>
+
+
+<dt id="arg-comments">comments<a class="anchor" aria-label="anchor" href="#arg-comments"></a></dt>
+<dd><p>a list of vector string. The comments of the issues.</p></dd>
+
+
+<dt id="arg-milestone">milestone<a class="anchor" aria-label="anchor" href="#arg-milestone"></a></dt>
+<dd><p>a vector of string (or missing). The milestones of the
+issues.</p></dd>
+
+
+<dt id="arg-repo">repo<a class="anchor" aria-label="anchor" href="#arg-repo"></a></dt>
+<dd><p>A character string specifying the GitHub repository name (only
+taken into account if <code>source</code> is set to <code>"online"</code>).
+Defaults to the package option <code>IssueTrackeR.repo</code>.</p></dd>
+
+
+<dt id="arg-owner">owner<a class="anchor" aria-label="anchor" href="#arg-owner"></a></dt>
+<dd><p>A character string specifying the GitHub owner (only taken
+into account if <code>source</code> is set to <code>"online"</code>).
+Defaults to the package option <code>IssueTrackeR.owner</code>.</p></dd>
+
+
+<dt id="arg-url">url<a class="anchor" aria-label="anchor" href="#arg-url"></a></dt>
+<dd><p>a vector of string. The URLs of the API to the GitHub issues.</p></dd>
+
+
+<dt id="arg-html-url">html_url<a class="anchor" aria-label="anchor" href="#arg-html-url"></a></dt>
+<dd><p>a vector of string. The URLs to the GitHub issues.</p></dd>
+
+
+<dt id="arg-creator">creator<a class="anchor" aria-label="anchor" href="#arg-creator"></a></dt>
+<dd><p>a vector of string. The GitHub usernames of the creator of the
+issues.</p></dd>
+
+
+<dt id="arg-assignee">assignee<a class="anchor" aria-label="anchor" href="#arg-assignee"></a></dt>
+<dd><p>a vector of string. The GitHub usernames of the assignee of
+the issues.</p></dd>
+
+
+<dt id="arg-state-reason">state_reason<a class="anchor" aria-label="anchor" href="#arg-state-reason"></a></dt>
+<dd><p>a vector of string. <code>"open"</code>, <code>"completed"</code>,
+<code>"reopened"</code> or <code>"not_planned"</code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -80,36 +179,36 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Empty issue</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Empty list of issues</span></span></span>
 <span class="r-in"><span><span class="va">issues1</span> <span class="op">&lt;-</span> <span class="fu">new_issues</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Custom issue</span></span></span>
-<span class="r-in"><span><span class="va">issues2</span> <span class="op">&lt;-</span> <span class="fu">new_issues</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    x <span class="op">=</span> <span class="fu"><a href="new_issue.html">new_issue</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        title <span class="op">=</span> <span class="st">"Une autre issue"</span>,</span></span>
-<span class="r-in"><span>        body <span class="op">=</span> <span class="st">"J'ai une question au sujet de..."</span>,</span></span>
-<span class="r-in"><span>        number <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>        created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># List of issues from issue</span></span></span>
+<span class="r-in"><span><span class="va">issue1</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_issue.html">new_issue</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"Une autre issue"</span>,</span></span>
+<span class="r-in"><span>    state <span class="op">=</span> <span class="st">"open"</span>,</span></span>
+<span class="r-in"><span>    body <span class="op">=</span> <span class="st">"J'ai une question au sujet de..."</span>,</span></span>
+<span class="r-in"><span>    number <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">issues2</span> <span class="op">&lt;-</span> <span class="fu">new_issues</span><span class="op">(</span>x <span class="op">=</span> <span class="va">issue1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Custom issues</span></span></span>
+<span class="r-in"><span><span class="va">issues3</span> <span class="op">&lt;-</span> <span class="fu">new_issues</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"Une autre issue"</span>,</span></span>
+<span class="r-in"><span>    state <span class="op">=</span> <span class="st">"open"</span>,</span></span>
+<span class="r-in"><span>    body <span class="op">=</span> <span class="st">"J'ai une question au sujet de..."</span>,</span></span>
+<span class="r-in"><span>    number <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">issues3</span> <span class="op">&lt;-</span> <span class="fu">new_issues</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="new_issue.html">new_issue</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        title <span class="op">=</span> <span class="st">"Nouvelle issue"</span>,</span></span>
-<span class="r-in"><span>        body <span class="op">=</span> <span class="st">"Un nouveau bug pour la fonction..."</span>,</span></span>
-<span class="r-in"><span>        state <span class="op">=</span> <span class="st">"open"</span>,</span></span>
-<span class="r-in"><span>        number <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>        created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="new_issue.html">new_issue</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        title <span class="op">=</span> <span class="st">"Une autre issue"</span>,</span></span>
-<span class="r-in"><span>        body <span class="op">=</span> <span class="st">"J'ai une question au sujet de..."</span>,</span></span>
-<span class="r-in"><span>        state <span class="op">=</span> <span class="st">"closed"</span>,</span></span>
-<span class="r-in"><span>        number <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>        created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">issues4</span> <span class="op">&lt;-</span> <span class="fu">new_issues</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nouvelle issue"</span>, <span class="st">"Une autre issue"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    body <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Un nouveau bug pour la fonction..."</span>,</span></span>
+<span class="r-in"><span>             <span class="st">"J'ai une question au sujet de..."</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"open"</span>, <span class="st">"closed"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    number <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>

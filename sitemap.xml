@@ -7,8 +7,6 @@
 <url><loc>/news/index.html</loc></url>
 <url><loc>/reference/IssueTrackeR-package.html</loc></url>
 <url><loc>/reference/append.html</loc></url>
-<url><loc>/reference/contains.html</loc></url>
-<url><loc>/reference/filter_issues.html</loc></url>
 <url><loc>/reference/format_issues.html</loc></url>
 <url><loc>/reference/format_labels.html</loc></url>
 <url><loc>/reference/format_milestones.html</loc></url>
@@ -17,7 +15,8 @@
 <url><loc>/reference/new_issue.html</loc></url>
 <url><loc>/reference/new_issues.html</loc></url>
 <url><loc>/reference/print.html</loc></url>
-<url><loc>/reference/sort.IssuesTB.html</loc></url>
+<url><loc>/reference/sample.html</loc></url>
+<url><loc>/reference/summary.html</loc></url>
 <url><loc>/reference/update_database.html</loc></url>
 <url><loc>/reference/write.html</loc></url>
 </urlset>

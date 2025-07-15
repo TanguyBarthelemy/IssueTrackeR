@@ -79,7 +79,7 @@
 <p>You can install the development version of {IssueTrackeR} from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"TanguyBarthelemy/IssueTrackeR"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"TanguyBarthelemy/IssueTrackeR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
@@ -190,18 +190,18 @@
 <p>There are plenty of different filtering ways.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Condition: issues containing "README" in its body OR title</span></span>
-<span><span class="va">filtered_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/filter_issues.html">filter_issues</a></span><span class="op">(</span></span>
+<span><span class="va">filtered_issues</span> <span class="op">&lt;-</span> <span class="fu">filter_issues</span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="va">my_issues</span>,</span>
 <span>    fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"body"</span>, <span class="st">"title"</span><span class="op">)</span>,</span>
 <span>    values <span class="op">=</span> <span class="st">"README"</span>,</span>
 <span>    fields_logic_gate <span class="op">=</span> <span class="st">"OR"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>See <code><a href="reference/filter_issues.html">?filter_issues</a></code> and <code><a href="reference/contains.html">?contains</a></code> to explore more options.</p>
+<p>See <code>?filter_issues</code> and <code>?contains</code> to explore more options.</p>
 </div>
 <div class="section level3">
 <h3 id="sorting">Sorting<a class="anchor" aria-label="anchor" href="#sorting"></a>
 </h3>
-<p>Finally you can also sort your issues according to certain variable (quantitative) and impose sole filtering factors (conditions as in <code><a href="reference/filter_issues.html">filter_issues()</a></code>), which will be applied one after the other:</p>
+<p>Finally you can also sort your issues according to certain variable (quantitative) and impose sole filtering factors (conditions as in <code>filter_issues()</code>), which will be applied one after the other:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sorted_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="va">my_issues</span>,</span>
