@@ -59,7 +59,7 @@ issues.}
 
 \item{labels}{a list of vector string (or missing). The labels of the issues.}
 
-\item{milestone}{a vecyor of string (or missing). The milestones of the
+\item{milestone}{a vector of string (or missing). The milestones of the
 issues.}
 
 \item{repo}{A character string specifying the GitHub repository name (only

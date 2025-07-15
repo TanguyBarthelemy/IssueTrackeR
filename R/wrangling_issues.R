@@ -159,7 +159,7 @@ new_issue.default <- function(
 #' @param created_at a vector of date (or timestamp). The creation dates of the
 #' issues.
 #' @param labels a list of vector string (or missing). The labels of the issues.
-#' @param milestone a vecyor of string (or missing). The milestones of the
+#' @param milestone a vector of string (or missing). The milestones of the
 #' issues.
 #' @inheritParams get_issues
 #' @param url a vector of string. The URLs of the API to the GitHub issues.
