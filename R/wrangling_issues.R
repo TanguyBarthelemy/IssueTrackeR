@@ -1,110 +1,215 @@
 #' @title Create a new \code{IssueTB} object
 #'
+#' @param x a object representing an issue (\code{IssueTB} object, a \code{list}
+#' or a \code{data.frame})
 #' @param title a string. The title of the issue.
-#' @param state a character string that is either \code{"open"} (by default) if
+#' @param state a string that is either \code{"open"} (by default) if
 #' the issue is still open or \code{"closed"} if the issue is now closed.
-#' @param body a string. The title of the issue.
-#' @param number a string. The title of the issue.
-#' @param created_at a date. The title of the issue.
+#' @param body a string. The body (text) of the issue.
+#' @param number a string. The number of the issue.
+#' @param created_at a date (or timestamp). The title of the issue.
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.
-#' @param issue a list representing the object.
 #' @inheritParams get_issues
+#' @param url a string. The URL of the API to the GitHub issue.
+#' @param html_url a string. The URL to the GitHub issue.
+#' @param comments vector of string (the comments of the issue)
+#' @param creator a string. The GitHub username of the creator of the issue.
+#' @param assignee a string. The GitHub username of the assignee of the issue.
+#' @param state_reason a string. \code{"open"}, \code{"completed"},
+#' \code{"reopened"} or \code{"not_planned"}.
 #' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssueTB} object.
 #' @export
 #'
 #' @examples
-#'
 #' # Empty issue
 #' issue1 <- new_issue()
 #'
 #' # Custom issue
-#' issue2 <- new_issue(
+#' issue1 <- new_issue(
 #'     title = "Nouvelle issue",
 #'     body = "Un nouveau bug pour la fonction...",
 #'     number = 47,
 #'     created_at = Sys.Date()
 #' )
 #'
-#' issue3 <- new_issue(issue = issue2)
-#'
-new_issue <- function(
+#' issue2 <- new_issue(x = issue1)
+new_issue <- function(x = NULL, ...) {
+    UseMethod("new_issue", x)
+}
+
+#' @rdname new_issue
+#' @exportS3Method new_issue IssueTB
+#' @method new_issue IssueTB
+#' @export
+new_issue.IssueTB <- function(x, ...) {
+    return(x)
+}
+
+#' @rdname new_issue
+#' @exportS3Method new_issue data.frame
+#' @method new_issue data.frame
+#' @export
+new_issue.data.frame <- function(x, ...) {
+    if (nrow(x) != 1L) {
+        stop("There are several issues in the object `x`.", call. = FALSE)
+    }
+    issue <- unclass(x)
+    issue$labels <- issue$labels[[1L]]
+    issue$comments <- issue$comments[[1L]]
+    return(new_issue(issue))
+}
+
+#' @rdname new_issue
+#' @exportS3Method new_issue list
+#' @method new_issue list
+#' @export
+new_issue.list <- function(x, ...) {
+    issue <- do.call(args = x, what = new_issue)
+    return(issue)
+}
+
+#' @rdname new_issue
+#' @exportS3Method new_issue IssuesTB
+#' @method new_issue IssuesTB
+#' @export
+new_issue.IssuesTB <- function(x, ...) {
+    if (nrow(x) != 1L) {
+        stop("There are several issues in the object `x`.", call. = FALSE)
+    }
+    return(NextMethod())
+}
+
+#' @rdname new_issue
+#' @exportS3Method new_issue default
+#' @method new_issue default
+#' @export
+new_issue.default <- function(
+    x,
     title,
     body,
     number,
     state = c("open", "closed"),
     created_at = Sys.Date(),
     labels = NULL,
-    milestone = NULL,
-    issue = list(),
-    repo = NULL,
-    owner = NULL,
+    milestone = NA_character_,
+    repo = NA_character_,
+    owner = NA_character_,
+    url = NA_character_,
+    html_url = NA_character_,
+    comments = NULL,
+    creator = NA_character_,
+    assignee = NA_character_,
+    state_reason = NA_character_,
     ...
 ) {
     state <- match.arg(state)
 
-    if (!(missing(title) || missing(body) || missing(number))) {
-        issue <- list(
-            title = title,
-            body = body,
-            number = as.integer(number),
-            created_at = format_timestamp(created_at),
-            labels = labels,
-            milestone = milestone,
-            repo = repo,
-            owner = owner
-        )
-    } else if (!missing(issue)) {
-        issue[["created_at"]] <- format_timestamp(issue[["created_at"]])
-        issue[["number"]] <- as.integer(issue[["number"]])
+    if (missing(title) && missing(body) && missing(number)) {
+        title <- character(0L)
+        body <- character(0L)
+        number <- integer(0L)
+        state <- character(0L)
+        created_at <- format_timestamp(as.Date(character(0L)))
+        labels <- list()
+        milestone <- character(0L)
+        repo <- character(0L)
+        owner <- character(0L)
+        url <- character(0L)
+        html_url <- character(0L)
+        comments <- list()
+        creator <- character(0L)
+        assignee <- character(0L)
+        state_reason <- character(0L)
     }
+
+    issue <- list(
+        number = as.integer(number),
+        title = title,
+        body = body,
+        state = state,
+        url = url,
+        html_url = html_url,
+        milestone = milestone,
+        created_at = format_timestamp(created_at),
+        creator = creator,
+        assignee = assignee,
+        state_reason = state_reason,
+        owner = owner,
+        repo = repo,
+        labels = labels,
+        comments = comments
+    )
+
     class(issue) <- "IssueTB"
     return(issue)
 }
 
 #' @title Create a new \code{IssuesTB} object
 #'
-#' @param x a list containing \code{IssueTB} objects
+#' @param x a object representing a list of issues (\code{IssuesTB} object, a
+#' \code{list} or a \code{data.frame})
+#' @param title a vector of string. The titles of the issues.
+#' @param state a vector of string that is either \code{"open"} (by default) if
+#' the issues are still open or \code{"closed"} if the issues are now closed.
+#' @param body a vector of string. The bodies (text) of the issues.
+#' @param number a vector of string. The numbers of the issues.
+#' @param created_at a vector of date (or timestamp). The creation dates of the
+#' issues.
+#' @param labels a list of vector string (or missing). The labels of the issues.
+#' @param milestone a vector of string (or missing). The milestones of the
+#' issues.
+#' @inheritParams get_issues
+#' @param url a vector of string. The URLs of the API to the GitHub issues.
+#' @param html_url a vector of string. The URLs to the GitHub issues.
+#' @param comments a list of vector string. The comments of the issues.
+#' @param creator a vector of string. The GitHub usernames of the creator of the
+#'  issues.
+#' @param assignee a vector of string. The GitHub usernames of the assignee of
+#' the issues.
+#' @param state_reason a vector of string. \code{"open"}, \code{"completed"},
+#' \code{"reopened"} or \code{"not_planned"}.
+#' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssuesTB} object.
 #' @export
 #'
 #' @examples
-#'
-#' # Empty issue
+#' # Empty list of issues
 #' issues1 <- new_issues()
 #'
-#' # Custom issue
-#' issues2 <- new_issues(
-#'     x = new_issue(
-#'         title = "Une autre issue",
-#'         body = "J'ai une question au sujet de...",
-#'         number = 2,
-#'         created_at = Sys.Date()
-#'     )
+#' # List of issues from issue
+#' issue1 <- new_issue(
+#'     title = "Une autre issue",
+#'     state = "open",
+#'     body = "J'ai une question au sujet de...",
+#'     number = 2,
+#'     created_at = Sys.Date()
+#' )
+#' issues2 <- new_issues(x = issue1)
+#'
+#' # Custom issues
+#' issues3 <- new_issues(
+#'     title = "Une autre issue",
+#'     state = "open",
+#'     body = "J'ai une question au sujet de...",
+#'     number = 2,
+#'     created_at = Sys.Date()
 #' )
 #'
-#' issues3 <- new_issues(x = list(
-#'     new_issue(
-#'         title = "Nouvelle issue",
-#'         body = "Un nouveau bug pour la fonction...",
-#'         state = "open",
-#'         number = 1,
-#'         created_at = Sys.Date()
-#'     ),
-#'     new_issue(
-#'         title = "Une autre issue",
-#'         body = "J'ai une question au sujet de...",
-#'         state = "closed",
-#'         number = 2,
-#'         created_at = Sys.Date()
-#'     )
-#' ))
+#' issues4 <- new_issues(
+#'     title = c("Nouvelle issue", "Une autre issue"),
+#'     body = c("Un nouveau bug pour la fonction...",
+#'              "J'ai une question au sujet de..."),
+#'     state = c("open", "closed"),
+#'     number = 1:2,
+#'     created_at = Sys.Date()
+#' )
 #' @rdname new_issues
 #'
-new_issues <- function(x = list()) {
+new_issues <- function(x = NULL, ...) {
     UseMethod("new_issues", x)
 }
 
@@ -112,40 +217,128 @@ new_issues <- function(x = list()) {
 #' @exportS3Method new_issues IssueTB
 #' @method new_issues IssueTB
 #' @export
-new_issues.IssueTB <- function(x) {
-    issues <- list(x)
-    return(new_issues(x = issues))
+new_issues.IssueTB <- function(x, ...) {
+    x$comments <- list(x$comments)
+    x$labels <- list(x$labels)
+    issues <- do.call(args = x, what = new_issues)
+    return(issues)
 }
 
 #' @rdname new_issues
 #' @exportS3Method new_issues IssuesTB
 #' @method new_issues IssuesTB
 #' @export
-new_issues.IssuesTB <- function(x) {
+new_issues.IssuesTB <- function(x, ...) {
     return(x)
+}
+
+#' @rdname new_issues
+#' @exportS3Method new_issues data.frame
+#' @method new_issues data.frame
+#' @export
+new_issues.data.frame <- function(x, ...) {
+    issues <- do.call(args = x, what = new_issues)
+    return(issues)
+}
+
+#' @rdname new_issues
+#' @exportS3Method new_issues list
+#' @method new_issues list
+#' @export
+new_issues.list <- function(x, ...) {
+    issues <- do.call(args = x, what = new_issues)
+    return(issues)
 }
 
 #' @rdname new_issues
 #' @exportS3Method new_issues default
 #' @method new_issues default
 #' @export
-new_issues.default <- function(x = list()) {
-    class(x) <- "IssuesTB"
-    return(x)
-}
+new_issues.default <- function(
+    x,
+    title,
+    body,
+    number,
+    state,
+    created_at = Sys.Date(),
+    labels = list(),
+    comments = list(),
+    milestone = NA_character_,
+    repo = NA_character_,
+    owner = NA_character_,
+    url = NA_character_,
+    html_url = NA_character_,
+    creator = NA_character_,
+    assignee = NA_character_,
+    state_reason = NA_character_,
+    ...
+) {
+    if (missing(title) && missing(body) && missing(number) && missing(state)) {
+        title <- character(0L)
+        body <- character(0L)
+        number <- integer(0L)
+        state <- character(0L)
+        created_at <- format_timestamp(as.Date(character(0L)))
+        milestone <- character(0L)
+        repo <- character(0L)
+        owner <- character(0L)
+        url <- character(0L)
+        html_url <- character(0L)
+        creator <- character(0L)
+        assignee <- character(0L)
+        state_reason <- character(0L)
+    }
 
-#' @exportS3Method `[[` IssuesTB
-#' @method `[[` IssuesTB
-#' @export
-`[[.IssuesTB` <- function(x, ...) {
-    return(new_issue(issue = NextMethod()))
+    if (missing(labels)) {
+        labels <- rep(
+            x = list(list()),
+            times = length(title)
+        )
+    }
+    if (missing(comments)) {
+        comments <- rep(
+            x = list(data.frame(
+                text = character(0L),
+                author = character(0L),
+                stringsAsFactors = FALSE
+            )),
+            times = length(title)
+        )
+    }
+
+    issues <- data.frame(
+        number = as.integer(number),
+        title = title,
+        body = body,
+        state = state,
+        url = url,
+        html_url = html_url,
+        milestone = milestone,
+        created_at = format_timestamp(created_at),
+        creator = creator,
+        assignee = assignee,
+        state_reason = state_reason,
+        owner = owner,
+        repo = repo,
+        stringsAsFactors = FALSE
+    )
+    issues$labels <- labels
+    issues$comments <- comments
+
+    class(issues) <- c("IssuesTB", "data.frame")
+
+    return(issues)
 }
 
 #' @exportS3Method `[` IssuesTB
 #' @method `[` IssuesTB
 #' @export
-`[.IssuesTB` <- function(x, ...) {
-    return(new_issues(NextMethod()))
+`[.IssuesTB` <- function(x, i, j, ..., drop = TRUE) {
+    output <- new_issues(NextMethod())
+    if (drop && nrow(output) == 1L) {
+        return(new_issue(output))
+    }
+    return(output)
 }
 
 #' @exportS3Method `[<-` IssuesTB
@@ -162,13 +355,6 @@ new_issues.default <- function(x = list()) {
     return(new_issues(NextMethod()))
 }
 
-#' @exportS3Method c IssuesTB
-#' @method c IssuesTB
-#' @export
-c.IssuesTB <- function(...) {
-    return(new_issues(NextMethod()))
-}
-
 #' @rdname append
 #' @export
 #' @inherit base::append
@@ -181,11 +367,22 @@ append <- function(x, values, after = length(x)) {
 #' @param values a \code{IssueTB} or a \code{IssuesTB} object.
 #' @method append IssuesTB
 #' @export
-append.IssuesTB <- function(x, values, after) {
+append.IssuesTB <- function(x, values, after = nrow(x)) {
+    if (after > nrow(x)) {
+        after <- nrow(x)
+    }
+    if (after < 0L) {
+        after <- 0L
+    }
+
     if (inherits(values, "IssuesTB")) {
-        return(new_issues(NextMethod()))
+        return(rbind(
+            x[seq_len(after), , drop = FALSE],
+            values,
+            x[-seq_len(after), , drop = FALSE]
+        ))
     } else if (inherits(values, "IssueTB")) {
-        return(append(x, values = new_issues(values)))
+        return(append(x, values = new_issues(values), after = after))
     } else {
         stop(
             "This function requires a IssueTB or IssuesTB object ",
@@ -202,21 +399,62 @@ append.default <- function(x, values, after = length(x)) {
     base::append(x, values, after)
 }
 
+#' @exportS3Method rbind IssueTB
+#' @method rbind IssueTB
+#' @export
+rbind.IssueTB <- function(...) {
+    list(...) |>
+        lapply(FUN = new_issues) |>
+        do.call(what = rbind.data.frame) |>
+        new_issues()
+}
+
+#' @exportS3Method rbind IssuesTB
+#' @method rbind IssuesTB
+#' @export
+rbind.IssuesTB <- function(...) {
+    list(...) |>
+        lapply(FUN = new_issues) |>
+        do.call(what = rbind.data.frame) |>
+        new_issues()
+}
+
+#' @rdname sample
+#' @export
+#' @inherit base::sample
+sample <- function(x, size, replace = FALSE, prob = NULL) {
+    UseMethod("sample")
+}
+
+#' @rdname sample
+#' @exportS3Method sample IssuesTB
+#' @method sample IssuesTB
+#' @export
+sample.IssuesTB <- function(
+    x,
+    size = nrow(x),
+    replace = FALSE,
+    prob = NULL
+) {
+    selected_lines <- sample.int(
+        n = nrow(x),
+        size = size,
+        replace = replace,
+        prob = prob
+    )
+    return(x[selected_lines, , drop = FALSE])
+}
+
+#' @exportS3Method sample default
+#' @method sample default
+#' @export
+sample.default <- function(x, size, replace = FALSE, prob = NULL) {
+    base::sample(x = x, size = size, replace = replace, prob = prob)
+}
+
 #' @exportS3Method unique IssuesTB
 #' @method unique IssuesTB
 #' @export
 unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
-    saved_issues <- new_issues()
-    for (issue in x) {
-        is_in <- FALSE
-        for (already in saved_issues) {
-            if (identical(issue, already)) {
-                is_in <- TRUE
-            }
-        }
-        if (!is_in) {
-            saved_issues <- append(saved_issues, issue)
-        }
-    }
-    return(saved_issues)
+    return(x[!duplicated(x), ])
 }

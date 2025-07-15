@@ -2,39 +2,63 @@
 % Please edit documentation in R/wrangling_issues.R
 \name{new_issue}
 \alias{new_issue}
+\alias{new_issue.IssueTB}
+\alias{new_issue.data.frame}
+\alias{new_issue.list}
+\alias{new_issue.IssuesTB}
+\alias{new_issue.default}
 \title{Create a new \code{IssueTB} object}
 \usage{
-new_issue(
+new_issue(x = NULL, ...)
+
+\method{new_issue}{IssueTB}(x, ...)
+
+\method{new_issue}{data.frame}(x, ...)
+
+\method{new_issue}{list}(x, ...)
+
+\method{new_issue}{IssuesTB}(x, ...)
+
+\method{new_issue}{default}(
+  x,
   title,
   body,
   number,
   state = c("open", "closed"),
   created_at = Sys.Date(),
   labels = NULL,
-  milestone = NULL,
-  issue = list(),
-  repo = NULL,
-  owner = NULL,
+  milestone = NA_character_,
+  repo = NA_character_,
+  owner = NA_character_,
+  url = NA_character_,
+  html_url = NA_character_,
+  comments = NULL,
+  creator = NA_character_,
+  assignee = NA_character_,
+  state_reason = NA_character_,
   ...
 )
 }
 \arguments{
+\item{x}{a object representing an issue (\code{IssueTB} object, a \code{list}
+or a \code{data.frame})}
+
+\item{\dots}{Other information we would like to add to the issue.}
+
 \item{title}{a string. The title of the issue.}
 
-\item{body}{a string. The title of the issue.}
+\item{body}{a string. The body (text) of the issue.}
 
-\item{number}{a string. The title of the issue.}
+\item{number}{a string. The number of the issue.}
 
-\item{state}{a character string that is either \code{"open"} (by default) if
+\item{state}{a string that is either \code{"open"} (by default) if
 the issue is still open or \code{"closed"} if the issue is now closed.}
 
-\item{created_at}{a date. The title of the issue.}
+\item{created_at}{a date (or timestamp). The title of the issue.}
 
 \item{labels}{a vector string (or missing). The labels of the issue.}
 
 \item{milestone}{a string (or missing). The milestone of the issue.}
-
-\item{issue}{a list representing the object.}
 
 \item{repo}{A character string specifying the GitHub repository name (only
 taken into account if \code{source} is set to \code{"online"}).
@@ -44,7 +68,18 @@ Defaults to the package option \code{IssueTrackeR.repo}.}
 into account if \code{source} is set to \code{"online"}).
 Defaults to the package option \code{IssueTrackeR.owner}.}
 
-\item{\dots}{Other information we would like to add to the issue.}
+\item{url}{a string. The URL of the API to the GitHub issue.}
+
+\item{html_url}{a string. The URL to the GitHub issue.}
+
+\item{comments}{vector of string (the comments of the issue)}
+
+\item{creator}{a string. The GitHub username of the creator of the issue.}
+
+\item{assignee}{a string. The GitHub username of the assignee of the issue.}
+
+\item{state_reason}{a string. \code{"open"}, \code{"completed"},
+\code{"reopened"} or \code{"not_planned"}.}
 }
 \value{
 a \code{IssueTB} object.
@@ -53,18 +88,16 @@ a \code{IssueTB} object.
 Create a new \code{IssueTB} object
 }
 \examples{
-
 # Empty issue
 issue1 <- new_issue()
 
 # Custom issue
-issue2 <- new_issue(
+issue1 <- new_issue(
     title = "Nouvelle issue",
     body = "Un nouveau bug pour la fonction...",
     number = 47,
     created_at = Sys.Date()
 )
 
-issue3 <- new_issue(issue = issue2)
-
+issue2 <- new_issue(x = issue1)
 }

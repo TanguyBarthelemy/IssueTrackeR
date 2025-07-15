@@ -4,19 +4,86 @@
 \alias{new_issues}
 \alias{new_issues.IssueTB}
 \alias{new_issues.IssuesTB}
+\alias{new_issues.data.frame}
+\alias{new_issues.list}
 \alias{new_issues.default}
 \title{Create a new \code{IssuesTB} object}
 \usage{
-new_issues(x = list())
+new_issues(x = NULL, ...)
 
-\method{new_issues}{IssueTB}(x)
+\method{new_issues}{IssueTB}(x, ...)
 
-\method{new_issues}{IssuesTB}(x)
+\method{new_issues}{IssuesTB}(x, ...)
 
-\method{new_issues}{default}(x = list())
+\method{new_issues}{data.frame}(x, ...)
+
+\method{new_issues}{list}(x, ...)
+
+\method{new_issues}{default}(
+  x,
+  title,
+  body,
+  number,
+  state,
+  created_at = Sys.Date(),
+  labels = list(),
+  comments = list(),
+  milestone = NA_character_,
+  repo = NA_character_,
+  owner = NA_character_,
+  url = NA_character_,
+  html_url = NA_character_,
+  creator = NA_character_,
+  assignee = NA_character_,
+  state_reason = NA_character_,
+  ...
+)
 }
 \arguments{
-\item{x}{a list containing \code{IssueTB} objects}
+\item{x}{a object representing a list of issues (\code{IssuesTB} object, a
+\code{list} or a \code{data.frame})}
+
+\item{\dots}{Other information we would like to add to the issue.}
+
+\item{title}{a vector of string. The titles of the issues.}
+
+\item{body}{a vector of string. The bodies (text) of the issues.}
+
+\item{number}{a vector of string. The numbers of the issues.}
+
+\item{state}{a vector of string that is either \code{"open"} (by default) if
+the issues are still open or \code{"closed"} if the issues are now closed.}
+
+\item{created_at}{a vector of date (or timestamp). The creation dates of the
+issues.}
+
+\item{labels}{a list of vector string (or missing). The labels of the issues.}
+
+\item{comments}{a list of vector string. The comments of the issues.}
+
+\item{milestone}{a vector of string (or missing). The milestones of the
+issues.}
+
+\item{repo}{A character string specifying the GitHub repository name (only
+taken into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.repo}.}
+
+\item{owner}{A character string specifying the GitHub owner (only taken
+into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.owner}.}
+
+\item{url}{a vector of string. The URLs of the API to the GitHub issues.}
+
+\item{html_url}{a vector of string. The URLs to the GitHub issues.}
+
+\item{creator}{a vector of string. The GitHub usernames of the creator of the
+issues.}
+
+\item{assignee}{a vector of string. The GitHub usernames of the assignee of
+the issues.}
+
+\item{state_reason}{a vector of string. \code{"open"}, \code{"completed"},
+\code{"reopened"} or \code{"not_planned"}.}
 }
 \value{
 a \code{IssuesTB} object.
@@ -25,34 +92,34 @@ a \code{IssuesTB} object.
 Create a new \code{IssuesTB} object
 }
 \examples{
-
-# Empty issue
+# Empty list of issues
 issues1 <- new_issues()
 
-# Custom issue
-issues2 <- new_issues(
-    x = new_issue(
-        title = "Une autre issue",
-        body = "J'ai une question au sujet de...",
-        number = 2,
-        created_at = Sys.Date()
-    )
+# List of issues from issue
+issue1 <- new_issue(
+    title = "Une autre issue",
+    state = "open",
+    body = "J'ai une question au sujet de...",
+    number = 2,
+    created_at = Sys.Date()
+)
+issues2 <- new_issues(x = issue1)
+
+# Custom issues
+issues3 <- new_issues(
+    title = "Une autre issue",
+    state = "open",
+    body = "J'ai une question au sujet de...",
+    number = 2,
+    created_at = Sys.Date()
 )
 
-issues3 <- new_issues(x = list(
-    new_issue(
-        title = "Nouvelle issue",
-        body = "Un nouveau bug pour la fonction...",
-        state = "open",
-        number = 1,
-        created_at = Sys.Date()
-    ),
-    new_issue(
-        title = "Une autre issue",
-        body = "J'ai une question au sujet de...",
-        state = "closed",
-        number = 2,
-        created_at = Sys.Date()
-    )
-))
+issues4 <- new_issues(
+    title = c("Nouvelle issue", "Une autre issue"),
+    body = c("Un nouveau bug pour la fonction...",
+             "J'ai une question au sujet de..."),
+    state = c("open", "closed"),
+    number = 1:2,
+    created_at = Sys.Date()
+)
 }

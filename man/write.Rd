@@ -76,15 +76,25 @@ Depending on the object, the defaults value of the argument
 }
 }
 \examples{
-\donttest{
-all_issues <- get_issues(source = "online", verbose = FALSE)
-write_issues_to_dataset(all_issues)
+path <- system.file("data_issues", package = "IssueTrackeR")
+issues <- get_issues(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "list_issues.yaml"
+)
+milestones <- get_milestones(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "list_milestones.yaml"
+)
+labels <- get_labels(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "list_labels.yaml"
+)
 
-labels <- get_labels(source = "online")
+write_issues_to_dataset(issues)
 write_labels_to_dataset(labels)
-
-milestones <- get_milestones(source = "online")
 write_milestones_to_dataset(milestones)
-}
 
 }

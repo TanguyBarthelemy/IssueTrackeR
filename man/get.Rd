@@ -107,18 +107,24 @@ print(labels)
 
 milestones <- get_milestones(source = "online")
 print(milestones)
-
+}
 
 # From local
 
-# First update the local database
-update_database(verbose = TRUE)
-
-issues <- get_issues(source = "local",
-                     dataset_name = "open_issues.yaml",
-                     state = "open")
-labels <- get_labels(source = "local")
-milestones <- get_milestones(source = "local")
-}
-
+path <- system.file("data_issues", package = "IssueTrackeR")
+issues <- get_issues(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "list_issues.yaml"
+)
+milestones <- get_milestones(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "list_milestones.yaml"
+)
+labels <- get_labels(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "list_labels.yaml"
+)
 }

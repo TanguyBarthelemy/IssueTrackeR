@@ -1,0 +1,907 @@
+number:
+- 104
+- 236
+- 238
+- 51
+- 590
+- 38
+- 610
+- 658
+- 57
+- 112
+- 318
+- 283
+- 81
+- 326
+- 279
+- 97
+title:
+- Bump org.projectlombok:lombok from 1.18.28 to 1.18.30
+- Fix drag&drop from Excel
+- Missing chart export to SVG
+- theil2 slightly adapted
+- Summary info on pre-specified outliers not clear
+- Improve CsvInformationFormatter
+- Mode is 'Multiplicative' when transform function is 'None'
+- Migrate protobuf-maven-plugin from org.xolstice.maven.plugins to io.github.ascopes
+- Bump protobuf-java from 3.21.12 to 3.23.2
+- JWSACruncher and parameters `fullseriesname` and `refreshall`
+- Fix missing description field
+- Plot and display series if SA fail (and additionnal explanations)
+- Exporting and importing spec
+- Fix NPE in SaBatchUI renderer
+- Fix MissingResourceException in TsPeriodSelectorComponent
+- Bump spreadsheet4j.version from 2.5.2 to 2.5.3
+body:
+- |-
+  Bumps [org.projectlombok:lombok](https://github.com/projectlombok/lombok) from 1.18.28 to 1.18.30.
+  <details>
+  <summary>Changelog</summary>
+  <p><em>Sourced from <a href="https://github.com/projectlombok/lombok/blob/master/doc/changelog.markdown">org.projectlombok:lombok's changelog</a>.</em></p>
+  <blockquote>
+  <h3>v1.18.30 (September 20th, 2023)</h3>
+  <ul>
+  <li>PLATFORM: Initial JDK21 support added. [Issue <a href="https://redirect.github.com/projectlombok/lombok/issues/3393">#3393</a>](<a href="https://redirect.github.com/projectlombok/lombok/issues/3393">projectlombok/lombok#3393</a>).</li>
+  <li>BUGFIX: Any <code>@Helper</code> class directly in a method (and not nested more deeply) wouldn't work. [Issue <a href="https://redirect.github.com/projectlombok/lombok/issues/3370">#3370</a>](<a href="https://redirect.github.com/projectlombok/lombok/issues/3370">projectlombok/lombok#3370</a>).</li>
+  <li>BUGFIX: If using the module system and lombok is on the runtime classpath (shouldn't be, but happens), you'd get a split package error: <code>Package org.objectweb.asm in both module lombok and module org.objectweb.asm</code>. [Issue <a href="https://redirect.github.com/projectlombok/lombok/issues/3474">#3474</a>](<a href="https://redirect.github.com/projectlombok/lombok/issues/3474">projectlombok/lombok#3474</a>)</li>
+  <li>BUGFIX: Lombok wasn't properly copying the annotations it should be copying when generating methods in <code>record</code>s. [Issue <a href="https://redirect.github.com/projectlombok/lombok/issues/3315">#3315</a>](<a href="https://redirect.github.com/projectlombok/lombok/issues/3315">projectlombok/lombok#3315</a>).</li>
+  <li>BUGFIX: Delomboking anything with <code>@lombok.Singular</code> in it wouldn't remove that annotation. [Issue <a href="https://redirect.github.com/projectlombok/lombok/issues/1377">#1377</a>](<a href="https://redirect.github.com/projectlombok/lombok/issues/1377">projectlombok/lombok#1377</a>).</li>
+  <li>BUGFIX: Calling extension methods such that automatic widening is applied (i.e. calling <code>void ext(long arg)</code> with an <code>int</code>) would fail at runtime. [Issue <a href="https://redirect.github.com/projectlombok/lombok/issues/3463">#3463</a>](<a href="https://redirect.github.com/projectlombok/lombok/issues/3463">projectlombok/lombok#3463</a>).</li>
+  <li>BUGFIX: Extension methods can now be used in records. [Issue <a href="https://redirect.github.com/projectlombok/lombok/issues/3450">#3450</a>](<a href="https://redirect.github.com/projectlombok/lombok/issues/3450">projectlombok/lombok#3450</a>).</li>
+  <li>BUGFIX: <code>@Getter(lazy=true)</code> with complicated initialization expressions would fail on javac. [Issue <a href="https://redirect.github.com/projectlombok/lombok/issues/3314">#3314</a>](<a href="https://redirect.github.com/projectlombok/lombok/issues/3314">projectlombok/lombok#3314</a>).</li>
+  <li>BUGFIX: Using the maven surefire plugin with a <code>module-info.java</code> based project would fail with a <code>SurefireBooterForkException</code>. [Issue <a href="https://redirect.github.com/projectlombok/lombok/issues/3474">#3474</a>](<a href="https://redirect.github.com/projectlombok/lombok/issues/3474">projectlombok/lombok#3474</a>).</li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Commits</summary>
+  <ul>
+  <li><a href="https://github.com/projectlombok/lombok/commit/b118bea124bc5aef59cb0c5cac4a086e1e3d98f2"><code>b118bea</code></a> [release] pre-release version bump</li>
+  <li><a href="https://github.com/projectlombok/lombok/commit/7cbb5e9d4ad2a8e308711d0a9c59fc4f2c5292a8"><code>7cbb5e9</code></a> [fixes <a href="https://redirect.github.com/projectlombok/lombok/issues/3182">#3182</a>] [docs] Add a note about wonky equality definitions in the core ...</li>
+  <li><a href="https://github.com/projectlombok/lombok/commit/9bcaaafed4646ae750bf8d6ca7e3b1c549dc41f1"><code>9bcaaaf</code></a> [fixes <a href="https://redirect.github.com/projectlombok/lombok/issues/3474">#3474</a>] lombok.jar now contains zero paths that could clash with other ...</li>
+  <li><a href="https://github.com/projectlombok/lombok/commit/9ef9b58334fe5f861b44a0f76875f54fd24af20b"><code>9ef9b58</code></a> Add JDK 21 to test workflow</li>
+  <li><a href="https://github.com/projectlombok/lombok/commit/9f350ac78c50983141508339eb44f9989317be43"><code>9f350ac</code></a> Merge pull request <a href="https://redirect.github.com/projectlombok/lombok/issues/3503">#3503</a> from Rawi01/javac6-singular-test</li>
+  <li><a href="https://github.com/projectlombok/lombok/commit/e226cd357837e36c48a117793de3f91bbc644379"><code>e226cd3</code></a> Exclude failing test for javac &lt; 8</li>
+  <li><a href="https://github.com/projectlombok/lombok/commit/67cd7a6218d0989656674689e1795bb245470972"><code>67cd7a6</code></a> Merge pull request <a href="https://redirect.github.com/projectlombok/lombok/issues/3494">#3494</a> from Rawi01/enum-getter</li>
+  <li><a href="https://github.com/projectlombok/lombok/commit/6623e12fb221e5773beb0175f1a692dbb6e00074"><code>6623e12</code></a> Merge pull request <a href="https://redirect.github.com/projectlombok/lombok/issues/3486">#3486</a> from Rawi01/superbuilder-javadoc</li>
+  <li><a href="https://github.com/projectlombok/lombok/commit/28e5ddb075b61525ba686f3ed6ecbf7f762fc558"><code>28e5ddb</code></a> <a href="https://redirect.github.com/projectlombok/lombok/issues/3314">#3314</a> Add line to changelog</li>
+  <li><a href="https://github.com/projectlombok/lombok/commit/60ed4adfcee2416d757d312aa63281959ef06a9b"><code>60ed4ad</code></a> Merge pull request <a href="https://redirect.github.com/projectlombok/lombok/issues/3482">#3482</a> from Rawi01/getter-lazy</li>
+  <li>Additional commits viewable in <a href="https://github.com/projectlombok/lombok/compare/v1.18.28...v1.18.30">compare view</a></li>
+  </ul>
+  </details>
+  <br />
+
+
+  [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=org.projectlombok:lombok&package-manager=maven&previous-version=1.18.28&new-version=1.18.30)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+  Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+  [//]: # (dependabot-automerge-start)
+  [//]: # (dependabot-automerge-end)
+
+  ---
+
+  <details>
+  <summary>Dependabot commands and options</summary>
+  <br />
+
+  You can trigger Dependabot actions by commenting on this PR:
+  - `@dependabot rebase` will rebase this PR
+  - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+  - `@dependabot merge` will merge this PR after your CI passes on it
+  - `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+  - `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+  - `@dependabot reopen` will reopen this PR if it is closed
+  - `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+  - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+  - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+  - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+  - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+
+
+  </details>
+- ''
+- JD+ v2 is able to export a chart to SVG but v3 is not.
+- ''
+- |-
+  In the JD+ GUI, the user can insert 'pre-specified outliers' as shown below, and these can be fixed or non-fixed:
+
+  ![Image](https://github.com/user-attachments/assets/d4a65a9a-3173-4e67-80a3-1e1f4cdd7ee7)
+
+  If the user then looks at the **Summary** section of the **Main **results**** section in the output area for the series, the labelling for these pre-specified outliers is confusing:
+
+  ![Image](https://github.com/user-attachments/assets/13e3bb60-a0f3-4905-839c-5ece0d7bc286)
+
+  In this summary section, the fixed outliers (only) have been separated out. But because it firstly says '2 pre-specified outliers', it seems as though there are only 2 in total. However, all types of outliers, whether fixed or not, should be deemed 'pre-specified outliers', because they must be specified by the user in advance.
+
+  It would be better to display the information similar to below:
+
+  ```
+  3 pre-specified outliers
+  2 non-fixed [or say 'estimated' instead]
+  1 fixed
+  ```
+
+  There should also be a newline between 'No easter effect' and '2 pre-specified outliers' in the example above to further improve comprehension of the information about outliers.
+
+  Note there is further confusion when auto-outliering is enabled. If I switch it on for the example above, it now seems there are only 2 outliers: 1 that is detected, and 1 that is fixed:
+
+  ![Image](https://github.com/user-attachments/assets/f3b8fb2f-3b4f-4359-a43e-f99854d16f38)
+
+  My suggestion is as follows (noting importantly the newlines):
+
+  ```
+  4 outliers total
+
+  1 detected outlier [or say 'automatically inserted' instead to be clearer; 'detected' means 'identified', it doesn't mean 'identified and corrected']
+
+  3 pre-specified outliers
+  2 non-fixed
+  1 fixed
+  ```
+
+  If newlines aren't acceptable, then perhaps the following is best (that is, just ignore the fixed vs non-fixed distinction):
+
+  ```
+  4 outliers total
+  1 automatic outlier
+  3 pre-specified outliers
+  ```
+- ''
+- |-
+  My additive series has regarima.transform.function = 'None', but x11.mode is 'Multiplicative':
+  ![Image](https://github.com/user-attachments/assets/6934cd41-6613-43d7-8903-3f2deb923f70)
+
+  This is the same series with regarima.transform.function = 'Log', and x11.mode is also 'Multiplicative':
+  ![Image](https://github.com/user-attachments/assets/7fc1e851-4e78-4bc7-8749-6c0c207e0bd6)
+
+  In my first screenshot, it appears the seasonal adjustment is additive as appropriate. Can you confirm this is the case (i.e. that x11.mode = 'Multiplicative' isn't affecting it)?
+
+  Is there any way to change x11.mode to 'Additive' through the GUI? When I select transform.function = 'None', the x11.mode option disappears.
+- "From https://github.com/xolstice/protobuf-maven-plugin/ \n\n> This project is no
+  longer being maintained, and no further contributions will be considered.\n> \n>
+  Please consider switching to alternatives, such as:\n> https://github.com/ascopes/protobuf-maven-plugin\n> "
+- |-
+  Bumps [protobuf-java](https://github.com/protocolbuffers/protobuf) from 3.21.12 to 3.23.2.
+  <details>
+  <summary>Commits</summary>
+  <ul>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/a74f54b724bdc2fe0bfc271f4dc0ceb159805625"><code>a74f54b</code></a> Updating version.json and repo version numbers to: 23.2</li>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/45ddc11b507d2ed19edfd4ce0695326398a15bda"><code>45ddc11</code></a> Update upb dependency (<a href="https://redirect.github.com/protocolbuffers/protobuf/issues/12907">#12907</a>)</li>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/91e5e6e76d724b8a459d6c87079e76b3f174db32"><code>91e5e6e</code></a> Merge pull request <a href="https://redirect.github.com/protocolbuffers/protobuf/issues/12906">#12906</a> from mkruskal-google/java-fix-23</li>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/b556b8871cd07971b09df7b73ff6a461d78560fb"><code>b556b88</code></a> Automated rollback of commit 4d76f12a82bc53cc2d846e65dd8c4bce6c1d4645.</li>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/ab367ad73d27fd6da9f352038e4a5d618fa6e47a"><code>ab367ad</code></a> Merge pull request <a href="https://redirect.github.com/protocolbuffers/protobuf/issues/12852">#12852</a> from fowles/23.x</li>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/5bc7e020363a5f2bc98f310a2cbdc1214f94889c"><code>5bc7e02</code></a> fix missing int32_t (<a href="https://redirect.github.com/protocolbuffers/protobuf/issues/12554">#12554</a>)</li>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/a171d20df326b554497963c3bf7719e4e38061c3"><code>a171d20</code></a> Merge pull request <a href="https://redirect.github.com/protocolbuffers/protobuf/issues/12845">#12845</a> from protocolbuffers/23.x-202305171614</li>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/3cda141b4d6212f73baade23ef5b975342d7a60b"><code>3cda141</code></a> Updating version.json to: 23.2-dev</li>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/2dca62f7296e5b49d729f7384f975cecb38382a0"><code>2dca62f</code></a> Updating version.json and repo version numbers to: 23.1</li>
+  <li><a href="https://github.com/protocolbuffers/protobuf/commit/aee33a56892d1657651aa6ac72e40877d6033c60"><code>aee33a5</code></a> Updated upb dependency. (<a href="https://redirect.github.com/protocolbuffers/protobuf/issues/12836">#12836</a>)</li>
+  <li>Additional commits viewable in <a href="https://github.com/protocolbuffers/protobuf/compare/v3.21.12...v3.23.2">compare view</a></li>
+  </ul>
+  </details>
+  <br />
+
+
+  [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=com.google.protobuf:protobuf-java&package-manager=maven&previous-version=3.21.12&new-version=3.23.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+  Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+  [//]: # (dependabot-automerge-start)
+  [//]: # (dependabot-automerge-end)
+
+  ---
+
+  <details>
+  <summary>Dependabot commands and options</summary>
+  <br />
+
+  You can trigger Dependabot actions by commenting on this PR:
+  - `@dependabot rebase` will rebase this PR
+  - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+  - `@dependabot merge` will merge this PR after your CI passes on it
+  - `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+  - `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+  - `@dependabot reopen` will reopen this PR if it is closed
+  - `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+  - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+  - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+  - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+
+
+  </details>
+- "I tried the following parameters files an a workspace with data created by an Excel
+  file and it has no effect. Are the parameters `fullseriesname` and `refreshall`
+  suppose to work in the JWSACruncher? Am I doing something wrong?\r\n```\r\n<?xml
+  version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<wsaConfig bundle=\"10000\"
+  csvlayout=\"vtable\" csvseparator=\";\" ndecs=\"6\" fullseriesname=\"false\" rsltnamelevel=\"2\"
+  format=\"JD3\">\r\n    <policy>parameters</policy>\r\n    <refreshall>true</refreshall>\r\n
+  \   <matrix>\r\n        <item>period</item>\r\n        <item>log</item>\r\n    </matrix>\r\n
+  \   <tsmatrix>\r\n        <series>y</series>\r\n        <series>sa</series>\r\n
+  \   </tsmatrix>\r\n</wsaConfig>\r\n```\r\nAnd\r\n```\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"
+  standalone=\"yes\"?>\r\n<wsaConfig bundle=\"10000\" csvlayout=\"vtable\" csvseparator=\";\"
+  ndecs=\"6\" fullseriesname=\"true\" rsltnamelevel=\"2\" format=\"JD3\">\r\n    <policy>parameters</policy>\r\n
+  \   <refreshall>false</refreshall>\r\n    <matrix>\r\n        <item>period</item>\r\n
+  \       <item>log</item>\r\n    </matrix>\r\n    <tsmatrix>\r\n        <series>y</series>\r\n
+  \       <series>sa</series>\r\n    </tsmatrix>\r\n</wsaConfig>\r\n```\r\n"
+- ''
+- "(Issue related to jdemetra/jdemetra-core#1129)\r\n\r\nIf the seasonnal adjustment
+  fails, I can't neither plot nor see my values.\r\n\r\nFor example here, I have a
+  dataset with 11 values so the seasonal adjustment will obviously fail:\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/818fc2b7-9885-4627-8edc-b11553b95cf4)\r\n\r\nSo
+  the **Status** is **invalid** (obviously), but as you can see there is no message,
+  warning or error in the **Main results** panel:\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/40f9b633-b7cc-4907-b8dc-66bc15cc8379)\r\n\r\nIn
+  addition to that, the Input/Series and Input/Specifications panels are also empty:\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/4a04a661-10ca-4cab-8814-6d4eb20c66d9)\r\n\r\nI
+  would like to see my data (grid and plot) and to know why the seasonal adjustment
+  failed.\r\n\r\n"
+- "In version 2 with the package **RJDemetra**, there are 2 functions `load_spec`
+  and `save_spec` to save and use again a specification. But the saving and re-loading
+  process are using a `.RData` format which is not very convenient to work with JDemetra+.\r\n\r\nIn
+  the GUI, it already exists **Import** and **Export** methods which are using the
+  `.cfgx` format.\r\n\r\nSo I found this piece of code in jdplus-main:\r\n\r\nhttps://github.com/jdemetra/jdplus-main/blob/1a19d8b2d7d91110873773f30168eacc8fdb88e1/jdplus-main-desktop/jdplus-toolkit-desktop-plugin/src/main/java/jdplus/toolkit/desktop/plugin/core/interchange/FileBroker.java#L52-L58\r\n\r\nBut
+  I don't know how to use it with spec objects (with `.jcall` in R for example)...\r\n\r\nThank
+  you!"
+- "IDE log:\r\n```\r\njava.lang.NullPointerException: Cannot invoke \"jdplus.toolkit.base.api.processing.ProcessingLog.all()\"
+  because the return value of \"jdplus.sa.base.api.SaEstimation.getLog()\" is null\r\n
+  \              at jdplus.sa.desktop.plugin.multiprocessing.ui.SaBatchUI$WarningsRenderer.getTableCellRendererComponent(SaBatchUI.java:1165)\r\n
+  \              at java.desktop/javax.swing.JTable.prepareRenderer(Unknown Source)\r\n```"
+- "Move jdplus-main-desktop/jdplus-toolkit-desktop-plugin/src/main/resources/jdplus/toolkit/desktop/plugin/properties/Bundle.properties
+  to jdplus-main-desktop/jdplus-toolkit-desktop-plugin/src/main/resources/jdplus/toolkit/desktop/plugin/core/properties/Bundle.properties\r\n\r\n"
+- |-
+  Bumps `spreadsheet4j.version` from 2.5.2 to 2.5.3.
+  Updates `com.github.nbbrd.spreadsheet4j:spreadsheet-api` from 2.5.2 to 2.5.3
+  <details>
+  <summary>Release notes</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/releases">com.github.nbbrd.spreadsheet4j:spreadsheet-api's releases</a>.</em></p>
+  <blockquote>
+  <h2>Release v2.5.3</h2>
+  <h2><a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">2.5.3</a> - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Changelog</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/blob/develop/CHANGELOG.md">com.github.nbbrd.spreadsheet4j:spreadsheet-api's changelog</a>.</em></p>
+  <blockquote>
+  <h2>[2.5.3] - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove <code>spreadsheet-xl</code> dependency from <code>spreadsheet-poi</code></li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Commits</summary>
+  <ul>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/a149d820c2d018480ecf63fced7585dac6ba7f5e"><code>a149d82</code></a> Merge branch 'develop'</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/8dac4011554bcb486adc96635678772f228ef6ea"><code>8dac401</code></a> Update versions for release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/25076c77fe8a32d82124db06045fcf6e328d80fd"><code>25076c7</code></a> Update CHANGELOG.md for next release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/861cc7e0ace6cce6b7cd25c33945abf25d7fdbe9"><code>861cc7e</code></a> Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/04b7a5b7b4c22b518ba12ed4c47dcd9f52b44a9d"><code>04b7a5b</code></a> Pom cleanup</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/48dafcfc9e7f97612125edd94e4a887ba22a1710"><code>48dafcf</code></a> Add missing entries in CHANGELOG.md</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0f8f668b89c2c3a5b1033e2a745c3c3e1fb895"><code>4d0f8f6</code></a> Bump org.jreleaser:jreleaser-maven-plugin from 1.7.0 to 1.8.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0298cd1964b8f7deb33aeadbaf14b72c695dba"><code>4d0298c</code></a> Bump org.dhatim:fastexcel from 0.15.6 to 0.15.7</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/b528e4f0ceb18edef5680758062e94486d85d206"><code>b528e4f</code></a> Bump org.checkerframework:checker-qual from 3.36.0 to 3.37.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/cde9af4a53186afe734c85e624b0f673563d636e"><code>cde9af4</code></a> Bump org.apache.maven.plugins:maven-enforcer-plugin from 3.3.0 to 3.4.0</li>
+  <li>Additional commits viewable in <a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">compare view</a></li>
+  </ul>
+  </details>
+  <br />
+
+  Updates `com.github.nbbrd.spreadsheet4j:spreadsheet-xmlss` from 2.5.2 to 2.5.3
+  <details>
+  <summary>Release notes</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/releases">com.github.nbbrd.spreadsheet4j:spreadsheet-xmlss's releases</a>.</em></p>
+  <blockquote>
+  <h2>Release v2.5.3</h2>
+  <h2><a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">2.5.3</a> - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Changelog</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/blob/develop/CHANGELOG.md">com.github.nbbrd.spreadsheet4j:spreadsheet-xmlss's changelog</a>.</em></p>
+  <blockquote>
+  <h2>[2.5.3] - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove <code>spreadsheet-xl</code> dependency from <code>spreadsheet-poi</code></li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Commits</summary>
+  <ul>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/a149d820c2d018480ecf63fced7585dac6ba7f5e"><code>a149d82</code></a> Merge branch 'develop'</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/8dac4011554bcb486adc96635678772f228ef6ea"><code>8dac401</code></a> Update versions for release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/25076c77fe8a32d82124db06045fcf6e328d80fd"><code>25076c7</code></a> Update CHANGELOG.md for next release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/861cc7e0ace6cce6b7cd25c33945abf25d7fdbe9"><code>861cc7e</code></a> Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/04b7a5b7b4c22b518ba12ed4c47dcd9f52b44a9d"><code>04b7a5b</code></a> Pom cleanup</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/48dafcfc9e7f97612125edd94e4a887ba22a1710"><code>48dafcf</code></a> Add missing entries in CHANGELOG.md</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0f8f668b89c2c3a5b1033e2a745c3c3e1fb895"><code>4d0f8f6</code></a> Bump org.jreleaser:jreleaser-maven-plugin from 1.7.0 to 1.8.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0298cd1964b8f7deb33aeadbaf14b72c695dba"><code>4d0298c</code></a> Bump org.dhatim:fastexcel from 0.15.6 to 0.15.7</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/b528e4f0ceb18edef5680758062e94486d85d206"><code>b528e4f</code></a> Bump org.checkerframework:checker-qual from 3.36.0 to 3.37.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/cde9af4a53186afe734c85e624b0f673563d636e"><code>cde9af4</code></a> Bump org.apache.maven.plugins:maven-enforcer-plugin from 3.3.0 to 3.4.0</li>
+  <li>Additional commits viewable in <a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">compare view</a></li>
+  </ul>
+  </details>
+  <br />
+
+  Updates `com.github.nbbrd.spreadsheet4j:spreadsheet-od` from 2.5.2 to 2.5.3
+  <details>
+  <summary>Release notes</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/releases">com.github.nbbrd.spreadsheet4j:spreadsheet-od's releases</a>.</em></p>
+  <blockquote>
+  <h2>Release v2.5.3</h2>
+  <h2><a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">2.5.3</a> - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Changelog</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/blob/develop/CHANGELOG.md">com.github.nbbrd.spreadsheet4j:spreadsheet-od's changelog</a>.</em></p>
+  <blockquote>
+  <h2>[2.5.3] - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove <code>spreadsheet-xl</code> dependency from <code>spreadsheet-poi</code></li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Commits</summary>
+  <ul>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/a149d820c2d018480ecf63fced7585dac6ba7f5e"><code>a149d82</code></a> Merge branch 'develop'</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/8dac4011554bcb486adc96635678772f228ef6ea"><code>8dac401</code></a> Update versions for release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/25076c77fe8a32d82124db06045fcf6e328d80fd"><code>25076c7</code></a> Update CHANGELOG.md for next release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/861cc7e0ace6cce6b7cd25c33945abf25d7fdbe9"><code>861cc7e</code></a> Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/04b7a5b7b4c22b518ba12ed4c47dcd9f52b44a9d"><code>04b7a5b</code></a> Pom cleanup</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/48dafcfc9e7f97612125edd94e4a887ba22a1710"><code>48dafcf</code></a> Add missing entries in CHANGELOG.md</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0f8f668b89c2c3a5b1033e2a745c3c3e1fb895"><code>4d0f8f6</code></a> Bump org.jreleaser:jreleaser-maven-plugin from 1.7.0 to 1.8.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0298cd1964b8f7deb33aeadbaf14b72c695dba"><code>4d0298c</code></a> Bump org.dhatim:fastexcel from 0.15.6 to 0.15.7</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/b528e4f0ceb18edef5680758062e94486d85d206"><code>b528e4f</code></a> Bump org.checkerframework:checker-qual from 3.36.0 to 3.37.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/cde9af4a53186afe734c85e624b0f673563d636e"><code>cde9af4</code></a> Bump org.apache.maven.plugins:maven-enforcer-plugin from 3.3.0 to 3.4.0</li>
+  <li>Additional commits viewable in <a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">compare view</a></li>
+  </ul>
+  </details>
+  <br />
+
+  Updates `com.github.nbbrd.spreadsheet4j:spreadsheet-xl` from 2.5.2 to 2.5.3
+  <details>
+  <summary>Release notes</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/releases">com.github.nbbrd.spreadsheet4j:spreadsheet-xl's releases</a>.</em></p>
+  <blockquote>
+  <h2>Release v2.5.3</h2>
+  <h2><a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">2.5.3</a> - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Changelog</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/blob/develop/CHANGELOG.md">com.github.nbbrd.spreadsheet4j:spreadsheet-xl's changelog</a>.</em></p>
+  <blockquote>
+  <h2>[2.5.3] - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove <code>spreadsheet-xl</code> dependency from <code>spreadsheet-poi</code></li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Commits</summary>
+  <ul>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/a149d820c2d018480ecf63fced7585dac6ba7f5e"><code>a149d82</code></a> Merge branch 'develop'</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/8dac4011554bcb486adc96635678772f228ef6ea"><code>8dac401</code></a> Update versions for release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/25076c77fe8a32d82124db06045fcf6e328d80fd"><code>25076c7</code></a> Update CHANGELOG.md for next release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/861cc7e0ace6cce6b7cd25c33945abf25d7fdbe9"><code>861cc7e</code></a> Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/04b7a5b7b4c22b518ba12ed4c47dcd9f52b44a9d"><code>04b7a5b</code></a> Pom cleanup</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/48dafcfc9e7f97612125edd94e4a887ba22a1710"><code>48dafcf</code></a> Add missing entries in CHANGELOG.md</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0f8f668b89c2c3a5b1033e2a745c3c3e1fb895"><code>4d0f8f6</code></a> Bump org.jreleaser:jreleaser-maven-plugin from 1.7.0 to 1.8.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0298cd1964b8f7deb33aeadbaf14b72c695dba"><code>4d0298c</code></a> Bump org.dhatim:fastexcel from 0.15.6 to 0.15.7</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/b528e4f0ceb18edef5680758062e94486d85d206"><code>b528e4f</code></a> Bump org.checkerframework:checker-qual from 3.36.0 to 3.37.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/cde9af4a53186afe734c85e624b0f673563d636e"><code>cde9af4</code></a> Bump org.apache.maven.plugins:maven-enforcer-plugin from 3.3.0 to 3.4.0</li>
+  <li>Additional commits viewable in <a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">compare view</a></li>
+  </ul>
+  </details>
+  <br />
+
+  Updates `com.github.nbbrd.spreadsheet4j:spreadsheet-html` from 2.5.2 to 2.5.3
+  <details>
+  <summary>Release notes</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/releases">com.github.nbbrd.spreadsheet4j:spreadsheet-html's releases</a>.</em></p>
+  <blockquote>
+  <h2>Release v2.5.3</h2>
+  <h2><a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">2.5.3</a> - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Changelog</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/blob/develop/CHANGELOG.md">com.github.nbbrd.spreadsheet4j:spreadsheet-html's changelog</a>.</em></p>
+  <blockquote>
+  <h2>[2.5.3] - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove <code>spreadsheet-xl</code> dependency from <code>spreadsheet-poi</code></li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Commits</summary>
+  <ul>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/a149d820c2d018480ecf63fced7585dac6ba7f5e"><code>a149d82</code></a> Merge branch 'develop'</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/8dac4011554bcb486adc96635678772f228ef6ea"><code>8dac401</code></a> Update versions for release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/25076c77fe8a32d82124db06045fcf6e328d80fd"><code>25076c7</code></a> Update CHANGELOG.md for next release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/861cc7e0ace6cce6b7cd25c33945abf25d7fdbe9"><code>861cc7e</code></a> Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/04b7a5b7b4c22b518ba12ed4c47dcd9f52b44a9d"><code>04b7a5b</code></a> Pom cleanup</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/48dafcfc9e7f97612125edd94e4a887ba22a1710"><code>48dafcf</code></a> Add missing entries in CHANGELOG.md</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0f8f668b89c2c3a5b1033e2a745c3c3e1fb895"><code>4d0f8f6</code></a> Bump org.jreleaser:jreleaser-maven-plugin from 1.7.0 to 1.8.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0298cd1964b8f7deb33aeadbaf14b72c695dba"><code>4d0298c</code></a> Bump org.dhatim:fastexcel from 0.15.6 to 0.15.7</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/b528e4f0ceb18edef5680758062e94486d85d206"><code>b528e4f</code></a> Bump org.checkerframework:checker-qual from 3.36.0 to 3.37.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/cde9af4a53186afe734c85e624b0f673563d636e"><code>cde9af4</code></a> Bump org.apache.maven.plugins:maven-enforcer-plugin from 3.3.0 to 3.4.0</li>
+  <li>Additional commits viewable in <a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">compare view</a></li>
+  </ul>
+  </details>
+  <br />
+
+  Updates `com.github.nbbrd.spreadsheet4j:spreadsheet-fastexcel` from 2.5.2 to 2.5.3
+  <details>
+  <summary>Release notes</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/releases">com.github.nbbrd.spreadsheet4j:spreadsheet-fastexcel's releases</a>.</em></p>
+  <blockquote>
+  <h2>Release v2.5.3</h2>
+  <h2><a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">2.5.3</a> - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Changelog</summary>
+  <p><em>Sourced from <a href="https://github.com/nbbrd/spreadsheet4j/blob/develop/CHANGELOG.md">com.github.nbbrd.spreadsheet4j:spreadsheet-fastexcel's changelog</a>.</em></p>
+  <blockquote>
+  <h2>[2.5.3] - 2023-09-04</h2>
+  <h3>Fixed</h3>
+  <ul>
+  <li>Fix potential bugs related to system settings</li>
+  </ul>
+  <h3>Changed</h3>
+  <ul>
+  <li>Bump SODS from <a href="https://github.com/miachm/SODS/releases">1.5.1 to 1.6.2</a></li>
+  <li>Bump fastexcel from <a href="https://github.com/dhatim/fastexcel/releases">0.14.0 to 0.15.7</a></li>
+  <li>Bump jsoup from <a href="https://github.com/jhy/jsoup/blob/master/CHANGES">1.15.3 to 1.16.1</a></li>
+  <li>Remove <code>spreadsheet-xl</code> dependency from <code>spreadsheet-poi</code></li>
+  </ul>
+  </blockquote>
+  </details>
+  <details>
+  <summary>Commits</summary>
+  <ul>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/a149d820c2d018480ecf63fced7585dac6ba7f5e"><code>a149d82</code></a> Merge branch 'develop'</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/8dac4011554bcb486adc96635678772f228ef6ea"><code>8dac401</code></a> Update versions for release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/25076c77fe8a32d82124db06045fcf6e328d80fd"><code>25076c7</code></a> Update CHANGELOG.md for next release</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/861cc7e0ace6cce6b7cd25c33945abf25d7fdbe9"><code>861cc7e</code></a> Remove spreadsheet-xl dependency from spreadsheet-poi</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/04b7a5b7b4c22b518ba12ed4c47dcd9f52b44a9d"><code>04b7a5b</code></a> Pom cleanup</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/48dafcfc9e7f97612125edd94e4a887ba22a1710"><code>48dafcf</code></a> Add missing entries in CHANGELOG.md</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0f8f668b89c2c3a5b1033e2a745c3c3e1fb895"><code>4d0f8f6</code></a> Bump org.jreleaser:jreleaser-maven-plugin from 1.7.0 to 1.8.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/4d0298cd1964b8f7deb33aeadbaf14b72c695dba"><code>4d0298c</code></a> Bump org.dhatim:fastexcel from 0.15.6 to 0.15.7</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/b528e4f0ceb18edef5680758062e94486d85d206"><code>b528e4f</code></a> Bump org.checkerframework:checker-qual from 3.36.0 to 3.37.0</li>
+  <li><a href="https://github.com/nbbrd/spreadsheet4j/commit/cde9af4a53186afe734c85e624b0f673563d636e"><code>cde9af4</code></a> Bump org.apache.maven.plugins:maven-enforcer-plugin from 3.3.0 to 3.4.0</li>
+  <li>Additional commits viewable in <a href="https://github.com/nbbrd/spreadsheet4j/compare/v2.5.2...v2.5.3">compare view</a></li>
+  </ul>
+  </details>
+  <br />
+
+
+  Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+  [//]: # (dependabot-automerge-start)
+  [//]: # (dependabot-automerge-end)
+
+  ---
+
+  <details>
+  <summary>Dependabot commands and options</summary>
+  <br />
+
+  You can trigger Dependabot actions by commenting on this PR:
+  - `@dependabot rebase` will rebase this PR
+  - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+  - `@dependabot merge` will merge this PR after your CI passes on it
+  - `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+  - `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+  - `@dependabot reopen` will reopen this PR if it is closed
+  - `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+  - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+  - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+  - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+  - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+
+
+  </details>
+state:
+- closed
+- closed
+- closed
+- closed
+- open
+- closed
+- closed
+- closed
+- closed
+- open
+- closed
+- open
+- closed
+- closed
+- closed
+- closed
+url:
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/104
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/236
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/238
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/51
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/590
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/38
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/610
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/658
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/57
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/112
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/318
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/283
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/81
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/326
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/279
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/97
+html_url:
+- https://github.com/jdemetra/jdplus-main/pull/104
+- https://github.com/jdemetra/jdplus-main/pull/236
+- https://github.com/jdemetra/jdplus-main/issues/238
+- https://github.com/jdemetra/jdplus-main/pull/51
+- https://github.com/jdemetra/jdplus-main/issues/590
+- https://github.com/jdemetra/jdplus-main/pull/38
+- https://github.com/jdemetra/jdplus-main/issues/610
+- https://github.com/jdemetra/jdplus-main/issues/658
+- https://github.com/jdemetra/jdplus-main/pull/57
+- https://github.com/jdemetra/jdplus-main/issues/112
+- https://github.com/jdemetra/jdplus-main/pull/318
+- https://github.com/jdemetra/jdplus-main/issues/283
+- https://github.com/jdemetra/jdplus-main/issues/81
+- https://github.com/jdemetra/jdplus-main/issues/326
+- https://github.com/jdemetra/jdplus-main/pull/279
+- https://github.com/jdemetra/jdplus-main/pull/97
+milestone:
+- .na.character
+- .na.character
+- 3.2.2
+- .na.character
+- 3.6.0
+- .na.character
+- .na.character
+- 3.5.1
+- .na.character
+- .na.character
+- .na.character
+- 3.6.0
+- .na.character
+- 3.2.3
+- .na.character
+- .na.character
+created_at:
+- 1.695168e+09
+- 1.708992e+09
+- 1.7091648e+09
+- 1.6842816e+09
+- 1.743984e+09
+- 1.681776e+09
+- 1.7458848e+09
+- 1.7496864e+09
+- 1.6853184e+09
+- 1.6962912e+09
+- 1.7177184e+09
+- 1.7149536e+09
+- 1.6897248e+09
+- 1.7182368e+09
+- 1.7143488e+09
+- 1.6937856e+09
+creator:
+- dependabot[bot]
+- charphi
+- charphi
+- clemasso
+- a-s-russo
+- charphi
+- MichelleHedger
+- charphi
+- dependabot[bot]
+- AQLT
+- charphi
+- TanguyBarthelemy
+- TanguyBarthelemy
+- charphi
+- Immurb
+- dependabot[bot]
+assignee:
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- palatej
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- palatej
+- .na.character
+- charphi
+- .na.character
+- .na.character
+state_reason:
+- open
+- open
+- completed
+- open
+- open
+- open
+- completed
+- completed
+- open
+- reopened
+- open
+- open
+- completed
+- completed
+- open
+- open
+owner:
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+repo:
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+labels:
+- - name: dependencies
+    color: 0366d6
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/dependencies
+  - name: java
+    color: ffa221
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/java
+- []
+- - name: bug
+    color: d73a4a
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/bug
+- []
+- - name: enhancement
+    color: a2eeef
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/enhancement
+- []
+- []
+- - name: bug
+    color: d73a4a
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/bug
+- - name: dependencies
+    color: 0366d6
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/dependencies
+  - name: java
+    color: ffa221
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/java
+- - name: bug
+    color: d73a4a
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/bug
+- []
+- - name: bug
+    color: d73a4a
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/bug
+- []
+- - name: bug
+    color: d73a4a
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/bug
+- []
+- - name: dependencies
+    color: 0366d6
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/dependencies
+  - name: java
+    color: ffa221
+    url: https://api.github.com/repos/jdemetra/jdplus-main/labels/java
+comments:
+- text: '@dependabot rebase'
+  author: charphi
+- text: 'Fixes #197 '
+  author: charphi
+- text:
+  - "![image](https://github.com/jdemetra/jdplus-main/assets/8778378/501c9a0b-5c26-4887-ab17-76a0e125ec3f)\r\n"
+  - Fixed in 88049f80c13c1cca0052c81c5667224fd715bb02
+  author:
+  - charphi
+  - charphi
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - |-
+    If you use transform.function = 'None' the only possible x11.mode is 'Additive', and it is automatically chosen internally.
+
+    For reference #462 and #478
+
+    The relevant code for the decision:
+
+    https://github.com/jdemetra/jdplus-main/blob/d3063637277b051c02d0c5c2550918091be0fd39/jdplus-main-base/jdplus-x13-base-parent/jdplus-x13-base-core/src/main/java/jdplus/x13/base/core/x13/X13Kernel.java#L229-L254
+
+    The XML is as far as I am concerned not part of the external JDemetra API and can have strange information that are "cleaned" inside JDemetra.
+  - 'Even if it doesn''t generate any problem, I will changed the decomposition mode
+    to avoid misunderstanding. '
+  - Thanks for the explanation @Immurb and for the update @palatej. Much appreciated!
+  - |-
+    Hi @palatej and @Immurb. We have also noticed that when regarima.transform.function is changed in the GUI from 'None' to 'Log', x11.mode does not update to 'Multiplicative' automatically.
+
+    Presumably if regarima.transform.function = 'Log' and x11.mode = 'Additive' in the XML, the external JDemetra API sees this as 'Log' and 'Multiplicative', however could this also be changed as above to avoid misunderstanding? (I.e. if 'Log' is selected, X11.mode automatically changes to 'Multiplicative'?)
+  author:
+  - Immurb
+  - palatej
+  - MichelleHedger
+  - MichelleHedger
+- text: []
+  author: []
+- text: 'Superseded by #67.'
+  author: dependabot[bot]
+- text:
+  - 'Refreshall was fixed in 3.1.0 with f9a83377e3c3c0ef3f7793485504c471daf28ee6. '
+  - '@charphi @ChristianeHofer: so the fullseriesname parameter was also fixed in
+    3.1.0?'
+  - "The `fullseriesname` parameter is not currently used, and I don't know what @palatej
+    had in mind \U0001F604 "
+  - Then could you please reopen the issue since it is not completely solved? The
+    `fullseriesname` parameter must be associated to the "full series name" option
+    in the interface ("if false only the name of the series will be displayed")
+  - "Screenshot for reference:\r\n\r\n![Screenshot 2024-06-11 145010](https://github.com/jdemetra/jdplus-main/assets/8778378/309709ee-c4d8-4ded-a633-9bb2d043ae0e)\r\n"
+  author:
+  - ChristianeHofer
+  - AQLT
+  - charphi
+  - AQLT
+  - charphi
+- text: []
+  author: []
+- text: "I agree with @TanguyBarthelemy about the importance of this issue. In general,
+    regardless of the type of error, it is important to both:\r\n\r\n- clearly identify
+    that an error has been encountered (e.g. with a pop-up window, a message in the
+    status bar, or something similar); and\r\n- explain why the error was encountered
+    (if known).\r\n\r\nIn some other testing we have been conducting, we have experienced
+    a similar issue to Tanguy. Certain series and combinations of parameter settings
+    will yield a blank document when the seasonal adjustment processing fails, which
+    is not helpful in identifying the cause of our issue.\r\n\r\nNote that for single
+    documents, the user can't even see an 'Invalid' column, so it is even harder to
+    identify if an error has been raised compared to using multi-documents."
+  author: a-s-russo
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []

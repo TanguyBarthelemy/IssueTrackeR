@@ -7,7 +7,7 @@
 \usage{
 append(x, values, after = length(x))
 
-\method{append}{IssuesTB}(x, values, after)
+\method{append}{IssuesTB}(x, values, after = nrow(x))
 }
 \arguments{
 \item{x}{the vector the values are to be appended to.}
