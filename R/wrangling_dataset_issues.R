@@ -189,7 +189,8 @@ format_comments <- function(
             object = rep(
                 x = list(data.frame(
                     text = character(0L),
-                    author = character(0L)
+                    author = character(0L),
+                    stringsAsFactors = FALSE
                 )),
                 times = length(no_comment)
             ),

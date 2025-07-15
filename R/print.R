@@ -26,7 +26,7 @@
 #' print(all_issues[1:10, ])
 #'
 #' # Display the summary of one issue
-#' summary(all_issues[1, ])
+#' summary(all_issues[2, ])
 #'
 #' # Display the summary of
 #' summary(all_issues[1:10, ])
@@ -61,9 +61,14 @@ print.IssueTB <- function(x, ...) {
         substr(x = issue[["title"]], start = 1L, stop = 80L),
         "\n",
         crayon::underline("Text:\n"),
-        ifelse(test = nchar(issue[["body"]]) > 320L,
-               yes = paste0(substr(x = issue[["body"]], start = 1L, stop = 320L), "\n...\n"),
-               no = issue[["body"]]),
+        ifelse(
+            test = nchar(issue[["body"]]) > 320L,
+            yes = paste0(
+                substr(x = issue[["body"]], start = 1L, stop = 320L),
+                "\n...\n"
+            ),
+            no = issue[["body"]]
+        ),
         "\n",
         sep = ""
     )
@@ -175,9 +180,13 @@ print.summary.IssueTB <- function(x, ...) {
 print.summary.IssuesTB <- function(x, ...) {
     cat(
         crayon::bold(
-            if (x$nbr_issues == 0L) "No issues" else if (x$nbr_issues == 1L)
-                "There is 1 issue: " else
+            if (x$nbr_issues == 0L) {
+                "No issues"
+            } else if (x$nbr_issues == 1L) {
+                "There is 1 issue: "
+            } else {
                 paste("There are", x$nbr_issues, "issues:")
+            }
         ),
         paste0(
             "\n- ",

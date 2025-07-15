@@ -29,7 +29,7 @@ information with statistics by modalities.
 \examples{
 all_issues <- get_issues(
     source = "local",
-    dataset_dir = file.path(system.file("data_issues", package = "IssueTrackeR")),
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
     dataset_name = "list_issues.yaml"
 )
 

@@ -191,13 +191,13 @@ new_issue.default <- function(
 #' issues2 <- new_issues(x = issue1)
 #'
 #' # Custom issues
-# issues3 <- new_issues(
-#     title = "Une autre issue",
-#     state = "open",
-#     body = "J'ai une question au sujet de...",
-#     number = 2,
-#     created_at = Sys.Date()
-# )
+#' issues3 <- new_issues(
+#'     title = "Une autre issue",
+#'     state = "open",
+#'     body = "J'ai une question au sujet de...",
+#'     number = 2,
+#'     created_at = Sys.Date()
+#' )
 #'
 #' issues4 <- new_issues(
 #'     title = c("Nouvelle issue", "Une autre issue"),
@@ -299,7 +299,8 @@ new_issues.default <- function(
         comments <- rep(
             x = list(data.frame(
                 text = character(0L),
-                author = character(0L)
+                author = character(0L),
+                stringsAsFactors = FALSE
             )),
             times = length(title)
         )
@@ -367,8 +368,12 @@ append <- function(x, values, after = length(x)) {
 #' @method append IssuesTB
 #' @export
 append.IssuesTB <- function(x, values, after = nrow(x)) {
-    if (after > nrow(x)) after <- nrow(x)
-    if (after < 0L) after <- 0L
+    if (after > nrow(x)) {
+        after <- nrow(x)
+    }
+    if (after < 0L) {
+        after <- 0L
+    }
 
     if (inherits(values, "IssuesTB")) {
         return(rbind(
@@ -425,9 +430,20 @@ sample <- function(x, ...) {
 #' @exportS3Method sample IssuesTB
 #' @method sample IssuesTB
 #' @export
-sample.IssuesTB <- function(x, size = nrow(x), replace = FALSE, prob = NULL, ...) {
-    lines <- sample.int(n = nrow(x), size = size, replace = replace, prob = prob)
-    return(x[lines, , drop = FALSE])
+sample.IssuesTB <- function(
+    x,
+    size = nrow(x),
+    replace = FALSE,
+    prob = NULL,
+    ...
+) {
+    selected_lines <- sample.int(
+        n = nrow(x),
+        size = size,
+        replace = replace,
+        prob = prob
+    )
+    return(x[selected_lines, , drop = FALSE])
 }
 
 #' @exportS3Method sample default

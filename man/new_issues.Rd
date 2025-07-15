@@ -106,6 +106,13 @@ issue1 <- new_issue(
 issues2 <- new_issues(x = issue1)
 
 # Custom issues
+issues3 <- new_issues(
+    title = "Une autre issue",
+    state = "open",
+    body = "J'ai une question au sujet de...",
+    number = 2,
+    created_at = Sys.Date()
+)
 
 issues4 <- new_issues(
     title = c("Nouvelle issue", "Une autre issue"),

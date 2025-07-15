@@ -14,7 +14,7 @@
 #' @examples
 #' all_issues <- get_issues(
 #'     source = "local",
-#'     dataset_dir = file.path(system.file("data_issues", package = "IssueTrackeR")),
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
 #'     dataset_name = "list_issues.yaml"
 #' )
 #'
@@ -67,7 +67,9 @@ summary.IssueTB <- function(object, ...) {
                 123L
         }
 
-        object$label_color <- c("grey8", "ivory")[isDark(object$label_bgcolor) + 1L]
+        object$label_color <- c("grey8", "ivory")[
+            isDark(object$label_bgcolor) + 1L
+        ]
         object$label_url <- vapply(
             X = object$labels,
             FUN = `[[`,
