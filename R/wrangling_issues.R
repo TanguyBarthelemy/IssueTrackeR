@@ -443,10 +443,3 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL, ...) {
 unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
     return(x[!duplicated(x), ])
 }
-
-#' @exportS3Method length IssuesTB
-#' @method length IssuesTB
-#' @export
-length.IssuesTB <- function(x) {
-    return(nrow(x))
-}

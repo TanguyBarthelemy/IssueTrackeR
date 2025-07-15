@@ -31,9 +31,11 @@ This function displays an issue (\code{IssueTB} object) or a list of issues
 (\code{IssuesTB} object) with a formatted output.
 }
 \examples{
-
-\donttest{
-all_issues <- get_issues(source = "online", verbose = FALSE)
+all_issues <- get_issues(
+    source = "local",
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = "list_issues.yaml"
+)
 
 # Display one issue
 print(all_issues[1, ])
@@ -46,6 +48,4 @@ summary(all_issues[1, ])
 
 # Display the summary of
 summary(all_issues[1:10, ])
-}
-
 }

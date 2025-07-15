@@ -12,17 +12,17 @@
 #' @returns invisibly (with \code{invisible()}) \code{NULL}.
 #'
 #' @examples
-#'
-#' \donttest{
-#' all_issues <- get_issues(source = "online", verbose = FALSE)
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = file.path(system.file("data_issues", package = "IssueTrackeR")),
+#'     dataset_name = "list_issues.yaml"
+#' )
 #'
 #' # Summarise one issue
 #' summary(all_issues[1, ])
 #'
 #' # Summarise several issues
 #' summary(all_issues[1:10, ])
-#' }
-#'
 #' @rdname summary
 #'
 #' @exportS3Method summary IssueTB

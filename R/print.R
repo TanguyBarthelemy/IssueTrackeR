@@ -13,9 +13,11 @@
 #' @returns invisibly (with \code{invisible()}) \code{NULL}.
 #'
 #' @examples
-#'
-#' \donttest{
-#' all_issues <- get_issues(source = "online", verbose = FALSE)
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "list_issues.yaml"
+#' )
 #'
 #' # Display one issue
 #' print(all_issues[1, ])
@@ -28,8 +30,6 @@
 #'
 #' # Display the summary of
 #' summary(all_issues[1:10, ])
-#' }
-#'
 #' @rdname print
 #'
 #' @exportS3Method print IssueTB
