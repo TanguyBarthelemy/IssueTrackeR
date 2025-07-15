@@ -422,7 +422,6 @@ rbind.IssuesTB <- function(...) {
 #' @rdname sample
 #' @export
 #' @inherit base::sample
-#' @param \dots Other argument passed
 sample <- function(x, size, replace = FALSE, prob = NULL) {
     UseMethod("sample")
 }

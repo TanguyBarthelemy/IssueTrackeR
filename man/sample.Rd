@@ -19,8 +19,6 @@ sample(x, size, replace = FALSE, prob = NULL)
 
 \item{prob}{a vector of probability weights for obtaining the elements
     of the vector being sampled.}
-
-\item{\dots}{Other argument passed}
 }
 \value{
 For \code{sample} a vector of length \code{size} with elements
