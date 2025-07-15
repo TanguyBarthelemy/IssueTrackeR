@@ -77,12 +77,12 @@
 #'     dataset_dir = path,
 #'     dataset_name = "list_issues.yaml"
 #' )
-#' milestones <- get_issues(
+#' milestones <- get_milestones(
 #'     source = "local",
 #'     dataset_dir = path,
 #'     dataset_name = "list_milestones.yaml"
 #' )
-#' labels <- get_issues(
+#' labels <- get_labels(
 #'     source = "local",
 #'     dataset_dir = path,
 #'     dataset_name = "list_labels.yaml"
@@ -140,8 +140,10 @@ get_issues <- function(
         if (verbose) {
             message("The issues will be read from ", input_path, ".")
         }
+        raw_yaml <- yaml::read_yaml(file = input_path)
+        raw_yaml$comments <- lapply(X = raw_yaml$comments, FUN = as.data.frame)
         issues <- do.call(
-            args = yaml::read_yaml(file = input_path),
+            args = raw_yaml,
             what = new_issues
         )
     } else {
@@ -368,12 +370,12 @@ format_issues <- function(
 #'     dataset_dir = path,
 #'     dataset_name = "list_issues.yaml"
 #' )
-#' milestones <- get_issues(
+#' milestones <- get_milestones(
 #'     source = "local",
 #'     dataset_dir = path,
 #'     dataset_name = "list_milestones.yaml"
 #' )
-#' labels <- get_issues(
+#' labels <- get_labels(
 #'     source = "local",
 #'     dataset_dir = path,
 #'     dataset_name = "list_labels.yaml"

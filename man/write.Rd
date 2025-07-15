@@ -82,12 +82,12 @@ issues <- get_issues(
     dataset_dir = path,
     dataset_name = "list_issues.yaml"
 )
-milestones <- get_issues(
+milestones <- get_milestones(
     source = "local",
     dataset_dir = path,
     dataset_name = "list_milestones.yaml"
 )
-labels <- get_issues(
+labels <- get_labels(
     source = "local",
     dataset_dir = path,
     dataset_name = "list_labels.yaml"
