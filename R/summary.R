@@ -85,9 +85,9 @@ summary.IssueTB <- function(object, ...) {
 #' @export
 summary.IssuesTB <- function(object, ...) {
     state_table <- c(
-        open = "🟢 Open",
-        completed = "✔️ Completed",
-        not_planned = "🚫 Not planned"
+        open = "\U1F7E2 Open",
+        completed = "\U2714 Completed",
+        not_planned = "\U1F6AB Not planned"
     )
 
     x <- list(

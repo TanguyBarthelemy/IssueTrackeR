@@ -125,9 +125,9 @@ print.summary.IssueTB <- function(x, ...) {
         crayon::underline("State:"),
         " ",
         switch(x[["state_reason"]],
-               open = "🟢 Open",
-               completed = "✔️ Completed",
-               not_planned = "🚫 Not planned")
+               open = "\U1F7E2 Open",
+               completed = "\U2714 Completed",
+               not_planned = "\U1F6AB Not planned")
         ,
         "\n",
         crayon::underline("Nb comments:"),
