@@ -422,7 +422,8 @@ rbind.IssuesTB <- function(...) {
 #' @rdname sample
 #' @export
 #' @inherit base::sample
-sample <- function(x, ...) {
+#' @param \dots Other argument passed
+sample <- function(x, size, replace = FALSE, prob = NULL) {
     UseMethod("sample")
 }
 
@@ -434,8 +435,7 @@ sample.IssuesTB <- function(
     x,
     size = nrow(x),
     replace = FALSE,
-    prob = NULL,
-    ...
+    prob = NULL
 ) {
     selected_lines <- sample.int(
         n = nrow(x),
@@ -449,7 +449,7 @@ sample.IssuesTB <- function(
 #' @exportS3Method sample default
 #' @method sample default
 #' @export
-sample.default <- function(x, size, replace = FALSE, prob = NULL, ...) {
+sample.default <- function(x, size, replace = FALSE, prob = NULL) {
     base::sample(x = x, size = size, replace = replace, prob = prob)
 }
 

@@ -5,9 +5,9 @@
 \alias{sample.IssuesTB}
 \title{Random Samples and Permutations}
 \usage{
-sample(x, ...)
+sample(x, size, replace = FALSE, prob = NULL)
 
-\method{sample}{IssuesTB}(x, size = nrow(x), replace = FALSE, prob = NULL, ...)
+\method{sample}{IssuesTB}(x, size = nrow(x), replace = FALSE, prob = NULL)
 }
 \arguments{
 \item{x}{either a vector of one or more elements from which to choose,
@@ -19,6 +19,8 @@ sample(x, ...)
 
 \item{prob}{a vector of probability weights for obtaining the elements
     of the vector being sampled.}
+
+\item{\dots}{Other argument passed}
 }
 \value{
 For \code{sample} a vector of length \code{size} with elements

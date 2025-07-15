@@ -382,7 +382,7 @@ format_issues <- function(
 #'     dataset_name = "list_labels.yaml"
 #' )
 #'
-#' write_issues_to_dataset(all_issues)
+#' write_issues_to_dataset(issues)
 #' write_labels_to_dataset(labels)
 #' write_milestones_to_dataset(milestones)
 #'

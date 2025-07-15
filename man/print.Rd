@@ -44,7 +44,7 @@ print(all_issues[1, ])
 print(all_issues[1:10, ])
 
 # Display the summary of one issue
-summary(all_issues[1, ])
+summary(all_issues[2, ])
 
 # Display the summary of
 summary(all_issues[1:10, ])
