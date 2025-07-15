@@ -1,0 +1,65 @@
+name:
+- bug
+- dependencies
+- documentation
+- duplicate
+- enhancement
+- github_actions
+- good first issue
+- help wanted
+- invalid
+- java
+- question
+- wontfix
+description:
+- Something isn't working
+- Pull requests that update a dependency file
+- Improvements or additions to documentation
+- This issue or pull request already exists
+- New feature or request
+- Pull requests that update GitHub Actions code
+- Good for newcomers
+- Extra attention is needed
+- This doesn't seem right
+- Pull requests that update Java code
+- Further information is requested
+- This will not be worked on
+color:
+- d73a4a
+- 0366d6
+- 0075ca
+- cfd3d7
+- a2eeef
+- '000000'
+- 7057ff
+- 008672
+- e4e669
+- ffa221
+- d876e3
+- ffffff
+repo:
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+owner:
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra

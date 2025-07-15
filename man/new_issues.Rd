@@ -27,12 +27,12 @@ new_issues(x = NULL, ...)
   state,
   created_at = Sys.Date(),
   labels = list(),
+  comments = list(),
   milestone = NA_character_,
   repo = NA_character_,
   owner = NA_character_,
   url = NA_character_,
   html_url = NA_character_,
-  comments = list(),
   creator = NA_character_,
   assignee = NA_character_,
   state_reason = NA_character_,
@@ -59,6 +59,8 @@ issues.}
 
 \item{labels}{a list of vector string (or missing). The labels of the issues.}
 
+\item{comments}{a list of vector string. The comments of the issues.}
+
 \item{milestone}{a vector of string (or missing). The milestones of the
 issues.}
 
@@ -74,16 +76,14 @@ Defaults to the package option \code{IssueTrackeR.owner}.}
 
 \item{html_url}{a vector of string. The URLs to the GitHub issues.}
 
-\item{comments}{a list of vector string. The comments of the issues.}
-
 \item{creator}{a vector of string. The GitHub usernames of the creator of the
 issues.}
 
 \item{assignee}{a vector of string. The GitHub usernames of the assignee of
 the issues.}
 
-\item{state_reason}{a vector of string. \code{"open"}, \code{"completed"} or
-\code{"not_planned"}}
+\item{state_reason}{a vector of string. \code{"open"}, \code{"completed"},
+\code{"reopened"} or \code{"not_planned"}.}
 }
 \value{
 a \code{IssuesTB} object.
@@ -106,13 +106,6 @@ issue1 <- new_issue(
 issues2 <- new_issues(x = issue1)
 
 # Custom issues
-issues3 <- new_issues(
-    title = "Une autre issue",
-    state = "open",
-    body = "J'ai une question au sujet de...",
-    number = 2,
-    created_at = Sys.Date()
-)
 
 issues4 <- new_issues(
     title = c("Nouvelle issue", "Une autre issue"),

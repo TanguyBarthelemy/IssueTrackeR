@@ -16,8 +16,8 @@
 #' @param comments vector of string (the comments of the issue)
 #' @param creator a string. The GitHub username of the creator of the issue.
 #' @param assignee a string. The GitHub username of the assignee of the issue.
-#' @param state_reason a string. \code{"open"}, \code{"completed"} or
-#' \code{"not_planned"}
+#' @param state_reason a string. \code{"open"}, \code{"completed"},
+#' \code{"reopened"} or \code{"not_planned"}.
 #' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssueTB} object.
@@ -169,8 +169,8 @@ new_issue.default <- function(
 #'  issues.
 #' @param assignee a vector of string. The GitHub usernames of the assignee of
 #' the issues.
-#' @param state_reason a vector of string. \code{"open"}, \code{"completed"} or
-#' \code{"not_planned"}
+#' @param state_reason a vector of string. \code{"open"}, \code{"completed"},
+#' \code{"reopened"} or \code{"not_planned"}.
 #' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssuesTB} object.
@@ -191,13 +191,13 @@ new_issue.default <- function(
 #' issues2 <- new_issues(x = issue1)
 #'
 #' # Custom issues
-#' issues3 <- new_issues(
-#'     title = "Une autre issue",
-#'     state = "open",
-#'     body = "J'ai une question au sujet de...",
-#'     number = 2,
-#'     created_at = Sys.Date()
-#' )
+# issues3 <- new_issues(
+#     title = "Une autre issue",
+#     state = "open",
+#     body = "J'ai une question au sujet de...",
+#     number = 2,
+#     created_at = Sys.Date()
+# )
 #'
 #' issues4 <- new_issues(
 #'     title = c("Nouvelle issue", "Une autre issue"),
@@ -262,12 +262,12 @@ new_issues.default <- function(
     state,
     created_at = Sys.Date(),
     labels = list(),
+    comments = list(),
     milestone = NA_character_,
     repo = NA_character_,
     owner = NA_character_,
     url = NA_character_,
     html_url = NA_character_,
-    comments = list(),
     creator = NA_character_,
     assignee = NA_character_,
     state_reason = NA_character_,
@@ -279,16 +279,30 @@ new_issues.default <- function(
         number <- integer(0L)
         state <- character(0L)
         created_at <- format_timestamp(as.Date(character(0L)))
-        labels <- list()
         milestone <- character(0L)
         repo <- character(0L)
         owner <- character(0L)
         url <- character(0L)
         html_url <- character(0L)
-        comments <- list()
         creator <- character(0L)
         assignee <- character(0L)
         state_reason <- character(0L)
+    }
+
+    if (missing(labels)) {
+        labels <- rep(
+            x = list(list()),
+            times = length(title)
+        )
+    }
+    if (missing(comments)) {
+        comments <- rep(
+            x = list(data.frame(
+                text = character(0L),
+                author = character(0L)
+            )),
+            times = length(title)
+        )
     }
 
     issues <- data.frame(
@@ -380,14 +394,6 @@ append.default <- function(x, values, after = length(x)) {
     base::append(x, values, after)
 }
 
-#' @rdname rbind
-#' @export
-#' @inherit base::rbind
-rbind <- function(...) {
-    UseMethod("rbind")
-}
-
-#' @rdname rbind
 #' @exportS3Method rbind IssueTB
 #' @method rbind IssueTB
 #' @export
@@ -398,7 +404,6 @@ rbind.IssueTB <- function(...) {
         new_issues()
 }
 
-#' @rdname rbind
 #' @exportS3Method rbind IssuesTB
 #' @method rbind IssuesTB
 #' @export
@@ -409,11 +414,27 @@ rbind.IssuesTB <- function(...) {
         new_issues()
 }
 
-#' @exportS3Method rbind default
-#' @method rbind default
+#' @rdname sample
 #' @export
-rbind.default <- function(..., deparse.level = 1) {
-    base::rbind(..., deparse.level = deparse.level)
+#' @inherit base::sample
+sample <- function(x, ...) {
+    UseMethod("sample")
+}
+
+#' @rdname sample
+#' @exportS3Method sample IssuesTB
+#' @method sample IssuesTB
+#' @export
+sample.IssuesTB <- function(x, size = nrow(x), replace = FALSE, prob = NULL, ...) {
+    lines <- sample.int(n = nrow(x), size = size, replace = replace, prob = prob)
+    return(x[lines, , drop = FALSE])
+}
+
+#' @exportS3Method sample default
+#' @method sample default
+#' @export
+sample.default <- function(x, size, replace = FALSE, prob = NULL, ...) {
+    base::sample(x = x, size = size, replace = replace, prob = prob)
 }
 
 #' @exportS3Method unique IssuesTB
@@ -421,4 +442,11 @@ rbind.default <- function(..., deparse.level = 1) {
 #' @export
 unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
     return(x[!duplicated(x), ])
+}
+
+#' @exportS3Method length IssuesTB
+#' @method length IssuesTB
+#' @export
+length.IssuesTB <- function(x) {
+    return(nrow(x))
 }

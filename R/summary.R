@@ -37,44 +37,49 @@ summary.IssueTB <- function(object, ...) {
         "#",
         object[["number"]]
     )
-    object$nbr_comments <- length(object$comments)
-    object$label_name <- vapply(
-        X = object$labels,
-        FUN = `[[`,
-        "name",
-        FUN.VALUE = character(1L)
-    )
-    object$label_bgcolor <- paste0(
-        "#",
-        vapply(
+    object$nbr_comments <- nrow(object$comments)
+    object$has_labels <- length(object$labels) > 0L
+
+    if (object$has_labels) {
+        object$label_name <- vapply(
             X = object$labels,
             FUN = `[[`,
-            "color",
+            "name",
             FUN.VALUE = character(1L)
         )
-    )
+        object$label_bgcolor <- paste0(
+            "#",
+            vapply(
+                X = object$labels,
+                FUN = `[[`,
+                "color",
+                FUN.VALUE = character(1L)
+            )
+        )
 
-    isDark <- function(colr) {
-        apply(
-            X = grDevices::col2rgb(colr) * c(299L, 587L, 114L),
-            FUN = sum,
-            MARGIN = 2L
-        ) /
-            1000L <
-            123L
+        isDark <- function(colr) {
+            apply(
+                X = grDevices::col2rgb(colr) * c(299L, 587L, 114L),
+                FUN = sum,
+                MARGIN = 2L
+            ) /
+                1000L <
+                123L
+        }
+
+        object$label_color <- c("grey8", "ivory")[isDark(object$label_bgcolor) + 1L]
+        object$label_url <- vapply(
+            X = object$labels,
+            FUN = `[[`,
+            "url",
+            FUN.VALUE = character(1L)
+        ) |>
+            gsub(
+                pattern = "https://api.github.com/repos/",
+                replacement = "https://github.com/"
+            )
     }
 
-    object$label_color <- c("grey8", "ivory")[isDark(object$label_bgcolor) + 1L]
-    object$label_url <- vapply(
-        X = object$labels,
-        FUN = `[[`,
-        "url",
-        FUN.VALUE = character(1L)
-    ) |>
-        gsub(
-            pattern = "https://api.github.com/repos/",
-            replacement = "https://github.com/"
-        )
     class(object) <- "summary.IssueTB"
     return(object)
 }
@@ -86,6 +91,7 @@ summary.IssueTB <- function(object, ...) {
 summary.IssuesTB <- function(object, ...) {
     state_table <- c(
         open = "\U1F7E2 Open",
+        reopened = "\U267B Re-opened",
         completed = "\U2714 Completed",
         not_planned = "\U1F6AB Not planned"
     )

@@ -61,8 +61,10 @@ print.IssueTB <- function(x, ...) {
         substr(x = issue[["title"]], start = 1L, stop = 80L),
         "\n",
         crayon::underline("Text:\n"),
-        substr(x = issue[["body"]], start = 1L, stop = 320L),
-        "\n...\n\n",
+        ifelse(test = nchar(issue[["body"]]) > 320L,
+               yes = paste0(substr(x = issue[["body"]], start = 1L, stop = 320L), "\n...\n"),
+               no = issue[["body"]]),
+        "\n",
         sep = ""
     )
 
@@ -100,33 +102,37 @@ print.summary.IssueTB <- function(x, ...) {
         url = x[["html_url"]]
     ))
 
-    cat(crayon::underline("Labels:"), " ", sep = "")
+    if (x[["has_labels"]]) {
+        cat(crayon::underline("Labels:"), " ", sep = "")
+
+        cat(
+            vapply(
+                X = seq_along(x$labels),
+                FUN = function(k) {
+                    label_style <- combine_styles(
+                        make_style(x$label_color[k]),
+                        make_style(x$label_bgcolor[k], bg = TRUE)
+                    )
+                    cli::style_hyperlink(
+                        text = label_style(x$label_name[k]),
+                        url = x$label_url[k]
+                    )
+                },
+                FUN.VALUE = character(1L)
+            ),
+            sep = ", "
+        )
+
+        cat("\n")
+    }
 
     cat(
-        vapply(
-            X = seq_along(x$labels),
-            FUN = function(k) {
-                label_style <- combine_styles(
-                    make_style(x$label_color[k]),
-                    make_style(x$label_bgcolor[k], bg = TRUE)
-                )
-                cli::style_hyperlink(
-                    text = label_style(x$label_name[k]),
-                    url = x$label_url[k]
-                )
-            },
-            FUN.VALUE = character(1L)
-        ),
-        sep = ", "
-    )
-
-    cat(
-        "\n",
         crayon::underline("State:"),
         " ",
         switch(
             x[["state_reason"]],
             open = "\U1F7E2 Open",
+            reopened = "\U267B Re-opened",
             completed = "\U2714 Completed",
             not_planned = "\U1F6AB Not planned"
         ),

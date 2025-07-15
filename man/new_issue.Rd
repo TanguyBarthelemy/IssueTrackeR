@@ -78,8 +78,8 @@ Defaults to the package option \code{IssueTrackeR.owner}.}
 
 \item{assignee}{a string. The GitHub username of the assignee of the issue.}
 
-\item{state_reason}{a string. \code{"open"}, \code{"completed"} or
-\code{"not_planned"}}
+\item{state_reason}{a string. \code{"open"}, \code{"completed"},
+\code{"reopened"} or \code{"not_planned"}.}
 }
 \value{
 a \code{IssueTB} object.
