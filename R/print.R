@@ -124,11 +124,12 @@ print.summary.IssueTB <- function(x, ...) {
         "\n",
         crayon::underline("State:"),
         " ",
-        switch(x[["state_reason"]],
-               open = "\U1F7E2 Open",
-               completed = "\U2714 Completed",
-               not_planned = "\U1F6AB Not planned")
-        ,
+        switch(
+            x[["state_reason"]],
+            open = "\U1F7E2 Open",
+            completed = "\U2714 Completed",
+            not_planned = "\U1F6AB Not planned"
+        ),
         "\n",
         crayon::underline("Nb comments:"),
         " ",
@@ -168,9 +169,9 @@ print.summary.IssueTB <- function(x, ...) {
 print.summary.IssuesTB <- function(x, ...) {
     cat(
         crayon::bold(
-            if (x$nbr_issues == 0L) "No issues"
-            else if (x$nbr_issues == 1L) "There is 1 issue: "
-            else paste("There are", x$nbr_issues, "issues:")
+            if (x$nbr_issues == 0L) "No issues" else if (x$nbr_issues == 1L)
+                "There is 1 issue: " else
+                paste("There are", x$nbr_issues, "issues:")
         ),
         paste0(
             "\n- ",
