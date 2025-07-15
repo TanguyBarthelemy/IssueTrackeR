@@ -3,11 +3,17 @@
 \name{print.IssueTB}
 \alias{print.IssueTB}
 \alias{print.IssuesTB}
+\alias{print.summary.IssueTB}
+\alias{print.summary.IssuesTB}
 \title{Display IssueTB and IssuesTB object}
 \usage{
 \method{print}{IssueTB}(x, ...)
 
 \method{print}{IssuesTB}(x, ...)
+
+\method{print}{summary.IssueTB}(x, ...)
+
+\method{print}{summary.IssuesTB}(x, ...)
 }
 \arguments{
 \item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
@@ -30,10 +36,16 @@ This function displays an issue (\code{IssueTB} object) or a list of issues
 all_issues <- get_issues(source = "online", verbose = FALSE)
 
 # Display one issue
-print(all_issues[[1]])
+print(all_issues[1, ])
 
 # Display several issues
-print(all_issues[1:10])
+print(all_issues[1:10, ])
+
+# Display the summary of one issue
+summary(all_issues[1, ])
+
+# Display the summary of
+summary(all_issues[1:10, ])
 }
 
 }

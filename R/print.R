@@ -18,10 +18,16 @@
 #' all_issues <- get_issues(source = "online", verbose = FALSE)
 #'
 #' # Display one issue
-#' print(all_issues[[1]])
+#' print(all_issues[1, ])
 #'
 #' # Display several issues
-#' print(all_issues[1:10])
+#' print(all_issues[1:10, ])
+#'
+#' # Display the summary of one issue
+#' summary(all_issues[1, ])
+#'
+#' # Display the summary of
+#' summary(all_issues[1:10, ])
 #' }
 #'
 #' @rdname print
@@ -33,28 +39,25 @@
 print.IssueTB <- function(x, ...) {
     issue <- x
 
-    issue_url <- file.path(
-        "https://github.com",
-        issue$owner,
-        issue$repo,
-        "issues",
-        issue$number
-    )
-
-    cli::cli_h2(paste0(
-        "{.href [Issue ",
+    issue_desc <- paste0(
+        "Issue ",
         issue[["owner"]],
         "/",
         issue[["repo"]],
         "#",
-        issue[["number"]],
-        "](",
-        issue_url,
-        ")}"
-    ))
+        issue[["number"]]
+    )
+
+    cli::cli_h2(
+        cli::style_hyperlink(
+            text = issue_desc,
+            url = issue[["html_url"]]
+        )
+    )
 
     cat(
-        crayon::underline("Title: "),
+        crayon::underline("Title:"),
+        " ",
         substr(x = issue[["title"]], start = 1L, stop = 80L),
         "\n",
         crayon::underline("Text:\n"),
@@ -71,18 +74,113 @@ print.IssueTB <- function(x, ...) {
 #' @method print IssuesTB
 #' @export
 print.IssuesTB <- function(x, ...) {
-    issues <- x
     cat(crayon::bold(
-        ifelse(
-            test = nrow(issues) > 0L,
-            yes = paste("There are", nrow(issues), "issues."),
-            no = "No issues"
+        switch(
+            EXPR = as.character(nrow(x)),
+            "0" = "No issues",
+            "1" = "There is 1 issue.",
+            paste("There are", nrow(x), "issues.")
         ),
         "\n"
     ))
-    for (id_issue in seq_len(nrow(issues))) {
+    for (id_issue in seq_len(nrow(x))) {
         cat("\n")
-        print(issues[id_issue, , drop = TRUE])
+        print(x[id_issue, , drop = TRUE])
     }
-    return(invisible(issues))
+    return(invisible(x))
+}
+
+#' @rdname print
+#' @exportS3Method print summary.IssueTB
+#' @method print summary.IssueTB
+#' @export
+print.summary.IssueTB <- function(x, ...) {
+    cli::cli_h2(cli::style_hyperlink(
+        text = paste0("Issue ", x[["desc"]]),
+        url = x[["html_url"]]
+    ))
+
+    cat(crayon::underline("Labels:"), " ", sep = "")
+
+    cat(
+        vapply(
+            X = seq_along(x$labels),
+            FUN = function(k) {
+                label_style <- combine_styles(
+                    make_style(x$label_color[k]),
+                    make_style(x$label_bgcolor[k], bg = TRUE)
+                )
+                cli::style_hyperlink(
+                    text = label_style(x$label_name[k]),
+                    url = x$label_url[k]
+                )
+            },
+            FUN.VALUE = character(1L)
+        ),
+        sep = ", "
+    )
+
+    cat(
+        "\n",
+        crayon::underline("State:"),
+        " ",
+        switch(x[["state_reason"]],
+               open = "🟢 Open",
+               completed = "✔️ Completed",
+               not_planned = "🚫 Not planned")
+        ,
+        "\n",
+        crayon::underline("Nb comments:"),
+        " ",
+        x[["nbr_comments"]],
+        "\n\n",
+        crayon::underline("Title:"),
+        " ",
+        x[["title"]],
+        "\n",
+        crayon::underline("Text:\n"),
+        x[["body"]],
+        "\n\n",
+        sep = ""
+    )
+
+    if (x[["nbr_comments"]] > 0L) {
+        cat(
+            crayon::underline("Comments:\n"),
+            paste0(
+                "\nComment n°",
+                seq_len(x[["nbr_comments"]]),
+                " by ",
+                x[["comments"]][["author"]],
+                ":\n\n",
+                x[["comments"]][["text"]],
+                "\n"
+            ),
+            "\n"
+        )
+    }
+}
+
+#' @rdname print
+#' @exportS3Method print summary.IssuesTB
+#' @method print summary.IssuesTB
+#' @export
+print.summary.IssuesTB <- function(x, ...) {
+    cat(
+        crayon::bold(
+            if (x$nbr_issues == 0L) "No issues"
+            else if (x$nbr_issues == 1L) "There is 1 issue: "
+            else paste("There are", x$nbr_issues, "issues:")
+        ),
+        paste0(
+            "\n- ",
+            cli::style_hyperlink(
+                text = x[["issue_desc"]],
+                url = x[["html_url"]]
+            ),
+            " ",
+            x[["state_reason"]]
+        ),
+        "\n"
+    )
 }

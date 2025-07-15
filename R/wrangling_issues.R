@@ -1,15 +1,23 @@
 #' @title Create a new \code{IssueTB} object
 #'
+#' @param x a object representing an issue (\code{IssueTB} object, a \code{list}
+#' or a \code{data.frame})
 #' @param title a string. The title of the issue.
-#' @param state a character string that is either \code{"open"} (by default) if
+#' @param state a string that is either \code{"open"} (by default) if
 #' the issue is still open or \code{"closed"} if the issue is now closed.
-#' @param body a string. The title of the issue.
-#' @param number a string. The title of the issue.
-#' @param created_at a date. The title of the issue.
+#' @param body a string. The body (text) of the issue.
+#' @param number a string. The number of the issue.
+#' @param created_at a date (or timestamp). The title of the issue.
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.
-#' @param issue a list representing the object.
 #' @inheritParams get_issues
+#' @param url a string. The URL of the API to the GitHub issue.
+#' @param html_url a string. The URL to the GitHub issue.
+#' @param comments vector of string (the comments of the issue)
+#' @param creator a string. The GitHub username of the creator of the issue.
+#' @param assignee a string. The GitHub username of the assignee of the issue.
+#' @param state_reason a string. \code{"open"}, \code{"completed"} or
+#' \code{"not_planned"}
 #' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssueTB} object.
@@ -45,8 +53,13 @@ new_issue.IssueTB <- function(x, ...) {
 #' @method new_issue data.frame
 #' @export
 new_issue.data.frame <- function(x, ...) {
-    issue <- do.call(args = x, what = new_issue)
-    return(issue)
+    if (nrow(x) != 1L) {
+        stop("There are several issues in the object `x`.", call. = FALSE)
+    }
+    issue <- unclass(x)
+    issue$labels <- issue$labels[[1L]]
+    issue$comments <- issue$comments[[1L]]
+    return(new_issue(issue))
 }
 
 #' @rdname new_issue
@@ -89,6 +102,7 @@ new_issue.default <- function(
     comments = NULL,
     creator = NA_character_,
     assignee = NA_character_,
+    state_reason = NA_character_,
     ...
 ) {
     state <- match.arg(state)
@@ -108,6 +122,7 @@ new_issue.default <- function(
         comments <- list()
         creator <- character(0L)
         assignee <- character(0L)
+        state_reason <- character(0L)
     }
 
     issue <- list(
@@ -121,6 +136,7 @@ new_issue.default <- function(
         created_at = format_timestamp(created_at),
         creator = creator,
         assignee = assignee,
+        state_reason = state_reason,
         owner = owner,
         repo = repo,
         labels = labels,
@@ -133,7 +149,29 @@ new_issue.default <- function(
 
 #' @title Create a new \code{IssuesTB} object
 #'
-#' @param x a list containing \code{IssueTB} objects
+#' @param x a object representing a list of issues (\code{IssuesTB} object, a
+#' \code{list} or a \code{data.frame})
+#' @param title a vector of string. The titles of the issues.
+#' @param state a vector of string that is either \code{"open"} (by default) if
+#' the issues are still open or \code{"closed"} if the issues are now closed.
+#' @param body a vector of string. The bodies (text) of the issues.
+#' @param number a vector of string. The numbers of the issues.
+#' @param created_at a vector of date (or timestamp). The creation dates of the
+#' issues.
+#' @param labels a list of vector string (or missing). The labels of the issues.
+#' @param milestone a vecyor of string (or missing). The milestones of the
+#' issues.
+#' @inheritParams get_issues
+#' @param url a vector of string. The URLs of the API to the GitHub issues.
+#' @param html_url a vector of string. The URLs to the GitHub issues.
+#' @param comments a list of vector string. The comments of the issues.
+#' @param creator a vector of string. The GitHub usernames of the creator of the
+#'  issues.
+#' @param assignee a vector of string. The GitHub usernames of the assignee of
+#' the issues.
+#' @param state_reason a vector of string. \code{"open"}, \code{"completed"} or
+#' \code{"not_planned"}
+#' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssuesTB} object.
 #' @export
@@ -230,6 +268,7 @@ new_issues.default <- function(
     comments = list(),
     creator = NA_character_,
     assignee = NA_character_,
+    state_reason = NA_character_,
     ...
 ) {
     if (missing(title) && missing(body) && missing(number) && missing(state)) {
@@ -246,6 +285,7 @@ new_issues.default <- function(
         html_url <- character(0L)
         comments <- list()
         creator <- character(0L)
+        assignee <- character(0L)
         assignee <- character(0L)
     }
 
@@ -267,6 +307,7 @@ new_issues.default <- function(
         created_at = format_timestamp(created_at),
         creator = creator,
         assignee = assignee,
+        state_reason = state_reason,
         owner = owner,
         repo = repo,
         stringsAsFactors = FALSE
@@ -282,8 +323,8 @@ new_issues.default <- function(
 #' @exportS3Method `[` IssuesTB
 #' @method `[` IssuesTB
 #' @export
-`[.IssuesTB` <- function(x, ..., drop = TRUE) {
-    output <- new_issues(NextMethod(object = x, generic = "IssuesTB"))
+`[.IssuesTB` <- function(x, i, j, ..., drop = TRUE) {
+    output <- new_issues(NextMethod())
     if (drop && nrow(output) == 1L) {
         return(new_issue(output))
     }

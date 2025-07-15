@@ -35,11 +35,55 @@ new_issues(x = NULL, ...)
   comments = list(),
   creator = NA_character_,
   assignee = NA_character_,
+  state_reason = NA_character_,
   ...
 )
 }
 \arguments{
-\item{x}{a list containing \code{IssueTB} objects}
+\item{x}{a object representing a list of issues (\code{IssuesTB} object, a
+\code{list} or a \code{data.frame})}
+
+\item{\dots}{Other information we would like to add to the issue.}
+
+\item{title}{a vector of string. The titles of the issues.}
+
+\item{body}{a vector of string. The bodies (text) of the issues.}
+
+\item{number}{a vector of string. The numbers of the issues.}
+
+\item{state}{a vector of string that is either \code{"open"} (by default) if
+the issues are still open or \code{"closed"} if the issues are now closed.}
+
+\item{created_at}{a vector of date (or timestamp). The creation dates of the
+issues.}
+
+\item{labels}{a list of vector string (or missing). The labels of the issues.}
+
+\item{milestone}{a vecyor of string (or missing). The milestones of the
+issues.}
+
+\item{repo}{A character string specifying the GitHub repository name (only
+taken into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.repo}.}
+
+\item{owner}{A character string specifying the GitHub owner (only taken
+into account if \code{source} is set to \code{"online"}).
+Defaults to the package option \code{IssueTrackeR.owner}.}
+
+\item{url}{a vector of string. The URLs of the API to the GitHub issues.}
+
+\item{html_url}{a vector of string. The URLs to the GitHub issues.}
+
+\item{comments}{a list of vector string. The comments of the issues.}
+
+\item{creator}{a vector of string. The GitHub usernames of the creator of the
+issues.}
+
+\item{assignee}{a vector of string. The GitHub usernames of the assignee of
+the issues.}
+
+\item{state_reason}{a vector of string. \code{"open"}, \code{"completed"} or
+\code{"not_planned"}}
 }
 \value{
 a \code{IssuesTB} object.

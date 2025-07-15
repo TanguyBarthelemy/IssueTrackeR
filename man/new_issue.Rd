@@ -35,22 +35,26 @@ new_issue(x = NULL, ...)
   comments = NULL,
   creator = NA_character_,
   assignee = NA_character_,
+  state_reason = NA_character_,
   ...
 )
 }
 \arguments{
+\item{x}{a object representing an issue (\code{IssueTB} object, a \code{list}
+or a \code{data.frame})}
+
 \item{\dots}{Other information we would like to add to the issue.}
 
 \item{title}{a string. The title of the issue.}
 
-\item{body}{a string. The title of the issue.}
+\item{body}{a string. The body (text) of the issue.}
 
-\item{number}{a string. The title of the issue.}
+\item{number}{a string. The number of the issue.}
 
-\item{state}{a character string that is either \code{"open"} (by default) if
+\item{state}{a string that is either \code{"open"} (by default) if
 the issue is still open or \code{"closed"} if the issue is now closed.}
 
-\item{created_at}{a date. The title of the issue.}
+\item{created_at}{a date (or timestamp). The title of the issue.}
 
 \item{labels}{a vector string (or missing). The labels of the issue.}
 
@@ -64,7 +68,18 @@ Defaults to the package option \code{IssueTrackeR.repo}.}
 into account if \code{source} is set to \code{"online"}).
 Defaults to the package option \code{IssueTrackeR.owner}.}
 
-\item{issue}{a list representing the object.}
+\item{url}{a string. The URL of the API to the GitHub issue.}
+
+\item{html_url}{a string. The URL to the GitHub issue.}
+
+\item{comments}{vector of string (the comments of the issue)}
+
+\item{creator}{a string. The GitHub username of the creator of the issue.}
+
+\item{assignee}{a string. The GitHub username of the assignee of the issue.}
+
+\item{state_reason}{a string. \code{"open"}, \code{"completed"} or
+\code{"not_planned"}}
 }
 \value{
 a \code{IssueTB} object.

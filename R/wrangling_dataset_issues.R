@@ -156,22 +156,29 @@ format_comments <- function(
         "issue_url",
         FUN.VALUE = character(1L)
     )
+    comments_author <- vapply(
+        X = raw_comments,
+        FUN = Reduce,
+        f = `[[`,
+        x = c("user", "login"),
+        FUN.VALUE = character(1L)
+    )
     comments_bodies <- vapply(
         X = raw_comments,
         FUN = `[[`,
         "body",
         FUN.VALUE = character(1L)
     )
-
     comments_list <- split(
-        x = comments_bodies,
+        x = data.frame(text = comments_bodies, author = comments_author),
         f = comments_urls
-    )
+    ) |>
+        lapply(FUN = `rownames<-`, NULL)
     no_comment <- setdiff(urls, comments_urls)
     comments_list <- c(
         comments_list,
-        setNames(
-            object = as.list(rep(NA_character_, length(no_comment))),
+        stats::setNames(
+            object = rep(list(NULL), times = length(no_comment)),
             nm = no_comment
         )
     )
@@ -222,7 +229,7 @@ format_issues <- function(
     verbose = TRUE
 ) {
     urls <- vapply(X = raw_issues, FUN = `[[`, "url", FUN.VALUE = character(1L))
-    structurel <- strcapture(
+    structurel <- utils::strcapture(
         "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
         urls,
         proto = data.frame(
@@ -231,8 +238,16 @@ format_issues <- function(
             stringsAsFactors = FALSE
         )
     )
+    labels_list <- raw_issues |>
+        lapply(FUN = `[[`, "labels") |>
+        lapply(
+            FUN = lapply,
+            Reduce,
+            f = `[`,
+            x = list(c("name", "color", "url"))
+        )
 
-    issues <- new_issues(
+    issues <- new_issues.default(
         url = urls,
         html_url = vapply(
             X = raw_issues,
@@ -263,12 +278,7 @@ format_issues <- function(
             "number",
             FUN.VALUE = integer(1L)
         ),
-        labels = lapply(
-            X = raw_issues,
-            FUN = Reduce,
-            f = `[[`,
-            x = c("labels", "name")
-        ),
+        labels = labels_list,
         milestone = vapply(
             X = raw_issues,
             FUN = function(x) {
@@ -294,6 +304,17 @@ format_issues <- function(
             X = raw_issues,
             FUN = function(x) {
                 if (is.null(x$assignee)) NA_character_ else x$assignee$login
+            },
+            FUN.VALUE = character(1L)
+        ),
+        state_reason = vapply(
+            X = raw_issues,
+            FUN = function(x) {
+                ifelse(
+                    test = is.null(x$state_reason),
+                    yes = "open",
+                    no = x$state_reason
+                )
             },
             FUN.VALUE = character(1L)
         ),
