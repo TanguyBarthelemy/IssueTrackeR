@@ -149,7 +149,7 @@ print.summary.IssueTB <- function(x, ...) {
         cat(
             crayon::underline("Comments:\n"),
             paste0(
-                "\nComment n°",
+                "\nComment n\U00B0",
                 seq_len(x[["nbr_comments"]]),
                 " by ",
                 x[["comments"]][["author"]],
