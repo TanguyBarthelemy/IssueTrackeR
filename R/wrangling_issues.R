@@ -218,6 +218,8 @@ new_issues <- function(x = NULL, ...) {
 #' @method new_issues IssueTB
 #' @export
 new_issues.IssueTB <- function(x, ...) {
+    x$comments <- list(x$comments)
+    x$labels <- list(x$labels)
     issues <- do.call(args = x, what = new_issues)
     return(issues)
 }
@@ -286,14 +288,7 @@ new_issues.default <- function(
         comments <- list()
         creator <- character(0L)
         assignee <- character(0L)
-        assignee <- character(0L)
-    }
-
-    if (length(labels) == 0L) {
-        labels <- rep(list(NULL), times = length(title))
-    }
-    if (length(comments) == 0L) {
-        comments <- rep(list(NULL), times = length(title))
+        state_reason <- character(0L)
     }
 
     issues <- data.frame(
@@ -345,13 +340,6 @@ new_issues.default <- function(
     return(new_issues(NextMethod()))
 }
 
-#' @exportS3Method c IssuesTB
-#' @method c IssuesTB
-#' @export
-c.IssuesTB <- function(...) {
-    return(new_issues(NextMethod()))
-}
-
 #' @rdname append
 #' @export
 #' @inherit base::append
@@ -364,7 +352,7 @@ append <- function(x, values, after = length(x)) {
 #' @param values a \code{IssueTB} or a \code{IssuesTB} object.
 #' @method append IssuesTB
 #' @export
-append.IssuesTB <- function(x, values, after = length(x)) {
+append.IssuesTB <- function(x, values, after = nrow(x)) {
     if (after > nrow(x)) after <- nrow(x)
     if (after < 0L) after <- 0L
 
@@ -390,6 +378,42 @@ append.IssuesTB <- function(x, values, after = length(x)) {
 #' @export
 append.default <- function(x, values, after = length(x)) {
     base::append(x, values, after)
+}
+
+#' @rdname rbind
+#' @export
+#' @inherit base::rbind
+rbind <- function(...) {
+    UseMethod("rbind")
+}
+
+#' @rdname rbind
+#' @exportS3Method rbind IssueTB
+#' @method rbind IssueTB
+#' @export
+rbind.IssueTB <- function(...) {
+    list(...) |>
+        lapply(FUN = new_issues) |>
+        do.call(what = rbind.data.frame) |>
+        new_issues()
+}
+
+#' @rdname rbind
+#' @exportS3Method rbind IssuesTB
+#' @method rbind IssuesTB
+#' @export
+rbind.IssuesTB <- function(...) {
+    list(...) |>
+        lapply(FUN = new_issues) |>
+        do.call(what = rbind.data.frame) |>
+        new_issues()
+}
+
+#' @exportS3Method rbind default
+#' @method rbind default
+#' @export
+rbind.default <- function(..., deparse.level = 1) {
+    base::rbind(..., deparse.level = deparse.level)
 }
 
 #' @exportS3Method unique IssuesTB

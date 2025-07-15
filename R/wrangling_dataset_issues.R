@@ -178,7 +178,13 @@ format_comments <- function(
     comments_list <- c(
         comments_list,
         stats::setNames(
-            object = rep(list(NULL), times = length(no_comment)),
+            object = rep(
+                x = list(data.frame(
+                    text = character(0L),
+                    author = character(0L)
+                )),
+                times = length(no_comment)
+            ),
             nm = no_comment
         )
     )
