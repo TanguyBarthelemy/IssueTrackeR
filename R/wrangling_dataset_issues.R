@@ -59,6 +59,7 @@
 #' \donttest{
 #' # From online
 #'
+#' issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
 #' issues <- get_issues(source = "online")
 #' print(issues)
 #'
@@ -100,13 +101,63 @@ get_issues <- function(
     state <- match.arg(state)
 
     if (source == "online") {
-        raw_issues <- gh::gh(
-            repo = repo,
-            owner = owner,
-            endpoint = "/repos/:owner/:repo/issues",
-            state = state,
-            .limit = Inf
-        )
+
+        info_owner <- try(expr = {
+            gh::gh(
+                endpoint = "/users/:owner",
+                owner = owner
+            )
+        })
+        if (inherits(info_owner, "try-error")) {
+            stop(owner, " is not a valid GitHub user.\nThe argument owner must be a valid GitHub user.")
+        }
+
+        owner_type <- info_owner$type
+        if (is.null(repo)) {
+            if (owner_type == "User") {
+                endpoint = "/users/:owner/repos"
+            } else if (owner_type == "Organization") {
+                endpoint = "/orgs/:owner/repos"
+            } else {
+                stop("owner type not taken into account")
+            }
+
+            list_repo <- gh::gh(
+                endpoint = endpoint,
+                owner = owner
+            ) |> vapply(FUN = "[[", "name", FUN.VALUE = character(1L))
+
+            issues <- lapply(
+                X = list_repo,
+                FUN = get_issues,
+                source = "online",
+                owner = owner,
+                state = state,
+                verbose = verbose,
+                dataset_dir = NULL,
+                dataset_name = NULL
+            ) |>
+                do.call(what = rbind)
+
+            return(issues)
+        }
+
+        raw_issues <- try(expr = {
+            gh::gh(
+                repo = repo,
+                owner = owner,
+                endpoint = "/repos/:owner/:repo/issues",
+                state = state,
+                .limit = Inf
+            )
+        })
+        if (inherits(raw_issues, "try-error")) {
+            stop(repo, " is not a", ifelse(owner_type == "Organization", "n ", " "), tolower(owner_type), " repository name ", owner, ".\nThe argument repo must be a valid GitHub repo name.")
+        }
+
+        raw_issues <- raw_issues |>
+            Filter(f = function(.x) is.null(.x$pull_request))
+
         raw_comments <- gh::gh(
             repo = repo,
             owner = owner,

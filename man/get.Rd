@@ -99,6 +99,7 @@ function:
 \donttest{
 # From online
 
+issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
 issues <- get_issues(source = "online")
 print(issues)
 
