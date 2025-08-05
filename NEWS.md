@@ -8,8 +8,15 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [1.2.0] - 2025-07-16
+### Added
 
+* `summary()` accept `duplicated` as a `state_reason`
+* `get_issues()` with `repo = NULL` return all the issues of all the repositories of a user
+* error and warning message if a username or a repository don't exist
+* new entry `closed_at` with the closing date of an issue
+
+
+## [1.2.0] - 2025-07-16
 
 ### Changed
 
@@ -26,7 +33,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
 ## [1.1.1] - 2025-04-26
-
 
 ### Added
 
