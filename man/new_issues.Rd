@@ -26,6 +26,7 @@ new_issues(x = NULL, ...)
   number,
   state,
   created_at = Sys.Date(),
+  closed_at = as.Date(NA_integer_),
   labels = list(),
   comments = list(),
   milestone = NA_character_,
@@ -54,7 +55,10 @@ new_issues(x = NULL, ...)
 \item{state}{a vector of string that is either \code{"open"} (by default) if
 the issues are still open or \code{"closed"} if the issues are now closed.}
 
-\item{created_at}{a vector of date (or timestamp). The creation dates of the
+\item{created_at}{a vector of date (or timestamp). The creation date of the
+issues.}
+
+\item{closed_at}{a vector of date (or timestamp). The closing date of the
 issues.}
 
 \item{labels}{a list of vector string (or missing). The labels of the issues.}
@@ -83,7 +87,7 @@ issues.}
 the issues.}
 
 \item{state_reason}{a vector of string. \code{"open"}, \code{"completed"},
-\code{"reopened"} or \code{"not_planned"}.}
+\code{"reopened"}, \code{"not_planned"} or \code{"duplicated"}.}
 }
 \value{
 a \code{IssuesTB} object.

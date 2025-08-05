@@ -308,6 +308,13 @@ format_issues <- function(
             "created_at",
             FUN.VALUE = character(1L)
         ),
+        closed_at = vapply(
+            X = raw_issues,
+            FUN = function(x) {
+                if (is.null(x$closed_at)) NA_character_ else x$closed_at
+            },
+            FUN.VALUE = character(1L)
+        ),
         creator = vapply(
             X = raw_issues,
             FUN = Reduce,

@@ -139,7 +139,8 @@ print.summary.IssueTB <- function(x, ...) {
             open = "\U1F7E2 Open",
             reopened = "\U267B Re-opened",
             completed = "\U2714 Completed",
-            not_planned = "\U1F6AB Not planned"
+            not_planned = "\U1F6AB Not planned",
+            duplicated = "\U27BF Duplicated"
         ),
         "\n",
         crayon::underline("Nb comments:"),

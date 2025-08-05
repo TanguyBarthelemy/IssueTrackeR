@@ -7,7 +7,8 @@
 #' the issue is still open or \code{"closed"} if the issue is now closed.
 #' @param body a string. The body (text) of the issue.
 #' @param number a string. The number of the issue.
-#' @param created_at a date (or timestamp). The title of the issue.
+#' @param created_at a date (or timestamp). The creation date of the issue.
+#' @param closed_at a date (or timestamp). The closing date of the issue.
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.
 #' @inheritParams get_issues
@@ -17,7 +18,7 @@
 #' @param creator a string. The GitHub username of the creator of the issue.
 #' @param assignee a string. The GitHub username of the assignee of the issue.
 #' @param state_reason a string. \code{"open"}, \code{"completed"},
-#' \code{"reopened"} or \code{"not_planned"}.
+#' \code{"reopened"}, \code{"not_planned"} or \code{"duplicated"}.
 #' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssueTB} object.
@@ -93,6 +94,7 @@ new_issue.default <- function(
     number,
     state = c("open", "closed"),
     created_at = Sys.Date(),
+    closed_at = as.Date(NA_integer_),
     labels = NULL,
     milestone = NA_character_,
     repo = NA_character_,
@@ -113,6 +115,7 @@ new_issue.default <- function(
         number <- integer(0L)
         state <- character(0L)
         created_at <- format_timestamp(as.Date(character(0L)))
+        closed_at <- format_timestamp(as.Date(character(0L)))
         labels <- list()
         milestone <- character(0L)
         repo <- character(0L)
@@ -134,6 +137,7 @@ new_issue.default <- function(
         html_url = html_url,
         milestone = milestone,
         created_at = format_timestamp(created_at),
+        closed_at = format_timestamp(closed_at),
         creator = creator,
         assignee = assignee,
         state_reason = state_reason,
@@ -156,7 +160,9 @@ new_issue.default <- function(
 #' the issues are still open or \code{"closed"} if the issues are now closed.
 #' @param body a vector of string. The bodies (text) of the issues.
 #' @param number a vector of string. The numbers of the issues.
-#' @param created_at a vector of date (or timestamp). The creation dates of the
+#' @param created_at a vector of date (or timestamp). The creation date of the
+#' issues.
+#' @param closed_at a vector of date (or timestamp). The closing date of the
 #' issues.
 #' @param labels a list of vector string (or missing). The labels of the issues.
 #' @param milestone a vector of string (or missing). The milestones of the
@@ -170,7 +176,7 @@ new_issue.default <- function(
 #' @param assignee a vector of string. The GitHub usernames of the assignee of
 #' the issues.
 #' @param state_reason a vector of string. \code{"open"}, \code{"completed"},
-#' \code{"reopened"} or \code{"not_planned"}.
+#' \code{"reopened"}, \code{"not_planned"} or \code{"duplicated"}.
 #' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssuesTB} object.
@@ -261,6 +267,7 @@ new_issues.default <- function(
     number,
     state,
     created_at = Sys.Date(),
+    closed_at = as.Date(NA_integer_),
     labels = list(),
     comments = list(),
     milestone = NA_character_,
@@ -279,6 +286,7 @@ new_issues.default <- function(
         number <- integer(0L)
         state <- character(0L)
         created_at <- format_timestamp(as.Date(character(0L)))
+        closed_at <- format_timestamp(as.Date(character(0L)))
         milestone <- character(0L)
         repo <- character(0L)
         owner <- character(0L)
@@ -315,6 +323,7 @@ new_issues.default <- function(
         html_url = html_url,
         milestone = milestone,
         created_at = format_timestamp(created_at),
+        closed_at = format_timestamp(closed_at),
         creator = creator,
         assignee = assignee,
         state_reason = state_reason,
