@@ -105,15 +105,31 @@ get_issues <- function(
         info_owner <- try(expr = {
             gh::gh(
                 endpoint = "/users/:owner",
-                owner = owner
+                owner = owner,
+                .limit = Inf
             )
         })
         if (inherits(info_owner, "try-error")) {
-            stop(owner, " is not a valid GitHub user.\nThe argument owner must be a valid GitHub user.")
+            message_response <- attr(info_owner, "condition")$response_content$message
+            if (message_response == "Not Found") {
+                stop(owner, " is not a valid GitHub user.\n",
+                     "The argument owner must be a valid GitHub user.")
+            } else if (grepl("API rate limit exceeded", message_response)) {
+                warning(
+                    message_response, "\n",
+                    attr(info_owner, "condition")$body
+                )
+                return(new_issues())
+            } else {
+                stop("Weird message... Contact the maintainer of the package.")
+            }
         }
 
         owner_type <- info_owner$type
         if (is.null(repo)) {
+
+            if (verbose) cat("Try to find all repositories...")
+
             if (owner_type == "User") {
                 endpoint = "/users/:owner/repos"
             } else if (owner_type == "Organization") {
@@ -122,10 +138,23 @@ get_issues <- function(
                 stop("owner type not taken into account")
             }
 
-            list_repo <- gh::gh(
+            list_public_repo <- gh::gh(
                 endpoint = endpoint,
-                owner = owner
-            ) |> vapply(FUN = "[[", "name", FUN.VALUE = character(1L))
+                owner = owner,
+                .limit = Inf
+            ) |>
+                vapply(FUN = "[[", "name", FUN.VALUE = character(1L))
+
+            list_private_repo <- gh::gh(
+                endpoint = "/user/repos",
+                .limit = Inf,
+                visibility = "private"
+            ) |> Filter(f = \(.x) .x$owner$login == owner) |>
+                vapply(FUN = "[[", "name", FUN.VALUE = character(1L))
+
+            list_repo <- unique(c(list_private_repo, list_public_repo))
+
+            if (verbose) cat(" Done!\n")
 
             issues <- lapply(
                 X = list_repo,
@@ -142,6 +171,7 @@ get_issues <- function(
             return(issues)
         }
 
+        if (verbose) cat("Repo:", repo, " owner:", owner, "\n")
         raw_issues <- try(expr = {
             gh::gh(
                 repo = repo,
@@ -152,7 +182,21 @@ get_issues <- function(
             )
         })
         if (inherits(raw_issues, "try-error")) {
-            stop(repo, " is not a", ifelse(owner_type == "Organization", "n ", " "), tolower(owner_type), " repository name ", owner, ".\nThe argument repo must be a valid GitHub repo name.")
+            message_response <- attr(raw_issues, "condition")$response_content$message
+            if (message_response == "Not Found") {
+                stop(repo, " is not a",
+                     ifelse(owner_type == "Organization", "n ", " "),
+                     tolower(owner_type), " repository from ", owner,
+                     ".\nThe argument repo must be a valid GitHub repo name.")
+            } else if (grepl("API rate limit exceeded", message_response)) {
+                warning(
+                    message_response, "\n",
+                    attr(raw_issues, "condition")$body
+                )
+                return(new_issues())
+            } else {
+                stop("Weird message... Contact the maintainer of the package.")
+            }
         }
 
         raw_issues <- raw_issues |>
@@ -170,6 +214,8 @@ get_issues <- function(
             verbose = verbose
         )
     } else if (source == "local") {
+
+        if (verbose) cat("Looking into", dataset_name, "...\n")
         input_file <- tools::file_path_sans_ext(dataset_name)
         input_path <- file.path(dataset_dir, input_file) |>
             normalizePath(mustWork = FALSE) |>
