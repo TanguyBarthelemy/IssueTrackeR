@@ -14,7 +14,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * `get_issues()` with `repo = NULL` return all the issues of all the repositories of a user
 * error and warning message if a username or a repository don't exist
 * new entry `closed_at` with the closing date of an issue
-
+* New function `with_text()` to select the issues that contains text in their title, body or comments
 
 ## [1.2.0] - 2025-07-16
 
