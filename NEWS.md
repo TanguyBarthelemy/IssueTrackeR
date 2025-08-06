@@ -15,6 +15,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * error and warning message if a username or a repository don't exist
 * new entry `closed_at` with the closing date of an issue
 * New function `with_text()` to select the issues that contains text in their title, body or comments
+* New logo
 
 ## [1.2.0] - 2025-07-16
 

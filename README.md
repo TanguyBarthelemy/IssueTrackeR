@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# {IssueTrackeR}
+# {IssueTrackeR} <a href="https://tanguybarthelemy.github.io/IssueTrackeR/"><img src="man/figures/logo.svg" align="right" height="150" style="float:right; height:150px;"/></a>
 
 <!-- badges: start -->
 
@@ -48,9 +48,9 @@ remotes::install_github("TanguyBarthelemy/IssueTrackeR")
 library("IssueTrackeR")
 #> 
 #> Attaching package: 'IssueTrackeR'
-#> The following object is masked from 'package:base':
+#> The following objects are masked from 'package:base':
 #> 
-#>     append
+#>     append, sample
 ```
 
 ### Retrieve information from GitHub
@@ -61,8 +61,6 @@ To get information from a repository, you can call the functions
 ``` r
 # From online
 my_issues <- get_issues(source = "online", owner = "jdemetra", repo = "jdplus-main", verbose = FALSE)
-#> Running gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query
-#> ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 1s
 my_labels <- get_labels(source = "online", owner = "jdemetra", repo = "jdplus-main")
 #> Reading labels... Done!
 #> 12 labels found.
@@ -73,8 +71,9 @@ my_milestones <- get_milestones(source = "online", owner = "jdemetra", repo = "j
 #>  -  3.2.3 ... Done!
 #>  -  3.4.0 ... Done!
 #>  -  3.5.0 ... Done!
+#>  -  3.5.1 ... Done!
 #>  -  3.6.0 ... Done!
-#> Done! 6 milestones found.
+#> Done! 7 milestones found.
 ```
 
 ### Save issues in local
@@ -88,19 +87,19 @@ write_issues_to_dataset(
     issues = my_issues, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpUfaBSS\list_issues.yaml.
+#> The datasets will be exported to /tmp/Rtmpyc9CiM/list_issues.yaml.
 
 write_labels_to_dataset(
     labels = my_labels, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpUfaBSS\list_labels.yaml.
+#> The datasets will be exported to /tmp/Rtmpyc9CiM/list_labels.yaml.
 
 write_milestones_to_dataset(
     milestones = my_milestones, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpUfaBSS\list_milestones.yaml.
+#> The datasets will be exported to /tmp/Rtmpyc9CiM/list_milestones.yaml.
 ```
 
 ### Options
@@ -135,47 +134,6 @@ You can update your full database of issues, labels and milestones with
 ``` r
 # From online
 update_database(verbose = FALSE)
-#> Running gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query
-#> ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 1s ⠙ Running gh query 3 done (0.87/s) |
-#> 3.4s⠹ Running gh query 4 done (0.71/s) | 5.6s⠸ Running gh query 5 done (0.67/s)
-#> | 7.5s⠼ Running gh query 6 done (0.72/s) | 8.3s Running gh query
-#> ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query ■■■■■■■■■■■■■■■■■■■■■■■ 75% |
-#> ETA: 1s
-```
-
-### Filtering and sorting
-
-There are plenty of different filtering ways.
-
-``` r
-# Condition: issues containing "README" in its body OR title
-filtered_issues <- filter_issues(
-    x = my_issues,
-    fields = c("body", "title"),
-    values = "README",
-    fields_logic_gate = "OR"
-)
-```
-
-See `?filter_issues` and `?contains` to explore more options.
-
-### Sorting
-
-Finally you can also sort your issues according to certain variable
-(quantitative) and impose sole filtering factors (conditions as in
-`filter_issues()`), which will be applied one after the other:
-
-``` r
-sorted_issues <- sort(
-    x = my_issues,
-    sorting_variables = list(list(object = "milestones", field = "due_on"),
-                             list(object = "issues", field = "created_at")),
-    filtering_factors = list(list(values = "bug",
-                                  fields = "labels",
-                                  values_logic_gate = "OR"),
-                             list(values = "package", fields = "title")),
-    milestones = my_milestones
-)
 ```
 
 ## Contributing
