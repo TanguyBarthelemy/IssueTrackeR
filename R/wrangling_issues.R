@@ -88,10 +88,10 @@ new_issue.IssuesTB <- function(x, ...) {
 #' @export
 new_issue.default <- function(
     x,
-    title,
-    body,
-    number,
-    state = c("open", "closed"),
+    title = NA_character_,
+    body = NA_character_,
+    number = NA_integer_,
+    state = NA_character_,
     created_at = Sys.Date(),
     labels = NULL,
     milestone = NA_character_,
@@ -105,26 +105,6 @@ new_issue.default <- function(
     state_reason = NA_character_,
     ...
 ) {
-    state <- match.arg(state)
-
-    if (missing(title) && missing(body) && missing(number)) {
-        title <- character(0L)
-        body <- character(0L)
-        number <- integer(0L)
-        state <- character(0L)
-        created_at <- format_timestamp(as.Date(character(0L)))
-        labels <- list()
-        milestone <- character(0L)
-        repo <- character(0L)
-        owner <- character(0L)
-        url <- character(0L)
-        html_url <- character(0L)
-        comments <- list()
-        creator <- character(0L)
-        assignee <- character(0L)
-        state_reason <- character(0L)
-    }
-
     issue <- list(
         number = as.integer(number),
         title = title,
@@ -333,8 +313,20 @@ new_issues.default <- function(
 #' @exportS3Method `[` IssuesTB
 #' @method `[` IssuesTB
 #' @export
-`[.IssuesTB` <- function(x, i, j, ..., drop = TRUE) {
-    output <- new_issues(NextMethod())
+`[.IssuesTB` <- function (x, i, j, drop = TRUE) {
+    output <- NextMethod("[")
+    Narg <- nargs() - !missing(drop)
+    # Cas sélection de colonne
+    if (!missing(j)) {
+        if (length(j) > 1L || !drop) {
+            return(as.data.frame(output))
+        }
+        return(output)
+    } else if (Narg == 2L && !missing(i)) {
+        return(as.data.frame(output))
+    }
+
+    output <- new_issues(output)
     if (drop && nrow(output) == 1L) {
         return(new_issue(output))
     }
