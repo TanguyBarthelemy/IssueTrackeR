@@ -13,7 +13,7 @@ knitr::opts_chunk[["set"]](
 )
 ```
 
-# {IssueTrackeR}
+# {IssueTrackeR} <a href="https://tanguybarthelemy.github.io/IssueTrackeR/"><img src="man/figures/logo.svg" align="right" height="150" style="float:right; height:150px;"/></a> 
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/IssueTrackeR)](https://CRAN.R-project.org/package=IssueTrackeR)
@@ -116,39 +116,6 @@ You can update your full database of issues, labels and milestones with `update_
 ```{r, eval = TRUE, echo = TRUE}
 # From online
 update_database(verbose = FALSE)
-```
-
-### Filtering and sorting
-
-There are plenty of different filtering ways.
-
-```{r, eval = TRUE, echo = TRUE}
-# Condition: issues containing "README" in its body OR title
-filtered_issues <- filter_issues(
-    x = my_issues,
-    fields = c("body", "title"),
-    values = "README",
-    fields_logic_gate = "OR"
-)
-```
-
-See `?filter_issues` and `?contains` to explore more options.
-
-### Sorting
-
-Finally you can also sort your issues according to certain variable (quantitative) and impose sole filtering factors (conditions as in `filter_issues()`), which will be applied one after the other:
-
-```{r, eval = TRUE, echo = TRUE}
-sorted_issues <- sort(
-    x = my_issues,
-    sorting_variables = list(list(object = "milestones", field = "due_on"),
-                             list(object = "issues", field = "created_at")),
-    filtering_factors = list(list(values = "bug",
-                                  fields = "labels",
-                                  values_logic_gate = "OR"),
-                             list(values = "package", fields = "title")),
-    milestones = my_milestones
-)
 ```
 
 ## Contributing
