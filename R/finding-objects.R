@@ -27,25 +27,39 @@ with_text <- function(x, ...) {
 }
 
 #' @rdname with_text
-#' @exportS3Method with_text IssueTB
-#' @method with_text IssueTB
-#' @export
-with_text.IssueTB <- function(x, ...) {
-    return(
-        grepl(x = x$title, ...)
-        || grepl(x = x$body, ...)
-        || any(grepl(x = x$comments$text, ...))
-    )
-}
-
-#' @rdname with_text
 #' @exportS3Method with_text IssuesTB
 #' @method with_text IssuesTB
 #' @export
-with_text.IssuesTB <- function(x, ...) {
-    return(
-        grepl(x = x$title, ...)
-        | grepl(x = x$body, ...)
-        | sapply(X = x$comments, FUN = \(.x) any(grepl(x = .x$text, ...)))
-    )
+with_text.IssuesTB <- function(x, ..., in_title = TRUE, in_body= TRUE, in_comments = TRUE) {
+    condition <- F
+    if (in_title) {
+        condition <- condition | grepl(x = x$title, ...)
+    }
+    if (in_body) {
+        condition <- condition | grepl(x = x$body, ...)
+    }
+    if (in_comments) {
+        condition <- condition | sapply(
+            X = x$comments,
+            FUN = \(.x) any(grepl(x = .x$text, ...))
+        )
+    }
+    return(subset(x, condition))
+}
+
+#' @rdname with_labels
+#' @export
+with_labels <- function (x, ...)
+{
+    UseMethod("with_labels", x)
+}
+
+#' @rdname with_labels
+#' @exportS3Method with_labels IssuesTB
+#' @method with_labels IssuesTB
+#' @export
+with_labels.IssuesTB <- function (x, ...)
+{
+    condition <- grepl(x = x$labels, pattern = ...)
+    return(subset(x, condition))
 }

@@ -350,14 +350,15 @@ format_issues <- function(
             stringsAsFactors = FALSE
         )
     )
-    labels_list <- raw_issues |>
-        lapply(FUN = `[[`, "labels") |>
-        lapply(
-            FUN = lapply,
-            Reduce,
-            f = `[`,
-            x = list(c("name", "color", "url"))
-        )
+    labels_name <- raw_issues |>
+        lapply(FUN = \(raw_issue) {
+            vapply(
+                X = raw_issue[["labels"]],
+                FUN = `[[`,
+                FUN.VALUE = character(1L),
+                "name"
+            )
+        })
 
     issues <- new_issues.default(
         url = urls,
@@ -390,7 +391,7 @@ format_issues <- function(
             "number",
             FUN.VALUE = integer(1L)
         ),
-        labels = labels_list,
+        labels = labels_name,
         milestone = vapply(
             X = raw_issues,
             FUN = function(x) {

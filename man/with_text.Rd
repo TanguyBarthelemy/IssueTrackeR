@@ -2,13 +2,10 @@
 % Please edit documentation in R/finding-objects.R
 \name{with_text}
 \alias{with_text}
-\alias{with_text.IssueTB}
 \alias{with_text.IssuesTB}
 \title{Check for text in GitHub Issues or sets of Issues}
 \usage{
 with_text(x, ...)
-
-\method{with_text}{IssueTB}(x, ...)
 
 \method{with_text}{IssuesTB}(x, ...)
 }

@@ -5,6 +5,8 @@
 \alias{print.IssuesTB}
 \alias{print.summary.IssueTB}
 \alias{print.summary.IssuesTB}
+\alias{print.LabelsTB}
+\alias{print.summary.LabelsTB}
 \title{Display IssueTB and IssuesTB object}
 \usage{
 \method{print}{IssueTB}(x, ...)
@@ -14,6 +16,10 @@
 \method{print}{summary.IssueTB}(x, ...)
 
 \method{print}{summary.IssuesTB}(x, ...)
+
+\method{print}{summary.LabelsTB}(x, ...)
+
+\method{print}{summary.LabelsTB}(x, ...)
 }
 \arguments{
 \item{x}{a \code{IssueTB} or \code{IssuesTB} object.}

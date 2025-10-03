@@ -102,6 +102,7 @@ print.IssuesTB <- function(x, ...) {
 #' @method print summary.IssueTB
 #' @export
 print.summary.IssueTB <- function(x, ...) {
+    message("TO ADAPT WITH LABELS (avec ou sans get_labels)")
     cli::cli_h2(cli::style_hyperlink(
         text = paste0("Issue ", x[["desc"]]),
         url = x[["html_url"]]
@@ -200,4 +201,20 @@ print.summary.IssuesTB <- function(x, ...) {
         ),
         "\n"
     )
+}
+
+#' @rdname print
+#' @exportS3Method print summary.LabelsTB
+#' @method print summary.LabelsTB
+#' @export
+print.LabelsTB <- function(x, ...) {
+    message("To document and to write ! #TODO")
+}
+
+#' @rdname print
+#' @exportS3Method print summary.LabelsTB
+#' @method print summary.LabelsTB
+#' @export
+print.summary.LabelsTB <- function(x, ...) {
+    message("To document and to write ! #TODO")
 }

@@ -46,6 +46,7 @@ get_labels <- function(
         stop("wrong argument source", call. = FALSE)
     }
 
+    class(list_labels) <- c("LabelsTB", "data.frame")
     return(list_labels)
 }
 

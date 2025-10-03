@@ -278,7 +278,7 @@ new_issues.default <- function(
 
     if (missing(labels)) {
         labels <- rep(
-            x = list(list()),
+            x = list(NULL),
             times = length(title)
         )
     }
@@ -417,6 +417,14 @@ rbind.IssuesTB <- function(...) {
         lapply(FUN = new_issues) |>
         do.call(what = rbind.data.frame) |>
         new_issues()
+}
+
+#' @exportS3Method subset IssuesTB
+#' @method subset IssuesTB
+#' @export
+subset.IssuesTB <- function(x, ...) {
+    output <- new_issues(NextMethod())
+    return(output)
 }
 
 #' @rdname sample

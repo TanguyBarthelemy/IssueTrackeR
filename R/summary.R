@@ -30,6 +30,9 @@
 #'
 #' @export
 summary.IssueTB <- function(object, ...) {
+
+    message("TO ADAPT WITH LABELS (avec ou sans get_labels)")
+
     object$desc <- paste0(
         object[["owner"]],
         "/",
@@ -112,5 +115,16 @@ summary.IssuesTB <- function(object, ...) {
         state_reason = state_table[object[["state_reason"]]]
     )
     class(x) <- "summary.IssuesTB"
+    return(x)
+}
+
+#' @rdname summary
+#' @exportS3Method summary LabelsTB
+#' @method summary LabelsTB
+#' @export
+summary.LabelsTB <- function(object, ...) {
+    x <- NULL
+    message("TODO")
+    class(x) <- "summary.LabelsTB"
     return(x)
 }

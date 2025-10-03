@@ -21,10 +21,10 @@ new_issue(x = NULL, ...)
 
 \method{new_issue}{default}(
   x,
-  title,
-  body,
-  number,
-  state = c("open", "closed"),
+  title = NA_character_,
+  body = NA_character_,
+  number = NA_integer_,
+  state = NA_character_,
   created_at = Sys.Date(),
   closed_at = as.Date(NA_integer_),
   labels = NULL,

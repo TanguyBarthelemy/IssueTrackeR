@@ -16,6 +16,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * new entry `closed_at` with the closing date of an issue
 * New function `with_text()` to select the issues that contains text in their title, body or comments
 * New logo
+* New function `with_labels()` to filter issues by label's name
+
+### Changed
+
+* Labels in issues have been lightened (just the name of the labels and no more information are stored)
+
 
 ## [1.2.0] - 2025-07-16
 
