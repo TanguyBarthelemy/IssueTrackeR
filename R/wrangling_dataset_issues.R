@@ -117,17 +117,21 @@ get_issues <- function(
                 stop(
                     owner,
                     " is not a valid GitHub user.\n",
-                    "The argument owner must be a valid GitHub user."
+                    "The argument owner must be a valid GitHub user.",
+                    call. = FALSE
                 )
-            } else if (grepl("API rate limit exceeded", message_response)) {
+            } else if (grepl("API rate limit exceeded", message_response,
+                             fixed = TRUE)) {
                 warning(
                     message_response,
                     "\n",
-                    attr(info_owner, "condition")$body
+                    attr(info_owner, "condition")$body,
+                    call. = FALSE
                 )
                 return(new_issues())
             } else {
-                stop("Weird message... Contact the maintainer of the package.")
+                stop("Weird message... Contact the maintainer of the package.",
+                     call. = FALSE)
             }
         }
 
@@ -136,11 +140,11 @@ get_issues <- function(
             if (verbose) cat("Try to find all repositories...")
 
             if (owner_type == "User") {
-                endpoint = "/users/:owner/repos"
+                endpoint <- "/users/:owner/repos"
             } else if (owner_type == "Organization") {
-                endpoint = "/orgs/:owner/repos"
+                endpoint <- "/orgs/:owner/repos"
             } else {
-                stop("owner type not taken into account")
+                stop("owner type not taken into account", call. = FALSE)
             }
 
             list_public_repo <- gh::gh(
@@ -200,17 +204,21 @@ get_issues <- function(
                     tolower(owner_type),
                     " repository from ",
                     owner,
-                    ".\nThe argument repo must be a valid GitHub repo name."
+                    ".\nThe argument repo must be a valid GitHub repo name.",
+                    call. = FALSE
                 )
-            } else if (grepl("API rate limit exceeded", message_response)) {
+            } else if (grepl(pattern = "API rate limit exceeded",
+                             x = message_response, fixed = TRUE)) {
                 warning(
                     message_response,
                     "\n",
-                    attr(raw_issues, "condition")$body
+                    attr(raw_issues, "condition")$body,
+                    call. = FALSE
                 )
                 return(new_issues())
             } else {
-                stop("Weird message... Contact the maintainer of the package.")
+                stop("Weird message... Contact the maintainer of the package.",
+                     call. = FALSE)
             }
         }
 
@@ -365,14 +373,13 @@ format_issues <- function(
         )
     )
     labels_name <- raw_issues |>
-        lapply(FUN = \(raw_issue) {
-            vapply(
-                X = raw_issue[["labels"]],
-                FUN = `[[`,
-                FUN.VALUE = character(1L),
-                "name"
-            )
-        })
+        lapply(FUN = `[[`, "labels") |>
+        lapply(
+            FUN = vapply,
+            `[[`,
+            FUN.VALUE = character(1L),
+            "name"
+        )
 
     issues <- new_issues.default(
         url = urls,

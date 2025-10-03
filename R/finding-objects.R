@@ -37,7 +37,7 @@ with_text.IssuesTB <- function(
     in_body = TRUE,
     in_comments = TRUE
 ) {
-    condition <- F
+    condition <- FALSE
     if (in_title) {
         condition <- condition | grepl(x = x$title, ...)
     }
@@ -46,9 +46,10 @@ with_text.IssuesTB <- function(
     }
     if (in_comments) {
         condition <- condition |
-            sapply(
+            vapply(
                 X = x$comments,
-                FUN = \(.x) any(grepl(x = .x$text, ...))
+                FUN = \(.x) any(grepl(x = .x$text, ...)),
+                FUN.VALUE = logical(1L)
             )
     }
     return(subset(x, condition))
