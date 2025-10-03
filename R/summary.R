@@ -30,7 +30,6 @@
 #'
 #' @export
 summary.IssueTB <- function(object, ...) {
-
     message("TO ADAPT WITH LABELS (avec ou sans get_labels)")
 
     object$desc <- paste0(

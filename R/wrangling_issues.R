@@ -321,7 +321,7 @@ new_issues.default <- function(
 #' @exportS3Method `[` IssuesTB
 #' @method `[` IssuesTB
 #' @export
-`[.IssuesTB` <- function (x, i, j, drop = TRUE) {
+`[.IssuesTB` <- function(x, i, j, drop = TRUE) {
     output <- NextMethod("[")
     Narg <- nargs() - !missing(drop)
     # Cas sélection de colonne

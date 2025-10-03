@@ -7,7 +7,7 @@
 \usage{
 with_text(x, ...)
 
-\method{with_text}{IssuesTB}(x, ...)
+\method{with_text}{IssuesTB}(x, ..., in_title = TRUE, in_body = TRUE, in_comments = TRUE)
 }
 \arguments{
 \item{x}{An object of class \code{IssueTB} (a single issue) or

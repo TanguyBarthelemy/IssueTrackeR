@@ -30,7 +30,13 @@ with_text <- function(x, ...) {
 #' @exportS3Method with_text IssuesTB
 #' @method with_text IssuesTB
 #' @export
-with_text.IssuesTB <- function(x, ..., in_title = TRUE, in_body= TRUE, in_comments = TRUE) {
+with_text.IssuesTB <- function(
+    x,
+    ...,
+    in_title = TRUE,
+    in_body = TRUE,
+    in_comments = TRUE
+) {
     condition <- F
     if (in_title) {
         condition <- condition | grepl(x = x$title, ...)
@@ -39,18 +45,18 @@ with_text.IssuesTB <- function(x, ..., in_title = TRUE, in_body= TRUE, in_commen
         condition <- condition | grepl(x = x$body, ...)
     }
     if (in_comments) {
-        condition <- condition | sapply(
-            X = x$comments,
-            FUN = \(.x) any(grepl(x = .x$text, ...))
-        )
+        condition <- condition |
+            sapply(
+                X = x$comments,
+                FUN = \(.x) any(grepl(x = .x$text, ...))
+            )
     }
     return(subset(x, condition))
 }
 
 #' @rdname with_labels
 #' @export
-with_labels <- function (x, ...)
-{
+with_labels <- function(x, ...) {
     UseMethod("with_labels", x)
 }
 
@@ -58,8 +64,7 @@ with_labels <- function (x, ...)
 #' @exportS3Method with_labels IssuesTB
 #' @method with_labels IssuesTB
 #' @export
-with_labels.IssuesTB <- function (x, ...)
-{
+with_labels.IssuesTB <- function(x, ...) {
     condition <- grepl(x = x$labels, pattern = ...)
     return(subset(x, condition))
 }
