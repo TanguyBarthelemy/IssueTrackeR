@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>List Things to Do • IssueTrackeR</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -13,6 +18,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="List Things to Do">
 <meta property="og:description" content="Manage a GitHub problem using R: wrangle issues, labels and milestones. It includes functions for storing, prioritizing (sorting), displaying, adding, deleting, and selecting (filtering) issues based on qualitative and quantitative information. Issues (labels and milestones) are written in lists and categorized into the S3 class to be easily manipulated as datasets in R.">
+<meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">IssueTrackeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0.9000</span>
       </span>
     </div>
 
@@ -66,7 +72,8 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="issuetracker">{IssueTrackeR}<a class="anchor" aria-label="anchor" href="#issuetracker"></a>
+<div class="page-header"><h1 id="issuetracker-">{IssueTrackeR} <a href="https://tanguybarthelemy.github.io/IssueTrackeR/" class="external-link"><img src="reference/figures/logo.svg" align="right" height="150" style="float:right; height:150px;"></a>
+<a class="anchor" aria-label="anchor" href="#issuetracker-"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -100,9 +107,9 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/TanguyBarthelemy/IssueTrackeR" class="external-link">"IssueTrackeR"</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'IssueTrackeR'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     append</span></span></code></pre></div>
+<span><span class="co">#&gt;     append, sample</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="retrieve-information-from-github">Retrieve information from GitHub<a class="anchor" aria-label="anchor" href="#retrieve-information-from-github"></a>
 </h3>
@@ -110,8 +117,6 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># From online</span></span>
 <span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_issues</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, owner <span class="op">=</span> <span class="st">"jdemetra"</span>, repo <span class="op">=</span> <span class="st">"jdplus-main"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Running gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 1s</span></span>
 <span><span class="va">my_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_labels</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, owner <span class="op">=</span> <span class="st">"jdemetra"</span>, repo <span class="op">=</span> <span class="st">"jdplus-main"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading labels... Done!</span></span>
 <span><span class="co">#&gt; 12 labels found.</span></span>
@@ -122,8 +127,9 @@
 <span><span class="co">#&gt;  -  3.2.3 ... Done!</span></span>
 <span><span class="co">#&gt;  -  3.4.0 ... Done!</span></span>
 <span><span class="co">#&gt;  -  3.5.0 ... Done!</span></span>
+<span><span class="co">#&gt;  -  3.5.1 ... Done!</span></span>
 <span><span class="co">#&gt;  -  3.6.0 ... Done!</span></span>
-<span><span class="co">#&gt; Done! 6 milestones found.</span></span></code></pre></div>
+<span><span class="co">#&gt; Done! 7 milestones found.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="save-issues-in-local">Save issues in local<a class="anchor" aria-label="anchor" href="#save-issues-in-local"></a>
@@ -134,19 +140,19 @@
 <span>    issues <span class="op">=</span> <span class="va">my_issues</span>, </span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpUfaBSS\list_issues.yaml.</span></span>
+<span><span class="co">#&gt; The datasets will be exported to /tmp/Rtmpyc9CiM/list_issues.yaml.</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/write.html">write_labels_to_dataset</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="va">my_labels</span>, </span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpUfaBSS\list_labels.yaml.</span></span>
+<span><span class="co">#&gt; The datasets will be exported to /tmp/Rtmpyc9CiM/list_labels.yaml.</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/write.html">write_milestones_to_dataset</a></span><span class="op">(</span></span>
 <span>    milestones <span class="op">=</span> <span class="va">my_milestones</span>, </span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpUfaBSS\list_milestones.yaml.</span></span></code></pre></div>
+<span><span class="co">#&gt; The datasets will be exported to /tmp/Rtmpyc9CiM/list_milestones.yaml.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="options">Options<a class="anchor" aria-label="anchor" href="#options"></a>
@@ -176,43 +182,7 @@
 <p>You can update your full database of issues, labels and milestones with <code><a href="reference/update_database.html">update_database()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># From online</span></span>
-<span><span class="fu"><a href="reference/update_database.html">update_database</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Running gh query ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 1s ⠙ Running gh query 3 done (0.87/s) |</span></span>
-<span><span class="co">#&gt; 3.4s⠹ Running gh query 4 done (0.71/s) | 5.6s⠸ Running gh query 5 done (0.67/s)</span></span>
-<span><span class="co">#&gt; | 7.5s⠼ Running gh query 6 done (0.72/s) | 8.3s Running gh query</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■ 50% | ETA: 1sRunning gh query ■■■■■■■■■■■■■■■■■■■■■■■ 75% |</span></span>
-<span><span class="co">#&gt; ETA: 1s</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="filtering-and-sorting">Filtering and sorting<a class="anchor" aria-label="anchor" href="#filtering-and-sorting"></a>
-</h3>
-<p>There are plenty of different filtering ways.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Condition: issues containing "README" in its body OR title</span></span>
-<span><span class="va">filtered_issues</span> <span class="op">&lt;-</span> <span class="fu">filter_issues</span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="va">my_issues</span>,</span>
-<span>    fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"body"</span>, <span class="st">"title"</span><span class="op">)</span>,</span>
-<span>    values <span class="op">=</span> <span class="st">"README"</span>,</span>
-<span>    fields_logic_gate <span class="op">=</span> <span class="st">"OR"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>See <code>?filter_issues</code> and <code>?contains</code> to explore more options.</p>
-</div>
-<div class="section level3">
-<h3 id="sorting">Sorting<a class="anchor" aria-label="anchor" href="#sorting"></a>
-</h3>
-<p>Finally you can also sort your issues according to certain variable (quantitative) and impose sole filtering factors (conditions as in <code>filter_issues()</code>), which will be applied one after the other:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sorted_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="va">my_issues</span>,</span>
-<span>    sorting_variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>object <span class="op">=</span> <span class="st">"milestones"</span>, field <span class="op">=</span> <span class="st">"due_on"</span><span class="op">)</span>,</span>
-<span>                             <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>object <span class="op">=</span> <span class="st">"issues"</span>, field <span class="op">=</span> <span class="st">"created_at"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    filtering_factors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="st">"bug"</span>,</span>
-<span>                                  fields <span class="op">=</span> <span class="st">"labels"</span>,</span>
-<span>                                  values_logic_gate <span class="op">=</span> <span class="st">"OR"</span><span class="op">)</span>,</span>
-<span>                             <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="st">"package"</span>, fields <span class="op">=</span> <span class="st">"title"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    milestones <span class="op">=</span> <span class="va">my_milestones</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/update_database.html">update_database</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
