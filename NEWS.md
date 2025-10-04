@@ -17,10 +17,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New function `with_text()` to select the issues that contains text in their title, body or comments
 * New logo
 * New function `with_labels()` to filter issues by label's name
+* New function `get_all_repos()` to get all the repos' name from an owner
 
 ### Changed
 
 * Labels in issues have been lightened (just the name of the labels and no more information are stored)
+* The method `summary()` has a new argument `labels` to display color and links of the labels.
+* `get_labels()` now accepts `repo = NULL` and retrieve all the labels from all the repos from an owner.
 
 
 ## [1.2.0] - 2025-07-16

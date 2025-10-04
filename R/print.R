@@ -102,7 +102,6 @@ print.IssuesTB <- function(x, ...) {
 #' @method print summary.IssueTB
 #' @export
 print.summary.IssueTB <- function(x, ...) {
-    message("TO ADAPT WITH LABELS (avec ou sans get_labels)")
     cli::cli_h2(cli::style_hyperlink(
         text = paste0("Issue ", x[["desc"]]),
         url = x[["html_url"]]
@@ -111,23 +110,27 @@ print.summary.IssueTB <- function(x, ...) {
     if (x[["has_labels"]]) {
         cat(crayon::underline("Labels:"), " ", sep = "")
 
+        if (is.null(x$labels_color)) {
+            cat(x$labels, sep = ", ")
+        } else {
         cat(
             vapply(
                 X = seq_along(x$labels),
                 FUN = function(k) {
-                    label_style <- combine_styles(
-                        make_style(x$label_color[k]),
-                        make_style(x$label_bgcolor[k], bg = TRUE)
+                    label_style <- crayon::combine_styles(
+                        crayon::make_style(x$labels_color[k]),
+                        crayon::make_style(x$labels_bgcolor[k], bg = TRUE)
                     )
                     cli::style_hyperlink(
-                        text = label_style(x$label_name[k]),
-                        url = x$label_url[k]
+                        text = label_style(x$labels_name[k]),
+                        url = x$labels_url[k]
                     )
                 },
                 FUN.VALUE = character(1L)
             ),
             sep = ", "
         )
+        }
 
         cat("\n")
     }

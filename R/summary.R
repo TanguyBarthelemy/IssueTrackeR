@@ -29,9 +29,7 @@
 #' @method summary IssueTB
 #'
 #' @export
-summary.IssueTB <- function(object, ...) {
-    message("TO ADAPT WITH LABELS (avec ou sans get_labels)")
-
+summary.IssueTB <- function(object, labels, ...) {
     object$desc <- paste0(
         object[["owner"]],
         "/",
@@ -43,45 +41,53 @@ summary.IssueTB <- function(object, ...) {
     object$has_labels <- length(object$labels) > 0L
 
     if (object$has_labels) {
-        object$label_name <- vapply(
-            X = object$labels,
-            FUN = `[[`,
-            "name",
-            FUN.VALUE = character(1L)
-        )
-        object$label_bgcolor <- paste0(
-            "#",
-            vapply(
-                X = object$labels,
-                FUN = `[[`,
-                "color",
-                FUN.VALUE = character(1L)
-            )
-        )
 
-        isDark <- function(colr) {
-            apply(
-                X = grDevices::col2rgb(colr) * c(299L, 587L, 114L),
-                FUN = sum,
-                MARGIN = 2L
-            ) /
-                1000L <
-                123L
+        object$labels_name <- object$labels
+
+        if (!missing(labels) && inherits(labels, "LabelsTB")) {
+
+            my_labels <- labels |>
+                subset(
+                    owner == object$owner
+                    & repo == object$repo
+                    & name %in% object$labels_name,
+                       select = c("name", "color")
+                )
+
+            if (nrow(my_labels) == length(object$labels_name)
+                & all(object$labels_name %in% my_labels$name)) {
+
+                rownames(my_labels) <- my_labels$name
+                object$labels_bgcolor <- my_labels[object$labels_name, "color"]
+
+                isDark <- function(colr) {
+                    apply(
+                        X = grDevices::col2rgb(colr) * c(299L, 587L, 114L),
+                        FUN = sum,
+                        MARGIN = 2L
+                    ) /
+                        1000L <
+                        123L
+                }
+
+                object$labels_color <- c("grey8", "ivory")[
+                    isDark(object$labels_bgcolor) + 1L
+                ]
+                object$labels_url <- file.path(
+                    "https://github.com/",
+                    object$owner,
+                    object$repo,
+                    "labels",
+                    utils::URLencode(object$labels_name)
+                )
+            } else {
+                message("Your `labels` don't correspond to the issue.")
+            }
+
+        } else {
+            message("For colourful links, add a labels argument (resulting from get_labels().")
         }
 
-        object$label_color <- c("grey8", "ivory")[
-            isDark(object$label_bgcolor) + 1L
-        ]
-        object$label_url <- vapply(
-            X = object$labels,
-            FUN = `[[`,
-            "url",
-            FUN.VALUE = character(1L)
-        ) |>
-            gsub(
-                pattern = "https://api.github.com/repos/",
-                replacement = "https://github.com/"
-            )
     }
 
     class(object) <- "summary.IssueTB"

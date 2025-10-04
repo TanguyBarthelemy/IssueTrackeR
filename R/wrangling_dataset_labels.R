@@ -1,23 +1,82 @@
 #' @export
 #' @rdname get
 get_labels <- function(
-    source = c("local", "online"),
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_labels.yaml",
-    repo = getOption("IssueTrackeR.repo"),
-    owner = getOption("IssueTrackeR.owner"),
-    verbose = TRUE
+        source = c("local", "online"),
+        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+        dataset_name = "list_labels.yaml",
+        repo = getOption("IssueTrackeR.repo"),
+        owner = getOption("IssueTrackeR.owner"),
+        verbose = TRUE
 ) {
     source <- match.arg(source)
 
     if (source == "online") {
-        list_labels <- gh::gh(
-            repo = repo,
-            owner = owner,
-            endpoint = "/repos/:owner/:repo/labels",
-            .limit = Inf
-        ) |>
-            format_labels(verbose = verbose)
+
+        if (is.null(repo)) {
+            if (verbose) cat("Try to find all repositories...")
+            list_repo <- get_all_repos(owner)
+            if (verbose) cat(" Done!\n")
+
+            list_labels <- lapply(
+                X = list_repo,
+                FUN = get_labels,
+                source = "online",
+                owner = owner,
+                verbose = verbose,
+                dataset_dir = NULL,
+                dataset_name = NULL
+            ) |>
+                do.call(what = rbind)
+
+            return(list_labels)
+        }
+
+        raw_labels <- try(expr = {
+            gh::gh(
+                repo = repo,
+                owner = owner,
+                endpoint = "/repos/:owner/:repo/labels",
+                .limit = Inf
+            )
+        })
+        if (inherits(raw_labels, "try-error")) {
+            message_response <- attr(
+                raw_labels,
+                "condition"
+            )$response_content$message
+            if (message_response == "Not Found") {
+                stop(
+                    repo,
+                    " is not a repository from ",
+                    owner,
+                    ".\nThe argument repo must be a valid GitHub repo name.",
+                    call. = FALSE
+                )
+            } else if (grepl(pattern = "API rate limit exceeded",
+                             x = message_response, fixed = TRUE)) {
+                warning(
+                    message_response,
+                    "\n",
+                    attr(raw_labels, "condition")$body,
+                    call. = FALSE
+                )
+                list_labels <- data.frame(
+                    name = character(),
+                    description = character(),
+                    color = character(),
+                    repo = character(),
+                    owner = character()
+                )
+                class(list_labels) <- c("LabelsTB", "data.frame")
+                return(list_labels)
+            } else {
+                stop("Weird message... Contact the maintainer of the package.",
+                     call. = FALSE)
+            }
+        }
+
+        if (verbose) cat("Repo:", repo, " owner:", owner, "\n")
+        list_labels <- format_labels(raw_labels = raw_labels, verbose = verbose)
 
         if (!is.null(list_labels)) {
             list_labels <- cbind(list_labels, repo = repo, owner = owner)
@@ -83,8 +142,12 @@ format_labels <- function(raw_labels, verbose = TRUE) {
         FUN = base::`[`,
         c("name", "description", "color")
     ) |>
-        do.call(what = rbind) |>
-        as.data.frame()
+        lapply(FUN = \(label) {
+            label$color <- paste0("#", label$color)
+            if (is.null(label$description)) label$description <- ""
+            return(as.data.frame(label))
+        }) |>
+        do.call(what = rbind)
     if (verbose) {
         cat("Done!\n", nrow(new_labels_structure), " labels found.\n", sep = "")
     }
@@ -94,10 +157,10 @@ format_labels <- function(raw_labels, verbose = TRUE) {
 #' @rdname write
 #' @export
 write_labels_to_dataset <- function(
-    labels,
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_labels.yaml",
-    verbose = TRUE
+        labels,
+        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+        dataset_name = "list_labels.yaml",
+        verbose = TRUE
 ) {
     output_file <- tools::file_path_sans_ext(dataset_name)
     output_path <- file.path(dataset_dir, output_file) |>
