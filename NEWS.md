@@ -18,6 +18,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New logo
 * New function `with_labels()` to filter issues by label's name
 * New function `get_all_repos()` to get all the repos' name from an owner
+* New method `print()` and `summary()` for `LabelsTB` objects
 
 ### Changed
 

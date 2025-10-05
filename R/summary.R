@@ -60,25 +60,16 @@ summary.IssueTB <- function(object, labels, ...) {
                 rownames(my_labels) <- my_labels$name
                 object$labels_bgcolor <- my_labels[object$labels_name, "color"]
 
-                isDark <- function(colr) {
-                    apply(
-                        X = grDevices::col2rgb(colr) * c(299L, 587L, 114L),
-                        FUN = sum,
-                        MARGIN = 2L
-                    ) /
-                        1000L <
-                        123L
-                }
-
                 object$labels_color <- c("grey8", "ivory")[
                     isDark(object$labels_bgcolor) + 1L
                 ]
-                object$labels_url <- file.path(
-                    "https://github.com/",
+                object$labels_url <- paste(
+                    "https://github.com",
                     object$owner,
                     object$repo,
                     "labels",
-                    utils::URLencode(object$labels_name)
+                    utils::URLencode(object$labels_name),
+                    sep = "/"
                 )
             } else {
                 message("Your `labels` don't correspond to the issue.")
@@ -128,8 +119,34 @@ summary.IssuesTB <- function(object, ...) {
 #' @method summary LabelsTB
 #' @export
 summary.LabelsTB <- function(object, ...) {
-    x <- NULL
-    message("TODO")
-    class(x) <- "summary.LabelsTB"
-    return(x)
+
+    object$labels_bgcolor <- object$color
+    object$labels_color <- c("grey8", "ivory")[
+        isDark(object$labels_bgcolor) + 1L
+    ]
+    object$labels_url <- paste(
+        "https://github.com",
+        object$owner,
+        object$repo,
+        "labels",
+        utils::URLencode(object$labels_name),
+        sep = "/"
+    )
+    object$formated_label <- vapply(
+        X = seq_len(nrow(object)),
+        FUN = function(k) {
+            label_style <- crayon::combine_styles(
+                crayon::make_style(object$labels_color[k]),
+                crayon::make_style(object$labels_bgcolor[k], bg = TRUE)
+            )
+            cli::style_hyperlink(
+                text = label_style(object$name[k]),
+                url = object$labels_url[k]
+            )
+        },
+        FUN.VALUE = character(1L)
+    )
+
+    class(object) <- c("summary.LabelsTB", "data.frame")
+    return(object)
 }

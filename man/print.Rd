@@ -17,7 +17,7 @@
 
 \method{print}{summary.IssuesTB}(x, ...)
 
-\method{print}{summary.LabelsTB}(x, ...)
+\method{print}{LabelsTB}(x, ...)
 
 \method{print}{summary.LabelsTB}(x, ...)
 }

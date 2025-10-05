@@ -6,7 +6,7 @@
 \alias{summary.LabelsTB}
 \title{Compute a summary of an issue or a list of issues}
 \usage{
-\method{summary}{IssueTB}(object, ...)
+\method{summary}{IssueTB}(object, labels, ...)
 
 \method{summary}{IssuesTB}(object, ...)
 
