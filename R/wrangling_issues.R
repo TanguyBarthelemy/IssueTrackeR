@@ -278,7 +278,11 @@ new_issues.default <- function(
 
     if (missing(labels)) {
         labels <- rep(
-            x = list(NULL),
+            x = list(data.frame(
+                name = character(0L),
+                color = character(0L),
+                stringsAsFactors = FALSE
+            )),
             times = length(title)
         )
     }

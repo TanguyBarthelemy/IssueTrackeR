@@ -310,14 +310,19 @@ format_issues <- function(
             stringsAsFactors = FALSE
         )
     )
-    labels_name <- raw_issues |>
-        lapply(FUN = `[[`, "labels") |>
-        lapply(
-            FUN = vapply,
-            `[[`,
-            FUN.VALUE = character(1L),
-            "name"
-        )
+    labels_list <- raw_issues |>
+        lapply(FUN = `[[`, "labels")  |>
+        lapply(FUN = function(lbls) {
+        if (length(lbls) == 0) {
+            data.frame(name = character(0), color = character(0))
+        } else {
+            data.frame(
+                name  = vapply(X = lbls, FUN = "[[", "name", FUN.VALUE = character(1)),
+                color = paste0("#", vapply(X = lbls, FUN = "[[", "color", FUN.VALUE = character(1))),
+                stringsAsFactors = FALSE
+            )
+        }
+    })
 
     issues <- new_issues.default(
         url = urls,
@@ -350,7 +355,7 @@ format_issues <- function(
             "number",
             FUN.VALUE = integer(1L)
         ),
-        labels = labels_name,
+        labels = labels_list,
         milestone = vapply(
             X = raw_issues,
             FUN = function(x) {

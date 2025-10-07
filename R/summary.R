@@ -29,7 +29,7 @@
 #' @method summary IssueTB
 #'
 #' @export
-summary.IssueTB <- function(object, labels, ...) {
+summary.IssueTB <- function(object, ...) {
     object$desc <- paste0(
         object[["owner"]],
         "/",
@@ -38,46 +38,24 @@ summary.IssueTB <- function(object, labels, ...) {
         object[["number"]]
     )
     object$nbr_comments <- nrow(object$comments)
-    object$has_labels <- length(object$labels) > 0L
+    object$has_labels <- nrow(object$labels) > 0L
 
     if (object$has_labels) {
 
-        object$labels_name <- object$labels
+        object$labels_name <- object$labels$name
+        object$labels_bgcolor <- object$labels$color
 
-        if (!missing(labels) && inherits(labels, "LabelsTB")) {
-
-            my_labels <- labels |>
-                subset(
-                    owner == object$owner
-                    & repo == object$repo
-                    & name %in% object$labels_name,
-                       select = c("name", "color")
-                )
-
-            if (nrow(my_labels) == length(object$labels_name)
-                & all(object$labels_name %in% my_labels$name)) {
-
-                rownames(my_labels) <- my_labels$name
-                object$labels_bgcolor <- my_labels[object$labels_name, "color"]
-
-                object$labels_color <- c("grey8", "ivory")[
-                    isDark(object$labels_bgcolor) + 1L
-                ]
-                object$labels_url <- paste(
-                    "https://github.com",
-                    object$owner,
-                    object$repo,
-                    "labels",
-                    utils::URLencode(object$labels_name),
-                    sep = "/"
-                )
-            } else {
-                message("Your `labels` don't correspond to the issue.")
-            }
-
-        } else {
-            message("For colourful links, add a labels argument (resulting from get_labels().")
-        }
+        object$labels_color <- c("grey8", "ivory")[
+            isDark(object$labels_bgcolor) + 1L
+        ]
+        object$labels_url <- paste(
+            "https://github.com",
+            object$owner,
+            object$repo,
+            "labels",
+            utils::URLencode(object$labels_name),
+            sep = "/"
+        )
 
     }
 

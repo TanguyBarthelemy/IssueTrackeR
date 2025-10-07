@@ -19,11 +19,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New function `with_labels()` to filter issues by label's name
 * New function `get_all_repos()` to get all the repos' name from an owner
 * New method `print()` and `summary()` for `LabelsTB` objects
+* Not exported `isDark()` function to verify if a color is dark or light (to display text in black or white above)
 
 ### Changed
 
-* Labels in issues have been lightened (just the name of the labels and no more information are stored)
-* The method `summary()` has a new argument `labels` to display color and links of the labels.
+* Labels in issues have been lightened (just the name and the color of the labels and no more information are stored)
 * `get_labels()` now accepts `repo = NULL` and retrieve all the labels from all the repos from an owner.
 
 

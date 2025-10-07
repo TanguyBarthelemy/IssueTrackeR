@@ -108,27 +108,23 @@ print.summary.IssueTB <- function(x, ...) {
     if (x[["has_labels"]]) {
         cat(crayon::underline("Labels:"), " ", sep = "")
 
-        if (is.null(x$labels_color)) {
-            cat(x$labels, sep = ", ")
-        } else {
-            cat(
-                vapply(
-                    X = seq_along(x$labels),
-                    FUN = function(k) {
-                        label_style <- crayon::combine_styles(
-                            crayon::make_style(x$labels_color[k]),
-                            crayon::make_style(x$labels_bgcolor[k], bg = TRUE)
-                        )
-                        cli::style_hyperlink(
-                            text = label_style(x$labels_name[k]),
-                            url = x$labels_url[k]
-                        )
-                    },
-                    FUN.VALUE = character(1L)
-                ),
-                sep = ", "
-            )
-        }
+        cat(
+            vapply(
+                X = seq_along(x$labels_name),
+                FUN = function(k) {
+                    label_style <- crayon::combine_styles(
+                        crayon::make_style(x$labels_color[k]),
+                        crayon::make_style(x$labels_bgcolor[k], bg = TRUE)
+                    )
+                    cli::style_hyperlink(
+                        text = label_style(x$labels_name[k]),
+                        url = x$labels_url[k]
+                    )
+                },
+                FUN.VALUE = character(1L)
+            ),
+            sep = ", "
+        )
 
         cat("\n")
     }
