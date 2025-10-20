@@ -15,11 +15,14 @@ with_text(x, ...)
 \item{...}{Additional arguments passed to \code{\link[=grepl]{grepl()}}, such as \code{pattern}
 and \code{ignore.case}.}
 
-\item{in_title}{Boolean. Does the function search for text in the title?}
+\item{in_title}{Boolean. Does the function search for text in the title?
+(Default \code{TRUE})}
 
-\item{in_body}{Boolean. Does the function search for text in the body?}
+\item{in_body}{Boolean. Does the function search for text in the body?
+(Default \code{TRUE})}
 
-\item{in_comments}{Boolean. Does the function search for text in the comments?}
+\item{in_comments}{Boolean. Does the function search for text in the
+comments? (Default \code{TRUE})}
 }
 \value{
 An object \code{IssuesTB} with issues that satisfy the condition.

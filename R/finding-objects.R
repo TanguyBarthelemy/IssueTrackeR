@@ -6,8 +6,11 @@
 #'
 #' @param x An object of class \code{IssuesTB}.
 #' @param in_title Boolean. Does the function search for text in the title?
+#' (Default \code{TRUE})
 #' @param in_body Boolean. Does the function search for text in the body?
-#' @param in_comments Boolean. Does the function search for text in the comments?
+#' (Default \code{TRUE})
+#' @param in_comments Boolean. Does the function search for text in the
+#' comments? (Default \code{TRUE})
 #' @param ... Additional arguments passed to [grepl()], such as \code{pattern}
 #' and \code{ignore.case}.
 #'
