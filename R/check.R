@@ -9,21 +9,21 @@ check_response <- function(x, context = "GitHub API call") {
 
     if (grepl("Timeout was reached", msg, ignore.case = TRUE)) {
         stop(
-            "[", context, "]", " The GitHub API request timed out. 🕓\n",
-            "→ Check your network connection or increase timeout options.\n",
-            "→ Or wait a few seconds and try again.",
+            "[", context, "]", " The GitHub API request timed out. \U1F553\n",
+            "\u2192 Check your network connection or increase timeout options.\n",
+            "\u2192 Or wait a few seconds and try again.",
             call. = FALSE
         )
     } else if (grepl("Resource not accessible by integration", msg, ignore.case = TRUE)) {
         stop(
-            "[", context, "]", " The GitHub token used does not have sufficient permissions 🔒.\n",
-            "→ Try using a Personal Access Token (PAT) with 'repo' scope.",
+            "[", context, "]", " The GitHub token used does not have sufficient permissions \U1F512.\n",
+            "\u2192 Try using a Personal Access Token (PAT) with 'repo' scope.",
             call. = FALSE
         )
     } else if (grepl("API rate limit exceeded", msg, ignore.case = TRUE)) {
         stop(
-            "[", context, "]", " GitHub API rate limit exceeded ⏳.\n",
-            "→ Wait a few minutes or authenticate with a PAT to increase your limit.",
+            "[", context, "]", " GitHub API rate limit exceeded \U23F3\n",
+            "\u2192 Wait a few minutes or authenticate with a PAT to increase your limit.",
             call. = FALSE
         )
     } else if (inherits(cond, "http_error_404") || grepl("URL not found", msg, ignore.case = TRUE)) {
@@ -40,8 +40,8 @@ check_response <- function(x, context = "GitHub API call") {
 
             stop(
                 "[", context, "] ", "The repository '", owner, "/", repo,
-                "' does not exist or is not accessible on GitHub ❌.\n",
-                "→ Verify that both owner and repo names are correct, and that you have access rights.",
+                "' does not exist or is not accessible on GitHub \U274C.\n",
+                "\u2192 Verify that both owner and repo names are correct, and that you have access rights.",
                 call. = FALSE
             )
 
@@ -51,8 +51,8 @@ check_response <- function(x, context = "GitHub API call") {
 
             stop(
                 "[", context, "] ", "The user '", owner,
-                "' does not exist or is not accessible on GitHub ❌.\n",
-                "→ Check that the username is correct.",
+                "' does not exist or is not accessible on GitHub \U274C.\n",
+                "\u2192 Check that the username is correct.",
                 call. = FALSE
             )
 
@@ -63,31 +63,23 @@ check_response <- function(x, context = "GitHub API call") {
 
             stop(
                 "[", context, "] ", "The organization '", owner,
-                "' does not exist or is not accessible on GitHub ❌.\n",
-                "→ Check that the organization name is correct.",
+                "' does not exist or is not accessible on GitHub \U274C.\n",
+                "\u2192 Check that the organization name is correct.",
                 call. = FALSE
             )
 
-            # Cas 4 : 404 générique
         } else {
             stop(
-                "[", context, "] ", "The requested resource was not found on GitHub ❌.\n",
-                "→ Check the API endpoint and parameters.",
+                "[", context, "] ", "The requested resource was not found on GitHub \U274C.\n",
+                "\u2192 Check the API endpoint and parameters.",
                 call. = FALSE
             )
         }
-    } else if (grepl("URL not found", msg, ignore.case = TRUE)) {
-        stop(
-            "[", context, "]",
-            # repo, " is not a repository from ", owner, ".\n",
-            "The argument repo must be a valid GitHub repo name.",
-            call. = FALSE
-        )
     } else {
         stop(
             "[", context, "]",
             " Weird message...\n",
-            "→ Please contact the maintainer of the package with the error message:\n",
+            "\u2192 Please contact the maintainer of the package with the error message:\n",
             msg,
             call. = FALSE
         )
