@@ -10,7 +10,8 @@ check_response <- function(x, context = "GitHub API call") {
     if (grepl("Timeout was reached", msg, ignore.case = TRUE)) {
         stop(
             "[", context, "]", " The GitHub API request timed out. \U1F553\n",
-            "\u2192 Check your network connection or increase timeout options.\n",
+            "\u2192 Check your network connection\n",
+            "\u2192 Or increase timeout options.\n",
             "\u2192 Or wait a few seconds and try again.",
             call. = FALSE
         )
@@ -23,7 +24,8 @@ check_response <- function(x, context = "GitHub API call") {
     } else if (grepl("API rate limit exceeded", msg, ignore.case = TRUE)) {
         stop(
             "[", context, "]", " GitHub API rate limit exceeded \U23F3\n",
-            "\u2192 Wait a few minutes or authenticate with a PAT to increase your limit.",
+            "\u2192 Wait a few minutes\n",
+            "\u2192 Or authenticate with a PAT to increase your limit.",
             call. = FALSE
         )
     } else if (inherits(cond, "http_error_404") || grepl("URL not found", msg, ignore.case = TRUE)) {
@@ -40,7 +42,8 @@ check_response <- function(x, context = "GitHub API call") {
 
             stop(
                 "[", context, "] ", "The repository '", owner, "/", repo,
-                "' does not exist or is not accessible on GitHub \U274C.\n",
+                "' does not exist\n",
+                "\u2192 Or is not accessible on GitHub \U274C.\n",
                 "\u2192 Verify that both owner and repo names are correct, and that you have access rights.",
                 call. = FALSE
             )
@@ -51,7 +54,8 @@ check_response <- function(x, context = "GitHub API call") {
 
             stop(
                 "[", context, "] ", "The user '", owner,
-                "' does not exist or is not accessible on GitHub \U274C.\n",
+                "' does not exist\n",
+                "\u2192 Or is not accessible on GitHub \U274C.\n",
                 "\u2192 Check that the username is correct.",
                 call. = FALSE
             )
@@ -63,7 +67,8 @@ check_response <- function(x, context = "GitHub API call") {
 
             stop(
                 "[", context, "] ", "The organization '", owner,
-                "' does not exist or is not accessible on GitHub \U274C.\n",
+                "' does not exist\n",
+                "\u2192 Or is not accessible on GitHub \U274C.\n",
                 "\u2192 Check that the organization name is correct.",
                 call. = FALSE
             )

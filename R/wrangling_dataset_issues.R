@@ -177,6 +177,7 @@ get_issues <- function(
         }
         raw_yaml <- yaml::read_yaml(file = input_path)
         raw_yaml$comments <- lapply(X = raw_yaml$comments, FUN = as.data.frame)
+        raw_yaml$labels <- lapply(X = raw_yaml$labels, FUN = as.data.frame)
         issues <- do.call(
             args = raw_yaml,
             what = new_issues
