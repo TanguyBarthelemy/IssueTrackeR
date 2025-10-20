@@ -247,7 +247,7 @@ print.LabelsTB <- function(x, ...) {
     for (id in seq_len(nrow(couples))) {
         owner_name <- couples[id, "owner"]
         repo_name <- couples[id, "repo"]
-        labels_owner <- x[x$owner == owner_name & repo == repo_name, ]
+        labels_owner <- x[x$owner == owner_name & x$repo == repo_name, ]
 
         cat(
             paste0(
@@ -287,7 +287,7 @@ print.summary.LabelsTB <- function(x, ...) {
     for (id in seq_len(nrow(couples))) {
         owner_name <- couples[id, "owner"]
         repo_name <- couples[id, "repo"]
-        labels_owner <- x[x$owner == owner_name & repo == repo_name, ]
+        labels_owner <- x[x$owner == owner_name & x$repo == repo_name, ]
 
         cat(
             paste0(
