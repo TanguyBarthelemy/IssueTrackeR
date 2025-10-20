@@ -15,6 +15,12 @@ with_text(x, ...)
 
 \item{...}{Additional arguments passed to \code{\link[=grepl]{grepl()}}, such as \code{pattern}
 and \code{ignore.case}.}
+
+\item{in_title}{Boolean. Does the function search for text in the title?}
+
+\item{in_body}{Boolean. Does the function search for text in the body?}
+
+\item{in_comments}{Boolean. Does the function search for text in the comments?}
 }
 \value{
 A logical value (\code{TRUE}/\code{FALSE}) if \code{x} is a single issue, or a

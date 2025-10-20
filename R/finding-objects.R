@@ -6,10 +6,14 @@
 #'
 #' @param x An object of class \code{IssueTB} (a single issue) or
 #' \code{IssuesTB} (a \code{data.frame} or \code{tibble} of issues).
+#' @param in_title Boolean. Does the function search for text in the title?
+#' @param in_body Boolean. Does the function search for text in the body?
+#' @param in_comments Boolean. Does the function search for text in the comments?
 #' @param ... Additional arguments passed to [grepl()], such as \code{pattern}
 #' and \code{ignore.case}.
+#' @param
 #'
-#' @return A logical value (`TRUE`/`FALSE`) if `x` is a single issue, or a
+#' @returns A logical value (`TRUE`/`FALSE`) if `x` is a single issue, or a
 #' logical vector for multiple issues.
 #'
 #' @examples
