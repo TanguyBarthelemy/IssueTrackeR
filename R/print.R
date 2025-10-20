@@ -87,7 +87,8 @@ print.IssuesTB <- function(x, ...) {
             paste("There are", nrow(x), "issues.")
         ),
         "\n"
-    ) |> cat()
+    ) |>
+        cat()
     for (id_issue in seq_len(nrow(x))) {
         cat("\n")
         print(x[id_issue, , drop = TRUE])
@@ -206,7 +207,6 @@ print.summary.IssuesTB <- function(x, ...) {
 #' @method print LabelsTB
 #' @export
 print.LabelsTB <- function(x, ...) {
-
     x$labels_bgcolor <- x$color
     x$labels_color <- c("grey8", "ivory")[
         isDark(x$labels_bgcolor) + 1L
@@ -242,7 +242,8 @@ print.LabelsTB <- function(x, ...) {
             "1" = "There is 1 repo.",
             paste("There are", nrow(couples), "repos.")
         )
-    ) |> cat()
+    ) |>
+        cat()
 
     for (id in seq_len(nrow(couples))) {
         owner_name <- couples[id, "owner"]
@@ -254,7 +255,12 @@ print.LabelsTB <- function(x, ...) {
                 "\n- ",
                 cli::style_hyperlink(
                     text = paste(owner_name, repo_name, sep = "/"),
-                    url = paste("https://github.com", owner_name, repo_name, sep = "/")
+                    url = paste(
+                        "https://github.com",
+                        owner_name,
+                        repo_name,
+                        sep = "/"
+                    )
                 ),
                 ":"
             ),
@@ -271,8 +277,6 @@ print.LabelsTB <- function(x, ...) {
 #' @method print summary.LabelsTB
 #' @export
 print.summary.LabelsTB <- function(x, ...) {
-    # print(unclass(x))
-    # return(NULL)
     crayon::bold(
         switch(
             EXPR = as.character(nrow(x)),
@@ -280,7 +284,8 @@ print.summary.LabelsTB <- function(x, ...) {
             "1" = "There is 1 label.",
             paste("There are", nrow(x), "labels.")
         )
-    ) |> cat()
+    ) |>
+        cat()
 
     couples <- unique(x[, c("owner", "repo")])
 
@@ -294,7 +299,12 @@ print.summary.LabelsTB <- function(x, ...) {
                 "\n- ",
                 cli::style_hyperlink(
                     text = paste(owner_name, repo_name, sep = "/"),
-                    url = paste("https://github.com", owner_name, repo_name, sep = "/")
+                    url = paste(
+                        "https://github.com",
+                        owner_name,
+                        repo_name,
+                        sep = "/"
+                    )
                 ),
                 ":"
             ),

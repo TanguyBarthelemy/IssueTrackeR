@@ -101,11 +101,14 @@ get_issues <- function(
     state <- match.arg(state)
 
     if (source == "online") {
-
         if (is.null(repo)) {
-            if (verbose) cat("Try to find all repositories...")
+            if (verbose) {
+                cat("Try to find all repositories...")
+            }
             list_repo <- get_all_repos(owner)
-            if (verbose) cat(" Done!\n")
+            if (verbose) {
+                cat(" Done!\n")
+            }
 
             issues <- lapply(
                 X = list_repo,
@@ -122,7 +125,9 @@ get_issues <- function(
             return(issues)
         }
 
-        if (verbose) cat("Repo:", repo, " owner:", owner, "\n")
+        if (verbose) {
+            cat("Repo:", repo, " owner:", owner, "\n")
+        }
         raw_issues <- try(expr = {
             gh::gh(
                 repo = repo,
@@ -153,7 +158,9 @@ get_issues <- function(
             verbose = verbose
         )
     } else if (source == "local") {
-        if (verbose) cat("Looking into", dataset_name, "...\n")
+        if (verbose) {
+            cat("Looking into", dataset_name, "...\n")
+        }
         if (tools::file_ext(dataset_name) == "yaml") {
             input_file <- tools::file_path_sans_ext(dataset_name)
         }
@@ -186,7 +193,11 @@ get_issues <- function(
             X = raw_yaml$labels,
             FUN = function(lbls) {
                 if (length(lbls$name) == 0L) {
-                    return(data.frame(name = character(0L), color = character(0L)))
+                    return(data.frame(
+                        name = character(0L),
+                        color = character(0L),
+                        stringsAsFactors = FALSE
+                    ))
                 }
                 return(data.frame(lbls))
             }
@@ -304,18 +315,35 @@ format_issues <- function(
         )
     )
     labels_list <- raw_issues |>
-        lapply(FUN = `[[`, "labels")  |>
+        lapply(FUN = `[[`, "labels") |>
         lapply(FUN = function(lbls) {
-        if (length(lbls) == 0L) {
-            data.frame(name = character(0L), color = character(0L))
-        } else {
-            data.frame(
-                name  = vapply(X = lbls, FUN = "[[", "name", FUN.VALUE = character(1)),
-                color = paste0("#", vapply(X = lbls, FUN = "[[", "color", FUN.VALUE = character(1))),
-                stringsAsFactors = FALSE
-            )
-        }
-    })
+            if (length(lbls) == 0L) {
+                data.frame(
+                    name = character(0L),
+                    color = character(0L),
+                    stringsAsFactors = FALSE
+                )
+            } else {
+                data.frame(
+                    name = vapply(
+                        X = lbls,
+                        FUN = "[[",
+                        "name",
+                        FUN.VALUE = character(1L)
+                    ),
+                    color = paste0(
+                        "#",
+                        vapply(
+                            X = lbls,
+                            FUN = "[[",
+                            "color",
+                            FUN.VALUE = character(1L)
+                        )
+                    ),
+                    stringsAsFactors = FALSE
+                )
+            }
+        })
 
     issues <- new_issues.default(
         url = urls,

@@ -16,7 +16,9 @@
 #'
 #' @export
 get_all_repos <- function(owner, public = TRUE, private = TRUE) {
-    if (isFALSE(public | private)) return(NULL)
+    if (isFALSE(public | private)) {
+        return(NULL)
+    }
 
     info_owner <- try(expr = {
         gh::gh(
@@ -48,7 +50,8 @@ get_all_repos <- function(owner, public = TRUE, private = TRUE) {
         check_response(list_public_repo)
         list_public_repo <- vapply(
             X = list_public_repo,
-            FUN = "[[", "name",
+            FUN = "[[",
+            "name",
             FUN.VALUE = character(1L)
         )
 

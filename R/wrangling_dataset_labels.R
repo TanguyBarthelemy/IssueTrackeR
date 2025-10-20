@@ -1,21 +1,24 @@
 #' @export
 #' @rdname get
 get_labels <- function(
-        source = c("local", "online"),
-        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-        dataset_name = "list_labels.yaml",
-        repo = getOption("IssueTrackeR.repo"),
-        owner = getOption("IssueTrackeR.owner"),
-        verbose = TRUE
+    source = c("local", "online"),
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = "list_labels.yaml",
+    repo = getOption("IssueTrackeR.repo"),
+    owner = getOption("IssueTrackeR.owner"),
+    verbose = TRUE
 ) {
     source <- match.arg(source)
 
     if (source == "online") {
-
         if (is.null(repo)) {
-            if (verbose) cat("Try to find all repositories...")
+            if (verbose) {
+                cat("Try to find all repositories...")
+            }
             list_repo <- get_all_repos(owner)
-            if (verbose) cat(" Done!\n")
+            if (verbose) {
+                cat(" Done!\n")
+            }
 
             list_labels <- lapply(
                 X = list_repo,
@@ -41,7 +44,9 @@ get_labels <- function(
         })
         check_response(raw_labels)
 
-        if (verbose) cat("Repo:", repo, " owner:", owner, "\n")
+        if (verbose) {
+            cat("Repo:", repo, " owner:", owner, "\n")
+        }
         list_labels <- format_labels(raw_labels = raw_labels, verbose = verbose)
 
         if (!is.null(list_labels)) {
@@ -105,7 +110,9 @@ format_labels <- function(raw_labels, verbose = TRUE) {
     ) |>
         lapply(FUN = \(label) {
             label$color <- paste0("#", label$color)
-            if (is.null(label$description)) label$description <- ""
+            if (is.null(label$description)) {
+                label$description <- ""
+            }
             return(as.data.frame(label))
         }) |>
         do.call(what = rbind)
@@ -118,10 +125,10 @@ format_labels <- function(raw_labels, verbose = TRUE) {
 #' @rdname write
 #' @export
 write_labels_to_dataset <- function(
-        labels,
-        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-        dataset_name = "list_labels.yaml",
-        verbose = TRUE
+    labels,
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = "list_labels.yaml",
+    verbose = TRUE
 ) {
     if (tools::file_ext(dataset_name) == "yaml") {
         output_file <- tools::file_path_sans_ext(dataset_name)

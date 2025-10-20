@@ -26,6 +26,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * Labels in issues have been lightened (just the name and the colour of the labels and no more information are stored)
 * `get_labels()` now accepts `repo = NULL` and retrieve all the labels from all the repos from an owner.
+* slightly change the writing and reading method of datasets
 
 
 ## [1.2.0] - 2025-07-16

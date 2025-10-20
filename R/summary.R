@@ -41,7 +41,6 @@ summary.IssueTB <- function(object, ...) {
     object$has_labels <- nrow(object$labels) > 0L
 
     if (object$has_labels) {
-
         object$labels_name <- object$labels$name
         object$labels_bgcolor <- object$labels$color
 
@@ -56,7 +55,6 @@ summary.IssueTB <- function(object, ...) {
             utils::URLencode(object$labels_name),
             sep = "/"
         )
-
     }
 
     class(object) <- "summary.IssueTB"
@@ -97,7 +95,6 @@ summary.IssuesTB <- function(object, ...) {
 #' @method summary LabelsTB
 #' @export
 summary.LabelsTB <- function(object, ...) {
-
     object$labels_bgcolor <- object$color
     object$labels_color <- c("grey8", "ivory")[
         isDark(object$labels_bgcolor) + 1L
