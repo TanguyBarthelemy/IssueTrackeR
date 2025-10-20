@@ -3,15 +3,14 @@
 \name{with_text}
 \alias{with_text}
 \alias{with_text.IssuesTB}
-\title{Check for text in GitHub Issues or sets of Issues}
+\title{Check for text in GitHub Issues}
 \usage{
 with_text(x, ...)
 
 \method{with_text}{IssuesTB}(x, ..., in_title = TRUE, in_body = TRUE, in_comments = TRUE)
 }
 \arguments{
-\item{x}{An object of class \code{IssueTB} (a single issue) or
-\code{IssuesTB} (a \code{data.frame} or \code{tibble} of issues).}
+\item{x}{An object of class \code{IssuesTB}.}
 
 \item{...}{Additional arguments passed to \code{\link[=grepl]{grepl()}}, such as \code{pattern}
 and \code{ignore.case}.}
@@ -23,8 +22,7 @@ and \code{ignore.case}.}
 \item{in_comments}{Boolean. Does the function search for text in the comments?}
 }
 \value{
-A logical value (\code{TRUE}/\code{FALSE}) if \code{x} is a single issue, or a
-logical vector for multiple issues.
+An object \code{IssuesTB} with issues that satisfy the condition.
 }
 \description{
 Generic function to search for a given text pattern in the title, body, or

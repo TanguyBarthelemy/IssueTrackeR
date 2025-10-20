@@ -1,20 +1,17 @@
-#' @title Check for text in GitHub Issues or sets of Issues
+#' @title Check for text in GitHub Issues
 #'
 #' @description
 #' Generic function to search for a given text pattern in the title, body, or
 #' comments of a GitHub Issue object or a collection of Issues.
 #'
-#' @param x An object of class \code{IssueTB} (a single issue) or
-#' \code{IssuesTB} (a \code{data.frame} or \code{tibble} of issues).
+#' @param x An object of class \code{IssuesTB}.
 #' @param in_title Boolean. Does the function search for text in the title?
 #' @param in_body Boolean. Does the function search for text in the body?
 #' @param in_comments Boolean. Does the function search for text in the comments?
 #' @param ... Additional arguments passed to [grepl()], such as \code{pattern}
 #' and \code{ignore.case}.
-#' @param
 #'
-#' @returns A logical value (`TRUE`/`FALSE`) if `x` is a single issue, or a
-#' logical vector for multiple issues.
+#' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
 #' @examples
 #' all_issues <- get_issues(
@@ -59,6 +56,25 @@ with_text.IssuesTB <- function(
     return(subset(x, condition))
 }
 
+#' @title Check for labels in GitHub Issues
+#'
+#' @description
+#' Generic function to search for issues with labels
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param ... Additional arguments passed to [grepl()], such as \code{pattern}
+#' and \code{ignore.case}.
+#'
+#' @returns An object \code{IssuesTB} with issues that satisfy the condition.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "list_issues.yaml"
+#' )
+#' with_labels(all_issues, pattern = "Bug")
+#'
 #' @rdname with_labels
 #' @export
 with_labels <- function(x, ...) {
@@ -70,6 +86,6 @@ with_labels <- function(x, ...) {
 #' @method with_labels IssuesTB
 #' @export
 with_labels.IssuesTB <- function(x, ...) {
-    condition <- grepl(x = x$labels, pattern = ...)
+    condition <- grepl(x = x$labels, ...)
     return(subset(x, condition))
 }
