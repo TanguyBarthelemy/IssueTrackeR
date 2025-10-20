@@ -48,20 +48,13 @@ get_labels <- function(
             list_labels <- cbind(list_labels, repo = repo, owner = owner)
         }
     } else if (source == "local") {
-        input_file <- tools::file_path_sans_ext(dataset_name)
-        input_path <- file.path(dataset_dir, input_file) |>
-            normalizePath(mustWork = FALSE) |>
-            paste0(".yaml")
-
-        if (!file.exists(input_path)) {
-            stop(
-                "The file doesn't exist. Run `write_labels_to_dataset()`",
-                " to write a set of labels in the directory\n",
-                "Or call get_labels() with ",
-                "the argument `source` to \"online\".",
-                call. = FALSE
-            )
+        if (tools::file_ext(dataset_name) == "yaml") {
+            input_file <- tools::file_path_sans_ext(dataset_name)
         }
+        input_path <- file.path(dataset_dir, input_file) |>
+            paste0(... = _, ".yaml") |>
+            normalizePath(mustWork = TRUE)
+
         if (verbose) {
             message("The labels will be read from ", input_path, ".")
         }
@@ -128,10 +121,12 @@ write_labels_to_dataset <- function(
         dataset_name = "list_labels.yaml",
         verbose = TRUE
 ) {
-    output_file <- tools::file_path_sans_ext(dataset_name)
+    if (tools::file_ext(dataset_name) == "yaml") {
+        output_file <- tools::file_path_sans_ext(dataset_name)
+    }
     output_path <- file.path(dataset_dir, output_file) |>
-        normalizePath(mustWork = FALSE) |>
-        paste0(".yaml")
+        paste0(... = _, ".yaml") |>
+        normalizePath(mustWork = FALSE)
 
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)

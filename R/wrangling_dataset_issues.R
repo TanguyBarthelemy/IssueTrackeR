@@ -465,7 +465,7 @@ write_issues_to_dataset.IssuesTB <- function(
     if (tools::file_ext(dataset_name) == "yaml") {
         output_file <- tools::file_path_sans_ext(dataset_name)
     }
-    output_path <- file.path(dataset_dir, input_file) |>
+    output_path <- file.path(dataset_dir, output_file) |>
         paste0(... = _, ".yaml") |>
         normalizePath(mustWork = FALSE)
 

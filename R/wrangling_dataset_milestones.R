@@ -81,32 +81,21 @@ get_milestones <- function(
             milestones <- cbind(milestones, repo = repo, owner = owner)
         }
     } else if (source == "local") {
-        input_file <- tools::file_path_sans_ext(dataset_name)
+        if (tools::file_ext(dataset_name) == "yaml") {
+            input_file <- tools::file_path_sans_ext(dataset_name)
+        }
         input_path <- file.path(dataset_dir, input_file) |>
-            normalizePath(mustWork = FALSE) |>
-            paste0(".yaml")
+            paste0(... = _, ".yaml") |>
+            normalizePath(mustWork = TRUE)
 
-        if (file.exists(input_path)) {
-            if (verbose) {
-                message("The milestones will be read from ", input_path, ".")
-            }
-            milestones <- yaml::read_yaml(file = input_path) |>
-                as.data.frame()
-            if (nrow(milestones) > 0L) {
-                milestones[["due_on"]] <- format_timestamp(
-                    x = milestones[["due_on"]]
-                )
-            }
-        } else {
-            stop(
-                "The file ",
-                input_path,
-                " doesn't exist.\n",
-                "Run `write_milestones_to_dataset()`",
-                " to write a set of milestones in the directory\n",
-                "Or call get_milestones() with the argument",
-                " `source` to \"online\".",
-                call. = FALSE
+        if (verbose) {
+            message("The milestones will be read from ", input_path, ".")
+        }
+        milestones <- yaml::read_yaml(file = input_path) |>
+            as.data.frame()
+        if (nrow(milestones) > 0L) {
+            milestones[["due_on"]] <- format_timestamp(
+                x = milestones[["due_on"]]
             )
         }
     } else {
@@ -164,10 +153,12 @@ write_milestones_to_dataset <- function(
     dataset_name = "list_milestones.yaml",
     verbose = TRUE
 ) {
-    output_file <- tools::file_path_sans_ext(dataset_name)
+    if (tools::file_ext(dataset_name) == "yaml") {
+        output_file <- tools::file_path_sans_ext(dataset_name)
+    }
     output_path <- file.path(dataset_dir, output_file) |>
-        normalizePath(mustWork = FALSE) |>
-        paste0(".yaml")
+        paste0(... = _, ".yaml") |>
+        normalizePath(mustWork = FALSE)
 
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)
