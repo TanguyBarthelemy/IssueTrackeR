@@ -25,7 +25,7 @@ Generic function to search for issues with labels
 all_issues <- get_issues(
     source = "local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "list_issues.yaml"
+    dataset_name = "open_issues.yaml"
 )
 with_labels(all_issues, pattern = "Bug")
 
