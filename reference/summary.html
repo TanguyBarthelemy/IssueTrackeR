@@ -92,28 +92,98 @@ information with statistics by modalities.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
 <span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"list_issues.yaml"</span></span></span>
+<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"open_issues.yaml"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Looking into list_issues.yaml ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Looking into open_issues.yaml ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/open_issues.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Summarise one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (object$has_labels) {    object$labels_name &lt;- object$labels$name    object$labels_bgcolor &lt;- object$labels$color    object$labels_color &lt;- c("grey8", "ivory")[isDark(object$labels_bgcolor) +         1L]    object$labels_url &lt;- paste("https://github.com", object$owner,         object$repo, "labels", utils::URLencode(object$labels_name),         sep = "/")}:</span> argument is of length zero</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#763</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> 🟢 Open</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Error loading V2 workspace with fixed week calendar day</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> If I create a workspace in V2 with a National Calendar with a Fixed Week it cannot be imported with the V3. Error loading the calendar with the following error:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> java.lang.NullPointerException: Cannot invoke "String.toUpperCase(java.util.Locale)" because "day" is null</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.util.XmlFixedWeekDay.ofDay(XmlFixedWeekDay.java:64)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.util.XmlFixedWeekDay.create(XmlFixedWeekDay.java:46)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.util.XmlFixedWeekDay.create(XmlFixedWeekDay.java:32)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.util.XmlSpecialDayEvent.create(XmlSpecialDayEvent.java:53)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.util.XmlNationalCalendar.addTo(XmlNationalCalendar.java:120)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.util.XmlCalendars.copyTo(XmlCalendars.java:67)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.util.XmlCalendars.create(XmlCalendars.java:82)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.util.XmlCalendars.create(XmlCalendars.java:33)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.base.workspace.file.util.XmlConverterSupport$ValueAdapter.toValue(XmlConverterSupport.java:104)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.io.AndThenFileParser.parsePath(AndThenFileParser.java:29)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at nbbrd.io.xml.Xml$AdaptedParser.parsePath(Xml.java:102)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.base.workspace.file.util.XmlConverterSupport.readItem(XmlConverterSupport.java:77)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.base.workspace.file.util.XmlConverterSupport.read(XmlConverterSupport.java:63)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.util.QuickHandler.read(QuickHandler.java:32)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.GenericHandlers$UtilCal.read(GenericHandlers.java:38)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.SafeHandler.loadValue(SafeHandler.java:61)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Caused: java.io.IOException: Unexpected exception while loading Calendars</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.SafeHandler.loadValue(SafeHandler.java:63)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.FileWorkspaceImpl.load(FileWorkspaceImpl.java:133)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.desktop.plugin.workspace.FileRepository.loadCalendars(FileRepository.java:224)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [catch] at jdplus.toolkit.desktop.plugin.workspace.FileRepository.load(FileRepository.java:185)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.desktop.plugin.workspace.FileRepository.open(FileRepository.java:162)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.desktop.plugin.workspace.WorkspaceFactory.openWorkspace(WorkspaceFactory.java:269)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.desktop.plugin.workspace.WorkspaceFactory.openWorkspace(WorkspaceFactory.java:264)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.desktop.plugin.workspace.actions.OpenWorkspace.actionPerformed(OpenWorkspace.java:31)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at org.openide.awt.AlwaysEnabledAction$1.run(AlwaysEnabledAction.java:175)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at org.openide.util.actions.ActionInvoker$1.run(ActionInvoker.java:70)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at org.openide.util.actions.ActionInvoker.doPerformAction(ActionInvoker.java:91)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at org.openide.util.actions.ActionInvoker.invokeAction(ActionInvoker.java:74)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at org.openide.awt.AlwaysEnabledAction.actionPerformed(AlwaysEnabledAction.java:178)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2313)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:405)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.AbstractButton.doClick(AbstractButton.java:374)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/com.apple.laf.ScreenMenuItem.actionPerformed(ScreenMenuItem.java:129)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.MenuItem.processActionEvent(MenuItem.java:692)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.MenuItem.processEvent(MenuItem.java:651)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.MenuComponent.dispatchEventImpl(MenuComponent.java:378)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.MenuComponent.dispatchEvent(MenuComponent.java:367)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:778)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:97)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:747)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:744)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:136)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Summarise several issues</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues.</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#104 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#236 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#238 ✔ Completed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#51 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#590 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#38 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#610 ✔ Completed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#658 ✔ Completed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#57 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#112 ♻ Re-opened </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#763 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#761 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#758 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#752 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#751 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#734 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#733 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#711 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#698 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#695 🟢 Open </span>
 </code></pre></div>
     </div>
   </div>

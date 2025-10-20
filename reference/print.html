@@ -99,24 +99,22 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
 <span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"list_issues.yaml"</span></span></span>
+<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"open_issues.yaml"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Looking into list_issues.yaml ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Looking into open_issues.yaml ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/open_issues.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#104</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#763</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Bump org.projectlombok:lombok from 1.18.28 to 1.18.30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Error loading V2 workspace with fixed week calendar day</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bumps [org.projectlombok:lombok](https://github.com/projectlombok/lombok) from 1.18.28 to 1.18.30.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;details&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;summary&gt;Changelog&lt;/summary&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;p&gt;&lt;em&gt;Sourced from &lt;a href="https://github.com/projectlombok/lombok/blob/master/doc/changelog.markdown"&gt;org.projectlombok:lombok's changelog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;blockquote&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;h3&gt;v1.18.30 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> If I create a workspace in V2 with a National Calendar with a Fixed Week it cannot be imported with the V3. Error loading the calendar with the following error:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> java.lang.NullPointerException: Cannot invoke "String.toUpperCase(java.util.Locale)" because "day" is null</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.uti</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
@@ -124,119 +122,205 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#104</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#763</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Bump org.projectlombok:lombok from 1.18.28 to 1.18.30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Error loading V2 workspace with fixed week calendar day</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bumps [org.projectlombok:lombok](https://github.com/projectlombok/lombok) from 1.18.28 to 1.18.30.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;details&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;summary&gt;Changelog&lt;/summary&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;p&gt;&lt;em&gt;Sourced from &lt;a href="https://github.com/projectlombok/lombok/blob/master/doc/changelog.markdown"&gt;org.projectlombok:lombok's changelog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;blockquote&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;h3&gt;v1.18.30 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> If I create a workspace in V2 with a National Calendar with a Fixed Week it cannot be imported with the V3. Error loading the calendar with the following error:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> java.lang.NullPointerException: Cannot invoke "String.toUpperCase(java.util.Locale)" because "day" is null</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.uti</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#236</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#761</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Fix drag&amp;drop from Excel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Reloading an xlsx files in Providers create new SA-Item</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We observe what appears to be a bug.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#238</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Missing chart export to SVG</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> JD+ v2 is able to export a chart to SVG but v3 is not.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When reloading a data file in the Providers tab, new series are added to the open SA-Processing.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#51</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> theil2 slightly adapted</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Procedure</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#590</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Summary info on pre-specified outliers not clear</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In the JD+ GUI, the user can insert 'pre-specified outliers' as shown below, and these can be fixed or non-fixed:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ![Image](https://github.com/user-attachments/assets/d4a65a9a-3173-4e67-80a3-1e1f4cdd7ee7)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> If the user then looks at the **Summary** section of the **Main **results**** section in the output area for the s</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1) Open JDemetra+ v3.5.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2) Create a new WS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3) Create a new SAP</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4) Add data from Providers to SAP</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5) Add new points to data file</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6) Re-add the data file</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#38</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#758</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Improve CsvInformationFormatter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Unify period display in GUI (2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Issue #489 is unresolved. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The problem remains in version 3.5.1. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Also, the SI ratio display is still different and appears with Q1, Q2, Q3, Q4 :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#610</span> ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="605" height="255" alt="Image" src="https://github.com/user-attachments/assets/49948a60-a027-4bed-8947-9e9eedc49537" /&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#752</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Mode is 'Multiplicative' when transform function is 'None'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Add ways to retrieve WS file names and paths</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> My additive series has regarima.transform.function = 'None', but x11.mode is 'Multiplicative':</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ![Image](https://github.com/user-attachments/assets/6934cd41-6613-43d7-8903-3f2deb923f70)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It would be very interesting to add ways to retrieve WS file names and paths.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> This is the same series with regarima.transform.function = 'Log', and x11.mode is also 'Multiplicative':</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ![Image](https://github.com/u</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Is it possible to add methods like `getSource` and `setSource` to be able to retrieve the file containing a SA-Processing, a SA-Item or even a Workspace directly from the Java object?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Thank you</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#751</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Structure of a WS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hello, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I'm opening an issue but it's more of **a discussion**.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> First of all, the WS structure contains:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - data (calendar, regressors and data), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - statistical models (specifications) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - and outputs. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In the context of moving to a cloud-native solution and changing JD+ to a web API, would it make sense to review th</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#658</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#734</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Migrate protobuf-maven-plugin from org.xolstice.maven.plugins to io.github.ascop</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Can't refresh a SA-Item when WS newly created</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> From https://github.com/xolstice/protobuf-maven-plugin/ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Introduction</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; This project is no longer being maintained, and no further contributions will be considered.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; Please consider switching to alternatives, such as:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; https://github.com/ascopes/protobuf-maven-plugin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In JDemetra+ v3, it's not possible to refresh a SA-Item with **Right click** &gt; **Refresh** when the newly created WS is not saved.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It was possible to refresh a new WS in version 2.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#57</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Bump protobuf-java from 3.21.12 to 3.23.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bumps [protobuf-java](https://github.com/protocolbuffers/protobuf) from 3.21.12 to 3.23.2.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;details&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;summary&gt;Commits&lt;/summary&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ul&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;li&gt;&lt;a href="https://github.com/protocolbuffers/protobuf/commit/a74f54b724bdc2fe0bfc271f4dc0ceb159805625"&gt;&lt;code&gt;a74f54b&lt;/code&gt;&lt;/a&gt; Updating version.json and repo version numbers to: 23.2&lt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> But there is A way to refresh a SA-Item with concurrent policy with the GUI in version 3.5.0 with a newly created WS is </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#112</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#733</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> JWSACruncher and parameters `fullseriesname` and `refreshall`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Changing the `domainSpec` doesn't refresh the model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I tried the following parameters files an a workspace with data created by an Excel file and it has no effect. Are the parameters `fullseriesname` and `refreshall` suppose to work in the JWSACruncher? Am I doing something wrong?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;wsaConfig bundle="10000" cs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Intro</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In the latest v3.5.1, there is a *breaking change* with v3.5.0 regarding the specification handling.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Step to reproduce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1) Open JDemetra+ v3.5.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2) Create a new WS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3) Add a series (with for example RSA3 specification)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4) Change the `domainSpec` (**Right click** &gt; **Edit** &gt; **Reference specification** &gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#711</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> GUI unresponsive when an incorrectly specified file is opened in the Providers p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Consider importing a CSV file in the Providers panel and specifying an incorrect date format (such as using 'mm' rather than 'MM', where the former specifies minutes and the latter specifies the month):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="462" height="501" alt="Image" src="https://github.com/user-attachments/assets/8fac7b3d-29cd-4078-81a3-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#698</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Series naming restrictions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> This is just a question:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Are there any character restrictions imposed by the JDemetra+ GUI and/or the Cruncher when naming series (that is, when providing a name or ID for series)? For example, are certain special characters not allowed, or are there any character-length limits, and do these differ for the GUI vs the </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#695</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Infinity result for diagnostics.fcast-outsample-variance causes remainder of dem</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I've found a bug with the cruncher. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Here's the output I saw at the end of my run: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - At the end of the output printed out by cruncher was this: (note the 'failed' line)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Flushing bundle...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Generate Output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Csv matrix</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> failed: Input length = 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> csv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> generated</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Saving new processing...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - output series were produced a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (object$has_labels) {    object$labels_name &lt;- object$labels$name    object$labels_bgcolor &lt;- object$labels$color    object$labels_color &lt;- c("grey8", "ivory")[isDark(object$labels_bgcolor) +         1L]    object$labels_url &lt;- paste("https://github.com", object$owner,         object$repo, "labels", utils::URLencode(object$labels_name),         sep = "/")}:</span> argument is of length zero</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#761</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> 🟢 Open</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Reloading an xlsx files in Providers create new SA-Item</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We observe what appears to be a bug.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When reloading a data file in the Providers tab, new series are added to the open SA-Processing.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Procedure</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1) Open JDemetra+ v3.5.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2) Create a new WS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3) Create a new SAP</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4) Add data from Providers to SAP</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5) Add new points to data file</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6) Re-add the data file under Providers (even if already present and with star)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7) Click on "Reload"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8) Series are added again to SAP</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Here's a short video describing the procedure:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/user-attachments/assets/323a11ee-9949-467d-8f43-79b4cdf8ab3b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Comments:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Comment n°1 by Immurb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Just to add some additional information:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1. Still happens in the develop branch</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2. Seems to duplicate only the last added items (last transfer) when the corresponding data file is reloaded</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3. Only happens once, so if you reload the same data file multiple times only one set of duplicates is added</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4. No new data is needed in the data file and it doesn't matter if you add any data files to the provider (Step 5 and 6)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5. Seems to be related to the events fired in InternalTsProvider (so not only xlsx shows this behaviour)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues.</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#104 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#236 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#238 ✔ Completed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#51 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#590 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#38 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#610 ✔ Completed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#658 ✔ Completed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#57 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#112 ♻ Re-opened </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#763 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#761 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#758 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#752 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#751 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#734 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#733 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#711 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#698 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#695 🟢 Open </span>
 </code></pre></div>
     </div>
   </div>
