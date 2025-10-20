@@ -154,30 +154,41 @@ get_issues <- function(
         )
     } else if (source == "local") {
         if (verbose) cat("Looking into", dataset_name, "...\n")
-        input_file <- tools::file_path_sans_ext(dataset_name)
-        input_path <- file.path(dataset_dir, input_file) |>
-            normalizePath(mustWork = FALSE) |>
-            paste0(".yaml")
-
-        if (!file.exists(input_path)) {
-            stop(
-                "The file ",
-                input_file,
-                ".yaml",
-                " doesn't exist. Run `write_issues_to_dataset()`",
-                " to write a set of issues in the directory.\n",
-                "Or call get_issues() with ",
-                "the argument `source` to \"online\".",
-                call. = FALSE
-            )
+        if (tools::file_ext(dataset_name) == "yaml") {
+            input_file <- tools::file_path_sans_ext(dataset_name)
         }
+        input_path <- file.path(dataset_dir, input_file) |>
+            paste0(... = _, ".yaml") |>
+            normalizePath(mustWork = TRUE)
 
         if (verbose) {
             message("The issues will be read from ", input_path, ".")
         }
         raw_yaml <- yaml::read_yaml(file = input_path)
-        raw_yaml$comments <- lapply(X = raw_yaml$comments, FUN = as.data.frame)
-        raw_yaml$labels <- lapply(X = raw_yaml$labels, FUN = as.data.frame)
+        raw_yaml$comments <- lapply(
+            X = raw_yaml$comments,
+            FUN = function(comments) {
+                if (length(comments$text) == 0L) {
+                    return(data.frame(
+                        text = character(0L),
+                        author = character(0L),
+                        stringsAsFactors = FALSE
+                    ))
+                }
+                return(data.frame(comments))
+            }
+        )
+
+        raw_yaml$labels <- lapply(
+            X = raw_yaml$labels,
+            FUN = function(lbls) {
+                if (length(lbls$name) == 0L) {
+                    return(data.frame(name = character(0L), color = character(0L)))
+                }
+                return(data.frame(lbls))
+            }
+        )
+
         issues <- do.call(
             args = raw_yaml,
             what = new_issues
@@ -292,8 +303,8 @@ format_issues <- function(
     labels_list <- raw_issues |>
         lapply(FUN = `[[`, "labels")  |>
         lapply(FUN = function(lbls) {
-        if (length(lbls) == 0) {
-            data.frame(name = character(0), color = character(0))
+        if (length(lbls) == 0L) {
+            data.frame(name = character(0L), color = character(0L))
         } else {
             data.frame(
                 name  = vapply(X = lbls, FUN = "[[", "name", FUN.VALUE = character(1)),
@@ -451,10 +462,12 @@ write_issues_to_dataset.IssuesTB <- function(
     verbose = TRUE,
     ...
 ) {
-    output_file <- tools::file_path_sans_ext(dataset_name)
-    output_path <- file.path(dataset_dir, output_file) |>
-        normalizePath(mustWork = FALSE) |>
-        paste0(".yaml")
+    if (tools::file_ext(dataset_name) == "yaml") {
+        output_file <- tools::file_path_sans_ext(dataset_name)
+    }
+    output_path <- file.path(dataset_dir, input_file) |>
+        paste0(... = _, ".yaml") |>
+        normalizePath(mustWork = FALSE)
 
     if (verbose) {
         message("The datasets will be exported to ", output_path, ".")
