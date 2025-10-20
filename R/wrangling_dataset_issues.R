@@ -164,7 +164,10 @@ get_issues <- function(
         if (verbose) {
             message("The issues will be read from ", input_path, ".")
         }
-        raw_yaml <- yaml::read_yaml(file = input_path)
+
+        raw_yaml <- readLines(con = input_path, encoding = "UTF-8")
+        raw_yaml <- yaml::yaml.load(raw_yaml)
+
         raw_yaml$comments <- lapply(
             X = raw_yaml$comments,
             FUN = function(comments) {
@@ -479,10 +482,8 @@ write_issues_to_dataset.IssuesTB <- function(
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)
     }
-    yaml::write_yaml(
-        x = issues,
-        file = output_path
-    )
+    issues_yaml <- yaml::as.yaml(issues)
+    writeLines(text = enc2utf8(issues_yaml), con = output_path, useBytes = TRUE)
     return(invisible(TRUE))
 }
 

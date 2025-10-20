@@ -58,7 +58,9 @@ get_labels <- function(
         if (verbose) {
             message("The labels will be read from ", input_path, ".")
         }
-        list_labels <- yaml::read_yaml(file = input_path) |>
+
+        list_labels <- readLines(con = input_path, encoding = "UTF-8") |>
+            yaml::yaml.load() |>
             as.data.frame()
     } else {
         stop("wrong argument source", call. = FALSE)
@@ -138,9 +140,7 @@ write_labels_to_dataset <- function(
         }
     }
 
-    yaml::write_yaml(
-        x = labels,
-        file = output_path
-    )
+    labels_yaml <- yaml::as.yaml(labels)
+    writeLines(text = enc2utf8(labels_yaml), con = output_path, useBytes = TRUE)
     return(invisible(TRUE))
 }

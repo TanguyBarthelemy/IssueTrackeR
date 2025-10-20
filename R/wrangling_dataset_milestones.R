@@ -91,7 +91,8 @@ get_milestones <- function(
         if (verbose) {
             message("The milestones will be read from ", input_path, ".")
         }
-        milestones <- yaml::read_yaml(file = input_path) |>
+        milestones <- readLines(con = input_path, encoding = "UTF-8") |>
+            yaml::yaml.load() |>
             as.data.frame()
         if (nrow(milestones) > 0L) {
             milestones[["due_on"]] <- format_timestamp(
@@ -170,9 +171,7 @@ write_milestones_to_dataset <- function(
         }
     }
 
-    yaml::write_yaml(
-        x = milestones,
-        file = output_path
-    )
+    milestones_yaml <- yaml::as.yaml(milestones)
+    writeLines(text = enc2utf8(milestones_yaml), con = output_path, useBytes = TRUE)
     return(invisible(TRUE))
 }
