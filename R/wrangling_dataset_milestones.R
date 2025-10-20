@@ -65,14 +65,17 @@ get_milestones <- function(
     source <- match.arg(source)
 
     if (source == "online") {
-        milestones <- gh::gh(
-            repo = repo,
-            owner = owner,
-            endpoint = "/repos/:owner/:repo/milestones",
-            state = "all",
-            .limit = Inf
-        ) |>
-            format_milestones(verbose = verbose)
+        raw_milestones <- try(expr = {
+            gh::gh(
+                repo = repo,
+                owner = owner,
+                endpoint = "/repos/:owner/:repo/milestones",
+                state = "all",
+                .limit = Inf
+            )
+        })
+        check_response(raw_milestones)
+        milestones <- format_milestones(raw_milestones, verbose = verbose)
 
         if (nrow(milestones) > 0L) {
             milestones <- cbind(milestones, repo = repo, owner = owner)

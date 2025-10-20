@@ -39,41 +39,7 @@ get_labels <- function(
                 .limit = Inf
             )
         })
-        if (inherits(raw_labels, "try-error")) {
-            message_response <- attr(
-                raw_labels,
-                "condition"
-            )$response_content$message
-            if (message_response == "Not Found") {
-                stop(
-                    repo,
-                    " is not a repository from ",
-                    owner,
-                    ".\nThe argument repo must be a valid GitHub repo name.",
-                    call. = FALSE
-                )
-            } else if (grepl(pattern = "API rate limit exceeded",
-                             x = message_response, fixed = TRUE)) {
-                warning(
-                    message_response,
-                    "\n",
-                    attr(raw_labels, "condition")$body,
-                    call. = FALSE
-                )
-                list_labels <- data.frame(
-                    name = character(),
-                    description = character(),
-                    color = character(),
-                    repo = character(),
-                    owner = character()
-                )
-                class(list_labels) <- c("LabelsTB", "data.frame")
-                return(list_labels)
-            } else {
-                stop("Weird message... Contact the maintainer of the package.",
-                     call. = FALSE)
-            }
-        }
+        check_response(raw_labels)
 
         if (verbose) cat("Repo:", repo, " owner:", owner, "\n")
         list_labels <- format_labels(raw_labels = raw_labels, verbose = verbose)

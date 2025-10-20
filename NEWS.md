@@ -20,6 +20,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New function `get_all_repos()` to get all the repos' name from an owner
 * New method `print()` and `summary()` for `LabelsTB` objects
 * Not exported `isDark()` function to verify if a color is dark or light (to display text in black or white above)
+* New function to check the output of the API
 
 ### Changed
 

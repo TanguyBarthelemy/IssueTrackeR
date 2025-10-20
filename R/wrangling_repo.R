@@ -8,32 +8,7 @@ get_all_repos <- function(owner) {
             .limit = Inf
         )
     })
-    if (inherits(info_owner, "try-error")) {
-        message_response <- attr(
-            info_owner,
-            "condition"
-        )$response_content$message
-        if (message_response == "Not Found") {
-            stop(
-                owner,
-                " is not a valid GitHub user.\n",
-                "The argument owner must be a valid GitHub user.",
-                call. = FALSE
-            )
-        } else if (grepl("API rate limit exceeded", message_response,
-                         fixed = TRUE)) {
-            warning(
-                message_response,
-                "\n",
-                attr(info_owner, "condition")$body,
-                call. = FALSE
-            )
-            return(new_issues())
-        } else {
-            stop("Weird message... Contact the maintainer of the package.",
-                 call. = FALSE)
-        }
-    }
+    check_response(info_owner)
 
     owner_type <- info_owner$type
     if (owner_type == "User") {
@@ -44,18 +19,31 @@ get_all_repos <- function(owner) {
         stop("owner type not taken into account", call. = FALSE)
     }
 
-    list_public_repo <- gh::gh(
-        endpoint = endpoint,
-        owner = owner,
-        .limit = Inf
-    ) |>
-        vapply(FUN = "[[", "name", FUN.VALUE = character(1L))
+    list_public_repo <- try({
+        gh::gh(
+            endpoint = endpoint,
+            owner = owner,
+            .limit = Inf
+        )
+    })
+    check_response(list_public_repo)
 
-    list_private_repo <- gh::gh(
-        endpoint = "/user/repos",
-        .limit = Inf,
-        visibility = "private"
-    ) |>
+    list_public_repo <- vapply(
+        X = list_public_repo,
+        FUN = "[[", "name",
+        FUN.VALUE = character(1L)
+    )
+
+    list_private_repo <- try({
+        gh::gh(
+            endpoint = "/user/repos",
+            .limit = Inf,
+            visibility = "private"
+        )
+    })
+    check_response(list_private_repo)
+
+    list_private_repo <- list_private_repo |>
         Filter(f = \(.x) .x$owner$login == owner) |>
         vapply(FUN = "[[", "name", FUN.VALUE = character(1L))
 

@@ -132,43 +132,21 @@ get_issues <- function(
                 .limit = Inf
             )
         })
-        if (inherits(raw_issues, "try-error")) {
-            message_response <- attr(
-                raw_issues,
-                "condition"
-            )$response_content$message
-            if (message_response == "Not Found") {
-                stop(
-                    repo,
-                    " is not a repository from ",
-                    owner,
-                    ".\nThe argument repo must be a valid GitHub repo name.",
-                    call. = FALSE
-                )
-            } else if (grepl(pattern = "API rate limit exceeded",
-                             x = message_response, fixed = TRUE)) {
-                warning(
-                    message_response,
-                    "\n",
-                    attr(raw_issues, "condition")$body,
-                    call. = FALSE
-                )
-                return(new_issues())
-            } else {
-                stop("Weird message... Contact the maintainer of the package.",
-                     call. = FALSE)
-            }
-        }
+        check_response(raw_issues)
 
         raw_issues <- raw_issues |>
             Filter(f = function(.x) is.null(.x$pull_request))
 
-        raw_comments <- gh::gh(
-            repo = repo,
-            owner = owner,
-            endpoint = "/repos/:owner/:repo/issues/comments",
-            .limit = Inf
-        )
+        raw_comments <- try(expr = {
+            gh::gh(
+                repo = repo,
+                owner = owner,
+                endpoint = "/repos/:owner/:repo/issues/comments",
+                .limit = Inf
+            )
+        })
+        check_response(raw_comments)
+
         issues <- format_issues(
             raw_issues = raw_issues,
             raw_comments = raw_comments,
