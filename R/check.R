@@ -27,13 +27,11 @@ check_response <- function(x, context = "GitHub API call") {
             call. = FALSE
         )
     } else if (inherits(cond, "http_error_404") || grepl("URL not found", msg, ignore.case = TRUE)) {
-        # Extraire l'URL depuis le message d'erreur
         url_line <- cond$body["x"]
         url <- sub(".*<8;;", "", url_line)
         url <- sub("\\a.*", "", url)
         url <- trimws(url)
 
-        # Cas 1 : owner/repo non trouvé
         if (grepl("/repos/", url)) {
             repo_path <- sub("^.*/repos/", "", url)
             parts <- strsplit(repo_path, "/")[[1]]
@@ -47,7 +45,6 @@ check_response <- function(x, context = "GitHub API call") {
                 call. = FALSE
             )
 
-            # Cas 2 : utilisateur inexistant
         } else if (grepl("/users/", url)) {
             owner <- sub("^.*/users/", "", url)
             owner <- sub("\\?.*$", "", owner)
@@ -59,10 +56,9 @@ check_response <- function(x, context = "GitHub API call") {
                 call. = FALSE
             )
 
-            # Cas 3 : organisation inexistante
         } else if (grepl("/orgs/", url)) {
             owner <- sub("^.*/orgs/", "", url)
-            owner <- sub("/.*$", "", owner)   # ✅ coupe tout après le nom de l’organisation
+            owner <- sub("/.*$", "", owner)
             owner <- sub("\\?.*$", "", owner)
 
             stop(
