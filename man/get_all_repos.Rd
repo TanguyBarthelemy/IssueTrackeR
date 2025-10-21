@@ -24,6 +24,9 @@ A string with the list of repo of a user or an organisation.
 Returns a list of repos.
 }
 \examples{
+
+\donttest{
 get_all_repos("rjdverse")
+}
 
 }

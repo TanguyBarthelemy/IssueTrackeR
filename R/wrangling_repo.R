@@ -12,7 +12,10 @@
 #' @returns A string with the list of repo of a user or an organisation.
 #'
 #' @examples
+#'
+#' \donttest{
 #' get_all_repos("rjdverse")
+#' }
 #'
 #' @export
 get_all_repos <- function(owner, public = TRUE, private = TRUE) {

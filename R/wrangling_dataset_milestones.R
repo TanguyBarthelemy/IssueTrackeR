@@ -20,6 +20,8 @@
 #' @examples
 #'
 #' # With milestones
+#'
+#' \donttest{
 #' raw_milestones <- gh::gh(
 #'     repo = "jdplus-main",
 #'     owner = "jdemetra",
@@ -29,6 +31,7 @@
 #' )
 #' raw_milestone <- raw_milestones[[5L]]
 #' format_milestone(raw_milestone)
+#' }
 #'
 format_milestone <- function(raw_milestone, verbose = TRUE) {
     if (verbose) {
