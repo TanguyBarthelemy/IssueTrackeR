@@ -1,0 +1,136 @@
+name: Publish Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'New tag'
+        required: true
+        type: string
+
+jobs:
+  Prepare_new_release:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    env:
+      GITHUB_PAT: ${{ secrets.WORKFLOW_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install libcurl
+        run: sudo apt-get install libcurl4-openssl-dev
+
+      - name: Install R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R dependencies
+        run: |
+          install.packages("remotes")
+          remotes::install_github("TanguyBarthelemy/releaser")
+        shell: Rscript {0}
+
+      - name: Check tag
+        id: set-tag
+        run: |
+          library("releaser")
+          library("desc")
+
+          current_version <- desc_get_version(file = ".")
+          possible_tags <- paste0("v", get_different_future_version(version_number = current_version))
+
+          tag <- Sys.getenv("tag")
+
+          if (!startsWith(tag, "v")) tag <- paste0("v", tag)
+          if (!tag %in% as.character(possible_tags)) stop("Invalid tag. Possible tags:", toString(possible_tags))
+
+          system(paste0("echo \"tag=", tag, "\" >> \"$GITHUB_OUTPUT\""))
+        shell: Rscript {0}
+        env:
+          tag: ${{ github.event.inputs.tag }}
+
+      - name: Update DESCRIPTION and CHANGELOG with new released version
+        run: |
+          library("desc")
+          library("releaser")
+
+          tag <- Sys.getenv("tag")
+          new_version <- substr(tag, start = 2, stop = nchar(tag))
+
+          desc_set_version(version = new_version, file = ".")
+          update_news_md(new_version = new_version, path = ".",
+                         gh_repo = "TanguyBarthelemy/IssueTrackeR")
+        shell: Rscript {0}
+        env:
+          tag: ${{ steps.set-tag.outputs.tag }}
+
+      - name: New commit to release and new tag
+        run: |
+          git add -A
+          git commit -m "New release $tag" -m "Co-authored-by: ${CO_AUTHOR_NAME} <${CO_AUTHOR_EMAIL}>"
+          git tag "$tag"
+        env:
+          CO_AUTHOR_NAME: ${{ github.actor }}
+          CO_AUTHOR_EMAIL: ${{ github.actor }}@users.noreply.github.com
+          tag: ${{ steps.set-tag.outputs.tag }}
+
+      - name: Update DESCRIPTION with new develop version
+        run: |
+          library("desc")
+          desc_bump_version(file = ".", which = "dev")
+        shell: Rscript {0}
+        env:
+          tag: ${{ steps.set-tag.outputs.tag }}
+
+      - name: New commit back to development
+        run: |
+          git add -A
+          git commit -m "🔖 Auto-bump develop version" -m "Co-authored-by: ${CO_AUTHOR_NAME} <${CO_AUTHOR_EMAIL}>"
+        env:
+          CO_AUTHOR_NAME: ${{ github.actor }}
+          CO_AUTHOR_EMAIL: ${{ github.actor }}@users.noreply.github.com
+
+      - name: Push
+        run: |
+          git push origin "$tag"
+          git push --atomic origin main
+        env:
+          tag: ${{ steps.set-tag.outputs.tag }}
+
+      - name: Create release text
+        id: create-body
+        run: |
+          library("releaser")
+
+          tag <- Sys.getenv("tag")
+          new_version <- substr(tag, start = 2, stop = nchar(tag))
+
+          release_body <- paste0("# {IssueTrackeR} [", new_version, "]\n\n", get_changes(path = ".", version_number = new_version))
+
+          output_file <- Sys.getenv("GITHUB_OUTPUT")
+
+          cat("body<<EOF\n", file = output_file, append = TRUE)
+          cat(release_body, file = output_file, append = TRUE)
+          cat("\nEOF\n", file = output_file, append = TRUE)
+        shell: Rscript {0}
+        env:
+          tag: ${{ steps.set-tag.outputs.tag }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body: "${{ steps.create-body.outputs.body }}"
+          tag_name: ${{ steps.set-tag.outputs.tag }}
+          draft: true
