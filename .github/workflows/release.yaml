@@ -16,9 +16,6 @@ jobs:
     permissions:
       contents: write
 
-    env:
-      GITHUB_PAT: ${{ secrets.WORKFLOW_TOKEN }}
-
     steps:
       - uses: TanguyBarthelemy/r-release-action
         with:
@@ -26,4 +23,4 @@ jobs:
           gh_repo: "TanguyBarthelemy/IssueTrackeR"
           main-branch: "main"
           dev-branch: "develop"
-          github_token: ${{ env.GITHUB_PAT }}
+          github_token: ${{ github.token }}
