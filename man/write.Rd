@@ -80,7 +80,7 @@ path <- system.file("data_issues", package = "IssueTrackeR")
 issues <- get_issues(
     source = "local",
     dataset_dir = path,
-    dataset_name = "list_issues.yaml"
+    dataset_name = "open_issues.yaml"
 )
 milestones <- get_milestones(
     source = "local",

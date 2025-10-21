@@ -15,7 +15,7 @@
 #' all_issues <- get_issues(
 #'     source = "local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "list_issues.yaml"
+#'     dataset_name = "open_issues.yaml"
 #' )
 #'
 #' # Summarise one issue
@@ -38,48 +38,23 @@ summary.IssueTB <- function(object, ...) {
         object[["number"]]
     )
     object$nbr_comments <- nrow(object$comments)
-    object$has_labels <- length(object$labels) > 0L
+    object$has_labels <- nrow(object$labels) > 0L
 
     if (object$has_labels) {
-        object$label_name <- vapply(
-            X = object$labels,
-            FUN = `[[`,
-            "name",
-            FUN.VALUE = character(1L)
-        )
-        object$label_bgcolor <- paste0(
-            "#",
-            vapply(
-                X = object$labels,
-                FUN = `[[`,
-                "color",
-                FUN.VALUE = character(1L)
-            )
-        )
+        object$labels_name <- object$labels$name
+        object$labels_bgcolor <- object$labels$color
 
-        isDark <- function(colr) {
-            apply(
-                X = grDevices::col2rgb(colr) * c(299L, 587L, 114L),
-                FUN = sum,
-                MARGIN = 2L
-            ) /
-                1000L <
-                123L
-        }
-
-        object$label_color <- c("grey8", "ivory")[
-            isDark(object$label_bgcolor) + 1L
+        object$labels_color <- c("grey8", "ivory")[
+            isDark(object$labels_bgcolor) + 1L
         ]
-        object$label_url <- vapply(
-            X = object$labels,
-            FUN = `[[`,
-            "url",
-            FUN.VALUE = character(1L)
-        ) |>
-            gsub(
-                pattern = "https://api.github.com/repos/",
-                replacement = "https://github.com/"
-            )
+        object$labels_url <- paste(
+            "https://github.com",
+            object$owner,
+            object$repo,
+            "labels",
+            utils::URLencode(object$labels_name),
+            sep = "/"
+        )
     }
 
     class(object) <- "summary.IssueTB"
@@ -95,7 +70,8 @@ summary.IssuesTB <- function(object, ...) {
         open = "\U1F7E2 Open",
         reopened = "\U267B Re-opened",
         completed = "\U2714 Completed",
-        not_planned = "\U1F6AB Not planned"
+        not_planned = "\U1F6AB Not planned",
+        duplicated = "\U27BF Duplicated"
     )
 
     x <- list(
@@ -112,4 +88,40 @@ summary.IssuesTB <- function(object, ...) {
     )
     class(x) <- "summary.IssuesTB"
     return(x)
+}
+
+#' @rdname summary
+#' @exportS3Method summary LabelsTB
+#' @method summary LabelsTB
+#' @export
+summary.LabelsTB <- function(object, ...) {
+    object$labels_bgcolor <- object$color
+    object$labels_color <- c("grey8", "ivory")[
+        isDark(object$labels_bgcolor) + 1L
+    ]
+    object$labels_url <- paste(
+        "https://github.com",
+        object$owner,
+        object$repo,
+        "labels",
+        utils::URLencode(object$labels_name),
+        sep = "/"
+    )
+    object$formated_label <- vapply(
+        X = seq_len(nrow(object)),
+        FUN = function(k) {
+            label_style <- crayon::combine_styles(
+                crayon::make_style(object$labels_color[k]),
+                crayon::make_style(object$labels_bgcolor[k], bg = TRUE)
+            )
+            cli::style_hyperlink(
+                text = label_style(object$name[k]),
+                url = object$labels_url[k]
+            )
+        },
+        FUN.VALUE = character(1L)
+    )
+
+    class(object) <- c("summary.LabelsTB", "data.frame")
+    return(object)
 }

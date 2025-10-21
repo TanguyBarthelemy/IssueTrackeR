@@ -3,11 +3,14 @@
 \name{summary.IssueTB}
 \alias{summary.IssueTB}
 \alias{summary.IssuesTB}
+\alias{summary.LabelsTB}
 \title{Compute a summary of an issue or a list of issues}
 \usage{
 \method{summary}{IssueTB}(object, ...)
 
 \method{summary}{IssuesTB}(object, ...)
+
+\method{summary}{LabelsTB}(object, ...)
 }
 \arguments{
 \item{object}{a \code{IssueTB} or \code{IssuesTB} object.}
@@ -30,7 +33,7 @@ information with statistics by modalities.
 all_issues <- get_issues(
     source = "local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "list_issues.yaml"
+    dataset_name = "open_issues.yaml"
 )
 
 # Summarise one issue

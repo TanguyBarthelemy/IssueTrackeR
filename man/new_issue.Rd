@@ -21,11 +21,12 @@ new_issue(x = NULL, ...)
 
 \method{new_issue}{default}(
   x,
-  title,
-  body,
-  number,
-  state = c("open", "closed"),
+  title = NA_character_,
+  body = NA_character_,
+  number = NA_integer_,
+  state = NA_character_,
   created_at = Sys.Date(),
+  closed_at = as.Date(NA_integer_),
   labels = NULL,
   milestone = NA_character_,
   repo = NA_character_,
@@ -54,7 +55,9 @@ or a \code{data.frame})}
 \item{state}{a string that is either \code{"open"} (by default) if
 the issue is still open or \code{"closed"} if the issue is now closed.}
 
-\item{created_at}{a date (or timestamp). The title of the issue.}
+\item{created_at}{a date (or timestamp). The creation date of the issue.}
+
+\item{closed_at}{a date (or timestamp). The closing date of the issue.}
 
 \item{labels}{a vector string (or missing). The labels of the issue.}
 
@@ -79,7 +82,7 @@ Defaults to the package option \code{IssueTrackeR.owner}.}
 \item{assignee}{a string. The GitHub username of the assignee of the issue.}
 
 \item{state_reason}{a string. \code{"open"}, \code{"completed"},
-\code{"reopened"} or \code{"not_planned"}.}
+\code{"reopened"}, \code{"not_planned"} or \code{"duplicated"}.}
 }
 \value{
 a \code{IssueTB} object.

@@ -1,0 +1,3492 @@
+number:
+- 763
+- 761
+- 758
+- 752
+- 751
+- 734
+- 733
+- 711
+- 698
+- 695
+- 690
+- 689
+- 687
+- 682
+- 679
+- 667
+- 664
+- 661
+- 653
+- 652
+- 651
+- 645
+- 643
+- 642
+- 640
+- 636
+- 617
+- 608
+- 607
+- 603
+- 601
+- 596
+- 594
+- 593
+- 591
+- 590
+- 572
+- 571
+- 564
+- 562
+- 560
+- 559
+- 557
+- 556
+- 534
+- 532
+- 523
+- 510
+- 492
+- 491
+- 488
+- 485
+- 484
+- 483
+- 479
+- 458
+- 455
+- 449
+- 447
+- 429
+- 428
+- 423
+- 421
+- 420
+- 419
+- 418
+- 400
+- 399
+- 385
+- 381
+- 372
+- 371
+- 353
+- 349
+- 345
+- 338
+- 337
+- 335
+- 331
+- 315
+- 296
+- 293
+- 287
+- 283
+- 272
+- 270
+- 261
+- 250
+- 243
+- 177
+- 163
+- 162
+- 161
+- 160
+- 136
+- 130
+- 112
+title:
+- Error loading V2 workspace with fixed week calendar day
+- Reloading an xlsx files in Providers create new SA-Item
+- Unify period display in GUI (2)
+- Add ways to retrieve WS file names and paths
+- Structure of a WS
+- Can't refresh a SA-Item when WS newly created
+- Changing the `domainSpec` doesn't refresh the model
+- GUI unresponsive when an incorrectly specified file is opened in the Providers panel
+- Series naming restrictions
+- Infinity result for diagnostics.fcast-outsample-variance causes remainder of demetra_m.csv
+  to be empty
+- Change of reference specification in SAProcessing is not working
+- Drag and Drop a timeseries from the results to the SA-Processing doubles the series
+- Output from Cruncher and Output from UI have a small inconsistency for fixed user-defined
+  trading days
+- Make outlier information consistent in Pre-processing panel for fixed and non-fixed
+  corrections
+- Cruncher automatically changing transform function
+- Cannot scroll a long list of pre-specified outliers
+- Combined seasonality tests on sa not appearing
+- Make error in saving workspaces explicit
+- Excel SA-Item names contain `\n` to separate sheet series
+- The cruncher generates no warning if failing to compute
+- How do you re-order SAIs in SAP?
+- '`No information for this item` and `Invalid` when Variables have spaces'
+- Several synonyms and imprecisions in the JDemetra+ term
+- Error with `mvn clean install`
+- Role of the metadata in the WS structure
+- Error with `mvn clean install -DskipTests`
+- Cannot use keyboard shortcut to paste series into an empty grid container
+- Add export to mermaid.js chart
+- Cannot select all in a grid
+- Cannot edit format of charts
+- What does 'Show all' do in right-click context menu of charts?
+- Add OpenNodeAction as preferred action on ProviderNode when node has no children
+- Missing series items in the output of the GUI
+- Periodicity/frequency of series not immediately clear
+- User-defined variables renaming is not consistent
+- Summary info on pre-specified outliers not clear
+- Cannot rename user-defined variables (regressors) successfully
+- List of user-defined variables (regressors) displayed poorly in 'Variables' dialogue
+  box
+- Missing item in dictionaries
+- Model changed by Seats - output
+- XML files are badly indented from a certain level upwards
+- Default MCD in MCDFilter
+- Documentation for number pattern
+- Add option to retrieve desktop application version in headless environment
+- Checking for invalid series in workspace files
+- Unnecessary row displayed in Grid of time series
+- Add Copy Path/Reference context menu item to the Providers tab
+- Series selection blocking highlighting of rows in check last test
+- V3 output dictionary for Cruncher parameter file
+- Add confidence interval in the distribution chart of the residuals.
+- Should leap year be considered as trading day regressor?
+- Series vs items in the Cruncher input parameter file
+- Cruncher error logs
+- Precedence of refresh policy specified in Cruncher parameter file vs workspace file
+- Possible mistake in documentation for unit root limit options
+- Make release process more robust against missing binaries in java distribution
+- Manual creation of user defined variables
+- demetra_m.csv empty column names
+- user-defined calendar effect names do not appear in demetra-m.csv
+- Ability to specify non-standard parameters for prior corrections is absent in the
+  GUI
+- Truncated text in global SA general options tab
+- Documentation on workspace file XML tags (seasonal adjustment parameter settings)
+- Missing revisions policy in documentation
+- Adding a message when a WS is saved
+- User-defined calendar effects
+- Better handling of coefficients/parameters in the GUI
+- How to specify the data format in Providers?
+- How to change the 'bias' parameter in the GUI?
+- Cannot save updates to user-defined variables (regressors) in the Variables document
+- Allow separation of excluding forecasts vs backcasts in the generation of extreme
+  values
+- The name of the newly created WS does not appear in the GUI
+- Add message in the case of redundant regression variables
+- 'Restore support of ODBC connection string on files '
+- Icons to expand and collapse panes in multi-processing window too small
+- Format type of date in output
+- Restoring series name in legend does nothing
+- Possible enhancement of the GUI
+- Open JDemetra+ workspace with `Open with...`
+- Improve SA output
+- Missing diagnostics in Summary
+- Display jump discontinuity for level shifts (trend breaks)
+- Add support of standard reporting period and time range
+- Show internal corrections on SI chart
+- Plot and display series if SA fail (and additionnal explanations)
+- 'SAVING WS: no message when overwriting an existing WS '
+- warning at start of 3.2.2
+- No new logo in shortcuts
+- Add time filter in UI components
+- Color scheme selection via 'Configure...' not user-friendly
+- Improve branding
+- Improve I/O of CSV files
+- Use Platform-Specific Desktop Features from JDK 9
+- Use enhanced Pseudo-Random Number Generators from JDK 17
+- Migrate to Java 21
+- '[FR] decimal separator in the JWSACruncher'
+- XSD avaliability
+- JWSACruncher and parameters `fullseriesname` and `refreshall`
+body:
+- "If I create a workspace in V2 with a National Calendar with a Fixed Week it cannot
+  be imported with the V3. Error loading the calendar with the following error:\n```\njava.lang.NullPointerException:
+  Cannot invoke \"String.toUpperCase(java.util.Locale)\" because \"day\" is null\n\tat
+  internal.toolkit.base.workspace.file.xml.util.XmlFixedWeekDay.ofDay(XmlFixedWeekDay.java:64)\n\tat
+  internal.toolkit.base.workspace.file.xml.util.XmlFixedWeekDay.create(XmlFixedWeekDay.java:46)\n\tat
+  internal.toolkit.base.workspace.file.xml.util.XmlFixedWeekDay.create(XmlFixedWeekDay.java:32)\n\tat
+  internal.toolkit.base.workspace.file.xml.util.XmlSpecialDayEvent.create(XmlSpecialDayEvent.java:53)\n\tat
+  internal.toolkit.base.workspace.file.xml.util.XmlNationalCalendar.addTo(XmlNationalCalendar.java:120)\n\tat
+  internal.toolkit.base.workspace.file.xml.util.XmlCalendars.copyTo(XmlCalendars.java:67)\n\tat
+  internal.toolkit.base.workspace.file.xml.util.XmlCalendars.create(XmlCalendars.java:82)\n\tat
+  internal.toolkit.base.workspace.file.xml.util.XmlCalendars.create(XmlCalendars.java:33)\n\tat
+  jdplus.toolkit.base.workspace.file.util.XmlConverterSupport$ValueAdapter.toValue(XmlConverterSupport.java:104)\n\tat
+  internal.io.AndThenFileParser.parsePath(AndThenFileParser.java:29)\n\tat nbbrd.io.xml.Xml$AdaptedParser.parsePath(Xml.java:102)\n\tat
+  jdplus.toolkit.base.workspace.file.util.XmlConverterSupport.readItem(XmlConverterSupport.java:77)\n\tat
+  jdplus.toolkit.base.workspace.file.util.XmlConverterSupport.read(XmlConverterSupport.java:63)\n\tat
+  internal.toolkit.base.workspace.file.util.QuickHandler.read(QuickHandler.java:32)\n\tat
+  internal.toolkit.base.workspace.file.GenericHandlers$UtilCal.read(GenericHandlers.java:38)\n\tat
+  internal.toolkit.base.workspace.file.SafeHandler.loadValue(SafeHandler.java:61)\nCaused:
+  java.io.IOException: Unexpected exception while loading Calendars\n\tat internal.toolkit.base.workspace.file.SafeHandler.loadValue(SafeHandler.java:63)\n\tat
+  internal.toolkit.base.workspace.file.FileWorkspaceImpl.load(FileWorkspaceImpl.java:133)\n\tat
+  jdplus.toolkit.desktop.plugin.workspace.FileRepository.loadCalendars(FileRepository.java:224)\n[catch]
+  at jdplus.toolkit.desktop.plugin.workspace.FileRepository.load(FileRepository.java:185)\n\tat
+  jdplus.toolkit.desktop.plugin.workspace.FileRepository.open(FileRepository.java:162)\n\tat
+  jdplus.toolkit.desktop.plugin.workspace.WorkspaceFactory.openWorkspace(WorkspaceFactory.java:269)\n\tat
+  jdplus.toolkit.desktop.plugin.workspace.WorkspaceFactory.openWorkspace(WorkspaceFactory.java:264)\n\tat
+  jdplus.toolkit.desktop.plugin.workspace.actions.OpenWorkspace.actionPerformed(OpenWorkspace.java:31)\n\tat
+  org.openide.awt.AlwaysEnabledAction$1.run(AlwaysEnabledAction.java:175)\n\tat org.openide.util.actions.ActionInvoker$1.run(ActionInvoker.java:70)\n\tat
+  org.openide.util.actions.ActionInvoker.doPerformAction(ActionInvoker.java:91)\n\tat
+  org.openide.util.actions.ActionInvoker.invokeAction(ActionInvoker.java:74)\n\tat
+  org.openide.awt.AlwaysEnabledAction.actionPerformed(AlwaysEnabledAction.java:178)\n\tat
+  java.desktop/javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972)\n\tat
+  java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2313)\n\tat
+  java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:405)\n\tat
+  java.desktop/javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262)\n\tat
+  java.desktop/javax.swing.AbstractButton.doClick(AbstractButton.java:374)\n\tat java.desktop/com.apple.laf.ScreenMenuItem.actionPerformed(ScreenMenuItem.java:129)\n\tat
+  java.desktop/java.awt.MenuItem.processActionEvent(MenuItem.java:692)\n\tat java.desktop/java.awt.MenuItem.processEvent(MenuItem.java:651)\n\tat
+  java.desktop/java.awt.MenuComponent.dispatchEventImpl(MenuComponent.java:378)\n\tat
+  java.desktop/java.awt.MenuComponent.dispatchEvent(MenuComponent.java:367)\n\tat
+  java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:778)\n\tat java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)\n\tat
+  java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)\n\tat java.base/java.security.AccessController.doPrivileged(AccessController.java:399)\n\tat
+  java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)\n\tat
+  java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:97)\n\tat
+  java.desktop/java.awt.EventQueue$5.run(EventQueue.java:747)\n\tat java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)\n\tat
+  java.base/java.security.AccessController.doPrivileged(AccessController.java:399)\n\tat
+  java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)\n\tat
+  java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:744)\n\tat org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:136)\n\tat
+  java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)\n\tat
+  java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)\n\tat
+  java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)\n\tat
+  java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)\n\tat
+  java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)\n\tat
+  java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)\n```"
+- |-
+  We observe what appears to be a bug.
+
+  ### Description
+
+  When reloading a data file in the Providers tab, new series are added to the open SA-Processing.
+
+  ### Procedure
+
+  1) Open JDemetra+ v3.5.1
+  2) Create a new WS
+  3) Create a new SAP
+  4) Add data from Providers to SAP
+  5) Add new points to data file
+  6) Re-add the data file under Providers (even if already present and with star)
+  7) Click on "Reload"
+  8) Series are added again to SAP
+
+  Here's a short video describing the procedure:
+
+  https://github.com/user-attachments/assets/323a11ee-9949-467d-8f43-79b4cdf8ab3b
+- "Issue #489 is unresolved. \nThe problem remains in version 3.5.1. \n\nAlso, the
+  SI ratio display is still different and appears with Q1, Q2, Q3, Q4 :\n\n<img width=\"605\"
+  height=\"255\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/49948a60-a027-4bed-8947-9e9eedc49537\"
+  />"
+- |-
+  It would be very interesting to add ways to retrieve WS file names and paths.
+
+  Is it possible to add methods like `getSource` and `setSource` to be able to retrieve the file containing a SA-Processing, a SA-Item or even a Workspace directly from the Java object?
+
+  Thank you
+- "Hello, \n\nI'm opening an issue but it's more of **a discussion**.\n\nFirst of
+  all, the WS structure contains:\n\n- data (calendar, regressors and data), \n- statistical
+  models (specifications) \n- and outputs. \n\nIn the context of moving to a cloud-native
+  solution and changing JD+ to a web API, would it make sense to review this structure?\nI'm
+  wondering about this too, because it's a recurring remark that was at the origin
+  of @AlessandroPiovani's project ([RJDprocessor](https://github.com/AlessandroPiovani/RJDProcessor)).\n\nAlso,
+  in the context of online services via compute servers or virtual machines (see [SSPCloud](https://datalab.sspcloud.fr)
+  we are using at Insee), does this structure fit in well with modern statistical
+  processes?\n\nFinally, how can WS be managed with **Git** directories? Should WS
+  be pushed or not, or only the models?\n\nThanks"
+- "### Introduction\n\nIn JDemetra+ v3, it's not possible to refresh a SA-Item with
+  **Right click** > **Refresh** when the newly created WS is not saved.\nIt was possible
+  to refresh a new WS in version 2.\n\nBut there is A way to refresh a SA-Item with
+  concurrent policy with the GUI in version 3.5.0 with a newly created WS is not saved.
+  Just by changing the `domainSpecification` like in #733 \n\n### My questions\n\nIs
+  there a way to refresh a SA-Item newly created in v3.5.1?\n"
+- |+
+  ### Intro
+
+  In the latest v3.5.1, there is a *breaking change* with v3.5.0 regarding the specification handling.
+
+  ### Step to reproduce
+
+  1) Open JDemetra+ v3.5.1
+  2) Create a new WS
+  3) Add a series (with for example RSA3 specification)
+  4) Change the `domainSpec` (**Right click** > **Edit** > **Reference specification** > **Select...** > RSA5 (for example)
+
+  ### Conclusion
+
+  The `domainSpec` is changed but not *applied*. So, the **Current spec** is still **New** and not **Concurrent** as in v3.5.0
+
+  Is it a bug? I don't see any mention of it in the CHANGELOG and is it intended?
+
+- |-
+  Consider importing a CSV file in the Providers panel and specifying an incorrect date format (such as using 'mm' rather than 'MM', where the former specifies minutes and the latter specifies the month):
+
+  <img width="462" height="501" alt="Image" src="https://github.com/user-attachments/assets/8fac7b3d-29cd-4078-81a3-1876b076f251" />
+
+  After attempting to include some of the imported data in a new Vars document via the Workspace panel, the JD+ GUI becomes glitchy and unresponsive (the Vars-1 window is stuck on the 'Drop data here' prompt, and preview/mouse-over content from the Providers panel clashes with the prompt and won't disappear):
+
+  <img width="874" height="583" alt="Image" src="https://github.com/user-attachments/assets/7c13d973-b719-4621-b389-d2e9fb9b50ec" />
+
+  As another example, the screen shot below shows how the Providers panel remains with the contents of the Workspace panel after attempting to switch to it:
+
+  <img width="207" height="197" alt="Image" src="https://github.com/user-attachments/assets/430b6688-c429-4dfa-8e66-9cab84812313" />
+
+  It would be nice if the GUI would more gracefully handle invalid importation to improve the user experience (whether the date format is mis-specified, or anything else is mis-specified, such as TAB rather than COMMA for the delimiter value, for example).
+
+  To recover in this situation, I essentially have to restart the GUI and lose any unsaved changes. I would suggest this behaviour is a bug, rather than being suggestive of an enhancement.
+- |-
+  This is just a question:
+
+  Are there any character restrictions imposed by the JDemetra+ GUI and/or the Cruncher when naming series (that is, when providing a name or ID for series)? For example, are certain special characters not allowed, or are there any character-length limits, and do these differ for the GUI vs the Cruncher?
+- "I've found a bug with the cruncher. \n\nHere's the output I saw at the end of my
+  run: \n- At the end of the output printed out by cruncher was this: (note the 'failed'
+  line)\n```\nFlushing bundle...\nGenerate Output\nCsv matrix\nfailed: Input length
+  = 1\ncsv\ngenerated\nSaving new processing...\n```\n- output series were produced
+  as normal\n- the demetra_m.csv file is missing most of its content. Up to a certain
+  series X, it is written to as normal. But the row for series X abruptly stops printing
+  output midway through. The several rows that were most recently printed are then
+  printed twice more, starting at midway through the series X row (presumably these
+  were the contents of the buffer), always stopping abruptly at the same point in
+  the next series X row.  This meant most of the series had no matrix output at all.\n\n\nUsing
+  a debugger, I could see that the issue was an **UnmappableCharacterException**,
+  which occurs when you try to write a valid character into a file using a character
+  set that does not contain that character. The exception only occurs when the buffer
+  with that character is flushed. It happens in the CsvInformationFormatter class,
+  and the chosen character set is visible in the CsvMatrixOutput class. Both are in
+  the jdplus.sa.base.csv package.\n\nThe issue is that the infinity character ∞ is
+  not valid in the chosen character set [ISO/IEC 8859-1 - Wikipedia](https://en.wikipedia.org/wiki/ISO/IEC_8859-1#Code_page_layout)\n\nThe
+  cell that gets an infinity result is **diagnostics.fcast-outsample-variance** in
+  series X. If I remove that the from parameters file, cruncher runs as normal with
+  no issues.\n\nI tried removing every series except series X, and I got the same
+  output in the demetra_m.csv file, except that the rows were only printed twice,
+  not thrice. So this can be reproduced with just one series.\nI also tried removing
+  just series X from the full workspace, and it ran as normal with no issues. So the
+  diagnostic works in most situations, just not for this series.\n\nI suggest you
+  do one of the following things to fix the issue:\n- Change the character set used
+  for CSV output to one that includes the infinity character\n- Change the custom
+  number formatter to print a double 'infinity' value as the string \"infinity\" instead
+  of as \"∞\"\n- If infinity is not a valid result for the diagnostics.fcast-outsample-variance
+  test, change it so that it can't end up with infinity\n\n\nI don't need this fix
+  urgently- it turns out that I don't need fcast-outsample-variance so I've just removed
+  that from the parameters file."
+- |-
+  I changed the reference specification from RSAfull to x11 and then the specification wasn't changed:
+
+  <img width="991" height="603" alt="Image" src="https://github.com/user-attachments/assets/719f1e55-d3f6-4c3e-9d54-6ac304e7a84e" />
+- |-
+  1. Step run a seasonal Adjustment
+
+  <img width="1028" height="703" alt="Image" src="https://github.com/user-attachments/assets/259b11fd-dece-4ac6-b37b-b2a4a7335d6c" />
+
+  2. Drag and Drop a series
+
+  <img width="988" height="364" alt="Image" src="https://github.com/user-attachments/assets/f21f58fe-90d7-44b0-98f0-91c20e3cb1b8" />
+
+  then the Series is doubled, and buggy
+- "Please find enclosed the example for a user-defined trading day. The output could
+  be generated with the cruncher or with output in the UI for a SaProcessing. \nIn
+  the output in \"ahaCN_GP14\\SAProcessing-1\\demetra_m.csv\" for ahaCN_GP14, the
+  regression.ntd is 1 but the column E and F for the variables are empty. In Version
+  2 ntd=0 and the columns are also empty. \n\n\n\n[ahaCN_GP14.zip](https://github.com/user-attachments/files/21258003/ahaCN_GP14.zip)"
+- |-
+  All fixed and non-fixed (estimated) outlier corrections can be conveniently seen in the Pre-processing panel. However, the information displayed for each type (fixed vs non-fixed) differs. In the example screen shot below, non-fixed (pre-specified) outliers have the type and period shown, but not the name; whereas for fixed outliers, the name is shown, but not the type and date:
+
+  <img width="910" height="491" alt="Image" src="https://github.com/user-attachments/assets/287b2ddc-990f-4de8-86f2-84109dc1ebf6" />
+
+  Also note: https://github.com/jdemetra/jdplus-main/issues/590: it would be better if 'Prespecified outliers' was labelled 'Non-fixed outliers' instead in the Pre-processing panel. 'Coefficients' does not need to be pluralised by the way, as the entry for each row reflects a single coefficient; it should just be 'Coefficient'.
+- "Hi,\n\nWe have noticed that when a series that has regarima.transform.function
+  = 'Log' cannot be logged (for example, if it has 0s or negative values in the original
+  series), the Cruncher automatically converts the transform function to 'None'.\n\nAre
+  you able to confirm that this is the only situation in which the Cruncher would
+  change the user specified transform function (excluding if it is set to 'Auto',
+  of course)? \n\nSimilarly, would Cruncher ever change x11.mode from the user specified
+  mode?"
+- |-
+  For series with many pre-specified outliers, the left-hand panel of the 'Pre-specified outliers' dialogue box does not allow scrolling to see the entire list:
+
+  ![Image](https://github.com/user-attachments/assets/b3e5ade3-02b4-4b05-8d45-9d694812433b)
+
+  Fortunately, any non-visible outliers can still be navigated to using the arrow keys, but clearly this behaviour is not ideal and a scrollbar should be added.
+- |-
+  Hi,
+
+  When I set my (monthly) series and model span to only the last 36, 37 or 38 periods, the 'Combined seasonality tests on sa' and 'Combined seasonality tests on sa (last years)' don't appear in the Main results part of the GUI:
+
+  Main results with longer series and model spans:
+  ![Image](https://github.com/user-attachments/assets/b154c104-cf58-4c8f-ba55-9b9e4248b45c)
+
+  Changed the series and model spans:
+  ![Image](https://github.com/user-attachments/assets/89d0ad4b-385a-4bf6-869b-87bba53bddf5)
+
+  Main results with 36 periods for series and model spans:
+  ![Image](https://github.com/user-attachments/assets/d8a60344-295a-4bfb-9ffd-21ba6ce692ca)
+
+  Is this a bug or is it expected due to how the combined test for SA is calculated?
+
+  Also, does the (last years) in the Main results part of the GUI refer to the most recent 3 years (as in the demetra_m output), or the most recent 10 years (as in the Seasonality Tests Diagnostics part of the GUI), or something else? It would be helpful if this was explicitly labelled.
+- |-
+  We would like to suggest the following feature request that will improve the user experience:
+
+  The JD+ GUI does not provide an explicit error when the operation to save a workspace file has failed. Instead, the operation fails mostly silently, which misleads the user into thinking that their workspace has saved successfully.
+
+  For example, when saving a workspace to a read-only location, there is no explicit feedback to the user to state that the workspace has in fact not been saved, and the experience is indistinguishable to a save operation that has succeeded. The only implicit feedback is via the error icon in the bottom-right corner of the screen. We have detected two related errors for this scenario:
+
+  ![Image](https://github.com/user-attachments/assets/8eb9c64d-9e78-42b5-af5b-d9ef351c7068)
+
+  ![Image](https://github.com/user-attachments/assets/6eb7ee08-092f-4adf-b426-4823ea7bbdf4)
+
+  Ideally, a pop-up message box would appear (with far more user-friendly text than what appears in the images above) and alert the user to the failed save operation when attempting to save to a read-only location, so that they can be aware of this fact and then save the workspace in an alternative location with write-access.
+
+  This scenario is highly relevant for us, since we have many non-sophisticated users of JD+ who are unfamiliar with operating the GUI and in knowing where to save their files, and who will likely ignore the error area in the bottom-right corner of the screen (noting that we have encountered a number of errors that seem irrelevant to the user and will therefore be overlooked by them due to frequent irrelevancy).
+
+  The message could say the following, for example: `Error! You've attempted to save to a read-only location, so the workspace has not been saved. Choose a different location with write-access to save the workspace in.`
+
+  If there are other possible reasons for not being able to save a workspace besides saving to a read-only location, then ideally they should also be accounted for.
+
+  (Similarly, a more explicit message or indication could perhaps be provided when a save operation is successful (via either 'Save' or 'Save As', so that in the absence of it, the user becomes alerted to something having gone wrong. But for failed save operations, an explicit message is preferred.)
+- "When we create a new SA-Item from an Excel file, the name of the series is automatically
+  `sheet name\\nseries name`.\n\nOn the GUI, it appears with an arrow ▶:\n\n![Image](https://github.com/user-attachments/assets/955bd1e0-98aa-4101-bc25-8af37974715b)\n\nBut
+  on the XML file:\n\n![Image](https://github.com/user-attachments/assets/2d248675-3561-4862-80d1-1055eb925518)\n\n\nAnd
+  on R. Here is an example with **{rjd3providers}**:\n\n``` r\nlibrary(\"rjd3providers\")\ndata_path
+  <- system.file(\"data\", \"IPI_nace4.xlsx\", package = \"rjd3workspace\")\nts_object
+  <- spreadsheet_series(\n    file = data_path, \n    sheet = 1L, \n    series = 1L\n)\nts_object$name\n#>
+  [1] \"IPI\\nRF0610\"\n```\n\n<sup>Created on 2025-06-03 with [reprex v2.1.1](https://reprex.tidyverse.org)</sup>\n\nIs
+  there another way to separate these two informations?\n"
+- |-
+  We can study 3 different cases of data:
+
+  - ts without metadata
+  - ts with metadata
+  - ts with false metadata
+
+  In these 3 cases, the seasonal adjustment works, but the refresh only works for the first 2 cases and generates an invalid for the last case.
+
+  **Is this a deliberate behaviour?**
+
+  here is my R code:
+
+  ```r
+  library("rjd3toolkit")
+  library("rjd3workspace")
+  library("rjd3providers")
+  library("rjd3x13")
+
+  data_path <- system.file("data", "IPI_nace4.csv", package = "rjd3workspace")
+  ts_object <- txt_series(
+      file = data_path,
+      series = 1L,
+      delimiter = "SEMICOLON",
+      fmt.date = "dd/MM/yyyy"
+  )
+  ts_object2 <- txt_series(
+      file = data_path,
+      series = 2L,
+      delimiter = "SEMICOLON",
+      fmt.date = "dd/MM/yyyy"
+  )
+
+  my_ws <- jws_new()
+  my_sap <- jws_sap_new(my_ws, "new_sap")
+
+  add_sa_item(my_sap, name = "air_with_ts_metadata", x = AirPassengers, spec = x13_spec())
+  add_sa_item(my_sap, name = "air_with_wrong_ts_metadata", x = AirPassengers, spec = x13_spec())
+  add_sa_item(my_sap, name = "air", x = AirPassengers, spec = x13_spec())
+  set_ts(my_sap, 1, ts_object)
+
+  ts_object2$moniker$id <- ts_object2$moniker$id |> txt_id_properties() |> txt_to_id()
+  set_ts(my_sap, 2, ts_object2)
+
+  save_workspace(my_ws, "tmp.xml", replace = TRUE)
+
+  library("rjwsacruncher")
+  options(
+      cruncher_bin_directory = "path/to/jwsacruncher-3.5.0/bin/",
+      v3 = TRUE
+  )
+
+  cruncher_and_param(workspace = "tmp.xml", policy = "complete", log_file = "cruncher.log")
+  ```
+
+  Also, the [cruncher.log](https://github.com/user-attachments/files/20576914/cruncher.log) isn't very informative and doesn't give any details about the fact that the adjustment is failing for the second SA-Item.
+- |
+  Is it possible to move (up or down) an SA-Item in an SA-processing?
+
+  I'd like to reorganise my SA-Items so that they follow a certain nomenclature (a certain order).
+  I'd like to do this in R but I haven't found any other method than creating a copy of my WS and transferring my SA-Items one by one in the order I want.
+
+  My questions are as follows:
+
+  - Is it possible to do this with the GUI (outside R)?
+  - Is there another method in R?
+
+  Thank you.
+- |
+  When you create a WS with variables and the variable name contains one or more spaces, JDemetra+ no longer knows how to distinguish variables from their name and you end up with more variables than you expected and incorrect variables.
+
+  Here's an example of my tests on video:
+
+  https://github.com/user-attachments/assets/c27dd99a-6acb-447b-826b-76f98b72b7da
+
+  I think it's either a bug or a shortcoming in the GUI warnings and in the documentation.
+- |
+  In JDemetra+, there is a precise vocabulary for distinguishing objects.
+  **Names are important** and some terms are unfortunately synonyms and can refer to the same object.
+
+  I suggest grouping the names together to obtain one name = one object.
+
+  Here's my list:
+  | Current name                                                                  | Suggested name                            |
+  |-------------------------------------------------------------------------------|-------------------------------------------|
+  | Reference specification --> 2nd column of the table + right click on a series | Domain specification (domainSpec )         |
+  | Current spec (3rd column of the table)                                        | Policy                                    |
+  | Specification (panel on the right)                                            | Estimation specification (estimationSpec ) |
+  | Multi-document / Multi-Processing                                             | SA-Processing                            |
+
+  ![Image](https://github.com/user-attachments/assets/f4e8ede0-3ca1-4639-971b-c11b51e96257)
+
+  ![Image](https://github.com/user-attachments/assets/62c2afb5-9a91-4cc2-bc6f-6c455704c971)
+
+
+  In R, there is also a `result_spec` item which corresponds to `pointSpec`:
+
+  ``` r
+  mod <- rjd3x13::x13(AirPassengers)
+  names(mod)
+  #> [1] "result"          "estimation_spec" "result_spec"     "user_defined"
+  ```
+
+  <sup>Created on 2025-05-27 with [reprex v2.1.1](https://reprex.tidyverse.org)</sup>
+- |-
+  I try to build the jdplus_main project with `mvn clean install`, but I get an error:
+
+  ```
+  [INFO] ------------------------------------------------------------------------
+  [INFO] BUILD FAILURE
+  [INFO] ------------------------------------------------------------------------
+  [INFO] Total time:  01:38 h
+  [INFO] Finished at: 2025-05-26T16:06:45+02:00
+  [INFO] ------------------------------------------------------------------------
+  [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.3:test (default-test) on project jdplus-text-base-api: There are test failures.
+  [ERROR]
+  [ERROR] See C:\Users\UTZK0M\Documents\Projets R\Projets MTS\jdemetra-core\v3\jdplus-main\jdplus-main-base\jdplus-text-base-parent\jdplus-text-base-api\target\surefire-reports for the individual test results.
+  [ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+  [ERROR] -> [Help 1]
+  [ERROR]
+  [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+  [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+  [ERROR]
+  [ERROR] For more information about the errors and possible solutions, please read the following articles:
+  [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+  [ERROR]
+  [ERROR] After correcting the problems, you can resume the build with the command
+  [ERROR]   mvn <args> -rf :jdplus-text-base-api
+  ```
+
+  It's due to a test with the moniker and the spacing (#254)
+
+  even with the flag `-DskipTests` (#636), I get an error (but a different one).
+
+
+  Here is the full log : [log.txt](https://github.com/user-attachments/files/20443094/log.txt)
+- |-
+  Currently in a SA-Processing there are SA-Item and each SA-Item can contain a `<item name="metadata">` section with (currently only) the `<item name="comment">` item.
+  I understand that the role of this section is to add information that are not related to the adjustment but we want to keep.
+
+  But could we include in this section more information. For example:
+
+  - the `priority` item (#611) which is not directly related to the adjustment
+  - the `quality` item which is an output from the model (and not useful to adjust the data)
+  - the `policy` item which is also an output (and which is not used to refresh the data when the cruncher is called again, for example #483)
+  - any other item we want to add to our SA-Item
+
+  In the package **{rjd3workspace}**, I would like to add a function `put_metadata()` to add (or update) any new metadata (key, value) to SA-Item (but also SA-Processing and WS).
+- |+
+  I try to build the jdplus_main project with `mvn clean install -DskipTests`, but I get an error:
+
+  ```
+  [INFO] ------------------------------------------------------------------------
+  [INFO] BUILD FAILURE
+  [INFO] ------------------------------------------------------------------------
+  [INFO] Total time:  07:58 min
+  [INFO] Finished at: 2025-05-26T14:23:50+02:00
+  [INFO] ------------------------------------------------------------------------
+  [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.0:compile (default-compile) on project jdplus-main-desktop-design: Fatal error compiling: error: invalid flag: -proc:full -> [Help 1]
+  [ERROR]
+  [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+  [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+  [ERROR]
+  [ERROR] For more information about the errors and possible solutions, please read the following articles:
+  [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+  [ERROR]
+  [ERROR] After correcting the problems, you can resume the build with the command
+  [ERROR]   mvn <args> -rf :jdplus-main-desktop-design
+  ```
+
+  Here is the full log : [log.txt](https://github.com/user-attachments/files/20441049/log.txt)
+
+- |-
+  In JD+ v3.4.0, I can copy a series and paste it into a chart container using the `Ctrl` + `V` keyboard shortcut. This works whether the chart container is empty, or whether it contains series already.
+
+  For grid containers however, the keyboard shortcut does not seem to work unless the user activates an existing column by clicking on a row within it. This therefore means that the user cannot use the keyboard shortcut directly on an empty grid container, because there is no column to be activated.
+
+  In the screen shot below, I have highlighted the two areas on a grid corresponding to my explanation above: the red area is what the user must click on first to allow the keyboard shortcut to work; the blue area doesn't seem to work, although it does work for chart containers (that is, I can click anywhere in a chart container to activate it, and then the keyboard shortcut will work; and so I don't have to click on an existing series for the shortcut to work).
+
+  ![Image](https://github.com/user-attachments/assets/1bcf4976-6d02-4b2b-ae4d-d8324036c2bf)
+- |-
+  Description from Mermaid.js :
+  > JavaScript based diagramming and charting tool that renders Markdown-inspired text definitions to create and modify diagrams dynamically.
+
+  Example :
+
+  This text ...
+  ```
+  xychart-beta
+      title "Sales Revenue"
+      x-axis [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+      y-axis "Revenue (in $)" 4000 --> 11000
+      bar [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+      line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+  ```
+
+  ... is rendered like that:
+  ```mermaid
+  xychart-beta
+      title "Sales Revenue"
+      x-axis [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+      y-axis "Revenue (in $)" 4000 --> 11000
+      bar [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+      line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+  ```
+
+  Documentation: https://mermaid.js.org/syntax/xyChart.html
+- |-
+  When I click on **Select all** from the right-click context menu of a grid (first image below), nothing happens (second image below):
+
+  ![Image](https://github.com/user-attachments/assets/ea086707-b78d-4bf3-872a-c272939b9c4a)
+
+  ![Image](https://github.com/user-attachments/assets/f8f359a2-76f7-472e-a3dd-5da8a5ed22e8)
+
+  However, the keyboard shortcut `Ctrl` + `A`, or clicking in the top-left corner works as expected:
+
+  ![Image](https://github.com/user-attachments/assets/38d1c9f6-2723-4845-ad99-fbc7537afa70)
+- |-
+  When I right-click on a chart container and select **Edit format...** to change the formatting of the dates and numbers (such as using the settings below), nothing changes:
+
+  ![Image](https://github.com/user-attachments/assets/60d7c8fb-8724-461c-9fe0-3664dbbf7da0)
+
+  ![Image](https://github.com/user-attachments/assets/315abcb7-963b-424c-80a3-a76afa281e81)
+- |-
+  When I right-click on a chart and select 'Show all', it doesn't seem to do anything:
+
+  ![Image](https://github.com/user-attachments/assets/1a8f8989-f1b1-43f6-b6bf-0cf6d48babe7)
+
+  I tried highlighting and unhighlighting various series, and showing and hiding the legend and title, but 'Show all' doesn't seem to do anything for any combination I tried. (For example, if I deselected the title and legend, I thought that 'Show all' would make them both appear again.)
+
+  What is 'Show all' supposed to do?
+- |-
+  A provider node has no children if no datasource has been defined and/or restored.
+  Double-clicking on it in this state doesn't do anything.
+  Currently, the user must right-click the provider node to add a new source.
+  The idea is to check if the provider node has no children on double-click and, if so, add a new source directly.
+- "Related to #294 \n\n ### GUI v3 vs {rjd3x13}\n\nNormally, the graphical interface
+  and R packages in version 3 produce the same output. \nHowever, some items produce
+  an output with **{rjd3x13}** that cannot be obtained via the GUI output:\n\n- `decomposition.s_cmp_f`\n-
+  `decomposition.sa_cmp_f`\n- `decomposition.t_cmp_f`\n- `l`\n- `l_b`\n- `yc_f`\n-
+  `ycal_f`\n- `residuals.res`\n- `preadjustment.a1a`\n- `decomposition.x11-all`\n\nIs
+  this a mistake or just my fault for missing these items?\n\n### GUI v3 vs {RJDemetra}\n\nAlso,
+  I know that not all the V2 outputs have been transcribed into v3, but here is a
+  list of those that exist in v2 and not in v3:\n\n- `decomposition.i_cmp_e`\n- `decomposition.i_cmp_ef`\n-
+  `decomposition.i_cmp_f`\n- `decomposition.imodel.innovationvariance`\n- `decomposition.model.innovationvariance`\n-
+  `decomposition.modelchanged`\n- `decomposition.parameterscutoff`\n- `decomposition.s_cmp_e`\n-
+  `decomposition.s_cmp_ef`\n- `decomposition.sa_cmp_e`\n- `decomposition.sa_cmp_ef`\n-
+  `decomposition.samodel.innovationvariance`\n- `decomposition.smodel.innovationvariance`\n-
+  `decomposition.t_cmp_e`\n- `decomposition.t_cmp_ef`\n- `decomposition.tmodel.innovationvariance`\n-
+  `decomposition.transitorymodel.ar`\n- `decomposition.transitorymodel.diff`\n- `decomposition.transitorymodel.fullar`\n-
+  `decomposition.transitorymodel.innovationvariance`\n- `decomposition.transitorymodel.ma`\n-
+  `preprocessing.model.bcasts(?)`\n- `preprocessing.model.covar`\n- `preprocessing.model.efcasts(?)`\n-
+  `preprocessing.model.fcasts(?)`\n- `preprocessing.model.fullresiduals`\n- `preprocessing.model.l_f`\n-
+  `preprocessing.model.lin_bcasts(?)`\n- `preprocessing.model.lin_fcasts(?)`\n- `preprocessing.model.pcovar`\n-
+  `preprocessing.model.y_lin_f`\n- `preprocessing.model.yc_ef`\n- `decomposition.b12`\n-
+  `decomposition.b14`\n- `decomposition.b15`\n- `decomposition.b16`\n- `decomposition.b18`\n-
+  `decomposition.b19`\n- `decomposition.c3`\n- `decomposition.c8`\n- `decomposition.c12`\n-
+  `decomposition.c14`\n- `decomposition.c15`\n- `decomposition.c16`\n- `decomposition.c18`\n-
+  `decomposition.c19`\n- `decomposition.d3`\n- `decomposition.d10a`\n- `decomposition.d10b`\n-
+  `decomposition.d14`\n- `decomposition.d15`\n- `decomposition.d16b`\n- `decomposition.d19`\n-
+  `decomposition.d9filter`\n- `decomposition.slen`\n- `decomposition.d12filter`\n-
+  `decomposition.tlen`\n- `d10`\n- `d10a`\n- `d16`\n- `d16a`\n"
+- |-
+  For series in a multi-document, it's not immediately obvious to the user what the periodicity or frequency of the series is. After processing an individual series and clicking on its row, the 'Main results' tab appears and the user can tell the frequency by the x-axis labelling of the SI chart as highlighted in red below. This is an unnatural and slower way though of discovering the frequency of a series.
+
+  ![Image](https://github.com/user-attachments/assets/d28f6949-140f-4ab9-89c6-c1dc018b648e)
+
+  It would be ideal if the Summary section just said explicitly 'Quarterly series' or something similar as indicated by the arrow in the screen shot below:
+
+  ![Image](https://github.com/user-attachments/assets/21b48667-fea7-409b-a422-b52fd604f8d4)
+
+  Note that the span of the series as per the line 'Estimation span: [12-2008 - 12-2003]' is not especially helpful either, because for some dates, like 3-2008, this could refer to either the March month of monthly data, or the March quarter of quarterly data. (Note #489 which would assist here; for example, 'Q3 2008' is clearer for quarterly data than '3-2008'.)
+
+  Consideration could also be given to having a new column to display the frequency of each series as indicated by the arrow in the screen shot below:
+
+  ![Image](https://github.com/user-attachments/assets/0a0eafed-f697-485b-b4a9-fff2d630fbb8)
+- |
+  When renaming User-defined variables through the following menu, I can sometimes rename variables to the same name, and other times I get an error message.
+
+  ![Image](https://github.com/user-attachments/assets/b2b30a7e-cc26-44c0-9b71-4fb3c7b8bb95)
+
+  Here, I attempted to rename Headline_impute_2qtrs to Headline imputation and received this message:
+
+  ![Image](https://github.com/user-attachments/assets/199e4a64-7a82-4d09-a051-164ab26e61f4)
+
+  Here, on the other hand, I have successfully renamed Vars-2 to Vars-1, even though there is already a Vars-1 variable.
+
+  ![Image](https://github.com/user-attachments/assets/88867422-10fc-4ac1-a14b-4155f37bec2c)
+
+  In this case, the filename remains as Vars-2, as shown in the workspace XML file:
+
+  ![Image](https://github.com/user-attachments/assets/0966a121-9155-41f7-9311-7391cc001469)
+
+  Also in this case, the name used in the selection of User-defined variables to apply to a series remains as Vars-2:
+
+  ![Image](https://github.com/user-attachments/assets/b19b23f2-3ae4-45a1-8b24-7c834a79a1e8)
+
+  Even within the same Workspace I get inconsistent results when attempting to rename a variable to the same name as another variable. To be clear, I don't want to have two variables of the same name - I am trying to determine what validation JD+ does to prevent this.
+
+  I also wonder what the purpose of the 'name' of the variable is, as opposed to the 'file' name. It appears the _name_ is only used for display in the Utilities section of the Workspace tab, but the _file_ is used to link variables in the XML files (i.e. to specify which user-defined variables are applied to a series in the SAProcessing file). If this is the case, is it possible to rename the variable _file_ as opposed to the _name_?
+- |-
+  In the JD+ GUI, the user can insert 'pre-specified outliers' as shown below, and these can be fixed or non-fixed:
+
+  ![Image](https://github.com/user-attachments/assets/d4a65a9a-3173-4e67-80a3-1e1f4cdd7ee7)
+
+  If the user then looks at the **Summary** section of the **Main **results**** section in the output area for the series, the labelling for these pre-specified outliers is confusing:
+
+  ![Image](https://github.com/user-attachments/assets/13e3bb60-a0f3-4905-839c-5ece0d7bc286)
+
+  In this summary section, the fixed outliers (only) have been separated out. But because it firstly says '2 pre-specified outliers', it seems as though there are only 2 in total. However, all types of outliers, whether fixed or not, should be deemed 'pre-specified outliers', because they must be specified by the user in advance.
+
+  It would be better to display the information similar to below:
+
+  ```
+  3 pre-specified outliers
+  2 non-fixed [or say 'estimated' instead]
+  1 fixed
+  ```
+
+  There should also be a newline between 'No easter effect' and '2 pre-specified outliers' in the example above to further improve comprehension of the information about outliers.
+
+  Note there is further confusion when auto-outliering is enabled. If I switch it on for the example above, it now seems there are only 2 outliers: 1 that is detected, and 1 that is fixed:
+
+  ![Image](https://github.com/user-attachments/assets/f3b8fb2f-3b4f-4359-a43e-f99854d16f38)
+
+  My suggestion is as follows (noting importantly the newlines):
+
+  ```
+  4 outliers total
+
+  1 detected outlier [or say 'automatically inserted' instead to be clearer; 'detected' means 'identified', it doesn't mean 'identified and corrected']
+
+  3 pre-specified outliers
+  2 non-fixed
+  1 fixed
+  ```
+
+  If newlines aren't acceptable, then perhaps the following is best (that is, just ignore the fixed vs non-fixed distinction):
+
+  ```
+  4 outliers total
+  1 automatic outlier
+  3 pre-specified outliers
+  ```
+- |-
+  Consider creating a Variables document with a regressor called 'x_1':
+
+  ![Image](https://github.com/user-attachments/assets/78726fbe-bfa3-4081-b8cb-43423b67eba2)
+
+  Now consider a series in a multi-document and applying the above regressor to it:
+
+  ![Image](https://github.com/user-attachments/assets/b39d481f-62e7-4f93-92fa-ad1d6db9e733)
+
+  If the series is processed, it will successfully run:
+
+  ![Image](https://github.com/user-attachments/assets/b8a3dd02-a767-41ca-afd6-92d17422ccd3)
+
+  Now consider renaming the regressor via the 'Vars-1' document by changing the name from 'x_1' to 'x_1_changed':
+
+  ![Image](https://github.com/user-attachments/assets/3d55d1c4-d173-4e90-84f8-2b317f7324e1)
+
+  After renaming it, the operation _appears_ to have been successful in the 'Vars-1' document:
+
+  ![Image](https://github.com/user-attachments/assets/6285d0a0-b87e-480e-8e0f-c9faeb1318da)
+
+  If the series is reprocessed _but no other changes are made_, it will 'successfully run' again:
+
+  ![Image](https://github.com/user-attachments/assets/b8a3dd02-a767-41ca-afd6-92d17422ccd3)
+
+  However, if any _other_ change whatsoever is made to the series (such as changing the 'Tolerance') and then the series is processed, it will not run successfully:
+
+  ![Image](https://github.com/user-attachments/assets/2f45838b-c7ed-48a0-84d3-414cb8ccc22d)
+
+  If the name of the regressor is changed back to 'x_1' from 'x_1_changed', _whether or not other changes are made_, the series can be processed and run successfully again (here, instead of changing the tolerance, 'Preliminary Check' was unticked):
+
+  ![Image](https://github.com/user-attachments/assets/a1b7cc15-982d-4fc3-8d34-f0a9f7e2c701)
+
+  ![Image](https://github.com/user-attachments/assets/771e6df7-b348-448b-b9d3-166b6ed88c0c)
+
+  The above steps prove that the backend of the GUI is not correctly registering a change in the name of a regressor permanently.
+- |-
+  When I attempt to insert/modify/remove outliers via the 'Variables' dialogue box, the name of the variable that I am currently editing does not appear correctly. In the screen shot below, I have clicked the `+` button to insert a new variable, but it is barely visible on the left-hand side of the box. It seems to have been squished into a narrow height:
+
+  ![Image](https://github.com/user-attachments/assets/b7e46736-de66-4872-8b31-54a259c8f36e)
+
+  If I then insert another outlier, the first one now appears correctly (that is, it is visible), but the second, current one has the same issue:
+
+  ![Image](https://github.com/user-attachments/assets/886b1662-8b74-49fc-99b7-516a1b99ca86)
+
+  After inserting the second one, if I then select the first variable on the left, you can see the squished nature of the second one:
+
+  ![Image](https://github.com/user-attachments/assets/32e00d7f-5898-4db0-8b10-112631110e42)
+
+  The screen shot below is a zoomed-in image to show this issue more clearly:
+
+  ![Image](https://github.com/user-attachments/assets/7319b29a-1f02-49cb-a14b-e58ad0dc3706)
+- |+
+  I don't find some items in the dictionaries:
+
+  - in [RegressionDictionaries](https://github.com/jdemetra/jdplus-main/blob/develop/jdplus-main-base/jdplus-toolkit-base-parent/jdplus-toolkit-base-api/src/main/java/jdplus/toolkit/base/api/dictionaries/RegressionDictionaries.java):
+    - `regression.description`
+    - `regression.out(*)`
+    - `regression.type`
+
+    Why some lines are commented:
+    - https://github.com/jdemetra/jdplus-main/blob/050b49712dca25c518cccbb0911dc102fba54762/jdplus-main-base/jdplus-toolkit-base-parent/jdplus-toolkit-base-api/src/main/java/jdplus/toolkit/base/api/dictionaries/RegressionDictionaries.java#L97-L98
+    - https://github.com/jdemetra/jdplus-main/blob/050b49712dca25c518cccbb0911dc102fba54762/jdplus-main-base/jdplus-toolkit-base-parent/jdplus-toolkit-base-api/src/main/java/jdplus/toolkit/base/api/dictionaries/RegressionDictionaries.java#L142-L143
+    - https://github.com/jdemetra/jdplus-main/blob/050b49712dca25c518cccbb0911dc102fba54762/jdplus-main-base/jdplus-toolkit-base-parent/jdplus-toolkit-base-api/src/main/java/jdplus/toolkit/base/api/dictionaries/RegressionDictionaries.java#L151-L152
+    - https://github.com/jdemetra/jdplus-main/blob/050b49712dca25c518cccbb0911dc102fba54762/jdplus-main-base/jdplus-toolkit-base-parent/jdplus-toolkit-base-api/src/main/java/jdplus/toolkit/base/api/dictionaries/RegressionDictionaries.java#L172-L175
+
+  - in [X13Dictionaries ](https://github.com/jdemetra/jdplus-main/blob/develop/jdplus-main-base/jdplus-x13-base-parent/jdplus-x13-base-api/src/main/java/jdplus/x13/base/api/x13/X13Dictionaries.java):
+    - `decomposition.s_cmp_b`
+    - `decomposition.s_cmp_f`
+    - `decomposition.sa_cmp_b`
+    - `decomposition.sa_cmp_f`
+    - `decomposition.si_cmp`
+    - `decomposition.t_cmp_b`
+    - `decomposition.t_cmp_f`
+    - `diagnostics.fcast-insample-mean`
+    - `diagnostics.fcast-outsample-mean`
+    - `diagnostics.fcast-outsample-variance`
+    - `s_b`
+    - `sa_b`
+    - `t_b`
+    - `variancedecomposition.cycle`
+    - `variancedecomposition.irregular`
+    - `variancedecomposition.others`
+    - `variancedecomposition.seasonality`
+    - `variancedecomposition.tdh`
+    - `variancedecomposition.total`
+
+  But these items exists and provide informations.
+
+
+- JDemetra 3.4.0 - When the TRAMO model is not decomposed, the representation (P,D,Q)(BP,BD,BQ)s  of
+  the Seats model is not available.
+- |-
+  Everything is in the title. From a certain level, the indentation of the XML files comes back to 0:
+
+  ![Image](https://github.com/user-attachments/assets/5eac083a-6ea7-4dcd-b271-47916001eb47)
+
+  This makes reading these files very complicated. Is it possible to indent these files correctly?
+- "When all the I/C ratios are greater than 1, the MCD value used in the program is
+  equal to 2: \nhttps://github.com/jdemetra/jdplus-main/blob/37c578dbff38f6c54f682536222c185c718eb4d7/jdplus-main-base/jdplus-x13-base-parent/jdplus-x13-base-core/src/main/java/jdplus/x13/base/core/x11/filter/X11FilterFactory.java#L40-L60\nIs
+  this the value desired?"
+- |-
+  Could it be possible to add some documentation to choose the **locale** corresponding to a `number pattern`:
+
+  ![Image](https://github.com/user-attachments/assets/0ae53d62-19d8-48a9-935f-37bdb174fde0)
+
+  Maybe a link or a small comment?
+- "Add option to retrieve desktop application version in headless environment.\n\nSomething
+  like: \n```shell\n$ nbdemetra64.exe --nogui --nosplash --version\n\nJDemetra+ 3.4.0\nJVM:
+  21.0.1 (GraalVM Community OpenJDK 64-Bit Server VM 21.0.1+12-jvmci-23.1-b19)\nOS:
+  Windows 11 10.0 amd64\n```"
+- |-
+  When the JD+ GUI indicates that a series has a 'Status' of 'Invalid', how is this recorded in the underlying XML workspace file?
+
+  ![Image](https://github.com/user-attachments/assets/5e230a9f-148a-4a27-8a60-a83b3c654e90)
+
+  Is the 'Quality' tag changed to 'Undefined'? Is such a change sufficient, or is there some other indicator that should be used instead?
+
+  ![Image](https://github.com/user-attachments/assets/4368388d-f35b-4dad-8262-62f167dab488)
+
+  That is, what is the most reliable why to understand from the XML workspace file when JD+ has encountered an error and cannot execute the seasonal adjustment algorithm on a series successfully?
+- |-
+  The following series has been imported from an Excel spreadsheet via the Providers panel. The series spans April 1982 to December 1985. However, when viewing the series in a Grid by double clicking on it, a row for 1986 is unnecessarily shown:
+
+  ![Image](https://github.com/user-attachments/assets/368a03b5-4e6f-44e1-bfeb-4fa40c214bee)
+- |-
+  The SDMX plugin uses a Copy Path/Reference context menu item to allow the user to quickly copy and paste relevant data IDs such as source, flow, and key. It is also used to create a command line with the appropriate parameters, allowing for some automation.
+
+  ![Image](https://github.com/user-attachments/assets/63c3066f-a7d2-4d15-a6f2-380961cf281c)
+  ![Image](https://github.com/user-attachments/assets/fa00a83a-7324-477c-88ba-8813d8eff208)
+
+  This feature could be generalized to be used by other plugins to provide things like:
+  - file name
+  - file path
+  - URIs
+  - SQL queries
+  - Excel ranges
+  - ...
+- "Regarding the check last function in the JDemetra+ GUI, the red/orange highlighting
+  in the 'Rel. Error N-1' column is blocked whenever that series' row is selected.
+  In the example below, the series in the first row is selected, but the red highlighting
+  in the relative error column cannot be seen:\r\n\r\n![image](https://github.com/user-attachments/assets/221691e3-6ad5-4ffe-8e66-b9a2b72672bb)\r\n\r\nIf
+  I select a different series (that is, the one in the second row), then I can see
+  the red colouring, but I can no longer see information about the series in the corresponding
+  panel on the right:\r\n\r\n![image](https://github.com/user-attachments/assets/5b4c740a-065c-44cc-a2f1-fad284486ec9)\r\n\r\nThe
+  problem is worse if only one series is in the list, as there is no way to deselect
+  the series so that the red colouring can be seen:\r\n\r\n![image](https://github.com/user-attachments/assets/23a9fe5e-a6ba-48c4-bffe-7cb4bd80367e)\r\n\r\nA
+  workaround that is not ideal is to re-drag the series into the check last panel
+  again:\r\n\r\n![image](https://github.com/user-attachments/assets/699a7f53-1ace-49cf-86fb-f281b5471ac4)\r\n\r\nBut
+  as soon as I click on the series, the same issue as above occurs:\r\n\r\n![image](https://github.com/user-attachments/assets/88c7c556-8a88-41ce-8f02-df456700f81f)\r\n\r\nCan
+  the user experience be changed such that, for example, if a user clicks in the white
+  space of the check last panel, the blue series row selection highlighting disappears
+  (but the info. in the panel on the right remains), or could the blue row highlighting
+  only occur on the series name column rather than the other columns?"
+- "Regarding the output dictionary at: https://github.com/jdemetra/jwsacruncher/wiki/Output-dictionaries,
+  this appears to be for JD+ version 2. If that is the case, could we please kindly
+  request an exhaustive list for version 3?\r\n\r\nPlease also see the following separate
+  but related issues (especially the first one):\r\n- https://github.com/jdemetra/jdplus-main/issues/394\r\n-
+  https://github.com/jdemetra/jdplus-main/issues/485"
+- "*Issue revealed by Nikolina Rizanovska*\r\n\r\nIs it possible to add dashed lines
+  to indicate the confidence interval at 95% in the distribution chart of the residuals?\r\n(We
+  are in the `Preprocessing` --> `Residuals` --> `Distribution` section)\r\n\r\n![image](https://github.com/user-attachments/assets/1ed8e0ef-bcf7-48cd-aac5-f645043fd0d4)\r\n"
+- "*Issue revealed by Nikolina Rizanovska*\r\n\r\nWhen you want to use calendar regressors
+  (**including the leap year**) in your seasonal adjustment, JDemetra+ indicates a
+  number of variable (here 6) in the Summary:\r\n\r\n![image](https://github.com/user-attachments/assets/e41846f1-dba3-4abe-8424-8a152a458e9f)\r\n\r\nBut
+  it doesn't count the leap-year variable:\r\n\r\n![image](https://github.com/user-attachments/assets/3284b52d-da8d-49e0-a46b-3fce96560cbd)\r\n\r\nIs
+  it possible to indicate the real number (7 variables with leap-year)?"
+- "Regarding the output dictionary for the input parameter file for Cruncher (https://github.com/jdemetra/jwsacruncher/wiki/Output-dictionaries),
+  could a column please be added to clarify which keys refer to series as opposed
+  to items?\r\n\r\nThat is, which tags correspond to the `<matrix>` items block, and
+  which tags correspond to the `<tsmatrix>` series block, as per the example given
+  at: https://github.com/jdemetra/jwsacruncher/wiki#parameters-file ? Are series tags
+  simply those with a Java class of `ec.tstoolkit.timeseries.simplets.TsData`, and
+  item tags are everything else?\r\n\r\n![image](https://github.com/user-attachments/assets/58559564-7ebf-4ad4-90d6-9624f68e9c3d)\r\n\r\n![image](https://github.com/user-attachments/assets/f016d278-6f49-4581-bd8f-d0c16fb71632)"
+- "Hi JDemetra+ devs,\r\nWe are using cruncher v3 in a data processing application
+  implemented in Java. At a high level we are calling jdplus.cruncher.App.main with
+  a valid workspace and parameters file, then parsing the output files for consumption
+  by downstream services.\r\nOne issue with cruncher is that in most cases it does
+  not produce any exceptions or logs when any of the SAItem.process calls fail, so
+  we cannot know when/why a cruncher run failed (other than by seeing if it produces
+  an empty output file).\r\n\r\n**The cause seems to be as follows:**\r\nCruncher
+  hardcodes the \"verbose\" param in this SAItem process call to false: https://github.com/jdemetra/jdplus-main/blob/develop/jdplus-main-cli/jdplus-main-cli-bin/src/main/java/jdplus/cruncher/batch/SaBatchProcessor.java#L89\r\nThis
+  causes cruncher to use a DummyLog rather than the DefaultProcessingLog class - https://github.com/jdemetra/jdplus-main/blob/develop/jdplus-main-base/jdplus-toolkit-base-parent/jdplus-toolkit-base-api/src/main/java/jdplus/toolkit/base/api/processing/DefaultProcessingLog.java\r\n\r\n**Feature
+  request**\r\nWould it be possible to update cruncher with the following changes:\r\n1)
+  allow users to parameterise cruncher to use \"verbose\" logging (i.e. log errors
+  DefaultProcessingLog)\r\n2) return the content of the ProcessingLog to the user
+  when the cruncher run completes."
+- "When supplying the input parameter file to a Cruncher run as documented at https://github.com/jdemetra/jwsacruncher/wiki#parameters-file,
+  the refresh policy must be specified:\r\n\r\n![image](https://github.com/user-attachments/assets/7f0546af-a2f8-4b4a-8120-a538393f4f88)\r\n\r\nHowever,
+  a refresh policy can also be specified for each individual series in its corresponding
+  workspace file. For example, in a multi-document containing a group of series, each
+  one can have its own revisions policy specified (via the GUI), such as the first
+  two series in the screen shot shown below:\r\n\r\n![image](https://github.com/user-attachments/assets/d3f7fb8e-6444-4707-af3c-c7b9f2d33769)\r\n\r\nGiven
+  this, what happens if one or more individual series has a policy that differs from
+  the single one provided in the Cruncher parameter file? (Does the Cruncher accept
+  per-series policies?)\r\n\r\nFor example, does the parameter file policy act as
+  a global policy that overrides any individual series, or conversely, is it ignored
+  if individual ones are specified? Are any policies redundant or ignored? How is
+  this situation handled? Can we specify different polices for different series in
+  the same Cruncher run over a group of series?\r\n"
+- "Regarding the entry for the unit root limit on this page: https://jdemetradocumentation.github.io/JDemetra-documentation/pages/reference-manual/modelling-spec-arima.html\r\n\r\n![image](https://github.com/user-attachments/assets/03153d3f-56d4-439a-83d5-fd363090fcb4)\r\n\r\nIn
+  the underlying XML workspace file, the corresponding data item is 'u**b**final',
+  not 'u**r**final':\r\n\r\n![image](https://github.com/user-attachments/assets/d6579bf8-b09d-4f20-9fab-fd4b07a89ca9)\r\n\r\nIs
+  this a mistake in the documentation on the page, or do separate options exist (that
+  is, 'ubfinal' and 'urfinal')?\r\n\r\nNote also the following that can be seen in
+  the Specifications (info) panel in the GUI:\r\n\r\n![image](https://github.com/user-attachments/assets/838db766-4696-4798-80a3-d1480b6a140c)\r\n\r\nAnd
+  finally, here is the description in the Specifications (editable) panel in the GUI:\r\n\r\n![image](https://github.com/user-attachments/assets/3d17731b-64a2-43f9-b35e-1504ca45f460)\r\n\r\nCould
+  the correct names and default values please be aligned in the code and documentation?\r\n\r\nSee
+  also: https://github.com/jdemetra/jdplus-main/issues/479"
+- "Some builds fail because the java distribution bundled in JD+ (temurin) has sometimes
+  some issues with the windows binaries.\r\nThe release process should be more robust
+  to handle this kind of event.\r\nAs an alternative, JD+ could also use Azul Zulu
+  instead of Adoptium Temurin.\r\n\r\nCurrent workaround: https://github.com/jdemetra/jdplus-main/commit/580dbd689428c4b379090f5209dcd01358275c76\r\n\r\nSome
+  explanation for the missing binaries : https://github.com/adoptium/adoptium-support/issues/994"
+- "Hey development team,\r\nI am trying to directly create a workspace for JDemetra
+  using its Java libraries (e.g. jdplus-sa-base-workspace). I want to add Variables
+  and userDefinedVariables.\r\nWhen creating the Variables using the JD GUI, the variables
+  show up in the XML file as dynamicTsVariable. One can add multiple of these to one
+  item under Utilities > Variables  and this shows as multiple variables in a single
+  vars xml file.\r\n\r\n![image](https://github.com/user-attachments/assets/94ada2c4-8b72-46b1-ab19-704952aeebcf)\r\n\r\nI
+  am trying to mimic this functionality using the addVariable function in the Ws class.\r\n\r\n![image](https://github.com/user-attachments/assets/80e8ca2d-c7f4-41d5-a6ff-a32f47dfaa8f)\r\n\r\n![image](https://github.com/user-attachments/assets/9b42a707-1b44-4e5a-bf3d-d8e15f7b5721)\r\n\r\n\r\nHowever,
+  this creates one variable per file. It also creates static variables (tsVariable)-
+  I can't see a way to create/add dynamic variables in the Ws class\r\n\r\n![image](https://github.com/user-attachments/assets/ea46922b-c23a-46f1-866b-7ef778841d8c)\r\n\r\n\r\nWould
+  you be able to guide me to better create Variables so that they all end up in one
+  Vars xml file (perhaps mimicking the GUI process)? And could you explain the difference
+  between static and dynamic variables?\r\n \r\nAdditionally would you be able to
+  guide me as to how to connect the Variables with the appropriate user defined variable
+  in each series? \r\nCurrently, I am adding a userDefinedVariable to the RegressionSpec
+  class, with the name matching that of the Variable in the appropriate Vars.xml file:\r\n
+  \r\n![image](https://github.com/user-attachments/assets/a7172063-c30a-4c54-a760-ac9460d192c2)\r\n
+  \r\nBut this is not producing valid workspace files and the JDemetra+ GUI doesn't
+  appear to acknowledge the reference to the correct Variable. "
+- "In the demetra_m.csv file, empty column names appear as in version 2. It would
+  be more useful to have a standard name for each column.\r\n![demetram_empty_columnames](https://github.com/user-attachments/assets/f08575e5-ed8a-40df-8ca8-99c4af149dd1)\r\n\r\n\r\n"
+- "user-defined calendar effect names do not appear in demetra-m.csv file.\r\n![calendar
+  effec_demetram](https://github.com/user-attachments/assets/267217bf-e37c-40bd-913e-324a5dc48d79)\r\n\r\n\r\n\r\n"
+- "In RJDemetra, we are able to specify additional parameters for prior corrections
+  as appropriate. For example, for level shifts (LSs), we can choose to have them
+  as being 'zero-ended' or 'one-ended'. Is this possible in the GUI? There is no option
+  in the relevant dialogue box for LSs, for example:\r\n\r\n![image](https://github.com/user-attachments/assets/4f411bb6-107e-44ea-aa6f-b16270a0a39b)\r\n\r\nSimilarly
+  for transitory changes (TCs) and seasonal outliers (SOs), how can we specify the
+  rate and period parameters, respectively?"
+- "Observe the truncated text in the General tab of the SA options window highlighted
+  in the screen shot below. Despite sufficient room for the text to be displayed in
+  full, it has been truncated. (Presumably, it should say 'Model stability'.)\r\n\r\n![image](https://github.com/user-attachments/assets/20dcec28-c637-4895-bd9b-5dc0c2f24c7d)\r\n"
+- "Is there documentation on all possible XML tags (that is, all seasonal adjustment
+  parameter settings as per the Specifications panel) that could possibly populate
+  a workspace file using the X13 algorithm?\r\n\r\nIf not, could we please request
+  such documentation, specifically doco that contains:\r\n- all possible XML tags/parameters
+  (along with very brief descriptions of each one)\r\n- default values for all tags/parameters
+  (along with very brief descriptions of the sets of allowable values)\r\n- which
+  classes/variables in the Java code correspond to which tags/parameters\r\n\r\nIt
+  is worth mentioning that we have struggled to map settings from our existing seasonal
+  adjustment package to JDemetra+ data items in the absence of such documentation,
+  both methodologically (first and second points above) and technologically (third
+  point above). \r\n\r\nThis has been exacerbated by parameters in the workspaces
+  not appearing in the files if they assume default values. That is, they are 'hidden'
+  from us, making it hard to understand the set of all possible parameter settings
+  that we could choose from; ideally, all tags would always be populated in each workspace
+  file regardless of value. We have also had to use a lot of educated guessing and
+  trial and error to understand the corresponding classes/variables in the Java code."
+- "According to the list of revisions policies for JDemetra+ at: https://github.com/jdemetra/jwsacruncher/wiki#parameters-file,
+  there are 8 of them:\r\n\r\n![image](https://github.com/user-attachments/assets/807fdf98-3a8f-4fe0-b9fd-c5e3dd3d2eb7)\r\n\r\nHowever,
+  at: https://jdemetradocumentation.github.io/JDemetra-documentation/pages/case-studies/revision.html,
+  there are only 7 listed in the table at the bottom of the page:\r\n\r\n![image](https://github.com/user-attachments/assets/8bc93eec-3b4f-4d54-a269-d731e1e47796)\r\n\r\nObserve
+  that the 'all outliers' policy is missing in the table above.\r\n\r\nNote further
+  that all eight appear in the left-hand navigation panel of the same site:\r\n\r\n![image](https://github.com/user-attachments/assets/31d6eaae-3682-4a8d-8833-50938d6d8dae)"
+- Is it possible to add a message (for example in the bottom right-hand corner of
+  the interface) when a worskpace is saved to inform the user that the WS has been
+  saved at its place or an error if it isn't the case ?
+- Better handling of user-defined calendar effects (output, gui)
+- "Improve the naming of coefficients/parameters in the spec boxes\r\nHide coefficients
+  when they can't be specified (undefined transformation)"
+- "When I try to add some series (txt files) in the Providers, by default there is
+  a data format `1,234.5` (representing the value 1234.5):\r\n\r\n![image](https://github.com/user-attachments/assets/77695364-1999-468a-a066-502e323fb45a)\r\n\r\nBut
+  how to change it with other formats as `1.234,5`.\r\nThere are a lot of different
+  format (for example described [here](https://docs.oracle.com/cd/E19455-01/806-0169/overview-9/index.html)).\r\n\r\nIs
+  it possible to specify a new format (like a new decimal separator, big or small
+  marks...)?\r\n\r\nFor example these two files ([temp7.csv](https://github.com/user-attachments/files/16765805/temp7.csv)
+  and [temp4.csv](https://github.com/user-attachments/files/16765806/temp4.csv)) failed
+  to be imported or to be read correctly:\r\n\r\n![image](https://github.com/user-attachments/assets/9c5e8522-416d-454b-8cef-9a301c5efc8e)\r\n\r\nAlso,
+  the delimiter of column offers currently 4 choices:\r\n![image](https://github.com/user-attachments/assets/1b488555-3f7c-41e4-9760-2d640dc0588d)\r\n\r\nIs
+  it possible to add more choices as the character `|` is sometimes used?\r\n\r\nAlso,
+  all these remarks are *cosmetic* in the sense that they don't prevent the java core
+  from running and can easily be re-typed in excel or R.\r\n\r\nThank you\r\n"
+- "The XML file underlying each workspace includes the following `bias` tag by default:\r\n\r\n![image](https://github.com/user-attachments/assets/7d0bda1a-030e-4078-a06a-5041d2ca9c1f)\r\n\r\nTwo
+  questions:\r\n\r\n- What is it? (What does it mean or do, and what values can it
+  take?)\r\n- Where can it be viewed, changed or set in the Specifications panel in
+  the GUI?"
+- "When I make changes to user-defined variables in the Variables document of my workspace,
+  certain changes such as inserting new ones or removing existing ones, will not be
+  saved. In one instance, when I click on 'Save Workspace', the underlying XML file
+  is not updated, and in another instance, I cannot even select 'Save Workspace' as
+  it is greyed-out. The only solution to save my changes appears to be selecting 'Save
+  Workspace As...' instead, which is highly undesirable.\r\n\r\n![image](https://github.com/user-attachments/assets/3ca10c7a-d5d3-4e7e-bc4e-df79a0121892)\r\n\r\nBelow
+  is an example video of not being able to insert a user-defined variable:\r\n\r\nhttps://github.com/user-attachments/assets/e449dea7-39b1-4cec-8575-fe7cc3c68260\r\n\r\nBelow
+  is an example video of not being able to remove a user-defined variable:\r\n\r\nhttps://github.com/user-attachments/assets/7bd8ad63-8a39-4d2a-b773-34bc0073d53b"
+- "A potential enhancement of the 'Excludeforecast' parameter is to separate it into
+  excluding forecasts and excluding backcasts individually, so that forecasts can
+  be excluded in the generation of extreme values whilst backcasts are not excluded,
+  or vice versa.\r\n\r\n![image](https://github.com/user-attachments/assets/54657db1-841d-4c2f-a573-03a29e40317d)\r\n\r\nNote
+  further that the name 'Excludeforecast' could be relabelled more appropriately since
+  it currently refers to excluding both forecasts and backcasts. If not implementing
+  the enhancement idea above, then perhaps 'ExcludeFcastBcast' is clearer? This would
+  also align better with the separation of forecasts vs backcasts elsewhere, such
+  as for forecast and backcast horizons:\r\n\r\n![image](https://github.com/user-attachments/assets/d5edd3b7-ca13-4f76-83f5-480e0e7ed970)"
+- "When a ws is created and saved in version 3, its name does not appear in the bar
+  provided.\r\nTo make it appear, close the ws then reopen it and the name will be
+  displayed correctly.\r\n\r\nHere is a small demo of what I did to get this bug:\r\n\r\nhttps://github.com/jdemetra/jdplus-main/assets/112711017/963115ec-a1ac-421f-b237-254ffa969cce\r\n\r\n"
+- "It seems to me that in the presence of multicollinearity JD+ will declare one regression
+  variable from each possible linear combination as being redundant and automatically
+  set the corresponding regression effects to zero. The latter are then reported in
+  a separate output table without any further explanation.\r\nI think many users would
+  appreciate an additional (warning) message that briefly states why those coefficients
+  have been fixed by the program."
+- "In v2, it was possible to drag&drop files to the ODBC provider in order to create
+  a connection string on the fly.\r\nIt was limited to MS Access files but could be
+  extended to any file type supported by an ODBC driver.\r\n\r\n![Screenshot 2024-06-27
+  084947](https://github.com/jdemetra/jdplus-main/assets/8778378/2d58f93c-07f3-4c1f-a21d-7f3240e0726f)\r\n"
+- "Is it intentional to have the buttons highlighted in the image below so small?
+  They are very hard to click since they are so small, and I suspect many users miss
+  seeing them because they are so small, especially in the latter image.\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/110582146/afccad96-d618-44bc-b3b0-358b3a0d186e)\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/110582146/d45838a5-af27-44f1-815e-f5f9d5e0d049)\r\n"
+- "Dear all, \r\n\r\nI noticed some trouble with the new output format: \r\nin version
+  2, the date was of format \"General\" in the output, however \r\nin version 3, the
+  date is changed to a real date of format type: \r\n1995-01-01T00:00:00/PM3, which
+  creates problems in our subsequent macros. \r\nIs there any special reason behind
+  this change or can/will it be switched back to a \"General\" format type? \r\n\r\nThank
+  you very much for letting me know, \r\nVéronique"
+- "When I rename a series in the legend of a chart and click on 'Restore', nothing
+  seems to happen. For example, in the image below, the initial names of the series
+  that I used to create the chart were both 'Seasonally adjusted'. I changed this
+  to 'SA (with auto-outliering)' and 'SA (without auto-outliering)'. When I then open
+  the Rename window again and click on 'Restore', the window closes and I detect no
+  changes anywhere:\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/110582146/43ffe512-f369-4912-a575-983b3e9d73c1)"
+- "Dear all, \r\nI noticed that if an SA-Processing is renamed, the new name is immediately
+  reflected in the SA-Processing window but not in the menu bar (only after closing
+  and reopening the Workspace). Would it be possible to fix this please? \r\n\r\nBest
+  greetings, \r\nVéronique"
+- "When I want to open an existing workspace with JDemetra+, I open the GUI then I
+  go to `File` --> `Open Workspace` --> then I search my `.xml` file.\r\n\r\nIs it
+  possible to open a workspace (from the `.xml` file) with the `Open with...` button?\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/d21266de-7b4a-4f68-a41a-0062a2bdbe7f)\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/e415e66d-aafd-42bd-a196-c425ddf94b1a)\r\n\r\nCurrently
+  this method doen't works.\r\n\r\nThank you!"
+- "Two problems with current implementation:\r\n- the notification doesn't show the
+  created file on Excel output\r\n![Screenshot 2024-06-14 133226](https://github.com/jdemetra/jdplus-main/assets/8778378/4664035b-69e5-4d18-a656-4f49a7104baa)\r\n![Screenshot
+  2024-06-14 133329](https://github.com/jdemetra/jdplus-main/assets/8778378/4934271b-0358-435b-9d5c-2aa2e88229e9)\r\n\r\n-
+  the folder parameter is not used if it doesn't exist; the default folder is used
+  instead\r\n![Screenshot 2024-06-14 133202](https://github.com/jdemetra/jdplus-main/assets/8778378/28cf1a7c-5c44-4fc0-9363-ce01e5fe1faf)\r\n"
+- "In the main panel of a SA-Item (**Main Results**), there are sometimes some missing
+  diagnostics in the **Residuals seasonality tests**.\r\n\r\nA classic series contains
+  4 items in the **Residuals seasonality tests** : two QS-Test and two F-test:\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/9dafb92b-3ed5-4d16-ae3d-b8e140ee1f88)\r\n\r\nBut
+  for some series, some items are missing:\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/b983dbee-0495-4805-b35b-def8250e6c00)\r\n\r\nIt
+  happened at Insee (but on confidential data) and I tried to reproduce it with a
+  test series (s4 in [temp.csv](https://github.com/user-attachments/files/15587012/temp.csv)).\r\n\r\nI
+  don't know if:\r\n- the tests are missing, \r\n- it's a bug\r\n- or just JDemetra+
+  can't compute and display nothing because the series contains some discrepancy or
+  is weird\r\n\r\nThe same problem also occurs in version 2. So I also raised an issue
+  in jdemetra/jdemetra-app (jdemetra/jdemetra-app#890)\r\n\r\nThank you!\r\n"
+- "It would be ideal to have the option available to view a jump discontinuity at
+  any level shift (trend break) when plotting the trend. In the image below, for example,
+  instead of the blue trend line continuing unbroken, there is a visual jump where
+  the level shift occurs in Q4 2001. This makes is easier and quicker for the user
+  to identify any level shifts in the series.\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/110582146/347f7f67-9830-4557-8bd4-792093d03f1f)"
+- "JD+ only supports dates (`2010-01-01`) as I/O for observation periods.\r\nOther
+  representations exists as well and could be integrated into a future release such
+  as:\r\n- standard reporting period (`2010-Q1`, `2012-M12`)\r\n- time range (`2010-01-01/P3M`,
+  `2012-12-01/P1M`)\r\n\r\nThese representations are already defined in the [SDMX
+  specification](https://sdmx.org/wp-content/uploads/SDMX_2-1_SECTION_6_TechnicalNotes.pdf).\r\nJD+
+  implementation should ensure that the solution doesn't break anything and stays
+  backward compatible."
+- "There are two potential improvements to SI charts in the JDemetra+ GUI:\r\n\r\n-
+  revealing X11 internal automatic corrections by simultaneously displaying modified
+  and unmodified SI ratios with lines joining them\r\n- (if not the above, or possibly
+  in addition to:) allowing the user to choose between displaying modified or unmodified
+  SI ratios (for example, as an option in global settings)\r\n\r\nBeing able to view
+  internal corrections assists the user in identifying periods that may require a
+  user-defined correction (such as an AO) that the internal automatic correction is
+  not treating adequately.\r\n\r\nBelow is an example of this feature. The hollow
+  circles are the unmodified SI ratios; the filled circles are the modified SI ratios;
+  and the dashed lines join modified-unmodified SI ratio pairs.\r\n\r\n![SIchart](https://github.com/jdemetra/jdplus-main/assets/110582146/db1182d8-e087-4b3c-b6cb-3d805782e189)"
+- "(Issue related to jdemetra/jdemetra-core#1129)\r\n\r\nIf the seasonnal adjustment
+  fails, I can't neither plot nor see my values.\r\n\r\nFor example here, I have a
+  dataset with 11 values so the seasonal adjustment will obviously fail:\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/818fc2b7-9885-4627-8edc-b11553b95cf4)\r\n\r\nSo
+  the **Status** is **invalid** (obviously), but as you can see there is no message,
+  warning or error in the **Main results** panel:\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/40f9b633-b7cc-4907-b8dc-66bc15cc8379)\r\n\r\nIn
+  addition to that, the Input/Series and Input/Specifications panels are also empty:\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/112711017/4a04a661-10ca-4cab-8814-6d4eb20c66d9)\r\n\r\nI
+  would like to see my data (grid and plot) and to know why the seasonal adjustment
+  failed.\r\n\r\n"
+- "when saving a WS no message when overwriting an existing ws \r\n\r\nwould be useful"
+- "warning message when starting 3.2.2\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/43274870/e4291603-3036-4f16-a1b5-a42dd360af11)\r\n\r\nDetails
+  \r\norg.netbeans.core.network.proxy.pac.PacParsingException: Cannot find secure
+  PAC script engine.\r\nAllowed engines: GraalVM:js,Graal.js,Nashorn\r\nFound engines:\r\nWill
+  not resolve proxy configuration.\r\nBrand ALLOWED_PAC_ENGINES key in org.netbeans.core.network.proxy.pac.impl.Bundle
+  to configure.\r\n\r\n\tat org.netbeans.core.network.proxy.pac.impl.NbPacScriptEvaluator.getScriptEngine(NbPacScriptEvaluator.java:286)\r\n\tat
+  org.netbeans.core.network.proxy.pac.impl.NbPacScriptEvaluator.<init>(NbPacScriptEvaluator.java:204)\r\n\tat
+  org.netbeans.core.network.proxy.pac.impl.NbPacScriptEvaluatorFactory.createPacScriptEvaluator(NbPacScriptEvaluatorFactory.java:45)\r\n[catch]
+  at org.netbeans.core.network.proxy.ProxyAutoConfig.initEngine(ProxyAutoConfig.java:114)\r\n\tat
+  org.netbeans.core.network.proxy.ProxyAutoConfig$1.run(ProxyAutoConfig.java:82)\r\n\tat
+  org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1420)\r\n\tat org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:45)\r\n\tat
+  org.openide.util.lookup.Lookups.executeWith(Lookups.java:287)\r\n\tat org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2035)\r\n"
+- "the new logo appears just in the top left corner of the open GUI but not in the
+  short cuts \r\n\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/43274870/d5c4ca0c-9d70-42ee-bd40-97a2714db224)\r\n"
+- See https://github.com/jdemetra/jdplus-main/blob/develop/jdplus-main-base/jdplus-toolkit-base-parent/jdplus-toolkit-base-api/src/main/java/jdplus/toolkit/base/api/timeseries/TimeSelector.java
+- "(Version: 3.2.2-SNAPSHOT)\r\n\r\n- A graph's display options can be modified via
+  the 'Configure...' context menu when right-clicking on it. This brings up a dialogue
+  box with an option to change the 'Color scheme'. However, the different colour options
+  are not presented as a user-friendly drop-down list. Instead, the user must somehow
+  know in advance what the options are and start typing letters to see the colour
+  options appear. (And if the 'wrong' letters are typed, then the options shown to
+  the viewer are limited.) There shouldn't be a need to type; the user should merely
+  just select one option from the list of all possible colour schemes.\r\n\r\n- Another
+  issue is that the name of the colour option changes once it is clicked on. For example,
+  when selecting 'Ice Cream Sandwich - Dark' (first image below), it changes to 'Android
+  - Dark' (second image below).\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/110582146/6f94b807-acce-4d5d-ab1c-9d0f8c02092b)\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/110582146/3e18e9e5-84ea-469f-886d-6fa8a8b40056)\r\n\r\n-
+  There is also no option for selecting the default colour scheme. (Admittedly, the
+  selection field is prepopulated with the text of the default colour scheme, but
+  this isn't explicit enough.)\r\n\r\n- Finally, it would be nice to allow the user
+  to single-click to select an option, rather than have to double-click. (For example,
+  when selecting the 'Line thickness' in the same dialogue box, only a single-click
+  is required.)"
+- "Current branding of JD+ is outdated and inconsistent.\r\n\r\nHere is a non-exhaustive
+  list of items to update and improve:\r\n1. icon, favicon and avatar (square shape,
+  logo only)\r\n2. splash screen, about dialog image and banner (rectangular shape,
+  landscape orientation, logo+text)\r\n3. short description (a few words)\r\n4. longer
+  description (a few sentences)\r\n5. URLs and domain name"
+- "The current import/export from/to CSV files has the following problems:\r\n- The
+  UI is inconsistent and confusing.\r\n- The code is redundant and all over the place."
+- "See https://openjdk.org/jeps/272\r\n\r\nMost [nbbrd desktop API](https://github.com/nbbrd/java-desktop-util/)
+  can be replaced by the latest JDK desktop API. \r\nThere are a few exceptions anyway:
+  search and kwown folders"
+- See https://openjdk.org/jeps/356
+- "The current Java version used by JD+ is Java 17.\r\nA new Java LTS has been released
+  and brings significant improvements in performance, language and libraries.\r\n\r\nSee
+  https://nipafx.dev/road-to-21-upgrade/"
+- It could be good to be able to change the decimal separator in the JWSACruncher
+  to avoid a system dependency. This is linked to https://github.com/jdemetra/jwsacruncher/issues/13.
+- "As our organization are moving towards XMLs, it is getting too time consuming to
+  adopt the XML files to the structure that JDEMETRA+ requries for input. \r\n\r\nHave
+  this very easy code snippet to do it, given you have pivoted it in a cetrain way,
+  but should be covered by someone who has far better knowledge. \r\n\r\nFor better
+  understanding, here is the function converting from a pivoted pandas dataframe to
+  xml\r\n\r\n```python\r\n\r\nimport pandas as pd\r\nimport xml.etree.cElementTree
+  as ET\r\nimport os\r\nfrom bs4 import BeautifulSoup\r\n\r\n\r\n\r\ndef DfToXml(data,\r\n
+  \           out : str,\r\n            outpath : str,\r\n            pstart : str,\r\n
+  \           ystart : str,\r\n            freq : str):\r\n    \"\"\"\r\n    Parameters:\r\n
+  \       data : A Pandas DataFrame you want to convert.\r\n        out : The name
+  of the outputfile and attribute name in tscollection.\r\n        outpath : Directory
+  you want to save the output-file.\r\n        pstart : The period (month, quarter)
+  you want the sa to start in the first year.\r\n        ystart : Startyear of the
+  series.\r\n        freq : Yearly frequency of the series. Quarterly is 4, monthly
+  is 12, etc..\r\n    Returns:\r\n        An XML-file in your specified directory.\r\n
+  \   \"\"\"\r\n    # Deletes the first column since its because in our data thats
+  a period-column\r\n    RawSeries2 = data.drop(data.columns[0], axis=1)\r\n    #
+  Start building xml\r\n    root = ET.Element(\"tsworkspace\",\r\n                      attrib={\"xmlns\":
+  \"eu/tstoolkit:core\",\r\n                              \"xmlns:xsd\": \"http://www.w3.org/2001/XMLSchema\",\r\n
+  \                             \"xmlns:xsi\": \"http://www.w3.org/2001/XMLSchema-instance\"})\r\n
+  \   timeseries = ET.SubElement(root, 'timeseries')\r\n    tscollection = ET.SubElement(timeseries,
+  \"tscollection\")\r\n    tscollection.set('name', out)\r\n    data = ET.SubElement(tscollection,
+  \"data\")\r\n\r\n    # Looping through colname and series\r\n    for (columnName,
+  columnData) in RawSeries2.items():\r\n        ts = ET.SubElement(data, \"ts\")\r\n
+  \       navn = columnName\r\n        ts.set('name', navn)\r\n        tsdata = ET.SubElement(ts,\r\n
+  \                              'tsdata',\r\n                               attrib={\"pstart\":
+  pstart,\r\n                                       \"ystart\": ystart,\r\n                                       \"freq\":
+  freq})\r\n        data2 = ET.SubElement(tsdata, \"data\")\r\n        verdier = columnData\r\n
+  \       verdier2 = verdier.to_string(index=False)\r\n        verdier3 = verdier2.replace(\"\\n\",
+  \" \")\r\n        data2.text = verdier3\r\n\r\n    xml_data = ET.tostring(root)\r\n
+  \   xml_data2 = BeautifulSoup(xml_data, \"xml\").prettify()\r\n    with open(f\"{outpath}/{out}.xml\",
+  'w') as f:\r\n        f.write(xml_data2)\r\n\r\n    #return print(xml_data2)\r\n
+  \   return print(f\"\"\"Pandas DataFrame has been converted to an XML and has \r\n
+  \   been saved at {outpath}/{out}.xml\"\"\")\r\n\r\n```\r\n\r\n"
+- "I tried the following parameters files an a workspace with data created by an Excel
+  file and it has no effect. Are the parameters `fullseriesname` and `refreshall`
+  suppose to work in the JWSACruncher? Am I doing something wrong?\r\n```\r\n<?xml
+  version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<wsaConfig bundle=\"10000\"
+  csvlayout=\"vtable\" csvseparator=\";\" ndecs=\"6\" fullseriesname=\"false\" rsltnamelevel=\"2\"
+  format=\"JD3\">\r\n    <policy>parameters</policy>\r\n    <refreshall>true</refreshall>\r\n
+  \   <matrix>\r\n        <item>period</item>\r\n        <item>log</item>\r\n    </matrix>\r\n
+  \   <tsmatrix>\r\n        <series>y</series>\r\n        <series>sa</series>\r\n
+  \   </tsmatrix>\r\n</wsaConfig>\r\n```\r\nAnd\r\n```\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"
+  standalone=\"yes\"?>\r\n<wsaConfig bundle=\"10000\" csvlayout=\"vtable\" csvseparator=\";\"
+  ndecs=\"6\" fullseriesname=\"true\" rsltnamelevel=\"2\" format=\"JD3\">\r\n    <policy>parameters</policy>\r\n
+  \   <refreshall>false</refreshall>\r\n    <matrix>\r\n        <item>period</item>\r\n
+  \       <item>log</item>\r\n    </matrix>\r\n    <tsmatrix>\r\n        <series>y</series>\r\n
+  \       <series>sa</series>\r\n    </tsmatrix>\r\n</wsaConfig>\r\n```\r\n"
+state:
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+url:
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/763
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/761
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/758
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/752
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/751
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/734
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/733
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/711
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/698
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/695
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/690
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/689
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/687
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/682
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/679
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/667
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/664
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/661
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/653
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/652
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/651
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/645
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/643
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/642
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/640
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/636
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/617
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/608
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/607
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/603
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/601
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/596
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/594
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/593
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/591
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/590
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/572
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/571
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/564
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/562
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/560
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/559
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/557
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/556
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/534
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/532
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/523
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/510
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/492
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/491
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/488
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/485
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/484
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/483
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/479
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/458
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/455
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/449
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/447
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/429
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/428
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/423
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/421
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/420
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/419
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/418
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/400
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/399
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/385
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/381
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/372
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/371
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/353
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/349
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/345
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/338
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/337
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/335
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/331
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/315
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/296
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/293
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/287
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/283
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/272
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/270
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/261
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/250
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/243
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/177
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/163
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/162
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/161
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/160
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/136
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/130
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/112
+html_url:
+- https://github.com/jdemetra/jdplus-main/issues/763
+- https://github.com/jdemetra/jdplus-main/issues/761
+- https://github.com/jdemetra/jdplus-main/issues/758
+- https://github.com/jdemetra/jdplus-main/issues/752
+- https://github.com/jdemetra/jdplus-main/issues/751
+- https://github.com/jdemetra/jdplus-main/issues/734
+- https://github.com/jdemetra/jdplus-main/issues/733
+- https://github.com/jdemetra/jdplus-main/issues/711
+- https://github.com/jdemetra/jdplus-main/issues/698
+- https://github.com/jdemetra/jdplus-main/issues/695
+- https://github.com/jdemetra/jdplus-main/issues/690
+- https://github.com/jdemetra/jdplus-main/issues/689
+- https://github.com/jdemetra/jdplus-main/issues/687
+- https://github.com/jdemetra/jdplus-main/issues/682
+- https://github.com/jdemetra/jdplus-main/issues/679
+- https://github.com/jdemetra/jdplus-main/issues/667
+- https://github.com/jdemetra/jdplus-main/issues/664
+- https://github.com/jdemetra/jdplus-main/issues/661
+- https://github.com/jdemetra/jdplus-main/issues/653
+- https://github.com/jdemetra/jdplus-main/issues/652
+- https://github.com/jdemetra/jdplus-main/issues/651
+- https://github.com/jdemetra/jdplus-main/issues/645
+- https://github.com/jdemetra/jdplus-main/issues/643
+- https://github.com/jdemetra/jdplus-main/issues/642
+- https://github.com/jdemetra/jdplus-main/issues/640
+- https://github.com/jdemetra/jdplus-main/issues/636
+- https://github.com/jdemetra/jdplus-main/issues/617
+- https://github.com/jdemetra/jdplus-main/issues/608
+- https://github.com/jdemetra/jdplus-main/issues/607
+- https://github.com/jdemetra/jdplus-main/issues/603
+- https://github.com/jdemetra/jdplus-main/issues/601
+- https://github.com/jdemetra/jdplus-main/issues/596
+- https://github.com/jdemetra/jdplus-main/issues/594
+- https://github.com/jdemetra/jdplus-main/issues/593
+- https://github.com/jdemetra/jdplus-main/issues/591
+- https://github.com/jdemetra/jdplus-main/issues/590
+- https://github.com/jdemetra/jdplus-main/issues/572
+- https://github.com/jdemetra/jdplus-main/issues/571
+- https://github.com/jdemetra/jdplus-main/issues/564
+- https://github.com/jdemetra/jdplus-main/issues/562
+- https://github.com/jdemetra/jdplus-main/issues/560
+- https://github.com/jdemetra/jdplus-main/issues/559
+- https://github.com/jdemetra/jdplus-main/issues/557
+- https://github.com/jdemetra/jdplus-main/issues/556
+- https://github.com/jdemetra/jdplus-main/issues/534
+- https://github.com/jdemetra/jdplus-main/issues/532
+- https://github.com/jdemetra/jdplus-main/issues/523
+- https://github.com/jdemetra/jdplus-main/issues/510
+- https://github.com/jdemetra/jdplus-main/issues/492
+- https://github.com/jdemetra/jdplus-main/issues/491
+- https://github.com/jdemetra/jdplus-main/issues/488
+- https://github.com/jdemetra/jdplus-main/issues/485
+- https://github.com/jdemetra/jdplus-main/issues/484
+- https://github.com/jdemetra/jdplus-main/issues/483
+- https://github.com/jdemetra/jdplus-main/issues/479
+- https://github.com/jdemetra/jdplus-main/issues/458
+- https://github.com/jdemetra/jdplus-main/issues/455
+- https://github.com/jdemetra/jdplus-main/issues/449
+- https://github.com/jdemetra/jdplus-main/issues/447
+- https://github.com/jdemetra/jdplus-main/issues/429
+- https://github.com/jdemetra/jdplus-main/issues/428
+- https://github.com/jdemetra/jdplus-main/issues/423
+- https://github.com/jdemetra/jdplus-main/issues/421
+- https://github.com/jdemetra/jdplus-main/issues/420
+- https://github.com/jdemetra/jdplus-main/issues/419
+- https://github.com/jdemetra/jdplus-main/issues/418
+- https://github.com/jdemetra/jdplus-main/issues/400
+- https://github.com/jdemetra/jdplus-main/issues/399
+- https://github.com/jdemetra/jdplus-main/issues/385
+- https://github.com/jdemetra/jdplus-main/issues/381
+- https://github.com/jdemetra/jdplus-main/issues/372
+- https://github.com/jdemetra/jdplus-main/issues/371
+- https://github.com/jdemetra/jdplus-main/issues/353
+- https://github.com/jdemetra/jdplus-main/issues/349
+- https://github.com/jdemetra/jdplus-main/issues/345
+- https://github.com/jdemetra/jdplus-main/issues/338
+- https://github.com/jdemetra/jdplus-main/issues/337
+- https://github.com/jdemetra/jdplus-main/issues/335
+- https://github.com/jdemetra/jdplus-main/issues/331
+- https://github.com/jdemetra/jdplus-main/issues/315
+- https://github.com/jdemetra/jdplus-main/issues/296
+- https://github.com/jdemetra/jdplus-main/issues/293
+- https://github.com/jdemetra/jdplus-main/issues/287
+- https://github.com/jdemetra/jdplus-main/issues/283
+- https://github.com/jdemetra/jdplus-main/issues/272
+- https://github.com/jdemetra/jdplus-main/issues/270
+- https://github.com/jdemetra/jdplus-main/issues/261
+- https://github.com/jdemetra/jdplus-main/issues/250
+- https://github.com/jdemetra/jdplus-main/issues/243
+- https://github.com/jdemetra/jdplus-main/issues/177
+- https://github.com/jdemetra/jdplus-main/issues/163
+- https://github.com/jdemetra/jdplus-main/issues/162
+- https://github.com/jdemetra/jdplus-main/issues/161
+- https://github.com/jdemetra/jdplus-main/issues/160
+- https://github.com/jdemetra/jdplus-main/issues/136
+- https://github.com/jdemetra/jdplus-main/issues/130
+- https://github.com/jdemetra/jdplus-main/issues/112
+milestone:
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- 3.6.0
+- .na.character
+- 3.6.0
+- .na.character
+- 3.6.0
+- 3.6.0
+- 3.6.0
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- 3.6.0
+- backlog
+- 3.6.0
+- 3.6.0
+- 3.6.0
+- backlog
+- 3.6.0
+- backlog
+- 3.6.0
+- 3.6.0
+- .na.character
+- .na.character
+- 3.6.0
+- .na.character
+- .na.character
+- .na.character
+- 3.6.0
+- 3.6.0
+- 3.6.0
+- .na.character
+- backlog
+- backlog
+- .na.character
+- backlog
+- .na.character
+- .na.character
+- 3.6.0
+- backlog
+- .na.character
+- .na.character
+- .na.character
+- 3.6.0
+- backlog
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- backlog
+- backlog
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- backlog
+- backlog
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- backlog
+- backlog
+- backlog
+- backlog
+- backlog
+- backlog
+- 3.6.0
+- backlog
+- backlog
+- backlog
+- backlog
+- backlog
+- .na.character
+- backlog
+- backlog
+- backlog
+- backlog
+- .na.character
+- .na.character
+- .na.character
+created_at:
+- 1.7606592e+09
+- 1.7604864e+09
+- 1.7604e+09
+- 1.7598816e+09
+- 1.7598816e+09
+- 1.7581536e+09
+- 1.7581536e+09
+- 1.7557344e+09
+- 1.7536608e+09
+- 1.7533152e+09
+- 1.7527104e+09
+- 1.7527104e+09
+- 1.752624e+09
+- 1.7523648e+09
+- 1.752192e+09
+- 1.750896e+09
+- 1.7508096e+09
+- 1.7502048e+09
+- 1.7489088e+09
+- 1.7489088e+09
+- 1.7489088e+09
+- 1.748304e+09
+- 1.748304e+09
+- 1.7482176e+09
+- 1.7482176e+09
+- 1.7482176e+09
+- 1.7464896e+09
+- 1.7455392e+09
+- 1.7453664e+09
+- 1.7453664e+09
+- 1.74528e+09
+- 1.7445888e+09
+- 1.7442432e+09
+- 1.7442432e+09
+- 1.7441568e+09
+- 1.743984e+09
+- 1.7430336e+09
+- 1.7430336e+09
+- 1.7424288e+09
+- 1.7423424e+09
+- 1.7423424e+09
+- 1.7421696e+09
+- 1.7419104e+09
+- 1.7419104e+09
+- 1.7397504e+09
+- 1.7394048e+09
+- 1.7386272e+09
+- 1.7363808e+09
+- 1.7330976e+09
+- 1.7328384e+09
+- 1.7328384e+09
+- 1.7325792e+09
+- 1.7324928e+09
+- 1.7324928e+09
+- 1.7315424e+09
+- 1.7293824e+09
+- 1.7292096e+09
+- 1.728432e+09
+- 1.728432e+09
+- 1.7267904e+09
+- 1.7267904e+09
+- 1.7260992e+09
+- 1.7260128e+09
+- 1.72584e+09
+- 1.7255808e+09
+- 1.7255808e+09
+- 1.7247168e+09
+- 1.724544e+09
+- 1.7230752e+09
+- 1.7224704e+09
+- 1.7201376e+09
+- 1.7201376e+09
+- 1.7194464e+09
+- 1.71936e+09
+- 1.7191872e+09
+- 1.7188416e+09
+- 1.7187552e+09
+- 1.7186688e+09
+- 1.7183232e+09
+- 1.7175456e+09
+- 1.7165088e+09
+- 1.716336e+09
+- 1.7156448e+09
+- 1.7149536e+09
+- 1.713744e+09
+- 1.713744e+09
+- 1.7121888e+09
+- 1.71072e+09
+- 1.7095104e+09
+- 1.702512e+09
+- 1.7000928e+09
+- 1.7000928e+09
+- 1.7000928e+09
+- 1.7000928e+09
+- 1.6983648e+09
+- 1.6969824e+09
+- 1.6962912e+09
+closed_at:
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+creator:
+- AQLT
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- a-s-russo
+- a-s-russo
+- Blassik
+- ChristianeHofer
+- ChristianeHofer
+- ChristianeHofer
+- a-s-russo
+- MichelleHedger
+- a-s-russo
+- MichelleHedger
+- a-s-russo
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- TanguyBarthelemy
+- a-s-russo
+- charphi
+- a-s-russo
+- a-s-russo
+- a-s-russo
+- charphi
+- TanguyBarthelemy
+- a-s-russo
+- MichelleHedger
+- a-s-russo
+- a-s-russo
+- a-s-russo
+- TanguyBarthelemy
+- Ciamman
+- TanguyBarthelemy
+- AQLT
+- TanguyBarthelemy
+- charphi
+- a-s-russo
+- a-s-russo
+- charphi
+- a-s-russo
+- a-s-russo
+- TanguyBarthelemy
+- TanguyBarthelemy
+- a-s-russo
+- bezdomniy
+- a-s-russo
+- a-s-russo
+- charphi
+- ashah12
+- MFatihTuzen
+- MFatihTuzen
+- a-s-russo
+- a-s-russo
+- a-s-russo
+- a-s-russo
+- TanguyBarthelemy
+- palatej
+- palatej
+- TanguyBarthelemy
+- a-s-russo
+- a-s-russo
+- a-s-russo
+- TanguyBarthelemy
+- webelk
+- charphi
+- a-s-russo
+- veroniqueelter
+- a-s-russo
+- veroniqueelter
+- TanguyBarthelemy
+- charphi
+- TanguyBarthelemy
+- a-s-russo
+- charphi
+- a-s-russo
+- TanguyBarthelemy
+- annasmyk
+- annasmyk
+- annasmyk
+- charphi
+- a-s-russo
+- charphi
+- charphi
+- charphi
+- charphi
+- charphi
+- AQLT
+- superjarle
+- AQLT
+assignee:
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- charphi
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- charphi
+- .na.character
+- charphi
+- charphi
+- charphi
+- charphi
+- palatej
+- charphi
+- palatej
+- palatej
+- .na.character
+- .na.character
+- palatej
+- palatej
+- .na.character
+- .na.character
+- charphi
+- charphi
+- palatej
+- .na.character
+- charphi
+- .na.character
+- Immurb
+- .na.character
+- .na.character
+- Immurb
+- Immurb
+- .na.character
+- annasmyk
+- charphi
+- .na.character
+- palatej
+- palatej
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- palatej
+- palatej
+- .na.character
+- .na.character
+- .na.character
+- ChristianeHofer
+- .na.character
+- palatej
+- charphi
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- palatej
+- .na.character
+- charphi
+- .na.character
+- palatej
+- .na.character
+- .na.character
+- charphi
+- charphi
+- charphi
+- charphi
+- charphi
+- charphi
+- charphi
+- charphi
+- JanGerhardt
+- palatej
+- .na.character
+state_reason:
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- reopened
+owner:
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+repo:
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+labels:
+- name: []
+  color: []
+- name: bug
+  color: '#d73a4a'
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: bug
+  color: '#d73a4a'
+- name: []
+  color: []
+- name: enhancement
+  color: '#a2eeef'
+- name: []
+  color: []
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: bug
+  color: '#d73a4a'
+- name: []
+  color: []
+- name: []
+  color: []
+- name: question
+  color: '#d876e3'
+- name: []
+  color: []
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
+- name: bug
+  color: '#d73a4a'
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: []
+  color: []
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
+- name: []
+  color: []
+- name: []
+  color: []
+- name: enhancement
+  color: '#a2eeef'
+- name:
+  - documentation
+  - enhancement
+  color:
+  - '#0075ca'
+  - '#a2eeef'
+- name: []
+  color: []
+- name: []
+  color: []
+- name: documentation
+  color: '#0075ca'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: documentation
+  color: '#0075ca'
+- name: enhancement
+  color: '#a2eeef'
+- name: question
+  color: '#d876e3'
+- name: []
+  color: []
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: documentation
+  color: '#0075ca'
+- name: enhancement
+  color: '#a2eeef'
+- name: question
+  color: '#d876e3'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: []
+  color: []
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
+- name: bug
+  color: '#d73a4a'
+- name: []
+  color: []
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name:
+  - enhancement
+  - question
+  color:
+  - '#a2eeef'
+  - '#d876e3'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
+- name: bug
+  color: '#d73a4a'
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: []
+  color: []
+- name: []
+  color: []
+- name: bug
+  color: '#d73a4a'
+comments:
+- text: []
+  author: []
+- text: |-
+    Just to add some additional information:
+
+    1. Still happens in the develop branch
+    2. Seems to duplicate only the last added items (last transfer) when the corresponding data file is reloaded
+    3. Only happens once, so if you reload the same data file multiple times only one set of duplicates is added
+    4. No new data is needed in the data file and it doesn't matter if you add any data files to the provider (Step 5 and 6)
+    5. Seems to be related to the events fired in InternalTsProvider (so not only xlsx shows this behaviour)
+  author: Immurb
+- text:
+  - It was changed after the release of 3.5.1 so you have to check on the development
+    branch.
+  - |-
+    Ok, I will try the new dev version! Thank you
+
+    Since the issue is still valid until a new release is made I leave this issue open.
+  author:
+  - Immurb
+  - TanguyBarthelemy
+- text: []
+  author: []
+- text:
+  - |-
+    Hi just to clarify, you mean the file representation of a workspace or do you mean the complete structure of JDemetra with SaItems, TsVariables, ModellingContext? Changing the latter would mean a total redesign of JDemetra, the former is just one implementation of WorkspaceRepository and can be replaced even while the JDemetra application is running.
+    A web API would be designed mostly from the ground up but in the end the data and statistical models still need to be provided by the user.
+
+    To Git: We commit the whole Workspace.
+  - |-
+    Hi everyone, the structure I’m proposing in my package is not meant to replace the existing workspace (its structure remains unchanged) but rather to provide something that can be extracted from it.
+    In practice, I extract the specifications from the workspace and store them in a JSON file. A workspace can also be rebuilt by merging the specifications and the data back together.
+
+    I’m implementing everything in R, but doing the same in Java would not be an issue. I also noticed that in JD+GUI (v2) there’s something similar, where specifications can be extracted into .cfgx files, but in my opinion JSON offers a more readable format.
+
+    <img width="557" height="670" alt="Image" src="https://github.com/user-attachments/assets/c9f70d9d-03bd-48fd-84ca-b77095842556" />
+
+    You can find more details about my project here: https://github.com/AlessandroPiovani/RJDProcessor/blob/main/RJDProcessor/doc/package_description/IPS964_AlessandroPiovani_v2.pdf [IPS964_AlessandroPiovani_v2.pdf](https://github.com/user-attachments/files/22871353/IPS964_AlessandroPiovani_v2.pdf)
+  - "Hi @AlessandroPiovani, \n\nTo import and export specification in R, you can use
+    the functions from {rjd3workspace} `x13_write_spec` and `x13_read_spec`.\n\n[Exporting
+    to `.cfgx` files](https://github.com/jdemetra/jdplus-main/issues/81) is obsolete,
+    and working with XML files is very convenient (both human-readable and machine-readable). "
+  - "Thank you @Immurb for your reply. Okay for Git, we're thinking about it at Insee
+    too.\n\nI don't want to totally overhaul JDemetra+ of course ^^. \n\nMy question
+    was more: \nGiven that we'll have to create a web API for JDemetra+, what's the
+    future for the WS structure and to what extent will we have to separate models,
+    data and output? "
+  - |-
+    Since the XML workspace (file representation) is in the jdplus-main-desktop part, I would expect it to be only relevant for the client software and stay relevant there.
+    The web API will have another representation for workspace, if it has one at all. But that depends mainly on the functions provided by the web API.
+  author:
+  - Immurb
+  - AlessandroPiovani
+  - TanguyBarthelemy
+  - TanguyBarthelemy
+  - Immurb
+- text: []
+  author: []
+- text:
+  - "Hi Tanguy,\n\nThere was a bug in 3.5.0 related  to the domainSpec/estimationSpec
+    (see #639).\nYou can now change the domainSpec without changing the estimationSpec
+    (and of course the opposite). By design, a change of the domainSpec is not applied
+    on the estimationSpec, but you have a command to do it. \nI hesitated to apply
+    it automatically, for instance because we don't always want to change immediately
+    the model. So, I kept the most flexible solution. But we can modify that behaviour
+    in different ways (applying it always, applying it in new processing...). \nTo
+    be discussed..."
+  - |-
+    OK thanks Jean.
+    What is the command to apply the `domainSpec` on the `estimationSpec`?
+
+    I thought it was the **refresh** operation but it's disabled for WS newly created.
+  - |-
+    It is only available in 3.5.2 (dev).
+    See below
+
+    <img width="359" height="383" alt="Image" src="https://github.com/user-attachments/assets/bcb74596-d93f-4e3a-b462-1481f92427c3" />
+  - Ok thanks !
+  author:
+  - palatej
+  - TanguyBarthelemy
+  - palatej
+  - TanguyBarthelemy
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - 'Thanks for this @Blassik. Yes, we would like the `demetra_m` file issue fixed,
+    but to be clear, we would also like to know if there is an issue with calculating
+    variances regarding `diagnostics.fcast-outsample-variance`, similar to the out-of-bounds
+    exception that was identified as the cause of the bug we raised in: https://github.com/jdemetra/jdplus-main/issues/368'
+  - "@Blassik : Thanks a lot for informing us of the problem. Could you send the series
+    that generated it (if necessary, make a workspace that contains the series + spec
+    + additional information and put it in a zip file);  I will take a look. \nAnyway,
+    I will adapt the formatter to avoid that kind of problem."
+  - "Hi @palatej \nHere's a zip that you can use to reproduce the issue. I've included
+    a parameters file and minimised that and the SaProcessing file as much as possible\n\n[Infinity-series.zip](https://github.com/user-attachments/files/21461982/Infinity-series.zip)"
+  - "Thank you for the series. \nThe problem is clearer now: the series is short and
+    deterministic. Normally, the processing is stopped by some preliminary checks
+    in that case, because it generates numerous numerical issues. However, you deactivated
+    those tests (be careful in that case).\nI will introduce some additional tests
+    to avoid as much as possible the computation of  meaningless diagnostics (for
+    instance when the standard deviation of some regression is 0, which was the case
+    in the out-of-sample diagnostics used in your example).\nAnyway, as mentioned
+    above, I will check for NaN in the output."
+  author:
+  - a-s-russo
+  - palatej
+  - Blassik
+  - palatej
+- text:
+  - |-
+    It may be linked to  #639. But in reverse.
+    I think you need to refresh your model to apply your domainSpec to your series.
+  - Ok. I just corrected it.
+  author:
+  - TanguyBarthelemy
+  - palatej
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - "usually when a residual seasonality (or trading days) test doesn't appear it
+    is because it couldn't be computed, for example too small irregular..@palatej
+    is working on more explicit labeling\nI would say most recent 10 years "
+  - Thanks for the explanation @annasmyk and for working on the labelling @palatej.
+  author:
+  - annasmyk
+  - MichelleHedger
+- text: []
+  author: []
+- text: 'will be improved in R '
+  author: annasmyk
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - |-
+    I don't see any benefits in making the specific items less specific, or do you have a use case in mind?
+
+    I think adding a function to the R Package could be beneficial, is it not easily accessible at the moment?
+
+    P.S. We at the Bundesbank use the metadata in v2 at the moment for a lot of plugin specific information e.g. in the CompRes plugin for specifying where to find old factors, and plan to use them again.
+  - |
+    I don't want the items to be less specific but just put them in the metadata section, where they'll maybe fit better (keeping there item names).
+
+    It's more a question / general comment than a suggestion.
+  - |-
+    I have two comments on the metadata
+    - The metadata are probably underused for the time  being. The use case of the Bundesbank is surely a good example of what we could do.  Adding functions to manage them in R is surely a good idea. You can indeed put what you want in metadata. However, we should avoid putting information available elsewhere: quality, priority, policy are already defined in SaItem (ensuring coherence could become complex)
+    - I am not convinced by the use of the metadata to specify the refreshing policy. Refreshing policies are linked to different steps in the production chain: for instance, we refresh everything once every two years and we just refresh a few information (parameters, coefficients...) every month; that doesn't depend on the series. Series with different lifetime should be grouped in different workspaces. But of course, you a free to develop your personal approach...
+  - |-
+    > However, we should avoid putting information available elsewhere: quality, priority, policy are already defined in SaItem (ensuring coherence could become complex)
+
+    I wasn't thinking of copying the information but rather of moving it into metadata.
+  author:
+  - Immurb
+  - TanguyBarthelemy
+  - palatej
+  - TanguyBarthelemy
+- text:
+  - "The version of the JDK you are using might be outdated.\nTry with a newer version
+    of JDK. "
+  - |
+    Hi @charphi , thank you
+
+    How can I specify a new Java installation? Do I have to updat my env var on Windows (`PATH` or `JDK_HOME`)?
+  - |
+    I corrected my mvn and Java version. See:
+
+    ```
+    > mvn --version
+
+    WARNING: A restricted method in java.lang.System has been called
+    WARNING: java.lang.System::load has been called by org.fusesource.jansi.internal.JansiLoader in an unnamed module (file:/C:/Users/UTZK0M/Software/apache-maven-3.9.9/lib/jansi-2.4.1.jar)
+    WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+    WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+    Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
+    Maven home: C:\Users\UTZK0M\Software\apache-maven-3.9.9
+    Java version: 24.0.1, vendor: Oracle Corporation, runtime: C:\Users\UTZK0M\Software\Java\Java24\jdk-24.0.1
+    Default locale: fr_FR, platform encoding: UTF-8
+    OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
+    ```
+
+    But I still get an error:
+
+    ```
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD FAILURE
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Total time:  12:35 min
+    [INFO] Finished at: 2025-05-28T09:20:40+02:00
+    [INFO] ------------------------------------------------------------------------
+    [ERROR] Failed to execute goal on project jdplus-toolkit-desktop-plugin: Could not collect dependencies for project eu.europa.ec.joinup.sat:jdplus-toolkit-desktop-plugin:nbm:3.5.1-SNAPSHOT
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-netbeans-api-annotations-common:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-netbeans-api-annotations-common:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-netbeans-api-annotations-common:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-modules:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-modules:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-modules:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-netbeans-modules-settings:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-netbeans-modules-settings:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-netbeans-modules-settings:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-util-lookup:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-util-lookup:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-util-lookup:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-util:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-util:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-util:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-util-ui:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-util-ui:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-util-ui:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-nodes:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-nodes:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-nodes:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-windows:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-windows:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-windows:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-loaders:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-loaders:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-loaders:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-awt:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-awt:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-awt:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-dialogs:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-dialogs:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-dialogs:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-explorer:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-explorer:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-explorer:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-netbeans-api-progress:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-netbeans-api-progress:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-netbeans-api-progress:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-filesystems-nb:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-filesystems-nb:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-filesystems-nb:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-netbeans-modules-options-api:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-netbeans-modules-options-api:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-netbeans-modules-options-api:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-openide-actions:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-openide-actions:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-openide-actions:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-netbeans-swing-outline:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-netbeans-swing-outline:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-netbeans-swing-outline:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for org.netbeans.api:org-netbeans-core-multiview:jar:RELEASE260
+    [ERROR]         Caused by: The following artifacts could not be resolved: org.netbeans.api:org-netbeans-core-multiview:pom:RELEASE260 (absent): Could not transfer artifact org.netbeans.api:org-netbeans-core-multiview:pom:RELEASE260 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR] Failed to read artifact descriptor for com.miglayout:miglayout-swing:jar:11.4.2
+    [ERROR]         Caused by: The following artifacts could not be resolved: com.miglayout:miglayout-swing:pom:11.4.2 (absent): Could not transfer artifact com.miglayout:miglayout-swing:pom:11.4.2 from/to central (https://repo.maven.apache.org/maven2): Permission denied: getsockopt
+    [ERROR]
+    [ERROR] -> [Help 1]
+    [ERROR]
+    [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+    [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+    [ERROR]
+    [ERROR] For more information about the errors and possible solutions, please read the following articles:
+    [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+    [ERROR]
+    [ERROR] After correcting the problems, you can resume the build with the command
+    [ERROR]   mvn <args> -rf :jdplus-toolkit-desktop-plugin
+    ```
+
+
+    Here is my full log: [log.txt](https://github.com/user-attachments/files/20478114/log.txt)
+  - The error you have now means you cannot download some dependencies from Maven
+    Central.
+  author:
+  - charphi
+  - TanguyBarthelemy
+  - TanguyBarthelemy
+  - charphi
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - |
+    Hi Anthony,
+
+    I use it to come back from a zoom ...
+    (it might have other purposes as well, though ;-)
+
+    Anna
+  - |-
+    Thanks @annasmyk for the tip. That's the one thing I didn't try! Indeed, it can be used to zoom back out.
+
+    (Perhaps the button could be disabled in the right-click context menu when already zoomed out to make this clearer, or it could be labelled as 'Zoom out' instead.)
+  - we should call it "reset zoom"
+  author:
+  - annasmyk
+  - a-s-russo
+  - annasmyk
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - "Thank you for your detailed explanation.\nThe current behavior is \"by design\".
+    So it's not an actual bug. However, it can be misleading and I will change a few
+    details and/or add messages if need be.\n\nSome explanations:\n1. There is no
+    connection between the SA specification and the user-defined regression variables
+    (including calendars). If you change those variables (name or content), the SA
+    processing is not modified (too complex and error-prone, with many side effects).
+    I will not change that choice.\n2. JD+ often uses caching. The results of each
+    SA processing is cached in a multi-document. If you re-run the multi-processing,
+    any series already processed will be skipped. Suppose that you just add one series,
+    it could be expensive to re-process all the other series. Of course, if you change
+    something in a spec, the corresponding item will be re-computed. \n \nI see two
+    simple solutions: either to provide a function to clear any series already processed
+    (so, you will be able to re-compute them) or to force re-processing. The first
+    one is more flexible (you could change other things before processing), but it
+    needs two actions to recompute everything. Of course, we can provide both solutions.\n\nAn
+    additional tool that could be useful: providing the list of the SA items that
+    use a given user-defined variable or calendar. Much more complex and not for the
+    short term.\n"
+  - 'Another remark (related to a previous issue): information on missing regression
+    variables explaining why a series can''t be processed will be provided in the
+    next release, with other error messages'
+  - 'I put a (very partial) solution in the version in dev : you can now reset the
+    processing of selected SA items (and of course apply the "run" button or the start
+    menu item to re-compute the processing. So, you don''t need to modify an option
+    to see the impact of the renaming or of changes in your variables. So, it will
+    be available in 3.4.1 (coming soon)'
+  - |-
+    Hi @palatej. Thanks for your prompt reply and helpful explanations. We appreciate the situation better now.
+
+    We can see merits to both of your simple solutions. Admittedly, we have set up our new system to only use a single series per multi-document (for various reasons too complex to explain here), and so for us, option two (force reprocessing) is preferable because it will not be too resource-intensive in our situation. However, your first simple solution (clear already processed series) is also reasonable and we appreciate the use cases for it.
+
+    The best solution (for us), and arguably from a user experience perspective, is your long-term solution in which a list of SA items that use a given user-defined variable is provided, and better yet, is used automatically to reprocess those series.
+
+    In the meantime, your (very partial) solution in the version in dev should suffice in the short-term.
+
+    However, your solutions above we think will still not address the related issue in: https://github.com/jdemetra/jdplus-main/issues/385. Is it possible to have that issue fixed as well so that any changes to Variables documents (that do not correspond to changes in the SAProcessing file) can be saved in isolation?
+
+    Regarding the inclusion of information on missing regression variables and other error messages, we very much look forward to this new feature.
+  - 'I skipped #385. I see the problem. It will be corrected in the next release (3.4.1)'
+  - 'Thanks @palatej. Please also note new bugs we discovered yesterday that may be
+    related to the above, as raised in: #591 and #592.'
+  - Ok. I see the problem. To be noted that the name of a group of variables is not
+    necessary the name of the corresponding file (names are not always valid file
+    names, especially if we consider different platforms). An old choice that generates
+    many questions...
+  - |-
+    Thanks again for implementing a solution to this issue @palatej. The below is just a suggestion for your consideration:
+
+    Perhaps instead of 'Start' and 'Re-run', the labels 'Process new series' and 'Process all series' might be clearer regarding their functions:
+
+    ![Image](https://github.com/user-attachments/assets/c4c8cc64-13bb-4c05-9f40-8877b7286f1b)
+  author:
+  - palatej
+  - palatej
+  - palatej
+  - a-s-russo
+  - palatej
+  - a-s-russo
+  - palatej
+  - a-s-russo
+- text: []
+  author: []
+- text:
+  - |-
+    Part of the missing items will be added in 3.4.1 (variance decomposition,  forecasts, backcasts...)
+    The rest in 3.5.0
+  - 'Need testing : be sure that every item is available in latest version.'
+  - |
+    I [just tested](https://github.com/rjdverse/rjd3x13/issues/74#issuecomment-3167335818), these items are missing in the dictionnary of the current version of JDemetra+:
+
+    - `cal_f`
+    - `decomposition.s_cmp_f`
+    - `decomposition.sa_cmp_f`
+    - `decomposition.si_cmp`
+    - `decomposition.t_cmp_f`
+    - `regression.description`
+    - `regression.out(*)`
+    - `regression.type`
+    - `y_f`
+  author:
+  - palatej
+  - TanguyBarthelemy
+  - TanguyBarthelemy
+- text:
+  - |-
+    Hi could you be more specific and maybe provide an example?
+    Where are you looking for the model?
+    Are you using multi-documents or just documents under seasonal adjustment?
+    Was it working in an older 3.X version?
+  - "I am using multi-documents and I do not know if it worked in an older 3.X version.\r\n\r\nIn
+    the attached file, you will find the example you asked for.\r\n\r\nFigure 1 (node
+    \"Main results\"): the Seats model is not reported.\r\n\r\nFigure 2 (node \"Pre-processing
+    -> Arima\"): only the model identified in Tramo is reported (versions 2.x.x. reported
+    the same information for the model used by Seats).    \r\n\r\nFigure 3 (node \"Decomposition\"):
+    The model used for the decomposition (reported in the section \"Model\") is not
+    reported in the form (P,D,Q)(BP,BD,BQ). In the example, the model (orders and
+    coefficients) can be deduced quite easily, but more complex models could take
+    experience and time.\r\n\r\n   \r\n\r\n----- Messaggio originale -----\r\nDa:
+    \"Thomas Witthohn\" ***@***.***>\r\nA: \"jdemetra/jdplus-main\" ***@***.***>\r\nCc:
+    \"Anna Ciammola\" ***@***.***>, \"Author\" ***@***.***>\r\nInviato: Mercoledì,
+    19 marzo 2025 13:25:32\r\nOggetto: Re: [jdemetra/jdplus-main] Model changed by
+    Seats - output (Issue #562)\r\n\r\nImmurb left a comment (jdemetra/jdplus-main#562)\r\n\r\nHi
+    could you be more specific and maybe provide an example?\r\nWhere are you looking
+    for the model?\r\nAre you using multi-documents or just documents under seasonal
+    adjustment?\r\nWas it working in an older 3.X version?\r\n\r\n-- \r\nReply to
+    this email directly or view it on GitHub:\r\n https://urlsand.esvalabs.com/?u=https%3A%2F%2Fgithub.com%2Fjdemetra%2Fjdplus-main%2Fissues%2F562%23issuecomment-2736451942&e=2637b01d&h=841c7250&f=y&p=y
+    \r\nYou are receiving this because you authored the thread.\r\n\r\nMessage ID:
+    ***@***.***>"
+  - "Hello ! The problem is slightly more complex: with some parameters (\"noisy\"),
+    the model modified by SEATS is not a usual SARIMA model any more. More exactly,
+    the moving average part is more complex and can't be expressed with Q, BQ and
+    the corresponding coefficients.\nSo, the solution would be to mention if the modified
+    model is still a SARIMA and then only, to provide the usual information.\nI don't
+    know if that's really useful and what would be the actual added value (the algorithms
+    used for the canonical decomposition just use generic ARIMA models) "
+  - "Hello!\r\n\r\nI will describe what happened with JDemetra+ 2.x.x.\r\n\r\nWhen
+    Tramo model was not decomposed by Seats, one of the approaches used in the production
+    of OFFICIAL seasonally adjusted data was based on the manual identification of
+    a decomposable model (sometimes the model used by Seats was initially imposed
+    and then improved).\r\n\r\nWith the partial concurrent approach a decomposable
+    model was preferred for two reasons:\r\n1) forecasts of unadjusted series (in
+    Tramo) and forecasts of components (in Seats) were consistent;\r\n2) we were 100%
+    sure that seasonally adjusted data were generated through the same model.\r\n\r\nTo
+    corroborate item 2): let us think of a time series whose model M1 does not admit
+    a decomposition. M1 is then \"approximated\" with a different model M2. Adding
+    a new observation, M1 coefficients change and now M1 admits a decomposition. This
+    can generate large revisions (or larger than usual).\r\n\r\nHave the previous
+    issues been overcome with the new JD+ 3.x.x.?\r\nIf yes, my previous request can
+    be easily ignored.\r\n   \r\n     \r\n\r\n----- Messaggio originale -----\r\nDa:
+    \"Jean Palate\" ***@***.***>\r\nA: \"jdemetra/jdplus-main\" ***@***.***>\r\nCc:
+    \"Anna Ciammola\" ***@***.***>, \"Author\" ***@***.***>\r\nInviato: Giovedì, 20
+    marzo 2025 17:14:19\r\nOggetto: Re: [jdemetra/jdplus-main] Model changed by Seats
+    - output (Issue #562)\r\n\r\npalatej left a comment (jdemetra/jdplus-main#562)\r\n\r\nHello
+    ! The problem is slightly more complex: with some parameters (\"noisy\"), the
+    model modified by SEATS is not a usual SARIMA model any more. More exactly, the
+    moving average part is more complex and can't be expressed with Q, BQ and the
+    corresponding coefficients.\r\nSo, the solution would be to mention if the modified
+    model is still a SARIMA and then only, to provide the usual information.\r\nI
+    don't know if that's really useful and what would be the actual added value (the
+    algorithms used for the canonical decomposition just use generic ARIMA models)
+    \r\n\r\n-- \r\nReply to this email directly or view it on GitHub:\r\n https://urlsand.esvalabs.com/?u=https%3A%2F%2Fgithub.com%2Fjdemetra%2Fjdplus-main%2Fissues%2F562%23issuecomment-2740995244&e=2637b01d&h=5eb7ac3b&f=y&p=y
+    \r\nYou are receiving this because you authored the thread.\r\n\r\nMessage ID:
+    ***@***.***>\r\n"
+  author:
+  - Immurb
+  - Ciamman
+  - palatej
+  - Ciamman
+- text: []
+  author: []
+- text: []
+  author: []
+- text: |-
+    Just FYI in case it's been overlooked:
+
+    As per: https://github.com/jdemetra/jdplus-main/issues/492, this issue should have a label of `documentation`.
+  author: a-s-russo
+- text:
+  - |-
+    NetBeans dependency (command line processing API):
+    ```xml
+    <dependency>
+        <groupId>org.netbeans.api</groupId>
+        <artifactId>org-netbeans-modules-sendopts</artifactId>
+    </dependency>
+    ```
+
+    Some explanation:
+    https://stackoverflow.com/a/30507160
+  - |-
+    Prototype:
+    ```java
+    public final class VersionArgsProcessor implements ArgsProcessor {
+
+        @Arg(shortName = 'v', longName="version", defaultValue = "")
+        @Description(shortDescription="#DESC_StartJavaLanguageServer")
+        @NbBundle.Messages("DESC_StartJavaLanguageServer=Starts the Java Language Server")
+        public String[] myVersion;
+
+        @Override
+        public void process(Env env) throws CommandException {
+            Stream.of(getVersion()).forEach(env.getOutputStream()::println);
+        }
+
+        private static String[] getVersion() {
+            SystemProperties sys = SystemProperties.DEFAULT;
+            return new String[]{
+                    "About.getName()" + " " + "About.getVersion()",
+                    "JVM: " + sys.getJavaVersion() + " (" + sys.getJavaVendor() + " " + sys.getJavaVmName() + " " + sys.getJavaVmVersion() + ")",
+                    "OS: " + sys.getOsName() + " " + sys.getOsVersion() + " " + sys.getOsArch()
+            };
+        }
+    }
+    ```
+  - 'Some doc: https://netbeans.apache.org/wiki/main/wiki/HowToParseTheCommandLine/'
+  author:
+  - charphi
+  - charphi
+  - charphi
+- text:
+  - "For the time being, 'Quality' = 'Undefined' is indeed the only solution.\nIt
+    is of course not sufficient. I am currently working on something more complete
+    to show and explain why the seasonal adjustment didn't succeed. For version 3.5
+    (June if possible). "
+  - Thanks @palatej. That'd be great to have something more complete.
+  author:
+  - palatej
+  - a-s-russo
+- text:
+  - Could you provide a sample file ?
+  - |-
+    Hi @charphi. Please find attached below the file I've been using (created/edited using LibreOffice):
+
+    [short_series.xlsx](https://github.com/user-attachments/files/19275604/short_series.xlsx)
+  author:
+  - charphi
+  - a-s-russo
+- text: 'You may wish to escape command parameters, at least on windows: if there
+    are commas (,) in the parameters, powershell will wrongly interpret the inputs.
+    Putting the source, flow and keys between double quotes fix that. I haven''t tested
+    on other OS.'
+  author: CyLuGh
+- text: []
+  author: []
+- text:
+  - "I did some testing in an attempt to figure out valid v3 keys for the parameter
+    file. I've attached a spreadsheet with my findings in case they're of use to anyone
+    else before the v3 output dictionary is produced.\r\n\r\n[v3ParameterFileTesting.xlsx](https://github.com/user-attachments/files/18030824/v3ParameterFileTesting.xlsx)\r\n\r\nNote
+    that I only tested with one set of series, so it's likely that some of the keys
+    that didn't work for me (e.g. trading day keys, backcasts) do actually work but
+    weren't relevant for my series.\r\n\r\nThe keys I tested came from:\r\n- the default
+    parameter file generated by cruncher when it's run without a parameter file\r\n-
+    the v2 output dictionary\r\n- the v3 cruncher and RJDemetra columns from the spreadsheet
+    in this ticket https://github.com/jdemetra/jdplus-main/issues/394\r\n\r\nThe **Worked**
+    column shows keys that I confirmed can produce output- for <matrix> keys, they
+    produced output in the relevant column in the demetra_m.csv file, and for <series>
+    keys, they produced a csv file which contained output. The column is in alphabetical
+    order and I haven't specified where I found each key.\r\n\r\nThe other columns
+    show keys that didn't work and where I got them from. I removed a few keys which
+    didn't work that were obviously renamed between v2 and v3. For example arima.th
+    became arima.theta, and the a/b/c/d/e were moved under a different parent, so
+    I didn't include them in the v2 column. \r\n\r\nAlso, there are a couple items
+    in red on the first sheet- these ones didn't even produce a column header in demetra_m.
+    That surprised me, because putting in random text still produces a column header.
+    This may be a bug?"
+  - "Just a short comment on the red items: They are \"array\" types. They only create
+    column if there is at least 1 entry for them. For example, if there are trading
+    days it outputs regression.td(1), regression.td(2) and so on.\r\n\r\nWe will add
+    an option to the cruncher to output the used dictionary with classes and descriptions.
+    It is pretty much the parameters written in the default params file with some
+    extra information.  "
+  author:
+  - Blassik
+  - Immurb
+- text: []
+  author: []
+- text: []
+  author: []
+- text: "The short answer is yes.\r\n\r\nYou can see how it is decided at https://github.com/jdemetra/jdplus-main/blob/69be4a2cf5cd761b952f20a61db8edbf2dd49ee2/jdplus-main-cli/jdplus-main-cli-bin/src/main/java/jdplus/cruncher/WsaConfig.java#L166-L183\r\n\r\nInternally
+    series have another output processor than the other information.\r\nWe are thinking
+    about creating a new parameter file for the cruncher (without breaking the old
+    one). Then the users don't have to make the separation because the program will
+    be able to make it."
+  author: Immurb
+- text: []
+  author: []
+- text:
+  - "To apply a series by series policies you have to do it in the GUI \r\n\r\n- policy
+    field is just information, and has no \"value\" on what will be done next\r\n\r\n-
+    the cruncher will always apply a unique policy to the whole WS and override everything
+    \r\n\r\n- if you use `rjd3workspace::.jsap_refresh` you can apply it SAP by SAP "
+  - "Thanks @annasmyk for your reply. That's helped to clarify the situation for us.\r\n\r\nWe
+    will integrate Cruncher into our system as best we can given what you have explained.
+    We might suggest to you though a possible feature to be included into a future
+    version of JDemetra+ whereby the policy field is respected to avoid having a blanket
+    policy being applied to each series by the parameter input file. We'd find it
+    more convenient if JD+ worked that way.\r\n\r\n(Also just a friendly note to say
+    that we are not using the R interface at all.)\r\n\r\nThanks again for your response."
+  author:
+  - annasmyk
+  - a-s-russo
+- text: []
+  author: []
+- text: "The Java version used to select the bundled distribution is updated by a
+    GitHub workflow that generates a PR.\nUnfortunately, this workflow is not capable
+    of triggering regular checks to prevent the problem described above.\n\nSee: https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#triggering-further-workflow-runs "
+  author: charphi
+- text:
+  - "Regarding the difference between static and dynamic variables, there is a short
+    explanation at: https://jdemetra-new-documentation.netlify.app/a-outlier-detection#generating-external-regressors:\r\n\r\n![image](https://github.com/user-attachments/assets/e81e1d62-d6b6-4e8b-9f98-5c7055f9af97)"
+  - "Maybe this implementation can help for creating DynamicVariables:\r\nhttps://github.com/jdemetra/jdplus-main/blob/69be4a2cf5cd761b952f20a61db8edbf2dd49ee2/jdplus-main-desktop/jdplus-toolkit-desktop-plugin/src/main/java/jdplus/toolkit/desktop/plugin/ui/variables/JTsVariableList.java#L209-L221\r\n\r\nThe
+    class as a whole is more or less the GUI implementation of Variables.\r\n\r\nYou
+    have to create a TsMoniker to use dynamic variables. For that you can look into
+    the providers for example [ jdplus-main-base/jdplus-spreadsheet-base-parent/jdplus-spreadsheet-base-api/src/main/java/jdplus/spreadsheet/base/api/SpreadSheetProvider.java](https://github.com/jdemetra/jdplus-main/blob/69be4a2cf5cd761b952f20a61db8edbf2dd49ee2/jdplus-main-base/jdplus-spreadsheet-base-parent/jdplus-spreadsheet-base-api/src/main/java/jdplus/spreadsheet/base/api/SpreadSheetProvider.java)"
+  author:
+  - a-s-russo
+  - Immurb
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - Just downloaded the latest standalone version and this doesn't happen to me.
+  - "Here is the version we're using in which the problem occurs:\r\n\r\n**Product
+    Version:** v3.2.4\r\n**Java:** 17.0.12; OpenJDK 64-Bit Server VM 17.0.12+7-LTS\r\n**Runtime:**
+    OpenJDK Runtime Environment 17.0.12+7-LTS\r\n**System:** Linux version 4.14.343-261.564.amzn2.x86_64
+    running on amd64; UTF-8; en_US (nbdemetra)\r\n\r\nThere's also another version
+    we're using in a different internal environment in which the problem _doesn't
+    _occur:__\r\n\r\n**Product Version:** v3.2.4\r\n**Java:** 21.0.2; Java HotSpot(TM)
+    64-Bit Server VM 21.0.2+13-LTS-58\r\n**Runtime:** Java(TM) SE Runtime Environment
+    21.0.2+13-LTS-58\r\n**System:** Windows Server 2022 version 10.0 running on amd64;
+    UTF-8; en_US (nbdemetra)"
+  author:
+  - Immurb
+  - a-s-russo
+- text:
+  - "Every X13 specification mapping should be in the [information part of the code](https://github.com/jdemetra/jdplus-main/tree/develop/jdplus-main-base/jdplus-x13-base-parent/jdplus-x13-base-information/src/main/java/jdplus/x13/base/information)
+    and correspond with the classes in the api part.\r\n\r\nI'm not sure if the xml
+    is made to be written from outside JDemetra and therefore has no additional documentation,
+    but @charphi should be more knowledgeable on that part."
+  - "Indeed. The current xml is for internal purposes. Moreover, it doesn't correspond
+    to an actual xml schema; it just defines a tree structure with a small set of
+    possible nodes. So, you are not able to validate your xml (except for the syntax).\r\n\r\nI
+    made for v2 a true xml schema, but it was really cumbersome and I think that nearly
+    nobody used it. See [jtss/src/main/resources](https://github.com/jdemetra/jdemetra-core/tree/develop/jtss/src/main/resources)
+    for more details.\r\n\r\nIn the future, if we want to build WEB/GRPC-services,
+    we probably should use well-defined and documented protocols (based for instance
+    on protos files). Developments for the medium term."
+  author:
+  - Immurb
+  - palatej
+- text:
+  - "I just realised there is a ninth policy as shown at: https://jdemetra-new-documentation.netlify.app/a-rev-policies\r\n\r\n![image](https://github.com/user-attachments/assets/781a2fe6-7d8a-4dc4-a77a-3e4ae068cbff)"
+  - "Hi \r\n\r\nyou mean \"concurrent\" ?"
+  - "On this page, there are only **7** policies in the summary table at the bottom:
+    https://jdemetradocumentation.github.io/JDemetra-documentation/pages/case-studies/revision.html\r\n-
+    current\r\n- fixed\r\n- reg coefs\r\n- reg coefs + ARIMA params\r\n- reg coefs
+    + last outliers\r\n- reg coefs + ARIMA model\r\n- concurrent\r\n- _MISSING: reg
+    coefs + all outliers, reg coefs + MA params_\r\n\r\nOn this page, there are only
+    **7** policies in the Details section (FYI @AQLT): https://aqlt.github.io/rjwsacruncher/reference/create_param_file.html\r\n-
+    current\r\n- fixed\r\n- reg coefs\r\n- reg coefs + last outliers\r\n- reg coefs
+    + all outliers\r\n- reg coefs + ARIMA model\r\n- concurrent\r\n- _MISSING: reg
+    coefs + MA params, reg coefs + ARIMA params_\r\n\r\nOn this page, there are only
+    **7** policies in the 'Create the parameter file with create_param_file()' section
+    (FYI @AQLT): https://aqlt.github.io/rjwsacruncher/articles/run_jwsacruncher.html\r\n-
+    fixed\r\n- reg coefs\r\n- reg coefs + ARIMA params\r\n- reg coefs + last outliers\r\n-
+    reg coefs + all outliers\r\n- reg coefs + ARIMA model\r\n- concurrent\r\n- _MISSING:
+    current, reg coefs + MA params_\r\n\r\nOn these two pages, there are only **8**
+    policies: https://jdemetradocumentation.github.io/JDemetra-documentation/pages/case-studies/revision.html
+    (in the left-hand side pane), and https://github.com/jdemetra/jwsacruncher/wiki
+    (at the bottom)\r\n- current\r\n- fixed\r\n- reg coefs\r\n- reg coefs + ARIMA
+    params\r\n- reg coefs + last outliers\r\n- reg coefs + all outliers\r\n- reg coefs
+    + ARIMA model\r\n- concurrent\r\n- _MISSING: reg coefs + MA params_\r\n\r\nOn
+    this page, there are all **9** policies in the overview table: https://jdemetra-new-documentation.netlify.app/a-rev-policies#a-rev-pol-ov:\r\n-
+    current\r\n- fixed\r\n- reg coefs\r\n- reg coefs + MA params\r\n- reg coefs +
+    ARIMA params\r\n- reg coefs + last outliers\r\n- reg coefs + all outliers\r\n-
+    reg coefs + ARIMA model\r\n- concurrent\r\n- _MISSING: none_"
+  - In the code I see 8 policies https://github.com/jdemetra/jdplus-main/blob/507ec0aed4cf740afb92e2cd544b71738117b95f/jdplus-main-cli/jdplus-main-cli-bin/src/main/java/jdplus/cruncher/WsaConfig.java#L88-L118
+  - |
+    Now that the JWSACruncher has been updated to add the `fixedarparameters`, I updated the documentation of `rjwsacruncher`. Note that:
+
+    -  <https://github.com/jdemetra/jwsacruncher/wiki#parameters-file> is associated with V2 so it normal to not have this last policy.
+    - <https://jdemetradocumentation.github.io/JDemetra-documentation/> is deprecated and no more updated.
+  author:
+  - a-s-russo
+  - annasmyk
+  - a-s-russo
+  - AQLT
+  - AQLT
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - "I guess you are talking about the X11 Parameter Bias correction for log-additive
+    decomposition?\r\nIt should only be available in the GUI if your X11 Mode is LogAdditive.
+    Then you can choose between None, Legacy, Smooth or Ratio.\r\nThe different corrections
+    can be found at https://github.com/jdemetra/jdplus-main/blob/0af1f27f818106dda82cc0f0b0d87808f21046cb/jdplus-main-base/jdplus-x13-base-parent/jdplus-x13-base-core/src/main/java/jdplus/x13/base/core/x11/X11Kernel.java#L184-L193\r\n\r\nDoes
+    that answer the question?\r\n"
+  - "Thanks @Immurb for your prompt reply. Does this parameter apply only to log-additive
+    decompositions?\r\n\r\nIf so, then the bias parameter appears in the underlying
+    XML file even if I select a multiplicative decomposition (with a log transform);
+    why is that the case?\r\n\r\nIn the Specifications panel, I selected 'Log' for
+    'Function' under 'TRANSFORMATION', and selected 'Multiplicative' for 'Mode' under
+    'X11' (first screen shot below). However, there is no option to select the setting
+    for the bias parameter (that is, turn it off), yet the XML file contains it (second
+    screen shot below).\r\n\r\n![image](https://github.com/user-attachments/assets/c33f1b64-a374-4465-b745-e0c093c40cbd)\r\n\r\n![image](https://github.com/user-attachments/assets/25168684-ef8a-4b4f-9326-16c7cdf499de)"
+  - "You probably had LogAdditive selected once. The bias correction is then set to
+    **Ratio** and because that is not the default (**Legacy**) it is then always saved.
+    I'm not sure why Ratio is selected by default but Legacy is the default for saving.
+    Nonetheless the parameter is only used inside the Kernel if it is LogAdditive,
+    seasonal and the parameter is not None:\r\nhttps://github.com/jdemetra/jdplus-main/blob/0af1f27f818106dda82cc0f0b0d87808f21046cb/jdplus-main-base/jdplus-x13-base-parent/jdplus-x13-base-core/src/main/java/jdplus/x13/base/core/x11/X11Kernel.java#L168-L175\r\n\r\nWe
+    should remove it from saving to xml, if the mode is not LogAdditive."
+  - "The fact that the parameter is saved in xml will not generate any problem; there
+    are other unused parameters that are saved in xml because they differ from their
+    default values. To avoid misunderstanding, they should indeed be removed. I just
+    corrected the code for this one.\r\nWe provide several bias corrections because
+    the original one (\"legacy\") gives sometimes very strange (seasonal) results.
+    The \"ratio\" method is exactly what is used in TramoSeats and the \"smooth\"
+    is experimental. A methodological point that should be improved in future versions..."
+  - Thanks @Immurb and @palatej for your helpful replies. Yes, I had selected log-additive
+    at one stage during my session, then switched to a different decomposition, and
+    then noticed that the XML file was populated with the corresponding tag forever
+    more, which I thought was strange behaviour. Thanks for clarifying that it will
+    not impact the series even if it appears in the XML file.
+  author:
+  - Immurb
+  - a-s-russo
+  - Immurb
+  - palatej
+  - a-s-russo
+- text:
+  - FYI @Immurb I added some videos to this issue to explain the problem further.
+  - Yeah this is definitely a bug. The internal classes change their state successfully,
+    but don't communicate it to the UI elements.
+  author:
+  - a-s-russo
+  - Immurb
+- text:
+  - We can definitely change the name of the parameter and will think about splitting
+    it. I hope we have a decision at the start of next week.
+  - Thanks for your prompt reply @Immurb as always. Note that this is not impacting
+    us at all. I raise this only in the interests of improving JDemetra+.
+  - 'Do you have a use case where you would like to have separate exclude backcast
+    and forecast? Both are calculated with the same model. '
+  - "The only use case I can think of is in importing a series into JD+ in which one
+    wishes to limit revisions at the start of the series. If the series before importation
+    was not previously using backcasts in the generation of extreme values at the
+    beginning of the series, yet this setting is desired at the current end of the
+    series via forecasts, then the user must make a decision to benefit one end of
+    the series over the other.\r\n\r\nI don't think separate models would be needed
+    for backcasts vs forecasts (unless the back of the series is very different to
+    the current end), and this use case would be rare."
+  author:
+  - Immurb
+  - a-s-russo
+  - ChristianeHofer
+  - a-s-russo
+- text: This bug seems to happen only with "Save Workspace" not with "Save Workspace
+    as".
+  author: Immurb
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - "These icons are part of the FlatLaf look&feel used in the NetBeans Platform.\r\nWe
+    cannot change these icons easily.\r\nSee https://www.formdev.com/flatlaf/components/splitpane/"
+  - "Thanks for explaining @charphi. Based on the link you provided, it seems `SplitPane.dividerSize`
+    might help? (Or perhaps that doesn't scale with the arrow icon size, and only
+    changes the divider size but not the arrow icon size, as you seem to have pointed
+    out to me in your reply.)\r\n\r\nOtherwise, no worries if this is problematic
+    to fix.\r\n\r\nNote also that I think this issue is better classified as an 'improvement'
+    rather than a 'bug'."
+  author:
+  - charphi
+  - a-s-russo
+- text: "Which output and options are you using ? (Excel, CSV ... )\r\nCould you share
+    a screenshot ?"
+  author: charphi
+- text:
+  - "The \"Restore\" button only works if a provider is associated to the TS. \r\nIn
+    your case, your TS is derived from another so there is no provider to get the
+    original name.\r\n\r\nWould it be OK to just disable the button if the restore
+    is not possible ?"
+  - Thanks @charphi for your reply. I was not aware of that intended behavior, so
+    this doesn't appear to be a bug then. Your suggested improvement sounds suitable.
+  author:
+  - charphi
+  - a-s-russo
+- text: []
+  author: []
+- text: |-
+    Some blog post about it:
+    https://web.archive.org/web/20131216134906/https://blogs.oracle.com/geertjan/entry/how_to_open_a_project
+  author: charphi
+- text: []
+  author: []
+- text:
+  - If I remember well, when the irregular is too small those statistics are not printed
+    (to avoid false alarms)
+  - "Ok thank you, effectively some of the series I use have a low irregular component.\r\nMaybe
+    it is possible to add a message or a warning explaining why this statistic is
+    not available?"
+  - "Good Idea I would be in favor of a warning too\r\n"
+  - For the time being, warnings are used for more important information (non decomposable
+    series, short series...). Some results of  diagnostics are removed just because
+    they are meaningless or even misleading (in your case, when the irregular is very
+    small). Putting too many warnings could "kill" the warnings. So, we should use
+    a different channel. Not for the short term (v3.3 ?)
+  author:
+  - AQLT
+  - TanguyBarthelemy
+  - annasmyk
+  - palatej
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: "I agree with @TanguyBarthelemy about the importance of this issue. In general,
+    regardless of the type of error, it is important to both:\r\n\r\n- clearly identify
+    that an error has been encountered (e.g. with a pop-up window, a message in the
+    status bar, or something similar); and\r\n- explain why the error was encountered
+    (if known).\r\n\r\nIn some other testing we have been conducting, we have experienced
+    a similar issue to Tanguy. Certain series and combinations of parameter settings
+    will yield a blank document when the seasonal adjustment processing fails, which
+    is not helpful in identifying the cause of our issue.\r\n\r\nNote that for single
+    documents, the user can't even see an 'Invalid' column, so it is even harder to
+    identify if an error has been raised compared to using multi-documents."
+  author: a-s-russo
+- text: []
+  author: []
+- text: 'Having the same message in 3.4.0...just for the record '
+  author: annasmyk
+- text:
+  - "The `nbdemetra64.exe` executable currently uses the default NetBeans Platform
+    icon.\r\nIn order to get the new logo included in the executable, we must use
+    a program on Windows which is annoying with our current build workflow.\r\n\r\nSo,
+    I'm searching for a platform-independent solution.\r\nThis problem has already
+    been asked at https://stackoverflow.com/questions/8659286/replacing-icon-in-windows-exe-from-open-source-platform-independent-java-code\r\n"
+  - "https://github.com/eclipse-platform/eclipse.platform.swt/blob/master/bundles/org.eclipse.swt.tools/Icon%20Exe/org/eclipse/swt/tools/internal/IconExe.java\r\n"
+  author:
+  - charphi
+  - charphi
+- text: 'Screenshots: https://github.com/nbbrd/java-desktop-util/issues/154'
+  author: charphi
+- text: []
+  author: []
+- text:
+  - "The about dialog\r\n![about](https://github.com/jdemetra/jdplus-main/assets/8778378/29c17609-bafa-4c14-a9cb-47d3681b5a0a)\r\n\r\nThe
+    icon used by `.exe`\r\n![icon_exe](https://github.com/jdemetra/jdplus-main/assets/8778378/f37a3a37-99bc-4a22-a02e-48ebf77641e8)\r\n\r\nThe
+    icon used by the window frame\r\n![icon_frame](https://github.com/jdemetra/jdplus-main/assets/8778378/80ea038d-f0f8-4174-909c-89f562654992)\r\n\r\nThe
+    splash screen\r\n![splash](https://github.com/jdemetra/jdplus-main/assets/8778378/f5cff845-304a-494b-9348-7903d396fad2)\r\n\r\nThe
+    GitHub avatar\r\n![avatar](https://github.com/jdemetra/jdplus-main/assets/8778378/77a1f7c9-0f60-401c-8999-7ebf798a8b5d)\r\n\r\nA
+    logo that appears on some sites\r\n![logo](https://github.com/jdemetra/jdplus-main/assets/8778378/a631045c-74a6-42fe-930c-0e58359f3ef2)\r\n"
+  - "There are too many different links and they are difficult to remember:\r\n- https://jdemetra-new-documentation.netlify.app/\r\n-
+    https://jdemetra-universe-blog.netlify.app/\r\n- https://cros-legacy.ec.europa.eu/content/centre-excellence-statistical-methods-and-tools\r\n-
+    https://github.com/jdemetra\r\n\r\nMy solution would be to purchase a domain name
+    (i.e. example.org) and use it like that :\r\n- https://docs.example.org\r\n- https://blog.example.org\r\n-
+    https://stace.example.org\r\n- https://dev.example.org\r\n"
+  - "For the logo, we should hire a professional designer...\r\nWhat do you think
+    ? @annasmyk @ChristianeHofer @palatej @clemasso"
+  - The "logo that appears on some sites" wasn't already done by a professional designer?
+    I thought it was supposed to be the official JDemetra+ logo, as I understood it
+    was discussed and approved by the SACE in 2017.
+  - I do remember some discussion about the logo but nothing else ... maybe I was
+    absent at the related meeting.
+  - For the different links I think a fast and simple solution would be to have github
+    pages in the same organisation (and to move the documentation to github.com/jdemetra)
+  - "@jadoull has created a new splash screen using AI \U0001F44D \r\n\r\n![splash](https://github.com/jdemetra/jdplus-main/assets/8778378/b891a0ac-0a72-451c-aa80-675e8d2b751f)\r\n"
+  author:
+  - charphi
+  - charphi
+  - charphi
+  - AQLT
+  - charphi
+  - AQLT
+  - charphi
+- text:
+  - "I found the following CVS-output to be confusing:\r\ndecomposition_d_tables_d10
+    and decomposition_d_tables_d10a are both available to be choosen, but in the final
+    output only decomposition_d_tables_d10 is explicitly in the file. The forecasts
+    from decomposition_d_tables_d10a are added to the decomposition_d_tables_d10 series
+    without explicit note."
+  - "Related problems:\r\nhttps://github.com/jdemetra/jwsacruncher/issues/13\r\nhttps://github.com/jdemetra/jdplus-main/issues/136"
+  author:
+  - ClaudiaFries
+  - charphi
+- text: []
+  author: []
+- text: https://www.javaspecialists.eu/archive/Issue315-Random-Newsletter.html
+  author: charphi
+- text: 'NetBeans 20 supports JDK21: https://github.com/apache/netbeans/releases/tag/20'
+  author: charphi
+- text:
+  - "Changing the decimal separator is not implemented yet but technically possible.
+    In the current release, the locale defines the decimal separator.\r\nTo make it
+    changeable, one could replace using the locale with using the settings from the
+    cruncher’s params file (or its default settings) in the formatter classes. This
+    would also affect some functionalities of JD+ which contain creating (csv) output
+    files. \r\nIf some users made use of changing the locale for some reason (that
+    is doable, e.g. with a plug-in), those functionalities would possible create a
+    different output file than expected. \r\nTherefore, it needs to be discussed when
+    to use the locale and when to use an individual specification before the code
+    is altered.    \r\nBesides, we found that the number of decimals ndecs from the
+    params file is not applied correctly: In the DoubleFormatter class “9” is hard
+    coded as the max number of decimals, so both the locale and the params settings
+    have no influence."
+  - "Currently, in my opinion, the problem is also that the decimal separator changes
+    the column separator. If your local is a comma, then the exported file when you
+    choose \"CSV\" or \"CSV matrix\" is not anymore a CSV file. \r\nMoreover, being
+    able to fix/change the decimal separator would improve the reproducibility of
+    software results"
+  author:
+  - JanGerhardt
+  - AQLT
+- text: []
+  author: []
+- text:
+  - 'Refreshall was fixed in 3.1.0 with f9a83377e3c3c0ef3f7793485504c471daf28ee6. '
+  - '@charphi @ChristianeHofer: so the fullseriesname parameter was also fixed in
+    3.1.0?'
+  - "The `fullseriesname` parameter is not currently used, and I don't know what @palatej
+    had in mind \U0001F604 "
+  - Then could you please reopen the issue since it is not completely solved? The
+    `fullseriesname` parameter must be associated to the "full series name" option
+    in the interface ("if false only the name of the series will be displayed")
+  - "Screenshot for reference:\r\n\r\n![Screenshot 2024-06-11 145010](https://github.com/jdemetra/jdplus-main/assets/8778378/309709ee-c4d8-4ded-a633-9bb2d043ae0e)\r\n"
+  author:
+  - ChristianeHofer
+  - AQLT
+  - charphi
+  - AQLT
+  - charphi
+

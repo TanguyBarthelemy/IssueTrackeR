@@ -2,9 +2,9 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: main
+    branches: [main, develop]
   pull_request:
-    branches: main
+    branches: [main, develop]
 
 name: lint
 
@@ -14,7 +14,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.WORKFLOW_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 

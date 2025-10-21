@@ -59,6 +59,7 @@
 #' \donttest{
 #' # From online
 #'
+#' issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
 #' issues <- get_issues(source = "online")
 #' print(issues)
 #'
@@ -75,7 +76,7 @@
 #' issues <- get_issues(
 #'     source = "local",
 #'     dataset_dir = path,
-#'     dataset_name = "list_issues.yaml"
+#'     dataset_name = "open_issues.yaml"
 #' )
 #' milestones <- get_milestones(
 #'     source = "local",
@@ -100,48 +101,108 @@ get_issues <- function(
     state <- match.arg(state)
 
     if (source == "online") {
-        raw_issues <- gh::gh(
-            repo = repo,
-            owner = owner,
-            endpoint = "/repos/:owner/:repo/issues",
-            state = state,
-            .limit = Inf
-        )
-        raw_comments <- gh::gh(
-            repo = repo,
-            owner = owner,
-            endpoint = "/repos/:owner/:repo/issues/comments",
-            .limit = Inf
-        )
+        if (is.null(repo)) {
+            if (verbose) {
+                cat("Try to find all repositories...")
+            }
+            list_repo <- get_all_repos(owner)
+            if (verbose) {
+                cat(" Done!\n")
+            }
+
+            issues <- lapply(
+                X = list_repo,
+                FUN = get_issues,
+                source = "online",
+                owner = owner,
+                state = state,
+                verbose = verbose,
+                dataset_dir = NULL,
+                dataset_name = NULL
+            ) |>
+                do.call(what = rbind)
+
+            return(issues)
+        }
+
+        if (verbose) {
+            cat("Repo:", repo, " owner:", owner, "\n")
+        }
+        raw_issues <- try(expr = {
+            gh::gh(
+                repo = repo,
+                owner = owner,
+                endpoint = "/repos/:owner/:repo/issues",
+                state = state,
+                .limit = Inf
+            )
+        })
+        check_response(raw_issues)
+
+        raw_issues <- raw_issues |>
+            Filter(f = function(.x) is.null(.x$pull_request))
+
+        raw_comments <- try(expr = {
+            gh::gh(
+                repo = repo,
+                owner = owner,
+                endpoint = "/repos/:owner/:repo/issues/comments",
+                .limit = Inf
+            )
+        })
+        check_response(raw_comments)
+
         issues <- format_issues(
             raw_issues = raw_issues,
             raw_comments = raw_comments,
             verbose = verbose
         )
     } else if (source == "local") {
-        input_file <- tools::file_path_sans_ext(dataset_name)
-        input_path <- file.path(dataset_dir, input_file) |>
-            normalizePath(mustWork = FALSE) |>
-            paste0(".yaml")
-
-        if (!file.exists(input_path)) {
-            stop(
-                "The file ",
-                input_file,
-                ".yaml",
-                " doesn't exist. Run `write_issues_to_dataset()`",
-                " to write a set of issues in the directory.\n",
-                "Or call get_issues() with ",
-                "the argument `source` to \"online\".",
-                call. = FALSE
-            )
+        if (verbose) {
+            cat("Looking into", dataset_name, "...\n")
         }
+        if (tools::file_ext(dataset_name) == "yaml") {
+            input_file <- tools::file_path_sans_ext(dataset_name)
+        }
+        input_path <- file.path(dataset_dir, input_file) |>
+            paste0(".yaml") |>
+            normalizePath(mustWork = TRUE)
 
         if (verbose) {
             message("The issues will be read from ", input_path, ".")
         }
-        raw_yaml <- yaml::read_yaml(file = input_path)
-        raw_yaml$comments <- lapply(X = raw_yaml$comments, FUN = as.data.frame)
+
+        raw_yaml <- readLines(con = input_path, encoding = "UTF-8")
+        raw_yaml <- yaml::yaml.load(raw_yaml)
+
+        raw_yaml$comments <- lapply(
+            X = raw_yaml$comments,
+            FUN = function(comments) {
+                if (length(comments$text) == 0L) {
+                    return(data.frame(
+                        text = character(0L),
+                        author = character(0L),
+                        stringsAsFactors = FALSE
+                    ))
+                }
+                return(data.frame(comments))
+            }
+        )
+
+        raw_yaml$labels <- lapply(
+            X = raw_yaml$labels,
+            FUN = function(lbls) {
+                if (length(lbls$name) == 0L) {
+                    return(data.frame(
+                        name = character(0L),
+                        color = character(0L),
+                        stringsAsFactors = FALSE
+                    ))
+                }
+                return(data.frame(lbls))
+            }
+        )
+
         issues <- do.call(
             args = raw_yaml,
             what = new_issues
@@ -248,19 +309,41 @@ format_issues <- function(
         "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
         urls,
         proto = data.frame(
-            owners = character(),
-            repos = character(),
+            owner = character(),
+            repo = character(),
             stringsAsFactors = FALSE
         )
     )
     labels_list <- raw_issues |>
         lapply(FUN = `[[`, "labels") |>
-        lapply(
-            FUN = lapply,
-            Reduce,
-            f = `[`,
-            x = list(c("name", "color", "url"))
-        )
+        lapply(FUN = function(lbls) {
+            if (length(lbls) == 0L) {
+                data.frame(
+                    name = character(0L),
+                    color = character(0L),
+                    stringsAsFactors = FALSE
+                )
+            } else {
+                data.frame(
+                    name = vapply(
+                        X = lbls,
+                        FUN = "[[",
+                        "name",
+                        FUN.VALUE = character(1L)
+                    ),
+                    color = paste0(
+                        "#",
+                        vapply(
+                            X = lbls,
+                            FUN = "[[",
+                            "color",
+                            FUN.VALUE = character(1L)
+                        )
+                    ),
+                    stringsAsFactors = FALSE
+                )
+            }
+        })
 
     issues <- new_issues.default(
         url = urls,
@@ -308,6 +391,13 @@ format_issues <- function(
             "created_at",
             FUN.VALUE = character(1L)
         ),
+        closed_at = vapply(
+            X = raw_issues,
+            FUN = function(x) {
+                if (is.null(x$closed_at)) NA_character_ else x$closed_at
+            },
+            FUN.VALUE = character(1L)
+        ),
         creator = vapply(
             X = raw_issues,
             FUN = Reduce,
@@ -333,8 +423,8 @@ format_issues <- function(
             },
             FUN.VALUE = character(1L)
         ),
-        owner = structurel$owners,
-        repo = structurel$repos
+        owner = structurel$owner,
+        repo = structurel$repo
     )
 
     return(issues)
@@ -369,7 +459,7 @@ format_issues <- function(
 #' issues <- get_issues(
 #'     source = "local",
 #'     dataset_dir = path,
-#'     dataset_name = "list_issues.yaml"
+#'     dataset_name = "open_issues.yaml"
 #' )
 #' milestones <- get_milestones(
 #'     source = "local",
@@ -403,10 +493,12 @@ write_issues_to_dataset.IssuesTB <- function(
     verbose = TRUE,
     ...
 ) {
-    output_file <- tools::file_path_sans_ext(dataset_name)
+    if (tools::file_ext(dataset_name) == "yaml") {
+        output_file <- tools::file_path_sans_ext(dataset_name)
+    }
     output_path <- file.path(dataset_dir, output_file) |>
-        normalizePath(mustWork = FALSE) |>
-        paste0(".yaml")
+        paste0(".yaml") |>
+        normalizePath(mustWork = FALSE)
 
     if (verbose) {
         message("The datasets will be exported to ", output_path, ".")
@@ -418,10 +510,8 @@ write_issues_to_dataset.IssuesTB <- function(
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)
     }
-    yaml::write_yaml(
-        x = issues,
-        file = output_path
-    )
+    issues_yaml <- yaml::as.yaml(issues)
+    writeLines(text = enc2utf8(issues_yaml), con = output_path, useBytes = TRUE)
     return(invisible(TRUE))
 }
 

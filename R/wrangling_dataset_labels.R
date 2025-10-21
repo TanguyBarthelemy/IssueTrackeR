@@ -11,41 +11,67 @@ get_labels <- function(
     source <- match.arg(source)
 
     if (source == "online") {
-        list_labels <- gh::gh(
-            repo = repo,
-            owner = owner,
-            endpoint = "/repos/:owner/:repo/labels",
-            .limit = Inf
-        ) |>
-            format_labels(verbose = verbose)
+        if (is.null(repo)) {
+            if (verbose) {
+                cat("Try to find all repositories...")
+            }
+            list_repo <- get_all_repos(owner)
+            if (verbose) {
+                cat(" Done!\n")
+            }
+
+            list_labels <- lapply(
+                X = list_repo,
+                FUN = get_labels,
+                source = "online",
+                owner = owner,
+                verbose = verbose,
+                dataset_dir = NULL,
+                dataset_name = NULL
+            ) |>
+                do.call(what = rbind)
+
+            return(list_labels)
+        }
+
+        raw_labels <- try(expr = {
+            gh::gh(
+                repo = repo,
+                owner = owner,
+                endpoint = "/repos/:owner/:repo/labels",
+                .limit = Inf
+            )
+        })
+        check_response(raw_labels)
+
+        if (verbose) {
+            cat("Repo:", repo, " owner:", owner, "\n")
+        }
+        list_labels <- format_labels(raw_labels = raw_labels, verbose = verbose)
 
         if (!is.null(list_labels)) {
             list_labels <- cbind(list_labels, repo = repo, owner = owner)
         }
     } else if (source == "local") {
-        input_file <- tools::file_path_sans_ext(dataset_name)
-        input_path <- file.path(dataset_dir, input_file) |>
-            normalizePath(mustWork = FALSE) |>
-            paste0(".yaml")
-
-        if (!file.exists(input_path)) {
-            stop(
-                "The file doesn't exist. Run `write_labels_to_dataset()`",
-                " to write a set of labels in the directory\n",
-                "Or call get_labels() with ",
-                "the argument `source` to \"online\".",
-                call. = FALSE
-            )
+        if (tools::file_ext(dataset_name) == "yaml") {
+            input_file <- tools::file_path_sans_ext(dataset_name)
         }
+        input_path <- file.path(dataset_dir, input_file) |>
+            paste0(".yaml") |>
+            normalizePath(mustWork = TRUE)
+
         if (verbose) {
             message("The labels will be read from ", input_path, ".")
         }
-        list_labels <- yaml::read_yaml(file = input_path) |>
+
+        list_labels <- readLines(con = input_path, encoding = "UTF-8") |>
+            yaml::yaml.load() |>
             as.data.frame()
     } else {
         stop("wrong argument source", call. = FALSE)
     }
 
+    class(list_labels) <- c("LabelsTB", "data.frame")
     return(list_labels)
 }
 
@@ -82,8 +108,14 @@ format_labels <- function(raw_labels, verbose = TRUE) {
         FUN = base::`[`,
         c("name", "description", "color")
     ) |>
-        do.call(what = rbind) |>
-        as.data.frame()
+        lapply(FUN = \(label) {
+            label$color <- paste0("#", label$color)
+            if (is.null(label$description)) {
+                label$description <- ""
+            }
+            return(as.data.frame(label))
+        }) |>
+        do.call(what = rbind)
     if (verbose) {
         cat("Done!\n", nrow(new_labels_structure), " labels found.\n", sep = "")
     }
@@ -98,10 +130,12 @@ write_labels_to_dataset <- function(
     dataset_name = "list_labels.yaml",
     verbose = TRUE
 ) {
-    output_file <- tools::file_path_sans_ext(dataset_name)
+    if (tools::file_ext(dataset_name) == "yaml") {
+        output_file <- tools::file_path_sans_ext(dataset_name)
+    }
     output_path <- file.path(dataset_dir, output_file) |>
-        normalizePath(mustWork = FALSE) |>
-        paste0(".yaml")
+        paste0(".yaml") |>
+        normalizePath(mustWork = FALSE)
 
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)
@@ -113,9 +147,7 @@ write_labels_to_dataset <- function(
         }
     }
 
-    yaml::write_yaml(
-        x = labels,
-        file = output_path
-    )
+    labels_yaml <- yaml::as.yaml(labels)
+    writeLines(text = enc2utf8(labels_yaml), con = output_path, useBytes = TRUE)
     return(invisible(TRUE))
 }
