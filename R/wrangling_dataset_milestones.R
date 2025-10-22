@@ -50,7 +50,7 @@ format_milestone <- function(raw_milestone, verbose = TRUE) {
     }
     description <- null_to_default(
         x = raw_milestone[["description"]],
-        default = NA_character_
+        default = ""
     )
     due_on <- format_timestamp(null_to_default(
         x = raw_milestone[["due_on"]],
@@ -115,6 +115,9 @@ get_milestones <- function(
             return(milestones)
         }
 
+        if (verbose) {
+            cat("Repo:", repo, " owner:", owner, "\n")
+        }
         raw_milestones <- try(expr = {
             gh::gh(
                 repo = repo,

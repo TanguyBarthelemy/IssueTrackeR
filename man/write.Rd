@@ -93,8 +93,8 @@ labels <- get_labels(
     dataset_name = "list_labels.yaml"
 )
 
-write_issues_to_dataset(issues)
-write_labels_to_dataset(labels)
-write_milestones_to_dataset(milestones)
+write_issues_to_dataset(issues, dataset_dir = tempdir())
+write_labels_to_dataset(labels, dataset_dir = tempdir())
+write_milestones_to_dataset(milestones, dataset_dir = tempdir())
 
 }
