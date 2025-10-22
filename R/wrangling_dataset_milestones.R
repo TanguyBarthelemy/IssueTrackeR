@@ -69,7 +69,7 @@ format_milestone <- function(raw_milestone, verbose = TRUE) {
         title = raw_milestone[["title"]],
         description = description,
         due_on = due_on,
-        due_on = due_on,
+        closed_at = closed_at,
         creator = creator,
         state = raw_milestone[["state"]]
     )
@@ -92,13 +92,7 @@ get_milestones <- function(
 
     if (source == "online") {
         if (is.null(repo)) {
-            if (verbose) {
-                cat("Try to find all repositories...")
-            }
-            list_repo <- get_all_repos(owner)
-            if (verbose) {
-                cat(" Done!\n")
-            }
+            list_repo <- get_all_repos(owner, verbose = verbose)
 
             milestones <- lapply(
                 X = list_repo,

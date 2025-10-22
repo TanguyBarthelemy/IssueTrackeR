@@ -12,13 +12,7 @@ get_labels <- function(
 
     if (source == "online") {
         if (is.null(repo)) {
-            if (verbose) {
-                cat("Try to find all repositories...")
-            }
-            list_repo <- get_all_repos(owner)
-            if (verbose) {
-                cat(" Done!\n")
-            }
+            list_repo <- get_all_repos(owner, verbose = verbose)
 
             list_labels <- lapply(
                 X = list_repo,
@@ -110,7 +104,10 @@ format_labels <- function(raw_labels, verbose = TRUE) {
     ) |>
         lapply(FUN = \(label) {
             label$color <- paste0("#", label$color)
-            label$description <- null_to_default(label$description, default = "")
+            label$description <- null_to_default(
+                x = label$description,
+                default = ""
+            )
             return(as.data.frame(label))
         }) |>
         do.call(what = rbind)

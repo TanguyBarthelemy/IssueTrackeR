@@ -102,7 +102,7 @@ get_issues <- function(
 
     if (source == "online") {
         if (is.null(repo)) {
-            if (length(owner) > 1) {
+            if (length(owner) > 1L) {
                 issues <- lapply(
                     X = owner,
                     FUN = get_issues,
@@ -117,14 +117,7 @@ get_issues <- function(
 
                 return(issues)
             }
-            if (verbose) {
-                cat("Try to find all repositories from ",
-                    owner, "...", sep = "")
-            }
-            list_repo <- get_all_repos(owner)
-            if (verbose) {
-                cat(" Done!\n")
-            }
+            list_repo <- get_all_repos(owner, verbose = verbose)
 
             issues <- lapply(
                 X = list_repo,
