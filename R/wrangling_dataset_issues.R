@@ -102,8 +102,24 @@ get_issues <- function(
 
     if (source == "online") {
         if (is.null(repo)) {
+            if (length(owner) > 1) {
+                issues <- lapply(
+                    X = owner,
+                    FUN = get_issues,
+                    source = "online",
+                    repo = NULL,
+                    state = state,
+                    verbose = verbose,
+                    dataset_dir = NULL,
+                    dataset_name = NULL
+                ) |>
+                    do.call(what = rbind)
+
+                return(issues)
+            }
             if (verbose) {
-                cat("Try to find all repositories...")
+                cat("Try to find all repositories from ",
+                    owner, "...", sep = "")
             }
             list_repo <- get_all_repos(owner)
             if (verbose) {
@@ -398,7 +414,7 @@ format_issues <- function(
             FUN = function(x) {
                 null_to_default(x$closed_at, default = NA_integer_)
             },
-            FUN.VALUE = character(1L)
+            FUN.VALUE = integer(1L)
         ),
         creator = vapply(
             X = raw_issues,
