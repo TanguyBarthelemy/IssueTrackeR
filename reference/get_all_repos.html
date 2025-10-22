@@ -53,7 +53,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_all_repos</span><span class="op">(</span><span class="va">owner</span>, public <span class="op">=</span> <span class="cn">TRUE</span>, private <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_all_repos</span><span class="op">(</span><span class="va">owner</span>, public <span class="op">=</span> <span class="cn">TRUE</span>, private <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -75,6 +75,11 @@ Defaults to the package option <code>IssueTrackeR.owner</code>.</p></dd>
 <dd><p>Boolean. Should we include private repos?
 (Default <code>TRUE</code>)</p></dd>
 
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>A logical value indicating whether to print additional
+information. Default is <code>TRUE</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -86,7 +91,7 @@ Defaults to the package option <code>IssueTrackeR.owner</code>.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">get_all_repos</span><span class="op">(</span><span class="st">"rjdverse"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error in gh::gh(endpoint = "/user/repos", .limit = Inf, visibility = "private") : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Try to find all repositories from rjdverse...Error in gh::gh(endpoint = "/user/repos", .limit = Inf, visibility = "private") : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   GitHub API error (403): Resource not accessible by integration</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Read more at</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB; font-style: italic;">&lt;https://docs.github.com/rest/repos/repos#list-repositories-for-the-authenticated-user&gt;</span></span>
