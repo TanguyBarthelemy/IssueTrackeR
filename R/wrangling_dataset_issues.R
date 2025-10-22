@@ -404,10 +404,13 @@ format_issues <- function(
         ),
         closed_at = vapply(
             X = raw_issues,
-            FUN = function(x) {
-                null_to_default(x$closed_at, default = NA_integer_)
+            FUN = function(.x) {
+                format_timestamp(null_to_default(
+                    x = .x$closed_at,
+                    default = NA_real_
+                ))
             },
-            FUN.VALUE = integer(1L)
+            FUN.VALUE = double(1L)
         ),
         creator = vapply(
             X = raw_issues,

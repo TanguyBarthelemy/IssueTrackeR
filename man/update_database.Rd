@@ -51,7 +51,7 @@ online reference.
 \examples{
 
 \donttest{
-update_database()
+update_database(dataset_dir = tempdir())
 }
 
 }

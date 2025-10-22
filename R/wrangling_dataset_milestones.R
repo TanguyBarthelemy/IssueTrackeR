@@ -54,11 +54,11 @@ format_milestone <- function(raw_milestone, verbose = TRUE) {
     )
     due_on <- format_timestamp(null_to_default(
         x = raw_milestone[["due_on"]],
-        default = NA_integer_
+        default = NA_real_
     ))
     closed_at <- format_timestamp(null_to_default(
         x = raw_milestone[["closed_at"]],
-        default = NA_integer_
+        default = NA_real_
     ))
     creator <- null_to_default(
         x = raw_milestone[["creator"]][["login"]],

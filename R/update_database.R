@@ -29,7 +29,7 @@
 #' @examples
 #'
 #' \donttest{
-#' update_database()
+#' update_database(dataset_dir = tempdir())
 #' }
 #'
 update_database <- function(
