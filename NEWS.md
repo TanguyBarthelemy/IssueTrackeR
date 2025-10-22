@@ -8,6 +8,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+* New function to convert NULL value to default value
+* Add information in milestones datasets
+
 
 ## [1.3.0] - 2025-10-21
 

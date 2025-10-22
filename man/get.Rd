@@ -32,6 +32,7 @@ get_milestones(
   dataset_name = "list_milestones.yaml",
   repo = getOption("IssueTrackeR.repo"),
   owner = getOption("IssueTrackeR.owner"),
+  state = c("open", "closed", "all"),
   verbose = TRUE
 )
 }

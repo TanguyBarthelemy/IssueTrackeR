@@ -367,7 +367,9 @@ format_issues <- function(
         ),
         body = vapply(
             X = raw_issues,
-            FUN = function(x) if (is.null(x$body)) "" else x$body,
+            FUN = function(x) {
+                null_to_default(x$body, default = "")
+            },
             FUN.VALUE = character(1L)
         ),
         number = vapply(
@@ -380,7 +382,7 @@ format_issues <- function(
         milestone = vapply(
             X = raw_issues,
             FUN = function(x) {
-                if (is.null(x$milestone)) NA_character_ else x$milestone$title
+                null_to_default(x$milestone$title, default = NA_character_)
             },
             FUN.VALUE = character(1L)
         ),
@@ -394,7 +396,7 @@ format_issues <- function(
         closed_at = vapply(
             X = raw_issues,
             FUN = function(x) {
-                if (is.null(x$closed_at)) NA_character_ else x$closed_at
+                null_to_default(x$closed_at, default = NA_integer_)
             },
             FUN.VALUE = character(1L)
         ),
@@ -408,18 +410,14 @@ format_issues <- function(
         assignee = vapply(
             X = raw_issues,
             FUN = function(x) {
-                if (is.null(x$assignee)) NA_character_ else x$assignee$login
+                null_to_default(x$assignee$login, default = NA_character_)
             },
             FUN.VALUE = character(1L)
         ),
         state_reason = vapply(
             X = raw_issues,
             FUN = function(x) {
-                ifelse(
-                    test = is.null(x$state_reason),
-                    yes = "open",
-                    no = x$state_reason
-                )
+                null_to_default(x$state_reason, default = "open")
             },
             FUN.VALUE = character(1L)
         ),

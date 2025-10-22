@@ -110,9 +110,7 @@ format_labels <- function(raw_labels, verbose = TRUE) {
     ) |>
         lapply(FUN = \(label) {
             label$color <- paste0("#", label$color)
-            if (is.null(label$description)) {
-                label$description <- ""
-            }
+            label$description <- null_to_default(label$description, default = "")
             return(as.data.frame(label))
         }) |>
         do.call(what = rbind)

@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr}
+\strong{Maintainer}: Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr} [artist]
 
 }
 \keyword{internal}
