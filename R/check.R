@@ -62,8 +62,12 @@ check_response <- function(x, context = "GitHub API call") {
             trimws()
 
         if (grepl(pattern = "/repos/", x = url_repo, fixed = TRUE)) {
-            repo_path <- sub(pattern = "^.*/repos/", replacement = "",
-                             x = url_repo, fixed = TRUE)
+            repo_path <- sub(
+                pattern = "^.*/repos/",
+                replacement = "",
+                x = url_repo,
+                fixed = TRUE
+            )
             parts <- strsplit(x = repo_path, split = "/", fixed = TRUE)[[1L]]
             owner <- parts[1L]
             repo <- parts[2L]

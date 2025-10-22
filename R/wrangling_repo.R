@@ -18,13 +18,14 @@
 #' }
 #'
 #' @export
-get_all_repos <- function(owner,
-                          public = TRUE,
-                          private = TRUE,
-                          verbose = TRUE) {
+get_all_repos <- function(
+    owner,
+    public = TRUE,
+    private = TRUE,
+    verbose = TRUE
+) {
     if (verbose) {
-        cat("Try to find all repositories from ",
-            owner, "...", sep = "")
+        cat("Try to find all repositories from ", owner, "...", sep = "")
     }
 
     if (isFALSE(public | private)) {
