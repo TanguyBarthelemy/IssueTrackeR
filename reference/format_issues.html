@@ -102,6 +102,8 @@ title, body and labels) of all issues.</p>
 <span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu">format_issues</span><span class="op">(</span>raw_issues <span class="op">=</span> <span class="va">raw_issues</span>,</span></span>
 <span class="r-in"><span>                            raw_comments <span class="op">=</span> <span class="va">raw_comments</span>,</span></span>
 <span class="r-in"><span>                            verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vapply(X = raw_issues, FUN = function(x) {    null_to_default(x$closed_at, default = NA_integer_)}, FUN.VALUE = character(1L)):</span> values must be type 'character',</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>  but FUN(X[[1]]) result is type 'integer'</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
