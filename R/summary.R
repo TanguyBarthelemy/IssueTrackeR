@@ -37,7 +37,7 @@ summary.IssueTB <- function(object, ...) {
         "#",
         object[["number"]]
     )
-    object$nbr_comments <- nrow(object$comments)
+    object$nbr_comments <- get_nbr_comments(object)
     object$has_labels <- nrow(object$labels) > 0L
 
     if (object$has_labels) {

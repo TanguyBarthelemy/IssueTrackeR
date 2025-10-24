@@ -28,8 +28,8 @@ comments? (Default \code{TRUE})}
 An object \code{IssuesTB} with issues that satisfy the condition.
 }
 \description{
-Generic function to search for a given text pattern in the title, body, or
-comments of a GitHub Issue object or a collection of Issues.
+Generic function to filter issues with a given text pattern in the title,
+body, or comments of a GitHub Issue object or a collection of Issues.
 }
 \examples{
 all_issues <- get_issues(

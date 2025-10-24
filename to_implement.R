@@ -11,10 +11,6 @@ d <- function(x) {
     return(invisible(x))
 }
 
-with_comment <- function(x) {
-    nbr_comment <- x$comments |> lapply(nrow) |> as.numeric()
-    return(x[nbr_comment > 0, ])
-}
 
 author_last_comment <- function(x) {
     authors <- x$comments |>
