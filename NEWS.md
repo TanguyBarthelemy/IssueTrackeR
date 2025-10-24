@@ -13,7 +13,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New function to convert NULL value to default value
 * Add information in milestones datasets
 * `get_nbr_comments()`: Function to compute the number of comments
-* `with_comments()` : Function to filter the issue with or without comments
+* `with_comments()`: Function to filter the issue with or without comments
+* `author_last_comment()`: Add new function to retrieve the name of the last commentator
 
 
 ## [1.3.0] - 2025-10-21

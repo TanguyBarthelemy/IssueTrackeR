@@ -162,7 +162,7 @@ get_nbr_comments <- function(x) {
 #' @method get_nbr_comments IssueTB
 #' @export
 get_nbr_comments.IssueTB <- function(x) {
-    nbr_comment <- as.numeric(lapply(X = x$comments, FUN = nrow))
+    nbr_comment <- nrow(x$comments)
     return(nbr_comment)
 }
 
@@ -171,6 +171,55 @@ get_nbr_comments.IssueTB <- function(x) {
 #' @method get_nbr_comments IssuesTB
 #' @export
 get_nbr_comments.IssuesTB <- function(x) {
-    nbr_comment <- nrow(x$comments)
+    nbr_comment <- as.numeric(lapply(X = x$comments, FUN = nrow))
     return(nbr_comment)
+}
+
+#' @title Name of last commentator
+#'
+#' @description
+#' Retrieve the name of the last commentator
+#'
+#' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
+#'
+#' @returns A string with the name of the last person which leaves a comment. If there is no comments, it returns an empty string.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' author_last_comment(all_issues)
+#' author_last_comment(all_issues[1L, ])
+#'
+#' @rdname author_last_comment
+#' @export
+author_last_comment <- function(x) {
+    UseMethod("author_last_comment", x)
+}
+
+#' @rdname author_last_comment
+#' @exportS3Method author_last_comment IssueTB
+#' @method author_last_comment IssueTB
+#' @export
+author_last_comment.IssueTB <- function(x) {
+    if (get_nbr_comments(x) == 0L) {
+        return("")
+    }
+    last_commentator <- x$author[nrow(x)]
+    return(last_commentator)
+}
+
+#' @rdname author_last_comment
+#' @exportS3Method author_last_comment IssuesTB
+#' @method author_last_comment IssuesTB
+#' @export
+author_last_comment.IssuesTB <- function(x) {
+    nbr_comments <- get_nbr_comments(x)
+    authors <- character(nrow(x))
+    authors[nbr_comments > 0] <- x$comments[nbr_comments > 0] |>
+        lapply(FUN = \(.x) {.x$author[nrow(.x)]}) |>
+        as.character()
+    return(authors)
 }

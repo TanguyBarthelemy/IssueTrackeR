@@ -10,17 +10,3 @@ d <- function(x) {
         "\n")
     return(invisible(x))
 }
-
-
-author_last_comment <- function(x) {
-    authors <- x$comments |>
-        lapply(FUN = \(.x) {.x[nrow(.x), ]$author}) |>
-        do.call(what = c)
-    return(authors)
-}
-
-issue_with_comments <- all_issues |> with_comment()
-issue_without_answer <- issue_with_comments |>
-    dplyr::filter(author_last_comment(issue_with_comments) == creator)
-
-d(issue_without_answer)
