@@ -92,6 +92,21 @@ get_milestones <- function(
 
     if (source == "online") {
         if (is.null(repo)) {
+            if (length(owner) > 1L) {
+                milestones <- lapply(
+                    X = owner,
+                    FUN = get_milestones,
+                    source = "online",
+                    repo = NULL,
+                    state = state,
+                    verbose = verbose,
+                    dataset_dir = NULL,
+                    dataset_name = NULL
+                ) |>
+                    do.call(what = rbind)
+
+                return(milestones)
+            }
             list_repo <- get_all_repos(owner, verbose = verbose)
 
             milestones <- lapply(

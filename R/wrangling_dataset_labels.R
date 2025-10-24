@@ -12,6 +12,20 @@ get_labels <- function(
 
     if (source == "online") {
         if (is.null(repo)) {
+            if (length(owner) > 1L) {
+                list_labels <- lapply(
+                    X = owner,
+                    FUN = get_labels,
+                    source = "online",
+                    repo = NULL,
+                    verbose = verbose,
+                    dataset_dir = NULL,
+                    dataset_name = NULL
+                ) |>
+                    do.call(what = rbind)
+
+                return(list_labels)
+            }
             list_repo <- get_all_repos(owner, verbose = verbose)
 
             list_labels <- lapply(
