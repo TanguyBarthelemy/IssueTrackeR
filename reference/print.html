@@ -266,47 +266,7 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#761</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> 🟢 Open</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Reloading an xlsx files in Providers create new SA-Item</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We observe what appears to be a bug.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ### Description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> When reloading a data file in the Providers tab, new series are added to the open SA-Processing.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ### Procedure</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1) Open JDemetra+ v3.5.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2) Create a new WS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3) Create a new SAP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4) Add data from Providers to SAP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5) Add new points to data file</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6) Re-add the data file under Providers (even if already present and with star)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7) Click on "Reload"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8) Series are added again to SAP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Here's a short video describing the procedure:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/user-attachments/assets/323a11ee-9949-467d-8f43-79b4cdf8ab3b</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Comments:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment n°1 by Immurb:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Just to add some additional information:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1. Still happens in the develop branch</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2. Seems to duplicate only the last added items (last transfer) when the corresponding data file is reloaded</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3. Only happens once, so if you reload the same data file multiple times only one set of duplicates is added</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4. No new data is needed in the data file and it doesn't matter if you add any data files to the provider (Step 5 and 6)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5. Seems to be related to the events fired in InternalTsProvider (so not only xlsx shows this behaviour)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_nbr_comments.IssueTB(object):</span> 'list' object cannot be coerced to type 'double'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>

@@ -12,6 +12,7 @@
 <url><loc>/reference/format_milestones.html</loc></url>
 <url><loc>/reference/get.html</loc></url>
 <url><loc>/reference/get_all_repos.html</loc></url>
+<url><loc>/reference/get_nbr_comments.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/new_issue.html</loc></url>
 <url><loc>/reference/new_issues.html</loc></url>
@@ -19,6 +20,7 @@
 <url><loc>/reference/sample.html</loc></url>
 <url><loc>/reference/summary.html</loc></url>
 <url><loc>/reference/update_database.html</loc></url>
+<url><loc>/reference/with_comments.html</loc></url>
 <url><loc>/reference/with_labels.html</loc></url>
 <url><loc>/reference/with_text.html</loc></url>
 <url><loc>/reference/write.html</loc></url>
