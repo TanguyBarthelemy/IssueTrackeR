@@ -124,7 +124,7 @@ with_comments <- function(x, negate = FALSE) {
 #' @method with_comments IssuesTB
 #' @export
 with_comments.IssuesTB <- function(x, negate = FALSE) {
-    condition <- get_nbr_comments(x) > 0
+    condition <- get_nbr_comments(x) > 0L
     if (negate) {
         return(x[!condition, ])
     } else {
@@ -182,7 +182,8 @@ get_nbr_comments.IssuesTB <- function(x) {
 #'
 #' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
 #'
-#' @returns A string with the name of the last person which leaves a comment. If there is no comments, it returns an empty string.
+#' @returns A string with the name of the last person which leaves a comment.
+#' If there is no comments, it returns an empty string.
 #'
 #' @examples
 #' all_issues <- get_issues(
@@ -218,8 +219,8 @@ author_last_comment.IssueTB <- function(x) {
 author_last_comment.IssuesTB <- function(x) {
     nbr_comments <- get_nbr_comments(x)
     authors <- character(nrow(x))
-    authors[nbr_comments > 0] <- x$comments[nbr_comments > 0] |>
-        lapply(FUN = \(.x) {.x$author[nrow(.x)]}) |>
+    authors[nbr_comments > 0L] <- x$comments[nbr_comments > 0L] |>
+        lapply(FUN = \(.x) .x$author[nrow(.x)]) |>
         as.character()
     return(authors)
 }
