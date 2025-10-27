@@ -96,7 +96,7 @@ get_labels <- function(
 #'
 #' @examples
 #'
-#' \donttest{
+#' \dontrun{
 #' # With labels
 #' raw_labels <- gh::gh(
 #'    repo = "rjdemetra",

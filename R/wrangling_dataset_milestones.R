@@ -32,7 +32,7 @@ null_to_default <- function(x, default) {
 #'
 #' # With milestones
 #'
-#' \donttest{
+#' \dontrun{
 #' raw_milestones <- gh::gh(
 #'     repo = "jdplus-main",
 #'     owner = "jdemetra",
@@ -182,7 +182,7 @@ get_milestones <- function(
 #'
 #' @examples
 #'
-#' \donttest{
+#' \dontrun{
 #' # With milestones
 #' milestones_jdplus_main <- gh::gh(
 #'     repo = "jdplus-main",

@@ -23,7 +23,7 @@ Format the milestones in a simpler format
 }
 \examples{
 
-\donttest{
+\dontrun{
 # With milestones
 milestones_jdplus_main <- gh::gh(
     repo = "jdplus-main",

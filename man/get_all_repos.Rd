@@ -28,7 +28,7 @@ Returns a list of repos.
 }
 \examples{
 
-\donttest{
+\dontrun{
 get_all_repos("rjdverse")
 }
 

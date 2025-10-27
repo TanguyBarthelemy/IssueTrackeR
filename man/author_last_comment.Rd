@@ -16,7 +16,8 @@ author_last_comment(x)
 \item{x}{An object of class \code{IssueTB} or \code{IssuesTB}.}
 }
 \value{
-A string with the name of the last person which leaves a comment. If there is no comments, it returns an empty string.
+A string with the name of the last person which leaves a comment.
+If there is no comments, it returns an empty string.
 }
 \description{
 Retrieve the name of the last commentator

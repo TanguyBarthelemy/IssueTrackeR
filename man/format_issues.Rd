@@ -27,7 +27,7 @@ Format the issue in a simpler format
 }
 \examples{
 
-\donttest{
+\dontrun{
 raw_issues <- gh::gh(
     repo = "rjdemetra",
     owner = "rjdverse",

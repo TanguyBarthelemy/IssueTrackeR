@@ -22,7 +22,7 @@ check_response <- function(x, context = "GitHub API call") {
         )
     } else if (
         grepl(
-            pattern = "Resource not accessible by integration",
+            pattern = "Requires authentication",
             x = msg,
             ignore.case = TRUE,
             fixed = TRUE

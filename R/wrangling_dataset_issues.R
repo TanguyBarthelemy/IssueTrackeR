@@ -56,7 +56,7 @@
 #'
 #' @examples
 #'
-#' \donttest{
+#' \dontrun{
 #' # From online
 #'
 #' issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
@@ -290,7 +290,7 @@ format_comments <- function(
 #'
 #' @examples
 #'
-#' \donttest{
+#' \dontrun{
 #' raw_issues <- gh::gh(
 #'     repo = "rjdemetra",
 #'     owner = "rjdverse",

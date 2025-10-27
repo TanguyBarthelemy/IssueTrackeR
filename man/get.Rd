@@ -97,7 +97,7 @@ function:
 }
 \examples{
 
-\donttest{
+\dontrun{
 # From online
 
 issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
