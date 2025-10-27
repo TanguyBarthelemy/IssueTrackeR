@@ -1,3 +1,14 @@
+null_to_default <- function(x, default) {
+    if (is.list(x)) {
+        return(lapply(x, null_to_default, default = default))
+    }
+    return(ifelse(
+        test = is.null(x),
+        yes = default,
+        no = x
+    ))
+}
+
 #' @title Format the milestone in a simpler format
 #'
 #' @param raw_milestone Milestone. Subset of a \code{gh_response} object output
@@ -20,6 +31,8 @@
 #' @examples
 #'
 #' # With milestones
+#'
+#' \dontrun{
 #' raw_milestones <- gh::gh(
 #'     repo = "jdplus-main",
 #'     owner = "jdemetra",
@@ -29,25 +42,36 @@
 #' )
 #' raw_milestone <- raw_milestones[[5L]]
 #' format_milestone(raw_milestone)
+#' }
 #'
 format_milestone <- function(raw_milestone, verbose = TRUE) {
     if (verbose) {
         cat("\t- ", raw_milestone[["title"]], "... Done!\n")
     }
-    description <- ifelse(
-        test = is.null(raw_milestone[["description"]]),
-        yes = NA_character_,
-        no = raw_milestone[["description"]]
+    description <- null_to_default(
+        x = raw_milestone[["description"]],
+        default = ""
     )
-    due_on <- format_timestamp(ifelse(
-        test = is.null(raw_milestone[["due_on"]]),
-        yes = NA_integer_,
-        no = raw_milestone[["due_on"]]
+    due_on <- format_timestamp(null_to_default(
+        x = raw_milestone[["due_on"]],
+        default = NA_real_
     ))
+    closed_at <- format_timestamp(null_to_default(
+        x = raw_milestone[["closed_at"]],
+        default = NA_real_
+    ))
+    creator <- null_to_default(
+        x = raw_milestone[["creator"]][["login"]],
+        default = NA_character_
+    )
+
     output <- data.frame(
         title = raw_milestone[["title"]],
         description = description,
-        due_on = due_on
+        due_on = due_on,
+        closed_at = closed_at,
+        creator = creator,
+        state = raw_milestone[["state"]]
     )
     return(output)
 }
@@ -60,17 +84,55 @@ get_milestones <- function(
     dataset_name = "list_milestones.yaml",
     repo = getOption("IssueTrackeR.repo"),
     owner = getOption("IssueTrackeR.owner"),
+    state = c("open", "closed", "all"),
     verbose = TRUE
 ) {
     source <- match.arg(source)
+    state <- match.arg(state)
 
     if (source == "online") {
+        if (is.null(repo)) {
+            if (length(owner) > 1L) {
+                milestones <- lapply(
+                    X = owner,
+                    FUN = get_milestones,
+                    source = "online",
+                    repo = NULL,
+                    state = state,
+                    verbose = verbose,
+                    dataset_dir = NULL,
+                    dataset_name = NULL
+                ) |>
+                    do.call(what = rbind)
+
+                return(milestones)
+            }
+            list_repo <- get_all_repos(owner, verbose = verbose)
+
+            milestones <- lapply(
+                X = list_repo,
+                FUN = get_milestones,
+                source = "online",
+                owner = owner,
+                state = state,
+                verbose = verbose,
+                dataset_dir = NULL,
+                dataset_name = NULL
+            ) |>
+                do.call(what = rbind)
+
+            return(milestones)
+        }
+
+        if (verbose) {
+            cat("Repo:", repo, " owner:", owner, "\n")
+        }
         raw_milestones <- try(expr = {
             gh::gh(
                 repo = repo,
                 owner = owner,
                 endpoint = "/repos/:owner/:repo/milestones",
-                state = "all",
+                state = state,
                 .limit = Inf
             )
         })
@@ -120,7 +182,7 @@ get_milestones <- function(
 #'
 #' @examples
 #'
-#' \donttest{
+#' \dontrun{
 #' # With milestones
 #' milestones_jdplus_main <- gh::gh(
 #'     repo = "jdplus-main",

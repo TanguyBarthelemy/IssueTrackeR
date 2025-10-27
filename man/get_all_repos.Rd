@@ -4,7 +4,7 @@
 \alias{get_all_repos}
 \title{Retrieve all the visible repos from a user / an organisation}
 \usage{
-get_all_repos(owner, public = TRUE, private = TRUE)
+get_all_repos(owner, public = TRUE, private = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{owner}{A character string specifying the GitHub owner (only taken
@@ -16,6 +16,9 @@ Defaults to the package option \code{IssueTrackeR.owner}.}
 
 \item{private}{Boolean. Should we include private repos?
 (Default \code{TRUE})}
+
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 A string with the list of repo of a user or an organisation.
@@ -24,6 +27,9 @@ A string with the list of repo of a user or an organisation.
 Returns a list of repos.
 }
 \examples{
+
+\dontrun{
 get_all_repos("rjdverse")
+}
 
 }

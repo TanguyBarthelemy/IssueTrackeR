@@ -32,6 +32,7 @@ get_milestones(
   dataset_name = "list_milestones.yaml",
   repo = getOption("IssueTrackeR.repo"),
   owner = getOption("IssueTrackeR.owner"),
+  state = c("open", "closed", "all"),
   verbose = TRUE
 )
 }
@@ -96,7 +97,7 @@ function:
 }
 \examples{
 
-\donttest{
+\dontrun{
 # From online
 
 issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)

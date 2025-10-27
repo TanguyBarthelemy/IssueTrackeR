@@ -22,7 +22,7 @@ check_response <- function(x, context = "GitHub API call") {
         )
     } else if (
         grepl(
-            pattern = "Resource not accessible by integration",
+            pattern = "Requires authentication",
             x = msg,
             ignore.case = TRUE,
             fixed = TRUE
@@ -62,8 +62,12 @@ check_response <- function(x, context = "GitHub API call") {
             trimws()
 
         if (grepl(pattern = "/repos/", x = url_repo, fixed = TRUE)) {
-            repo_path <- sub(pattern = "^.*/repos/", replacement = "",
-                             x = url_repo, fixed = TRUE)
+            repo_path <- sub(
+                pattern = "^.*/repos/",
+                replacement = "",
+                x = url_repo,
+                fixed = TRUE
+            )
             parts <- strsplit(x = repo_path, split = "/", fixed = TRUE)[[1L]]
             owner <- parts[1L]
             repo <- parts[2L]

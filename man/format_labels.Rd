@@ -23,7 +23,7 @@ Format the label in a simpler format
 }
 \examples{
 
-\donttest{
+\dontrun{
 # With labels
 raw_labels <- gh::gh(
    repo = "rjdemetra",

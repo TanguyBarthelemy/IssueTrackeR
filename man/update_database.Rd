@@ -50,8 +50,8 @@ online reference.
 }
 \examples{
 
-\donttest{
-update_database()
+\dontrun{
+update_database(dataset_dir = tempdir())
 }
 
 }

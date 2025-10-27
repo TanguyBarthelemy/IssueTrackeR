@@ -246,8 +246,8 @@ print.LabelsTB <- function(x, ...) {
         cat()
 
     for (id in seq_len(nrow(couples))) {
-        owner_name <- couples[id, "owner"]
-        repo_name <- couples[id, "repo"]
+        owner_name <- couples$owner[id]
+        repo_name <- couples$repo[id]
         labels_owner <- x[x$owner == owner_name & x$repo == repo_name, ]
 
         cat(
@@ -290,8 +290,8 @@ print.summary.LabelsTB <- function(x, ...) {
     couples <- unique(x[, c("owner", "repo")])
 
     for (id in seq_len(nrow(couples))) {
-        owner_name <- couples[id, "owner"]
-        repo_name <- couples[id, "repo"]
+        owner_name <- couples$owner[id]
+        repo_name <- couples$repo[id]
         labels_owner <- x[x$owner == owner_name & x$repo == repo_name, ]
 
         cat(

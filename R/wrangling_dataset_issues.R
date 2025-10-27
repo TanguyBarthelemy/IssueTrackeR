@@ -56,7 +56,7 @@
 #'
 #' @examples
 #'
-#' \donttest{
+#' \dontrun{
 #' # From online
 #'
 #' issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
@@ -102,13 +102,22 @@ get_issues <- function(
 
     if (source == "online") {
         if (is.null(repo)) {
-            if (verbose) {
-                cat("Try to find all repositories...")
+            if (length(owner) > 1L) {
+                issues <- lapply(
+                    X = owner,
+                    FUN = get_issues,
+                    source = "online",
+                    repo = NULL,
+                    state = state,
+                    verbose = verbose,
+                    dataset_dir = NULL,
+                    dataset_name = NULL
+                ) |>
+                    do.call(what = rbind)
+
+                return(issues)
             }
-            list_repo <- get_all_repos(owner)
-            if (verbose) {
-                cat(" Done!\n")
-            }
+            list_repo <- get_all_repos(owner, verbose = verbose)
 
             issues <- lapply(
                 X = list_repo,
@@ -281,7 +290,7 @@ format_comments <- function(
 #'
 #' @examples
 #'
-#' \donttest{
+#' \dontrun{
 #' raw_issues <- gh::gh(
 #'     repo = "rjdemetra",
 #'     owner = "rjdverse",
@@ -367,7 +376,9 @@ format_issues <- function(
         ),
         body = vapply(
             X = raw_issues,
-            FUN = function(x) if (is.null(x$body)) "" else x$body,
+            FUN = function(x) {
+                null_to_default(x$body, default = "")
+            },
             FUN.VALUE = character(1L)
         ),
         number = vapply(
@@ -380,7 +391,7 @@ format_issues <- function(
         milestone = vapply(
             X = raw_issues,
             FUN = function(x) {
-                if (is.null(x$milestone)) NA_character_ else x$milestone$title
+                null_to_default(x$milestone$title, default = NA_character_)
             },
             FUN.VALUE = character(1L)
         ),
@@ -393,10 +404,13 @@ format_issues <- function(
         ),
         closed_at = vapply(
             X = raw_issues,
-            FUN = function(x) {
-                if (is.null(x$closed_at)) NA_character_ else x$closed_at
+            FUN = function(.x) {
+                format_timestamp(null_to_default(
+                    x = .x$closed_at,
+                    default = NA_real_
+                ))
             },
-            FUN.VALUE = character(1L)
+            FUN.VALUE = double(1L)
         ),
         creator = vapply(
             X = raw_issues,
@@ -408,18 +422,14 @@ format_issues <- function(
         assignee = vapply(
             X = raw_issues,
             FUN = function(x) {
-                if (is.null(x$assignee)) NA_character_ else x$assignee$login
+                null_to_default(x$assignee$login, default = NA_character_)
             },
             FUN.VALUE = character(1L)
         ),
         state_reason = vapply(
             X = raw_issues,
             FUN = function(x) {
-                ifelse(
-                    test = is.null(x$state_reason),
-                    yes = "open",
-                    no = x$state_reason
-                )
+                null_to_default(x$state_reason, default = "open")
             },
             FUN.VALUE = character(1L)
         ),
@@ -472,9 +482,9 @@ format_issues <- function(
 #'     dataset_name = "list_labels.yaml"
 #' )
 #'
-#' write_issues_to_dataset(issues)
-#' write_labels_to_dataset(labels)
-#' write_milestones_to_dataset(milestones)
+#' write_issues_to_dataset(issues, dataset_dir = tempdir())
+#' write_labels_to_dataset(labels, dataset_dir = tempdir())
+#' write_milestones_to_dataset(milestones, dataset_dir = tempdir())
 #'
 #' @rdname write
 #'

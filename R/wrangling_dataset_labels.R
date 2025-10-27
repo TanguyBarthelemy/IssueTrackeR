@@ -12,13 +12,21 @@ get_labels <- function(
 
     if (source == "online") {
         if (is.null(repo)) {
-            if (verbose) {
-                cat("Try to find all repositories...")
+            if (length(owner) > 1L) {
+                list_labels <- lapply(
+                    X = owner,
+                    FUN = get_labels,
+                    source = "online",
+                    repo = NULL,
+                    verbose = verbose,
+                    dataset_dir = NULL,
+                    dataset_name = NULL
+                ) |>
+                    do.call(what = rbind)
+
+                return(list_labels)
             }
-            list_repo <- get_all_repos(owner)
-            if (verbose) {
-                cat(" Done!\n")
-            }
+            list_repo <- get_all_repos(owner, verbose = verbose)
 
             list_labels <- lapply(
                 X = list_repo,
@@ -88,7 +96,7 @@ get_labels <- function(
 #'
 #' @examples
 #'
-#' \donttest{
+#' \dontrun{
 #' # With labels
 #' raw_labels <- gh::gh(
 #'    repo = "rjdemetra",
@@ -110,9 +118,10 @@ format_labels <- function(raw_labels, verbose = TRUE) {
     ) |>
         lapply(FUN = \(label) {
             label$color <- paste0("#", label$color)
-            if (is.null(label$description)) {
-                label$description <- ""
-            }
+            label$description <- null_to_default(
+                x = label$description,
+                default = ""
+            )
             return(as.data.frame(label))
         }) |>
         do.call(what = rbind)
