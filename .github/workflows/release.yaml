@@ -18,10 +18,9 @@ jobs:
 
     steps:
 
-      - uses: TanguyBarthelemy/r-release-action@555dfb17aa8651e38a1bccd7f147389da68a238c
+      - uses: TanguyBarthelemy/r-release-action@eab2b8ceefec5099438347ddee0ef1a26fff743d
         with:
           tag: ${{ github.event.inputs.tag }}
           gh_repo: "TanguyBarthelemy/IssueTrackeR"
           main-branch: "main"
           dev-branch: "develop"
-          github_token: ${{ github.token }}
