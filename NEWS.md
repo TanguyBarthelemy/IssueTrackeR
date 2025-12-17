@@ -11,6 +11,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Changed
 
 * Removed progress bar in `gh::gh()` calls
+* `update_database()` updates all the milestones (closed and open)
 
 ### Fixed
 
