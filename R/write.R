@@ -111,7 +111,8 @@ write_to_dataset.LabelsTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = "list_labels.yaml",
-    verbose = TRUE
+    verbose = TRUE,
+    ...
 ) {
     .write(x, dataset_dir, dataset_name, verbose)
     return(invisible(TRUE))
@@ -125,7 +126,8 @@ write_to_dataset.MilestonesTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = "list_milestones.yaml",
-    verbose = TRUE
+    verbose = TRUE,
+    ...
 ) {
     .write(x, dataset_dir, dataset_name, verbose)
     return(invisible(TRUE))

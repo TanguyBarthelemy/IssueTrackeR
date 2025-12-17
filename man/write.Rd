@@ -22,14 +22,16 @@ write_to_dataset(x, ...)
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   dataset_name = "list_labels.yaml",
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 )
 
 \method{write_to_dataset}{MilestonesTB}(
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   dataset_name = "list_milestones.yaml",
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 )
 
 \method{write_to_dataset}{default}(x, ...)
