@@ -219,8 +219,9 @@ write_milestones_to_dataset <- function(
     dataset_name = "list_milestones.yaml",
     verbose = TRUE
 ) {
-    if (tools::file_ext(dataset_name) == "yaml") {
-        output_file <- tools::file_path_sans_ext(dataset_name)
+    output_file <- dataset_name
+    if (tools::file_ext(output_file) == "yaml") {
+        output_file <- tools::file_path_sans_ext(output_file)
     }
     output_path <- file.path(dataset_dir, output_file) |>
         paste0(".yaml") |>
