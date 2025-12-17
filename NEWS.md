@@ -12,6 +12,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * Removed progress bar in `gh::gh()` calls
 
+### Fixed
+
+* Removed a warning due to the use of `ignore.case = TRUE` and `fixed = TRUE` simultaneously in `grepl()`
+
 
 ## [1.3.1] - 2025-10-27
 

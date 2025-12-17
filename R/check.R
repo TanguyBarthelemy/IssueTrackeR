@@ -25,7 +25,7 @@ check_response <- function(x, context = "GitHub API call") {
             pattern = "Requires authentication",
             x = msg,
             ignore.case = TRUE,
-            fixed = TRUE
+            perl = FALSE
         )
     ) {
         stop(
@@ -37,7 +37,14 @@ check_response <- function(x, context = "GitHub API call") {
             "\u2192 Try using a Personal Access Token (PAT) with 'repo' scope.",
             call. = FALSE
         )
-    } else if (grepl("API rate limit exceeded", msg, ignore.case = TRUE)) {
+    } else if (
+        grepl(
+            pattern = "API rate limit exceeded",
+            x = msg,
+            ignore.case = TRUE,
+            perl = FALSE
+        )
+    ) {
         stop(
             "[",
             context,
@@ -53,7 +60,7 @@ check_response <- function(x, context = "GitHub API call") {
                 pattern = "URL not found",
                 x = msg,
                 ignore.case = TRUE,
-                fixed = TRUE
+                perl = FALSE
             )
     ) {
         url_repo <- cond$body["x"] |>
