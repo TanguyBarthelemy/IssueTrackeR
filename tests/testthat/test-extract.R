@@ -1,4 +1,3 @@
-
 closed_issues <- get_issues(
     source = "local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
@@ -10,7 +9,10 @@ l <- list(
     list(
         data.frame(name = character(0), color = character(0)),
         data.frame(name = "bug", color = "#d73a4a"),
-        data.frame(name = c("bug", "enhancement"), color = c("#d73a4a", "#a2eeef"))
+        data.frame(
+            name = c("bug", "enhancement"),
+            color = c("#d73a4a", "#a2eeef")
+        )
     ),
     new_issue(
         number = 827L,
@@ -52,20 +54,35 @@ l <- list(
         labels = data.frame(name = "bug", color = "#d73a4a"),
         comments = data.frame(text = character(0), author = character(0))
     ),
-    list(data.frame(name = c("bug", "enhancement"), color = c("#d73a4a", "#a2eeef")))
+    list(data.frame(
+        name = c("bug", "enhancement"),
+        color = c("#d73a4a", "#a2eeef")
+    ))
 )
 
 test_that("[ function is good", {
-
     testthat::expect_identical(my_issues[], my_issues)
     testthat::expect_identical(my_issues[1], l[[1L]])
-    testthat::expect_identical(my_issues["labels"], list(labels = l[[2L]]) |> structure(row.names = c(2L, 1L, 22L), class = "data.frame"))
+    testthat::expect_identical(
+        my_issues["labels"],
+        list(labels = l[[2L]]) |>
+            structure(row.names = c(2L, 1L, 22L), class = "data.frame")
+    )
     testthat::expect_identical(my_issues[1, ], l[[3L]])
-    testthat::expect_identical(my_issues[1,, drop = TRUE], l[[3L]])
-    testthat::expect_identical(my_issues[1,, drop = FALSE], new_issues(l[[3]]) |> structure(row.names = 2L))
+    testthat::expect_identical(my_issues[1, , drop = TRUE], l[[3L]])
+    testthat::expect_identical(
+        my_issues[1, , drop = FALSE],
+        new_issues(l[[3]]) |> structure(row.names = 2L)
+    )
 
-    testthat::expect_warning(testthat::expect_identical(my_issues[1, drop = TRUE], l[[1L]]))
-    testthat::expect_warning(testthat::expect_identical(my_issues[1, drop = FALSE], l[[1L]]))
+    testthat::expect_warning(testthat::expect_identical(
+        my_issues[1, drop = TRUE],
+        l[[1L]]
+    ))
+    testthat::expect_warning(testthat::expect_identical(
+        my_issues[1, drop = FALSE],
+        l[[1L]]
+    ))
     testthat::expect_identical(my_issues[, "labels"], l[[2L]])
     testthat::expect_identical(my_issues[, 1], l[[1]][[1]])
     testthat::expect_identical(my_issues[, 1, drop = TRUE], l[[1]][[1]])
@@ -73,13 +90,24 @@ test_that("[ function is good", {
 
     testthat::expect_identical(my_issues[1, "labels"], l[[4L]])
     testthat::expect_identical(my_issues[1, "labels", drop = TRUE], l[[4L]])
-    testthat::expect_identical(my_issues[1, "labels", drop = FALSE], list(labels = l[[4L]]) |> structure(row.names = 2L, class = "data.frame"))
+    testthat::expect_identical(
+        my_issues[1, "labels", drop = FALSE],
+        list(labels = l[[4L]]) |>
+            structure(row.names = 2L, class = "data.frame")
+    )
 
-    testthat::expect_identical(my_issues[2,], l[[5]])
+    testthat::expect_identical(my_issues[2, ], l[[5]])
     testthat::expect_identical(my_issues[3, "labels"], l[[6]])
     testthat::expect_identical(my_issues[3, "labels", drop = TRUE], l[[6]])
-    testthat::expect_identical(my_issues[3, "labels", drop = FALSE], list(labels = l[[6]]) |> structure(row.names = 22L, class = "data.frame"))
+    testthat::expect_identical(
+        my_issues[3, "labels", drop = FALSE],
+        list(labels = l[[6]]) |>
+            structure(row.names = 22L, class = "data.frame")
+    )
     testthat::expect_identical(my_issues[3, 1], 639L)
     testthat::expect_identical(my_issues[3, 1, drop = TRUE], 639L)
-    testthat::expect_identical(my_issues[3, 1, drop = FALSE], data.frame(number = 639L, row.names = 22L))
+    testthat::expect_identical(
+        my_issues[3, 1, drop = FALSE],
+        data.frame(number = 639L, row.names = 22L)
+    )
 })

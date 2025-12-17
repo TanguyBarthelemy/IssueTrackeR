@@ -167,6 +167,7 @@ get_milestones <- function(
         stop("wrong argument source", call. = FALSE)
     }
 
+    class(milestones) <- c("MilestonesTB", "data.frame")
     return(milestones)
 }
 
@@ -209,39 +210,4 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
         cat("Done!", nrow(new_mlst_structure), "milestones found.\n", sep = " ")
     }
     return(new_mlst_structure)
-}
-
-#' @rdname write
-#' @export
-write_milestones_to_dataset <- function(
-    milestones,
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_milestones.yaml",
-    verbose = TRUE
-) {
-    output_file <- dataset_name
-    if (tools::file_ext(output_file) == "yaml") {
-        output_file <- tools::file_path_sans_ext(output_file)
-    }
-    output_path <- file.path(dataset_dir, output_file) |>
-        paste0(".yaml") |>
-        normalizePath(mustWork = FALSE)
-
-    if (!dir.exists(dataset_dir)) {
-        dir.create(dataset_dir)
-    }
-    if (verbose) {
-        message("The datasets will be exported to ", output_path, ".")
-        if (file.exists(output_path)) {
-            message("The file already exists and will be overwritten.")
-        }
-    }
-
-    milestones_yaml <- yaml::as.yaml(milestones, precision = 22L, indent = 2L)
-    writeLines(
-        text = enc2utf8(milestones_yaml),
-        con = output_path,
-        useBytes = TRUE
-    )
-    return(invisible(TRUE))
 }

@@ -49,7 +49,7 @@ update_database <- function(
         verbose = verbose,
         ...
     )
-    write_issues_to_dataset(
+    write_to_dataset(
         issues = issues_open,
         dataset_dir = dataset_dir,
         dataset_name = datasets_name[["open"]],
@@ -62,7 +62,7 @@ update_database <- function(
         verbose = verbose,
         ...
     )
-    write_issues_to_dataset(
+    write_to_dataset(
         issues = issues_closed,
         dataset_dir = dataset_dir,
         dataset_name = datasets_name[["closed"]],
@@ -70,15 +70,20 @@ update_database <- function(
     )
 
     list_labels <- get_labels(source = "online", verbose = verbose, ...)
-    write_labels_to_dataset(
+    write_to_dataset(
         labels = list_labels,
         dataset_dir = dataset_dir,
         dataset_name = datasets_name[["labels"]],
         verbose = verbose
     )
 
-    milestones <- get_milestones(source = "online", verbose = verbose, state = "all", ...)
-    write_milestones_to_dataset(
+    milestones <- get_milestones(
+        source = "online",
+        verbose = verbose,
+        state = "all",
+        ...
+    )
+    write_to_dataset(
         milestones = milestones,
         dataset_dir = dataset_dir,
         dataset_name = datasets_name[["milestones"]],

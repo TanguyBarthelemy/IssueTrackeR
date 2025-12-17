@@ -132,34 +132,3 @@ format_labels <- function(raw_labels, verbose = TRUE) {
     }
     return(new_labels_structure)
 }
-
-#' @rdname write
-#' @export
-write_labels_to_dataset <- function(
-    labels,
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_labels.yaml",
-    verbose = TRUE
-) {
-    output_file <- dataset_name
-    if (tools::file_ext(output_file) == "yaml") {
-        output_file <- tools::file_path_sans_ext(output_file)
-    }
-    output_path <- file.path(dataset_dir, output_file) |>
-        paste0(".yaml") |>
-        normalizePath(mustWork = FALSE)
-
-    if (!dir.exists(dataset_dir)) {
-        dir.create(dataset_dir)
-    }
-    if (verbose) {
-        message("The datasets will be exported to ", output_path, ".")
-        if (file.exists(output_path)) {
-            message("The file already exists and will be overwritten.")
-        }
-    }
-
-    labels_yaml <- yaml::as.yaml(labels, precision = 22L, indent = 2L)
-    writeLines(text = enc2utf8(labels_yaml), con = output_path, useBytes = TRUE)
-    return(invisible(TRUE))
-}
