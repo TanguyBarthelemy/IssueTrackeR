@@ -72,7 +72,9 @@ format_milestone <- function(raw_milestone, verbose = TRUE) {
         due_on = due_on,
         closed_at = closed_at,
         creator = creator,
-        state = raw_milestone[["state"]]
+        state = raw_milestone[["state"]],
+        nb_issues_open = raw_milestone[["open_issues"]],
+        nb_issues_closed = raw_milestone[["closed_issues"]]
     )
     return(output)
 }

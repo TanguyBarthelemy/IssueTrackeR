@@ -11,6 +11,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 * New class `MilestonesTB` for milestones objects
+* Number of issues open or closed in each milestones
 
 ### Changed
 
