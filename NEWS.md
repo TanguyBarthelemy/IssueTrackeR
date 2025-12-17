@@ -8,6 +8,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+* Removed progress bar in `gh::gh()` calls
+
+
+## [1.3.1] - 2025-10-27
+
 ### Added
 
 * New function to convert NULL value to default value
@@ -15,10 +22,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * `get_nbr_comments()`: Function to compute the number of comments
 * `with_comments()`: Function to filter the issue with or without comments
 * `author_last_comment()`: Add new function to retrieve the name of the last commentator
-
-### Changed
-
-* Removed progress bar
 
 
 ## [1.3.0] - 2025-10-21
@@ -103,7 +106,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New CHANGELOG (`NEWS.md`)
 * Documentation for `logic_reducer()`, `no_milestones()`, `vgrepl()` and `simple_sort`
 
-[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.1.0...v1.1.1
