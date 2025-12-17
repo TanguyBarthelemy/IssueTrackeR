@@ -107,220 +107,320 @@
 <span class="r-in"><span><span class="co"># Display one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#763</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#844</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Error loading V2 workspace with fixed week calendar day</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Charts are slow when displaying lots of observations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> If I create a workspace in V2 with a National Calendar with a Fixed Week it cannot be imported with the V3. Error loading the calendar with the following error:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> java.lang.NullPointerException: Cannot invoke "String.toUpperCase(java.util.Locale)" because "day" is null</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.uti</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> High frequencies provide a lot of observations. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> More than 600000 observations seems to be problematic in charts.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (see `sdmx-dl:/STATCAN_HFED/CCEI%2CDF_HFED_AB%2C1.0/H.CA_AB.CA_BC.NSI`).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display several issues</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#763</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#844</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Error loading V2 workspace with fixed week calendar day</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Charts are slow when displaying lots of observations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> If I create a workspace in V2 with a National Calendar with a Fixed Week it cannot be imported with the V3. Error loading the calendar with the following error:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> java.lang.NullPointerException: Cannot invoke "String.toUpperCase(java.util.Locale)" because "day" is null</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	at internal.toolkit.base.workspace.file.xml.uti</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> High frequencies provide a lot of observations. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> More than 600000 observations seems to be problematic in charts.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (see `sdmx-dl:/STATCAN_HFED/CCEI%2CDF_HFED_AB%2C1.0/H.CA_AB.CA_BC.NSI`).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#843</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Why the color is not updated?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## Questions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Not the color</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When I try to switch from a Tramo-Seats specification to X13 (or vice versa), the `domainSpec` (**Reference Specification**) name is updated, but **not the color**.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Apply before refresh</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Then, if I want to refresh the model, I have to **apply the `domainSpec`** before I can use a r</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#761</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#842</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Reloading an xlsx files in Providers create new SA-Item</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Zoom in GUI</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We observe what appears to be a bug.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It would be great to be able to zoom in the GUI.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ### Description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> For example, here is a normal view with big screen:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> When reloading a data file in the Providers tab, new series are added to the open SA-Processing.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="1920" height="1032" alt="Image" src="https://github.com/user-attachments/assets/e9f0a942-daa0-41b1-8980-09823cda08a9" /&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ### Procedure</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1) Open JDemetra+ v3.5.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2) Create a new WS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3) Create a new SAP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4) Add data from Providers to SAP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5) Add new points to data file</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6) Re-add the data file</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We could zoom in = increase the size of the fonts, the width, the height of the con</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#758</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#841</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Unify period display in GUI (2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Overview of a theme</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Issue #489 is unresolved. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The problem remains in version 3.5.1. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## Questions</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Also, the SI ratio display is still different and appears with Q1, Q2, Q3, Q4 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Change and preview a theme</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="605" height="255" alt="Image" src="https://github.com/user-attachments/assets/49948a60-a027-4bed-8947-9e9eedc49537" /&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When you want to change the theme in the GUI, you have to restart the interface. It would be interesting to have a preview (without necessarily updating the interface) to choose a theme.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#752</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Add ways to retrieve WS file names and paths</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> It would be very interesting to add ways to retrieve WS file names and paths.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Light and dark</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Is it possible to add methods like `getSource` and `setSource` to be able to retrieve the file containing a SA-Processing, a SA-Item or even a Workspace directly from the Java object?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Thank you</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#751</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Structure of a WS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hello, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I'm opening an issue but it's more of **a discussion**.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First of all, the WS structure contains:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - data (calendar, regressors and data), </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - statistical models (specifications) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - and outputs. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In the context of moving to a cloud-native solution and changing JD+ to a web API, would it make sense to review th</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Also, in many programs, it is possible to choose a “light” and a “</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#734</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#840</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Can't refresh a SA-Item when WS newly created</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> White on white headers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ### Introduction</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In grid mode, headers turn white on white as you move the mouse over them.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In JDemetra+ v3, it's not possible to refresh a SA-Item with **Right click** &gt; **Refresh** when the newly created WS is not saved.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> It was possible to refresh a new WS in version 2.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/user-attachments/assets/b6787118-3f06-4dcf-94bc-42fe4607fb4f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> But there is A way to refresh a SA-Item with concurrent policy with the GUI in version 3.5.0 with a newly created WS is </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#838</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Cannot delete several objects at the same time</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> For certain types of object, it is not possible to delete them all at the same time.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> These include:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - Several groups of variables:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="310" height="226" alt="Image" src="https://github.com/user-attachments/assets/63bc2edf-a114-4a60-a230-485f7fb92808" /&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - Several SA-Processings:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="313" height="14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#733</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#837</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Changing the `domainSpec` doesn't refresh the model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> `Delete`, `Close`, `Clear` or `Remove`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ### Intro</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The vocabulary used to remove or delete an element is not the same:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In the latest v3.5.1, there is a *breaking change* with v3.5.0 regarding the specification handling.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - **Remove** is used for variables</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - **Delete** is used for SA-objects (SAI, SAP, SAD and WS)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - **Close** is used for provider connections</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - **Clear** for containers (grid, group of regressors and chart)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ### Step to reproduce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1) Open JDemetra+ v3.5.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2) Create a new WS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3) Add a series (with for example RSA3 specification)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4) Change the `domainSpec` (**Right click** &gt; **Edit** &gt; **Reference specification** &gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## Examples</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### `Remove`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Removing variables</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#711</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#821</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> GUI unresponsive when an incorrectly specified file is opened in the Providers p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Accepting new providers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Consider importing a CSV file in the Providers panel and specifying an incorrect date format (such as using 'mm' rather than 'MM', where the former specifies minutes and the latter specifies the month):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> With the emergence of new file formats, would it be costly to add new providers?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="462" height="501" alt="Image" src="https://github.com/user-attachments/assets/8fac7b3d-29cd-4078-81a3-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At Insee, we're thinking in particular of the parquet format (which is not currently a priority for time series data, but could become one in the future). </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#820</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Problem with creating csv and csv matrix output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When outputting the results of seasonal adjustment in csv and csv matrix format, the output fails with error `java.nio.charset.UnmappableCharacterException: Input Length = 1` (more details below). The problem was first seen on version 3.5.1 and is still seen in the newest version 3.6.0 using a computer running Windows </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#698</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#819</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Series naming restrictions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Regarima residuals threshold values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> This is just a question:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We have noticed that threshold values in `Tools &gt; Options &gt; SA &gt; TramoSeats &gt; Regarima residuals` are the same for Uncertain/Bad for Seasonal and Severe/Bad for Trading days (see picture below).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When changing the settings and closing the program, the changes are not saved, they default to the same value.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Are there any character restrictions imposed by the JDemetra+ GUI and/or the Cruncher when naming series (that is, when providing a name or ID for series)? For example, are certain special characters not allowed, or are there any character-length limits, and do these differ for the GUI vs the </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#695</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Infinity result for diagnostics.fcast-outsample-variance causes remainder of dem</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I've found a bug with the cruncher. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Here's the output I saw at the end of my run: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - At the end of the output printed out by cruncher was this: (note the 'failed' line)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Flushing bundle...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Generate Output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Csv matrix</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> failed: Input length = 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> csv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> generated</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Saving new processing...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - output series were produced a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#761</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#843</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> 🟢 Open</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Reloading an xlsx files in Providers create new SA-Item</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Why the color is not updated?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We observe what appears to be a bug.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## Questions</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ### Description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Not the color</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> When reloading a data file in the Providers tab, new series are added to the open SA-Processing.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When I try to switch from a Tramo-Seats specification to X13 (or vice versa), the `domainSpec` (**Reference Specification**) name is updated, but **not the color**.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ### Procedure</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Apply before refresh</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1) Open JDemetra+ v3.5.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2) Create a new WS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3) Create a new SAP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4) Add data from Providers to SAP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5) Add new points to data file</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6) Re-add the data file under Providers (even if already present and with star)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7) Click on "Reload"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8) Series are added again to SAP</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Then, if I want to refresh the model, I have to **apply the `domainSpec`** before I can use a refresh policy (e.g. Concurrent). I'm not sure if this was the case with other specification changes or other refresh policies.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Here's a short video describing the procedure:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Refresh only the first</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/user-attachments/assets/323a11ee-9949-467d-8f43-79b4cdf8ab3b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When I refresh a group of SA-Items and one of the refreshes fails, only the first n are executed (even if there are valid ones that haven't been tested).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In my example, only the first SA-Item is refreshed.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Comments:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment n°1 by Immurb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### **Bold** or `(frozen)`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Just to add some additional information:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Finally, the name of an SA-Item can be **bold* or followed by `(frozen)`. What does this mean again?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1. Still happens in the develop branch</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2. Seems to duplicate only the last added items (last transfer) when the corresponding data file is reloaded</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3. Only happens once, so if you reload the same data file multiple times only one set of duplicates is added</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4. No new data is needed in the data file and it doesn't matter if you add any data files to the provider (Step 5 and 6)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5. Seems to be related to the events fired in InternalTsProvider (so not only xlsx shows this behaviour)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I think it means it's linked to fact that the link to the raw data is updated or that the the model is refreshed ?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> There are cases where the `(frozen)` remains in the SA-Item name, I need to raise an issue for that too.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ## Examples</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Here is an example:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/user-attachments/assets/9f6e1e62-2aaa-40c3-8a8d-5313c06c6bfa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Errors</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The error message I got:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/user-attachments/assets/3273b9af-d573-440d-aec3-ea5581e50fa1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;details&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;summary&gt;Tramo-Seats full log&lt;/summary&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> java.lang.ClassCastException: class jdplus.x13.base.api.x13.X13Spec cannot be cast to class jdplus.tramoseats.base.api.tramoseats.TramoSeatsSpec (jdplus.x13.base.api.x13.X13Spec is in unnamed module of loader org.netbeans.StandardModule$OneModuleClassLoader @7cf564fc; jdplus.tramoseats.base.api.tramoseats.TramoSeatsSpec is in unnamed module of loader org.netbeans.StandardModule$OneModuleClassLoader @30e1fd5a)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.tramoseats.base.core.tramoseats.TramoSeatsFactory.refreshSpec(TramoSeatsFactory.java:62)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.base.api.SaItem.refresh(SaItem.java:311)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.ui.MultiProcessingDocument.refresh(MultiProcessingDocument.java:174)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.ui.SaBatchUI.refresh(SaBatchUI.java:508)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.ui.SaBatchUI.refresh(SaBatchUI.java:493)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.actions.LocalRefreshConcurrent.process(LocalRefreshConcurrent.java:37)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.actions.LocalRefreshConcurrent.process(LocalRefreshConcurrent.java:18)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.desktop.plugin.ui.ActiveViewAction.actionPerformed(ActiveViewAction.java:42)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.AbstractButton.fireActionPerformed(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.DefaultButtonModel.setPressed(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.AbstractButton.doClick(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.plaf.basic.BasicMenuItemUI.doClick(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.plaf.basic.BasicMenuItemUI$Handler.mouseReleased(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.processMouseEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.JComponent.processMouseEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.processEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Container.processEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Container.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.dispatchEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Container.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Window.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.dispatchEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$4.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$4.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.AccessController.doPrivileged(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$5.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$5.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.AccessController.doPrivileged(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue.dispatchEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [catch] at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:136)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/details&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;details&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;summary&gt;X13 full log&lt;/summary&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> java.lang.ClassCastException: class jdplus.tramoseats.base.api.tramoseats.TramoSeatsSpec cannot be cast to class jdplus.x13.base.api.x13.X13Spec (jdplus.tramoseats.base.api.tramoseats.TramoSeatsSpec is in unnamed module of loader org.netbeans.StandardModule$OneModuleClassLoader @30e1fd5a; jdplus.x13.base.api.x13.X13Spec is in unnamed module of loader org.netbeans.StandardModule$OneModuleClassLoader @7cf564fc)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.x13.base.core.x13.X13Factory.refreshSpec(X13Factory.java:70)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.base.api.SaItem.refresh(SaItem.java:311)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.ui.MultiProcessingDocument.refresh(MultiProcessingDocument.java:174)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.ui.SaBatchUI.refresh(SaBatchUI.java:508)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.ui.SaBatchUI.refresh(SaBatchUI.java:493)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.actions.LocalRefreshConcurrent.process(LocalRefreshConcurrent.java:37)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.sa.desktop.plugin.multiprocessing.actions.LocalRefreshConcurrent.process(LocalRefreshConcurrent.java:18)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at jdplus.toolkit.desktop.plugin.ui.ActiveViewAction.actionPerformed(ActiveViewAction.java:42)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.AbstractButton.fireActionPerformed(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.DefaultButtonModel.setPressed(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.AbstractButton.doClick(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.plaf.basic.BasicMenuItemUI.doClick(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.plaf.basic.BasicMenuItemUI$Handler.mouseReleased(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.processMouseEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/javax.swing.JComponent.processMouseEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.processEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Container.processEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Container.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.dispatchEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Container.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Window.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.Component.dispatchEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue.dispatchEventImpl(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$4.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$4.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.AccessController.doPrivileged(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$5.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue$5.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.AccessController.doPrivileged(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventQueue.dispatchEvent(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [catch] at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:136)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	at java.desktop/java.awt.EventDispatchThread.run(Unknown Source)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/details&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues.</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#763 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#761 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#758 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#752 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#751 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#734 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#733 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#711 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#698 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#695 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#844 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#843 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#842 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#841 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#840 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#838 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#837 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#821 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#820 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#819 🟢 Open </span>
 </code></pre></div>
     </div>
   </div>
