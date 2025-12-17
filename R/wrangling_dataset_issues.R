@@ -490,6 +490,10 @@ format_issues <- function(
 #' write_labels_to_dataset(labels, dataset_dir = tempdir())
 #' write_milestones_to_dataset(milestones, dataset_dir = tempdir())
 #'
+#' write_issues_to_dataset(issues, dataset_dir = tempdir(), dataset_name = "my_issues")
+#' write_labels_to_dataset(labels, dataset_dir = tempdir(), dataset_name = "my_labels")
+#' write_milestones_to_dataset(milestones, dataset_dir = tempdir(), dataset_name = "my_milestones")
+#'
 #' @rdname write
 #'
 write_issues_to_dataset <- function(issues, ...) {
@@ -507,8 +511,9 @@ write_issues_to_dataset.IssuesTB <- function(
     verbose = TRUE,
     ...
 ) {
-    if (tools::file_ext(dataset_name) == "yaml") {
-        output_file <- tools::file_path_sans_ext(dataset_name)
+    output_file <- dataset_name
+    if (tools::file_ext(output_file) == "yaml") {
+        output_file <- tools::file_path_sans_ext(output_file)
     }
     output_path <- file.path(dataset_dir, output_file) |>
         paste0(".yaml") |>
@@ -524,7 +529,7 @@ write_issues_to_dataset.IssuesTB <- function(
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)
     }
-    issues_yaml <- yaml::as.yaml(issues)
+    issues_yaml <- yaml::as.yaml(issues, precision = 22L, indent = 2L)
     writeLines(text = enc2utf8(issues_yaml), con = output_path, useBytes = TRUE)
     return(invisible(TRUE))
 }

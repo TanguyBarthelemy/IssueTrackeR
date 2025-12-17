@@ -77,7 +77,7 @@ update_database <- function(
         verbose = verbose
     )
 
-    milestones <- get_milestones(source = "online", verbose = verbose, ...)
+    milestones <- get_milestones(source = "online", verbose = verbose, state = "all", ...)
     write_milestones_to_dataset(
         milestones = milestones,
         dataset_dir = dataset_dir,

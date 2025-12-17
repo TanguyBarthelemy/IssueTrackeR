@@ -236,7 +236,7 @@ write_milestones_to_dataset <- function(
         }
     }
 
-    milestones_yaml <- yaml::as.yaml(milestones)
+    milestones_yaml <- yaml::as.yaml(milestones, precision = 22L, indent = 2L)
     writeLines(
         text = enc2utf8(milestones_yaml),
         con = output_path,

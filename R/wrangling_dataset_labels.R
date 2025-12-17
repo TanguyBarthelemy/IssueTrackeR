@@ -158,7 +158,7 @@ write_labels_to_dataset <- function(
         }
     }
 
-    labels_yaml <- yaml::as.yaml(labels)
+    labels_yaml <- yaml::as.yaml(labels, precision = 22L, indent = 2L)
     writeLines(text = enc2utf8(labels_yaml), con = output_path, useBytes = TRUE)
     return(invisible(TRUE))
 }
