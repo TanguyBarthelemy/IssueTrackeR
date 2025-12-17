@@ -134,21 +134,21 @@
 <div class="section level3">
 <h3 id="save-issues-in-local">Save issues in local<a class="anchor" aria-label="anchor" href="#save-issues-in-local"></a>
 </h3>
-<p>You can also write the datasets in local with <code><a href="reference/write.html">write_issues_to_dataset()</a></code>, <code><a href="reference/write.html">write_labels_to_dataset()</a></code> and <code><a href="reference/write.html">write_milestones_to_dataset()</a></code>:</p>
+<p>You can also write the datasets in local with <code>write_issues_to_dataset()</code>, <code>write_labels_to_dataset()</code> and <code>write_milestones_to_dataset()</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/write.html">write_issues_to_dataset</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu">write_issues_to_dataset</span><span class="op">(</span></span>
 <span>    issues <span class="op">=</span> <span class="va">my_issues</span>, </span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; The datasets will be exported to /tmp/Rtmpyc9CiM/list_issues.yaml.</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/write.html">write_labels_to_dataset</a></span><span class="op">(</span></span>
+<span><span class="fu">write_labels_to_dataset</span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="va">my_labels</span>, </span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; The datasets will be exported to /tmp/Rtmpyc9CiM/list_labels.yaml.</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/write.html">write_milestones_to_dataset</a></span><span class="op">(</span></span>
+<span><span class="fu">write_milestones_to_dataset</span><span class="op">(</span></span>
 <span>    milestones <span class="op">=</span> <span class="va">my_milestones</span>, </span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
