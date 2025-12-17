@@ -143,7 +143,8 @@ get_issues <- function(
                 owner = owner,
                 endpoint = "/repos/:owner/:repo/issues",
                 state = state,
-                .limit = Inf
+                .limit = Inf,
+                .progress = FALSE
             )
         })
         check_response(raw_issues)
@@ -156,7 +157,8 @@ get_issues <- function(
                 repo = repo,
                 owner = owner,
                 endpoint = "/repos/:owner/:repo/issues/comments",
-                .limit = Inf
+                .limit = Inf,
+                .progress = FALSE
             )
         })
         check_response(raw_comments)
@@ -295,13 +297,15 @@ format_comments <- function(
 #'     repo = "rjdemetra",
 #'     owner = "rjdverse",
 #'     endpoint = "/repos/:owner/:repo/issues",
-#'     .limit = Inf
+#'     .limit = Inf,
+#'     .progress = FALSE
 #' )
 #' raw_comments <- gh::gh(
 #'     repo = "rjdemetra",
 #'     owner = "rjdverse",
 #'     endpoint = "/repos/:owner/:repo/issues/comments",
-#'     .limit = Inf
+#'     .limit = Inf,
+#'     .progress = FALSE
 #' )
 #' all_issues <- format_issues(raw_issues = raw_issues,
 #'                             raw_comments = raw_comments,

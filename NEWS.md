@@ -16,6 +16,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * `with_comments()`: Function to filter the issue with or without comments
 * `author_last_comment()`: Add new function to retrieve the name of the last commentator
 
+### Changed
+
+* Removed progress bar
+
 
 ## [1.3.0] - 2025-10-21
 

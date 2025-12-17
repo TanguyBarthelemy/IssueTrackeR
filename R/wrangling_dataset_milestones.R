@@ -38,7 +38,8 @@ null_to_default <- function(x, default) {
 #'     owner = "jdemetra",
 #'     endpoint = "/repos/:owner/:repo/milestones",
 #'     state = "all",
-#'     .limit = Inf
+#'     .limit = Inf,
+#'     .progress = FALSE
 #' )
 #' raw_milestone <- raw_milestones[[5L]]
 #' format_milestone(raw_milestone)
@@ -133,7 +134,8 @@ get_milestones <- function(
                 owner = owner,
                 endpoint = "/repos/:owner/:repo/milestones",
                 state = state,
-                .limit = Inf
+                .limit = Inf,
+                .progress = FALSE
             )
         })
         check_response(raw_milestones)
@@ -189,7 +191,8 @@ get_milestones <- function(
 #'     owner = "jdemetra",
 #'     endpoint = "/repos/:owner/:repo/milestones",
 #'     state = "all",
-#'     .limit = Inf
+#'     .limit = Inf,
+#'     .progress = FALSE
 #'  )
 #' format_milestones(milestones_jdplus_main)
 #' }

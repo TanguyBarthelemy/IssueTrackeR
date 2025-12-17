@@ -47,7 +47,8 @@ get_labels <- function(
                 repo = repo,
                 owner = owner,
                 endpoint = "/repos/:owner/:repo/labels",
-                .limit = Inf
+                .limit = Inf,
+                .progress = FALSE
             )
         })
         check_response(raw_labels)
@@ -102,7 +103,8 @@ get_labels <- function(
 #'    repo = "rjdemetra",
 #'    owner = "rjdverse",
 #'    endpoint = "/repos/:owner/:repo/labels",
-#'    .limit = Inf
+#'    .limit = Inf,
+#'    .progress = FALSE
 #' )
 #' format_labels(raw_labels)
 #' }
