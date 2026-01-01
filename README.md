@@ -40,7 +40,8 @@ remotes::install_github("TanguyBarthelemy/IssueTrackeR")
   GitHub repository.
 - **Issue Management**: Class S3 to manage the issues as a datasets
   within R.
-- **Filtering**: Filter issues by labels, content and milestones.
+- **Filtering**: Filter issues by labels, content (title, body and
+  comments) and milestones.
 
 ## Usage
 
@@ -62,18 +63,15 @@ To get information from a repository, you can call the functions
 # From online
 my_issues <- get_issues(source = "online", owner = "jdemetra", repo = "jdplus-main", verbose = FALSE)
 my_labels <- get_labels(source = "online", owner = "jdemetra", repo = "jdplus-main")
+#> Repo: jdplus-main  owner: jdemetra 
 #> Reading labels... Done!
 #> 12 labels found.
 my_milestones <- get_milestones(source = "online", owner = "jdemetra", repo = "jdplus-main")
+#> Repo: jdplus-main  owner: jdemetra 
 #> Reading milestones... 
 #>  -  backlog ... Done!
-#>  -  3.2.2 ... Done!
-#>  -  3.2.3 ... Done!
-#>  -  3.4.0 ... Done!
-#>  -  3.5.0 ... Done!
-#>  -  3.5.1 ... Done!
-#>  -  3.6.0 ... Done!
-#> Done! 7 milestones found.
+#>  -  3.7.0 ... Done!
+#> Done! 2 milestones found.
 ```
 
 ### Save issues in local
@@ -87,19 +85,19 @@ write_issues_to_dataset(
     issues = my_issues, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/Rtmpyc9CiM/list_issues.yaml.
+#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpEVPyuu\list_issues.yaml.
 
 write_labels_to_dataset(
     labels = my_labels, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/Rtmpyc9CiM/list_labels.yaml.
+#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpEVPyuu\list_labels.yaml.
 
 write_milestones_to_dataset(
     milestones = my_milestones, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/Rtmpyc9CiM/list_milestones.yaml.
+#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpEVPyuu\list_milestones.yaml.
 ```
 
 ### Options

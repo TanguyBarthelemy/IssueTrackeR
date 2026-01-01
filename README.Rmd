@@ -44,7 +44,7 @@ remotes::install_github("TanguyBarthelemy/IssueTrackeR")
 
 - **Retrieve Issues**: Fetch issues from any (with sufficient rights) GitHub repository.
 - **Issue Management**: Class S3 to manage the issues as a datasets within R.
-- **Filtering**: Filter issues by labels, content and milestones.
+- **Filtering**: Filter issues by labels, content (title, body and comments) and milestones.
 
 
 ## Usage
