@@ -28,7 +28,7 @@ add_n_years <- function(x, n) {
 }
 
 # Nbr d'issues ouvertes depuis au moins lag annés
-get_still_open <- function(x, lag = 0) {
+get_still_open <- function(x, lag = 0L) {
     dates <- get_dates_vec(x$created_at)
 
     closed <- as.Date(x$closed_at)
@@ -45,18 +45,18 @@ get_still_open <- function(x, lag = 0) {
     return(still_open)
 }
 
-generate_age_mat <- function(x, n = 3) {
+generate_age_mat <- function(x, n = 3L) {
     age_mat <- lapply(
-        X = seq_len(n + 1) - 1,
+        X = seq_len(n + 1L) - 1L,
         FUN = get_still_open,
         x = x
     ) |>
         do.call(what = cbind)
-    age_mat <- age_mat - cbind(age_mat[, -1], 0L)
+    age_mat <- age_mat - cbind(age_mat[, -1L], 0L)
 
-    colnames(age_mat)[n + 1] <- paste0(">", n, "y")
+    colnames(age_mat)[n + 1L] <- paste0(">", n, "y")
     colnames(age_mat)[seq_len(n)] <- paste0(
-        seq_len(n) - 1,
+        seq_len(n) - 1L,
         "-",
         seq_len(n),
         "y"
@@ -65,7 +65,7 @@ generate_age_mat <- function(x, n = 3) {
 }
 
 
-plot_historic <- function(x, n = 3) {
+plot_historic <- function(x, n = 3L) {
     dates <- get_dates_vec(x$created_at)
     age_mat <- generate_age_mat(x, n)
 
@@ -77,14 +77,14 @@ plot_historic <- function(x, n = 3) {
 
     plot(
         range(dates),
-        c(0, max(rowSums(age_mat))),
+        c(0L, max(rowSums(age_mat))),
         type = "n",
         xlab = "Date",
         ylab = "Issues ouvertes",
         main = "Anciennete du backlog"
     )
 
-    cum <- rep(0, nrow(age_mat))
+    cum <- rep(0L, nrow(age_mat))
 
     for (j in seq_len(ncol(age_mat))) {
         y1 <- cum
@@ -100,7 +100,7 @@ plot_historic <- function(x, n = 3) {
         cum <- y2
     }
 
-    legend(
+    graphics::legend(
         "topleft",
         legend = colnames(age_mat),
         fill = cols,
@@ -132,13 +132,13 @@ plot_created_closed <- function(x) {
         main = "Backlog et flux"
     )
 
-    graphics::abline(h = 0, col = "grey70")
+    graphics::abline(h = 0L, col = "grey70")
 
     # ouvertures
     graphics::rect(
-        xleft = dates - 10,
-        ybottom = 0,
-        xright = dates + 10,
+        xleft = dates - 10L,
+        ybottom = 0L,
+        xright = dates + 10L,
         ytop = new_created,
         col = "#238636",
         border = NA
@@ -146,10 +146,10 @@ plot_created_closed <- function(x) {
 
     # fermetures
     graphics::rect(
-        xleft = dates - 10,
+        xleft = dates - 10L,
         ybottom = -new_closed,
-        xright = dates + 10,
-        ytop = 0,
+        xright = dates + 10L,
+        ytop = 0L,
         col = "#DA3633",
         border = NA
     )
@@ -158,7 +158,7 @@ plot_created_closed <- function(x) {
     graphics::lines(
         dates,
         still_open,
-        lwd = 2,
+        lwd = 2L,
         col = "black"
     )
 
@@ -166,9 +166,9 @@ plot_created_closed <- function(x) {
         "topleft",
         legend = c("Still open", "New open", "New closed"),
         col = c("black", "#238636", "#DA3633"),
-        lty = c(1, NA, NA),
-        pch = c(NA, 15, 15),
-        pt.cex = 2,
+        lty = c(1L, NA, NA),
+        pch = c(NA, 15L, 15L),
+        pt.cex = 2L,
         bty = "n"
     )
 
@@ -225,7 +225,7 @@ plot_created_closed <- function(x) {
 plot.IssuesTB <- function(
     x,
     type = c("history", "created-closed"),
-    n = 3,
+    n = 3L,
     ...
 ) {
     type <- match.arg(type)
