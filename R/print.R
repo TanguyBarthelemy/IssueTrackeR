@@ -30,7 +30,7 @@
 #'
 #' # Display the summary of
 #' summary(all_issues[1:10, ])
-#' @rdname print
+#' @name print
 #'
 #' @exportS3Method print IssueTB
 #' @method print IssueTB

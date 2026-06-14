@@ -23,7 +23,7 @@
 #'
 #' # Summarise several issues
 #' summary(all_issues[1:10, ])
-#' @rdname summary
+#' @name summary
 #'
 #' @exportS3Method summary IssueTB
 #' @method summary IssueTB

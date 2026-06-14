@@ -2,41 +2,51 @@
 % Please edit documentation in R/plot.R
 \name{plot.IssuesTB}
 \alias{plot.IssuesTB}
-\title{Plot IssuesTB object}
+\title{Plot an IssuesTB object}
 \usage{
-\method{plot}{IssuesTB}(x, type = c("history", "created-closed"), n = 3, ...)
+\method{plot}{IssuesTB}(x, type = c("history", "created-closed"), n = 3L, ...)
 }
 \arguments{
-\item{x}{a \code{IssuesTB} object.}
+\item{x}{An object of class \code{IssuesTB}.}
 
-\item{type}{a character to indicate which graph to plot. The accepted values
-are "history" or "created-closed". The default value is "history".}
+\item{type}{Character string indicating which plot to produce.
+Accepted values are \code{"history"} and \code{"created-closed"}.
+The default is \code{"history"}.}
 
-\item{n}{The number of layer displayed in the graph.
-Used only if \verb{type = "history}}
+\item{n}{Integer specifying the number of age classes to display when
+\code{type = "history"}.}
 
-\item{\dots}{Unused argument}
+\item{\dots}{Currently ignored.}
 }
 \value{
-invisibly (with \code{invisible()}) \code{x}.
+Invisibly returns \code{x}.
 }
 \description{
-2 ways to plot the issues:
+Visualize the evolution of an issue tracker backlog.
+
+Two types of plots are available:
 \itemize{
-\item The issues still open by layer of ancienneté
-\item The contribution between new created, closed and still open
+\item \code{"history"}: displays the distribution of open issues by age.
+\item \code{"created-closed"}: displays backlog size together with the
+numbers of newly created and newly closed issues.
 }
 }
 \details{
-If \code{type = "history"}, the graph will show the number of issue at the time
-according to the ancienneté of its creation (in the year, one year ago, two
-years ago...).
+When \code{type = "history"}, a stacked area chart is produced showing
+the number of open issues by age over time. This visualization highlights
+the evolution and aging of the backlog.
 
-If \verb{type == "created-closed}, the number of open issue is accompagné of the
-contribution of the created and closed issues.
+The first classes correspond to one-year intervals (\code{0-1y},
+\code{1-2y}, ..., \code{(n-1)-ny}) and the last class groups all issues
+older than \code{n} years.
 
-The number of issues is displayed by month from the date of the first
-created issue to today.
+When \code{type = "created-closed"}, the total number of open issues is
+displayed together with the monthly numbers of newly created and newly
+closed issues. This visualization helps assess whether issue creation
+and resolution rates are balanced over time.
+
+All statistics are aggregated monthly, from the month of the first issue
+creation to the current date.
 }
 \examples{
 all_issues <- rbind(
@@ -53,5 +63,6 @@ all_issues <- rbind(
 )
 
 plot(all_issues, type = "history")
-plot(all_issues, type = "created-close")
+plot(all_issues, type = "created-closed")
+
 }
