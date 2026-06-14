@@ -175,32 +175,45 @@ plot_created_closed <- function(x) {
     return(NULL)
 }
 
-#' @title Plot IssuesTB object
+#' @title Plot an IssuesTB object
 #'
 #' @description
-#' 2 ways to plot the issues:
-#'  * The issues still open by layer of ancienneté
-#'  * The contribution between new created, closed and still open
+#' Visualize the evolution of an issue tracker backlog.
 #'
-#' @param x a \code{IssuesTB} object.
-#' @param type a character to indicate which graph to plot. The accepted values
-#'  are "history" or "created-closed". The default value is "history".
-#' @param n The number of layer displayed in the graph.
-#'  Used only if `type = "history`
-#' @param \dots Unused argument
+#' Two types of plots are available:
+#' \itemize{
+#'   \item \code{"history"}: displays the distribution of open issues by age.
+#'   \item \code{"created-closed"}: displays backlog size together with the
+#'   numbers of newly created and newly closed issues.
+#' }
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param type Character string indicating which plot to produce.
+#'   Accepted values are \code{"history"} and \code{"created-closed"}.
+#'   The default is \code{"history"}.
+#' @param n Integer specifying the number of age classes to display when
+#'   \code{type = "history"}.
+#' @param \dots Currently ignored.
 #'
 #' @details
-#' If `type = "history"`, the graph will show the number of issue at the time
-#' according to the ancienneté of its creation (in the year, one year ago, two
-#' years ago...).
+#' When \code{type = "history"}, a stacked area chart is produced showing
+#' the number of open issues by age over time. This visualization highlights
+#' the evolution and aging of the backlog.
 #'
-#' If `type == "created-closed`, the number of open issue is accompagné of the
-#' contribution of the created and closed issues.
+#' The first classes correspond to one-year intervals (\code{0-1y},
+#' \code{1-2y}, ..., \code{(n-1)-ny}) and the last class groups all issues
+#' older than \code{n} years.
 #'
-#' The number of issues is displayed by month from the date of the first
-#' created issue to today.
+#' When \code{type = "created-closed"}, the total number of open issues is
+#' displayed together with the monthly numbers of newly created and newly
+#' closed issues. This visualization helps assess whether issue creation
+#' and resolution rates are balanced over time.
 #'
-#' @returns invisibly (with \code{invisible()}) \code{x}.
+#' All statistics are aggregated monthly, from the month of the first issue
+#' creation to the current date.
+#'
+#' @returns
+#' Invisibly returns \code{x}.
 #'
 #' @examples
 #' all_issues <- rbind(
@@ -217,9 +230,9 @@ plot_created_closed <- function(x) {
 #' )
 #'
 #' plot(all_issues, type = "history")
-#' plot(all_issues, type = "created-close")
+#' plot(all_issues, type = "created-closed")
+#'
 #' @rdname plot
-#' @exportS3Method plot IssuesTB
 #' @method plot IssuesTB
 #' @export
 plot.IssuesTB <- function(
@@ -231,7 +244,7 @@ plot.IssuesTB <- function(
     type <- match.arg(type)
     if (type == "history") {
         plot_historic(x, n)
-    } else {
+    } else if (type == "created-closed") {
         plot_created_closed(x)
     }
     return(invisible(x))
