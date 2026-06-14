@@ -1,7 +1,7 @@
 .write <- function(
     x,
     dataset_dir = tempdir(),
-    dataset_name,
+    dataset_name = "object.yaml",
     verbose = TRUE,
     ...
 ) {
