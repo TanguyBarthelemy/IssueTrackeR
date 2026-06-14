@@ -113,7 +113,7 @@
 <p>The optional <code>prob</code> argument can be used to give a vector of
   weights for obtaining the elements of the vector being sampled.  They
   need not sum to one, but they should be non-negative and not all zero.
-  If <code>replace</code> is true, Walker's alias method (Ripley, 1987) is
+  If <code>replace</code> is true, Walker's alias method (<a href="#reference+sample.Rd+R+3ARipley+3A1987" class="citation">Ripley 1987</a>) is
   used when there are more than 200 reasonably probable values: this
   gives results incompatible with those from <span style="R">R</span> &lt; 2.2.0.</p>
 <p>If <code>replace</code> is false, these probabilities are applied
@@ -129,10 +129,15 @@
     </div>
     <div id="references">
     <h2>References</h2>
-    <p>Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988)
-  <em>The New S Language</em>.
-  Wadsworth &amp; Brooks/Cole.</p>
-<p>Ripley, B. D. (1987) <em>Stochastic Simulation</em>. Wiley.</p>
+    <p><span id="reference+sample.Rd+R+3ABecker+2BChambers+2BWilks+3A1988"></span>Becker RA, Chambers JM, Wilks AR (1988).
+<em>The New S Language</em>.
+Chapman and Hall/CRC, London.
+ISBN 053409192X.
+</p><p>
+<span id="reference+sample.Rd+R+3ARipley+3A1987"></span>Ripley BD (1987).
+<em>Stochastic Simulation</em>.
+Wiley, New York, NY.
+ISBN 0471818844.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -147,16 +152,16 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span></span></span>
 <span class="r-in"><span><span class="co"># a random permutation</span></span></span>
 <span class="r-in"><span><span class="fu">sample</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  5 12  2  6  7  8  4 10  3  1 11  9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  7  5  6  4 10  1 11  8  3  9 12  2</span>
 <span class="r-in"><span><span class="co"># bootstrap resampling -- only if length(x) &gt; 1 !</span></span></span>
 <span class="r-in"><span><span class="fu">sample</span><span class="op">(</span><span class="va">x</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  7  5  6  9  6 10  5  2  1  4  8  6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  7 11 11  5  5 12  2  6  4  2  3  9</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 100 Bernoulli trials</span></span></span>
 <span class="r-in"><span><span class="fu">sample</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 0 0 1 1 0 1 0 0 0 1 0 1 0 1 1 0 1 1 1 0 1 0 1 0 1 0 1 1 1 0 0 1 1 0 0 1 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [38] 1 0 1 0 0 1 1 0 1 1 1 0 1 1 1 1 1 0 0 0 1 0 0 0 0 1 0 0 0 1 1 0 0 0 0 1 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [75] 0 1 1 1 0 0 0 0 0 1 0 0 0 0 0 0 1 0 1 0 1 1 0 1 1 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 1 0 0 1 0 1 0 1 0 1 1 0 1 0 1 1 1 0 0 1 1 0 1 0 0 0 1 0 1 0 1 1 0 1 1 1 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [38] 1 0 1 0 1 0 1 1 1 0 0 1 1 0 0 1 1 1 0 1 0 0 1 1 0 1 1 1 0 1 1 1 1 1 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [75] 1 0 0 0 0 1 0 0 0 1 1 0 0 0 0 1 0 0 1 1 1 0 0 0 0 0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## More careful bootstrapping --  Consider this when using sample()</span></span></span>
 <span class="r-in"><span><span class="co">## programmatically (i.e., in your function or simulation)!</span></span></span>
@@ -166,7 +171,7 @@
 <span class="r-in"><span>    <span class="fu">sample</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">x</span> <span class="op">&gt;</span>  <span class="fl">8</span><span class="op">]</span><span class="op">)</span> <span class="co"># length 2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10  9</span>
 <span class="r-in"><span>    <span class="fu">sample</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">x</span> <span class="op">&gt;</span>  <span class="fl">9</span><span class="op">]</span><span class="op">)</span> <span class="co"># oops -- length 10!</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  7  5  4 10  3  8  6  2  9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  9  5  3 10  2  4  8  6  1  7</span>
 <span class="r-in"><span>    <span class="fu">sample</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">]</span><span class="op">)</span> <span class="co"># length 0</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> integer(0)</span>
 <span class="r-in"><span></span></span>
@@ -181,11 +186,11 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## R 3.0.0 and later</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="fl">1e10</span>, <span class="fl">12</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 7518792438 1508621556 8956009260 7957912378 1061793731 8107709433</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 3891447250 4293482860 8759734749 1792156505 1414462143 8663051368</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 8236300557 9843030214 9614065959 6047160812 6377193290 9292739565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 5847769922  432334835 5941559274  903219743 1051969528 8054590391</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="fl">1e10</span>, <span class="fl">12</span><span class="op">)</span> <span class="co"># not that there is much chance of duplicates</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 6480620242 7033808252 1282673882 5230829625 9330208980 1662559869</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 4599744223 7637754558 6895036458 4859369491 8320726885 5170695281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2533343833 7571270355  347252719 2821739599  938715679 8787762671</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 6042409916 7417209664 6769686473 4029336865 3498644011 9466218482</span>
 </code></pre></div>
     </div>
   </div>
