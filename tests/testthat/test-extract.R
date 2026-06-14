@@ -1,3 +1,10 @@
+closed_issues <- get_issues(
+    source = "local",
+    dataset_dir = testthat::test_path("data"),
+    dataset_name = "closed_issues.yaml"
+)
+my_issues <- closed_issues[c(1L, 4L, 6L), ]
+
 l <- list(
     data.frame(number = c(963L, 323L, 154L), row.names = c(1L, 4L, 6L)),
     list(
@@ -49,14 +56,6 @@ l <- list(
 )
 
 test_that("[ function is good", {
-
-    closed_issues <- get_issues(
-        source = "local",
-        dataset_dir = testthat::test_path("data"),
-        dataset_name = "closed_issues.yaml"
-    )
-    my_issues <- closed_issues[c(1L, 4L, 6L), ]
-
     testthat::expect_identical(my_issues[], my_issues)
     testthat::expect_identical(my_issues[1], l[[1L]])
     testthat::expect_identical(

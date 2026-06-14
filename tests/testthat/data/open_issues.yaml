@@ -1,0 +1,308 @@
+number:
+- 690
+- 562
+- 447
+- 419
+- 418
+- 261
+- 250
+- 162
+- 161
+- 136
+title:
+- Change of reference specification in SAProcessing is not working
+- Model changed by Seats - output
+- user-defined calendar effect names do not appear in demetra-m.csv
+- User-defined calendar effects
+- Better handling of coefficients/parameters in the GUI
+- No new logo in shortcuts
+- Add time filter in UI components
+- Use Platform-Specific Desktop Features from JDK 9
+- Use enhanced Pseudo-Random Number Generators from JDK 17
+- '[FR] decimal separator in the JWSACruncher'
+body:
+- |-
+  I changed the reference specification from RSAfull to x11 and then the specification wasn't changed:
+
+  <img width="991" height="603" alt="Image" src="https://github.com/user-attachments/assets/719f1e55-d3f6-4c3e-9d54-6ac304e7a84e" />
+- JDemetra 3.4.0 - When the TRAMO model is not decomposed, the representation (P,D,Q)(BP,BD,BQ)s  of
+  the Seats model is not available.
+- "user-defined calendar effect names do not appear in demetra-m.csv file.\r\n![calendar
+  effec_demetram](https://github.com/user-attachments/assets/267217bf-e37c-40bd-913e-324a5dc48d79)\r\n\r\n\r\n\r\n"
+- Better handling of user-defined calendar effects (output, gui)
+- "Improve the naming of coefficients/parameters in the spec boxes\r\nHide coefficients
+  when they can't be specified (undefined transformation)"
+- "the new logo appears just in the top left corner of the open GUI but not in the
+  short cuts \r\n\r\n\r\n![image](https://github.com/jdemetra/jdplus-main/assets/43274870/d5c4ca0c-9d70-42ee-bd40-97a2714db224)\r\n"
+- See https://github.com/jdemetra/jdplus-main/blob/develop/jdplus-main-base/jdplus-toolkit-base-parent/jdplus-toolkit-base-api/src/main/java/jdplus/toolkit/base/api/timeseries/TimeSelector.java
+- "See https://openjdk.org/jeps/272\r\n\r\nMost [nbbrd desktop API](https://github.com/nbbrd/java-desktop-util/)
+  can be replaced by the latest JDK desktop API. \r\nThere are a few exceptions anyway:
+  search and kwown folders"
+- See https://openjdk.org/jeps/356
+- It could be good to be able to change the decimal separator in the JWSACruncher
+  to avoid a system dependency. This is linked to https://github.com/jdemetra/jwsacruncher/issues/13.
+state:
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+url:
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/690
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/562
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/447
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/419
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/418
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/261
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/250
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/162
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/161
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/136
+html_url:
+- https://github.com/jdemetra/jdplus-main/issues/690
+- https://github.com/jdemetra/jdplus-main/issues/562
+- https://github.com/jdemetra/jdplus-main/issues/447
+- https://github.com/jdemetra/jdplus-main/issues/419
+- https://github.com/jdemetra/jdplus-main/issues/418
+- https://github.com/jdemetra/jdplus-main/issues/261
+- https://github.com/jdemetra/jdplus-main/issues/250
+- https://github.com/jdemetra/jdplus-main/issues/162
+- https://github.com/jdemetra/jdplus-main/issues/161
+- https://github.com/jdemetra/jdplus-main/issues/136
+milestone:
+- .na.character
+- .na.character
+- backlog
+- backlog
+- backlog
+- backlog
+- backlog
+- backlog
+- backlog
+- .na.character
+created_at:
+- 1752710400.0
+- 1742342400.0
+- 1728432000.0
+- 1725580800.0
+- 1725580800.0
+- 1712188800.0
+- 1710720000.0
+- 1700092800.0
+- 1700092800.0
+- 1698364800.0
+closed_at:
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+- .na.real
+creator:
+- ChristianeHofer
+- Ciamman
+- MFatihTuzen
+- palatej
+- palatej
+- annasmyk
+- charphi
+- charphi
+- charphi
+- AQLT
+assignee:
+- .na.character
+- palatej
+- palatej
+- palatej
+- palatej
+- charphi
+- charphi
+- charphi
+- charphi
+- JanGerhardt
+state_reason:
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+- open
+owner:
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+repo:
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+labels:
+- name: []
+  color: []
+- name:
+  - documentation
+  - enhancement
+  color:
+  - '#0075ca'
+  - '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: []
+  color: []
+- name: []
+  color: []
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: enhancement
+  color: '#a2eeef'
+- name: []
+  color: []
+comments:
+- text:
+  - |-
+    It may be linked to  #639. But in reverse.
+    I think you need to refresh your model to apply your domainSpec to your series.
+  - Ok. I just corrected it.
+  author:
+  - TanguyBarthelemy
+  - palatej
+- text:
+  - |-
+    Hi could you be more specific and maybe provide an example?
+    Where are you looking for the model?
+    Are you using multi-documents or just documents under seasonal adjustment?
+    Was it working in an older 3.X version?
+  - "I am using multi-documents and I do not know if it worked in an older 3.X version.\r\n\r\nIn
+    the attached file, you will find the example you asked for.\r\n\r\nFigure 1 (node
+    \"Main results\"): the Seats model is not reported.\r\n\r\nFigure 2 (node \"Pre-processing
+    -> Arima\"): only the model identified in Tramo is reported (versions 2.x.x. reported
+    the same information for the model used by Seats).    \r\n\r\nFigure 3 (node \"Decomposition\"):
+    The model used for the decomposition (reported in the section \"Model\") is not
+    reported in the form (P,D,Q)(BP,BD,BQ). In the example, the model (orders and
+    coefficients) can be deduced quite easily, but more complex models could take
+    experience and time.\r\n\r\n   \r\n\r\n----- Messaggio originale -----\r\nDa:
+    \"Thomas Witthohn\" ***@***.***>\r\nA: \"jdemetra/jdplus-main\" ***@***.***>\r\nCc:
+    \"Anna Ciammola\" ***@***.***>, \"Author\" ***@***.***>\r\nInviato: Mercoledì,
+    19 marzo 2025 13:25:32\r\nOggetto: Re: [jdemetra/jdplus-main] Model changed by
+    Seats - output (Issue #562)\r\n\r\nImmurb left a comment (jdemetra/jdplus-main#562)\r\n\r\nHi
+    could you be more specific and maybe provide an example?\r\nWhere are you looking
+    for the model?\r\nAre you using multi-documents or just documents under seasonal
+    adjustment?\r\nWas it working in an older 3.X version?\r\n\r\n-- \r\nReply to
+    this email directly or view it on GitHub:\r\n https://urlsand.esvalabs.com/?u=https%3A%2F%2Fgithub.com%2Fjdemetra%2Fjdplus-main%2Fissues%2F562%23issuecomment-2736451942&e=2637b01d&h=841c7250&f=y&p=y
+    \r\nYou are receiving this because you authored the thread.\r\n\r\nMessage ID:
+    ***@***.***>"
+  - "Hello ! The problem is slightly more complex: with some parameters (\"noisy\"),
+    the model modified by SEATS is not a usual SARIMA model any more. More exactly,
+    the moving average part is more complex and can't be expressed with Q, BQ and
+    the corresponding coefficients.\nSo, the solution would be to mention if the modified
+    model is still a SARIMA and then only, to provide the usual information.\nI don't
+    know if that's really useful and what would be the actual added value (the algorithms
+    used for the canonical decomposition just use generic ARIMA models) "
+  - "Hello!\r\n\r\nI will describe what happened with JDemetra+ 2.x.x.\r\n\r\nWhen
+    Tramo model was not decomposed by Seats, one of the approaches used in the production
+    of OFFICIAL seasonally adjusted data was based on the manual identification of
+    a decomposable model (sometimes the model used by Seats was initially imposed
+    and then improved).\r\n\r\nWith the partial concurrent approach a decomposable
+    model was preferred for two reasons:\r\n1) forecasts of unadjusted series (in
+    Tramo) and forecasts of components (in Seats) were consistent;\r\n2) we were 100%
+    sure that seasonally adjusted data were generated through the same model.\r\n\r\nTo
+    corroborate item 2): let us think of a time series whose model M1 does not admit
+    a decomposition. M1 is then \"approximated\" with a different model M2. Adding
+    a new observation, M1 coefficients change and now M1 admits a decomposition. This
+    can generate large revisions (or larger than usual).\r\n\r\nHave the previous
+    issues been overcome with the new JD+ 3.x.x.?\r\nIf yes, my previous request can
+    be easily ignored.\r\n   \r\n     \r\n\r\n----- Messaggio originale -----\r\nDa:
+    \"Jean Palate\" ***@***.***>\r\nA: \"jdemetra/jdplus-main\" ***@***.***>\r\nCc:
+    \"Anna Ciammola\" ***@***.***>, \"Author\" ***@***.***>\r\nInviato: Giovedì, 20
+    marzo 2025 17:14:19\r\nOggetto: Re: [jdemetra/jdplus-main] Model changed by Seats
+    - output (Issue #562)\r\n\r\npalatej left a comment (jdemetra/jdplus-main#562)\r\n\r\nHello
+    ! The problem is slightly more complex: with some parameters (\"noisy\"), the
+    model modified by SEATS is not a usual SARIMA model any more. More exactly, the
+    moving average part is more complex and can't be expressed with Q, BQ and the
+    corresponding coefficients.\r\nSo, the solution would be to mention if the modified
+    model is still a SARIMA and then only, to provide the usual information.\r\nI
+    don't know if that's really useful and what would be the actual added value (the
+    algorithms used for the canonical decomposition just use generic ARIMA models)
+    \r\n\r\n-- \r\nReply to this email directly or view it on GitHub:\r\n https://urlsand.esvalabs.com/?u=https%3A%2F%2Fgithub.com%2Fjdemetra%2Fjdplus-main%2Fissues%2F562%23issuecomment-2740995244&e=2637b01d&h=5eb7ac3b&f=y&p=y
+    \r\nYou are receiving this because you authored the thread.\r\n\r\nMessage ID:
+    ***@***.***>\r\n"
+  author:
+  - Immurb
+  - Ciamman
+  - palatej
+  - Ciamman
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text:
+  - "The `nbdemetra64.exe` executable currently uses the default NetBeans Platform
+    icon.\r\nIn order to get the new logo included in the executable, we must use
+    a program on Windows which is annoying with our current build workflow.\r\n\r\nSo,
+    I'm searching for a platform-independent solution.\r\nThis problem has already
+    been asked at https://stackoverflow.com/questions/8659286/replacing-icon-in-windows-exe-from-open-source-platform-independent-java-code\r\n"
+  - "https://github.com/eclipse-platform/eclipse.platform.swt/blob/master/bundles/org.eclipse.swt.tools/Icon%20Exe/org/eclipse/swt/tools/internal/IconExe.java\r\n"
+  author:
+  - charphi
+  - charphi
+- text: 'Screenshots: https://github.com/nbbrd/java-desktop-util/issues/154'
+  author: charphi
+- text: []
+  author: []
+- text: https://www.javaspecialists.eu/archive/Issue315-Random-Newsletter.html
+  author: charphi
+- text:
+  - "Changing the decimal separator is not implemented yet but technically possible.
+    In the current release, the locale defines the decimal separator.\r\nTo make it
+    changeable, one could replace using the locale with using the settings from the
+    cruncher’s params file (or its default settings) in the formatter classes. This
+    would also affect some functionalities of JD+ which contain creating (csv) output
+    files. \r\nIf some users made use of changing the locale for some reason (that
+    is doable, e.g. with a plug-in), those functionalities would possible create a
+    different output file than expected. \r\nTherefore, it needs to be discussed when
+    to use the locale and when to use an individual specification before the code
+    is altered.    \r\nBesides, we found that the number of decimals ndecs from the
+    params file is not applied correctly: In the DoubleFormatter class “9” is hard
+    coded as the max number of decimals, so both the locale and the params settings
+    have no influence."
+  - "Currently, in my opinion, the problem is also that the decimal separator changes
+    the column separator. If your local is a comma, then the exported file when you
+    choose \"CSV\" or \"CSV matrix\" is not anymore a CSV file. \r\nMoreover, being
+    able to fix/change the decimal separator would improve the reproducibility of
+    software results"
+  author:
+  - JanGerhardt
+  - AQLT
+
