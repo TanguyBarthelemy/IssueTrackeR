@@ -104,9 +104,41 @@ comments? (Default <code>TRUE</code>)</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Looking into open_issues.yaml ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/open_issues.yaml.</span>
 <span class="r-in"><span><span class="fu">with_text</span><span class="op">(</span><span class="va">all_issues</span>, pattern <span class="op">=</span> <span class="st">"Excel"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 6 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 8 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#888</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Is it possible to choose the value `(?)` in GUI output?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The aim of this issue is to find out whether, when I generate an excel output with the GUI, it's possible to choose the length of series which items ends with `(?)`.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I will take the example of the forecasted series. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In X13-RegARIMA, there are forecasts in the preprocessing part but only with `(?)` items and it's not</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#865</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> `(frozen)` in SAI names</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I just created a new WS with csv and Excel files. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When I try to read it from R, I get `(frozen)` in the name of the SA-Items:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/user-attachments/assets/28fffeb1-b58c-42d5-8219-c440d30248d9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Here is the R code:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ``` r</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> library("rjd3workspace")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> jws &lt;- jws_open("~/tmp.xml")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> jsap &lt;- jws_sap(jws, 1L)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sap_</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#653</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Excel SA-Item names contain `\n` to separate sheet series</span>

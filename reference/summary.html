@@ -100,33 +100,38 @@ information with statistics by modalities.</p>
 <span class="r-in"><span><span class="co"># Summarise one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#844</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1006</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> 🟢 Open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Charts are slow when displaying lots of observations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Benchmarking Results includes forecast observations beyond the input series</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> High frequencies provide a lot of observations. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> More than 600000 observations seems to be problematic in charts.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (see `sdmx-dl:/STATCAN_HFED/CCEI%2CDF_HFED_AB%2C1.0/H.CA_AB.CA_BC.NSI`).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="340" height="216" alt="Image" src="https://github.com/user-attachments/assets/cd77b619-d644-4d03-925e-6a858eeb3709" /&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> While testing JDemetra+ 3.7.1, I noticed an unexpected behaviour in the **Benchmarking Results** output. The input series used in this example ends in **2025 Q1**. However, the table displayed under **Benchmarking Results** contains additional observations beyond the end of the available data. These values appear to be forecasted values generated internally by the benchmarking procedure.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Although the forecasts themselves may be valid, they are displayed in the same table as the observed data without any visual distinction. As a result, it is difficult for users to identify where the original series ends and where the forecast period begins.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Version: JDemetra+ 3.7.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Summarise several issues</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues.</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#844 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#843 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#842 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#841 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#840 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#838 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#837 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#821 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#820 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#819 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1006 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1004 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#987 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#962 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#961 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#943 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#940 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#912 ♻ Re-opened </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#888 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#883 🟢 Open </span>
 </code></pre></div>
     </div>
   </div>
