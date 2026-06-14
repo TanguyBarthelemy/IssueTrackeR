@@ -58,7 +58,7 @@ If \code{x} has length 1, is numeric (in the sense of
   The optional \code{prob} argument can be used to give a vector of
   weights for obtaining the elements of the vector being sampled.  They
   need not sum to one, but they should be non-negative and not all zero.
-  If \code{replace} is true, Walker's alias method (Ripley, 1987) is
+  If \code{replace} is true, Walker's alias method {(\if{html}{\out{<a href="#reference+sample.Rd+R+3ARipley+3A1987" class="citation">}}Ripley 1987\if{html}{\out{</a>}})} is
   used when there are more than 200 reasonably probable values: this
   gives results incompatible with those from \R < 2.2.0.
 
@@ -105,11 +105,17 @@ sample.int(1e10, 12, replace = TRUE)
 sample.int(1e10, 12) # not that there is much chance of duplicates
 }
 \references{
-Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988)
-  \emph{The New S Language}.
-  Wadsworth & Brooks/Cole.
+{\if{html}{\out{<span id="reference+sample.Rd+R+3ABecker+2BChambers+2BWilks+3A1988"></span>}}Becker RA, Chambers JM, Wilks AR (1988).
+\emph{The New S Language}.
+Chapman and Hall/CRC, London.
+ISBN 053409192X.\ifelse{html}{\out{
+</p><p>
+}}{
 
-  Ripley, B. D. (1987) \emph{Stochastic Simulation}. Wiley.
+}\if{html}{\out{<span id="reference+sample.Rd+R+3ARipley+3A1987"></span>}}Ripley BD (1987).
+\emph{Stochastic Simulation}.
+Wiley, New York, NY.
+ISBN 0471818844.}
 }
 \seealso{
 \code{\link[base]{RNGkind}(sample.kind = ..)} about random number generation,

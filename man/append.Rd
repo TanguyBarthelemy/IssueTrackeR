@@ -27,7 +27,8 @@ Add elements to a vector.
 append(1:5, 0:1, after = 3)
 }
 \references{
-Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988)
-  \emph{The New S Language}.
-  Wadsworth & Brooks/Cole.
+{\if{html}{\out{<span id="reference+append.Rd+R+3ABecker+2BChambers+2BWilks+3A1988"></span>}}Becker RA, Chambers JM, Wilks AR (1988).
+\emph{The New S Language}.
+Chapman and Hall/CRC, London.
+ISBN 053409192X.}
 }

@@ -6,6 +6,8 @@
 \alias{IssueTrackeR-package}
 \title{IssueTrackeR: List Things to Do}
 \description{
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
+
 Manage a 'GitHub' problem using R: wrangle issues, labels and milestones. It includes functions for storing, prioritizing (sorting), displaying, adding, deleting, and selecting (filtering) issues based on qualitative and quantitative information. Issues (labels and milestones) are written in lists and categorized into the S3 class to be easily manipulated as datasets in R.
 }
 \seealso{
@@ -19,6 +21,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr} [artist]
+
+Authors:
+\itemize{
+  \item Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr} [artist]
+}
 
 }
 \keyword{internal}

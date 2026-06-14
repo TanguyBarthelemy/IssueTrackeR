@@ -26,12 +26,21 @@ data from GitHub.
 
 ## Installation
 
-You can install the development version of {IssueTrackeR} from
-[GitHub](https://github.com/) with:
+You can install {IssueTrackeR} from
+[CRAN](https://cran.r-project.org/web/packages/IssueTrackeR/index.html):
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("TanguyBarthelemy/IssueTrackeR")
+install.packages("IssueTrackeR")
+```
+
+### Development
+
+You can install the development version of {IssueTrackeR} from
+[GitHub](https://github.com/):
+
+``` r
+# install.packages("pak")
+pak::pak("TanguyBarthelemy/IssueTrackeR")
 ```
 
 ## Features
@@ -70,34 +79,32 @@ my_milestones <- get_milestones(source = "online", owner = "jdemetra", repo = "j
 #> Repo: jdplus-main  owner: jdemetra 
 #> Reading milestones... 
 #>  -  backlog ... Done!
-#>  -  3.7.0 ... Done!
+#>  -  3.8.0 ... Done!
 #> Done! 2 milestones found.
 ```
 
 ### Save issues in local
 
-You can also write the datasets in local with
-`write_issues_to_dataset()`, `write_labels_to_dataset()` and
-`write_milestones_to_dataset()`:
+You can also write the datasets in local with `write_to_dataset()`:
 
 ``` r
-write_issues_to_dataset(
-    issues = my_issues, 
+write_to_dataset(
+    x = my_issues, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpEVPyuu\list_issues.yaml.
+#> The datasets will be exported to /tmp/RtmptJdtR6/list_issues.yaml.
 
-write_labels_to_dataset(
-    labels = my_labels, 
+write_to_dataset(
+    x = my_labels, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpEVPyuu\list_labels.yaml.
+#> The datasets will be exported to /tmp/RtmptJdtR6/list_labels.yaml.
 
-write_milestones_to_dataset(
-    milestones = my_milestones, 
+write_to_dataset(
+    x = my_milestones, 
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to C:\Users\UTZK0M\AppData\Local\Temp\RtmpEVPyuu\list_milestones.yaml.
+#> The datasets will be exported to /tmp/RtmptJdtR6/list_milestones.yaml.
 ```
 
 ### Options

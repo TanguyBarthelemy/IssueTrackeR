@@ -1,6 +1,6 @@
 .write <- function(
     x,
-    dataset_dir,
+    dataset_dir = tempdir(),
     dataset_name,
     verbose = TRUE,
     ...
