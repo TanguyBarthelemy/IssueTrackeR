@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r parameters, include = FALSE}
 knitr::opts_chunk[["set"]](
     collapse = TRUE,
     comment = "#>",
@@ -32,13 +32,20 @@ This package relies a lot on the package [{gh}](https://github.com/r-lib/gh) to 
 
 ## Installation
 
-You can install the development version of {IssueTrackeR} from [GitHub](https://github.com/) with:
+You can install {IssueTrackeR} from [CRAN](https://cran.r-project.org/web/packages/IssueTrackeR/index.html):
 
-``` r
-# install.packages("remotes")
-remotes::install_github("TanguyBarthelemy/IssueTrackeR")
+```{r install-from-cran, eval = TRUE, echo = TRUE, results = "hide", message = FALSE}
+install.packages("IssueTrackeR")
 ```
 
+### Development
+
+You can install the development version of {IssueTrackeR} from [GitHub](https://github.com/):
+
+```{r install-from-gh, eval = TRUE, echo = TRUE, results = "hide", message = FALSE}
+# install.packages("pak")
+pak::pak("TanguyBarthelemy/IssueTrackeR")
+```
 
 ## Features
 
@@ -49,7 +56,7 @@ remotes::install_github("TanguyBarthelemy/IssueTrackeR")
 
 ## Usage
 
-```{r, eval = TRUE, echo = TRUE}
+```{r loading, eval = TRUE, echo = TRUE}
 library("IssueTrackeR")
 ```
 
@@ -57,7 +64,7 @@ library("IssueTrackeR")
 
 To get information from a repository, you can call the functions `get_issues`, `get_labels` and `get_milestones`
 
-```{r, eval = TRUE, echo = TRUE}
+```{r retrieve, eval = TRUE, echo = TRUE}
 # From online
 my_issues <- get_issues(source = "online", owner = "jdemetra", repo = "jdplus-main", verbose = FALSE)
 my_labels <- get_labels(source = "online", owner = "jdemetra", repo = "jdplus-main")
@@ -66,21 +73,21 @@ my_milestones <- get_milestones(source = "online", owner = "jdemetra", repo = "j
 
 ### Save issues in local
 
-You can also write the datasets in local with `write_issues_to_dataset()`, `write_labels_to_dataset()` and `write_milestones_to_dataset()`:
+You can also write the datasets in local with `write_to_dataset()`:
 
-```{r, eval = TRUE, echo = TRUE}
-write_issues_to_dataset(
-    issues = my_issues, 
+```{r export, eval = TRUE, echo = TRUE}
+write_to_dataset(
+    x = my_issues, 
     dataset_dir = tempdir()
 )
 
-write_labels_to_dataset(
-    labels = my_labels, 
+write_to_dataset(
+    x = my_labels, 
     dataset_dir = tempdir()
 )
 
-write_milestones_to_dataset(
-    milestones = my_milestones, 
+write_to_dataset(
+    x = my_milestones, 
     dataset_dir = tempdir()
 )
 ```
@@ -89,7 +96,7 @@ write_milestones_to_dataset(
 
 It is also possible to set option for a R session:
 
-```{r, eval = TRUE, echo = TRUE}
+```{r set-options, eval = TRUE, echo = TRUE}
 # The directory containing the yaml files in local
 options(IssueTrackeR.dataset.dir = tempdir())
 # The default GitHub owner
@@ -102,7 +109,7 @@ options(IssueTrackeR.repo = "jdplus-main")
 
 Then it's possible to read Issues from local yaml files:
 
-```{r, eval = FALSE, echo = TRUE}
+```{r retriev-local, eval = FALSE, echo = TRUE}
 # From local
 my_issues <- get_issues(source = "local")
 my_labels <- get_labels(source = "local")
@@ -113,7 +120,7 @@ my_milestones <- get_milestones(source = "local")
 
 You can update your full database of issues, labels and milestones with `update_database()`:
 
-```{r, eval = TRUE, echo = TRUE}
+```{r update-database, eval = TRUE, echo = TRUE}
 # From online
 update_database(verbose = FALSE)
 ```
