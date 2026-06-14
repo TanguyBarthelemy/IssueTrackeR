@@ -4,26 +4,39 @@
 \alias{plot.IssuesTB}
 \title{Plot IssuesTB object}
 \usage{
-\method{plot}{IssuesTB}(x, type = c("history", "open-closed"), n = 3, ...)
+\method{plot}{IssuesTB}(x, type = c("history", "created-closed"), n = 3, ...)
 }
 \arguments{
-\item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
+\item{x}{a \code{IssuesTB} object.}
+
+\item{type}{a character to indicate which graph to plot. The accepted values
+are "history" or "created-closed". The default value is "history".}
+
+\item{n}{The number of layer displayed in the graph.
+Used only if \verb{type = "history}}
 
 \item{\dots}{Unused argument}
 }
 \value{
-invisibly (with \code{invisible()}) \code{NULL}.
+invisibly (with \code{invisible()}) \code{x}.
 }
 \description{
 2 ways to plot the issues:
 \itemize{
-\item The full history (with)
-\item The contribution betwxeen open and closed
+\item The issues still open by layer of ancienneté
+\item The contribution between new created, closed and still open
 }
 }
 \details{
-This function displays a list of issues
-(\code{IssuesTB} object) with a formatted output.
+If \code{type = "history"}, the graph will show the number of issue at the time
+according to the ancienneté of its creation (in the year, one year ago, two
+years ago...).
+
+If \verb{type == "created-closed}, the number of open issue is accompagné of the
+contribution of the created and closed issues.
+
+The number of issues is displayed by month from the date of the first
+created issue to today.
 }
 \examples{
 all_issues <- rbind(
@@ -39,5 +52,6 @@ all_issues <- rbind(
     )
 )
 
-plot(all_issues)
+plot(all_issues, type = "history")
+plot(all_issues, type = "created-close")
 }
