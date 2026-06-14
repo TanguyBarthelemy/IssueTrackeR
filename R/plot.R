@@ -64,7 +64,7 @@ generate_age_mat <- function(x, n = 3L) {
     return(age_mat)
 }
 
-
+#'
 plot_historic <- function(x, n = 3L) {
     dates <- get_dates_vec(x$created_at)
     age_mat <- generate_age_mat(x, n)
