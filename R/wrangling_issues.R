@@ -18,7 +18,7 @@
 #' @param creator a string. The GitHub username of the creator of the issue.
 #' @param assignee a string. The GitHub username of the assignee of the issue.
 #' @param state_reason a string. \code{"open"}, \code{"completed"},
-#' \code{"reopened"}, \code{"not_planned"} or \code{"duplicated"}.
+#' \code{"reopened"}, \code{"not_planned"} or \code{"duplicate"}.
 #' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssueTB} object.
@@ -155,7 +155,7 @@ new_issue.default <- function(
 #' @param assignee a vector of string. The GitHub usernames of the assignee of
 #' the issues.
 #' @param state_reason a vector of string. \code{"open"}, \code{"completed"},
-#' \code{"reopened"}, \code{"not_planned"} or \code{"duplicated"}.
+#' \code{"reopened"}, \code{"not_planned"} or \code{"duplicate"}.
 #' @param \dots Other information we would like to add to the issue.
 #'
 #' @returns a \code{IssuesTB} object.

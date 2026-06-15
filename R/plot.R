@@ -79,8 +79,8 @@ plot_historic <- function(x, n = 3L) {
         c(0L, max(rowSums(age_mat))),
         type = "n",
         xlab = "Date",
-        ylab = "Issues ouvertes",
-        main = "Anciennete du backlog"
+        ylab = "Open issues",
+        main = "Open Issues by Age"
     )
 
     cum <- rep(0L, nrow(age_mat))
@@ -127,8 +127,8 @@ plot_created_closed <- function(x) {
         type = "n",
         ylim = ylim,
         xlab = "Date",
-        ylab = "Nombre d'issues",
-        main = "Backlog et flux"
+        ylab = "Number of issues",
+        main = "Evolution of Open Issues"
     )
 
     graphics::abline(h = 0L, col = "grey70")
@@ -163,7 +163,7 @@ plot_created_closed <- function(x) {
 
     graphics::legend(
         "topleft",
-        legend = c("Still open", "New open", "New closed"),
+        legend = c("Still open", "New created", "New closed"),
         col = c("black", "#238636", "#DA3633"),
         lty = c(1L, NA, NA),
         pch = c(NA, 15L, 15L),
@@ -181,21 +181,21 @@ plot_created_closed <- function(x) {
 #'
 #' Two types of plots are available:
 #' \itemize{
-#'   \item \code{"history"}: displays the distribution of open issues by age.
+#'   \item \code{"historic"}: displays the distribution of open issues by age.
 #'   \item \code{"created-closed"}: displays backlog size together with the
 #'   numbers of newly created and newly closed issues.
 #' }
 #'
 #' @param x An object of class \code{IssuesTB}.
 #' @param type Character string indicating which plot to produce.
-#'   Accepted values are \code{"history"} and \code{"created-closed"}.
-#'   The default is \code{"history"}.
+#'   Accepted values are \code{"historic"} and \code{"created-closed"}.
+#'   The default is \code{"historic"}.
 #' @param n Integer specifying the number of age classes to display when
-#'   \code{type = "history"}.
+#'   \code{type = "historic"}.
 #' @param \dots Currently ignored.
 #'
 #' @details
-#' When \code{type = "history"}, a stacked area chart is produced showing
+#' When \code{type = "historic"}, a stacked area chart is produced showing
 #' the number of open issues by age over time. This visualization highlights
 #' the evolution and aging of the backlog.
 #'
@@ -228,7 +228,7 @@ plot_created_closed <- function(x) {
 #'     )
 #' )
 #'
-#' plot(all_issues, type = "history")
+#' plot(all_issues, type = "historic")
 #' plot(all_issues, type = "created-closed")
 #'
 #' @rdname plot
@@ -236,12 +236,12 @@ plot_created_closed <- function(x) {
 #' @export
 plot.IssuesTB <- function(
     x,
-    type = c("history", "created-closed"),
+    type = c("historic", "created-closed"),
     n = 3L,
     ...
 ) {
     type <- match.arg(type)
-    if (type == "history") {
+    if (type == "historic") {
         plot_historic(x, n)
     } else if (type == "created-closed") {
         plot_created_closed(x)

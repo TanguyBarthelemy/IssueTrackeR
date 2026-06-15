@@ -139,6 +139,7 @@ print.summary.IssueTB <- function(x, ...) {
             reopened = "\U267B Re-opened",
             completed = "\U2714 Completed",
             not_planned = "\U1F6AB Not planned",
+            duplicate = "\U27BF Duplicated",
             duplicated = "\U27BF Duplicated"
         ),
         "\n",

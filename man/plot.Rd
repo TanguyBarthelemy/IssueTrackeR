@@ -4,17 +4,17 @@
 \alias{plot.IssuesTB}
 \title{Plot an IssuesTB object}
 \usage{
-\method{plot}{IssuesTB}(x, type = c("history", "created-closed"), n = 3L, ...)
+\method{plot}{IssuesTB}(x, type = c("historic", "created-closed"), n = 3L, ...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
 \item{type}{Character string indicating which plot to produce.
-Accepted values are \code{"history"} and \code{"created-closed"}.
-The default is \code{"history"}.}
+Accepted values are \code{"historic"} and \code{"created-closed"}.
+The default is \code{"historic"}.}
 
 \item{n}{Integer specifying the number of age classes to display when
-\code{type = "history"}.}
+\code{type = "historic"}.}
 
 \item{\dots}{Currently ignored.}
 }
@@ -26,13 +26,13 @@ Visualize the evolution of an issue tracker backlog.
 
 Two types of plots are available:
 \itemize{
-\item \code{"history"}: displays the distribution of open issues by age.
+\item \code{"historic"}: displays the distribution of open issues by age.
 \item \code{"created-closed"}: displays backlog size together with the
 numbers of newly created and newly closed issues.
 }
 }
 \details{
-When \code{type = "history"}, a stacked area chart is produced showing
+When \code{type = "historic"}, a stacked area chart is produced showing
 the number of open issues by age over time. This visualization highlights
 the evolution and aging of the backlog.
 
@@ -62,7 +62,7 @@ all_issues <- rbind(
     )
 )
 
-plot(all_issues, type = "history")
+plot(all_issues, type = "historic")
 plot(all_issues, type = "created-closed")
 
 }
