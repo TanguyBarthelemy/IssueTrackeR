@@ -13,6 +13,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New class `MilestonesTB` for milestones objects
 * Number of issues open or closed in each milestones
 * New function to plot issues
+* New checked case if internet connection is down
 
 ### Changed
 

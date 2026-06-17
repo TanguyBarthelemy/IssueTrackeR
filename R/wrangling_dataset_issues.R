@@ -134,6 +134,22 @@ get_issues <- function(
             return(issues)
         }
 
+        if (length(repo) > 1L) {
+            issues <- lapply(
+                X = repo,
+                FUN = get_issues,
+                source = "online",
+                owner = owner,
+                state = state,
+                verbose = verbose,
+                dataset_dir = NULL,
+                dataset_name = NULL
+            ) |>
+                do.call(what = rbind)
+
+            return(issues)
+        }
+
         if (verbose) {
             cat("Repo:", repo, " owner:", owner, "\n")
         }
