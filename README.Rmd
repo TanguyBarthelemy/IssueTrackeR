@@ -34,7 +34,7 @@ This package relies a lot on the package [{gh}](https://github.com/r-lib/gh) to 
 
 You can install {IssueTrackeR} from [CRAN](https://cran.r-project.org/web/packages/IssueTrackeR/index.html):
 
-```{r install-from-cran, eval = TRUE, echo = TRUE, results = "hide", message = FALSE}
+```{r install-from-cran, eval = FALSE, echo = TRUE, results = "hide", message = FALSE}
 install.packages("IssueTrackeR")
 ```
 
@@ -42,7 +42,7 @@ install.packages("IssueTrackeR")
 
 You can install the development version of {IssueTrackeR} from [GitHub](https://github.com/):
 
-```{r install-from-gh, eval = TRUE, echo = TRUE, results = "hide", message = FALSE}
+```{r install-from-gh, eval = FALSE, echo = TRUE, results = "hide", message = FALSE}
 # install.packages("pak")
 pak::pak("TanguyBarthelemy/IssueTrackeR")
 ```
@@ -66,9 +66,23 @@ To get information from a repository, you can call the functions `get_issues`, `
 
 ```{r retrieve, eval = TRUE, echo = TRUE}
 # From online
-my_issues <- get_issues(source = "online", owner = "jdemetra", repo = "jdplus-main", verbose = FALSE)
-my_labels <- get_labels(source = "online", owner = "jdemetra", repo = "jdplus-main")
-my_milestones <- get_milestones(source = "online", owner = "jdemetra", repo = "jdplus-main")
+my_issues <- get_issues(
+    source = "online",
+    owner = "jdemetra",
+    repo = "jdplus-main",
+    verbose = FALSE
+)
+my_labels <- get_labels(
+    source = "online",
+    owner = "jdemetra",
+    repo = "jdplus-main"
+)
+my_milestones <- get_milestones(
+    source = "online",
+    owner = "jdemetra",
+    repo = "jdplus-main"
+)
+
 ```
 
 ### Save issues in local
@@ -77,17 +91,17 @@ You can also write the datasets in local with `write_to_dataset()`:
 
 ```{r export, eval = TRUE, echo = TRUE}
 write_to_dataset(
-    x = my_issues, 
+    x = my_issues,
     dataset_dir = tempdir()
 )
 
 write_to_dataset(
-    x = my_labels, 
+    x = my_labels,
     dataset_dir = tempdir()
 )
 
 write_to_dataset(
-    x = my_milestones, 
+    x = my_milestones,
     dataset_dir = tempdir()
 )
 ```

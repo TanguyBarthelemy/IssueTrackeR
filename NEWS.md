@@ -14,6 +14,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * Number of issues open or closed in each milestones
 * New function to plot issues
 * New checked case if internet connection is down
+* Display of the default options at the start of the package [#7]("https://github.com/TanguyBarthelemy/IssueTrackeR/issues/7")
+* New function `reset_options` to reset the default options
 
 ### Changed
 
