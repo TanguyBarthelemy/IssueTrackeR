@@ -20,6 +20,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * Removed progress bar in `gh::gh()` calls
 * `update_database()` updates all the milestones (closed and open)
 * `write_issues_to_dataset()`, `write_labels_to_dataset()` and `write_milestones_to_dataset()` are regrouped into `write_to_dataset()`
+* `get_issues()` accept now several repos to look for issues. Argument `repo` can be a vector of several repos.
 
 ### Fixed
 

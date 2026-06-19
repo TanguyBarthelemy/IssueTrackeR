@@ -56,12 +56,12 @@ check_response <- function(x, context = "GitHub API call") {
         )
     } else if (
         inherits(x = cond, what = "http_error_404") ||
-        grepl(
-            pattern = "URL not found",
-            x = msg,
-            ignore.case = TRUE,
-            perl = FALSE
-        )
+            grepl(
+                pattern = "URL not found",
+                x = msg,
+                ignore.case = TRUE,
+                perl = FALSE
+            )
     ) {
         url_repo <- cond$body["x"] |>
             sub(pattern = ".*<8;;", replacement = "") |>
@@ -149,7 +149,8 @@ check_response <- function(x, context = "GitHub API call") {
             "\u2192 Check your internet connection.\n",
             "\u2192 If you recently changed network (Wi-Fi/Ethernet/VPN), ",
             "wait a few seconds and try again.\n",
-            "\u2192 If the problem persists, verify your proxy or firewall settings.",
+            "\u2192 If the problem persists, ",
+            "verify your proxy or firewall settings.",
             call. = FALSE
         )
     } else {
