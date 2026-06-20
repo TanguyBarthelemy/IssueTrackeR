@@ -27,7 +27,7 @@ data from GitHub.
 ## Installation
 
 You can install {IssueTrackeR} from
-[CRAN](https://cran.r-project.org/web/packages/IssueTrackeR/index.html):
+[CRAN](https://CRAN.R-project.org/package=IssueTrackeR):
 
 ``` r
 install.packages("IssueTrackeR")
@@ -56,6 +56,10 @@ pak::pak("TanguyBarthelemy/IssueTrackeR")
 
 ``` r
 library("IssueTrackeR")
+#> Currently, the default options are:
+#> - location for datasets is /tmp/Rtmpwi8Dqz/data
+#> - owner: rjdverse
+#> - repo: rjdemetra
 #> 
 #> Attaching package: 'IssueTrackeR'
 #> The following objects are masked from 'package:base':
@@ -70,12 +74,25 @@ To get information from a repository, you can call the functions
 
 ``` r
 # From online
-my_issues <- get_issues(source = "online", owner = "jdemetra", repo = "jdplus-main", verbose = FALSE)
-my_labels <- get_labels(source = "online", owner = "jdemetra", repo = "jdplus-main")
+my_issues <- get_issues(
+    source = "online",
+    owner = "jdemetra",
+    repo = "jdplus-main",
+    verbose = FALSE
+)
+my_labels <- get_labels(
+    source = "online",
+    owner = "jdemetra",
+    repo = "jdplus-main"
+)
 #> Repo: jdplus-main  owner: jdemetra 
 #> Reading labels... Done!
 #> 12 labels found.
-my_milestones <- get_milestones(source = "online", owner = "jdemetra", repo = "jdplus-main")
+my_milestones <- get_milestones(
+    source = "online",
+    owner = "jdemetra",
+    repo = "jdplus-main"
+)
 #> Repo: jdplus-main  owner: jdemetra 
 #> Reading milestones... 
 #>  -  backlog ... Done!
@@ -89,22 +106,22 @@ You can also write the datasets in local with `write_to_dataset()`:
 
 ``` r
 write_to_dataset(
-    x = my_issues, 
+    x = my_issues,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/RtmptJdtR6/list_issues.yaml.
+#> The datasets will be exported to /tmp/Rtmpwi8Dqz/list_issues.yaml.
 
 write_to_dataset(
-    x = my_labels, 
+    x = my_labels,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/RtmptJdtR6/list_labels.yaml.
+#> The datasets will be exported to /tmp/Rtmpwi8Dqz/list_labels.yaml.
 
 write_to_dataset(
-    x = my_milestones, 
+    x = my_milestones,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/RtmptJdtR6/list_milestones.yaml.
+#> The datasets will be exported to /tmp/Rtmpwi8Dqz/list_milestones.yaml.
 ```
 
 ### Options

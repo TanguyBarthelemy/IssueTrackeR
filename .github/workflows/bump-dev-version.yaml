@@ -9,6 +9,7 @@ name: Bump dev version
 jobs:
   update_version:
     runs-on: ubuntu-latest
+    permission: write
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
