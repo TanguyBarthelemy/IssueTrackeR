@@ -27,7 +27,7 @@ add_n_years <- function(x, n) {
     as.Date(lt)
 }
 
-# Nbr d'issues ouvertes depuis au moins lag annés
+# Nbr of open issues for at least `lag` years
 get_still_open <- function(x, lag = 0L) {
     dates <- get_dates_vec(x$created_at)
 
