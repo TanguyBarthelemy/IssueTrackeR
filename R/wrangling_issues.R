@@ -507,7 +507,7 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 #'
 #' @seealso [base::unique()], [base::duplicated()]
 #'
-#' @rdname unique-issues
+#' @name unique-issues
 #' @exportS3Method unique IssuesTB
 #' @method unique IssuesTB
 #' @export
