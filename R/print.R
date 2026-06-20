@@ -106,7 +106,7 @@ print.summary.IssueTB <- function(x, ...) {
         url = x[["html_url"]]
     ))
 
-    if (length(x$label_display) > 0) {
+    if (length(x$label_display) > 0L) {
         cat(crayon::underline("Labels:"), " ", sep = "")
         cat(x$label_display)
         cat("\n")
