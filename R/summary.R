@@ -94,6 +94,8 @@ summary.IssueTB <- function(object, ...) {
     return(object)
 }
 
+#' @param with_labels Boolean. Display the labels with the list of issues.
+#'   Default is `FALSE`.
 #' @rdname summary
 #' @exportS3Method summary IssuesTB
 #' @method summary IssuesTB

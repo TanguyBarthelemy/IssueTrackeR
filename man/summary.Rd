@@ -17,6 +17,9 @@
 \item{object}{a \code{IssueTB} or \code{IssuesTB} object.}
 
 \item{\dots}{Unused argument}
+
+\item{with_labels}{Boolean. Display the labels with the list of issues.
+Default is \code{FALSE}.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{NULL}.
