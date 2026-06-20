@@ -9,7 +9,7 @@
 \usage{
 \method{summary}{IssueTB}(object, ...)
 
-\method{summary}{IssuesTB}(object, ...)
+\method{summary}{IssuesTB}(object, with_labels = FALSE, ...)
 
 \method{summary}{LabelsTB}(object, ...)
 }
