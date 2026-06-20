@@ -431,14 +431,37 @@ subset.IssuesTB <- function(x, ...) {
     return(output)
 }
 
-#' @rdname sample
+#' @title Random Sampling
+#'
+#' @description
+#' Generic function for drawing a random sample from an object.
+#'
+#' For objects of class IssuesTB, this method returns a random subset
+#' of the issues.
+#'
+#' @inheritParams base::sample
+#'
+#' @returns
+#' - For `IssuesTB` objects, an object of the same class containing the
+#' sampled issues.
+#' - For all other objects, the result of [base::sample()].
+#'
+#' @details
+#' The arguments and overall behavior are consistent with [base::sample()].
+#' For details about the sampling algorithm, probability weights, and special
+#' cases, refer to the original documentation:
+#' https://stat.ethz.ch/R-manual/R-devel/library/base/html/sample.html
+#'
+#' @seealso [base::sample()]
+#'
+#' @name sample-issues
 #' @export
-#' @inherit base::sample
 sample <- function(x, size, replace = FALSE, prob = NULL) {
     UseMethod("sample")
 }
 
-#' @rdname sample
+#' @param x An object of class `IssuesTB`
+#' @rdname sample-issues
 #' @exportS3Method sample IssuesTB
 #' @method sample IssuesTB
 #' @export
@@ -457,6 +480,7 @@ sample.IssuesTB <- function(
     return(x[selected_lines, , drop = FALSE])
 }
 
+#' @rdname sample-issues
 #' @exportS3Method sample default
 #' @method sample default
 #' @export
@@ -464,6 +488,26 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
     base::sample(x = x, size = size, replace = replace, prob = prob)
 }
 
+#' @title Unique issues of an IssuesTB Object
+#'
+#' @description
+#' Keep only different issues from a IssuesTB Object
+#'
+#' @param x An object of class `IssuesTB`
+#' @inheritParams base::unique
+#'
+#' @returns
+#' An `IssuesTB` object containing only unique issues.
+#'
+#' @details
+#' This method is consistent with [base::unique()]. For details about the
+#' generic function and its default methods, refer to the original
+#' documentation:
+#' https://stat.ethz.ch/R-manual/R-devel/library/base/html/unique.html
+#'
+#' @seealso [base::unique()], [base::duplicated()]
+#'
+#' @rdname unique-issues
 #' @exportS3Method unique IssuesTB
 #' @method unique IssuesTB
 #' @export
