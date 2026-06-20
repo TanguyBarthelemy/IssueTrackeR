@@ -39,3 +39,5 @@ cran-comments.md
 ^\.claude$
 
 .lycheeignore
+^cran-comments\.md$
+^CRAN-SUBMISSION$
