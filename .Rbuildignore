@@ -37,3 +37,5 @@ cran-comments.md
 ^why\.md$
 ^\.positai$
 ^\.claude$
+
+.lycheeignore
