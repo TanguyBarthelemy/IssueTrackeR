@@ -18,7 +18,7 @@ jobs:
 
     steps:
 
-      - uses: TanguyBarthelemy/r-release-action@v1.1.0
+      - uses: TanguyBarthelemy/r-release-action@v1.1.1
         with:
           tag: ${{ github.event.inputs.tag }}
           gh_repo: "TanguyBarthelemy/IssueTrackeR"
