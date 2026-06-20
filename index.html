@@ -83,7 +83,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install {IssueTrackeR} from <a href="https://cran.r-project.org/web/packages/IssueTrackeR/index.html" class="external-link">CRAN</a>:</p>
+<p>You can install {IssueTrackeR} from <a href="https://CRAN.R-project.org/package=IssueTrackeR" class="external-link">CRAN</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"IssueTrackeR"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
@@ -112,6 +112,10 @@
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/TanguyBarthelemy/IssueTrackeR" class="external-link">"IssueTrackeR"</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Currently, the default options are:</span></span>
+<span><span class="co">#&gt; - location for datasets is /tmp/Rtmpwi8Dqz/data</span></span>
+<span><span class="co">#&gt; - owner: rjdverse</span></span>
+<span><span class="co">#&gt; - repo: rjdemetra</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'IssueTrackeR'</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
@@ -123,12 +127,25 @@
 <p>To get information from a repository, you can call the functions <code>get_issues</code>, <code>get_labels</code> and <code>get_milestones</code></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># From online</span></span>
-<span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_issues</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, owner <span class="op">=</span> <span class="st">"jdemetra"</span>, repo <span class="op">=</span> <span class="st">"jdplus-main"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">my_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_labels</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, owner <span class="op">=</span> <span class="st">"jdemetra"</span>, repo <span class="op">=</span> <span class="st">"jdplus-main"</span><span class="op">)</span></span>
+<span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_issues</a></span><span class="op">(</span></span>
+<span>    source <span class="op">=</span> <span class="st">"online"</span>,</span>
+<span>    owner <span class="op">=</span> <span class="st">"jdemetra"</span>,</span>
+<span>    repo <span class="op">=</span> <span class="st">"jdplus-main"</span>,</span>
+<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">my_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_labels</a></span><span class="op">(</span></span>
+<span>    source <span class="op">=</span> <span class="st">"online"</span>,</span>
+<span>    owner <span class="op">=</span> <span class="st">"jdemetra"</span>,</span>
+<span>    repo <span class="op">=</span> <span class="st">"jdplus-main"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Repo: jdplus-main  owner: jdemetra </span></span>
 <span><span class="co">#&gt; Reading labels... Done!</span></span>
 <span><span class="co">#&gt; 12 labels found.</span></span>
-<span><span class="va">my_milestones</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_milestones</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, owner <span class="op">=</span> <span class="st">"jdemetra"</span>, repo <span class="op">=</span> <span class="st">"jdplus-main"</span><span class="op">)</span></span>
+<span><span class="va">my_milestones</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_milestones</a></span><span class="op">(</span></span>
+<span>    source <span class="op">=</span> <span class="st">"online"</span>,</span>
+<span>    owner <span class="op">=</span> <span class="st">"jdemetra"</span>,</span>
+<span>    repo <span class="op">=</span> <span class="st">"jdplus-main"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Repo: jdplus-main  owner: jdemetra </span></span>
 <span><span class="co">#&gt; Reading milestones... </span></span>
 <span><span class="co">#&gt;  -  backlog ... Done!</span></span>
@@ -141,22 +158,22 @@
 <p>You can also write the datasets in local with <code><a href="reference/write.html">write_to_dataset()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/write.html">write_to_dataset</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="va">my_issues</span>, </span>
+<span>    x <span class="op">=</span> <span class="va">my_issues</span>,</span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to /tmp/RtmptJdtR6/list_issues.yaml.</span></span>
+<span><span class="co">#&gt; The datasets will be exported to /tmp/Rtmpwi8Dqz/list_issues.yaml.</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/write.html">write_to_dataset</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="va">my_labels</span>, </span>
+<span>    x <span class="op">=</span> <span class="va">my_labels</span>,</span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to /tmp/RtmptJdtR6/list_labels.yaml.</span></span>
+<span><span class="co">#&gt; The datasets will be exported to /tmp/Rtmpwi8Dqz/list_labels.yaml.</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/write.html">write_to_dataset</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="va">my_milestones</span>, </span>
+<span>    x <span class="op">=</span> <span class="va">my_milestones</span>,</span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to /tmp/RtmptJdtR6/list_milestones.yaml.</span></span></code></pre></div>
+<span><span class="co">#&gt; The datasets will be exported to /tmp/Rtmpwi8Dqz/list_milestones.yaml.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="options">Options<a class="anchor" aria-label="anchor" href="#options"></a>
