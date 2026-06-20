@@ -16,7 +16,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New checked case if internet connection is down
 * Display of the default options at the start of the package [#7](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/7)
 * New function `reset_options` to reset the default options [#4](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/4)
-* Argument `with_labels` display the labels with the issue in a summmary call of a list of issues
+* Argument `with_labels` display the labels with the issue in a summary call of a list of issues
 
 ### Changed
 
