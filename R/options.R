@@ -10,6 +10,9 @@
 #' reset_options()
 #' getOption("IssueTrackeR.owner")
 reset_options <- function() {
+    dataset_dir <- file.path(tempdir(), "data") |>
+        normalizePath(mustWork = FALSE)
+
     # nolint start undesirable_function_linter
     options(IssueTrackeR.dataset.dir = dataset_dir)
     options(IssueTrackeR.owner = "rjdverse")
