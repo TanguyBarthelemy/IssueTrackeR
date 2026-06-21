@@ -25,7 +25,7 @@ check_response <- function(x, context = "GitHub API call") {
             pattern = "Requires authentication",
             x = msg,
             ignore.case = TRUE,
-            fixed = TRUE
+            perl = FALSE
         )
     ) {
         stop(
@@ -37,7 +37,14 @@ check_response <- function(x, context = "GitHub API call") {
             "\u2192 Try using a Personal Access Token (PAT) with 'repo' scope.",
             call. = FALSE
         )
-    } else if (grepl("API rate limit exceeded", msg, ignore.case = TRUE)) {
+    } else if (
+        grepl(
+            pattern = "API rate limit exceeded",
+            x = msg,
+            ignore.case = TRUE,
+            perl = FALSE
+        )
+    ) {
         stop(
             "[",
             context,
@@ -53,7 +60,7 @@ check_response <- function(x, context = "GitHub API call") {
                 pattern = "URL not found",
                 x = msg,
                 ignore.case = TRUE,
-                fixed = TRUE
+                perl = FALSE
             )
     ) {
         url_repo <- cond$body["x"] |>
@@ -127,6 +134,25 @@ check_response <- function(x, context = "GitHub API call") {
                 call. = FALSE
             )
         }
+    } else if (
+        grepl(
+            pattern = "Failed to perform HTTP request",
+            x = msg,
+            ignore.case = TRUE
+        )
+    ) {
+        stop(
+            "[",
+            context,
+            "] ",
+            "Unable to reach GitHub servers \u1f310\n",
+            "\u2192 Check your internet connection.\n",
+            "\u2192 If you recently changed network (Wi-Fi/Ethernet/VPN), ",
+            "wait a few seconds and try again.\n",
+            "\u2192 If the problem persists, ",
+            "verify your proxy or firewall settings.",
+            call. = FALSE
+        )
     } else {
         stop(
             "[",

@@ -29,7 +29,8 @@ raw_labels <- gh::gh(
    repo = "rjdemetra",
    owner = "rjdverse",
    endpoint = "/repos/:owner/:repo/labels",
-   .limit = Inf
+   .limit = Inf,
+   .progress = FALSE
 )
 format_labels(raw_labels)
 }

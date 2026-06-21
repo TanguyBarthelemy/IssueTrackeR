@@ -1,3 +1,48 @@
+state_table <- c(
+    open = "\U1F7E2 Open",
+    reopened = "\U267B Re-opened",
+    completed = "\U2714 Completed",
+    not_planned = "\U1F6AB Not planned",
+    duplicate = "\U27BF Duplicated",
+    duplicated = "\U27BF Duplicated"
+)
+
+prepare_label_display <- function(x, html_url) {
+    if (nrow(x) == 0L) {
+        return("")
+    }
+
+    labels_name <- x$name
+    labels_bgcolor <- x$color
+
+    labels_color <- c("grey8", "ivory")[isDark(x$color) + 1L]
+    labels_url <- paste0(
+        gsub(
+            x = html_url,
+            pattern = "\\/[^\\/]*\\/[^\\/]*$",
+            replacement = "/labels/"
+        ),
+        utils::URLencode(labels_name)
+    )
+
+    output <- vapply(
+        X = seq_along(labels_name),
+        FUN = function(k) {
+            label_style <- crayon::combine_styles(
+                crayon::make_style(labels_color[k]),
+                crayon::make_style(labels_bgcolor[k], bg = TRUE)
+            )
+            cli::style_hyperlink(
+                text = label_style(labels_name[k]),
+                url = labels_url[k]
+            )
+        },
+        FUN.VALUE = character(1L)
+    ) |>
+        paste(collapse = ", ")
+    return(output)
+}
+
 #' @title Compute a summary of an issue or a list of issues
 #'
 #' @param object a \code{IssueTB} or \code{IssuesTB} object.
@@ -23,7 +68,7 @@
 #'
 #' # Summarise several issues
 #' summary(all_issues[1:10, ])
-#' @rdname summary
+#' @name summary
 #'
 #' @exportS3Method summary IssueTB
 #' @method summary IssueTB
@@ -37,43 +82,25 @@ summary.IssueTB <- function(object, ...) {
         "#",
         object[["number"]]
     )
+
     object$nbr_comments <- get_nbr_comments(object)
-    object$has_labels <- nrow(object$labels) > 0L
-
-    if (object$has_labels) {
-        object$labels_name <- object$labels$name
-        object$labels_bgcolor <- object$labels$color
-
-        object$labels_color <- c("grey8", "ivory")[
-            isDark(object$labels_bgcolor) + 1L
-        ]
-        object$labels_url <- paste(
-            "https://github.com",
-            object$owner,
-            object$repo,
-            "labels",
-            utils::URLencode(object$labels_name),
-            sep = "/"
-        )
-    }
+    object$state_reason <- state_table[object[["state_reason"]]]
+    object$label_display <- prepare_label_display(
+        x = object$labels,
+        html_url = object$html_url
+    )
 
     class(object) <- "summary.IssueTB"
     return(object)
 }
 
+#' @param with_labels Boolean. Display the labels with the list of issues.
+#'   Default is `FALSE`.
 #' @rdname summary
 #' @exportS3Method summary IssuesTB
 #' @method summary IssuesTB
 #' @export
-summary.IssuesTB <- function(object, ...) {
-    state_table <- c(
-        open = "\U1F7E2 Open",
-        reopened = "\U267B Re-opened",
-        completed = "\U2714 Completed",
-        not_planned = "\U1F6AB Not planned",
-        duplicated = "\U27BF Duplicated"
-    )
-
+summary.IssuesTB <- function(object, with_labels = FALSE, ...) {
     x <- list(
         nbr_issues = nrow(object),
         issue_desc = paste0(
@@ -86,6 +113,15 @@ summary.IssuesTB <- function(object, ...) {
         html_url = object[["html_url"]],
         state_reason = state_table[object[["state_reason"]]]
     )
+
+    if (with_labels) {
+        x$label_display <- Map(
+            prepare_label_display,
+            object$labels,
+            object$html_url
+        )
+    }
+
     class(x) <- "summary.IssuesTB"
     return(x)
 }

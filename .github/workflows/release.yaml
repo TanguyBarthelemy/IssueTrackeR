@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'New tag'
+        description: "Release tag (e.g. v1.2.0 or 2.5.1)"
         required: true
         type: string
 
@@ -17,10 +17,10 @@ jobs:
       contents: write
 
     steps:
-      - uses: TanguyBarthelemy/r-release-action
+
+      - uses: TanguyBarthelemy/r-release-action@v1.1.1
         with:
           tag: ${{ github.event.inputs.tag }}
           gh_repo: "TanguyBarthelemy/IssueTrackeR"
           main-branch: "main"
           dev-branch: "develop"
-          github_token: ${{ github.token }}

@@ -47,7 +47,8 @@ get_labels <- function(
                 repo = repo,
                 owner = owner,
                 endpoint = "/repos/:owner/:repo/labels",
-                .limit = Inf
+                .limit = Inf,
+                .progress = FALSE
             )
         })
         check_response(raw_labels)
@@ -102,7 +103,8 @@ get_labels <- function(
 #'    repo = "rjdemetra",
 #'    owner = "rjdverse",
 #'    endpoint = "/repos/:owner/:repo/labels",
-#'    .limit = Inf
+#'    .limit = Inf,
+#'    .progress = FALSE
 #' )
 #' format_labels(raw_labels)
 #' }
@@ -129,34 +131,4 @@ format_labels <- function(raw_labels, verbose = TRUE) {
         cat("Done!\n", nrow(new_labels_structure), " labels found.\n", sep = "")
     }
     return(new_labels_structure)
-}
-
-#' @rdname write
-#' @export
-write_labels_to_dataset <- function(
-    labels,
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_labels.yaml",
-    verbose = TRUE
-) {
-    if (tools::file_ext(dataset_name) == "yaml") {
-        output_file <- tools::file_path_sans_ext(dataset_name)
-    }
-    output_path <- file.path(dataset_dir, output_file) |>
-        paste0(".yaml") |>
-        normalizePath(mustWork = FALSE)
-
-    if (!dir.exists(dataset_dir)) {
-        dir.create(dataset_dir)
-    }
-    if (verbose) {
-        message("The datasets will be exported to ", output_path, ".")
-        if (file.exists(output_path)) {
-            message("The file already exists and will be overwritten.")
-        }
-    }
-
-    labels_yaml <- yaml::as.yaml(labels)
-    writeLines(text = enc2utf8(labels_yaml), con = output_path, useBytes = TRUE)
-    return(invisible(TRUE))
 }

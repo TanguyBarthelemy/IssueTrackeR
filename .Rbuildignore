@@ -35,3 +35,9 @@ cran-comments.md
 ^\.vscode$
 
 ^why\.md$
+^\.positai$
+^\.claude$
+
+.lycheeignore
+^cran-comments\.md$
+^CRAN-SUBMISSION$

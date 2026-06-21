@@ -30,7 +30,8 @@ milestones_jdplus_main <- gh::gh(
     owner = "jdemetra",
     endpoint = "/repos/:owner/:repo/milestones",
     state = "all",
-    .limit = Inf
+    .limit = Inf,
+    .progress = FALSE
  )
 format_milestones(milestones_jdplus_main)
 }

@@ -1,0 +1,133 @@
+number:
+- 963
+- 958
+- 347
+- 323
+- 311
+- 154
+title:
+- Fix config import in ProvidersTopComponent
+- Fix missing ARM-based packages in releases
+- Fix SQL queries
+- User-defined variables with lags
+- Fix default toolbar and menu
+- seasonal filter not shown in X-11
+body:
+- Config import in ProvidersTopComponent doesn't work anymore. Export is OK.
+- For some reasons, the packages are created at release time but are not added to
+  the release page.
+- SQL queries fail on cube with more than 2 dimensions.
+- User-defined variables with lags are not included in the model
+- Remove some default items from the toolbar and menu of the NetBeans Platform
+- The `Decomposition (X11) > Final filters` panel only shows the trend filter and
+  not the seasonal filter. Is this intentional?
+state:
+- closed
+- closed
+- closed
+- closed
+- closed
+- closed
+url:
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/963
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/958
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/347
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/323
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/311
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/154
+html_url:
+- https://github.com/jdemetra/jdplus-main/issues/963
+- https://github.com/jdemetra/jdplus-main/issues/958
+- https://github.com/jdemetra/jdplus-main/issues/347
+- https://github.com/jdemetra/jdplus-main/issues/323
+- https://github.com/jdemetra/jdplus-main/issues/311
+- https://github.com/jdemetra/jdplus-main/issues/154
+milestone:
+- 3.8.0
+- 3.8.0
+- 3.2.3
+- 3.2.3
+- 3.2.3
+- .na.character
+created_at:
+- 1776988800.0
+- 1776816000.0
+- 1719273600.0
+- 1718236800.0
+- 1717459200.0
+- 1699833600.0
+closed_at:
+- 1776988800.0
+- 1776816000.0
+- 1719273600.0
+- 1718236800.0
+- 1717459200.0
+- 1717545600.0
+creator:
+- charphi
+- charphi
+- charphi
+- palatej
+- charphi
+- AQLT
+assignee:
+- charphi
+- charphi
+- .na.character
+- palatej
+- charphi
+- .na.character
+state_reason:
+- completed
+- completed
+- completed
+- completed
+- completed
+- completed
+owner:
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+- jdemetra
+repo:
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+- jdplus-main
+labels:
+- name: bug
+  color: '#d73a4a'
+- name: bug
+  color: '#d73a4a'
+- name: bug
+  color: '#d73a4a'
+- name: bug
+  color: '#d73a4a'
+- name: bug
+  color: '#d73a4a'
+- name: []
+  color: []
+comments:
+- text: []
+  author: []
+- text: []
+  author: []
+- text: []
+  author: []
+- text: 'Solved in #324 '
+  author: palatej
+- text: []
+  author: []
+- text:
+  - Seem to be fixed in 3.2.2.
+  - Ondées.
+  - 'Indeed (sorry : the error corrector is awful)'
+  author:
+  - ChristianeHofer
+  - palatej
+  - palatej
+

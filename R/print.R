@@ -30,7 +30,7 @@
 #'
 #' # Display the summary of
 #' summary(all_issues[1:10, ])
-#' @rdname print
+#' @name print
 #'
 #' @exportS3Method print IssueTB
 #' @method print IssueTB
@@ -106,41 +106,16 @@ print.summary.IssueTB <- function(x, ...) {
         url = x[["html_url"]]
     ))
 
-    if (x[["has_labels"]]) {
+    if (length(x$label_display) > 0L) {
         cat(crayon::underline("Labels:"), " ", sep = "")
-
-        cat(
-            vapply(
-                X = seq_along(x$labels_name),
-                FUN = function(k) {
-                    label_style <- crayon::combine_styles(
-                        crayon::make_style(x$labels_color[k]),
-                        crayon::make_style(x$labels_bgcolor[k], bg = TRUE)
-                    )
-                    cli::style_hyperlink(
-                        text = label_style(x$labels_name[k]),
-                        url = x$labels_url[k]
-                    )
-                },
-                FUN.VALUE = character(1L)
-            ),
-            sep = ", "
-        )
-
+        cat(x$label_display)
         cat("\n")
     }
 
     cat(
         crayon::underline("State:"),
         " ",
-        switch(
-            x[["state_reason"]],
-            open = "\U1F7E2 Open",
-            reopened = "\U267B Re-opened",
-            completed = "\U2714 Completed",
-            not_planned = "\U1F6AB Not planned",
-            duplicated = "\U27BF Duplicated"
-        ),
+        x[["state_reason"]],
         "\n",
         crayon::underline("Nb comments:"),
         " ",
@@ -195,7 +170,12 @@ print.summary.IssuesTB <- function(x, ...) {
                 url = x[["html_url"]]
             ),
             " ",
-            x[["state_reason"]]
+            x[["state_reason"]],
+            ifelse(
+                test = nzchar(x$label_display),
+                no = "",
+                yes = paste0("\n", x$label_display, "\n")
+            )
         ),
         "\n"
     )

@@ -134,6 +134,22 @@ get_issues <- function(
             return(issues)
         }
 
+        if (length(repo) > 1L) {
+            issues <- lapply(
+                X = repo,
+                FUN = get_issues,
+                source = "online",
+                owner = owner,
+                state = state,
+                verbose = verbose,
+                dataset_dir = NULL,
+                dataset_name = NULL
+            ) |>
+                do.call(what = rbind)
+
+            return(issues)
+        }
+
         if (verbose) {
             cat("Repo:", repo, " owner:", owner, "\n")
         }
@@ -143,7 +159,8 @@ get_issues <- function(
                 owner = owner,
                 endpoint = "/repos/:owner/:repo/issues",
                 state = state,
-                .limit = Inf
+                .limit = Inf,
+                .progress = FALSE
             )
         })
         check_response(raw_issues)
@@ -156,7 +173,8 @@ get_issues <- function(
                 repo = repo,
                 owner = owner,
                 endpoint = "/repos/:owner/:repo/issues/comments",
-                .limit = Inf
+                .limit = Inf,
+                .progress = FALSE
             )
         })
         check_response(raw_comments)
@@ -295,13 +313,15 @@ format_comments <- function(
 #'     repo = "rjdemetra",
 #'     owner = "rjdverse",
 #'     endpoint = "/repos/:owner/:repo/issues",
-#'     .limit = Inf
+#'     .limit = Inf,
+#'     .progress = FALSE
 #' )
 #' raw_comments <- gh::gh(
 #'     repo = "rjdemetra",
 #'     owner = "rjdverse",
 #'     endpoint = "/repos/:owner/:repo/issues/comments",
-#'     .limit = Inf
+#'     .limit = Inf,
+#'     .progress = FALSE
 #' )
 #' all_issues <- format_issues(raw_issues = raw_issues,
 #'                             raw_comments = raw_comments,
@@ -438,97 +458,4 @@ format_issues <- function(
     )
 
     return(issues)
-}
-
-#' @title Save datasets in a yaml file
-#'
-#' @param issues a \code{IssuesTB} object.
-#' @param labels a list representing all labels with simpler structure (with
-#' name, description, colour)
-#' @param milestones a list representing milestones with simpler structure (with
-#' title, description and due_on).
-#' @inheritParams get_issues
-#' @param \dots Unused parameter.
-#'
-#' @details
-#' Depending on the object, the defaults value of the argument
-#' \code{dataset_name} is:
-#'
-#' \itemize{
-#' \item \code{"list_issues.yaml"} for issues;
-#' \item \code{"list_labels.yaml"} for labels;
-#' \item \code{"list_milestones.yaml"} for milestones.
-#' }
-#'
-#' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
-#' successful and an error otherwise.
-#' @export
-#'
-#' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
-#' )
-#' milestones <- get_milestones(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_milestones.yaml"
-#' )
-#' labels <- get_labels(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_labels.yaml"
-#' )
-#'
-#' write_issues_to_dataset(issues, dataset_dir = tempdir())
-#' write_labels_to_dataset(labels, dataset_dir = tempdir())
-#' write_milestones_to_dataset(milestones, dataset_dir = tempdir())
-#'
-#' @rdname write
-#'
-write_issues_to_dataset <- function(issues, ...) {
-    UseMethod(generic = "write_issues_to_dataset", object = issues)
-}
-
-#' @rdname write
-#' @exportS3Method write_issues_to_dataset IssuesTB
-#' @method write_issues_to_dataset IssuesTB
-#' @export
-write_issues_to_dataset.IssuesTB <- function(
-    issues,
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_issues.yaml",
-    verbose = TRUE,
-    ...
-) {
-    if (tools::file_ext(dataset_name) == "yaml") {
-        output_file <- tools::file_path_sans_ext(dataset_name)
-    }
-    output_path <- file.path(dataset_dir, output_file) |>
-        paste0(".yaml") |>
-        normalizePath(mustWork = FALSE)
-
-    if (verbose) {
-        message("The datasets will be exported to ", output_path, ".")
-        if (file.exists(output_path)) {
-            message("The file already exists and will be overwritten.")
-        }
-    }
-
-    if (!dir.exists(dataset_dir)) {
-        dir.create(dataset_dir)
-    }
-    issues_yaml <- yaml::as.yaml(issues)
-    writeLines(text = enc2utf8(issues_yaml), con = output_path, useBytes = TRUE)
-    return(invisible(TRUE))
-}
-
-#' @rdname write
-#' @exportS3Method write_issues_to_dataset default
-#' @method write_issues_to_dataset default
-#' @export
-write_issues_to_dataset.default <- function(issues, ...) {
-    stop("This function requires a IssuesTB object.", call. = FALSE)
 }

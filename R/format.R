@@ -26,8 +26,8 @@
 #'
 format_timestamp <- function(x) {
     output <- x |>
-        as.POSIXct(origin = "1970-01-01") |>
+        as.POSIXct(origin = "1970-01-01", tz = "UTC") |>
         as.integer() |>
-        as.POSIXct(origin = "1970-01-01")
+        as.POSIXct(origin = "1970-01-01", tz = "UTC")
     return(output)
 }

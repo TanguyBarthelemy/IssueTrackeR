@@ -32,13 +32,15 @@ raw_issues <- gh::gh(
     repo = "rjdemetra",
     owner = "rjdverse",
     endpoint = "/repos/:owner/:repo/issues",
-    .limit = Inf
+    .limit = Inf,
+    .progress = FALSE
 )
 raw_comments <- gh::gh(
     repo = "rjdemetra",
     owner = "rjdverse",
     endpoint = "/repos/:owner/:repo/issues/comments",
-    .limit = Inf
+    .limit = Inf,
+    .progress = FALSE
 )
 all_issues <- format_issues(raw_issues = raw_issues,
                             raw_comments = raw_comments,

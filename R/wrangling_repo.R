@@ -39,7 +39,8 @@ get_all_repos <- function(
         gh::gh(
             endpoint = "/users/:owner",
             owner = owner,
-            .limit = Inf
+            .limit = Inf,
+            .progress = FALSE
         )
     })
     check_response(info_owner)
@@ -59,7 +60,8 @@ get_all_repos <- function(
             gh::gh(
                 endpoint = endpoint,
                 owner = owner,
-                .limit = Inf
+                .limit = Inf,
+                .progress = FALSE
             )
         })
         check_response(list_public_repo)
@@ -78,7 +80,8 @@ get_all_repos <- function(
             gh::gh(
                 endpoint = "/user/repos",
                 .limit = Inf,
-                visibility = "private"
+                visibility = "private",
+                .progress = FALSE
             )
         })
         check_response(list_private_repo)

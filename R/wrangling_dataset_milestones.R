@@ -38,7 +38,8 @@ null_to_default <- function(x, default) {
 #'     owner = "jdemetra",
 #'     endpoint = "/repos/:owner/:repo/milestones",
 #'     state = "all",
-#'     .limit = Inf
+#'     .limit = Inf,
+#'     .progress = FALSE
 #' )
 #' raw_milestone <- raw_milestones[[5L]]
 #' format_milestone(raw_milestone)
@@ -71,7 +72,9 @@ format_milestone <- function(raw_milestone, verbose = TRUE) {
         due_on = due_on,
         closed_at = closed_at,
         creator = creator,
-        state = raw_milestone[["state"]]
+        state = raw_milestone[["state"]],
+        nb_issues_open = raw_milestone[["open_issues"]],
+        nb_issues_closed = raw_milestone[["closed_issues"]]
     )
     return(output)
 }
@@ -133,7 +136,8 @@ get_milestones <- function(
                 owner = owner,
                 endpoint = "/repos/:owner/:repo/milestones",
                 state = state,
-                .limit = Inf
+                .limit = Inf,
+                .progress = FALSE
             )
         })
         check_response(raw_milestones)
@@ -165,6 +169,7 @@ get_milestones <- function(
         stop("wrong argument source", call. = FALSE)
     }
 
+    class(milestones) <- c("MilestonesTB", "data.frame")
     return(milestones)
 }
 
@@ -189,7 +194,8 @@ get_milestones <- function(
 #'     owner = "jdemetra",
 #'     endpoint = "/repos/:owner/:repo/milestones",
 #'     state = "all",
-#'     .limit = Inf
+#'     .limit = Inf,
+#'     .progress = FALSE
 #'  )
 #' format_milestones(milestones_jdplus_main)
 #' }
@@ -206,38 +212,4 @@ format_milestones <- function(raw_milestones, verbose = TRUE) {
         cat("Done!", nrow(new_mlst_structure), "milestones found.\n", sep = " ")
     }
     return(new_mlst_structure)
-}
-
-#' @rdname write
-#' @export
-write_milestones_to_dataset <- function(
-    milestones,
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_milestones.yaml",
-    verbose = TRUE
-) {
-    if (tools::file_ext(dataset_name) == "yaml") {
-        output_file <- tools::file_path_sans_ext(dataset_name)
-    }
-    output_path <- file.path(dataset_dir, output_file) |>
-        paste0(".yaml") |>
-        normalizePath(mustWork = FALSE)
-
-    if (!dir.exists(dataset_dir)) {
-        dir.create(dataset_dir)
-    }
-    if (verbose) {
-        message("The datasets will be exported to ", output_path, ".")
-        if (file.exists(output_path)) {
-            message("The file already exists and will be overwritten.")
-        }
-    }
-
-    milestones_yaml <- yaml::as.yaml(milestones)
-    writeLines(
-        text = enc2utf8(milestones_yaml),
-        con = output_path,
-        useBytes = TRUE
-    )
-    return(invisible(TRUE))
 }

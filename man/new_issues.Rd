@@ -87,7 +87,7 @@ issues.}
 the issues.}
 
 \item{state_reason}{a vector of string. \code{"open"}, \code{"completed"},
-\code{"reopened"}, \code{"not_planned"} or \code{"duplicated"}.}
+\code{"reopened"}, \code{"not_planned"} or \code{"duplicate"}.}
 }
 \value{
 a \code{IssuesTB} object.

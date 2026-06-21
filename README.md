@@ -26,12 +26,21 @@ data from GitHub.
 
 ## Installation
 
-You can install the development version of {IssueTrackeR} from
-[GitHub](https://github.com/) with:
+You can install {IssueTrackeR} from
+[CRAN](https://CRAN.R-project.org/package=IssueTrackeR):
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("TanguyBarthelemy/IssueTrackeR")
+install.packages("IssueTrackeR")
+```
+
+### Development
+
+You can install the development version of {IssueTrackeR} from
+[GitHub](https://github.com/):
+
+``` r
+# install.packages("pak")
+pak::pak("TanguyBarthelemy/IssueTrackeR")
 ```
 
 ## Features
@@ -40,12 +49,17 @@ remotes::install_github("TanguyBarthelemy/IssueTrackeR")
   GitHub repository.
 - **Issue Management**: Class S3 to manage the issues as a datasets
   within R.
-- **Filtering**: Filter issues by labels, content and milestones.
+- **Filtering**: Filter issues by labels, content (title, body and
+  comments) and milestones.
 
 ## Usage
 
 ``` r
 library("IssueTrackeR")
+#> Currently, the default options are:
+#> - location for datasets is /tmp/Rtmpwi8Dqz/data
+#> - owner: rjdverse
+#> - repo: rjdemetra
 #> 
 #> Attaching package: 'IssueTrackeR'
 #> The following objects are masked from 'package:base':
@@ -60,46 +74,54 @@ To get information from a repository, you can call the functions
 
 ``` r
 # From online
-my_issues <- get_issues(source = "online", owner = "jdemetra", repo = "jdplus-main", verbose = FALSE)
-my_labels <- get_labels(source = "online", owner = "jdemetra", repo = "jdplus-main")
+my_issues <- get_issues(
+    source = "online",
+    owner = "jdemetra",
+    repo = "jdplus-main",
+    verbose = FALSE
+)
+my_labels <- get_labels(
+    source = "online",
+    owner = "jdemetra",
+    repo = "jdplus-main"
+)
+#> Repo: jdplus-main  owner: jdemetra 
 #> Reading labels... Done!
 #> 12 labels found.
-my_milestones <- get_milestones(source = "online", owner = "jdemetra", repo = "jdplus-main")
+my_milestones <- get_milestones(
+    source = "online",
+    owner = "jdemetra",
+    repo = "jdplus-main"
+)
+#> Repo: jdplus-main  owner: jdemetra 
 #> Reading milestones... 
 #>  -  backlog ... Done!
-#>  -  3.2.2 ... Done!
-#>  -  3.2.3 ... Done!
-#>  -  3.4.0 ... Done!
-#>  -  3.5.0 ... Done!
-#>  -  3.5.1 ... Done!
-#>  -  3.6.0 ... Done!
-#> Done! 7 milestones found.
+#>  -  3.8.0 ... Done!
+#> Done! 2 milestones found.
 ```
 
 ### Save issues in local
 
-You can also write the datasets in local with
-`write_issues_to_dataset()`, `write_labels_to_dataset()` and
-`write_milestones_to_dataset()`:
+You can also write the datasets in local with `write_to_dataset()`:
 
 ``` r
-write_issues_to_dataset(
-    issues = my_issues, 
+write_to_dataset(
+    x = my_issues,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/Rtmpyc9CiM/list_issues.yaml.
+#> The datasets will be exported to /tmp/Rtmpwi8Dqz/list_issues.yaml.
 
-write_labels_to_dataset(
-    labels = my_labels, 
+write_to_dataset(
+    x = my_labels,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/Rtmpyc9CiM/list_labels.yaml.
+#> The datasets will be exported to /tmp/Rtmpwi8Dqz/list_labels.yaml.
 
-write_milestones_to_dataset(
-    milestones = my_milestones, 
+write_to_dataset(
+    x = my_milestones,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/Rtmpyc9CiM/list_milestones.yaml.
+#> The datasets will be exported to /tmp/Rtmpwi8Dqz/list_milestones.yaml.
 ```
 
 ### Options
