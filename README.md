@@ -13,7 +13,7 @@ built](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/pkgdow
 
 [![lint](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml)
 [![Coverage](https://codecov.io/gh/TanguyBarthelemy/IssueTrackeR/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/IssueTrackeR)
-[![muttest](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TanguyBarthelemy/IssueTrackeR/badges/badges/muttest.json)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/test-mutation.yaml)
+[![muttest](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TanguyBarthelemy/IssueTrackeR/badges/.badges/muttest.json)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/test-mutation.yaml)
 [![CodeFactor](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker/badge)](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker)
 <!-- badges: end -->
 
