@@ -7,99 +7,97 @@ name: Mutation Testing
 jobs:
   mutation-test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
-permissions:
-  contents: write
+      - name: Configure git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-steps:
-  - uses: actions/checkout@v7
-    with:
-      fetch-depth: 0
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
 
-  - name: Configure git
-    run: |
-      git config user.name "github-actions"
-      git config user.email "github-actions@github.com"
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            jakubsob/muttest
+            any::jsonlite
 
-  - uses: r-lib/actions/setup-r@v2
-    with:
-      use-public-rspm: true
+      - name: Run mutation tests and create badge
+        shell: Rscript {0}
+        run: |
+          plan <- muttest::muttest_plan(c(
+            muttest::arithmetic_operators(),
+            muttest::comparison_operators(),
+            muttest::logical_operators(),
+            # muttest::boolean_literal(),
+            # muttest::string_literals(),
+            muttest::numeric_increment(),
+            muttest::numeric_decrement(),
+            muttest::numeric_literals(),
+            muttest::remove_negation(),
+            muttest::condition_mutations(),
+            # muttest::call_name(),
+            # muttest::na_literal(),
+            muttest::na_literals(),
+            # muttest::replace_return_value(),
+            muttest::index_mutations()
+          ))
 
-  - uses: r-lib/actions/setup-r-dependencies@v2
-    with:
-      extra-packages: |
-        jakubsob/muttest
-        any::jsonlite
+          score <- muttest::muttest(plan)
 
-  - name: Run mutation tests and create badge
-    shell: Rscript {0}
-    run: |
-      plan <- muttest::muttest_plan(c(
-        muttest::arithmetic_operators(),
-        muttest::comparison_operators(),
-        muttest::logical_operators(),
-        # muttest::boolean_literal(),
-        # muttest::string_literals(),
-        muttest::numeric_increment(),
-        muttest::numeric_decrement(),
-        muttest::numeric_literals(),
-        muttest::remove_negation(),
-        muttest::condition_mutations(),
-        # muttest::call_name(),
-        # muttest::na_literal(),
-        muttest::na_literals(),
-        # muttest::replace_return_value(),
-        muttest::index_mutations()
-      ))
-
-      score <- muttest::muttest(plan)
-
-      rgb <- round(
-        colorRamp(c("#D61F1F", "#FFD301", "#006B3D"))(score)
-      )
-
-      dir.create(".badges", recursive = TRUE, showWarnings = FALSE)
-
-      jsonlite::write_json(
-        list(
-          schemaVersion = 1,
-          label = "muttest",
-          message = paste0(round(score * 100), "%"),
-          color = sprintf(
-            "#%02X%02X%02X",
-            rgb[1],
-            rgb[2],
-            rgb[3]
+          rgb <- round(
+            colorRamp(c("#D61F1F", "#FFD301", "#006B3D"))(score)
           )
-        ),
-        "/tmp/_badge_push.json",
-        auto_unbox = TRUE
-      )
 
-  - name: Publish badge branch
-    shell: bash
-    run: |
-      # Ouverture ou création de la branche badges
+          dir.create(".badges", recursive = TRUE, showWarnings = FALSE)
 
-      git fetch origin badges 2>/dev/null || true
+          jsonlite::write_json(
+            list(
+              schemaVersion = 1,
+              label = "muttest",
+              message = paste0(round(score * 100), "%"),
+              color = sprintf(
+                "#%02X%02X%02X",
+                rgb[1],
+                rgb[2],
+                rgb[3]
+              )
+            ),
+            "/tmp/_badge_push.json",
+            auto_unbox = TRUE
+          )
 
-      if git show-ref --verify --quiet refs/remotes/origin/badges; then
-        git checkout -b badges origin/badges 2>/dev/null || git checkout badges
-      else
-        git checkout --orphan badges
-        git rm -rf --cached .
-        git clean -fd
-        git commit --allow-empty -m "chore: initial badges branch"
-      fi
+      - name: Publish badge branch
+        shell: bash
+        run: |
+          # Ouverture ou création de la branche badges
 
-      # Mise à jour du badge
+          git fetch origin badges 2>/dev/null || true
 
-      mkdir -p .badges
-      cp /tmp/_badge_push.json .badges/muttest.json
+          if git show-ref --verify --quiet refs/remotes/origin/badges; then
+            git checkout -b badges origin/badges 2>/dev/null || git checkout badges
+          else
+            git checkout --orphan badges
+            git rm -rf --cached .
+            git clean -fd
+            git commit --allow-empty -m "chore: initial badges branch"
+          fi
 
-      git add .badges/muttest.json
-      git commit -m "chore: update muttest badge" || true
+          # Mise à jour du badge
 
-      # Publication
+          mkdir -p .badges
+          cp /tmp/_badge_push.json .badges/muttest.json
 
-      git push origin badges
+          git add .badges/muttest.json
+          git commit -m "chore: update muttest badge" || true
+
+          # Publication
+
+          git push origin badges
