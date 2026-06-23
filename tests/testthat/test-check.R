@@ -2,70 +2,70 @@ check_result_path <- file.path(
     testthat::test_path("data"),
     "check-results.rds"
 )
-check_results <- list(
-    x1 = try(
-        {
-            gh::gh(
-                repo = "aa",
-                owner = "bb",
-                endpoint = "/repos/:owner/:repo/issues",
-                state = "all",
-                .limit = Inf,
-                .progress = FALSE
-            )
-        },
-        silent = TRUE
-    ),
-    x2 = try(
-        {
-            gh::gh(
-                repo = "aa",
-                owner = "rjdverse",
-                endpoint = "/repos/:owner/:repo/issues",
-                state = "all",
-                .limit = Inf,
-                .progress = FALSE
-            )
-        },
-        silent = TRUE
-    ),
-    x3 = try(
-        {
-            gh::gh(
-                endpoint = "/users/:owner",
-                owner = "Tanguyyyyyyyy",
-                .limit = Inf,
-                .progress = FALSE
-            )
-        },
-        silent = TRUE
-    ),
-    x4 = try(
-        {
-            gh::gh(
-                endpoint = "/orgs/:owner/repos",
-                owner = "Tanguyyyyyyyy",
-                .limit = Inf,
-                .progress = FALSE
-            )
-        },
-        silent = TRUE
-    ),
-    x5 = try(
-        {
-            gh::gh(
-                repo = "IssueTrackeR",
-                owner = "TanguyBarthelemy",
-                endpoint = "/repos/:owner/:repo/issues",
-                state = "all",
-                .limit = Inf,
-                .progress = FALSE
-            )
-        },
-        silent = TRUE
-    )
-)
-saveRDS(check_results, check_result_path)
+# check_results <- list(
+#     x1 = try(
+#         {
+#             gh::gh(
+#                 repo = "aa",
+#                 owner = "bb",
+#                 endpoint = "/repos/:owner/:repo/issues",
+#                 state = "all",
+#                 .limit = Inf,
+#                 .progress = FALSE
+#             )
+#         },
+#         silent = TRUE
+#     ),
+#     x2 = try(
+#         {
+#             gh::gh(
+#                 repo = "aa",
+#                 owner = "rjdverse",
+#                 endpoint = "/repos/:owner/:repo/issues",
+#                 state = "all",
+#                 .limit = Inf,
+#                 .progress = FALSE
+#             )
+#         },
+#         silent = TRUE
+#     ),
+#     x3 = try(
+#         {
+#             gh::gh(
+#                 endpoint = "/users/:owner",
+#                 owner = "Tanguyyyyyyyy",
+#                 .limit = Inf,
+#                 .progress = FALSE
+#             )
+#         },
+#         silent = TRUE
+#     ),
+#     x4 = try(
+#         {
+#             gh::gh(
+#                 endpoint = "/orgs/:owner/repos",
+#                 owner = "Tanguyyyyyyyy",
+#                 .limit = Inf,
+#                 .progress = FALSE
+#             )
+#         },
+#         silent = TRUE
+#     ),
+#     x5 = try(
+#         {
+#             gh::gh(
+#                 repo = "IssueTrackeR",
+#                 owner = "TanguyBarthelemy",
+#                 endpoint = "/repos/:owner/:repo/issues",
+#                 state = "all",
+#                 .limit = Inf,
+#                 .progress = FALSE
+#             )
+#         },
+#         silent = TRUE
+#     )
+# )
+# saveRDS(check_results, check_result_path)
 check_results <- readRDS(check_result_path)
 
 test_that("Checks for fail API call", {
