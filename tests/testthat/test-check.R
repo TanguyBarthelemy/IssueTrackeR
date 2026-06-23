@@ -103,7 +103,7 @@ test_that("Checks for missing info", {
 
     expect_no_error(expect_error(
         check_response(x),
-        regexp = "The repository .* does not exist"
+        regexp = "The requested resource was not found on GitHub"
     ))
 })
 
