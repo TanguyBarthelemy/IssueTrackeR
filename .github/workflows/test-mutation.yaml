@@ -1,8 +1,9 @@
-on:
-  push:
-    branches: [develop]
-
 name: Mutation Testing
+
+on:
+  schedule:
+    - cron: "0 0 1 * *"
+  workflow_dispatch:
 
 jobs:
   mutation-test:
