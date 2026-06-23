@@ -30,3 +30,44 @@ test_scopes <- function() {
 }
 
 cache <- rlang::new_environment()
+
+expect_issues <- function(x) {
+    testthat::expect_type(x, "list")
+    testthat::expect_s3_class(x, "IssuesTB")
+    expect_identical(ncol(x), 16L)
+    expect_in(x[["state"]], c("open", "closed"))
+    testthat::expect_s3_class(x[["created_at"]], "POSIXct")
+    testthat::expect_s3_class(x[["closed_at"]], "POSIXct")
+    expect_in(
+        x[["state_reason"]],
+        c(
+            "open",
+            "reopened",
+            "completed",
+            "not_planned",
+            "duplicated",
+            "duplicate"
+        )
+    )
+    expect_identical(
+        names(x),
+        c(
+            "number",
+            "title",
+            "body",
+            "state",
+            "url",
+            "html_url",
+            "milestone",
+            "created_at",
+            "closed_at",
+            "creator",
+            "assignee",
+            "state_reason",
+            "owner",
+            "repo",
+            "labels",
+            "comments"
+        )
+    )
+}

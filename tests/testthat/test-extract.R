@@ -3,6 +3,12 @@ closed_issues <- get_issues(
     dataset_dir = testthat::test_path("data"),
     dataset_name = "closed_issues.yaml"
 )
+
+test_that("issues are issues", {
+    expect_issues(closed_issues)
+    expect_issues(closed_issues[0, ])
+})
+
 my_issues <- closed_issues[c(1L, 4L, 6L), ]
 
 l <- list(

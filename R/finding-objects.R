@@ -56,7 +56,7 @@ with_text.IssuesTB <- function(
                 FUN.VALUE = logical(1L)
             )
     }
-    return(x[condition, ])
+    return(x[condition, , drop = FALSE])
 }
 
 #' @title Check for labels in GitHub Issues
@@ -90,7 +90,7 @@ with_labels <- function(x, ...) {
 #' @export
 with_labels.IssuesTB <- function(x, ...) {
     condition <- grepl(x = x$labels, ...)
-    return(x[condition, ])
+    return(x[condition, , drop = FALSE])
 }
 
 #' @title Check for comments in GitHub Issues
@@ -126,9 +126,9 @@ with_comments <- function(x, negate = FALSE) {
 with_comments.IssuesTB <- function(x, negate = FALSE) {
     condition <- get_nbr_comments(x) > 0L
     if (negate) {
-        return(x[!condition, ])
+        return(x[!condition, , drop = FALSE])
     } else {
-        return(x[condition, ])
+        return(x[condition, , drop = FALSE])
     }
 }
 

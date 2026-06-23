@@ -1,4 +1,4 @@
-testthat::test_that("get_issues works", {
+testthat::test_that("get works", {
     skip_if_no_github()
 
     issues <- get_issues(
@@ -9,6 +9,23 @@ testthat::test_that("get_issues works", {
     )
     testthat::expect_type(issues, "list")
     testthat::expect_s3_class(issues, "IssuesTB")
+
+    labels <- get_labels(
+        source = "online",
+        owner = "rjdverse",
+        repo = "rjd3toolkit"
+    )
+    testthat::expect_type(labels, "list")
+    testthat::expect_s3_class(labels, "LabelsTB")
+
+    milestones <- get_milestones(
+        source = "online",
+        state = "all",
+        owner = "rjdverse",
+        repo = "rjd3toolkit"
+    )
+    testthat::expect_type(milestones, "list")
+    testthat::expect_s3_class(milestones, "MilestonesTB")
 })
 
 testthat::test_that("get_issues generates error", {
