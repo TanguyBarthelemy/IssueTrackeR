@@ -41,3 +41,5 @@ cran-comments.md
 .lycheeignore
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+
+heylogs.properties

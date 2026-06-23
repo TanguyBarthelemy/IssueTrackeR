@@ -39,6 +39,18 @@ is_not_found <- function(msg) {
     ))
 }
 
+is_orgs_call <- function(msg) {
+    return(grepl(pattern = "/orgs/", x = msg, fixed = TRUE))
+}
+
+is_user_call <- function(msg) {
+    return(grepl(pattern = "/users/", x = msg, fixed = TRUE))
+}
+
+is_repo_call <- function(msg) {
+    return(grepl(pattern = "/repos/", x = msg, fixed = TRUE))
+}
+
 timeout_msg <- c(
     " The GitHub API request timed out. \U1F553\n",
     "\u2192 Check your network connection\n",
@@ -102,7 +114,6 @@ wrong_org_name_msg <- function(owner) {
     ))
 }
 
-
 weird_msg <- function(msg) {
     return(c(
         " Weird message...\n",
@@ -132,30 +143,32 @@ check_response <- function(x) {
     } else if (
         inherits(x = cond, what = "http_error_404") || is_not_found(msg)
     ) {
-        url_repo <- cond$body["x"] |>
-            sub(pattern = ".*<8;;", replacement = "") |>
-            sub(pattern = "\\a.*", replacement = "") |>
-            trimws()
+        url_repo <- msg |>
+            sub(
+                pattern = ".*api.github.com/",
+                replacement = "api.github.com/"
+            ) |>
+            sub(pattern = "\033\\]8.*$", replacement = "")
 
-        if (grepl(pattern = "/repos/", x = url_repo, fixed = TRUE)) {
+        if (is_repo_call(url_repo)) {
             repo_path <- sub(
                 pattern = "^.*/repos/",
                 replacement = "",
                 x = url_repo,
-                fixed = TRUE
+                fixed = FALSE
             )
             parts <- strsplit(x = repo_path, split = "/", fixed = TRUE)[[1L]]
             owner <- parts[1L]
             repo <- parts[2L]
             stop(wrong_repo_msg(owner, repo), call. = FALSE)
-        } else if (grepl(pattern = "/users/", x = url_repo, fixed = TRUE)) {
+        } else if (is_user_call(url_repo)) {
             owner <- sub("^.*/users/", "", url_repo)
             owner <- sub("\\?.*$", "", owner)
             stop(wrong_username_msg(owner), call. = FALSE)
-        } else if (grepl(pattern = "/orgs/", x = url_repo, fixed = TRUE)) {
-            owner <- sub("^.*/orgs/", "", url_repo)
-            owner <- sub("/.*$", "", owner)
-            owner <- sub("\\?.*$", "", owner)
+        } else if (is_orgs_call(url_repo)) {
+            owner <- sub(pattern = "^.*/orgs/", "", url_repo)
+            owner <- sub(pattern = "/.*$", "", owner)
+            owner <- sub(pattern = "\\?.*$", "", owner)
             stop(wrong_org_name_msg(owner), call. = FALSE)
         } else {
             stop(no_resource_msg, call. = FALSE)
