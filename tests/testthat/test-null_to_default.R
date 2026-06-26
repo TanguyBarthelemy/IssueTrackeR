@@ -11,6 +11,9 @@ test_that("null_to_default works as expected with vectors", {
 })
 test_that("null_to_default works as expected with lists", {
     expect_identical(null_to_default(list(1, 10), default = 4L), list(1, 10))
-    expect_identical(null_to_default(list(1, 10, NULL), default = 4L), list(1, 10, 4L))
+    expect_identical(
+        null_to_default(list(1, 10, NULL), default = 4L),
+        list(1, 10, 4L)
+    )
     expect_identical(null_to_default(list(1:10), default = 4L), list(1:10))
 })

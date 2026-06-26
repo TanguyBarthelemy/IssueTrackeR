@@ -1,4 +1,3 @@
-
 my_dir <- tempdir()
 
 test_that("test update_database", {
