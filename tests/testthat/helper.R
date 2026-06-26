@@ -11,7 +11,12 @@ skip_if_no_github <- function(has_scope = NULL) {
         testthat::skip(msg)
     }
 
-    if (gh::gh_rate_limit()$remaining == 0L) {
+    try_rate_limit <- try(gh::gh_rate_limit(), silent = TRUE)
+    if (inherits(try_rate_limit, "try-error")) {
+        testthat::skip("API cannot connect to GitHub")
+    }
+
+    if (try_rate_limit$remaining == 0L) {
         testthat::skip("API rate limit exceeded")
     }
 }

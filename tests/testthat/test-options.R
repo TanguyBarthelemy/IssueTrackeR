@@ -8,6 +8,8 @@ test_that("options are set", {
     options(IssueTrackeR.repo = "IssueTrackeR")
     # nolint end
 
+    expect_identical(getOption("IssueTrackeR.dataset.dir"), "my_dir")
+
     expect_null(reset_options())
     expect_identical(getOption("IssueTrackeR.dataset.dir"), dataset_dir)
     expect_identical(getOption("IssueTrackeR.owner"), "rjdverse")

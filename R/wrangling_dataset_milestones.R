@@ -1,12 +1,11 @@
 null_to_default <- function(x, default) {
+    if (is.null(x)) {
+        return(default)
+    }
     if (is.list(x)) {
         return(lapply(x, null_to_default, default = default))
     }
-    return(ifelse(
-        test = is.null(x),
-        yes = default,
-        no = x
-    ))
+    return(x)
 }
 
 #' @title Format the milestone in a simpler format
