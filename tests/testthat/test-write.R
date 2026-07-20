@@ -18,40 +18,30 @@ test_that("writing works", {
 
 testthat::test_that(".write works correctly", {
     test_obj <- list(a = 1, b = "test", c = TRUE)
-    test_path <- tempfile(fileext = ".yaml")
-    print(test_path)
+    yaml_tmp <- tempfile(fileext = ".yaml")
+
     result <- .write(
         x = test_obj,
-        dataset_dir = dirname(test_path),
-        dataset_name = basename(test_path),
+        dataset_dir = dirname(yaml_tmp),
+        dataset_name = basename(yaml_tmp),
         overwrite = TRUE
     )
     expect_true(file.exists(test_path))
     expect_equal(result, normalizePath(test_path))
 
-    test_path2 <- normalizePath(tempfile(), mustWork = FALSE)
-    print(test_path2)
+    data_tmp_dir <- tempfile("data")
     result2 <- .write(
         x = test_obj,
-        dataset_dir = test_path2,
+        dataset_dir = data_tmp_dir,
         overwrite = TRUE
     )
-    expect_true(dir.exists(test_path2))
-    print("On teste les path !")
-    print("results :")
-    print(result2)
-    print(dput(result2))
-    print("results (normalised):")
-    print(normalizePath(result2))
-    print(dput(normalizePath(result2)))
-    print("le mien")
-    print(dput(normalizePath(file.path(test_path2, "object.yaml"))))
-    expect_equal(result2, normalizePath(file.path(test_path2, "object.yaml")))
+    expect_true(dir.exists(data_tmp_dir))
+    expect_equal(result2, normalizePath(file.path(data_tmp_dir, "object.yaml")))
 
     result_no_overwrite <- .write(
         x = test_obj,
-        dataset_dir = dirname(test_path),
-        dataset_name = basename(test_path),
+        dataset_dir = dirname(yaml_tmp),
+        dataset_name = basename(yaml_tmp),
         overwrite = FALSE
     )
     expect_false(result_no_overwrite)
