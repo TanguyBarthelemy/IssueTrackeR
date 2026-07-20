@@ -30,13 +30,13 @@
 #'
 #' @examples
 #' my_list <- list(name = "John", age = 30, city = "Paris")
-#' .write(my_list, dataset_name = "example_list")
+#' IssueTrackeR:::.write(my_list, dataset_name = "example_list")
 #'
 #' my_df <- data.frame(id = 1:3, value = c("A", "B", "C"))
 #' my_data_dir <- tempfile("data")
-#' .write(my_df, dataset_dir = my_data_dir, dataset_name = "my_dataframe")
+#' IssueTrackeR:::.write(my_df, dataset_dir = my_data_dir, dataset_name = "my_dataframe")
 #'
-#' .write(my_list, dataset_name = "example_list", overwrite = FALSE)
+#' IssueTrackeR:::.write(my_list, dataset_name = "example_list", overwrite = FALSE)
 .write <- function(
     x,
     dataset_dir = tempdir(),
