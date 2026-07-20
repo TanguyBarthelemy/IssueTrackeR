@@ -94,6 +94,7 @@
         con = output_path,
         useBytes = TRUE
     )
+    output_path <- normalizePath(output_path)
     print("4)")
     print(output_path)
     return(invisible(output_path))
