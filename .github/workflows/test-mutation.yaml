@@ -37,21 +37,18 @@ jobs:
             muttest::arithmetic_operators(),
             muttest::comparison_operators(),
             muttest::logical_operators(),
-            # muttest::boolean_literal(),
-            # muttest::string_literals(),
+            muttest::string_literals(),
             muttest::numeric_increment(),
             muttest::numeric_decrement(),
             muttest::numeric_literals(),
             muttest::remove_negation(),
             muttest::condition_mutations(),
-            # muttest::call_name(),
-            # muttest::na_literal(),
             muttest::na_literals(),
             # muttest::replace_return_value(),
             muttest::index_mutations()
           ))
 
-          score <- muttest::muttest(plan)
+          score <- muttest::muttest(plan, workers = 10)
 
           rgb <- round(
             colorRamp(c("#D61F1F", "#FFD301", "#006B3D"))(score)

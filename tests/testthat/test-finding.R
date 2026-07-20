@@ -1,9 +1,3 @@
-issues <- get_issues(
-    source = "local",
-    dataset_dir = testthat::test_path("data"),
-    dataset_name = "closed_issues.yaml"
-)
-
 test_that("with_text works", {
     fix_issue <- with_text(issues, "fix")
     expect_issues(fix_issue)

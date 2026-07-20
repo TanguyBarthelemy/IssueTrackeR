@@ -1,9 +1,3 @@
-issues <- get_issues(
-    source = "local",
-    dataset_dir = testthat::test_path("data"),
-    dataset_name = "closed_issues.yaml"
-)
-
 test_that("print works for IssueTB object", {
     expect_output(
         object = print(issues[1, ]),

@@ -76,3 +76,19 @@ expect_issues <- function(x) {
         )
     )
 }
+
+issues <- get_issues(
+    source = "local",
+    dataset_dir = testthat::test_path("data"),
+    dataset_name = "closed_issues.yaml"
+)
+labels <- get_labels(
+    source = "local",
+    dataset_dir = testthat::test_path("data"),
+    dataset_name = "list_labels.yaml"
+)
+milestones <- get_milestones(
+    source = "local",
+    dataset_dir = testthat::test_path("data"),
+    dataset_name = "list_milestones.yaml"
+)

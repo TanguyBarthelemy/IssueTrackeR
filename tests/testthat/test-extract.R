@@ -1,15 +1,9 @@
-closed_issues <- get_issues(
-    source = "local",
-    dataset_dir = testthat::test_path("data"),
-    dataset_name = "closed_issues.yaml"
-)
-
 test_that("issues are issues", {
-    expect_issues(closed_issues)
-    expect_issues(closed_issues[0, ])
+    expect_issues(issues)
+    expect_issues(issues[0, ])
 })
 
-my_issues <- closed_issues[c(1L, 4L, 6L), ]
+my_issues <- issues[c(1L, 4L, 6L), ]
 
 l <- list(
     data.frame(number = c(963L, 323L, 154L), row.names = c(1L, 4L, 6L)),
