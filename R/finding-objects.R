@@ -171,7 +171,7 @@ get_nbr_comments.IssueTB <- function(x) {
 #' @method get_nbr_comments IssuesTB
 #' @export
 get_nbr_comments.IssuesTB <- function(x) {
-    nbr_comment <- as.numeric(lapply(X = x$comments, FUN = nrow))
+    nbr_comment <- as.integer(lapply(X = x$comments, FUN = nrow))
     return(nbr_comment)
 }
 
@@ -220,7 +220,7 @@ author_last_comment.IssuesTB <- function(x) {
     nbr_comments <- get_nbr_comments(x)
     authors <- character(nrow(x))
     authors[nbr_comments > 0L] <- x$comments[nbr_comments > 0L] |>
-        lapply(FUN = author_last_comment) |>
+        lapply(FUN = \(.x) .x$author[nrow(.x)]) |>
         as.character()
     return(authors)
 }
