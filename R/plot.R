@@ -21,10 +21,45 @@ bin_count <- function(x, dates = get_dates_vec(x)) {
     return(groups)
 }
 
+#' @title Add Years to a Date
+#'
+#' @description
+#' Adds a specified number of years to a given date.
+#'
+#' @param x A date object
+#' @param n An integer specifying the number of years to add. Can be positive or negative.
+#'
+#'
+#' @returns
+#' A `Date` object representing the input date with `n` years added.
+#' If the input date is invalid or cannot be coerced to `POSIXlt`, an error is raised.
+#'
+#' @examples
+#' # Add years to a Date object
+#' date <- as.Date("2023-01-15")
+#' IssueTrackeR:::add_n_years(date, n = 2)
+#'
+#' # Subtract years
+#' IssueTrackeR:::add_n_years(date, n = -1)
+#'
+#' # Handle leap years
+#' leap_day <- as.Date("2020-02-29")
+#' IssueTrackeR:::add_n_years(leap_day, n = 1)
+#' IssueTrackeR:::add_n_years(leap_day, n = 4)
+#'
+#' # Add years to a character date
+#' IssueTrackeR:::add_n_years("2023-12-31", n = 3)  # Returns "2026-12-31"
+#'
+#' @details
+#' It is posssible to substract years with negative values of `n`.
+#' Leap day is saved each 4 years.
+#' The object `x` can be a `Date`, a `POSIXct`, a `POSIXlt` or a character.
+#'
+#' @dev
 add_n_years <- function(x, n) {
     lt <- as.POSIXlt(x)
     lt$year <- lt$year + n
-    as.Date(lt)
+    return(as.Date(lt))
 }
 
 # Nbr of open issues for at least `lag` years

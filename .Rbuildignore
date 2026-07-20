@@ -43,6 +43,7 @@ cran-comments.md
 ^CRAN-SUBMISSION$
 
 heylogs.properties
+^man/add_n_years\.Rd$
 ^man/isDark\.Rd$
 ^man/null_to_default\.Rd$
 ^man/dot-write\.Rd$
