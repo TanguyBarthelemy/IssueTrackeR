@@ -26,8 +26,8 @@ testthat::test_that(".write works correctly", {
         dataset_name = basename(yaml_tmp),
         overwrite = TRUE
     )
-    expect_true(file.exists(test_path))
-    expect_equal(result, normalizePath(test_path))
+    expect_true(file.exists(yaml_tmp))
+    expect_equal(result, normalizePath(yaml_tmp))
 
     data_tmp_dir <- tempfile("data")
     result2 <- .write(
