@@ -43,15 +43,13 @@ The functiobn automatically handles directory creation when the path doesn't
 exist.
 }
 \examples{
-# Example 1: Export a simple list
 my_list <- list(name = "John", age = 30, city = "Paris")
 .write(my_list, dataset_name = "example_list")
 
-# Example 2: Export a data.frame
 my_df <- data.frame(id = 1:3, value = c("A", "B", "C"))
-.write(my_df, dataset_dir = "data/", dataset_name = "my_dataframe")
+my_data_dir <- tempfile("data")
+.write(my_df, dataset_dir = my_data_dir, dataset_name = "my_dataframe")
 
-# Example 3: Avoid overwriting
 .write(my_list, dataset_name = "example_list", overwrite = FALSE)
-
 }
+\keyword{internal}
