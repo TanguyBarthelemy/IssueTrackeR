@@ -37,6 +37,9 @@ testthat::test_that(".write works correctly", {
         overwrite = TRUE
     )
     expect_true(dir.exists(test_path2))
+    print("On teste les path !")
+    print(dput(result2))
+    print(dput(normalizePath(file.path(test_path2, "object.yaml"))))
     expect_equal(result2, normalizePath(file.path(test_path2, "object.yaml")))
 
     result_no_overwrite <- .write(
