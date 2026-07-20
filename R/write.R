@@ -54,13 +54,19 @@
     verbose = TRUE,
     ...
 ) {
+    print("1)")
+    print(dataset_dir)
     output_file <- dataset_name
+    print("2)")
+    print(output_file)
     if (tools::file_ext(output_file) == "yaml") {
         output_file <- tools::file_path_sans_ext(output_file)
     }
     output_path <- file.path(dataset_dir, output_file) |>
         paste0(".yaml") |>
         normalizePath(mustWork = FALSE)
+    print("3)")
+    print(output_path)
 
     if (file.exists(output_path) && !overwrite) {
         if (verbose) {
@@ -88,6 +94,8 @@
         con = output_path,
         useBytes = TRUE
     )
+    print("4)")
+    print(output_path)
     return(invisible(output_path))
 }
 

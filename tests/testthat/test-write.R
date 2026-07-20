@@ -19,6 +19,7 @@ test_that("writing works", {
 testthat::test_that(".write works correctly", {
     test_obj <- list(a = 1, b = "test", c = TRUE)
     test_path <- tempfile(fileext = ".yaml")
+    print(test_path)
     result <- .write(
         x = test_obj,
         dataset_dir = dirname(test_path),
@@ -27,6 +28,16 @@ testthat::test_that(".write works correctly", {
     )
     expect_true(file.exists(test_path))
     expect_equal(result, normalizePath(test_path))
+
+    test_path2 <- normalizePath(tempfile(), mustWork = FALSE)
+    print(test_path2)
+    result2 <- .write(
+        x = test_obj,
+        dataset_dir = test_path2,
+        overwrite = TRUE
+    )
+    expect_true(dir.exists(test_path2))
+    expect_equal(result2, normalizePath(file.path(test_path2, "object.yaml")))
 
     result_no_overwrite <- .write(
         x = test_obj,
