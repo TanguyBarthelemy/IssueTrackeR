@@ -32,7 +32,8 @@ Defaults to \code{TRUE}.}
 }
 \value{
 The function returns \strong{invisibly} the full path of the written YAML file.
-If the file already exists and \code{overwrite = FALSE}, it returns \code{FALSE} without writing.
+If the file already exists and \code{overwrite = FALSE}, it returns \code{FALSE}
+without writing.
 }
 \description{
 This function exports an R object (such as a list, vector, data.frame, etc.)
@@ -48,8 +49,16 @@ IssueTrackeR:::.write(my_list, dataset_name = "example_list")
 
 my_df <- data.frame(id = 1:3, value = c("A", "B", "C"))
 my_data_dir <- tempfile("data")
-IssueTrackeR:::.write(my_df, dataset_dir = my_data_dir, dataset_name = "my_dataframe")
+IssueTrackeR:::.write(
+    x = my_df,
+    dataset_dir = my_data_dir,
+    dataset_name = "my_dataframe"
+)
 
-IssueTrackeR:::.write(my_list, dataset_name = "example_list", overwrite = FALSE)
+IssueTrackeR:::.write(
+    x = my_list,
+    dataset_name = "example_list",
+    overwrite = FALSE
+)
 }
 \keyword{internal}

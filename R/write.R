@@ -17,7 +17,8 @@
 #'
 #' @returns
 #' The function returns **invisibly** the full path of the written YAML file.
-#' If the file already exists and `overwrite = FALSE`, it returns `FALSE` without writing.
+#' If the file already exists and `overwrite = FALSE`, it returns `FALSE`
+#' without writing.
 #'
 #' @details
 #' The function automatically handles directory creation when the path doesn't
@@ -34,9 +35,17 @@
 #'
 #' my_df <- data.frame(id = 1:3, value = c("A", "B", "C"))
 #' my_data_dir <- tempfile("data")
-#' IssueTrackeR:::.write(my_df, dataset_dir = my_data_dir, dataset_name = "my_dataframe")
+#' IssueTrackeR:::.write(
+#'     x = my_df,
+#'     dataset_dir = my_data_dir,
+#'     dataset_name = "my_dataframe"
+#' )
 #'
-#' IssueTrackeR:::.write(my_list, dataset_name = "example_list", overwrite = FALSE)
+#' IssueTrackeR:::.write(
+#'     x = my_list,
+#'     dataset_name = "example_list",
+#'     overwrite = FALSE
+#' )
 .write <- function(
     x,
     dataset_dir = tempdir(),
