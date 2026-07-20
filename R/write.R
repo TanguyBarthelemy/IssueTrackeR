@@ -1,3 +1,42 @@
+#' @title Export an R Object to YAML
+#'
+#' @description
+#' This function exports an R object (such as a list, vector, data.frame, etc.)
+#' to a YAML file.
+#'
+#' @param x An R object to export.
+#' @param dataset_dir The destination directory where the YAML file will be
+#'   saved. By default, the system's temporary directory is used (`tempdir()`).
+#' @param dataset_name The name of the output file (without extension).
+#'   By default, the name is `"object.yaml"`.
+#' @param overwrite Logical indicating whether to overwrite the file if it
+#'   already exists. Defaults to `TRUE`.
+#' @param verbose Logical indicating whether to display informative messages.
+#'   Defaults to `TRUE`.
+#' @param ... Currently not used.
+#'
+#' @returns
+#' The function returns **invisibly** the full path of the written YAML file.
+#' If the file already exists and `overwrite = FALSE`, it returns `FALSE` without writing.
+#'
+#' @details
+#' The functiobn automatically handles directory creation when the path doesn't
+#' exist.
+#'
+#' @dev
+#' @importFrom yaml as.yaml
+#' @importFrom tools file_ext
+#' @importFrom tools file_path_sans_ext
+#'
+#' @examples
+#' my_list <- list(name = "John", age = 30, city = "Paris")
+#' .write(my_list, dataset_name = "example_list")
+#'
+#' my_df <- data.frame(id = 1:3, value = c("A", "B", "C"))
+#' my_data_dir <- tempfile("data")
+#' .write(my_df, dataset_dir = my_data_dir, dataset_name = "my_dataframe")
+#'
+#' .write(my_list, dataset_name = "example_list", overwrite = FALSE)
 .write <- function(
     x,
     dataset_dir = tempdir(),
@@ -14,10 +53,12 @@
         paste0(".yaml") |>
         normalizePath(mustWork = FALSE)
 
+    print(output_path)
+
     if (file.exists(output_path) && !overwrite) {
         if (verbose) {
             message(
-                "The file already exists and won't be overwritten.",
+                "The file already exists and won't be overwritten. ",
                 "To overwrite this file, please set `overwrite = TRUE`."
             )
         }
