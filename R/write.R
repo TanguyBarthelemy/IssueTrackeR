@@ -20,7 +20,7 @@
 #' If the file already exists and `overwrite = FALSE`, it returns `FALSE` without writing.
 #'
 #' @details
-#' The functiobn automatically handles directory creation when the path doesn't
+#' The function automatically handles directory creation when the path doesn't
 #' exist.
 #'
 #' @dev

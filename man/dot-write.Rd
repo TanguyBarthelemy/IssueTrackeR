@@ -39,7 +39,7 @@ This function exports an R object (such as a list, vector, data.frame, etc.)
 to a YAML file.
 }
 \details{
-The functiobn automatically handles directory creation when the path doesn't
+The function automatically handles directory creation when the path doesn't
 exist.
 }
 \examples{
