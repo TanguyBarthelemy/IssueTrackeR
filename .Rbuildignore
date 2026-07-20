@@ -43,4 +43,5 @@ cran-comments.md
 ^CRAN-SUBMISSION$
 
 heylogs.properties
+^man/null_to_default\.Rd$
 ^man/dot-write\.Rd$
