@@ -1,7 +1,7 @@
 test_that("summary has good structure", {
-    s1 <- summary(issues, with_labels = FALSE)
-    s2 <- summary(issues, with_labels = TRUE)
-    s3 <- summary(labels)
+    s1 <- summary(my_issues, with_labels = FALSE)
+    s2 <- summary(my_issues, with_labels = TRUE)
+    s3 <- summary(my_labels)
 
     testthat::expect_type(s1, "list")
     testthat::expect_s3_class(s1, "summary.IssuesTB")

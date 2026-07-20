@@ -1,9 +1,9 @@
 my_dir <- tempdir()
 
 test_that("writing works", {
-    expect_true(write_to_dataset(issues, dataset_dir = my_dir))
-    expect_true(write_to_dataset(labels, dataset_dir = my_dir))
-    expect_true(write_to_dataset(milestones, dataset_dir = my_dir))
+    expect_true(write_to_dataset(my_issues, dataset_dir = my_dir))
+    expect_true(write_to_dataset(my_labels, dataset_dir = my_dir))
+    expect_true(write_to_dataset(my_milestones, dataset_dir = my_dir))
     tmp_content <- list.files(
         path = my_dir,
         pattern = "*.yaml",

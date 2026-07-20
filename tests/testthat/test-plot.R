@@ -1,22 +1,22 @@
 test_that("plot return list of issues", {
     testthat::expect_identical(
-        object = plot(issues, type = "historic"),
-        expected = issues
+        object = plot(my_issues, type = "historic"),
+        expected = my_issues
     )
     testthat::expect_identical(
-        object = plot(issues, type = "created-closed"),
-        expected = issues
+        object = plot(my_issues, type = "created-closed"),
+        expected = my_issues
     )
 })
 
 test_that("plot fails if wrong type", {
     testthat::expect_error(
-        plot(issues, type = "a")
+        plot(my_issues, type = "a")
     )
     testthat::expect_error(
-        plot(issues, type = "wrong type")
+        plot(my_issues, type = "wrong type")
     )
     testthat::expect_error(
-        plot(issues, type = NA)
+        plot(my_issues, type = NA)
     )
 })
