@@ -26,3 +26,24 @@ test_that("with_text works", {
     expect_issues(awful_issue)
     expect_identical(nrow(awful_issue), 1L)
 })
+
+test_that("with_comments works", {
+    commented_issue <- with_comments(issues)
+    expect_issues(commented_issue)
+    expect_identical(nrow(commented_issue), 2L)
+    expect_identical(commented_issue[["number"]], c(323L, 154L))
+})
+
+test_that("get_nbr_comments works", {
+    expect_identical(
+        object = get_nbr_comments(issues),
+        expected = c(0L, 0L, 0L, 1L, 0L, 3L)
+    )
+})
+
+test_that("author_last_comment works", {
+    expect_identical(
+        object = author_last_comment(issues),
+        expected = c("", "", "", "palatej", "", "palatej")
+    )
+})

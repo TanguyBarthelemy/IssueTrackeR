@@ -220,7 +220,7 @@ author_last_comment.IssuesTB <- function(x) {
     nbr_comments <- get_nbr_comments(x)
     authors <- character(nrow(x))
     authors[nbr_comments > 0L] <- x$comments[nbr_comments > 0L] |>
-        lapply(FUN = \(.x) .x$author[nrow(.x)]) |>
+        lapply(FUN = author_last_comment) |>
         as.character()
     return(authors)
 }
