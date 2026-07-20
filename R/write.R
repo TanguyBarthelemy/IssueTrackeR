@@ -53,8 +53,6 @@
         paste0(".yaml") |>
         normalizePath(mustWork = FALSE)
 
-    print(output_path)
-
     if (file.exists(output_path) && !overwrite) {
         if (verbose) {
             message(

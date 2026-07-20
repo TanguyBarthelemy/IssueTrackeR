@@ -21,7 +21,7 @@ testthat::test_that(".write works correctly", {
     test_path <- tempfile(fileext = ".yaml")
     result <- .write(
         x = test_obj,
-        dataset_dir = dir(test_path),
+        dataset_dir = dirname(test_path),
         dataset_name = basename(test_path),
         overwrite = TRUE
     )
@@ -30,7 +30,7 @@ testthat::test_that(".write works correctly", {
 
     result_no_overwrite <- .write(
         x = test_obj,
-        dataset_dir = dir(test_path),
+        dataset_dir = dirname(test_path),
         dataset_name = basename(test_path),
         overwrite = FALSE
     )
