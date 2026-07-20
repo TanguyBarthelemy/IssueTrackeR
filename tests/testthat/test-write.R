@@ -38,7 +38,13 @@ testthat::test_that(".write works correctly", {
     )
     expect_true(dir.exists(test_path2))
     print("On teste les path !")
+    print("results :")
+    print(result2)
     print(dput(result2))
+    print("results (normalised):")
+    print(normalizePath(result2))
+    print(dput(normalizePath(result2)))
+    print("le mien")
     print(dput(normalizePath(file.path(test_path2, "object.yaml"))))
     expect_equal(result2, normalizePath(file.path(test_path2, "object.yaml")))
 
