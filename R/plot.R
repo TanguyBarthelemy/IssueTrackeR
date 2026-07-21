@@ -27,12 +27,14 @@ bin_count <- function(x, dates = get_dates_vec(x)) {
 #' Adds a specified number of years to a given date.
 #'
 #' @param x A date object
-#' @param n An integer specifying the number of years to add. Can be positive or negative.
+#' @param n An integer specifying the number of years to add. Can be positive
+#'   or negative.
 #'
 #'
 #' @returns
 #' A `Date` object representing the input date with `n` years added.
-#' If the input date is invalid or cannot be coerced to `POSIXlt`, an error is raised.
+#' If the input date is invalid or cannot be coerced to `POSIXlt`, an error is
+#' raised.
 #'
 #' @examples
 #' # Add years to a Date object

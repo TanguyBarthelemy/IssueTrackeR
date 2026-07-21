@@ -9,11 +9,13 @@ add_n_years(x, n)
 \arguments{
 \item{x}{A date object}
 
-\item{n}{An integer specifying the number of years to add. Can be positive or negative.}
+\item{n}{An integer specifying the number of years to add. Can be positive
+or negative.}
 }
 \value{
 A \code{Date} object representing the input date with \code{n} years added.
-If the input date is invalid or cannot be coerced to \code{POSIXlt}, an error is raised.
+If the input date is invalid or cannot be coerced to \code{POSIXlt}, an error is
+raised.
 }
 \description{
 Adds a specified number of years to a given date.
