@@ -13,6 +13,46 @@ get_dates_vec <- function(x) {
     return(dates)
 }
 
+#' @title Split dates in bins
+#'
+#' @description
+#' Groups observations by date bins and returns the count of observations in
+#' each bin.
+#'
+#' @param x A vector of `Date`
+#' @param dates A vector of `Date` objects defining the bin boundaries. If not
+#'   provided, the function uses `get_dates_vec(x)` to generate the dates.
+#'
+#' @return
+#' A numeric vector with the number of element in each date bin
+#'
+#' @examples
+#' # With a predefined date vector
+#' dates <- as.Date(c("2023-01-01", "2023-02-01", "2023-03-01"))
+#' x <- as.Date(c(
+#'     "2023-01-15", "2023-01-20", "2023-02-10",
+#'     "2023-02-28", "2023-03-15", "2023-03-20"
+#' ))
+#' IssueTrackeR:::bin_count(x, dates)
+#'
+#' # Default dates
+#' x <- c(
+#'     "2023-01-15", "2023-01-20", "2023-02-10",
+#'     "2023-02-28", "2023-03-15", "2023-03-20"
+#' )
+#' IssueTrackeR:::bin_count(x)
+#' @details
+#'
+#' The accepted formats for the argument \code{x} are:
+#'
+#' \itemize{
+#' \item \code{character} objects;
+#' \item \code{Date} objects;
+#' \item numeric (\code{integer} or \code{double});
+#' \item date/times object (classes \code{POSIXct} and \code{POSIXlt})
+#' }
+#'
+#' @dev
 bin_count <- function(x, dates = get_dates_vec(x)) {
     groups <- as.Date(x) |>
         cut(breaks = c(dates, max(dates) + 31L)) |>
@@ -55,7 +95,15 @@ bin_count <- function(x, dates = get_dates_vec(x)) {
 #' @details
 #' It is posssible to substract years with negative values of `n`.
 #' Leap day is saved each 4 years.
-#' The object `x` can be a `Date`, a `POSIXct`, a `POSIXlt` or a character.
+#'
+#' The accepted formats for the argument \code{x} are:
+#'
+#' \itemize{
+#' \item \code{character} objects;
+#' \item \code{Date} objects;
+#' \item numeric (\code{integer} or \code{double});
+#' \item date/times object (classes \code{POSIXct} and \code{POSIXlt})
+#' }
 #'
 #' @dev
 add_n_years <- function(x, n) {

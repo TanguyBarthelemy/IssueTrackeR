@@ -23,7 +23,15 @@ Adds a specified number of years to a given date.
 \details{
 It is posssible to substract years with negative values of \code{n}.
 Leap day is saved each 4 years.
-The object \code{x} can be a \code{Date}, a \code{POSIXct}, a \code{POSIXlt} or a character.
+
+The accepted formats for the argument \code{x} are:
+
+\itemize{
+\item \code{character} objects;
+\item \code{Date} objects;
+\item numeric (\code{integer} or \code{double});
+\item date/times object (classes \code{POSIXct} and \code{POSIXlt})
+}
 }
 \examples{
 # Add years to a Date object
