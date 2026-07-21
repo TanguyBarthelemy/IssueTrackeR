@@ -24,7 +24,7 @@ get_dates_vec <- function(x) {
 #'   provided, the function uses `get_dates_vec(x)` to generate the dates.
 #'
 #' @return
-#' A numeric vector with the number of element in each date bin
+#' A integer vector with the number of element in each date bin
 #'
 #' @examples
 #' # With a predefined date vector
@@ -57,7 +57,7 @@ bin_count <- function(x, dates = get_dates_vec(x)) {
     groups <- as.Date(x) |>
         cut(breaks = c(dates, max(dates) + 31L)) |>
         table() |>
-        as.numeric()
+        as.integer()
     return(groups)
 }
 
