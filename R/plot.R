@@ -1,3 +1,6 @@
+col_open_issues <- "#238636"
+col_closed_issues <- "#8250DF"
+
 get_dates_vec <- function(x) {
     min_date <- x |>
         as.Date() |>
@@ -149,6 +152,8 @@ generate_age_mat <- function(x, n = 3L) {
     return(age_mat)
 }
 
+#' @importFrom graphics polygon legend
+#' @importFrom grDevices hcl.colors
 plot_historic <- function(x, n = 3L) {
     dates <- get_dates_vec(x$created_at)
     age_mat <- generate_age_mat(x, n)
@@ -224,7 +229,7 @@ plot_created_closed <- function(x) {
         ybottom = 0L,
         xright = dates + 10L,
         ytop = new_created,
-        col = "#238636",
+        col = col_open_issues,
         border = NA
     )
 
@@ -234,7 +239,7 @@ plot_created_closed <- function(x) {
         ybottom = -new_closed,
         xright = dates + 10L,
         ytop = 0L,
-        col = "#DA3633",
+        col = col_closed_issues,
         border = NA
     )
 
@@ -249,7 +254,7 @@ plot_created_closed <- function(x) {
     graphics::legend(
         "topleft",
         legend = c("Still open", "New created", "New closed"),
-        col = c("black", "#238636", "#DA3633"),
+        col = c("black", col_open_issues, col_closed_issues),
         lty = c(1L, NA, NA),
         pch = c(NA, 15L, 15L),
         pt.cex = 2L,
