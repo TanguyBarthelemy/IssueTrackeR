@@ -13,9 +13,11 @@ get_still_open(x, lag = 0L)
 \method{get_still_open}{default}(x, lag)
 }
 \arguments{
-\item{x}{Data frame with GitHub issues, containing \code{created_at} and \code{closed_at} columns.}
+\item{x}{Data frame with GitHub issues, containing \code{created_at} and
+\code{closed_at} columns.}
 
-\item{lag}{Numeric. Number of years to look back for "still open" issues. Default is 0.}
+\item{lag}{Numeric. Number of years to look back for "still open" issues.
+Default is 0.}
 }
 \value{
 Named numeric vector of still open issues counts per month.

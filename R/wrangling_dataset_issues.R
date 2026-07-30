@@ -244,22 +244,28 @@ get_issues <- function(
 #' @title Format GitHub Issue Comments
 #'
 #' @description
-#' Format raw GitHub issue comments from `gh::gh` into a structured list, grouping comments by their associated issue URLs.
+#' Format raw GitHub issue comments from `gh::gh` into a structured list,
+#' grouping comments by their associated issue URLs.
 #'
 #' @param raw_comments A list of raw GitHub issue comments, typically retrieved
 #'   from the GitHub API by `gh::gh()`.
-#' @param urls A character vector of issue URLs for which comments should be formatted.
-#' @param verbose Logical. If `TRUE`, informative messages are printed during processing.
-#' Defaults to `TRUE`.
+#' @param urls A character vector of issue URLs for which comments should be
+#'   formatted.
+#' @param verbose Logical. If `TRUE`, informative messages are printed during
+#'   processing. Defaults to `TRUE`.
 #'
 #' @returns
 #' A list of data.frame representing the comments of different issues.
-#' If an issue URL has no associated comments, the corresponding list element is an empty data frame.
+#' If an issue URL has no associated comments, the corresponding list element
+#' is an empty data frame.
 #'
 #' @section Input structure:
-#' Each issue's comments should be a named list containing the following elements:
+#' Each issue's comments should be a named list containing the following
+#' elements:
+#'
 #' - `issue_url`: The URL of the issue associated with the comment.
-#' - `user`: A list containing user information, including `login` (the author's username).
+#' - `user`: A list containing user information, including `login` (the
+#'   author's username).
 #' - `body`: The comments.
 #'
 #' @section Output structure:

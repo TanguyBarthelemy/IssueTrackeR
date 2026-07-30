@@ -5,7 +5,8 @@ col_closed_issues <- "#8250DF"
 #'
 #' @param x Vector of dates or date-like objects.
 #'
-#' @returns Vector of `Date` objects from the first day of the minimum month in `x` to the current month.
+#' @returns Vector of `Date` objects from the first day of the minimum month in
+#' `x` to the current month.
 #'
 #' @examples
 #' dates <- as.Date(c("2023-03-15", "2023-04-20", "2023-05-05"))
@@ -142,8 +143,10 @@ add_n_years <- function(x, n) {
 
 #' @title Count Still Open Issues Over Time
 #'
-#' @param x Data frame with GitHub issues, containing `created_at` and `closed_at` columns.
-#' @param lag Numeric. Number of years to look back for "still open" issues. Default is 0.
+#' @param x Data frame with GitHub issues, containing `created_at` and
+#'   `closed_at` columns.
+#' @param lag Numeric. Number of years to look back for "still open" issues.
+#'   Default is 0.
 #'
 #' @returns Named numeric vector of still open issues counts per month.
 #'

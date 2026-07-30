@@ -10,7 +10,8 @@ get_dates_vec(x)
 \item{x}{Vector of dates or date-like objects.}
 }
 \value{
-Vector of \code{Date} objects from the first day of the minimum month in \code{x} to the current month.
+Vector of \code{Date} objects from the first day of the minimum month in
+\code{x} to the current month.
 }
 \description{
 Generate Monthly Date Sequence

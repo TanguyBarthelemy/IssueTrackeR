@@ -10,24 +10,29 @@ format_comments(raw_comments, urls, verbose = TRUE)
 \item{raw_comments}{A list of raw GitHub issue comments, typically retrieved
 from the GitHub API by \code{gh::gh()}.}
 
-\item{urls}{A character vector of issue URLs for which comments should be formatted.}
+\item{urls}{A character vector of issue URLs for which comments should be
+formatted.}
 
-\item{verbose}{Logical. If \code{TRUE}, informative messages are printed during processing.
-Defaults to \code{TRUE}.}
+\item{verbose}{Logical. If \code{TRUE}, informative messages are printed during
+processing. Defaults to \code{TRUE}.}
 }
 \value{
 A list of data.frame representing the comments of different issues.
-If an issue URL has no associated comments, the corresponding list element is an empty data frame.
+If an issue URL has no associated comments, the corresponding list element
+is an empty data frame.
 }
 \description{
-Format raw GitHub issue comments from \code{gh::gh} into a structured list, grouping comments by their associated issue URLs.
+Format raw GitHub issue comments from \code{gh::gh} into a structured list,
+grouping comments by their associated issue URLs.
 }
 \section{Input structure}{
 
-Each issue's comments should be a named list containing the following elements:
+Each issue's comments should be a named list containing the following
+elements:
 \itemize{
 \item \code{issue_url}: The URL of the issue associated with the comment.
-\item \code{user}: A list containing user information, including \code{login} (the author's username).
+\item \code{user}: A list containing user information, including \code{login} (the
+author's username).
 \item \code{body}: The comments.
 }
 }
