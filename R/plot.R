@@ -185,6 +185,7 @@ get_still_open.IssuesTB <- function(x, lag = 0L) {
 }
 
 #' @rdname get_still_open
+#' @export
 #' @exportS3Method get_still_open default
 #' @method get_still_open default
 get_still_open.default <- function(x, lag) {
