@@ -11,12 +11,15 @@
 <url><loc>/reference/author_last_comment.html</loc></url>
 <url><loc>/reference/bin_count.html</loc></url>
 <url><loc>/reference/dot-write.html</loc></url>
+<url><loc>/reference/format_comments.html</loc></url>
 <url><loc>/reference/format_issues.html</loc></url>
 <url><loc>/reference/format_labels.html</loc></url>
 <url><loc>/reference/format_milestones.html</loc></url>
 <url><loc>/reference/get.html</loc></url>
 <url><loc>/reference/get_all_repos.html</loc></url>
+<url><loc>/reference/get_dates_vec.html</loc></url>
 <url><loc>/reference/get_nbr_comments.html</loc></url>
+<url><loc>/reference/get_still_open.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/isDark.html</loc></url>
 <url><loc>/reference/new_issue.html</loc></url>
