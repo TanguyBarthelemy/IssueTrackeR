@@ -299,7 +299,7 @@ get_issues <- function(
 #'     "https://github.com/owner/repo/issues/3"  # No comments for this issue
 #' )
 #'
-#' formatted_comments <- format_comments(raw_comments, urls)
+#' formatted_comments <- IssueTrackeR:::format_comments(raw_comments, urls)
 #'
 #' @dev
 format_comments <- function(

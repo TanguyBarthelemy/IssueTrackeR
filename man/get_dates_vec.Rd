@@ -18,7 +18,7 @@ Generate Monthly Date Sequence
 }
 \examples{
 dates <- as.Date(c("2023-03-15", "2023-04-20", "2023-05-05"))
-get_dates_vec(dates)
+IssueTrackeR:::get_dates_vec(dates)
 
 }
 \keyword{internal}

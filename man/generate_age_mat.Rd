@@ -30,6 +30,6 @@ issues <- get_issues(
     dataset_dir = path,
     dataset_name = "open_issues.yaml"
 )
-age_matrix <- generate_age_mat(issues, n = 2)
+age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
 
 }

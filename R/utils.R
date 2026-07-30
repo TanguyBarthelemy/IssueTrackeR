@@ -31,9 +31,9 @@
 #' IssueTrackeR:::isDark("navy")
 #' IssueTrackeR:::isDark("yellow")
 #'
-#' # Check an RGB vector
-#' IssueTrackeR:::isDark(c(0, 0, 0))
-#' IssueTrackeR:::isDark(c(255, 255, 255))
+# # Check an RGB vector
+# IssueTrackeR:::isDark(grDevices::rgb(0, 0, 0))
+# IssueTrackeR:::isDark(grDevices::rgb(255, 255, 255, maxColorValue = 255))
 #' @dev
 isDark <- function(colr) {
     col1 <- grDevices::col2rgb(colr) * c(299L, 587L, 114L)

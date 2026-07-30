@@ -10,7 +10,7 @@ col_closed_issues <- "#8250DF"
 #'
 #' @examples
 #' dates <- as.Date(c("2023-03-15", "2023-04-20", "2023-05-05"))
-#' get_dates_vec(dates)
+#' IssueTrackeR:::get_dates_vec(dates)
 #'
 #' @dev
 get_dates_vec <- function(x) {
@@ -156,7 +156,7 @@ add_n_years <- function(x, n) {
 #'     dataset_dir = path,
 #'     dataset_name = "open_issues.yaml"
 #' )
-#' open_issues <- get_still_open(issues, lag = 1L)
+#' open_issues <- IssueTrackeR:::get_still_open(issues, lag = 1L)
 #'
 #' @dev
 get_still_open <- function(x, lag = 0L) {
@@ -209,7 +209,7 @@ get_still_open.default <- function(x, lag) {
 #'     dataset_dir = path,
 #'     dataset_name = "open_issues.yaml"
 #' )
-#' age_matrix <- generate_age_mat(issues, n = 2)
+#' age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
 #'
 generate_age_mat <- function(x, n = 3L) {
     UseMethod("generate_age_mat", x)

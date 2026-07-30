@@ -31,7 +31,7 @@ issues <- get_issues(
     dataset_dir = path,
     dataset_name = "open_issues.yaml"
 )
-open_issues <- get_still_open(issues, lag = 1L)
+open_issues <- IssueTrackeR:::get_still_open(issues, lag = 1L)
 
 }
 \keyword{internal}

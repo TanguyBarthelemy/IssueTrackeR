@@ -38,8 +38,5 @@ IssueTrackeR:::isDark("#FFFFFF")  # white is light
 IssueTrackeR:::isDark("navy")
 IssueTrackeR:::isDark("yellow")
 
-# Check an RGB vector
-IssueTrackeR:::isDark(c(0, 0, 0))
-IssueTrackeR:::isDark(c(255, 255, 255))
 }
 \keyword{internal}

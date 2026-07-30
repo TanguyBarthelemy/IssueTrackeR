@@ -72,7 +72,7 @@ urls <- c(
     "https://github.com/owner/repo/issues/3"  # No comments for this issue
 )
 
-formatted_comments <- format_comments(raw_comments, urls)
+formatted_comments <- IssueTrackeR:::format_comments(raw_comments, urls)
 
 }
 \keyword{internal}
