@@ -46,5 +46,6 @@ heylogs.properties
 ^man/bin_count\.Rd$
 ^man/add_n_years\.Rd$
 ^man/isDark\.Rd$
+^man/format_comments\.Rd$
 ^man/null_to_default\.Rd$
 ^man/dot-write\.Rd$

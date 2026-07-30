@@ -13,7 +13,7 @@ bin_count(x, dates = get_dates_vec(x))
 provided, the function uses \code{get_dates_vec(x)} to generate the dates.}
 }
 \value{
-A numeric vector with the number of element in each date bin
+A integer vector with the number of element in each date bin
 }
 \description{
 Groups observations by date bins and returns the count of observations in
