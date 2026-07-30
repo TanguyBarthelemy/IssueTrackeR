@@ -8,7 +8,7 @@
 \method{unique}{IssuesTB}(x, incomparables = FALSE, ...)
 }
 \arguments{
-\item{x}{An object of class \code{IssuesTB}}
+\item{x}{An object of class \code{IssuesTB}.}
 
 \item{incomparables}{a vector of values that cannot be compared.
     \code{FALSE} is a special value, meaning that all values can be

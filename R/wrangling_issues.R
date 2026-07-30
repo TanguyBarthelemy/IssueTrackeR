@@ -460,7 +460,7 @@ sample <- function(x, size, replace = FALSE, prob = NULL) {
     UseMethod("sample")
 }
 
-#' @param x An object of class `IssuesTB`
+#' @param x An object of class \code{IssuesTB}.
 #' @rdname sample-issues
 #' @exportS3Method sample IssuesTB
 #' @method sample IssuesTB
@@ -493,7 +493,7 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 #' @description
 #' Keep only different issues from a IssuesTB Object
 #'
-#' @param x An object of class `IssuesTB`
+#' @param x An object of class \code{IssuesTB}.
 #' @inheritParams base::unique
 #'
 #' @returns

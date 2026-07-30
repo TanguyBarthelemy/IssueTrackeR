@@ -14,7 +14,7 @@ sample(x, size, replace = FALSE, prob = NULL)
 \method{sample}{default}(x, size, replace = FALSE, prob = NULL)
 }
 \arguments{
-\item{x}{An object of class \code{IssuesTB}}
+\item{x}{An object of class \code{IssuesTB}.}
 
 \item{size}{a non-negative integer giving the number of items to choose.}
 

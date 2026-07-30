@@ -13,8 +13,7 @@ get_still_open(x, lag = 0L)
 \method{get_still_open}{default}(x, lag)
 }
 \arguments{
-\item{x}{Data frame with GitHub issues, containing \code{created_at} and
-\code{closed_at} columns.}
+\item{x}{An object of class \code{IssuesTB}.}
 
 \item{lag}{Numeric. Number of years to look back for "still open" issues.
 Default is 0.}
@@ -26,12 +25,13 @@ Named numeric vector of still open issues counts per month.
 Count Still Open Issues Over Time
 }
 \examples{
-# Assuming `issues` is a data frame with `created_at` and `closed_at` columns
+path <- system.file("data_issues", package = "IssueTrackeR")
+issues <- get_issues(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "open_issues.yaml"
+)
 open_issues <- get_still_open(issues, lag = 1L)
 
-}
-\seealso{
-\code{\link{get_dates_vec}} for generating date sequences.
-\code{\link{bin_count}} for counting issues per time bin.
 }
 \keyword{internal}

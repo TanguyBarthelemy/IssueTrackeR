@@ -143,20 +143,20 @@ add_n_years <- function(x, n) {
 
 #' @title Count Still Open Issues Over Time
 #'
-#' @param x Data frame with GitHub issues, containing `created_at` and
-#'   `closed_at` columns.
+#' @param x An object of class \code{IssuesTB}.
 #' @param lag Numeric. Number of years to look back for "still open" issues.
 #'   Default is 0.
 #'
 #' @returns Named numeric vector of still open issues counts per month.
 #'
 #' @examples
-#' # Assuming `issues` is a data frame with `created_at` and `closed_at` columns
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
 #' open_issues <- get_still_open(issues, lag = 1L)
-#'
-#' @seealso
-#' \code{\link{get_dates_vec}} for generating date sequences.
-#' \code{\link{bin_count}} for counting issues per time bin.
 #'
 #' @dev
 get_still_open <- function(x, lag = 0L) {
@@ -195,7 +195,31 @@ get_still_open.default <- function(x, lag) {
     )
 }
 
+#' @title Generate Age Matrix of Open Issues
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param n Number of age categories to create. Default: `3`.
+#'
+#' @return Matrix of open issue counts by age category.
+#'
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' age_matrix <- generate_age_mat(issues, n = 2)
+#'
 generate_age_mat <- function(x, n = 3L) {
+    UseMethod("generate_age_mat", x)
+}
+
+#' @rdname generate_age_mat
+#' @export
+#' @exportS3Method generate_age_mat IssuesTB
+#' @method generate_age_mat IssuesTB
+generate_age_mat.IssuesTB <- function(x, n = 3L) {
     age_mat <- lapply(
         X = seq_len(n + 1L) - 1L,
         FUN = get_still_open,
@@ -212,6 +236,17 @@ generate_age_mat <- function(x, n = 3L) {
         "y"
     )
     return(age_mat)
+}
+
+#' @rdname generate_age_mat
+#' @export
+#' @exportS3Method generate_age_mat default
+#' @method generate_age_mat default
+generate_age_mat.default <- function(x, n) {
+    stop(
+        "The function requires a IssuesTB object!",
+        call. = FALSE
+    )
 }
 
 #' @importFrom graphics polygon legend
