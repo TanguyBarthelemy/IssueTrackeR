@@ -95,6 +95,11 @@ considered dark.</p>
 <span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">isDark</span><span class="op">(</span><span class="st">"yellow"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check an RGB vector</span></span></span>
+<span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">isDark</span><span class="op">(</span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">isDark</span><span class="op">(</span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">255</span>, <span class="fl">255</span>, <span class="fl">255</span>, maxColorValue <span class="op">=</span> <span class="fl">255</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 </code></pre></div>
     </div>
   </div>
