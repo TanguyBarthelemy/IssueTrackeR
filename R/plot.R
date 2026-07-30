@@ -1,6 +1,31 @@
 col_open_issues <- "#238636"
 col_closed_issues <- "#8250DF"
 
+#' @title Generate Monthly Date Sequence
+#'
+#' @param x Vector of dates or date-like objects.
+#'
+#' @returns Vector of `Date` objects from the first day of the minimum month in `x` to the current month.
+#'
+#' @examples
+#' dates <- as.Date(c("2023-03-15", "2023-04-20", "2023-05-05"))
+#' get_dates_vec(dates)
+#'
+#' @dev
+get_dates_vec <- function(x) {
+    min_date <- x |>
+        as.Date() |>
+        min() |>
+        format("%Y-%m") |>
+        paste0(... = _, "-01") |>
+        as.Date()
+    dates <- seq.Date(
+        from = min_date,
+        to = Sys.Date(),
+        by = "month"
+    )
+    return(dates)
+}
 get_dates_vec <- function(x) {
     min_date <- x |>
         as.Date() |>
@@ -115,8 +140,30 @@ add_n_years <- function(x, n) {
     return(as.Date(lt))
 }
 
-# Nbr of open issues for at least `lag` years
+#' @title Count Still Open Issues Over Time
+#'
+#' @param x Data frame with GitHub issues, containing `created_at` and `closed_at` columns.
+#' @param lag Numeric. Number of years to look back for "still open" issues. Default is 0.
+#'
+#' @returns Named numeric vector of still open issues counts per month.
+#'
+#' @examples
+#' # Assuming `issues` is a data frame with `created_at` and `closed_at` columns
+#' open_issues <- get_still_open(issues, lag = 1L)
+#'
+#' @seealso
+#' \code{\link{get_dates_vec}} for generating date sequences.
+#' \code{\link{bin_count}} for counting issues per time bin.
+#'
+#' @dev
 get_still_open <- function(x, lag = 0L) {
+    UseMethod("get_still_open", x)
+}
+
+#' @rdname get_still_open
+#' @exportS3Method get_still_open IssuesTB
+#' @method get_still_open IssuesTB
+get_still_open.IssuesTB <- function(x, lag = 0L) {
     dates <- get_dates_vec(x$created_at)
 
     closed <- as.Date(x$closed_at)
@@ -131,6 +178,16 @@ get_still_open <- function(x, lag = 0L) {
     names(still_open) <- dates
 
     return(still_open)
+}
+
+#' @rdname get_still_open
+#' @exportS3Method get_still_open default
+#' @method get_still_open default
+get_still_open.default <- function(x, lag) {
+    stop(
+        "The function requires a IssuesTB object!",
+        call. = FALSE
+    )
 }
 
 generate_age_mat <- function(x, n = 3L) {
