@@ -345,6 +345,11 @@ plot_historic <- function(x, n = 3L) {
 #' )
 #'
 #' IssueTrackeR:::plot_created_closed(issues)
+#' @dev
+#' @importFrom graphics abline
+#' @importFrom graphics rect
+#' @importFrom graphics lines
+#' @importFrom graphics legend
 plot_created_closed <- function(x) {
     dates <- get_dates_vec(x$created_at)
 

@@ -33,3 +33,4 @@ issues <- get_issues(
 
 IssueTrackeR:::plot_created_closed(issues)
 }
+\keyword{internal}
