@@ -47,6 +47,7 @@ heylogs.properties
 ^man/bin_count\.Rd$
 ^man/add_n_years\.Rd$
 ^man/get_still_open\.Rd$
+^man/plot_historic\.Rd$
 ^man/isDark\.Rd$
 ^man/format_comments\.Rd$
 ^man/null_to_default\.Rd$

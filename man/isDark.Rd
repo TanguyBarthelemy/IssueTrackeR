@@ -38,5 +38,8 @@ IssueTrackeR:::isDark("#FFFFFF")  # white is light
 IssueTrackeR:::isDark("navy")
 IssueTrackeR:::isDark("yellow")
 
+# Check an RGB vector
+IssueTrackeR:::isDark(grDevices::rgb(0, 0, 0))
+IssueTrackeR:::isDark(grDevices::rgb(255, 255, 255, maxColorValue = 255))
 }
 \keyword{internal}

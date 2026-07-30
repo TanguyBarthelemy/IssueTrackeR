@@ -200,7 +200,7 @@ get_still_open.default <- function(x, lag) {
 #' @param x An object of class \code{IssuesTB}.
 #' @param n Number of age categories to create. Default: `3`.
 #'
-#' @return Matrix of open issue counts by age category.
+#' @returns Matrix of open issue counts by age category.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -249,8 +249,35 @@ generate_age_mat.default <- function(x, n) {
     )
 }
 
+#' @title Plot Historical Evolution of Open Issues by Age Categories
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param n Integer. Number of age (in years) categories to display. Default: 3.
+#'
+#' @returns Invisibly returns NULL.
+#'
+#' @details
+#' The function generates a plot directly. The plot shows a stacked area chart
+#' where each colored area represents an age category of open issues over time.
+#'
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#'
+#' # Plot issues with 3 age categories
+#' IssueTrackeR:::plot_historic(issues, n = 3)
+#'
+#' # Plot issues with 2 age categories
+#' IssueTrackeR:::plot_historic(issues, n = 2)
+#'
 #' @importFrom graphics polygon legend
 #' @importFrom grDevices hcl.colors
+#'
+#' @dev
 plot_historic <- function(x, n = 3L) {
     dates <- get_dates_vec(x$created_at)
     age_mat <- generate_age_mat(x, n)
@@ -296,6 +323,28 @@ plot_historic <- function(x, n = 3L) {
     return(invisible(NULL))
 }
 
+#' @title Plot Issue Creation, Closed, and Backlog Over Time
+#'
+#' @param x An object of class \code{IssuesTB}.
+#'
+#' @returns Invisibly returns NULL.
+#'
+#' @details
+#' Generates a composite plot showing:
+#'
+#' - Green bars: New issues created per month (above x-axis)
+#' - Purple bars: Issues closed per month (below x-axis)
+#' - Black line: Cumulative backlog of open issues
+#'
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#'
+#' IssueTrackeR:::plot_created_closed(issues)
 plot_created_closed <- function(x) {
     dates <- get_dates_vec(x$created_at)
 
