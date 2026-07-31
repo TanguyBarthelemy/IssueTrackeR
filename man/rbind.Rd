@@ -14,7 +14,8 @@
 \item{...}{Objects of class \code{IssueTB} or \code{IssuesTB}.}
 }
 \value{
-An \code{IssueTB} object containing the combined rows of all input objects.
+An \code{IssueTB} object containing the combined rows of all input
+objects.
 }
 \description{
 S3 method for combining \code{IssueTB} objects by rows.

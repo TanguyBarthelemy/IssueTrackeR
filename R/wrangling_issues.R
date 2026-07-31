@@ -443,7 +443,8 @@ append.default <- function(x, values, after = length(x)) {
 #'
 #' @param ... Objects of class \code{IssueTB} or \code{IssuesTB}.
 #'
-#' @returns An \code{IssueTB} object containing the combined rows of all input objects.
+#' @returns An \code{IssueTB} object containing the combined rows of all input
+#' objects.
 #'
 #' @seealso
 #' \code{\link[base]{rbind}} for the generic function
