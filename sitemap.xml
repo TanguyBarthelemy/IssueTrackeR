@@ -10,6 +10,7 @@
 <url><loc>/reference/append.html</loc></url>
 <url><loc>/reference/author_last_comment.html</loc></url>
 <url><loc>/reference/bin_count.html</loc></url>
+<url><loc>/reference/check_response.html</loc></url>
 <url><loc>/reference/dot-write.html</loc></url>
 <url><loc>/reference/format_comments.html</loc></url>
 <url><loc>/reference/format_issues.html</loc></url>
@@ -21,6 +22,7 @@
 <url><loc>/reference/get_dates_vec.html</loc></url>
 <url><loc>/reference/get_nbr_comments.html</loc></url>
 <url><loc>/reference/get_still_open.html</loc></url>
+<url><loc>/reference/github_errors.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/isDark.html</loc></url>
 <url><loc>/reference/new_issue.html</loc></url>
@@ -30,8 +32,10 @@
 <url><loc>/reference/plot_created_closed.html</loc></url>
 <url><loc>/reference/plot_historic.html</loc></url>
 <url><loc>/reference/print.html</loc></url>
+<url><loc>/reference/rbind.html</loc></url>
 <url><loc>/reference/reset_options.html</loc></url>
 <url><loc>/reference/sample-issues.html</loc></url>
+<url><loc>/reference/subset.html</loc></url>
 <url><loc>/reference/summary.html</loc></url>
 <url><loc>/reference/unique-issues.html</loc></url>
 <url><loc>/reference/update_database.html</loc></url>
