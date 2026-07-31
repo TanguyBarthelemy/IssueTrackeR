@@ -241,6 +241,67 @@ get_issues <- function(
     return(issues)
 }
 
+#' @title Format GitHub Issue Comments
+#'
+#' @description
+#' Format raw GitHub issue comments from `gh::gh` into a structured list,
+#' grouping comments by their associated issue URLs.
+#'
+#' @param raw_comments A list of raw GitHub issue comments, typically retrieved
+#'   from the GitHub API by `gh::gh()`.
+#' @param urls A character vector of issue URLs for which comments should be
+#'   formatted.
+#' @param verbose Logical. If `TRUE`, informative messages are printed during
+#'   processing. Defaults to `TRUE`.
+#'
+#' @returns
+#' A list of data.frame representing the comments of different issues.
+#' If an issue URL has no associated comments, the corresponding list element
+#' is an empty data frame.
+#'
+#' @section Input structure:
+#' Each issue's comments should be a named list containing the following
+#' elements:
+#'
+#' - `issue_url`: The URL of the issue associated with the comment.
+#' - `user`: A list containing user information, including `login` (the
+#'   author's username).
+#' - `body`: The comments.
+#'
+#' @section Output structure:
+#' The output is a list of data frame with the following columns:
+#' - `text`: The comments (text).
+#' - `author`: The username of the comment author.
+#'
+#' @examples
+#' # Comments from GitHub
+#' raw_comments <- list(
+#'     list(
+#'         issue_url = "https://github.com/owner/repo/issues/1",
+#'         user = list(login = "user1"),
+#'         body = "This is a comment on issue 1."
+#'     ),
+#'     list(
+#'         issue_url = "https://github.com/owner/repo/issues/1",
+#'         user = list(login = "user2"),
+#'         body = "Another comment on issue 1."
+#'     ),
+#'     list(
+#'         issue_url = "https://github.com/owner/repo/issues/2",
+#'         user = list(login = "user1"),
+#'         body = "A comment on issue 2."
+#'     )
+#' )
+#' # URLs for which comments should be formatted
+#' urls <- c(
+#'     "https://github.com/owner/repo/issues/1",
+#'     "https://github.com/owner/repo/issues/2",
+#'     "https://github.com/owner/repo/issues/3"  # No comments for this issue
+#' )
+#'
+#' formatted_comments <- IssueTrackeR:::format_comments(raw_comments, urls)
+#'
+#' @dev
 format_comments <- function(
     raw_comments,
     urls,

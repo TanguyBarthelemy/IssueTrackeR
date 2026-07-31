@@ -13,6 +13,7 @@ built](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/pkgdow
 
 [![lint](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/lint.yaml)
 [![Coverage](https://codecov.io/gh/TanguyBarthelemy/IssueTrackeR/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/IssueTrackeR)
+[![muttest](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TanguyBarthelemy/IssueTrackeR/badges/.badges/muttest.json)](https://github.com/TanguyBarthelemy/IssueTrackeR/actions/workflows/test-mutation.yaml)
 [![CodeFactor](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker/badge)](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker)
 <!-- badges: end -->
 
@@ -57,7 +58,7 @@ pak::pak("TanguyBarthelemy/IssueTrackeR")
 ``` r
 library("IssueTrackeR")
 #> Currently, the default options are:
-#> - location for datasets is /tmp/Rtmpwi8Dqz/data
+#> - location for datasets is /tmp/RtmpAaWI8a/data
 #> - owner: rjdverse
 #> - repo: rjdemetra
 #> 
@@ -109,19 +110,19 @@ write_to_dataset(
     x = my_issues,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/Rtmpwi8Dqz/list_issues.yaml.
+#> The datasets will be exported to /tmp/RtmpAaWI8a/list_issues.yaml.
 
 write_to_dataset(
     x = my_labels,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/Rtmpwi8Dqz/list_labels.yaml.
+#> The datasets will be exported to /tmp/RtmpAaWI8a/list_labels.yaml.
 
 write_to_dataset(
     x = my_milestones,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/Rtmpwi8Dqz/list_milestones.yaml.
+#> The datasets will be exported to /tmp/RtmpAaWI8a/list_milestones.yaml.
 ```
 
 ### Options

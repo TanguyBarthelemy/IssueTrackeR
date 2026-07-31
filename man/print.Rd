@@ -23,7 +23,7 @@
 \method{print}{summary.LabelsTB}(x, ...)
 }
 \arguments{
-\item{x}{a \code{IssueTB} or \code{IssuesTB} object.}
+\item{x}{An object of class \code{IssueTB} or \code{IssuesTB}.}
 
 \item{\dots}{Unused argument}
 }

@@ -11,7 +11,12 @@ skip_if_no_github <- function(has_scope = NULL) {
         testthat::skip(msg)
     }
 
-    if (gh::gh_rate_limit()$remaining == 0L) {
+    try_rate_limit <- try(gh::gh_rate_limit(), silent = TRUE)
+    if (inherits(try_rate_limit, "try-error")) {
+        testthat::skip("API cannot connect to GitHub")
+    }
+
+    if (try_rate_limit$remaining == 0L) {
         testthat::skip("API rate limit exceeded")
     }
 }
@@ -30,3 +35,60 @@ test_scopes <- function() {
 }
 
 cache <- rlang::new_environment()
+
+expect_issues <- function(x) {
+    testthat::expect_type(x, "list")
+    testthat::expect_s3_class(x, "IssuesTB")
+    expect_identical(ncol(x), 16L)
+    expect_in(x[["state"]], c("open", "closed"))
+    testthat::expect_s3_class(x[["created_at"]], "POSIXct")
+    testthat::expect_s3_class(x[["closed_at"]], "POSIXct")
+    expect_in(
+        x[["state_reason"]],
+        c(
+            "open",
+            "reopened",
+            "completed",
+            "not_planned",
+            "duplicated",
+            "duplicate"
+        )
+    )
+    expect_identical(
+        names(x),
+        c(
+            "number",
+            "title",
+            "body",
+            "state",
+            "url",
+            "html_url",
+            "milestone",
+            "created_at",
+            "closed_at",
+            "creator",
+            "assignee",
+            "state_reason",
+            "owner",
+            "repo",
+            "labels",
+            "comments"
+        )
+    )
+}
+
+my_issues <- get_issues(
+    source = "local",
+    dataset_dir = testthat::test_path("data"),
+    dataset_name = "closed_issues.yaml"
+)
+my_labels <- get_labels(
+    source = "local",
+    dataset_dir = testthat::test_path("data"),
+    dataset_name = "list_labels.yaml"
+)
+my_milestones <- get_milestones(
+    source = "local",
+    dataset_dir = testthat::test_path("data"),
+    dataset_name = "list_milestones.yaml"
+)

@@ -41,3 +41,16 @@ cran-comments.md
 .lycheeignore
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+
+heylogs.properties
+^man/check_response\.Rd$
+^man/get_dates_vec\.Rd$
+^man/bin_count\.Rd$
+^man/add_n_years\.Rd$
+^man/get_still_open\.Rd$
+^man/plot_historic\.Rd$
+^man/plot_created_closed\.Rd$
+^man/isDark\.Rd$
+^man/format_comments\.Rd$
+^man/null_to_default\.Rd$
+^man/dot-write\.Rd$

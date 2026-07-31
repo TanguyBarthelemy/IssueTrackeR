@@ -322,9 +322,27 @@ new_issues.default <- function(
     return(issues)
 }
 
+#' @name extraction-issues
+#' @title Extraction and replacement of information in issues
+#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams base::`[`
+#' @returns Information inside the `IssuesTB` object
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' open_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' first_issue <- open_issues[1, ]
+#' number <- open_issues[1, 1]
+#' state <- open_issues[1, "state"]
+#' open_issues[1, "state"] <- "closed"
+#' open_issues[["number"]] <- seq_along(open_issues[["number"]])
 #' @exportS3Method `[` IssuesTB
 #' @method `[` IssuesTB
 #' @export
+#' @noRd
 `[.IssuesTB` <- function(x, i, j, drop = TRUE) {
     output <- NextMethod("[")
     Narg <- nargs() - !missing(drop)
@@ -345,6 +363,7 @@ new_issues.default <- function(
     return(output)
 }
 
+#' @noRd
 #' @exportS3Method `[<-` IssuesTB
 #' @method `[<-` IssuesTB
 #' @export
@@ -352,6 +371,7 @@ new_issues.default <- function(
     return(new_issues(NextMethod()))
 }
 
+#' @noRd
 #' @exportS3Method `[[<-` IssuesTB
 #' @method `[[<-` IssuesTB
 #' @export
@@ -371,6 +391,19 @@ append <- function(x, values, after = length(x)) {
 #' @param values a \code{IssueTB} or a \code{IssuesTB} object.
 #' @method append IssuesTB
 #' @export
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' open_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' closed_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "closed_issues.yaml"
+#' )
+#' new_issues <- append(open_issues, closed_issues)
 append.IssuesTB <- function(x, values, after = nrow(x)) {
     if (after > nrow(x)) {
         after <- nrow(x)
@@ -403,6 +436,28 @@ append.default <- function(x, values, after = length(x)) {
     base::append(x, values, after)
 }
 
+#' @title Combining Issues
+#'
+#' @description
+#' S3 method for combining \code{IssueTB} objects by rows.
+#'
+#' @param ... Objects of class \code{IssueTB} or \code{IssuesTB}.
+#'
+#' @returns An \code{IssueTB} object containing the combined rows of all input
+#' objects.
+#'
+#' @seealso
+#' \code{\link[base]{rbind}} for the generic function
+#'
+#' @name rbind
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' open_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' new_issues <- rbind(open_issues[1, ], open_issues[-1, ])
 #' @exportS3Method rbind IssueTB
 #' @method rbind IssueTB
 #' @export
@@ -413,9 +468,23 @@ rbind.IssueTB <- function(...) {
         new_issues()
 }
 
+#' @rdname rbind
 #' @exportS3Method rbind IssuesTB
 #' @method rbind IssuesTB
 #' @export
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' open_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' closed_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "closed_issues.yaml"
+#' )
+#' new_issues <- rbind(open_issues, closed_issues)
 rbind.IssuesTB <- function(...) {
     list(...) |>
         lapply(FUN = new_issues) |>
@@ -423,9 +492,20 @@ rbind.IssuesTB <- function(...) {
         new_issues()
 }
 
+#' @rdname subset
+#' @inherit base::subset
+#' @param x An object of class \code{IssuesTB}.
 #' @exportS3Method subset IssuesTB
 #' @method subset IssuesTB
 #' @export
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' open_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' new_issues <- subset(open_issues, number < 150)
 subset.IssuesTB <- function(x, ...) {
     output <- new_issues(NextMethod())
     return(output)
@@ -460,7 +540,15 @@ sample <- function(x, size, replace = FALSE, prob = NULL) {
     UseMethod("sample")
 }
 
-#' @param x An object of class `IssuesTB`
+#' @param x An object of class \code{IssuesTB}.
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' open_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' new_issues <- sample(open_issues, size = 5L)
 #' @rdname sample-issues
 #' @exportS3Method sample IssuesTB
 #' @method sample IssuesTB
@@ -493,7 +581,7 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 #' @description
 #' Keep only different issues from a IssuesTB Object
 #'
-#' @param x An object of class `IssuesTB`
+#' @param x An object of class \code{IssuesTB}.
 #' @inheritParams base::unique
 #'
 #' @returns
@@ -504,6 +592,15 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 #' generic function and its default methods, refer to the original
 #' documentation:
 #' https://stat.ethz.ch/R-manual/R-devel/library/base/html/unique.html
+#'
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' open_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' new_issues <- unique(open_issues)
 #'
 #' @seealso [base::unique()], [base::duplicated()]
 #'

@@ -6,9 +6,12 @@
 #' @param x The timestamp. See detail section for more information.
 #'
 #' @details
+#' The accepted formats for the argument \code{x} are: color
+#'
 #' The accepted formats for the argument \code{x} are:
 #'
 #' \itemize{
+#' \item \code{character} objects;
 #' \item \code{Date} objects;
 #' \item numeric (\code{integer} or \code{double});
 #' \item date/times object (classes \code{POSIXct} and \code{POSIXlt})

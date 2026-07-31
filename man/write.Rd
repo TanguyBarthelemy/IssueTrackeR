@@ -8,12 +8,20 @@
 \alias{write_to_dataset.default}
 \title{Save datasets in a yaml file}
 \usage{
-write_to_dataset(x, ...)
+write_to_dataset(
+  x,
+  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+  dataset_name,
+  overwrite = TRUE,
+  verbose = TRUE,
+  ...
+)
 
 \method{write_to_dataset}{IssuesTB}(
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   dataset_name = "list_issues.yaml",
+  overwrite = TRUE,
   verbose = TRUE,
   ...
 )
@@ -22,6 +30,7 @@ write_to_dataset(x, ...)
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   dataset_name = "list_labels.yaml",
+  overwrite = TRUE,
   verbose = TRUE,
   ...
 )
@@ -30,17 +39,16 @@ write_to_dataset(x, ...)
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   dataset_name = "list_milestones.yaml",
+  overwrite = TRUE,
   verbose = TRUE,
   ...
 )
 
-\method{write_to_dataset}{default}(x, ...)
+\method{write_to_dataset}{default}(...)
 }
 \arguments{
 \item{x}{an object of class \code{IssuesTB}, \code{LabelsTB} or
 \code{MilestonesTB}.}
-
-\item{\dots}{Unused parameter.}
 
 \item{dataset_dir}{A character string specifying the path which contains the
 datasets (only taken into account if \code{source} is set to \code{"local"}).
@@ -51,8 +59,13 @@ which will be written (only taken into account if \code{source} is set to
 \code{"local"}).
 Defaults to \code{"open_issues.yaml"}.}
 
+\item{overwrite}{Boolean. If the dataset file already exists,
+should it be overwrite? Default is TRUE.}
+
 \item{verbose}{A logical value indicating whether to print additional
 information. Default is \code{TRUE}.}
+
+\item{\dots}{Unused parameter.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was

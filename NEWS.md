@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-07-31
+
+### Added
+
+* `overwrite` argument to specify if we want to overwrite an existing file if it already exists. [#18](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/18)
+
 ## [1.4.0] - 2026-06-21
 
 ### Added
@@ -118,8 +124,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New CHANGELOG (`NEWS.md`)
 * Documentation for `logic_reducer()`, `no_milestones()`, `vgrepl()` and `simple_sort`
 
-[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/1.4.0...HEAD
-[1.4.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.1...1.4.0
+[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.1...HEAD
+[1.4.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.0...v1.4.1
+[1.4.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.1.1...v1.2.0

@@ -1,12 +1,50 @@
+#' @title Replace NULL Values with a Default Value
+#'
+#' @description
+#' Recursively replaces every `NULL` values in an object with a specified
+#' default value.
+#'
+#' @param x An R object
+#' @param default The default value to replace `NULL` with.
+#'
+#' @returns
+#' The input object `x` with all `NULL` values replaced by `default`.
+#'
+#' @examples
+#' # Replace NULL with a numeric default
+#' x <- list(a = 1, b = NULL, c = 3)
+#' IssueTrackeR:::null_to_default(x, default = 0)
+#'
+#' # Replace NULL with a character default
+#' y <- list(name = "Alice", age = NULL, city = NULL)
+#' IssueTrackeR:::null_to_default(y, default = "unknown")
+#'
+#' # Nested list with NULL values
+#' z <- list(
+#'   id = 1,
+#'   details = list(
+#'     address = NULL,
+#'     phone = "123-456-7890"
+#'   )
+#' )
+#' IssueTrackeR:::null_to_default(z, default = NA)
+#'
+#' # Atomic NULL value
+#' IssueTrackeR:::null_to_default(NULL, default = FALSE)
+#'
+#' @dev
+#' @details
+#' If the input is a list, the function applies the replacement to each element
+#' of the list (recursively).
+#'
 null_to_default <- function(x, default) {
+    if (is.null(x)) {
+        return(default)
+    }
     if (is.list(x)) {
         return(lapply(x, null_to_default, default = default))
     }
-    return(ifelse(
-        test = is.null(x),
-        yes = default,
-        no = x
-    ))
+    return(x)
 }
 
 #' @title Format the milestone in a simpler format

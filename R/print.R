@@ -3,7 +3,7 @@
 #' @description
 #' Display IssueTB and IssuesTB with formatted output in the console
 #'
-#' @param x a \code{IssueTB} or \code{IssuesTB} object.
+#' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
 #' @param \dots Unused argument
 #'
 #' @details
@@ -45,7 +45,6 @@ print.IssueTB <- function(x, ...) {
         "#",
         x[["number"]]
     )
-
     cli::cli_h2(
         cli::style_hyperlink(
             text = issue_desc,

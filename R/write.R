@@ -1,7 +1,56 @@
+#' @title Export an R Object to YAML
+#'
+#' @description
+#' This function exports an R object (such as a list, vector, data.frame, etc.)
+#' to a YAML file.
+#'
+#' @param x An R object to export.
+#' @param dataset_dir The destination directory where the YAML file will be
+#'   saved. By default, the system's temporary directory is used (`tempdir()`).
+#' @param dataset_name The name of the output file (without extension).
+#'   By default, the name is `"object.yaml"`.
+#' @param overwrite Logical indicating whether to overwrite the file if it
+#'   already exists. Defaults to `TRUE`.
+#' @param verbose Logical indicating whether to display informative messages.
+#'   Defaults to `TRUE`.
+#' @param ... Currently not used.
+#'
+#' @returns
+#' The function returns **invisibly** the full path of the written YAML file.
+#' If the file already exists and `overwrite = FALSE`, it returns `FALSE`
+#' without writing.
+#'
+#' @details
+#' The function automatically handles directory creation when the path doesn't
+#' exist.
+#'
+#' @dev
+#' @importFrom yaml as.yaml
+#' @importFrom tools file_ext
+#' @importFrom tools file_path_sans_ext
+#'
+#' @examples
+#' my_list <- list(name = "John", age = 30, city = "Paris")
+#' IssueTrackeR:::.write(my_list, dataset_name = "example_list")
+#'
+#' my_df <- data.frame(id = 1:3, value = c("A", "B", "C"))
+#' my_data_dir <- tempfile("data")
+#' IssueTrackeR:::.write(
+#'     x = my_df,
+#'     dataset_dir = my_data_dir,
+#'     dataset_name = "my_dataframe"
+#' )
+#'
+#' IssueTrackeR:::.write(
+#'     x = my_list,
+#'     dataset_name = "example_list",
+#'     overwrite = FALSE
+#' )
 .write <- function(
     x,
     dataset_dir = tempdir(),
     dataset_name = "object.yaml",
+    overwrite = TRUE,
     verbose = TRUE,
     ...
 ) {
@@ -13,14 +62,25 @@
         paste0(".yaml") |>
         normalizePath(mustWork = FALSE)
 
+    if (file.exists(output_path) && !overwrite) {
+        if (verbose) {
+            message(
+                "The file already exists and won't be overwritten. ",
+                "To overwrite this file, please set `overwrite = TRUE`."
+            )
+        }
+        return(invisible(FALSE))
+    }
+
+    if (file.exists(output_path) && verbose) {
+        message("The file already exists and will be overwritten.")
+    }
+
     if (!dir.exists(dataset_dir)) {
         dir.create(dataset_dir)
     }
     if (verbose) {
         message("The datasets will be exported to ", output_path, ".")
-        if (file.exists(output_path)) {
-            message("The file already exists and will be overwritten.")
-        }
     }
     x_yaml <- yaml::as.yaml(x, precision = 22L, indent = 2L)
     writeLines(
@@ -28,7 +88,8 @@
         con = output_path,
         useBytes = TRUE
     )
-    return(invisible(TRUE))
+    output_path <- normalizePath(output_path, mustWork = TRUE)
+    return(invisible(output_path))
 }
 
 #' @title Save datasets in a yaml file
@@ -36,6 +97,8 @@
 #' @param x an object of class \code{IssuesTB}, \code{LabelsTB} or
 #' \code{MilestonesTB}.
 #' @inheritParams get_issues
+#' @param overwrite Boolean. If the dataset file already exists,
+#'   should it be overwrite? Default is TRUE.
 #' @param \dots Unused parameter.
 #'
 #' @details
@@ -83,7 +146,14 @@
 #'
 #' @rdname write
 #'
-write_to_dataset <- function(x, ...) {
+write_to_dataset <- function(
+    x,
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name,
+    overwrite = TRUE,
+    verbose = TRUE,
+    ...
+) {
     UseMethod(generic = "write_to_dataset", object = x)
 }
 
@@ -95,10 +165,11 @@ write_to_dataset.IssuesTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = "list_issues.yaml",
+    overwrite = TRUE,
     verbose = TRUE,
     ...
 ) {
-    .write(x, dataset_dir, dataset_name, verbose)
+    .write(x, dataset_dir, dataset_name, overwrite, verbose)
     return(invisible(TRUE))
 }
 
@@ -111,10 +182,11 @@ write_to_dataset.LabelsTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = "list_labels.yaml",
+    overwrite = TRUE,
     verbose = TRUE,
     ...
 ) {
-    .write(x, dataset_dir, dataset_name, verbose)
+    .write(x, dataset_dir, dataset_name, overwrite, verbose)
     return(invisible(TRUE))
 }
 
@@ -126,10 +198,11 @@ write_to_dataset.MilestonesTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = "list_milestones.yaml",
+    overwrite = TRUE,
     verbose = TRUE,
     ...
 ) {
-    .write(x, dataset_dir, dataset_name, verbose)
+    .write(x, dataset_dir, dataset_name, overwrite, verbose)
     return(invisible(TRUE))
 }
 
@@ -137,7 +210,7 @@ write_to_dataset.MilestonesTB <- function(
 #' @exportS3Method write_to_dataset default
 #' @method write_to_dataset default
 #' @export
-write_to_dataset.default <- function(x, ...) {
+write_to_dataset.default <- function(...) {
     stop(
         "This function requires a IssuesTB, LabelsTB or MilestonesTB object.",
         call. = FALSE

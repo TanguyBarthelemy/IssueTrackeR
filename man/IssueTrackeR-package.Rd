@@ -20,11 +20,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr} [artist]
+\strong{Maintainer}: Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr} [artist, copyright holder]
 
 Authors:
 \itemize{
-  \item Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr} [artist]
+  \item Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr} [artist, copyright holder]
 }
 
 }
