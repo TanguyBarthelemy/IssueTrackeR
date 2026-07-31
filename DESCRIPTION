@@ -9,7 +9,7 @@ Description: Manage a 'GitHub' problem using R: wrangle issues, labels and
     displaying, adding, deleting, and selecting (filtering) issues based
     on qualitative and quantitative information. Issues (labels and
     milestones) are written in lists and categorized into the S3 class to
-    be easily manipulated as datasets in R. color
+    be easily manipulated as datasets in R.
 License: MIT + file LICENSE
 URL: https://github.com/TanguyBarthelemy/IssueTrackeR,
     https://tanguybarthelemy.github.io/IssueTrackeR/

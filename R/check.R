@@ -37,21 +37,17 @@
 #' @examples
 #' # Check for error conditions
 #' error_msg <- "API rate limit exceeded for 123.123.123.123"
-#' if (api_rate_reached(error_msg)) {
-#'   message(api_rate_msg)
-#' }
+#' IssueTrackeR:::api_rate_reached(error_msg)
 #'
 #' # Check API call type
 #' api_url <- "https://api.github.com/repos/owner/repo"
-#' if (is_repo_call(api_url) && is_not_found(error_msg)) {
-#'   message(wrong_repo_msg("owner", "repo"))
-#' }
+#' IssueTrackeR:::is_repo_call(api_url)
+#' IssueTrackeR:::is_not_found(error_msg)
 #'
 #' # Handle unknown errors
 #' unknown_error <- "Unknown error occurred"
-#' message(weird_msg(unknown_error))
+#' IssueTrackeR:::weird_msg(unknown_error)
 #'
-#' @noRd
 #' @name github_errors
 NULL
 
@@ -191,6 +187,31 @@ weird_msg <- function(msg) {
     ))
 }
 
+#' @title Check and Handle GitHub API Errors Message
+#'
+#' @description
+#' Analyses error responses from GitHub API calls and explain error messages
+#' based on the error type.
+#'
+#' @param x A try-error object returned from a API call
+#'
+#' @returns Invisibly returns NULL if no error is detected.
+#' Else, a error is generated with appropriate message.
+#'
+#' @dev
+#'
+#' @details
+#' The function handles these specific error cases:
+#' - Timeout errors
+#' - Authentication errors
+#' - API rate limit errors
+#' - HTTP 404 errors (resource not found)
+#' - HTTP connection errors
+#' - Unknown errors
+#'
+#' @examples
+#' a <- try(gh::gh("/repos/owner/nonexistent"))
+#' try(IssueTrackeR:::check_response(a))
 check_response <- function(x) {
     if (!inherits(x, "try-error")) {
         return(invisible(NULL))

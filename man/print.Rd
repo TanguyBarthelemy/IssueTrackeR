@@ -28,7 +28,7 @@
 \item{\dots}{Unused argument}
 }
 \value{
-invisibly (with \code{invisible()}) \code{NULL}. color
+invisibly (with \code{invisible()}) \code{NULL}.
 }
 \description{
 Display IssueTB and IssuesTB with formatted output in the console
