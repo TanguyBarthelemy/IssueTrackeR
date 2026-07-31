@@ -19,7 +19,7 @@ Plot Historical Evolution of Open Issues by Age Categories
 }
 \details{
 The function generates a plot directly. The plot shows a stacked area chart
-where each colored area represents an age category of open issues over time.
+where each coloured area represents an age category of open issues over time.
 }
 \examples{
 path <- system.file("data_issues", package = "IssueTrackeR")

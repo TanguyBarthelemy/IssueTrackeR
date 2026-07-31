@@ -1,7 +1,66 @@
+#' @title GitHub API Error Handling Utilities
+#'
+#' @description
+#' A collection of functions to detect GitHub API errors and generate
+#' user-friendly error messages.
+#'
+#' @section Error Detection Functions:
+#' These functions check error messages for specific patterns:
+#' - `has_timeout()`: Detects timeout errors
+#' - `need_auth()`: Detects authentication errors
+#' - `api_rate_reached()`: Detects rate limit errors
+#' - `has_no_http()`: Detects HTTP connection errors
+#' - `is_not_found()`: Detects resource not found errors
+#' - `is_orgs_call()`: Detects organization API calls
+#' - `is_user_call()`: Detects user API calls
+#' - `is_repo_call()`: Detects repository API calls
+#'
+#' @section Error Message Functions:
+#' These functions generate formatted error messages with troubleshooting tips:
+#' - `timeout_msg`: Timeout error message
+#' - `auth_msg`: Authentication error message
+#' - `api_rate_msg`: Rate limit error message
+#' - `no_resource_msg`: Resource not found error message
+#' - `no_http_msg`: HTTP connection error message
+#' - `wrong_repo_msg()`: Repository not found error message
+#' - `wrong_username_msg()`: User not found error message
+#' - `wrong_org_name_msg()`: Organization not found error message
+#' - `weird_msg()`: Generic error message for unknown errors
+#'
+#' @param msg Character string containing the error message or API URL
+#' @param owner Character string containing the owner name
+#' @param repo Character string containing the repository name
+#'
+#' @returns For detection functions: Logical TRUE if the error condition is met.
+#' For message functions: Character vector with the error message.
+#'
+#' @examples
+#' # Check for error conditions
+#' error_msg <- "API rate limit exceeded for 123.123.123.123"
+#' if (api_rate_reached(error_msg)) {
+#'   message(api_rate_msg)
+#' }
+#'
+#' # Check API call type
+#' api_url <- "https://api.github.com/repos/owner/repo"
+#' if (is_repo_call(api_url) && is_not_found(error_msg)) {
+#'   message(wrong_repo_msg("owner", "repo"))
+#' }
+#'
+#' # Handle unknown errors
+#' unknown_error <- "Unknown error occurred"
+#' message(weird_msg(unknown_error))
+#'
+#' @noRd
+#' @name github_errors
+NULL
+
+#' @rdname github_errors
 has_timeout <- function(msg) {
     return(grepl("Timeout was reached", msg, ignore.case = TRUE))
 }
 
+#' @rdname github_errors
 need_auth <- function(msg) {
     return(grepl(
         pattern = "Requires authentication",
@@ -11,6 +70,7 @@ need_auth <- function(msg) {
     ))
 }
 
+#' @rdname github_errors
 api_rate_reached <- function(msg) {
     return(
         grepl(
@@ -22,6 +82,7 @@ api_rate_reached <- function(msg) {
     )
 }
 
+#' @rdname github_errors
 has_no_http <- function(msg) {
     return(grepl(
         pattern = "Failed to perform HTTP request",
@@ -30,6 +91,7 @@ has_no_http <- function(msg) {
     ))
 }
 
+#' @rdname github_errors
 is_not_found <- function(msg) {
     return(grepl(
         pattern = "URL not found",
@@ -39,14 +101,17 @@ is_not_found <- function(msg) {
     ))
 }
 
+#' @rdname github_errors
 is_orgs_call <- function(msg) {
     return(grepl(pattern = "/orgs/", x = msg, fixed = TRUE))
 }
 
+#' @rdname github_errors
 is_user_call <- function(msg) {
     return(grepl(pattern = "/users/", x = msg, fixed = TRUE))
 }
 
+#' @rdname github_errors
 is_repo_call <- function(msg) {
     return(grepl(pattern = "/repos/", x = msg, fixed = TRUE))
 }
@@ -71,7 +136,6 @@ no_resource_msg <- c(
     "The requested resource was not found on GitHub \U274C.\n",
     "\u2192 Check the API endpoint and parameters."
 )
-
 no_http_msg <- c(
     "Unable to reach GitHub servers \u1f310\n",
     "\u2192 Check your internet connection.\n",
@@ -81,6 +145,7 @@ no_http_msg <- c(
     "verify your proxy or firewall settings."
 )
 
+#' @rdname github_errors
 wrong_repo_msg <- function(owner, repo) {
     return(c(
         "The repository '",
@@ -94,6 +159,7 @@ wrong_repo_msg <- function(owner, repo) {
     ))
 }
 
+#' @rdname github_errors
 wrong_username_msg <- function(owner) {
     return(c(
         "The user '",
@@ -104,6 +170,7 @@ wrong_username_msg <- function(owner) {
     ))
 }
 
+#' @rdname github_errors
 wrong_org_name_msg <- function(owner) {
     return(c(
         "The organization '",
@@ -114,6 +181,7 @@ wrong_org_name_msg <- function(owner) {
     ))
 }
 
+#' @rdname github_errors
 weird_msg <- function(msg) {
     return(c(
         " Weird message...\n",

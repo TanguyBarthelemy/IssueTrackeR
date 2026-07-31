@@ -1,23 +1,23 @@
-#' @title Check if a Color is Dark
+#' @title Check if a Colour is Dark
 #'
 #' @description
-#' Determines whether a given color is "dark" based on its luminance contrast.
+#' Determines whether a given colour is "dark" based on its luminance contrast.
 #'
-#' @param colr A color.  specification. The color must be valid and recognized
+#' @param colr A colour.  specification. The colour must be valid and recognized
 #'   by `grDevices::col2rgb()`. It can be a character string (e.g.,
 #'   `"#RRGGBB"`, `"red"`, `"transparent"`) or an integer vector representing
 #'   RGB values.
 #'
 #' @returns
 #' A logical value:
-#' - `TRUE` if the color is dark.
-#' - `FALSE` if the color is light.
+#' - `TRUE` if the colour is dark.
+#' - `FALSE` if the colour is light.
 #'
 #' @details
 #' The function uses the **relative luminance** formula derived from the
 #' [WCAG](https://www.w3.org/WAI/WCAG21/quickref/) (Web Content Accessibility
-#' Guidelines) to calculate the *perceived brightness* of the color.
-#' If the luminance is below a 123 (on a scale of 0-255), the color is
+#' Guidelines) to calculate the *perceived brightness* of the colour.
+#' If the luminance is below a 123 (on a scale of 0-255), the colour is
 #' considered dark.
 #'
 #' @importFrom grDevices col2rgb

@@ -2,12 +2,12 @@
 % Please edit documentation in R/utils.R
 \name{isDark}
 \alias{isDark}
-\title{Check if a Color is Dark}
+\title{Check if a Colour is Dark}
 \usage{
 isDark(colr)
 }
 \arguments{
-\item{colr}{A color.  specification. The color must be valid and recognized
+\item{colr}{A colour.  specification. The colour must be valid and recognized
 by \code{grDevices::col2rgb()}. It can be a character string (e.g.,
 \code{"#RRGGBB"}, \code{"red"}, \code{"transparent"}) or an integer vector representing
 RGB values.}
@@ -15,18 +15,18 @@ RGB values.}
 \value{
 A logical value:
 \itemize{
-\item \code{TRUE} if the color is dark.
-\item \code{FALSE} if the color is light.
+\item \code{TRUE} if the colour is dark.
+\item \code{FALSE} if the colour is light.
 }
 }
 \description{
-Determines whether a given color is "dark" based on its luminance contrast.
+Determines whether a given colour is "dark" based on its luminance contrast.
 }
 \details{
 The function uses the \strong{relative luminance} formula derived from the
 \href{https://www.w3.org/WAI/WCAG21/quickref/}{WCAG} (Web Content Accessibility
-Guidelines) to calculate the \emph{perceived brightness} of the color.
-If the luminance is below a 123 (on a scale of 0-255), the color is
+Guidelines) to calculate the \emph{perceived brightness} of the colour.
+If the luminance is below a 123 (on a scale of 0-255), the colour is
 considered dark.
 }
 \examples{

@@ -122,7 +122,7 @@ bin_count <- function(x, dates = get_dates_vec(x)) {
 #' IssueTrackeR:::add_n_years("2023-12-31", n = 3)  # Returns "2026-12-31"
 #'
 #' @details
-#' It is posssible to substract years with negative values of `n`.
+#' It is possible to subtract years with negative values of `n`.
 #' Leap day is saved each 4 years.
 #'
 #' The accepted formats for the argument \code{x} are:
@@ -258,7 +258,7 @@ generate_age_mat.default <- function(x, n) {
 #'
 #' @details
 #' The function generates a plot directly. The plot shows a stacked area chart
-#' where each colored area represents an age category of open issues over time.
+#' where each coloured area represents an age category of open issues over time.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")

@@ -21,7 +21,7 @@ raised.
 Adds a specified number of years to a given date.
 }
 \details{
-It is posssible to substract years with negative values of \code{n}.
+It is possible to subtract years with negative values of \code{n}.
 Leap day is saved each 4 years.
 
 The accepted formats for the argument \code{x} are:

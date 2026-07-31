@@ -9,7 +9,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-* `overwrite` argument to specify if we want to overwrite an existing file if it already exists. (#18)
+* `overwrite` argument to specify if we want to overwrite an existing file if it already exists. (#18) color
 
 
 ## [1.4.0] - 2026-06-21

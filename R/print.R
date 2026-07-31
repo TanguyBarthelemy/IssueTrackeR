@@ -10,7 +10,7 @@
 #' This function displays an issue (\code{IssueTB} object) or a list of issues
 #' (\code{IssuesTB} object) with a formatted output.
 #'
-#' @returns invisibly (with \code{invisible()}) \code{NULL}.
+#' @returns invisibly (with \code{invisible()}) \code{NULL}. color
 #'
 #' @examples
 #' all_issues <- get_issues(
@@ -45,7 +45,7 @@ print.IssueTB <- function(x, ...) {
         "#",
         x[["number"]]
     )
-
+    a <- 1:length(x)
     cli::cli_h2(
         cli::style_hyperlink(
             text = issue_desc,
