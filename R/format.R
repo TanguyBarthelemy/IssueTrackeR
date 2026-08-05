@@ -6,7 +6,7 @@
 #' @param x The timestamp. See detail section for more information.
 #'
 #' @details
-#' The accepted formats for the argument \code{x} are:
+#' The accepted formats for the argument \code{x} are: color
 #'
 #' The accepted formats for the argument \code{x} are:
 #'

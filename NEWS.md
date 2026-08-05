@@ -7,10 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-07-31
+
 ### Added
 
-* `overwrite` argument to specify if we want to overwrite an existing file if it already exists. (#18)
-
+* `overwrite` argument to specify if we want to overwrite an existing file if it already exists. [#18](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/18)
 
 ## [1.4.0] - 2026-06-21
 
@@ -34,7 +35,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Fixed
 
 * Removed a warning due to the use of `ignore.case = TRUE` and `fixed = TRUE` simultaneously in `grepl()`
-
 
 ## [1.3.1] - 2025-10-27
 
@@ -68,7 +68,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * `get_labels()` now accepts `repo = NULL` and retrieve all the labels from all the repos from an owner.
 * slightly change the writing and reading method of datasets
 
-
 ## [1.2.0] - 2025-07-16
 
 ### Changed
@@ -84,7 +83,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * Url link with Issues printed
 * New `sample()`, `rbind()`, `summary()` method
 
-
 ## [1.1.1] - 2025-04-26
 
 ### Added
@@ -97,7 +95,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * `ignore.case = FALSE` if `fixed = TRUE`
 * lint condition_call (with `call. = FALSE`)
-
 
 ## [1.1.0] - 2025-01-09
 
@@ -119,7 +116,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * `[.IssuesTB` was duplicated
 * removed `... = _` in paste0 for R version before 4.2
 
-
 ## [1.0.0] - 2024-09-12
 
 ### Added
@@ -128,8 +124,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New CHANGELOG (`NEWS.md`)
 * Documentation for `logic_reducer()`, `no_milestones()`, `vgrepl()` and `simple_sort`
 
-
-[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.1...HEAD
+[1.4.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.2.0...v1.3.0

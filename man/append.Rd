@@ -24,7 +24,18 @@ A vector containing the values in \code{x} with the elements of
 Add elements to a vector.
 }
 \examples{
-append(1:5, 0:1, after = 3)
+path <- system.file("data_issues", package = "IssueTrackeR")
+open_issues <- get_issues(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "open_issues.yaml"
+)
+closed_issues <- get_issues(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "closed_issues.yaml"
+)
+new_issues <- append(open_issues, closed_issues)
 }
 \references{
 {\if{html}{\out{<span id="reference+append.Rd+R+3ABecker+2BChambers+2BWilks+3A1988"></span>}}Becker RA, Chambers JM, Wilks AR (1988).

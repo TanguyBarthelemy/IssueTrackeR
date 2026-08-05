@@ -43,6 +43,7 @@ cran-comments.md
 ^CRAN-SUBMISSION$
 
 heylogs.properties
+^man/check_response\.Rd$
 ^man/get_dates_vec\.Rd$
 ^man/bin_count\.Rd$
 ^man/add_n_years\.Rd$

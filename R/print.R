@@ -45,7 +45,6 @@ print.IssueTB <- function(x, ...) {
         "#",
         x[["number"]]
     )
-
     cli::cli_h2(
         cli::style_hyperlink(
             text = issue_desc,

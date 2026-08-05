@@ -42,6 +42,15 @@ For details about the sampling algorithm, probability weights, and special
 cases, refer to the original documentation:
 https://stat.ethz.ch/R-manual/R-devel/library/base/html/sample.html
 }
+\examples{
+path <- system.file("data_issues", package = "IssueTrackeR")
+open_issues <- get_issues(
+    source = "local",
+    dataset_dir = path,
+    dataset_name = "open_issues.yaml"
+)
+new_issues <- sample(open_issues, size = 5L)
+}
 \seealso{
 \code{\link[base:sample]{base::sample()}}
 }

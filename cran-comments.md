@@ -1,4 +1,13 @@
 
+## Submission of {releaser} v1.4.1 - 2026-07-31
+
+### R CMD check results
+
+* checked on windows, mac, ubuntu (with GitHub actions) checked on CRAN [win-builder](https://win-builder.r-project.org/)
+
+0 errors | 0 warnings | 0 note
+
+
 ## Submission of {IssueTrackeR} v1.4.0 - 2026-06-20
 
 ### Changes
