@@ -13,12 +13,12 @@ testthat::test_that("add_n_years correctly adds years to dates", {
     # Test 3: Handle leap years (Feb 29)
     leap_day <- as.Date("2020-02-29")
     result <- add_n_years(leap_day, n = 1)
-    expected <- as.Date("2021-03-01")  # Non-leap year
+    expected <- as.Date("2021-03-01") # Non-leap year
     expect_identical(result, expected)
 
     # Test 4: Add multiple years to a leap day
     result <- add_n_years(leap_day, n = 4)
-    expected <- as.Date("2024-02-29")  # Leap year
+    expected <- as.Date("2024-02-29") # Leap year
     expect_identical(result, expected)
 
     # Test 5: Add years to a character date
