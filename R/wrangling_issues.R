@@ -441,7 +441,7 @@ append.default <- function(x, values, after = length(x)) {
 #' @description
 #' S3 method for combining \code{IssueTB} objects by rows.
 #'
-#' @param ... Objects of class \code{IssueTB} or \code{IssuesTB}.
+#' @param \dots Objects of class \code{IssueTB} or \code{IssuesTB}.
 #'
 #' @returns An \code{IssueTB} object containing the combined rows of all input
 #' objects.

@@ -4,7 +4,7 @@
 #' Display IssueTB and IssuesTB with formatted output in the console
 #'
 #' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
-#' @param \dots Unused argument
+#' @param \dots Currently not used.
 #'
 #' @details
 #' This function displays an issue (\code{IssueTB} object) or a list of issues

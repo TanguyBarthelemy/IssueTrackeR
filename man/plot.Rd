@@ -16,7 +16,7 @@ The default is \code{"historic"}.}
 \item{n}{Integer specifying the number of age classes to display when
 \code{type = "historic"}.}
 
-\item{\dots}{Currently ignored.}
+\item{\dots}{Currently not used.}
 }
 \value{
 Invisibly returns \code{x}.

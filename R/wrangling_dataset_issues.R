@@ -251,8 +251,8 @@ get_issues <- function(
 #'   from the GitHub API by `gh::gh()`.
 #' @param urls A character vector of issue URLs for which comments should be
 #'   formatted.
-#' @param verbose Logical. If `TRUE`, informative messages are printed during
-#'   processing. Defaults to `TRUE`.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
 #'
 #' @returns
 #' A list of data.frame representing the comments of different issues.

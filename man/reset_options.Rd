@@ -4,7 +4,7 @@
 \alias{reset_options}
 \title{Reset options}
 \usage{
-reset_options()
+reset_options(verbose = TRUE)
 }
 \value{
 \code{NULL} invisibly

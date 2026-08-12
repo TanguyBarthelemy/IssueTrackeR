@@ -25,7 +25,7 @@
 \arguments{
 \item{x}{An object of class \code{IssueTB} or \code{IssuesTB}.}
 
-\item{\dots}{Unused argument}
+\item{\dots}{Currently not used.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{NULL}.

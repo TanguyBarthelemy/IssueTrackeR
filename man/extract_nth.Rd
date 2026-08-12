@@ -10,13 +10,15 @@ extract_nth(x, n)
 
 \method{extract_nth}{IssuesTB}(x, n)
 
-\method{extract_nth}{default}(x, n)
+\method{extract_nth}{default}(...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
 \item{n}{Integer. Position of the element to extract. 1 is for the first
 element.}
+
+\item{\dots}{Currently not used.}
 }
 \value{
 The nth issue as a \code{IssueTB} object.

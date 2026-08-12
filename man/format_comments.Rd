@@ -13,8 +13,8 @@ from the GitHub API by \code{gh::gh()}.}
 \item{urls}{A character vector of issue URLs for which comments should be
 formatted.}
 
-\item{verbose}{Logical. If \code{TRUE}, informative messages are printed during
-processing. Defaults to \code{TRUE}.}
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 A list of data.frame representing the comments of different issues.

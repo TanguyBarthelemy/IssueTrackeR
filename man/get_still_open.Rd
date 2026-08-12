@@ -10,7 +10,7 @@ get_still_open(x, lag = 0L)
 
 \method{get_still_open}{IssuesTB}(x, lag = 0L)
 
-\method{get_still_open}{default}(x, lag)
+\method{get_still_open}{default}(...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}

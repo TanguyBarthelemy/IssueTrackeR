@@ -11,7 +11,7 @@
 \method{rbind}{IssuesTB}(...)
 }
 \arguments{
-\item{...}{Objects of class \code{IssueTB} or \code{IssuesTB}.}
+\item{\dots}{Objects of class \code{IssueTB} or \code{IssuesTB}.}
 }
 \value{
 An \code{IssueTB} object containing the combined rows of all input

@@ -10,12 +10,14 @@ generate_age_mat(x, n = 3L)
 
 \method{generate_age_mat}{IssuesTB}(x, n = 3L)
 
-\method{generate_age_mat}{default}(x, n)
+\method{generate_age_mat}{default}(...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
 \item{n}{Number of age categories to create. Default: \code{3}.}
+
+\item{\dots}{Currently not used.}
 }
 \value{
 Matrix of open issue counts by age category.

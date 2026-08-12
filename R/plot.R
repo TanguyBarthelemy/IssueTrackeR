@@ -188,7 +188,7 @@ get_still_open.IssuesTB <- function(x, lag = 0L) {
 #' @export
 #' @exportS3Method get_still_open default
 #' @method get_still_open default
-get_still_open.default <- function(x, lag) {
+get_still_open.default <- function(...) {
     stop(
         "The function requires a IssuesTB object!",
         call. = FALSE
@@ -199,6 +199,7 @@ get_still_open.default <- function(x, lag) {
 #'
 #' @param x An object of class \code{IssuesTB}.
 #' @param n Number of age categories to create. Default: `3`.
+#' @param \dots Currently not used.
 #'
 #' @returns Matrix of open issue counts by age category.
 #'
@@ -242,7 +243,7 @@ generate_age_mat.IssuesTB <- function(x, n = 3L) {
 #' @export
 #' @exportS3Method generate_age_mat default
 #' @method generate_age_mat default
-generate_age_mat.default <- function(x, n) {
+generate_age_mat.default <- function(...) {
     stop(
         "The function requires a IssuesTB object!",
         call. = FALSE
@@ -433,7 +434,7 @@ plot_created_closed <- function(x) {
 #'   The default is \code{"historic"}.
 #' @param n Integer specifying the number of age classes to display when
 #'   \code{type = "historic"}.
-#' @param \dots Currently ignored.
+#' @param \dots Currently not used.
 #'
 #' @details
 #' When \code{type = "historic"}, a stacked area chart is produced showing

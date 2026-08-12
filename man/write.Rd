@@ -65,7 +65,7 @@ should it be overwrite? Default is TRUE.}
 \item{verbose}{A logical value indicating whether to print additional
 information. Default is \code{TRUE}.}
 
-\item{\dots}{Unused parameter.}
+\item{\dots}{Currently not used.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was

@@ -11,9 +11,9 @@
 #'   By default, the name is `"object.yaml"`.
 #' @param overwrite Logical indicating whether to overwrite the file if it
 #'   already exists. Defaults to `TRUE`.
-#' @param verbose Logical indicating whether to display informative messages.
-#'   Defaults to `TRUE`.
-#' @param ... Currently not used.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
 #'
 #' @returns
 #' The function returns **invisibly** the full path of the written YAML file.
@@ -99,7 +99,7 @@
 #' @inheritParams get_issues
 #' @param overwrite Boolean. If the dataset file already exists,
 #'   should it be overwrite? Default is TRUE.
-#' @param \dots Unused parameter.
+#' @param \dots Currently not used.
 #'
 #' @details
 #' Depending on the object, the defaults value of the argument

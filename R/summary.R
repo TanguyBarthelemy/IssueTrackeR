@@ -46,7 +46,7 @@ prepare_label_display <- function(x, html_url) {
 #' @title Compute a summary of an issue or a list of issues
 #'
 #' @param object a \code{IssueTB} or \code{IssuesTB} object.
-#' @param \dots Unused argument
+#' @param \dots Currently not used.
 #'
 #' @details
 #' This function compute the summary of an issue (\code{IssueTB} object) with

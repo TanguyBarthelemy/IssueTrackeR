@@ -11,7 +11,7 @@
 #' (Default \code{TRUE})
 #' @param in_comments Boolean. Does the function search for text in the
 #' comments? (Default \code{TRUE})
-#' @param ... Additional arguments passed to [grepl()], such as \code{pattern}
+#' @param \dots Additional arguments passed to [grepl()], such as \code{pattern}
 #' and \code{ignore.case}.
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
@@ -65,7 +65,7 @@ with_text.IssuesTB <- function(
 #' Generic function to filter issues with labels
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param ... Additional arguments passed to [grepl()], such as \code{pattern}
+#' @param \dots Additional arguments passed to [grepl()], such as \code{pattern}
 #' and \code{ignore.case}.
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
@@ -233,6 +233,7 @@ author_last_comment.IssuesTB <- function(x) {
 #' @param x An object of class \code{IssuesTB}.
 #' @param n Integer. Position of the element to extract. 1 is for the first
 #'   element.
+#' @param \dots Currently not used.
 #'
 #' @returns The nth issue as a `IssueTB` object.
 #' If \code{n} exceeds the number of issues, returns the last issue with a
@@ -274,6 +275,6 @@ extract_nth.IssuesTB <- function(x, n) {
 #' @exportS3Method extract_nth default
 #' @method extract_nth default
 #' @export
-extract_nth.default <- function(x, n) {
+extract_nth.default <- function(...) {
     stop("`x` should be a `IssuesTB` object.")
 }

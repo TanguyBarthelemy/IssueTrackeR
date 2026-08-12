@@ -9,7 +9,7 @@
 #' getOption("IssueTrackeR.owner")
 #' reset_options()
 #' getOption("IssueTrackeR.owner")
-reset_options <- function() {
+reset_options <- function(verbose = TRUE) {
     dataset_dir <- file.path(tempdir(), "data") |>
         normalizePath(mustWork = FALSE)
 

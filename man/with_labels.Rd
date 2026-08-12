@@ -12,7 +12,7 @@ with_labels(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{...}{Additional arguments passed to \code{\link[=grepl]{grepl()}}, such as \code{pattern}
+\item{\dots}{Additional arguments passed to \code{\link[=grepl]{grepl()}}, such as \code{pattern}
 and \code{ignore.case}.}
 }
 \value{
