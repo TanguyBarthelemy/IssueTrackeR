@@ -224,3 +224,56 @@ author_last_comment.IssuesTB <- function(x) {
         as.character()
     return(authors)
 }
+
+#' @title Extract the nth Issue from an List fo Issues
+#'
+#' @description
+#' Extract the nth issue from a `IssuesTB` object.
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param n Integer. Position of the element to extract. 1 is for the first
+#'   element.
+#'
+#' @returns The nth issue as a `IssueTB` object.
+#' If \code{n} exceeds the number of issues, returns the last issue with a
+#' warning. Returns `NULL` if the issues list is empty.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "open_issues.yaml"
+#' )
+#'
+#' first_issue <- extract_nth(all_issues, 1)
+#' third_issue <- extract_nth(all_issues, 3)
+#'
+#' @name extract_nth
+#' @export
+extract_nth <- function(x, n) {
+    UseMethod("extract_nth", x)
+}
+
+#' @rdname extract_nth
+#' @exportS3Method extract_nth IssuesTB
+#' @method extract_nth IssuesTB
+#' @export
+extract_nth.IssuesTB <- function(x, n) {
+    if (nrow(x) == 0L) {
+        message("The list of issues is empty. No issue to extract.")
+        return(NULL)
+    } else if (n > nrow(x)) {
+        warning("n > number of issues. The last issue will be extracted.")
+        return(x[nrow(x), , drop = TRUE])
+    } else {
+        return(x[n, , drop = TRUE])
+    }
+}
+
+#' @rdname extract_nth
+#' @exportS3Method extract_nth default
+#' @method extract_nth default
+#' @export
+extract_nth.default <- function(x, n) {
+    stop("`x` should be a `IssuesTB` object.")
+}
