@@ -53,10 +53,10 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extract_nth</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extract_nth</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, <span class="va">verbose</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'IssuesTB'</span></span>
-<span><span class="fu">extract_nth</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span><span class="op">)</span></span>
+<span><span class="fu">extract_nth</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Default S3 method</span></span>
 <span><span class="fu">extract_nth</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -73,6 +73,11 @@
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
 <dd><p>Integer. Position of the element to extract. 1 is for the first
 element.</p></dd>
+
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>A logical value indicating whether to print additional
+information. Default is <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -97,7 +102,9 @@ warning. Returns <code>NULL</code> if the issues list is empty.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/open_issues.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">first_issue</span> <span class="op">&lt;-</span> <span class="fu">extract_nth</span><span class="op">(</span><span class="va">all_issues</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The 1th issue will be extracted.</span>
 <span class="r-in"><span><span class="va">third_issue</span> <span class="op">&lt;-</span> <span class="fu">extract_nth</span><span class="op">(</span><span class="va">all_issues</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The 3th issue will be extracted.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

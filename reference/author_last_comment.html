@@ -53,13 +53,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">x</span>, <span class="va">verbose</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'IssueTB'</span></span>
-<span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">x</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'IssuesTB'</span></span>
-<span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">x</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -68,6 +68,11 @@
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>An object of class <code>IssueTB</code> or <code>IssuesTB</code>.</p></dd>
+
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>A logical value indicating whether to print additional
+information. Default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -86,6 +91,7 @@ If there is no comments, it returns an empty string.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Looking into open_issues.yaml ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/open_issues.yaml.</span>
 <span class="r-in"><span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">all_issues</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Try to retrieve comments from the list of issues.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] ""                  ""                  "TanguyBarthelemy" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [4] ""                  "TanguyBarthelemy"  ""                 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [7] ""                  "charphi"           ""                 </span>
@@ -129,6 +135,7 @@ If there is no comments, it returns an empty string.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [121] "charphi"           ""                  "charphi"          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [124] "AQLT"              ""                  "charphi"          </span>
 <span class="r-in"><span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1L</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> There are no comments in this issues.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
