@@ -212,6 +212,7 @@ get_still_open.default <- function(...) {
 #' )
 #' age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
 #'
+#' @dev
 generate_age_mat <- function(x, n = 3L) {
     UseMethod("generate_age_mat", x)
 }
@@ -347,6 +348,7 @@ plot_historic <- function(x, n = 3L) {
 #'
 #' IssueTrackeR:::plot_created_closed(issues)
 #' @dev
+#'
 #' @importFrom graphics abline
 #' @importFrom graphics rect
 #' @importFrom graphics lines

@@ -181,6 +181,8 @@ get_nbr_comments.IssuesTB <- function(x) {
 #' Retrieve the name of the last commentator
 #'
 #' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
 #'
 #' @returns A string with the name of the last person which leaves a comment.
 #' If there is no comments, it returns an empty string.
@@ -196,7 +198,7 @@ get_nbr_comments.IssuesTB <- function(x) {
 #'
 #' @rdname author_last_comment
 #' @export
-author_last_comment <- function(x) {
+author_last_comment <- function(x, verbose) {
     UseMethod("author_last_comment", x)
 }
 
@@ -204,8 +206,11 @@ author_last_comment <- function(x) {
 #' @exportS3Method author_last_comment IssueTB
 #' @method author_last_comment IssueTB
 #' @export
-author_last_comment.IssueTB <- function(x) {
+author_last_comment.IssueTB <- function(x, verbose = TRUE) {
     if (get_nbr_comments(x) == 0L) {
+        if (verbose) {
+            message("There are no comments in this issues.")
+        }
         return("")
     }
     last_commentator <- x$author[nrow(x)]
@@ -216,7 +221,10 @@ author_last_comment.IssueTB <- function(x) {
 #' @exportS3Method author_last_comment IssuesTB
 #' @method author_last_comment IssuesTB
 #' @export
-author_last_comment.IssuesTB <- function(x) {
+author_last_comment.IssuesTB <- function(x, verbose = TRUE) {
+    if (verbose) {
+        cat("Try to retrieve comments from the list of issues.\n")
+    }
     nbr_comments <- get_nbr_comments(x)
     authors <- character(nrow(x))
     authors[nbr_comments > 0L] <- x$comments[nbr_comments > 0L] |>
@@ -233,6 +241,8 @@ author_last_comment.IssuesTB <- function(x) {
 #' @param x An object of class \code{IssuesTB}.
 #' @param n Integer. Position of the element to extract. 1 is for the first
 #'   element.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'
 #' @returns The nth issue as a `IssueTB` object.
@@ -251,7 +261,7 @@ author_last_comment.IssuesTB <- function(x) {
 #'
 #' @name extract_nth
 #' @export
-extract_nth <- function(x, n) {
+extract_nth <- function(x, n, verbose) {
     UseMethod("extract_nth", x)
 }
 
@@ -259,17 +269,24 @@ extract_nth <- function(x, n) {
 #' @exportS3Method extract_nth IssuesTB
 #' @method extract_nth IssuesTB
 #' @export
-extract_nth.IssuesTB <- function(x, n) {
+extract_nth.IssuesTB <- function(x, n, verbose = TRUE) {
     if (nrow(x) == 0L) {
-        message("The list of issues is empty. No issue to extract.")
+        if (verbose) {
+            message("The list of issues is empty. No issue to extract.")
+        }
         return(NULL)
     } else if (n > nrow(x)) {
-        warning(
-            "n > number of issues. The last issue will be extracted.",
-            call. = FALSE
-        )
+        if (verbose) {
+            warning(
+                "n > number of issues. The last issue will be extracted.",
+                call. = FALSE
+            )
+        }
         return(x[nrow(x), , drop = TRUE])
     } else {
+        if (verbose) {
+            message("The ", n, "th issue will be extracted.")
+        }
         return(x[n, , drop = TRUE])
     }
 }

@@ -6,9 +6,9 @@
 \alias{extract_nth.default}
 \title{Extract the nth Issue from an List of Issues}
 \usage{
-extract_nth(x, n)
+extract_nth(x, n, verbose)
 
-\method{extract_nth}{IssuesTB}(x, n)
+\method{extract_nth}{IssuesTB}(x, n, verbose = TRUE)
 
 \method{extract_nth}{default}(...)
 }
@@ -17,6 +17,9 @@ extract_nth(x, n)
 
 \item{n}{Integer. Position of the element to extract. 1 is for the first
 element.}
+
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 
 \item{\dots}{Currently not used.}
 }

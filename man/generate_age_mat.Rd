@@ -35,3 +35,4 @@ issues <- get_issues(
 age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
 
 }
+\keyword{internal}

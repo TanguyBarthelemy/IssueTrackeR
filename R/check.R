@@ -48,14 +48,17 @@
 #' unknown_error <- "Unknown error occurred"
 #' IssueTrackeR:::weird_msg(unknown_error)
 #'
+#' @noRd
 #' @name github_errors
 NULL
 
+#' @noRd
 #' @rdname github_errors
 has_timeout <- function(msg) {
     return(grepl("Timeout was reached", msg, ignore.case = TRUE))
 }
 
+#' @noRd
 #' @rdname github_errors
 need_auth <- function(msg) {
     return(grepl(
@@ -66,6 +69,7 @@ need_auth <- function(msg) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 api_rate_reached <- function(msg) {
     return(
@@ -78,6 +82,7 @@ api_rate_reached <- function(msg) {
     )
 }
 
+#' @noRd
 #' @rdname github_errors
 has_no_http <- function(msg) {
     return(grepl(
@@ -87,6 +92,7 @@ has_no_http <- function(msg) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 is_not_found <- function(msg) {
     return(grepl(
@@ -97,16 +103,19 @@ is_not_found <- function(msg) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 is_orgs_call <- function(msg) {
     return(grepl(pattern = "/orgs/", x = msg, fixed = TRUE))
 }
 
+#' @noRd
 #' @rdname github_errors
 is_user_call <- function(msg) {
     return(grepl(pattern = "/users/", x = msg, fixed = TRUE))
 }
 
+#' @noRd
 #' @rdname github_errors
 is_repo_call <- function(msg) {
     return(grepl(pattern = "/repos/", x = msg, fixed = TRUE))
@@ -141,6 +150,7 @@ no_http_msg <- c(
     "verify your proxy or firewall settings."
 )
 
+#' @noRd
 #' @rdname github_errors
 wrong_repo_msg <- function(owner, repo) {
     return(c(
@@ -155,6 +165,7 @@ wrong_repo_msg <- function(owner, repo) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 wrong_username_msg <- function(owner) {
     return(c(
@@ -166,6 +177,7 @@ wrong_username_msg <- function(owner) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 wrong_org_name_msg <- function(owner) {
     return(c(
@@ -177,6 +189,7 @@ wrong_org_name_msg <- function(owner) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 weird_msg <- function(msg) {
     return(c(
@@ -198,8 +211,6 @@ weird_msg <- function(msg) {
 #' @returns Invisibly returns NULL if no error is detected.
 #' Else, a error is generated with appropriate message.
 #'
-#' @dev
-#'
 #' @details
 #' The function handles these specific error cases:
 #' - Timeout errors
@@ -212,6 +223,7 @@ weird_msg <- function(msg) {
 #' @examples
 #' a <- try(gh::gh("/repos/owner/nonexistent"))
 #' try(IssueTrackeR:::check_response(a))
+#' @dev
 check_response <- function(x) {
     if (!inherits(x, "try-error")) {
         return(invisible(NULL))

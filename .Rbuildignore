@@ -48,6 +48,7 @@ heylogs.properties
 ^man/bin_count\.Rd$
 ^man/add_n_years\.Rd$
 ^man/get_still_open\.Rd$
+^man/generate_age_mat\.Rd$
 ^man/plot_historic\.Rd$
 ^man/plot_created_closed\.Rd$
 ^man/isDark\.Rd$
