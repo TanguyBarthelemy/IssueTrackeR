@@ -264,7 +264,10 @@ extract_nth.IssuesTB <- function(x, n) {
         message("The list of issues is empty. No issue to extract.")
         return(NULL)
     } else if (n > nrow(x)) {
-        warning("n > number of issues. The last issue will be extracted.")
+        warning(
+            "n > number of issues. The last issue will be extracted.",
+            call. = FALSE
+        )
         return(x[nrow(x), , drop = TRUE])
     } else {
         return(x[n, , drop = TRUE])
@@ -276,5 +279,5 @@ extract_nth.IssuesTB <- function(x, n) {
 #' @method extract_nth default
 #' @export
 extract_nth.default <- function(...) {
-    stop("`x` should be a `IssuesTB` object.")
+    stop("`x` should be a `IssuesTB` object.", call. = FALSE)
 }
