@@ -52,7 +52,7 @@ get_dates_vec <- function(x) {
 #' @param dates A vector of `Date` objects defining the bin boundaries. If not
 #'   provided, the function uses `get_dates_vec(x)` to generate the dates.
 #'
-#' @return
+#' @returns
 #' A integer vector with the number of element in each date bin
 #'
 #' @examples
