@@ -4,7 +4,7 @@
 \alias{extract_nth}
 \alias{extract_nth.IssuesTB}
 \alias{extract_nth.default}
-\title{Extract the nth Issue from an List fo Issues}
+\title{Extract the nth Issue from an List of Issues}
 \usage{
 extract_nth(x, n)
 

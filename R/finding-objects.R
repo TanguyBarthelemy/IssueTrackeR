@@ -225,7 +225,7 @@ author_last_comment.IssuesTB <- function(x) {
     return(authors)
 }
 
-#' @title Extract the nth Issue from an List fo Issues
+#' @title Extract the nth Issue from an List of Issues
 #'
 #' @description
 #' Extract the nth issue from a `IssuesTB` object.
