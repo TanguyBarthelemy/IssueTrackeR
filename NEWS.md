@@ -10,6 +10,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 * `extract_nth()` returns the nth issue of a list of issues [#42](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/42)
+* `count_issues()` returns the number of issues in a list of issues [#35](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/35)
 
 ### Fixed
 

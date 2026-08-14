@@ -611,3 +611,43 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
     return(x[!duplicated(x), ])
 }
+
+#' @title Count the number of Issues
+#'
+#' @description
+#' Generic function to count the number of issues in a list of issues.
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
+#'
+#' @returns Integer. The number of issues.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "open_issues.yaml"
+#' )
+#'
+#' count_issues(all_issues)
+count_issues <- function(x, verbose = TRUE) {
+    UseMethod("count_issues", x)
+}
+
+#' @rdname count_issues
+#' @exportS3Method count_issues IssuesTB
+#' @method count_issues IssuesTB
+#' @export
+count_issues.IssuesTB <- function(x, verbose = TRUE) {
+    return(nrow(x))
+}
+
+#' @rdname count_issues
+#' @exportS3Method count_issues default
+#' @method count_issues default
+#' @export
+count_issues.default <- function(...) {
+    stop("`x` should be a `IssuesTB` object.", call. = FALSE)
+}
