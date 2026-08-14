@@ -632,6 +632,7 @@ unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
 #' )
 #'
 #' count_issues(all_issues)
+#' @export
 count_issues <- function(x, verbose = TRUE) {
     UseMethod("count_issues", x)
 }
