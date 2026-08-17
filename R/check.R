@@ -121,6 +121,12 @@ is_repo_call <- function(msg) {
     return(grepl(pattern = "/repos/", x = msg, fixed = TRUE))
 }
 
+#' @noRd
+#' @rdname github_errors
+is_api_down <- function(owner) {
+    return(grepl(pattern = "Unexpected content type \"text/html\"", x = msg, fixed = TRUE))
+}
+
 timeout_msg <- c(
     " The GitHub API request timed out. \U1F553\n",
     "\u2192 Check your network connection\n",
@@ -136,6 +142,10 @@ api_rate_msg <- c(
     " GitHub API rate limit exceeded \U23F3\n",
     "\u2192 Wait a few minutes\n",
     "\u2192 Or authenticate with a PAT to increase your limit."
+)
+api_down_msg <- c(
+    " GitHub API is currently down \U1F6D1\n",
+    "\u2192 Wait a few minutes and try again."
 )
 no_resource_msg <- c(
     "The requested resource was not found on GitHub \U274C.\n",
@@ -241,6 +251,8 @@ check_response <- function(x) {
         stop(auth_msg, call. = FALSE)
     } else if (api_rate_reached(msg)) {
         stop(api_rate_msg, call. = FALSE)
+    } else if (is_api_down(msg)) {
+        stop(api_down_msg, call. = FALSE)
     } else if (
         inherits(x = cond, what = "http_error_404") || is_not_found(msg)
     ) {
