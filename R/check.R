@@ -14,12 +14,14 @@
 #' - `is_orgs_call()`: Detects organization API calls
 #' - `is_user_call()`: Detects user API calls
 #' - `is_repo_call()`: Detects repository API calls
+#' - `is_api_down()`: Detects when GitHub APi is down
 #'
 #' @section Error Message Functions:
 #' These functions generate formatted error messages with troubleshooting tips:
 #' - `timeout_msg`: Timeout error message
 #' - `auth_msg`: Authentication error message
 #' - `api_rate_msg`: Rate limit error message
+#' - `api_down_msg`: API GitHub is down error message
 #' - `no_resource_msg`: Resource not found error message
 #' - `no_http_msg`: HTTP connection error message
 #' - `wrong_repo_msg()`: Repository not found error message

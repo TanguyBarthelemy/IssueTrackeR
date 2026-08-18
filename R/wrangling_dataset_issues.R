@@ -241,67 +241,8 @@ get_issues <- function(
     return(issues)
 }
 
-#' @title Format GitHub Issue Comments
-#'
-#' @description
-#' Format raw GitHub issue comments from `gh::gh` into a structured list,
-#' grouping comments by their associated issue URLs.
-#'
-#' @param raw_comments A list of raw GitHub issue comments, typically retrieved
-#'   from the GitHub API by `gh::gh()`.
-#' @param urls A character vector of issue URLs for which comments should be
-#'   formatted.
-#' @param verbose A logical value indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#'
-#' @returns
-#' A list of data.frame representing the comments of different issues.
-#' If an issue URL has no associated comments, the corresponding list element
-#' is an empty data frame.
-#'
-#' @section Input structure:
-#' Each issue's comments should be a named list containing the following
-#' elements:
-#'
-#' - `issue_url`: The URL of the issue associated with the comment.
-#' - `user`: A list containing user information, including `login` (the
-#'   author's username).
-#' - `body`: The comments.
-#'
-#' @section Output structure:
-#' The output is a list of data frame with the following columns:
-#' - `text`: The comments (text).
-#' - `author`: The username of the comment author.
-#'
-#' @examples
-#' # Comments from GitHub
-#' raw_comments <- list(
-#'     list(
-#'         issue_url = "https://github.com/owner/repo/issues/1",
-#'         user = list(login = "user1"),
-#'         body = "This is a comment on issue 1."
-#'     ),
-#'     list(
-#'         issue_url = "https://github.com/owner/repo/issues/1",
-#'         user = list(login = "user2"),
-#'         body = "Another comment on issue 1."
-#'     ),
-#'     list(
-#'         issue_url = "https://github.com/owner/repo/issues/2",
-#'         user = list(login = "user1"),
-#'         body = "A comment on issue 2."
-#'     )
-#' )
-#' # URLs for which comments should be formatted
-#' urls <- c(
-#'     "https://github.com/owner/repo/issues/1",
-#'     "https://github.com/owner/repo/issues/2",
-#'     "https://github.com/owner/repo/issues/3"  # No comments for this issue
-#' )
-#'
-#' formatted_comments <- IssueTrackeR:::format_comments(raw_comments, urls)
-#'
-#' @dev
+#' @rdname format
+#' @noRd
 format_comments <- function(
     raw_comments,
     urls,
@@ -353,42 +294,8 @@ format_comments <- function(
     return(output)
 }
 
-#' @title Format the issue in a simpler format
-#'
-#' @param raw_issues a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' issues.
-#' @param raw_comments a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' comments.
-#' @inheritParams get_issues
-#'
-#' @returns a list representing an issue with simpler structure (with number,
-#' title, body and labels) of all issues.
-#' @export
-#'
-#' @examples
-#'
-#' \dontrun{
-#' raw_issues <- gh::gh(
-#'     repo = "rjdemetra",
-#'     owner = "rjdverse",
-#'     endpoint = "/repos/:owner/:repo/issues",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#' )
-#' raw_comments <- gh::gh(
-#'     repo = "rjdemetra",
-#'     owner = "rjdverse",
-#'     endpoint = "/repos/:owner/:repo/issues/comments",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#' )
-#' all_issues <- format_issues(raw_issues = raw_issues,
-#'                             raw_comments = raw_comments,
-#'                             verbose = FALSE)
-#' }
-#'
+#' @rdname format
+#' @noRd
 format_issues <- function(
     raw_issues,
     raw_comments,

@@ -52,6 +52,5 @@ heylogs.properties
 ^man/plot_historic\.Rd$
 ^man/plot_created_closed\.Rd$
 ^man/isDark\.Rd$
-^man/format_comments\.Rd$
 ^man/null_to_default\.Rd$
 ^man/dot-write\.Rd$

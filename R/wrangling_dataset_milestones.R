@@ -47,42 +47,8 @@ null_to_default <- function(x, default) {
     return(x)
 }
 
-#' @title Format the milestone in a simpler format
-#'
-#' @param raw_milestone Milestone. Subset of a \code{gh_response} object output
-#' from the function \code{\link[gh]{gh}} which contains all the data and
-#' metadata for a GitHub milestone.
-#' @param verbose A logical value indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#'
-#' @returns a data.frame with 3 entries:
-#'
-#' \itemize{
-#' \item Title: name of the milestone
-#' \item description: Description of the milestone
-#' \item due_on: date to with the issue is due
-#' }
-#'
-#' @keywords internal
+#' @rdname format
 #' @noRd
-#'
-#' @examples
-#'
-#' # With milestones
-#'
-#' \dontrun{
-#' raw_milestones <- gh::gh(
-#'     repo = "jdplus-main",
-#'     owner = "jdemetra",
-#'     endpoint = "/repos/:owner/:repo/milestones",
-#'     state = "all",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#' )
-#' raw_milestone <- raw_milestones[[5L]]
-#' format_milestone(raw_milestone)
-#' }
-#'
 format_milestone <- function(raw_milestone, verbose = TRUE) {
     if (verbose) {
         cat("\t- ", raw_milestone[["title"]], "... Done!\n")
