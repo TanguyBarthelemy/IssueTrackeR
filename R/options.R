@@ -26,7 +26,8 @@ reset_options <- function(verbose = TRUE) {
         cat(
             "Reset the default options to:",
             paste(
-                "\n- location for datasets is", dataset_dir
+                "\n- location for datasets is",
+                dataset_dir
             ),
             paste("\n- owner: rjdverse"),
             paste("\n- repo: rjdemetra"),

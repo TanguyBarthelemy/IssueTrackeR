@@ -124,7 +124,11 @@ is_repo_call <- function(msg) {
 #' @noRd
 #' @rdname github_errors
 is_api_down <- function(msg) {
-    return(grepl(pattern = "Unexpected content type \"text/html\"", x = msg, fixed = TRUE))
+    return(grepl(
+        pattern = "Unexpected content type \"text/html\"",
+        x = msg,
+        fixed = TRUE
+    ))
 }
 
 timeout_msg <- c(
