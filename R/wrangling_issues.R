@@ -9,6 +9,8 @@
 #' @param number a string. The number of the issue.
 #' @param created_at a date (or timestamp). The creation date of the issue.
 #' @param closed_at a date (or timestamp). The closing date of the issue.
+#' @param closed_by a string. The GitHub username of the perso who closed the
+#' issue.
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.
 #' @inheritParams get_issues
@@ -95,6 +97,7 @@ new_issue.default <- function(
     state = NA_character_,
     created_at = Sys.Date(),
     closed_at = as.Date(NA_integer_),
+    closed_by = NA_character_,
     labels = NULL,
     milestone = NA_character_,
     repo = NA_character_,
@@ -117,6 +120,7 @@ new_issue.default <- function(
         milestone = milestone,
         created_at = format_timestamp(created_at),
         closed_at = format_timestamp(closed_at),
+        closed_by = closed_by,
         creator = creator,
         assignee = assignee,
         state_reason = state_reason,
@@ -143,6 +147,8 @@ new_issue.default <- function(
 #' issues.
 #' @param closed_at a vector of date (or timestamp). The closing date of the
 #' issues.
+#' @param closed_by a vector of string. The GitHub usernames of the person who
+#' closed the issues.
 #' @param labels a list of vector string (or missing). The labels of the issues.
 #' @param milestone a vector of string (or missing). The milestones of the
 #' issues.
@@ -247,6 +253,7 @@ new_issues.default <- function(
     state,
     created_at = Sys.Date(),
     closed_at = as.Date(NA_integer_),
+    closed_by = NA_character_,
     labels = list(),
     comments = list(),
     milestone = NA_character_,
@@ -266,6 +273,7 @@ new_issues.default <- function(
         state <- character(0L)
         created_at <- format_timestamp(as.Date(character(0L)))
         closed_at <- format_timestamp(as.Date(character(0L)))
+        closed_by <- character(0L)
         milestone <- character(0L)
         repo <- character(0L)
         owner <- character(0L)
@@ -307,6 +315,7 @@ new_issues.default <- function(
         milestone = milestone,
         created_at = format_timestamp(created_at),
         closed_at = format_timestamp(closed_at),
+        closed_by = closed_by,
         creator = creator,
         assignee = assignee,
         state_reason = state_reason,

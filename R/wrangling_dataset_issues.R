@@ -404,6 +404,13 @@ format_issues <- function(
             },
             FUN.VALUE = double(1L)
         ),
+        closed_by = vapply(
+            X = raw_issues,
+            FUN = function(.x) {
+                null_to_default(.x$closed_by$login, default = NA_character_)
+            },
+            FUN.VALUE = character(1L)
+        ),
         creator = vapply(
             X = raw_issues,
             FUN = Reduce,
