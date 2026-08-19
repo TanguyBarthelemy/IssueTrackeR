@@ -126,7 +126,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
     breaks <- c(0, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
-    labels <- c(
+    axis_labels <- c(
         "< 1 day",
         "1-7 days",
         "7-30 days",
@@ -137,7 +137,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
     classes <- cut(
         resolution_time,
         breaks = breaks,
-        labels = labels,
+        labels = axis_labels,
         right = FALSE,
         include.lowest = TRUE
     )
@@ -203,7 +203,7 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
     ticks <- c(1 / 24, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
-    labels <- c(
+    axis_labels <- c(
         "1 hour",
         "1 day",
         "1 week",
@@ -232,7 +232,7 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
     graphics::axis(
         side = 1,
         at = ticks[cond],
-        labels = labels[cond]
+        labels = axis_labels[cond]
     )
     return(invisible(NULL))
 }
