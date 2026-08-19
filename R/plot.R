@@ -202,7 +202,15 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
     }
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
-    ticks <- c(1L, 24L, 24L * 7L, 24L * 30L, 24L * 365L, 3L * 365L * 24L, max(resolution_time) + 1L)
+    ticks <- c(
+        1L,
+        24L,
+        24L * 7L,
+        24L * 30L,
+        24L * 365L,
+        3L * 365L * 24L,
+        max(resolution_time) + 1L
+    )
     axis_labels <- c(
         "1 hour",
         "1 day",
