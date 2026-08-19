@@ -101,6 +101,7 @@ with_labels.IssuesTB <- function(x, ...) {
 #' @param x An object of class \code{IssuesTB}.
 #' @param negate boolean indicating if we are searching for issues WITHOUT
 #' comments. Default is \code{FALSE}.
+#' @param \dots Currently not used.
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
@@ -115,7 +116,7 @@ with_labels.IssuesTB <- function(x, ...) {
 #'
 #' @rdname with_comments
 #' @export
-with_comments <- function(x, negate = FALSE) {
+with_comments <- function(x, ...) {
     UseMethod("with_comments", x)
 }
 
@@ -123,7 +124,7 @@ with_comments <- function(x, negate = FALSE) {
 #' @exportS3Method with_comments IssuesTB
 #' @method with_comments IssuesTB
 #' @export
-with_comments.IssuesTB <- function(x, negate = FALSE) {
+with_comments.IssuesTB <- function(x, negate = FALSE, ...) {
     condition <- get_nbr_comments(x) > 0L
     if (negate) {
         return(x[!condition, , drop = FALSE])
@@ -183,6 +184,7 @@ get_nbr_comments.IssuesTB <- function(x) {
 #' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
 #' @param verbose A logical value indicating whether to print additional
 #' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
 #'
 #' @returns A string with the name of the last person which leaves a comment.
 #' If there is no comments, it returns an empty string.
@@ -198,7 +200,7 @@ get_nbr_comments.IssuesTB <- function(x) {
 #'
 #' @rdname author_last_comment
 #' @export
-author_last_comment <- function(x, verbose) {
+author_last_comment <- function(x, ...) {
     UseMethod("author_last_comment", x)
 }
 
@@ -206,14 +208,15 @@ author_last_comment <- function(x, verbose) {
 #' @exportS3Method author_last_comment IssueTB
 #' @method author_last_comment IssueTB
 #' @export
-author_last_comment.IssueTB <- function(x, verbose = TRUE) {
-    if (get_nbr_comments(x) == 0L) {
+author_last_comment.IssueTB <- function(x, verbose = TRUE, ...) {
+    nb_comments <- get_nbr_comments(x)
+    if (nb_comments == 0L) {
         if (verbose) {
             message("There are no comments in this issues.")
         }
         return("")
     }
-    last_commentator <- x$author[nrow(x)]
+    last_commentator <- x$comments$author[nb_comments]
     return(last_commentator)
 }
 
@@ -221,7 +224,7 @@ author_last_comment.IssueTB <- function(x, verbose = TRUE) {
 #' @exportS3Method author_last_comment IssuesTB
 #' @method author_last_comment IssuesTB
 #' @export
-author_last_comment.IssuesTB <- function(x, verbose = TRUE) {
+author_last_comment.IssuesTB <- function(x, verbose = TRUE, ...) {
     if (verbose) {
         cat("Try to retrieve comments from the list of issues.\n")
     }
@@ -261,7 +264,7 @@ author_last_comment.IssuesTB <- function(x, verbose = TRUE) {
 #'
 #' @name extract_nth
 #' @export
-extract_nth <- function(x, n, verbose) {
+extract_nth <- function(x, ...) {
     UseMethod("extract_nth", x)
 }
 
@@ -269,7 +272,7 @@ extract_nth <- function(x, n, verbose) {
 #' @exportS3Method extract_nth IssuesTB
 #' @method extract_nth IssuesTB
 #' @export
-extract_nth.IssuesTB <- function(x, n, verbose = TRUE) {
+extract_nth.IssuesTB <- function(x, n, verbose = TRUE, ...) {
     if (nrow(x) == 0L) {
         if (verbose) {
             message("The list of issues is empty. No issue to extract.")

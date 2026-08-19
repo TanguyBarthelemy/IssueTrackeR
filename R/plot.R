@@ -350,6 +350,7 @@ add_n_years <- function(x, n) {
 #' @param x An object of class \code{IssuesTB}.
 #' @param lag Numeric. Number of years to look back for "still open" issues.
 #'   Default is 0.
+#' @param \dots Currently not used.
 #'
 #' @returns ts object with still open issues counts per month.
 #'
@@ -363,7 +364,7 @@ add_n_years <- function(x, n) {
 #' open_issues <- IssueTrackeR:::get_still_open(issues, lag = 1L)
 #'
 #' @dev
-get_still_open <- function(x, lag = 0L) {
+get_still_open <- function(x, ...) {
     UseMethod("get_still_open", x)
 }
 
@@ -371,7 +372,7 @@ get_still_open <- function(x, lag = 0L) {
 #' @export
 #' @exportS3Method get_still_open IssuesTB
 #' @method get_still_open IssuesTB
-get_still_open.IssuesTB <- function(x, lag = 0L) {
+get_still_open.IssuesTB <- function(x, lag = 0L, ...) {
     dates <- get_dates_vec(x$created_at)
 
     closed <- as.Date(x$closed_at)
@@ -419,7 +420,7 @@ get_still_open.default <- function(...) {
 #' age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
 #'
 #' @dev
-generate_age_mat <- function(x, n = 3L) {
+generate_age_mat <- function(x, ...) {
     UseMethod("generate_age_mat", x)
 }
 

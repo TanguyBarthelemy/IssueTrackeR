@@ -148,10 +148,6 @@
 #'
 write_to_dataset <- function(
     x,
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name,
-    overwrite = TRUE,
-    verbose = TRUE,
     ...
 ) {
     UseMethod(generic = "write_to_dataset", object = x)

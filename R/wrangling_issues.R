@@ -633,7 +633,7 @@ unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
 #'
 #' count_issues(all_issues)
 #' @export
-count_issues <- function(x, verbose = TRUE) {
+count_issues <- function(x, ...) {
     UseMethod("count_issues", x)
 }
 
@@ -641,7 +641,7 @@ count_issues <- function(x, verbose = TRUE) {
 #' @exportS3Method count_issues IssuesTB
 #' @method count_issues IssuesTB
 #' @export
-count_issues.IssuesTB <- function(x, verbose = TRUE) {
+count_issues.IssuesTB <- function(x, verbose = TRUE, ...) {
     return(nrow(x))
 }
 

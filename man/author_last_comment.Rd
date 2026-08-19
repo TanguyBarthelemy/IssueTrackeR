@@ -6,14 +6,16 @@
 \alias{author_last_comment.IssuesTB}
 \title{Name of last commentator}
 \usage{
-author_last_comment(x, verbose)
+author_last_comment(x, ...)
 
-\method{author_last_comment}{IssueTB}(x, verbose = TRUE)
+\method{author_last_comment}{IssueTB}(x, verbose = TRUE, ...)
 
-\method{author_last_comment}{IssuesTB}(x, verbose = TRUE)
+\method{author_last_comment}{IssuesTB}(x, verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{An object of class \code{IssueTB} or \code{IssuesTB}.}
+
+\item{\dots}{Currently not used.}
 
 \item{verbose}{A logical value indicating whether to print additional
 information. Default is \code{TRUE}.}

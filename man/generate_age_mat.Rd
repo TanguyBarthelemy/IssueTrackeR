@@ -6,7 +6,7 @@
 \alias{generate_age_mat.default}
 \title{Generate Age Matrix of Open Issues}
 \usage{
-generate_age_mat(x, n = 3L)
+generate_age_mat(x, ...)
 
 \method{generate_age_mat}{IssuesTB}(x, n = 3L)
 
@@ -15,9 +15,9 @@ generate_age_mat(x, n = 3L)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{n}{Number of age categories to create. Default: \code{3}.}
-
 \item{\dots}{Currently not used.}
+
+\item{n}{Number of age categories to create. Default: \code{3}.}
 }
 \value{
 ts matrix of open issue counts by age category.

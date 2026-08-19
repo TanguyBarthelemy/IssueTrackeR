@@ -6,22 +6,22 @@
 \alias{extract_nth.default}
 \title{Extract the nth Issue from an List of Issues}
 \usage{
-extract_nth(x, n, verbose)
+extract_nth(x, ...)
 
-\method{extract_nth}{IssuesTB}(x, n, verbose = TRUE)
+\method{extract_nth}{IssuesTB}(x, n, verbose = TRUE, ...)
 
 \method{extract_nth}{default}(...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
+\item{\dots}{Currently not used.}
+
 \item{n}{Integer. Position of the element to extract. 1 is for the first
 element.}
 
 \item{verbose}{A logical value indicating whether to print additional
 information. Default is \code{TRUE}.}
-
-\item{\dots}{Currently not used.}
 }
 \value{
 The nth issue as a \code{IssueTB} object.

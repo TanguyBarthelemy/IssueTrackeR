@@ -6,19 +6,19 @@
 \alias{count_issues.default}
 \title{Count the number of Issues}
 \usage{
-count_issues(x, verbose = TRUE)
+count_issues(x, ...)
 
-\method{count_issues}{IssuesTB}(x, verbose = TRUE)
+\method{count_issues}{IssuesTB}(x, verbose = TRUE, ...)
 
 \method{count_issues}{default}(...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
+\item{\dots}{Currently not used.}
+
 \item{verbose}{A logical value indicating whether to print additional
 information. Default is \code{TRUE}.}
-
-\item{\dots}{Currently not used.}
 }
 \value{
 Integer. The number of issues.
