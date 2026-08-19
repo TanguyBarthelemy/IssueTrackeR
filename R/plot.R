@@ -63,8 +63,8 @@ get_resolution_times.IssuesTB <- function(x, verbose = TRUE, ...) {
     if (all(is.na(x$closed_at))) {
         if (verbose) {
             warning("x contains no closed issues.")
-            return(invisible(NULL))
         }
+        return(invisible(NULL))
     }
     x_solved <- x[!is.na(x$closed_at), ]
     differences <- difftime(
@@ -96,6 +96,8 @@ get_resolution_times.default <- function(...) {
 #' 1-3 years, > 3 years).
 #'
 #' @param x An object of class \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
 #'
 #' @returns Invisibly returns `NULL`.
 #'
@@ -113,8 +115,14 @@ get_resolution_times.default <- function(...) {
 #' @importFrom graphics barplot
 #'
 #' @dev
-plot_resolution_bars <- function(x) {
-    resolution_time <- get_resolution_times(x) / 86400
+plot_resolution_bars <- function(x, verbose = TRUE) {
+    resolution_time <- get_resolution_times(x, verbose = FALSE) / 86400
+    if (length(resolution_time) == 0L) {
+        if (verbose) {
+            warning("x contains no closed issues.")
+        }
+        return(invisible(NULL))
+    }
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
     breaks <- c(0, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
@@ -154,6 +162,8 @@ plot_resolution_bars <- function(x) {
 #' 3 years).
 #'
 #' @param x An object of class \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
 #'
 #' @returns Invisibly returns `NULL`.
 #'
@@ -169,8 +179,14 @@ plot_resolution_bars <- function(x) {
 #'
 #' @dev
 #'
-plot_resolution_ecdf <- function(x) {
-    resolution_time <- (1 + get_resolution_times(x)) / 86400
+plot_resolution_ecdf <- function(x, verbose = TRUE) {
+    resolution_time <- (1 + get_resolution_times(x, verbose = FALSE)) / 86400
+    if (length(resolution_time) == 0L) {
+        if (verbose) {
+            warning("x contains no closed issues.")
+        }
+        return(invisible(NULL))
+    }
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
     ticks <- c(1 / 24, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
@@ -306,7 +322,7 @@ add_n_years <- function(x, n) {
 #' @param lag Numeric. Number of years to look back for "still open" issues.
 #'   Default is 0.
 #'
-#' @returns Named numeric vector of still open issues counts per month.
+#' @returns ts object with still open issues counts per month.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -338,7 +354,9 @@ get_still_open.IssuesTB <- function(x, lag = 0L) {
     new_created <- bin_count(created[keep], dates)
     new_closed <- bin_count(closed[keep], dates)
     still_open <- cumsum(new_created) - cumsum(new_closed)
-    names(still_open) <- dates
+
+    start_date <- as.integer(format(min(dates), format = c("%Y", "%m")))
+    still_open <- ts(still_open, start = start_date, frequency = 12L)
 
     return(still_open)
 }
@@ -360,7 +378,7 @@ get_still_open.default <- function(...) {
 #' @param n Number of age categories to create. Default: `3`.
 #' @param \dots Currently not used.
 #'
-#' @returns Matrix of open issue counts by age category.
+#' @returns ts matrix of open issue counts by age category.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -662,9 +680,9 @@ plot.IssuesTB <- function(
         plot_created_closed(x)
     } else if (type == "resolution-time") {
         old_par <- graphics::par(mfrow = c(1, 2))
+        on.exit(graphics::par(old_par))
         plot_resolution_bars(x)
         plot_resolution_ecdf(x)
-        on.exit(graphics::par(old_par))
     }
     return(invisible(x))
 }

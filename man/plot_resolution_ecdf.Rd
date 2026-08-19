@@ -4,10 +4,13 @@
 \alias{plot_resolution_ecdf}
 \title{Plot Empirical Cumulative Distribution of Resolution Times}
 \usage{
-plot_resolution_ecdf(x)
+plot_resolution_ecdf(x, verbose = TRUE)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
+
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 Invisibly returns \code{NULL}.

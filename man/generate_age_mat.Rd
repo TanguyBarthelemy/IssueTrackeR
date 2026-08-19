@@ -20,7 +20,7 @@ generate_age_mat(x, n = 3L)
 \item{\dots}{Currently not used.}
 }
 \value{
-Matrix of open issue counts by age category.
+ts matrix of open issue counts by age category.
 }
 \description{
 Generate Age Matrix of Open Issues

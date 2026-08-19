@@ -4,10 +4,13 @@
 \alias{plot_resolution_bars}
 \title{Plot Issue Resolution Time Distribution}
 \usage{
-plot_resolution_bars(x)
+plot_resolution_bars(x, verbose = TRUE)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
+
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 Invisibly returns \code{NULL}.

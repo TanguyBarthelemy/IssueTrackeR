@@ -19,7 +19,7 @@ get_still_open(x, lag = 0L)
 Default is 0.}
 }
 \value{
-Named numeric vector of still open issues counts per month.
+ts object with still open issues counts per month.
 }
 \description{
 Count Still Open Issues Over Time
