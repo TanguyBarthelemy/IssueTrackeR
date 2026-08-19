@@ -372,6 +372,7 @@ get_still_open <- function(x, ...) {
 #' @export
 #' @exportS3Method get_still_open IssuesTB
 #' @method get_still_open IssuesTB
+#' @importFrom stats ts
 get_still_open.IssuesTB <- function(x, lag = 0L, ...) {
     dates <- get_dates_vec(x$created_at)
 
@@ -386,7 +387,7 @@ get_still_open.IssuesTB <- function(x, lag = 0L, ...) {
     still_open <- cumsum(new_created) - cumsum(new_closed)
 
     start_date <- as.integer(format(min(dates), format = c("%Y", "%m")))
-    still_open <- ts(still_open, start = start_date, frequency = 12L)
+    still_open <- stats::ts(still_open, start = start_date, frequency = 12L)
 
     return(still_open)
 }
@@ -428,7 +429,7 @@ generate_age_mat <- function(x, ...) {
 #' @export
 #' @exportS3Method generate_age_mat IssuesTB
 #' @method generate_age_mat IssuesTB
-generate_age_mat.IssuesTB <- function(x, n = 3L) {
+generate_age_mat.IssuesTB <- function(x, n = 3L, ...) {
     age_mat <- lapply(
         X = seq_len(n + 1L) - 1L,
         FUN = get_still_open,

@@ -104,7 +104,10 @@ importFrom(graphics,
   rect,
   text
 )
-importFrom(stats,setNames)
+importFrom(stats,
+  setNames,
+  ts
+)
 importFrom(tools,
   file_ext,
   file_path_sans_ext

@@ -8,7 +8,7 @@
 \usage{
 generate_age_mat(x, ...)
 
-\method{generate_age_mat}{IssuesTB}(x, n = 3L)
+\method{generate_age_mat}{IssuesTB}(x, n = 3L, ...)
 
 \method{generate_age_mat}{default}(...)
 }
