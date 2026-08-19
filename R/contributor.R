@@ -1,6 +1,5 @@
 # Who contributes?
 
-
 report_contribution <- function(x) {
     opener <- table(x$creator)
     commenter <- x$comments |>

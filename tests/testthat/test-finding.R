@@ -43,7 +43,10 @@ test_that("with_comments works", {
     not_commented_issues <- with_comments(my_issues, negate = TRUE)
     expect_issues(not_commented_issues)
     expect_identical(nrow(not_commented_issues), 4L)
-    expect_identical(not_commented_issues[["number"]], c(963L, 958L, 347L, 311L))
+    expect_identical(
+        not_commented_issues[["number"]],
+        c(963L, 958L, 347L, 311L)
+    )
 })
 
 test_that("get_nbr_comments works", {
@@ -62,7 +65,10 @@ test_that("author_last_comment works", {
         object = author_last_comment(my_issues[6L, ]),
         expected = "palatej"
     )
-    expect_message(expect_identical(object = author_last_comment(my_issues[1, ]), expected = ""))
+    expect_message(expect_identical(
+        object = author_last_comment(my_issues[1, ]),
+        expected = ""
+    ))
 })
 
 test_that("extract_nth works", {

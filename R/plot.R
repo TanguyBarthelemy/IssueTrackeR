@@ -492,26 +492,28 @@ generate_author_mat.IssuesTB <- function(x, n = 5L, ...) {
     }
     issues_by_author <- lapply(
         X = authors,
-        FUN = \(author) subset(x, creator == author)
+        FUN = \(author) subset(x, x$creator == author)
     ) |>
         lapply(FUN = count_issues) |>
         as.numeric()
 
-    cond_author <- issues_by_author >= sort(issues_by_author, decreasing = TRUE)[n]
+    cond_author <- issues_by_author >=
+        sort(issues_by_author, decreasing = TRUE)[n]
     sub_authors <- authors[which(cond_author)]
 
     authors_mat <- lapply(
         X = sub_authors,
-        FUN = \(author) subset(x, creator == author)
-    ) |> lapply(
-        FUN = get_still_open
+        FUN = \(author) subset(x, x$creator == author)
     ) |>
+        lapply(
+            FUN = get_still_open
+        ) |>
         do.call(what = cbind)
 
     if (n < length(authors)) {
         authors_mat <- cbind(
             authors_mat,
-            get_still_open(subset(x, !creator %in% sub_authors))
+            get_still_open(subset(x, !x$creator %in% sub_authors))
         )
         colnames(authors_mat) <- c(sub_authors, "Others")
     } else {
