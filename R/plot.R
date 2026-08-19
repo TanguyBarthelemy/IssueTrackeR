@@ -116,7 +116,7 @@ get_resolution_times.default <- function(...) {
 #'
 #' @dev
 plot_resolution_bars <- function(x, verbose = TRUE) {
-    resolution_time <- get_resolution_times(x, verbose = FALSE) / 86400
+    resolution_time <- get_resolution_times(x, verbose = FALSE) / 86400.0
     if (length(resolution_time) == 0L) {
         if (verbose) {
             warning("x contains no closed issues.", call. = FALSE)
@@ -125,7 +125,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
     }
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
-    breaks <- c(0, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
+    breaks <- c(0L, 1L, 7L, 30L, 365L, 3L * 365L, max(resolution_time) + 1L)
     axis_labels <- c(
         "< 1 day",
         "1-7 days",
@@ -150,15 +150,15 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
         xlab = NULL,
         col = "grey75",
         border = NA,
-        las = 1,
-        ylim = c(0, max(counts) * 1.15)
+        las = 1L,
+        ylim = c(0.0, max(counts) * 1.15)
     )
 
     graphics::text(
         bp,
         counts,
         labels = counts,
-        pos = 3,
+        pos = 3L,
         cex = 0.9
     )
 
@@ -193,7 +193,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
 #' @dev
 #'
 plot_resolution_ecdf <- function(x, verbose = TRUE) {
-    resolution_time <- (1 + get_resolution_times(x, verbose = FALSE)) / 86400
+    resolution_time <- (1L + get_resolution_times(x, verbose = FALSE)) / 3600.0
     if (length(resolution_time) == 0L) {
         if (verbose) {
             warning("x contains no closed issues.", call. = FALSE)
@@ -202,7 +202,7 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
     }
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
-    ticks <- c(1 / 24, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
+    ticks <- c(1L, 24L, 24L * 7L, 24L * 30L, 24L * 365L, 3L * 365L * 24L, max(resolution_time) + 1L)
     axis_labels <- c(
         "1 hour",
         "1 day",
@@ -230,7 +230,7 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
     )
 
     graphics::axis(
-        side = 1,
+        side = 1L,
         at = ticks[cond],
         labels = axis_labels[cond]
     )
@@ -700,7 +700,7 @@ plot.IssuesTB <- function(
     } else if (type == "created-closed") {
         plot_created_closed(x)
     } else if (type == "resolution-time") {
-        old_par <- graphics::par(mfrow = c(1, 2))
+        old_par <- graphics::par(mfrow = c(1L, 2L))
         on.exit(graphics::par(old_par))
         plot_resolution_bars(x)
         plot_resolution_ecdf(x)
