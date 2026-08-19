@@ -62,7 +62,7 @@ get_resolution_times <- function(x, ...) {
 get_resolution_times.IssuesTB <- function(x, verbose = TRUE, ...) {
     if (all(is.na(x$closed_at))) {
         if (verbose) {
-            warning("x contains no closed issues.")
+            warning("x contains no closed issues.", call. = FALSE)
         }
         return(invisible(NULL))
     }
@@ -119,7 +119,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
     resolution_time <- get_resolution_times(x, verbose = FALSE) / 86400
     if (length(resolution_time) == 0L) {
         if (verbose) {
-            warning("x contains no closed issues.")
+            warning("x contains no closed issues.", call. = FALSE)
         }
         return(invisible(NULL))
     }
@@ -183,7 +183,7 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
     resolution_time <- (1 + get_resolution_times(x, verbose = FALSE)) / 86400
     if (length(resolution_time) == 0L) {
         if (verbose) {
-            warning("x contains no closed issues.")
+            warning("x contains no closed issues.", call. = FALSE)
         }
         return(invisible(NULL))
     }
