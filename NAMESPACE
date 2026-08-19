@@ -100,7 +100,6 @@ importFrom(graphics,
   box,
   legend,
   lines,
-  par,
   polygon,
   rect,
   text
@@ -114,6 +113,7 @@ importFrom(utils,
   URLencode,
   strcapture
 )
+importFrom(withr,with_par)
 importFrom(yaml,
   as.yaml,
   yaml.load

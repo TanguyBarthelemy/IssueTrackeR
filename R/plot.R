@@ -694,7 +694,7 @@ plot_created_closed <- function(x) {
 #' @exportS3Method base::plot
 #' @export
 #'
-#' @importFrom graphics par
+#' @importFrom withr with_par
 #'
 plot.IssuesTB <- function(
     x,
@@ -703,15 +703,17 @@ plot.IssuesTB <- function(
     ...
 ) {
     type <- match.arg(type)
-    if (type == "historic") {
-        plot_historic(x, n)
-    } else if (type == "created-closed") {
-        plot_created_closed(x)
-    } else if (type == "resolution-time") {
-        old_par <- graphics::par(mfrow = c(1L, 2L))
-        on.exit(graphics::par(old_par))
-        plot_resolution_bars(x)
-        plot_resolution_ecdf(x)
-    }
+    switch(
+        type,
+        historic = plot_historic(x, n),
+        "created-closed" = plot_created_closed(x),
+        "resolution-time" = withr::with_par(
+            new = list(mfrow = c(1L, 2L)),
+            code = {
+                plot_resolution_bars(x)
+                plot_resolution_ecdf(x)
+            }
+        )
+    )
     return(invisible(x))
 }
