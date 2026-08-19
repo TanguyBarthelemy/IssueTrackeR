@@ -20,6 +20,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * `closed_at` column is `POSIXct` [#35](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/35)
 * `get_still_open()` and `generate_age_mat()` return `ts` and `mts` objects  [#41](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/41)
 * `author_last_comment()` works with a single issue.
+* `closed_at` and `created_at` are now timestamps and no more dates.
 
 
 ## [1.4.1] - 2026-07-31
