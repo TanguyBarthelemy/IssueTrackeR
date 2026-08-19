@@ -64,3 +64,9 @@ test_that("author_last_comment works", {
     )
     expect_message(expect_identical(object = author_last_comment(my_issues[1, ]), expected = ""))
 })
+
+test_that("extract_nth works", {
+    expect_message(first_issue <- extract_nth(my_issues, 1L))
+    expect_issue(first_issue)
+    expect_identical(first_issue$number, 963L)
+})
