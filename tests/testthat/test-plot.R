@@ -19,7 +19,7 @@ test_that("plot return list of issues", {
 
 test_that("plot fails if wrong type", {
     testthat::expect_error(
-        plot(my_issues, type = "a")
+        plot(my_issues, type = "NULL")
     )
     testthat::expect_error(
         plot(my_issues, type = "wrong type")
