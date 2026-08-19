@@ -4,7 +4,7 @@
 \alias{plot.IssuesTB}
 \title{Plot an IssuesTB object}
 \usage{
-\method{plot}{IssuesTB}(x, type = c("historic", "created-closed"), n = 3L, ...)
+\method{plot}{IssuesTB}(x, type = c("historic", "created-closed", "resolution-time"), n = 3L, ...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
@@ -47,6 +47,14 @@ and resolution rates are balanced over time.
 
 All statistics are aggregated monthly, from the month of the first issue
 creation to the current date.
+
+When \code{type = "resolution-time"}, the resolution times are computed and
+displayed in two forms:
+\itemize{
+\item bar plot with categories from time
+\item ecdf to show the cumulative distribution of issues resolution times on a
+log scale
+}
 }
 \examples{
 all_issues <- rbind(
@@ -64,5 +72,6 @@ all_issues <- rbind(
 
 plot(all_issues, type = "historic")
 plot(all_issues, type = "created-closed")
+plot(all_issues, type = "resolution-time")
 
 }
