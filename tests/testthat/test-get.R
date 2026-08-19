@@ -28,6 +28,19 @@ testthat::test_that("get works", {
     testthat::expect_s3_class(milestones, "MilestonesTB")
 })
 
+testthat::test_that("get_issues with multiple repos works", {
+    skip_if_no_github()
+
+    issues <- get_issues(
+        source = "online",
+        state = "all",
+        owner = "TractorTom",
+        repo = NULL
+    )
+    testthat::expect_type(issues, "list")
+    testthat::expect_s3_class(issues, "IssuesTB")
+})
+
 testthat::test_that("get_issues generates error", {
     skip_if_no_github()
 
@@ -66,6 +79,14 @@ testthat::test_that("get_issues generates error", {
     testthat::expect_error(
         object = get_issues(
             source = "online",
+            state = "pas fraîche",
+            owner = "rjdverse",
+            repo = "rjd3toolkit"
+        )
+    )
+    testthat::expect_error(
+        object = get_issues(
+            source = "autre",
             state = "pas fraîche",
             owner = "rjdverse",
             repo = "rjd3toolkit"
