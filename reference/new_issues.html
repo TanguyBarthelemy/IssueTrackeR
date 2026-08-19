@@ -76,6 +76,7 @@
 <span>  <span class="va">state</span>,</span>
 <span>  created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  closed_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="cn">NA_integer_</span><span class="op">)</span>,</span>
+<span>  closed_by <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  comments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  milestone <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
@@ -128,6 +129,11 @@ issues.</p></dd>
 <dt id="arg-closed-at">closed_at<a class="anchor" aria-label="anchor" href="#arg-closed-at"></a></dt>
 <dd><p>a vector of date (or timestamp). The closing date of the
 issues.</p></dd>
+
+
+<dt id="arg-closed-by">closed_by<a class="anchor" aria-label="anchor" href="#arg-closed-by"></a></dt>
+<dd><p>a vector of string. The GitHub usernames of the person who
+closed the issues.</p></dd>
 
 
 <dt id="arg-labels">labels<a class="anchor" aria-label="anchor" href="#arg-labels"></a></dt>
