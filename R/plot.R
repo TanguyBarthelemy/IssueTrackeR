@@ -71,7 +71,7 @@ get_resolution_times.IssuesTB <- function(x, verbose = TRUE, ...) {
         time1 = x_solved$closed_at,
         time2 = x_solved$created_at,
         units = "secs"
-        ) |>
+    ) |>
         as.integer()
     return(differences)
 }
@@ -126,8 +126,21 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
     breaks <- c(0, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
-    labels <- c("< 1 day", "1-7 days", "7-30 days", "1 month-1 year", "1-3 years", "> 3 years")
-    classes <- cut(resolution_time, breaks = breaks, labels = labels, right = FALSE, include.lowest = TRUE)
+    labels <- c(
+        "< 1 day",
+        "1-7 days",
+        "7-30 days",
+        "1 month-1 year",
+        "1-3 years",
+        "> 3 years"
+    )
+    classes <- cut(
+        resolution_time,
+        breaks = breaks,
+        labels = labels,
+        right = FALSE,
+        include.lowest = TRUE
+    )
     counts <- table(classes)
 
     bp <- graphics::barplot(
@@ -190,7 +203,15 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
     ticks <- c(1 / 24, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
-    labels <- c("1 hour", "1 day", "1 week", "1 month", "1 year", "3 years", "> 3 years")
+    labels <- c(
+        "1 hour",
+        "1 day",
+        "1 week",
+        "1 month",
+        "1 year",
+        "3 years",
+        "> 3 years"
+    )
 
     x_ecdf <- sort(resolution_time)
     y_ecdf <- seq_along(x_ecdf) / length(x_ecdf)
