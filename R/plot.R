@@ -118,7 +118,7 @@ plot_resolution_bars <- function(x) {
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
     breaks <- c(0, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
-    labels <- c("< 1 day", "1–7 days", "7–30 days", "1 month–1 year", "1–3 years", "> 3 years")
+    labels <- c("< 1 day", "1-7 days", "7-30 days", "1 month-1 year", "1-3 years", "> 3 years")
     classes <- cut(resolution_time, breaks = breaks, labels = labels, right = FALSE, include.lowest = TRUE)
     counts <- table(classes)
 
@@ -617,7 +617,7 @@ plot_created_closed <- function(x) {
 #' When \code{type = "resolution-time"}, the resolution times are computed and
 #' displayed in two forms:
 #' - bar plot with categories from time
-#' - ecdf to show the cumulative distribution of issues resolution times on a
+#' - ECDF to show the cumulative distribution of issues resolution times on a
 #'   log scale
 #'
 #' @returns
@@ -641,9 +641,14 @@ plot_created_closed <- function(x) {
 #' plot(all_issues, type = "created-closed")
 #' plot(all_issues, type = "resolution-time")
 #'
-#' @rdname plot
+#' @name plot-issues
+#'
 #' @method plot IssuesTB
+#' @exportS3Method base::plot
 #' @export
+#'
+#' @importFrom graphics par
+#'
 plot.IssuesTB <- function(
     x,
     type = c("historic", "created-closed", "resolution-time"),
@@ -656,10 +661,10 @@ plot.IssuesTB <- function(
     } else if (type == "created-closed") {
         plot_created_closed(x)
     } else if (type == "resolution-time") {
-        old_par <- par(mfrow = c(1, 2))
+        old_par <- graphics::par(mfrow = c(1, 2))
         plot_resolution_bars(x)
         plot_resolution_ecdf(x)
-        on.exit(par(old_par))
+        on.exit(graphics::par(old_par))
     }
     return(invisible(x))
 }

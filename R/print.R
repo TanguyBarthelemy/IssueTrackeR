@@ -30,7 +30,7 @@
 #'
 #' # Display the summary of
 #' summary(all_issues[1:10, ])
-#' @name print
+#' @name print-issues
 #'
 #' @exportS3Method print IssueTB
 #' @method print IssueTB
@@ -73,7 +73,7 @@ print.IssueTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print IssuesTB
 #' @method print IssuesTB
 #' @export
@@ -95,7 +95,7 @@ print.IssuesTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print summary.IssueTB
 #' @method print summary.IssueTB
 #' @export
@@ -148,7 +148,7 @@ print.summary.IssueTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print summary.IssuesTB
 #' @method print summary.IssuesTB
 #' @export
@@ -181,7 +181,7 @@ print.summary.IssuesTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print LabelsTB
 #' @method print LabelsTB
 #' @export
@@ -251,7 +251,7 @@ print.LabelsTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print summary.LabelsTB
 #' @method print summary.LabelsTB
 #' @export

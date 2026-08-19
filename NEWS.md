@@ -9,7 +9,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-* New methods to plot resolutio time in `plot()` [#14](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/14)
+* New methods to plot resolution time in `plot()` [#14](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/14)
 * `plot_resolution_bars` and `plot_resolution_ecdf` function to plot resolution time object.
 * `extract_nth()` returns the nth issue of a list of issues [#42](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/42)
 * `count_issues()` returns the number of issues in a list of issues [#35](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/35)
