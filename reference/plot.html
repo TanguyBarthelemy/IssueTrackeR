@@ -63,7 +63,7 @@ numbers of newly created and newly closed issues.</p></li>
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'IssuesTB'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"historic"</span>, <span class="st">"created-closed"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">3L</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"historic"</span>, <span class="st">"created-closed"</span>, <span class="st">"resolution-time"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">3L</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -107,7 +107,11 @@ closed issues. This visualization helps assess whether issue creation
 and resolution rates are balanced over time.</p>
 <p>All statistics are aggregated monthly, from the month of the first issue
 creation to the current date.</p>
-    </div>
+<p>When <code>type = "resolution-time"</code>, the resolution times are computed and
+displayed in two forms:</p><ul><li><p>bar plot with categories from time</p></li>
+<li><p>ecdf to show the cumulative distribution of issues resolution times on a
+log scale</p></li>
+</ul></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
@@ -132,6 +136,8 @@ creation to the current date.</p>
 <span class="r-plt img"><img src="plot-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">all_issues</span>, type <span class="op">=</span> <span class="st">"created-closed"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">all_issues</span>, type <span class="op">=</span> <span class="st">"resolution-time"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
