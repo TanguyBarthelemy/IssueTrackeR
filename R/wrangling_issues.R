@@ -322,11 +322,13 @@ new_issues.default <- function(
     return(issues)
 }
 
-#' @name extraction-issues
 #' @title Extraction and replacement of information in issues
+#'
 #' @param x An object of class \code{IssuesTB}.
 #' @inheritParams base::`[`
+#'
 #' @returns Information inside the `IssuesTB` object
+#'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
 #' open_issues <- get_issues(
@@ -339,9 +341,12 @@ new_issues.default <- function(
 #' state <- open_issues[1, "state"]
 #' open_issues[1, "state"] <- "closed"
 #' open_issues[["number"]] <- seq_along(open_issues[["number"]])
+#'
 #' @exportS3Method `[` IssuesTB
 #' @method `[` IssuesTB
 #' @export
+#'
+#' @name extraction-issues
 #' @noRd
 `[.IssuesTB` <- function(x, i, j, drop = TRUE) {
     output <- NextMethod("[")
@@ -364,6 +369,7 @@ new_issues.default <- function(
 }
 
 #' @noRd
+#' @rdname extraction-issues
 #' @exportS3Method `[<-` IssuesTB
 #' @method `[<-` IssuesTB
 #' @export
@@ -372,6 +378,7 @@ new_issues.default <- function(
 }
 
 #' @noRd
+#' @rdname extraction-issues
 #' @exportS3Method `[[<-` IssuesTB
 #' @method `[[<-` IssuesTB
 #' @export
@@ -449,7 +456,7 @@ append.default <- function(x, values, after = length(x)) {
 #' @seealso
 #' \code{\link[base]{rbind}} for the generic function
 #'
-#' @name rbind
+#' @name rbind-issues
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
 #' open_issues <- get_issues(
@@ -468,7 +475,7 @@ rbind.IssueTB <- function(...) {
         new_issues()
 }
 
-#' @rdname rbind
+#' @rdname rbind-issues
 #' @exportS3Method rbind IssuesTB
 #' @method rbind IssuesTB
 #' @export

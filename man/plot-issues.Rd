@@ -5,7 +5,12 @@
 \alias{plot.IssuesTB}
 \title{Plot an IssuesTB object}
 \usage{
-\method{plot}{IssuesTB}(x, type = c("historic", "created-closed", "resolution-time"), n = 3L, ...)
+\method{plot}{IssuesTB}(
+  x,
+  type = c("historic", "author", "created-closed", "resolution-time"),
+  n = 3L,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
@@ -41,6 +46,9 @@ The first classes correspond to one-year intervals (\code{0-1y},
 \code{1-2y}, ..., \code{(n-1)-ny}) and the last class groups all issues
 older than \code{n} years.
 
+When \code{type = "author"}, the same graph as \code{type = "historic"} but
+this time with the number of open issues by author over time.
+
 When \code{type = "created-closed"}, the total number of open issues is
 displayed together with the monthly numbers of newly created and newly
 closed issues. This visualization helps assess whether issue creation
@@ -72,6 +80,7 @@ all_issues <- rbind(
 )
 
 plot(all_issues, type = "historic")
+plot(all_issues, type = "author")
 plot(all_issues, type = "created-closed")
 plot(all_issues, type = "resolution-time")
 

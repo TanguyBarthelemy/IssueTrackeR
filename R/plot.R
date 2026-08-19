@@ -48,13 +48,12 @@ get_dates_vec <- function(x) {
 #' )
 #'
 #' IssueTrackeR:::get_resolution_times(all_issues)
-#' @noRd
+#' @dev
 #' @name get_resolution_times
 get_resolution_times <- function(x, ...) {
     UseMethod("get_resolution_times", x)
 }
 
-#' @noRd
 #' @rdname get_resolution_times
 #' @export
 #' @exportS3Method get_resolution_times IssuesTB
@@ -76,7 +75,6 @@ get_resolution_times.IssuesTB <- function(x, verbose = TRUE, ...) {
     return(differences)
 }
 
-#' @noRd
 #' @rdname get_resolution_times
 #' @export
 #' @exportS3Method get_resolution_times default
@@ -459,16 +457,13 @@ generate_age_mat.default <- function(...) {
     )
 }
 
-#' @title Plot Historical Evolution of Open Issues by Age Categories
+#' @title Generate Matrix of Open Issues by Author
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param n Integer. Number of age (in years) categories to display. Default: 3.
+#' @param n Number of author to create. Default: `5`.
+#' @param \dots Currently not used.
 #'
-#' @returns Invisibly returns NULL.
-#'
-#' @details
-#' The function generates a plot directly. The plot shows a stacked area chart
-#' where each coloured area represents an age category of open issues over time.
+#' @returns ts matrix of open issue counts by author.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -477,41 +472,116 @@ generate_age_mat.default <- function(...) {
 #'     dataset_dir = path,
 #'     dataset_name = "open_issues.yaml"
 #' )
+#' author_matrix <- IssueTrackeR:::generate_author_mat(issues, n = 2)
 #'
-#' # Plot issues with 3 age categories
-#' IssueTrackeR:::plot_historic(issues, n = 3)
+#' @dev
+#' @name generate_author_mat
+generate_author_mat <- function(x, ...) {
+    UseMethod("generate_author_mat", x)
+}
+
+#' @rdname generate_author_mat
+#' @export
+#' @exportS3Method generate_author_mat IssuesTB
+#' @method generate_author_mat IssuesTB
+generate_author_mat.IssuesTB <- function(x, n = 5L, ...) {
+    authors <- unique(x$creator)
+
+    if (n > length(authors)) {
+        n <- length(authors)
+    }
+    issues_by_author <- lapply(
+        X = authors,
+        FUN = \(author) subset(x, creator == author)
+    ) |>
+        lapply(FUN = count_issues) |>
+        as.numeric()
+
+    cond_author <- issues_by_author >= sort(issues_by_author, decreasing = TRUE)[n]
+    sub_authors <- authors[which(cond_author)]
+
+    authors_mat <- lapply(
+        X = sub_authors,
+        FUN = \(author) subset(x, creator == author)
+    ) |> lapply(
+        FUN = get_still_open
+    ) |>
+        do.call(what = cbind)
+
+    if (n < length(authors)) {
+        authors_mat <- cbind(
+            authors_mat,
+            get_still_open(subset(x, !creator %in% sub_authors))
+        )
+        colnames(authors_mat) <- c(sub_authors, "Others")
+    } else {
+        colnames(authors_mat) <- sub_authors
+    }
+
+    authors_mat[is.na(authors_mat)] <- 0L
+    return(authors_mat)
+}
+
+#' @rdname generate_author_mat
+#' @export
+#' @exportS3Method generate_author_mat default
+#' @method generate_author_mat default
+generate_author_mat.default <- function(...) {
+    stop(
+        "The function requires a IssuesTB object!",
+        call. = FALSE
+    )
+}
+
+#' @title Plot Evolution of Open Issues by Categories
 #'
-#' # Plot issues with 2 age categories
-#' IssueTrackeR:::plot_historic(issues, n = 2)
+#' @param categorised_mat mts object with number of issues by categories.
+#'
+#' @returns Invisibly returns NULL.
+#'
+#' @details
+#' The function generates a plot directly. The plot shows a stacked area chart
+#' where each coloured area represents a category of open issues over time.
+#'
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' age_mat <- IssueTrackeR:::generate_age_mat(issues, 3L)
+#'
+#' IssueTrackeR:::plot_barplot(age_mat)
 #'
 #' @importFrom graphics polygon legend
 #' @importFrom grDevices hcl.colors
+#' @importFrom zoo as.Date
+#' @importFrom stats time
 #'
 #' @dev
-plot_historic <- function(x, n = 3L) {
-    dates <- get_dates_vec(x$created_at)
-    age_mat <- generate_age_mat(x, n)
-
+plot_barplot <- function(categorised_mat, by = "Age") {
+    dates <- zoo::as.Date(stats::time(categorised_mat))
     cols <- grDevices::hcl.colors(
-        ncol(age_mat),
+        ncol(categorised_mat),
         palette = "Viridis",
         rev = TRUE
     )
 
     plot(
         range(dates),
-        c(0L, max(rowSums(age_mat))),
+        c(0L, max(rowSums(categorised_mat))),
         type = "n",
         xlab = "Date",
         ylab = "Open issues",
-        main = "Open Issues by Age"
+        main = paste("Open Issues by", by)
     )
 
-    cum <- rep(0L, nrow(age_mat))
+    cum <- rep(0L, nrow(categorised_mat))
 
-    for (j in seq_len(ncol(age_mat))) {
+    for (j in seq_len(ncol(categorised_mat))) {
         y1 <- cum
-        y2 <- cum + age_mat[, j]
+        y2 <- cum + categorised_mat[, j]
 
         graphics::polygon(
             c(dates, rev(dates)),
@@ -525,7 +595,7 @@ plot_historic <- function(x, n = 3L) {
 
     graphics::legend(
         "topleft",
-        legend = colnames(age_mat),
+        legend = colnames(categorised_mat),
         fill = cols,
         bty = "n"
     )
@@ -655,6 +725,9 @@ plot_created_closed <- function(x) {
 #' \code{1-2y}, ..., \code{(n-1)-ny}) and the last class groups all issues
 #' older than \code{n} years.
 #'
+#' When \code{type = "author"}, the same graph as \code{type = "historic"} but
+#' this time with the number of open issues by author over time.
+#'
 #' When \code{type = "created-closed"}, the total number of open issues is
 #' displayed together with the monthly numbers of newly created and newly
 #' closed issues. This visualization helps assess whether issue creation
@@ -687,6 +760,7 @@ plot_created_closed <- function(x) {
 #' )
 #'
 #' plot(all_issues, type = "historic")
+#' plot(all_issues, type = "author")
 #' plot(all_issues, type = "created-closed")
 #' plot(all_issues, type = "resolution-time")
 #'
@@ -700,14 +774,21 @@ plot_created_closed <- function(x) {
 #'
 plot.IssuesTB <- function(
     x,
-    type = c("historic", "created-closed", "resolution-time"),
+    type = c("historic", "author", "created-closed", "resolution-time"),
     n = 3L,
     ...
 ) {
     type <- match.arg(type)
     switch(
         type,
-        historic = plot_historic(x, n),
+        historic = {
+            age_mat <- generate_age_mat(x, n)
+            plot_barplot(age_mat, by = "age")
+        },
+        author = {
+            age_mat <- generate_author_mat(x, n)
+            plot_barplot(age_mat, by = "author")
+        },
         "created-closed" = plot_created_closed(x),
         "resolution-time" = withr::with_par(
             new = list(mfrow = c(1L, 2L)),

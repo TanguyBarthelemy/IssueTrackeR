@@ -20,7 +20,7 @@
 #' @returns a \code{POSIXct} object with rounded \code{double} value.
 #'
 #' @keywords internal
-#' @noRd
+#' @dev
 #'
 #' @examples
 #'

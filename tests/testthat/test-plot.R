@@ -11,6 +11,10 @@ test_that("plot return list of issues", {
         object = plot(my_issues, type = "resolution-time"),
         expected = my_issues
     )
+    testthat::expect_identical(
+        object = plot(my_issues, type = "author"),
+        expected = my_issues
+    )
 })
 
 test_that("plot fails if wrong type", {

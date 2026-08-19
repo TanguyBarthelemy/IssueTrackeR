@@ -44,14 +44,17 @@ cran-comments.md
 
 heylogs.properties
 ^man/check_response\.Rd$
+^man/format_timestamp\.Rd$
 ^man/get_dates_vec\.Rd$
+^man/get_resolution_times\.Rd$
 ^man/plot_resolution_bars\.Rd$
 ^man/plot_resolution_ecdf\.Rd$
 ^man/bin_count\.Rd$
 ^man/add_n_years\.Rd$
 ^man/get_still_open\.Rd$
 ^man/generate_age_mat\.Rd$
-^man/plot_historic\.Rd$
+^man/generate_author_mat\.Rd$
+^man/plot_barplot\.Rd$
 ^man/plot_created_closed\.Rd$
 ^man/isDark\.Rd$
 ^man/null_to_default\.Rd$
