@@ -45,6 +45,8 @@ cran-comments.md
 heylogs.properties
 ^man/check_response\.Rd$
 ^man/get_dates_vec\.Rd$
+^man/plot_resolution_bars\.Rd$
+^man/plot_resolution_ecdf\.Rd$
 ^man/bin_count\.Rd$
 ^man/add_n_years\.Rd$
 ^man/get_still_open\.Rd$

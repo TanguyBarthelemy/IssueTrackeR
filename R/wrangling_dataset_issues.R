@@ -386,17 +386,21 @@ format_issues <- function(
         comments = format_comments(raw_comments = raw_comments, urls = urls),
         created_at = vapply(
             X = raw_issues,
-            FUN = `[[`,
-            "created_at",
-            FUN.VALUE = character(1L)
+            FUN = function(.x) {
+                .x$created_at |>
+                    null_to_default(default = NA_real_) |>
+                    strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+                    format_timestamp()
+            },
+            FUN.VALUE = double(1L)
         ),
         closed_at = vapply(
             X = raw_issues,
             FUN = function(.x) {
-                format_timestamp(null_to_default(
-                    x = .x$closed_at,
-                    default = NA_real_
-                ))
+                .x$closed_at |>
+                    null_to_default(default = NA_real_) |>
+                    strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+                    format_timestamp()
             },
             FUN.VALUE = double(1L)
         ),

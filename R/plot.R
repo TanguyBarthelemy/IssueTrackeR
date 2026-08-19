@@ -27,20 +27,179 @@ get_dates_vec <- function(x) {
     )
     return(dates)
 }
-get_dates_vec <- function(x) {
-    min_date <- x |>
-        as.Date() |>
-        min() |>
-        format("%Y-%m") |>
-        paste0(... = _, "-01") |>
-        as.Date()
-    dates <- seq.Date(
-        from = min_date,
-        to = Sys.Date(),
-        by = "month"
-    )
-    return(dates)
+
+#' @title Get Issue Resolution Times
+#'
+#' @description
+#' Calculates the time taken to resolve issues in seconds.
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
+#'
+#' @returns Integer vector of resolution times in seconds.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "closed_issues.yaml"
+#' )
+#'
+#' IssueTrackeR:::get_resolution_times(all_issues)
+#' @noRd
+#' @name get_resolution_times
+get_resolution_times <- function(x, ...) {
+    UseMethod("get_resolution_times", x)
 }
+
+#' @noRd
+#' @rdname get_resolution_times
+#' @export
+#' @exportS3Method get_resolution_times IssuesTB
+#' @method get_resolution_times IssuesTB
+get_resolution_times.IssuesTB <- function(x, verbose = TRUE, ...) {
+    if (all(is.na(x$closed_at))) {
+        if (verbose) {
+            warning("x contains no closed issues.")
+            return(invisible(NULL))
+        }
+    }
+    x_solved <- x[!is.na(x$closed_at), ]
+    differences <- difftime(
+        time1 = x_solved$closed_at,
+        time2 = x_solved$created_at,
+        units = "secs"
+        ) |>
+        as.integer()
+    return(differences)
+}
+
+#' @noRd
+#' @rdname get_resolution_times
+#' @export
+#' @exportS3Method get_resolution_times default
+#' @method get_resolution_times default
+get_resolution_times.default <- function(...) {
+    stop(
+        "The function requires a IssuesTB object!",
+        call. = FALSE
+    )
+}
+
+#' @title Plot Issue Resolution Time Distribution
+#'
+#' @description
+#' Creates a bar plot showing the distribution of issue resolution times
+#' in predefined time categories (< 1 day, 1-7 days, 7-30 days, 1 month-1 year,
+#' 1-3 years, > 3 years).
+#'
+#' @param x An object of class \code{IssuesTB}.
+#'
+#' @returns Invisibly returns `NULL`.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "closed_issues.yaml"
+#' )
+#'
+#' IssueTrackeR:::plot_resolution_bars(all_issues)
+#'
+#' @importFrom graphics box
+#' @importFrom graphics text
+#' @importFrom graphics barplot
+#'
+#' @dev
+plot_resolution_bars <- function(x) {
+    resolution_time <- get_resolution_times(x) / 86400
+    resolution_time <- resolution_time[!is.na(resolution_time)]
+
+    breaks <- c(0, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
+    labels <- c("< 1 day", "1–7 days", "7–30 days", "1 month–1 year", "1–3 years", "> 3 years")
+    classes <- cut(resolution_time, breaks = breaks, labels = labels, right = FALSE, include.lowest = TRUE)
+    counts <- table(classes)
+
+    bp <- graphics::barplot(
+        counts,
+        main = "Resolution delay",
+        ylab = "Number of issues",
+        xlab = NULL,
+        col = "grey75",
+        border = NA,
+        las = 1,
+        ylim = c(0, max(counts) * 1.15)
+    )
+
+    graphics::text(
+        bp,
+        counts,
+        labels = counts,
+        pos = 3,
+        cex = 0.9
+    )
+
+    graphics::box()
+
+    return(invisible(NULL))
+}
+
+#' @title Plot Empirical Cumulative Distribution of Resolution Times
+#'
+#' @description
+#' Creates an ECDF plot showing the cumulative distribution of issue
+#' resolution times on a log scale (1 hour, 1 day, 1 week, 1 month, 1 year,
+#' 3 years).
+#'
+#' @param x An object of class \code{IssuesTB}.
+#'
+#' @returns Invisibly returns `NULL`.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "closed_issues.yaml"
+#' )
+#'
+#' IssueTrackeR:::plot_resolution_ecdf(issues_tb)
+#' @importFrom graphics axis
+#'
+#' @dev
+#'
+plot_resolution_ecdf <- function(x) {
+    resolution_time <- (1 + get_resolution_times(x)) / 86400
+    resolution_time <- resolution_time[!is.na(resolution_time)]
+
+    ticks <- c(1 / 24, 1, 7, 30, 365, 3 * 365, max(resolution_time) + 1)
+    labels <- c("1 hour", "1 day", "1 week", "1 month", "1 year", "3 years", "> 3 years")
+
+    x_ecdf <- sort(resolution_time)
+    y_ecdf <- seq_along(x_ecdf) / length(x_ecdf)
+
+    cond <- ticks >= min(x_ecdf) & ticks <= max(x_ecdf)
+
+    plot(
+        x_ecdf,
+        y_ecdf,
+        type = "s",
+        log = "x",
+        xaxt = "n",
+        main = "Cumulative distribution",
+        xlab = "Time in days",
+        ylab = "Proportion of issues"
+    )
+
+    graphics::axis(
+        side = 1,
+        at = ticks[cond],
+        labels = labels[cond]
+    )
+    return(invisible(NULL))
+}
+
 
 #' @title Split dates in bins
 #'
@@ -455,6 +614,12 @@ plot_created_closed <- function(x) {
 #' All statistics are aggregated monthly, from the month of the first issue
 #' creation to the current date.
 #'
+#' When \code{type = "resolution-time"}, the resolution times are computed and
+#' displayed in two forms:
+#' - bar plot with categories from time
+#' - ecdf to show the cumulative distribution of issues resolution times on a
+#'   log scale
+#'
 #' @returns
 #' Invisibly returns \code{x}.
 #'
@@ -474,13 +639,14 @@ plot_created_closed <- function(x) {
 #'
 #' plot(all_issues, type = "historic")
 #' plot(all_issues, type = "created-closed")
+#' plot(all_issues, type = "resolution-time")
 #'
 #' @rdname plot
 #' @method plot IssuesTB
 #' @export
 plot.IssuesTB <- function(
     x,
-    type = c("historic", "created-closed"),
+    type = c("historic", "created-closed", "resolution-time"),
     n = 3L,
     ...
 ) {
@@ -489,6 +655,11 @@ plot.IssuesTB <- function(
         plot_historic(x, n)
     } else if (type == "created-closed") {
         plot_created_closed(x)
+    } else if (type == "resolution-time") {
+        old_par <- par(mfrow = c(1, 2))
+        plot_resolution_bars(x)
+        plot_resolution_ecdf(x)
+        on.exit(par(old_par))
     }
     return(invisible(x))
 }
