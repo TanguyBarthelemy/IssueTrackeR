@@ -8,7 +8,9 @@ title:
 - 3.6.0
 - 3.7.0
 - 3.8.0
+- 3.9.0
 description:
+- ''
 - ''
 - ''
 - ''
@@ -28,6 +30,7 @@ due_on:
 - 1763596800.0
 - 1772755200.0
 - 1782864000.0
+- 1791763200.0
 closed_at:
 - .na.real
 - 1714608000.0
@@ -37,6 +40,7 @@ closed_at:
 - 1749772800.0
 - 1763596800.0
 - 1772755200.0
+- 1782950400.0
 - .na.real
 creator:
 - charphi
@@ -48,6 +52,7 @@ creator:
 - palatej
 - charphi
 - charphi
+- charphi
 state:
 - open
 - closed
@@ -57,9 +62,10 @@ state:
 - closed
 - closed
 - closed
+- closed
 - open
 nb_issues_open:
-- 29
+- 30
 - 0
 - 0
 - 0
@@ -67,7 +73,8 @@ nb_issues_open:
 - 0
 - 0
 - 0
-- 18
+- 0
+- 19
 nb_issues_closed:
 - 0
 - 9
@@ -78,6 +85,7 @@ nb_issues_closed:
 - 19
 - 10
 - 9
+- 0
 repo:
 - jdplus-main
 - jdplus-main
@@ -88,7 +96,9 @@ repo:
 - jdplus-main
 - jdplus-main
 - jdplus-main
+- jdplus-main
 owner:
+- jdemetra
 - jdemetra
 - jdemetra
 - jdemetra

@@ -185,7 +185,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
 #'     dataset_name = "closed_issues.yaml"
 #' )
 #'
-#' IssueTrackeR:::plot_resolution_ecdf(issues_tb)
+#' IssueTrackeR:::plot_resolution_ecdf(all_issues)
 #' @importFrom graphics axis
 #'
 #' @dev
@@ -231,7 +231,7 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
         log = "x",
         xaxt = "n",
         main = "Cumulative distribution",
-        xlab = "Time in days",
+        xlab = "Time",
         ylab = "Proportion of issues"
     )
 

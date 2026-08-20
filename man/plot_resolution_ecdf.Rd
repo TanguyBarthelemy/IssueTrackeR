@@ -27,6 +27,6 @@ all_issues <- get_issues(
     dataset_name = "closed_issues.yaml"
 )
 
-IssueTrackeR:::plot_resolution_ecdf(issues_tb)
+IssueTrackeR:::plot_resolution_ecdf(all_issues)
 }
 \keyword{internal}

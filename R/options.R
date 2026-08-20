@@ -8,8 +8,6 @@
 #'
 #' @examples
 #' getOption("IssueTrackeR.owner")
-#' options(IssueTrackeR.owner = "TanguyBarthelemy")
-#' getOption("IssueTrackeR.owner")
 #' reset_options()
 #' getOption("IssueTrackeR.owner")
 reset_options <- function(verbose = TRUE) {

@@ -13,7 +13,7 @@
 #' issue.
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.
-#' @inheritParams get_issues
+#' @inheritParams get
 #' @param url a string. The URL of the API to the GitHub issue.
 #' @param html_url a string. The URL to the GitHub issue.
 #' @param comments vector of string (the comments of the issue)
@@ -152,7 +152,7 @@ new_issue.default <- function(
 #' @param labels a list of vector string (or missing). The labels of the issues.
 #' @param milestone a vector of string (or missing). The milestones of the
 #' issues.
-#' @inheritParams get_issues
+#' @inheritParams get
 #' @param url a vector of string. The URLs of the API to the GitHub issues.
 #' @param html_url a vector of string. The URLs to the GitHub issues.
 #' @param comments a list of vector string. The comments of the issues.

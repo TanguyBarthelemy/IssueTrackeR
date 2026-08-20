@@ -96,7 +96,7 @@
 #'
 #' @param x an object of class \code{IssuesTB}, \code{LabelsTB} or
 #' \code{MilestonesTB}.
-#' @inheritParams get_issues
+#' @inheritParams get
 #' @param overwrite Boolean. If the dataset file already exists,
 #'   should it be overwrite? Default is TRUE.
 #' @param \dots Currently not used.

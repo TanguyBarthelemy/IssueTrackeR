@@ -52,11 +52,9 @@
 #'
 #' @export
 #'
-#' @rdname get
+#' @name get
 #'
-#' @examples
-#'
-#' \dontrun{
+#' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
 #' # From online
 #'
 #' issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
@@ -68,7 +66,6 @@
 #'
 #' milestones <- get_milestones(source = "online")
 #' print(milestones)
-#' }
 #'
 #' # From local
 #'
