@@ -107,19 +107,65 @@
 <span class="r-in"><span><span class="co"># Display one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1006</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1039</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Benchmarking Results includes forecast observations beyond the input series</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Older WS are read not correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="340" height="216" alt="Image" src="https://github.com/user-attachments/assets/cd77b619-d644-4d03-925e-6a858eeb3709" /&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I created a WS with the version **3.7.1** with 1 SA-Processing with 1 SA-Item with:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> While testing JDemetra+ 3.7.1, I noticed an unexpected behaviour in the **Benchmarking Results** output. The input series used in this example ends in **2025 Q1**. However, the table displ</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - the series AirPassengers ([air.csv](https://github.com/user-attachments/files/30928390/air.csv))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - the specification:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - X13 RSA3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - 1 outliers (AO in 1956-08-01) in the estimation spec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - a basic span (series span) from 1949-01-0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display several issues</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1039</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Older WS are read not correctly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I created a WS with the version **3.7.1** with 1 SA-Processing with 1 SA-Item with:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - the series AirPassengers ([air.csv](https://github.com/user-attachments/files/30928390/air.csv))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - the specification:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - X13 RSA3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - 1 outliers (AO in 1956-08-01) in the estimation spec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - a basic span (series span) from 1949-01-0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1029</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Seasonal component in X11 spec : if set to NO, no info displayed in GUI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> HI ,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> in v 3.8.0 if seasonal component is unticked in the X11 part of the spec </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No information is diplayed in GUI  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="246" height="62" alt="Image" src="https://github.com/user-attachments/assets/a57354d6-256f-4bac-aff8-fa68720aee74" /&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> the estimation appears as invalid </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="647" height="40" alt="I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1023</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> OpenSSF badge</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I recently discovered the OpenSSF badge.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I was wondering if it applied to JDemetra+. It’s a badge that recognises packages that follow open-source best practice.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The link is https://www.bestpractices.dev/</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1006</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -205,66 +251,43 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> I notice (in this example) that this isn’t done by name and that the `^` and `v` keys aren’t used to reverse the direction.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/user-attachments/assets/c627e166-e28b-4de2-818f-821dd96c6b6c</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#912</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Add JDemetra+ to the EU Open Source Solutions Catalogue</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; The EU Open Source Software Solutions Catalogue (EU OSS Catalogue) has been created by the FOSSEPS Preparatory initiative, [Free and Open Source Software for European Public Services](https://interoperable-europe.ec.europa.eu/collection/fosseps), which aims to promote cooperation at European Union level by giving vis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#888</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Is it possible to choose the value `(?)` in GUI output?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The aim of this issue is to find out whether, when I generate an excel output with the GUI, it's possible to choose the length of series which items ends with `(?)`.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I will take the example of the forecasted series. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In X13-RegARIMA, there are forecasts in the preprocessing part but only with `(?)` items and it's not</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#883</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Adding a button to "refresh" a WS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *related to #882*</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I'm **not** talking here about the refresh policy that can be applied to a SA-Item or to a SA-Processing. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I'm talking about the action that is executed each time a workspace is saved or when it is closed and reopened. The WS is saved in a **XML format** but some information are also updated (maybe i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1004</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1029</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> 🟢 Open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Outlier type and position are missing in Matrix |&gt; Outliers</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Seasonal component in X11 spec : if set to NO, no info displayed in GUI</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Related to cosa-tsa-shop/UserSupport#10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> HI ,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In the section Matrix |&gt; Outliers (from a SA-Processing), the version 2 and 3 differs by their presentation:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> in v 3.8.0 if seasonal component is unticked in the X11 part of the spec </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - In version 2 we observe a column by outliers with type, position, coeff and T-Stats</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - In version 3 we observe 2 columns by outliers with coeffs and T-Stats</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No information is diplayed in GUI  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Is it possible to include the outliers type and position in version 3?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="246" height="62" alt="Image" src="https://github.com/user-attachments/assets/a57354d6-256f-4bac-aff8-fa68720aee74" /&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Here is the comparison:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> the estimation appears as invalid </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="1920" height="1031" alt="Image" src="https://github.com/user-attachments/assets/825ba55f-8f7a-4309-ba9d-0ead44f26889" /&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="647" height="40" alt="Image" src="https://github.com/user-attachments/assets/26b7da59-8cbc-43a7-ae8d-2d396912681b" /&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Expected behaviour is that all X11 estimations of S (from B5 to D10) are set to 0 or 1...and everthing is displayed and estimated </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> it was the case in v2.2.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues.</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1039 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1029 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1023 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1006 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1004 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#987 🟢 Open </span>
@@ -272,9 +295,6 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#961 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#943 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#940 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#912 ♻ Re-opened </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#888 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#883 🟢 Open </span>
 </code></pre></div>
     </div>
   </div>

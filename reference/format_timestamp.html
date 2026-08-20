@@ -79,11 +79,10 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">format_timestamp</span><span class="op">(</span><span class="fl">1743694674.9</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in format_timestamp(1743694674.9):</span> could not find function "format_timestamp"</span>
-<span class="r-in"><span><span class="fu">format_timestamp</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in format_timestamp(Sys.Date()):</span> could not find function "format_timestamp"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">format_timestamp</span><span class="op">(</span><span class="fl">1743694674.9</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2025-04-03 15:37:54 UTC"</span>
+<span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">format_timestamp</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-08-20 UTC"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
