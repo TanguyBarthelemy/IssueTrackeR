@@ -98,6 +98,7 @@ function:
 }
 \examples{
 \dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
+\donttest{
 # From online
 
 issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
@@ -109,6 +110,7 @@ print(labels)
 
 milestones <- get_milestones(source = "online")
 print(milestones)
+}
 
 # From local
 
