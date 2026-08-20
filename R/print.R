@@ -190,13 +190,13 @@ print.LabelsTB <- function(x, ...) {
     x$labels_color <- c("grey8", "ivory")[
         isDark(x$labels_bgcolor) + 1L
     ]
-    x$labels_url <- paste(
+    x$labels_url <- file.path(
         "https://github.com",
         x$owner,
         x$repo,
         "labels",
-        utils::URLencode(x$labels_name),
-        sep = "/"
+        utils::URLencode(x$name),
+        fsep = "/"
     )
     x$formated_label <- vapply(
         X = seq_len(nrow(x)),
@@ -278,11 +278,11 @@ print.summary.LabelsTB <- function(x, ...) {
                 "\n- ",
                 cli::style_hyperlink(
                     text = paste(owner_name, repo_name, sep = "/"),
-                    url = paste(
+                    url = file.path(
                         "https://github.com",
                         owner_name,
                         repo_name,
-                        sep = "/"
+                        fsep = "/"
                     )
                 ),
                 ":"

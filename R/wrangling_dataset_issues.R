@@ -67,7 +67,6 @@
 #'
 #' milestones <- get_milestones(source = "online")
 #' print(milestones)
-#' }
 #'
 #' # From local
 #'
@@ -87,6 +86,7 @@
 #'     dataset_dir = path,
 #'     dataset_name = "list_labels.yaml"
 #' )
+#' }
 get_issues <- function(
     source = c("local", "online"),
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),

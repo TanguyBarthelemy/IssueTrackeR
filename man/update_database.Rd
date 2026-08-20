@@ -50,6 +50,8 @@ online reference.
 }
 \examples{
 \dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
+\donttest{
 update_database(dataset_dir = tempdir())
+}
 \dontshow{\}) # examplesIf}
 }

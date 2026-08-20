@@ -27,8 +27,9 @@
 #' @export
 #'
 #' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
+#' \donttest{
 #' update_database(dataset_dir = tempdir())
-#'
+#' }
 update_database <- function(
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     datasets_name = c(

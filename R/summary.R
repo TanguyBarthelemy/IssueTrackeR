@@ -135,13 +135,13 @@ summary.LabelsTB <- function(object, ...) {
     object$labels_color <- c("grey8", "ivory")[
         isDark(object$labels_bgcolor) + 1L
     ]
-    object$labels_url <- paste(
+    object$labels_url <- file.path(
         "https://github.com",
         object$owner,
         object$repo,
         "labels",
-        utils::URLencode(object$labels_name),
-        sep = "/"
+        utils::URLencode(object$name),
+        fsep = "/"
     )
     object$formated_label <- vapply(
         X = seq_len(nrow(object)),

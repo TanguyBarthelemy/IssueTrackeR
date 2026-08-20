@@ -110,7 +110,6 @@ print(labels)
 
 milestones <- get_milestones(source = "online")
 print(milestones)
-}
 
 # From local
 
@@ -130,5 +129,6 @@ labels <- get_labels(
     dataset_dir = path,
     dataset_name = "list_labels.yaml"
 )
+}
 \dontshow{\}) # examplesIf}
 }
