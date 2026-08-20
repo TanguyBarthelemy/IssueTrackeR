@@ -25,7 +25,7 @@ new_issues(x = NULL, ...)
   body,
   number,
   state,
-  created_at = Sys.Date(),
+  created_at = as.Date(NA_integer_),
   closed_at = as.Date(NA_integer_),
   closed_by = NA_character_,
   labels = list(),
@@ -108,7 +108,7 @@ issue1 <- new_issue(
     title = "Une autre issue",
     state = "open",
     body = "J'ai une question au sujet de...",
-    number = 2,
+    number = 2L,
     created_at = Sys.Date()
 )
 issues2 <- new_issues(x = issue1)
@@ -118,7 +118,7 @@ issues3 <- new_issues(
     title = "Une autre issue",
     state = "open",
     body = "J'ai une question au sujet de...",
-    number = 2,
+    number = 2L,
     created_at = Sys.Date()
 )
 
@@ -128,6 +128,6 @@ issues4 <- new_issues(
              "J'ai une question au sujet de..."),
     state = c("open", "closed"),
     number = 1:2,
-    created_at = Sys.Date()
+    created_at = c(Sys.Date() - 30, Sys.Date())
 )
 }

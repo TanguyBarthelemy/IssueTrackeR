@@ -73,6 +73,14 @@ export(with_comments)
 export(with_labels)
 export(with_text)
 export(write_to_dataset)
+importFrom(checkmate,
+  assert_character,
+  assert_data_frame,
+  assert_integer,
+  assert_list,
+  assert_numeric,
+  assert_scalar
+)
 importFrom(cli,
   cli_h2,
   format_inline,

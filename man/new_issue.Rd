@@ -25,7 +25,7 @@ new_issue(x = NULL, ...)
   body = NA_character_,
   number = NA_integer_,
   state = NA_character_,
-  created_at = Sys.Date(),
+  created_at = as.Date(NA_integer_),
   closed_at = as.Date(NA_integer_),
   closed_by = NA_character_,
   labels = NULL,
@@ -102,7 +102,7 @@ issue1 <- new_issue()
 issue1 <- new_issue(
     title = "Nouvelle issue",
     body = "Un nouveau bug pour la fonction...",
-    number = 47,
+    number = 47L,
     created_at = Sys.Date()
 )
 

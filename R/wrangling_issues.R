@@ -34,7 +34,7 @@
 #' issue1 <- new_issue(
 #'     title = "Nouvelle issue",
 #'     body = "Un nouveau bug pour la fonction...",
-#'     number = 47,
+#'     number = 47L,
 #'     created_at = Sys.Date()
 #' )
 #'
@@ -89,13 +89,18 @@ new_issue.IssuesTB <- function(x, ...) {
 #' @exportS3Method new_issue default
 #' @method new_issue default
 #' @export
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_numeric
+#' @importFrom checkmate assert_scalar
+#' @importFrom checkmate assert_data_frame
 new_issue.default <- function(
     x,
     title = NA_character_,
     body = NA_character_,
     number = NA_integer_,
     state = NA_character_,
-    created_at = Sys.Date(),
+    created_at = as.Date(NA_integer_),
     closed_at = as.Date(NA_integer_),
     closed_by = NA_character_,
     labels = NULL,
@@ -110,6 +115,42 @@ new_issue.default <- function(
     state_reason = NA_character_,
     ...
 ) {
+
+    checkmate::assert_character(title)
+    checkmate::assert_character(body)
+    checkmate::assert_integer(number)
+    checkmate::assert_character(state)
+    checkmate::assert_numeric(created_at)
+    checkmate::assert_numeric(closed_at)
+    checkmate::assert_character(closed_by)
+    checkmate::assert_character(milestone)
+    checkmate::assert_character(repo)
+    checkmate::assert_character(owner)
+    checkmate::assert_character(url)
+    checkmate::assert_character(html_url)
+    checkmate::assert_character(creator)
+    checkmate::assert_character(assignee)
+    checkmate::assert_character(state_reason)
+
+    checkmate::assert_scalar(title, na.ok = TRUE)
+    checkmate::assert_scalar(body, na.ok = TRUE)
+    checkmate::assert_scalar(number, na.ok = TRUE)
+    checkmate::assert_scalar(state, na.ok = TRUE)
+    checkmate::assert_scalar(created_at, na.ok = TRUE)
+    checkmate::assert_scalar(closed_at, na.ok = TRUE)
+    checkmate::assert_scalar(closed_by, na.ok = TRUE)
+    checkmate::assert_scalar(milestone, na.ok = TRUE)
+    checkmate::assert_scalar(repo, na.ok = TRUE)
+    checkmate::assert_scalar(owner, na.ok = TRUE)
+    checkmate::assert_scalar(url, na.ok = TRUE)
+    checkmate::assert_scalar(html_url, na.ok = TRUE)
+    checkmate::assert_scalar(creator, na.ok = TRUE)
+    checkmate::assert_scalar(assignee, na.ok = TRUE)
+    checkmate::assert_scalar(state_reason, na.ok = TRUE)
+
+    checkmate::assert_data_frame(labels, null.ok = TRUE)
+    checkmate::assert_data_frame(comments, null.ok = TRUE)
+
     issue <- list(
         number = as.integer(number),
         title = title,
@@ -176,7 +217,7 @@ new_issue.default <- function(
 #'     title = "Une autre issue",
 #'     state = "open",
 #'     body = "J'ai une question au sujet de...",
-#'     number = 2,
+#'     number = 2L,
 #'     created_at = Sys.Date()
 #' )
 #' issues2 <- new_issues(x = issue1)
@@ -186,7 +227,7 @@ new_issue.default <- function(
 #'     title = "Une autre issue",
 #'     state = "open",
 #'     body = "J'ai une question au sujet de...",
-#'     number = 2,
+#'     number = 2L,
 #'     created_at = Sys.Date()
 #' )
 #'
@@ -196,7 +237,7 @@ new_issue.default <- function(
 #'              "J'ai une question au sujet de..."),
 #'     state = c("open", "closed"),
 #'     number = 1:2,
-#'     created_at = Sys.Date()
+#'     created_at = c(Sys.Date() - 30, Sys.Date())
 #' )
 #' @rdname new_issues
 #'
@@ -245,13 +286,17 @@ new_issues.list <- function(x, ...) {
 #' @exportS3Method new_issues default
 #' @method new_issues default
 #' @export
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_numeric
+#' @importFrom checkmate assert_list
 new_issues.default <- function(
     x,
     title,
     body,
     number,
     state,
-    created_at = Sys.Date(),
+    created_at = as.Date(NA_integer_),
     closed_at = as.Date(NA_integer_),
     closed_by = NA_character_,
     labels = list(),
@@ -284,6 +329,22 @@ new_issues.default <- function(
         state_reason <- character(0L)
     }
 
+    checkmate::assert_character(title)
+    checkmate::assert_character(body)
+    checkmate::assert_integer(number)
+    checkmate::assert_character(state)
+    checkmate::assert_numeric(created_at)
+    checkmate::assert_numeric(closed_at)
+    checkmate::assert_character(closed_by)
+    checkmate::assert_character(milestone)
+    checkmate::assert_character(repo)
+    checkmate::assert_character(owner)
+    checkmate::assert_character(url)
+    checkmate::assert_character(html_url)
+    checkmate::assert_character(creator)
+    checkmate::assert_character(assignee)
+    checkmate::assert_character(state_reason)
+
     if (missing(labels)) {
         labels <- rep(
             x = list(data.frame(
@@ -304,6 +365,9 @@ new_issues.default <- function(
             times = length(title)
         )
     }
+
+    checkmate::assert_list(labels)
+    checkmate::assert_list(comments)
 
     issues <- data.frame(
         number = as.integer(number),

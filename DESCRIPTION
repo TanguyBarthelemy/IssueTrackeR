@@ -27,6 +27,7 @@ Imports:
     graphics,
     grDevices, 
     withr, 
+    checkmate,
     zoo
 Suggests:
     rlang,
