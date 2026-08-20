@@ -350,7 +350,7 @@ add_n_years <- function(x, n) {
 #'   Default is 0.
 #' @param \dots Currently not used.
 #'
-#' @returns ts object with still open issues counts per month.
+#' @returns `ts` object with still open issues counts per month.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -407,7 +407,7 @@ get_still_open.default <- function(...) {
 #' @param n Number of age categories to create. Default: `3`.
 #' @param \dots Currently not used.
 #'
-#' @returns ts matrix of open issue counts by age category.
+#' @returns `ts` matrix of open issue counts by age category.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -463,7 +463,7 @@ generate_age_mat.default <- function(...) {
 #' @param n Number of author to create. Default: `5`.
 #' @param \dots Currently not used.
 #'
-#' @returns ts matrix of open issue counts by author.
+#' @returns `ts` matrix of open issue counts by author.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -537,7 +537,7 @@ generate_author_mat.default <- function(...) {
 
 #' @title Plot Evolution of Open Issues by Categories
 #'
-#' @param categorised_mat mts object with number of issues by categories.
+#' @param categorised_mat `mts` object with number of issues by categories.
 #'
 #' @returns Invisibly returns NULL.
 #'

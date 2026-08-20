@@ -7,7 +7,7 @@
 plot_barplot(categorised_mat, by = "Age")
 }
 \arguments{
-\item{categorised_mat}{mts object with number of issues by categories.}
+\item{categorised_mat}{\code{mts} object with number of issues by categories.}
 }
 \value{
 Invisibly returns NULL.

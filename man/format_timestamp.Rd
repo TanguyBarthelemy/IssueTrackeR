@@ -16,8 +16,6 @@ a \code{POSIXct} object with rounded \code{double} value.
 This function round a timestamp ()
 }
 \details{
-The accepted formats for the argument \code{x} are: color
-
 The accepted formats for the argument \code{x} are:
 
 \itemize{

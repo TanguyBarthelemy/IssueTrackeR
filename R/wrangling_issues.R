@@ -9,7 +9,7 @@
 #' @param number a string. The number of the issue.
 #' @param created_at a date (or timestamp). The creation date of the issue.
 #' @param closed_at a date (or timestamp). The closing date of the issue.
-#' @param closed_by a string. The GitHub username of the perso who closed the
+#' @param closed_by a string. The GitHub username of the person who closed the
 #' issue.
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.

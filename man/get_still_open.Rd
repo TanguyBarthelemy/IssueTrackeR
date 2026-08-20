@@ -21,7 +21,7 @@ get_still_open(x, ...)
 Default is 0.}
 }
 \value{
-ts object with still open issues counts per month.
+\code{ts} object with still open issues counts per month.
 }
 \description{
 Count Still Open Issues Over Time

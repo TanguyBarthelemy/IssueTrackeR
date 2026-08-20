@@ -20,7 +20,7 @@ generate_author_mat(x, ...)
 \item{n}{Number of author to create. Default: \code{5}.}
 }
 \value{
-ts matrix of open issue counts by author.
+\code{ts} matrix of open issue counts by author.
 }
 \description{
 Generate Matrix of Open Issues by Author

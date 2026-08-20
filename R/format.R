@@ -6,8 +6,6 @@
 #' @param x The timestamp. See detail section for more information.
 #'
 #' @details
-#' The accepted formats for the argument \code{x} are: color
-#'
 #' The accepted formats for the argument \code{x} are:
 #'
 #' \itemize{
@@ -56,8 +54,8 @@ format_timestamp <- function(x) {
 #' @inheritParams get_issues
 #'
 #' @returns
-#' - `format_labels`: A data frame with columns: name, description, color.
-#' - `format_comments`: A list of data frames with columns: text, author.
+#' - `format_labels`: A data frame with columns: `name`, `description`, `color`.
+#' - `format_comments`: A list of data frames with columns: `text`, `author`.
 #' - `format_issues`: A list of IssuesTB objects with complete issue data.
 #' - `format_milestone`: A data frame with milestone information.
 #'

@@ -20,7 +20,7 @@ generate_age_mat(x, ...)
 \item{n}{Number of age categories to create. Default: \code{3}.}
 }
 \value{
-ts matrix of open issue counts by age category.
+\code{ts} matrix of open issue counts by age category.
 }
 \description{
 Generate Age Matrix of Open Issues
