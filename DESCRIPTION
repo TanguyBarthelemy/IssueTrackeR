@@ -19,7 +19,7 @@ Depends:
 Imports: 
     cli,
     crayon,
-    gh,
+    gh (>= 1.5.0),
     yaml, 
     tools,
     stats, 
