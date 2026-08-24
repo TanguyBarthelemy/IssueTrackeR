@@ -25,10 +25,10 @@ By default, the name is \code{"object.yaml"}.}
 \item{overwrite}{Logical indicating whether to overwrite the file if it
 already exists. Defaults to \code{TRUE}.}
 
-\item{verbose}{Logical indicating whether to display informative messages.
-Defaults to \code{TRUE}.}
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 
-\item{...}{Currently not used.}
+\item{\dots}{Currently not used.}
 }
 \value{
 The function returns \strong{invisibly} the full path of the written YAML file.

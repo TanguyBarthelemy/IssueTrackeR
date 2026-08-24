@@ -14,7 +14,7 @@
 #'   labels = "list_labels.yaml",
 #'   milestones = "list_milestones.yaml")
 #' }.
-#' @inheritParams get_issues
+#' @inheritParams get
 #' @param \dots Additional arguments for connecting to the GitHub repository:
 #' * \code{repo} A character string specifying the GitHub repository name.
 #' Defaults to the package option \code{IssueTrackeR.repo}.
@@ -26,12 +26,10 @@
 #' @returns invisibly (with \code{invisible()}) \code{TRUE}.
 #' @export
 #'
-#' @examples
-#'
-#' \dontrun{
+#' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
+#' \donttest{
 #' update_database(dataset_dir = tempdir())
 #' }
-#'
 update_database <- function(
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     datasets_name = c(

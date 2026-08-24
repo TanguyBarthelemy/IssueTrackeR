@@ -27,11 +27,26 @@ test_that("with_text works", {
     expect_identical(nrow(awful_issue), 1L)
 })
 
+test_that("with_labels works", {
+    bug_issues <- with_labels(my_issues, "bug")
+    expect_issues(bug_issues)
+    expect_identical(nrow(bug_issues), 5L)
+    expect_identical(bug_issues[["number"]], c(963L, 958L, 347L, 323L, 311L))
+})
+
 test_that("with_comments works", {
-    commented_issue <- with_comments(my_issues)
-    expect_issues(commented_issue)
-    expect_identical(nrow(commented_issue), 2L)
-    expect_identical(commented_issue[["number"]], c(323L, 154L))
+    commented_issues <- with_comments(my_issues)
+    expect_issues(commented_issues)
+    expect_identical(nrow(commented_issues), 2L)
+    expect_identical(commented_issues[["number"]], c(323L, 154L))
+
+    not_commented_issues <- with_comments(my_issues, negate = TRUE)
+    expect_issues(not_commented_issues)
+    expect_identical(nrow(not_commented_issues), 4L)
+    expect_identical(
+        not_commented_issues[["number"]],
+        c(963L, 958L, 347L, 311L)
+    )
 })
 
 test_that("get_nbr_comments works", {
@@ -46,4 +61,18 @@ test_that("author_last_comment works", {
         object = author_last_comment(my_issues),
         expected = c("", "", "", "palatej", "", "palatej")
     )
+    expect_identical(
+        object = author_last_comment(my_issues[6L, ]),
+        expected = "palatej"
+    )
+    expect_message(expect_identical(
+        object = author_last_comment(my_issues[1, ]),
+        expected = ""
+    ))
+})
+
+test_that("extract_nth works", {
+    expect_message(first_issue <- extract_nth(my_issues, 1L))
+    expect_issue(first_issue)
+    expect_identical(first_issue$number, 963L)
 })

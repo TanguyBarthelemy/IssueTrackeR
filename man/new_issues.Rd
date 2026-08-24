@@ -25,8 +25,9 @@ new_issues(x = NULL, ...)
   body,
   number,
   state,
-  created_at = Sys.Date(),
+  created_at = as.Date(NA_integer_),
   closed_at = as.Date(NA_integer_),
+  closed_by = NA_character_,
   labels = list(),
   comments = list(),
   milestone = NA_character_,
@@ -60,6 +61,9 @@ issues.}
 
 \item{closed_at}{a vector of date (or timestamp). The closing date of the
 issues.}
+
+\item{closed_by}{a vector of string. The GitHub usernames of the person who
+closed the issues.}
 
 \item{labels}{a list of vector string (or missing). The labels of the issues.}
 
@@ -104,7 +108,7 @@ issue1 <- new_issue(
     title = "Une autre issue",
     state = "open",
     body = "J'ai une question au sujet de...",
-    number = 2,
+    number = 2L,
     created_at = Sys.Date()
 )
 issues2 <- new_issues(x = issue1)
@@ -114,7 +118,7 @@ issues3 <- new_issues(
     title = "Une autre issue",
     state = "open",
     body = "J'ai une question au sujet de...",
-    number = 2,
+    number = 2L,
     created_at = Sys.Date()
 )
 
@@ -124,6 +128,6 @@ issues4 <- new_issues(
              "J'ai une question au sujet de..."),
     state = c("open", "closed"),
     number = 1:2,
-    created_at = Sys.Date()
+    created_at = c(Sys.Date() - 30, Sys.Date())
 )
 }

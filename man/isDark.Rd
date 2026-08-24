@@ -24,8 +24,9 @@ Determines whether a given colour is "dark" based on its luminance contrast.
 }
 \details{
 The function uses the \strong{relative luminance} formula derived from the
-\href{https://www.w3.org/WAI/WCAG21/quickref/}{WCAG} (Web Content Accessibility
-Guidelines) to calculate the \emph{perceived brightness} of the colour.
+\href{https://www.w3.org/WAI/WCAG22/quickref/?versions=2.1}{WCAG} (Web Content
+ccessibility Guidelines) to calculate the \emph{perceived brightness} of the
+colour.
 If the luminance is below a 123 (on a scale of 0-255), the colour is
 considered dark.
 }

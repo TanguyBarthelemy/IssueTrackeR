@@ -84,31 +84,8 @@ get_labels <- function(
     return(list_labels)
 }
 
-#' @title Format the label in a simpler format
-#'
-#' @param raw_labels a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' labels.
-#' @inheritParams get_issues
-#'
-#' @returns a list representing labels with simpler structure (with name,
-#' description, colour)
-#' @export
-#'
-#' @examples
-#'
-#' \dontrun{
-#' # With labels
-#' raw_labels <- gh::gh(
-#'    repo = "rjdemetra",
-#'    owner = "rjdverse",
-#'    endpoint = "/repos/:owner/:repo/labels",
-#'    .limit = Inf,
-#'    .progress = FALSE
-#' )
-#' format_labels(raw_labels)
-#' }
-#'
+#' @rdname format
+#' @noRd
 format_labels <- function(raw_labels, verbose = TRUE) {
     if (verbose) {
         cat("Reading labels... ")

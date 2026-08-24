@@ -4,7 +4,7 @@
 #' Display IssueTB and IssuesTB with formatted output in the console
 #'
 #' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
-#' @param \dots Unused argument
+#' @param \dots Currently not used.
 #'
 #' @details
 #' This function displays an issue (\code{IssueTB} object) or a list of issues
@@ -30,7 +30,7 @@
 #'
 #' # Display the summary of
 #' summary(all_issues[1:10, ])
-#' @name print
+#' @name print-issues
 #'
 #' @exportS3Method print IssueTB
 #' @method print IssueTB
@@ -73,7 +73,7 @@ print.IssueTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print IssuesTB
 #' @method print IssuesTB
 #' @export
@@ -95,7 +95,7 @@ print.IssuesTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print summary.IssueTB
 #' @method print summary.IssueTB
 #' @export
@@ -148,7 +148,7 @@ print.summary.IssueTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print summary.IssuesTB
 #' @method print summary.IssuesTB
 #' @export
@@ -181,7 +181,7 @@ print.summary.IssuesTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print LabelsTB
 #' @method print LabelsTB
 #' @export
@@ -190,13 +190,13 @@ print.LabelsTB <- function(x, ...) {
     x$labels_color <- c("grey8", "ivory")[
         isDark(x$labels_bgcolor) + 1L
     ]
-    x$labels_url <- paste(
+    x$labels_url <- file.path(
         "https://github.com",
         x$owner,
         x$repo,
         "labels",
-        utils::URLencode(x$labels_name),
-        sep = "/"
+        utils::URLencode(x$name),
+        fsep = "/"
     )
     x$formated_label <- vapply(
         X = seq_len(nrow(x)),
@@ -251,7 +251,7 @@ print.LabelsTB <- function(x, ...) {
     return(invisible(x))
 }
 
-#' @rdname print
+#' @rdname print-issues
 #' @exportS3Method print summary.LabelsTB
 #' @method print summary.LabelsTB
 #' @export
@@ -278,11 +278,11 @@ print.summary.LabelsTB <- function(x, ...) {
                 "\n- ",
                 cli::style_hyperlink(
                     text = paste(owner_name, repo_name, sep = "/"),
-                    url = paste(
+                    url = file.path(
                         "https://github.com",
                         owner_name,
                         repo_name,
-                        sep = "/"
+                        fsep = "/"
                     )
                 ),
                 ":"

@@ -25,8 +25,9 @@ new_issue(x = NULL, ...)
   body = NA_character_,
   number = NA_integer_,
   state = NA_character_,
-  created_at = Sys.Date(),
+  created_at = as.Date(NA_integer_),
   closed_at = as.Date(NA_integer_),
+  closed_by = NA_character_,
   labels = NULL,
   milestone = NA_character_,
   repo = NA_character_,
@@ -58,6 +59,9 @@ the issue is still open or \code{"closed"} if the issue is now closed.}
 \item{created_at}{a date (or timestamp). The creation date of the issue.}
 
 \item{closed_at}{a date (or timestamp). The closing date of the issue.}
+
+\item{closed_by}{a string. The GitHub username of the person who closed the
+issue.}
 
 \item{labels}{a vector string (or missing). The labels of the issue.}
 
@@ -98,7 +102,7 @@ issue1 <- new_issue()
 issue1 <- new_issue(
     title = "Nouvelle issue",
     body = "Un nouveau bug pour la fonction...",
-    number = 47,
+    number = 47L,
     created_at = Sys.Date()
 )
 

@@ -140,18 +140,18 @@ test_that("summary has good structure", {
     expect_identical(
         s3[["labels_url"]],
         c(
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/",
-            "https://github.com/jdemetra/jdplus-main/labels/"
+            "https://github.com/jdemetra/jdplus-main/labels/bug",
+            "https://github.com/jdemetra/jdplus-main/labels/dependencies",
+            "https://github.com/jdemetra/jdplus-main/labels/documentation",
+            "https://github.com/jdemetra/jdplus-main/labels/duplicate",
+            "https://github.com/jdemetra/jdplus-main/labels/enhancement",
+            "https://github.com/jdemetra/jdplus-main/labels/github_actions",
+            "https://github.com/jdemetra/jdplus-main/labels/good%20first%20issue",
+            "https://github.com/jdemetra/jdplus-main/labels/help%20wanted",
+            "https://github.com/jdemetra/jdplus-main/labels/invalid",
+            "https://github.com/jdemetra/jdplus-main/labels/java",
+            "https://github.com/jdemetra/jdplus-main/labels/question",
+            "https://github.com/jdemetra/jdplus-main/labels/wontfix"
         )
     )
     expect_identical(

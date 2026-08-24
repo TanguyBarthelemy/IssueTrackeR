@@ -7,10 +7,19 @@ S3method(append,IssuesTB)
 S3method(append,default)
 S3method(author_last_comment,IssueTB)
 S3method(author_last_comment,IssuesTB)
+S3method(base::plot,IssuesTB)
+S3method(count_issues,IssuesTB)
+S3method(count_issues,default)
+S3method(extract_nth,IssuesTB)
+S3method(extract_nth,default)
 S3method(generate_age_mat,IssuesTB)
 S3method(generate_age_mat,default)
+S3method(generate_author_mat,IssuesTB)
+S3method(generate_author_mat,default)
 S3method(get_nbr_comments,IssueTB)
 S3method(get_nbr_comments,IssuesTB)
+S3method(get_resolution_times,IssuesTB)
+S3method(get_resolution_times,default)
 S3method(get_still_open,IssuesTB)
 S3method(get_still_open,default)
 S3method(new_issue,IssueTB)
@@ -48,9 +57,8 @@ S3method(write_to_dataset,MilestonesTB)
 S3method(write_to_dataset,default)
 export(append)
 export(author_last_comment)
-export(format_issues)
-export(format_labels)
-export(format_milestones)
+export(count_issues)
+export(extract_nth)
 export(get_all_repos)
 export(get_issues)
 export(get_labels)
@@ -65,28 +73,62 @@ export(with_comments)
 export(with_labels)
 export(with_text)
 export(write_to_dataset)
-importFrom(cli,cli_h2)
-importFrom(cli,format_inline)
-importFrom(cli,style_hyperlink)
-importFrom(crayon,bold)
-importFrom(crayon,combine_styles)
-importFrom(crayon,make_style)
-importFrom(crayon,underline)
-importFrom(gh,gh)
-importFrom(gh,gh_rate_limit)
-importFrom(gh,gh_token)
-importFrom(gh,gh_whoami)
-importFrom(grDevices,col2rgb)
-importFrom(grDevices,hcl.colors)
-importFrom(graphics,abline)
-importFrom(graphics,legend)
-importFrom(graphics,lines)
-importFrom(graphics,polygon)
-importFrom(graphics,rect)
-importFrom(stats,setNames)
-importFrom(tools,file_ext)
-importFrom(tools,file_path_sans_ext)
-importFrom(utils,URLencode)
-importFrom(utils,strcapture)
-importFrom(yaml,as.yaml)
-importFrom(yaml,yaml.load)
+importFrom(checkmate,
+  assert_character,
+  assert_data_frame,
+  assert_integer,
+  assert_list,
+  assert_numeric,
+  assert_scalar
+)
+importFrom(cli,
+  cli_h2,
+  format_inline,
+  style_hyperlink
+)
+importFrom(crayon,
+  bold,
+  combine_styles,
+  make_style,
+  underline
+)
+importFrom(gh,
+  gh,
+  gh_rate_limit,
+  gh_token,
+  gh_whoami
+)
+importFrom(grDevices,
+  col2rgb,
+  hcl.colors
+)
+importFrom(graphics,
+  abline,
+  axis,
+  barplot,
+  box,
+  legend,
+  lines,
+  polygon,
+  rect,
+  text
+)
+importFrom(stats,
+  setNames,
+  time,
+  ts
+)
+importFrom(tools,
+  file_ext,
+  file_path_sans_ext
+)
+importFrom(utils,
+  URLencode,
+  strcapture
+)
+importFrom(withr,with_par)
+importFrom(yaml,
+  as.yaml,
+  yaml.load
+)
+importFrom(zoo,as.Date)

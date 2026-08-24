@@ -11,7 +11,7 @@
 #' (Default \code{TRUE})
 #' @param in_comments Boolean. Does the function search for text in the
 #' comments? (Default \code{TRUE})
-#' @param ... Additional arguments passed to [grepl()], such as \code{pattern}
+#' @param \dots Additional arguments passed to [grepl()], such as \code{pattern}
 #' and \code{ignore.case}.
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
@@ -65,7 +65,7 @@ with_text.IssuesTB <- function(
 #' Generic function to filter issues with labels
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param ... Additional arguments passed to [grepl()], such as \code{pattern}
+#' @param \dots Additional arguments passed to [grepl()], such as \code{pattern}
 #' and \code{ignore.case}.
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
@@ -101,6 +101,7 @@ with_labels.IssuesTB <- function(x, ...) {
 #' @param x An object of class \code{IssuesTB}.
 #' @param negate boolean indicating if we are searching for issues WITHOUT
 #' comments. Default is \code{FALSE}.
+#' @param \dots Currently not used.
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
@@ -115,7 +116,7 @@ with_labels.IssuesTB <- function(x, ...) {
 #'
 #' @rdname with_comments
 #' @export
-with_comments <- function(x, negate = FALSE) {
+with_comments <- function(x, ...) {
     UseMethod("with_comments", x)
 }
 
@@ -123,7 +124,7 @@ with_comments <- function(x, negate = FALSE) {
 #' @exportS3Method with_comments IssuesTB
 #' @method with_comments IssuesTB
 #' @export
-with_comments.IssuesTB <- function(x, negate = FALSE) {
+with_comments.IssuesTB <- function(x, negate = FALSE, ...) {
     condition <- get_nbr_comments(x) > 0L
     if (negate) {
         return(x[!condition, , drop = FALSE])
@@ -181,6 +182,9 @@ get_nbr_comments.IssuesTB <- function(x) {
 #' Retrieve the name of the last commentator
 #'
 #' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
 #'
 #' @returns A string with the name of the last person which leaves a comment.
 #' If there is no comments, it returns an empty string.
@@ -196,7 +200,7 @@ get_nbr_comments.IssuesTB <- function(x) {
 #'
 #' @rdname author_last_comment
 #' @export
-author_last_comment <- function(x) {
+author_last_comment <- function(x, ...) {
     UseMethod("author_last_comment", x)
 }
 
@@ -204,11 +208,15 @@ author_last_comment <- function(x) {
 #' @exportS3Method author_last_comment IssueTB
 #' @method author_last_comment IssueTB
 #' @export
-author_last_comment.IssueTB <- function(x) {
-    if (get_nbr_comments(x) == 0L) {
+author_last_comment.IssueTB <- function(x, verbose = TRUE, ...) {
+    nb_comments <- get_nbr_comments(x)
+    if (nb_comments == 0L) {
+        if (verbose) {
+            message("There are no comments in this issues.")
+        }
         return("")
     }
-    last_commentator <- x$author[nrow(x)]
+    last_commentator <- x$comments$author[nb_comments]
     return(last_commentator)
 }
 
@@ -216,11 +224,80 @@ author_last_comment.IssueTB <- function(x) {
 #' @exportS3Method author_last_comment IssuesTB
 #' @method author_last_comment IssuesTB
 #' @export
-author_last_comment.IssuesTB <- function(x) {
+author_last_comment.IssuesTB <- function(x, verbose = TRUE, ...) {
+    if (verbose) {
+        cat("Try to retrieve comments from the list of issues.\n")
+    }
     nbr_comments <- get_nbr_comments(x)
     authors <- character(nrow(x))
     authors[nbr_comments > 0L] <- x$comments[nbr_comments > 0L] |>
         lapply(FUN = \(.x) .x$author[nrow(.x)]) |>
         as.character()
     return(authors)
+}
+
+#' @title Extract the nth Issue from an List of Issues
+#'
+#' @description
+#' Extract the nth issue from a `IssuesTB` object.
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param n Integer. Position of the element to extract. 1 is for the first
+#'   element.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
+#'
+#' @returns The nth issue as a `IssueTB` object.
+#' If \code{n} exceeds the number of issues, returns the last issue with a
+#' warning. Returns `NULL` if the issues list is empty.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "open_issues.yaml"
+#' )
+#'
+#' first_issue <- extract_nth(all_issues, 1)
+#' third_issue <- extract_nth(all_issues, 3)
+#'
+#' @name extract_nth
+#' @export
+extract_nth <- function(x, ...) {
+    UseMethod("extract_nth", x)
+}
+
+#' @rdname extract_nth
+#' @exportS3Method extract_nth IssuesTB
+#' @method extract_nth IssuesTB
+#' @export
+extract_nth.IssuesTB <- function(x, n, verbose = TRUE, ...) {
+    if (nrow(x) == 0L) {
+        if (verbose) {
+            message("The list of issues is empty. No issue to extract.")
+        }
+        return(NULL)
+    } else if (n > nrow(x)) {
+        if (verbose) {
+            warning(
+                "n > number of issues. The last issue will be extracted.",
+                call. = FALSE
+            )
+        }
+        return(x[nrow(x), , drop = TRUE])
+    } else {
+        if (verbose) {
+            message("The ", n, "th issue will be extracted.")
+        }
+        return(x[n, , drop = TRUE])
+    }
+}
+
+#' @rdname extract_nth
+#' @exportS3Method extract_nth default
+#' @method extract_nth default
+#' @export
+extract_nth.default <- function(...) {
+    stop("`x` should be a `IssuesTB` object.", call. = FALSE)
 }

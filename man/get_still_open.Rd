@@ -6,20 +6,22 @@
 \alias{get_still_open.default}
 \title{Count Still Open Issues Over Time}
 \usage{
-get_still_open(x, lag = 0L)
+get_still_open(x, ...)
 
-\method{get_still_open}{IssuesTB}(x, lag = 0L)
+\method{get_still_open}{IssuesTB}(x, lag = 0L, ...)
 
-\method{get_still_open}{default}(x, lag)
+\method{get_still_open}{default}(...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
+
+\item{\dots}{Currently not used.}
 
 \item{lag}{Numeric. Number of years to look back for "still open" issues.
 Default is 0.}
 }
 \value{
-Named numeric vector of still open issues counts per month.
+\code{ts} object with still open issues counts per month.
 }
 \description{
 Count Still Open Issues Over Time

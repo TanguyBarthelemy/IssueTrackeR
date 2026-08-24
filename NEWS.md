@@ -7,6 +7,24 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-08-24
+
+### Added
+
+* New methods to plot resolution time and author in `plot()` [#14](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/14) and [#40](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/40)
+* `plot_resolution_bars` and `plot_resolution_ecdf` function to plot resolution time object.
+* `extract_nth()` returns the nth issue of a list of issues [#42](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/42)
+* `count_issues()` returns the number of issues in a list of issues [#35](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/35)
+* New field `created_by` in issues
+
+### Fixed
+
+* `closed_at` column is `POSIXct` [#35](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/35)
+* `get_still_open()` and `generate_age_mat()` return `ts` and `mts` objects  [#41](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/41)
+* `author_last_comment()` works with a single issue.
+* `closed_at` and `created_at` are now timestamps and no more dates.
+* `summary()` has correct links and colours for `LabelsTB` objects.
+
 ## [1.4.1] - 2026-07-31
 
 ### Added
@@ -124,7 +142,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New CHANGELOG (`NEWS.md`)
 * Documentation for `logic_reducer()`, `no_milestones()`, `vgrepl()` and `simple_sort`
 
-[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.1...HEAD
+[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.0...v1.3.1

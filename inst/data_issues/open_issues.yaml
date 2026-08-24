@@ -1,4 +1,7 @@
 number:
+- 1039
+- 1029
+- 1023
 - 1006
 - 1004
 - 987
@@ -10,7 +13,6 @@ number:
 - 888
 - 883
 - 881
-- 880
 - 878
 - 872
 - 871
@@ -126,6 +128,9 @@ number:
 - 130
 - 112
 title:
+- Older WS are read not correctly
+- 'Seasonal component in X11 spec : if set to NO, no info displayed in GUI'
+- OpenSSF badge
 - Benchmarking Results includes forecast observations beyond the input series
 - Outlier type and position are missing in Matrix |> Outliers
 - The variable `regression.td-ftest` is missing in JD+ output
@@ -137,7 +142,6 @@ title:
 - Is it possible to choose the value `(?)` in GUI output?
 - Adding a button to "refresh" a WS
 - Reappearance of a deleted SA-Item
-- cruncher capabilities
 - How is computed the Non parametric (Kruskal-Wallis) test?
 - Missing parameters
 - No item with `(?)` with the GUI
@@ -259,6 +263,96 @@ title:
 - XSD avaliability
 - JWSACruncher and parameters `fullseriesname` and `refreshall`
 body:
+- |-
+  I created a WS with the version **3.7.1** with 1 SA-Processing with 1 SA-Item with:
+
+  - the series AirPassengers ([air.csv](https://github.com/user-attachments/files/30928390/air.csv))
+  - the specification:
+    - X13 RSA3
+    - 1 outliers (AO in 1956-08-01) in the estimation spec
+    - a basic span (series span) from 1949-01-01 in the reference spec
+
+
+  ## My problem
+
+  With the version **3.8.0** of JDemetra+, the outlier is not recognised.
+
+
+  ## Appendix contents
+
+  Here is my WS in version [3.7.1.zip](https://github.com/user-attachments/files/30928503/3.7.1.zip).
+  And I created a identical (in terms of series and specification) in version [3.8.0.zip](https://github.com/user-attachments/files/30928502/3.8.0.zip).
+
+
+  ## Comparison
+
+  To explore "more" I compared the SAProcessing.xml files. In the version **3.8.0**, there are added lines.
+
+  In the estimation spec:
+
+  ```
+  + "    <item name=\"frequency\">"
+  + "        <integer>12</integer>"
+  + "    </item>"
+  ```
+  ```
+  + "                            </item>"
+  + "                        </subset>"
+  + "                    </item>"
+  + "                    <item name=\"x11\">"
+  + "                        <subset>"
+  + "                            <item name=\"seasonalma\">"
+  + "<strings>"
+  + "    <items>Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr</items>"
+  + "</strings>"
+  + "                            </item>"
+  + "                            <item name=\"fcasts\">"
+  + "<integer>-1</integer>"
+  ```
+
+  And the same lines in the result spec:
+
+  ```
+  + "    <item name=\"frequency\">"
+  + "        <integer>12</integer>"
+  + "    </item>"
+  ```
+
+  ```
+  + "                            </item>"
+  + "                        </subset>"
+  + "                    </item>"
+  + "                    <item name=\"x11\">"
+  + "                        <subset>"
+  + "                            <item name=\"seasonalma\">"
+  + "<strings>"
+  + "    <items>Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr</items>"
+  + "</strings>"
+  + "                            </item>"
+  + "                            <item name=\"fcasts\">"
+  + "<integer>-1</integer>"
+  ```
+
+
+  ## Question
+
+  Is it an intended behaviour?
+  The changelog mentions that a new field `frequency` is added in the SA Specification but he doesn’t mention that this would break the WS’s backwards compatibility...
+
+  Thank you
+- "HI ,\n\nin v 3.8.0 if seasonal component is unticked in the X11 part of the spec
+  \n\nNo information is diplayed in GUI  \n\n<img width=\"246\" height=\"62\" alt=\"Image\"
+  src=\"https://github.com/user-attachments/assets/a57354d6-256f-4bac-aff8-fa68720aee74\"
+  />\n\nthe estimation appears as invalid \n\n<img width=\"647\" height=\"40\" alt=\"Image\"
+  src=\"https://github.com/user-attachments/assets/26b7da59-8cbc-43a7-ae8d-2d396912681b\"
+  />\n\n\n\nExpected behaviour is that all X11 estimations of S (from B5 to D10) are
+  set to 0 or 1...and everthing is displayed and estimated \nit was the case in v2.2.4\n\n "
+- |-
+  I recently discovered the OpenSSF badge.
+
+  I was wondering if it applied to JDemetra+. It’s a badge that recognises packages that follow open-source best practice.
+
+  The link is https://www.bestpractices.dev/
 - |+
   <img width="340" height="216" alt="Image" src="https://github.com/user-attachments/assets/cd77b619-d644-4d03-925e-6a858eeb3709" />
 
@@ -390,19 +484,6 @@ body:
   ### Example
 
   https://github.com/user-attachments/assets/90606c05-191e-485c-8270-a7faacf9a3b9
-- |+
-  Related to #867
-
-  At the moment, in my mind, the cuncher does 3 things:
-
-  - updating the raw data (linked via the ts metadata)
-  - refreshing the model (so the estimation policy) according to the chosen refresh policy
-  - producing outputs (demetra_m and series)
-
-  But is it possible to choose to run **only one or two** of the tasks described above?
-
-  For example, just producing output or just updating the data without refreshing the model.
-
 - "The function `rjd3toolkit::seasonality_kruskalwallis()` compute the Kruskal-Wallis
   test. But how is it implemented in x13 call?\n\nHere is a small example. I get two
   different result if I want to compute it directly from the raw data and get it from
@@ -2004,7 +2085,12 @@ state:
 - open
 - open
 - open
+- open
+- open
 url:
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/1039
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/1029
+- https://api.github.com/repos/jdemetra/jdplus-main/issues/1023
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/1006
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/1004
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/987
@@ -2016,7 +2102,6 @@ url:
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/888
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/883
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/881
-- https://api.github.com/repos/jdemetra/jdplus-main/issues/880
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/878
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/872
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/871
@@ -2132,6 +2217,9 @@ url:
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/130
 - https://api.github.com/repos/jdemetra/jdplus-main/issues/112
 html_url:
+- https://github.com/jdemetra/jdplus-main/issues/1039
+- https://github.com/jdemetra/jdplus-main/issues/1029
+- https://github.com/jdemetra/jdplus-main/issues/1023
 - https://github.com/jdemetra/jdplus-main/issues/1006
 - https://github.com/jdemetra/jdplus-main/issues/1004
 - https://github.com/jdemetra/jdplus-main/issues/987
@@ -2143,7 +2231,6 @@ html_url:
 - https://github.com/jdemetra/jdplus-main/issues/888
 - https://github.com/jdemetra/jdplus-main/issues/883
 - https://github.com/jdemetra/jdplus-main/issues/881
-- https://github.com/jdemetra/jdplus-main/issues/880
 - https://github.com/jdemetra/jdplus-main/issues/878
 - https://github.com/jdemetra/jdplus-main/issues/872
 - https://github.com/jdemetra/jdplus-main/issues/871
@@ -2260,13 +2347,42 @@ html_url:
 - https://github.com/jdemetra/jdplus-main/issues/112
 milestone:
 - .na.character
+- 3.9.0
+- backlog
 - .na.character
 - .na.character
 - .na.character
 - .na.character
 - .na.character
 - .na.character
-- 3.8.0
+- .na.character
+- 3.9.0
+- backlog
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- backlog
+- .na.character
+- .na.character
+- .na.character
+- 3.9.0
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- 3.9.0
+- .na.character
 - backlog
 - .na.character
 - .na.character
@@ -2280,21 +2396,6 @@ milestone:
 - .na.character
 - .na.character
 - .na.character
-- backlog
-- .na.character
-- .na.character
-- .na.character
-- 3.8.0
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- 3.8.0
-- .na.character
-- backlog
 - .na.character
 - .na.character
 - .na.character
@@ -2306,40 +2407,28 @@ milestone:
 - .na.character
 - .na.character
 - .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- .na.character
-- 3.8.0
-- 3.8.0
-- 3.8.0
+- 3.9.0
+- 3.9.0
+- 3.9.0
 - .na.character
 - .na.character
 - .na.character
 - .na.character
 - backlog
-- 3.8.0
+- 3.9.0
 - backlog
-- 3.8.0
+- 3.9.0
 - backlog
-- 3.8.0
-- 3.8.0
+- 3.9.0
+- 3.9.0
 - .na.character
 - .na.character
-- 3.8.0
+- 3.9.0
 - .na.character
 - .na.character
 - .na.character
-- 3.8.0
-- 3.8.0
+- 3.9.0
+- 3.9.0
 - .na.character
 - backlog
 - backlog
@@ -2347,12 +2436,12 @@ milestone:
 - backlog
 - .na.character
 - .na.character
-- 3.8.0
+- 3.9.0
 - backlog
 - .na.character
 - .na.character
 - .na.character
-- 3.8.0
+- 3.9.0
 - backlog
 - .na.character
 - .na.character
@@ -2367,14 +2456,14 @@ milestone:
 - backlog
 - backlog
 - backlog
-- 3.8.0
+- 3.9.0
 - backlog
 - backlog
 - backlog
 - backlog
 - backlog
 - backlog
-- 3.8.0
+- 3.9.0
 - backlog
 - backlog
 - backlog
@@ -2384,134 +2473,136 @@ milestone:
 - backlog
 - .na.character
 - .na.character
-- 3.8.0
+- 3.9.0
 created_at:
-- 1781136000.0
-- 1780876800.0
-- 1779840000.0
-- 1776988800.0
-- 1776902400.0
-- 1775692800.0
-- 1775606400.0
-- 1772496000.0
-- 1771372800.0
-- 1770768000.0
-- 1770768000.0
-- 1770681600.0
-- 1770249600.0
-- 1769472000.0
-- 1769472000.0
-- 1769472000.0
-- 1769472000.0
-- 1769040000.0
-- 1769040000.0
-- 1768867200.0
-- 1768435200.0
-- 1768348800.0
-- 1768176000.0
-- 1767830400.0
-- 1767830400.0
-- 1767830400.0
-- 1766361600.0
-- 1765843200.0
-- 1765756800.0
-- 1765756800.0
-- 1765756800.0
-- 1765756800.0
-- 1764288000.0
-- 1764201600.0
-- 1763596800.0
-- 1763510400.0
-- 1762819200.0
-- 1762128000.0
-- 1762128000.0
-- 1761177600.0
-- 1761004800.0
-- 1761004800.0
-- 1761004800.0
-- 1761004800.0
-- 1761004800.0
-- 1760659200.0
-- 1760400000.0
-- 1759881600.0
-- 1759881600.0
-- 1758153600.0
-- 1758153600.0
-- 1753660800.0
-- 1753315200.0
-- 1752710400.0
-- 1752624000.0
-- 1752364800.0
-- 1752192000.0
-- 1750809600.0
-- 1748908800.0
-- 1748908800.0
-- 1748908800.0
-- 1748304000.0
-- 1748304000.0
-- 1748217600.0
-- 1748217600.0
-- 1748217600.0
-- 1745539200.0
-- 1745366400.0
-- 1744588800.0
-- 1744243200.0
-- 1744243200.0
-- 1744156800.0
-- 1743984000.0
-- 1743033600.0
-- 1743033600.0
-- 1742428800.0
-- 1742342400.0
-- 1742342400.0
-- 1742169600.0
-- 1741910400.0
-- 1739750400.0
-- 1739404800.0
-- 1738627200.0
-- 1736380800.0
-- 1733097600.0
-- 1732838400.0
-- 1732838400.0
-- 1732579200.0
-- 1732492800.0
-- 1732492800.0
-- 1731542400.0
-- 1729382400.0
-- 1729209600.0
-- 1728432000.0
-- 1728432000.0
-- 1726790400.0
-- 1726790400.0
-- 1726099200.0
-- 1726012800.0
-- 1725580800.0
-- 1725580800.0
-- 1724716800.0
-- 1724544000.0
-- 1722470400.0
-- 1720137600.0
-- 1720137600.0
-- 1719446400.0
-- 1719187200.0
-- 1718841600.0
-- 1718668800.0
-- 1718323200.0
-- 1717545600.0
-- 1716508800.0
-- 1716336000.0
-- 1715644800.0
-- 1714953600.0
-- 1713744000.0
-- 1712188800.0
-- 1710720000.0
-- 1709510400.0
-- 1702512000.0
-- 1700092800.0
-- 1700092800.0
-- 1698364800.0
-- 1696982400.0
-- 1696291200.0
+- 1786438332.0
+- 1783435584.0
+- 1782810857.0
+- 1781183243.0
+- 1780926958.0
+- 1779876797.0
+- 1777022839.0
+- 1776951641.0
+- 1775754325.0
+- 1775637304.0
+- 1772543992.0
+- 1771405918.0
+- 1770828944.0
+- 1770819496.0
+- 1770285522.0
+- 1769513279.0
+- 1769512032.0
+- 1769511518.0
+- 1769507242.0
+- 1769102357.0
+- 1769079488.0
+- 1768905707.0
+- 1768469872.0
+- 1768391189.0
+- 1768257863.0
+- 1767896607.0
+- 1767895252.0
+- 1767890598.0
+- 1766380852.0
+- 1765900068.0
+- 1765815057.0
+- 1765812209.0
+- 1765810418.0
+- 1765810189.0
+- 1764344806.0
+- 1764247077.0
+- 1763649749.0
+- 1763581998.0
+- 1762901749.0
+- 1762188024.0
+- 1762187681.0
+- 1761215795.0
+- 1761078198.0
+- 1761077734.0
+- 1761076454.0
+- 1761075677.0
+- 1761075452.0
+- 1760707179.0
+- 1760443278.0
+- 1759937217.0
+- 1759936940.0
+- 1758189248.0
+- 1758187517.0
+- 1753742213.0
+- 1753332962.0
+- 1752760481.0
+- 1752673531.0
+- 1752448434.0
+- 1752217518.0
+- 1750828467.0
+- 1748967306.0
+- 1748966624.0
+- 1748964717.0
+- 1748359477.0
+- 1748335098.0
+- 1748271637.0
+- 1748265353.0
+- 1748262449.0
+- 1745579318.0
+- 1745382359.0
+- 1744634960.0
+- 1744305277.0
+- 1744243371.0
+- 1744179278.0
+- 1744068753.0
+- 1743047396.0
+- 1743045799.0
+- 1742491838.0
+- 1742382173.0
+- 1742379179.0
+- 1742243351.0
+- 1741965332.0
+- 1739828979.0
+- 1739405787.0
+- 1738678873.0
+- 1736381651.0
+- 1733105444.0
+- 1732877738.0
+- 1732876271.0
+- 1732657836.0
+- 1732512533.0
+- 1732507077.0
+- 1731555701.0
+- 1729454624.0
+- 1729213043.0
+- 1728468902.0
+- 1728468317.0
+- 1726808132.0
+- 1726806236.0
+- 1726178497.0
+- 1726095937.0
+- 1725628564.0
+- 1725628487.0
+- 1724775785.0
+- 1724625122.0
+- 1722481854.0
+- 1720193699.0
+- 1720190998.0
+- 1719471179.0
+- 1719215198.0
+- 1718850079.0
+- 1718722406.0
+- 1718364524.0
+- 1717591887.0
+- 1716509901.0
+- 1716381089.0
+- 1715662484.0
+- 1715004932.0
+- 1713798936.0
+- 1712238054.0
+- 1710759045.0
+- 1709591566.0
+- 1702546296.0
+- 1700140125.0
+- 1700139904.0
+- 1698391521.0
+- 1697039312.0
+- 1696358488.0
 closed_at:
 - .na.real
 - .na.real
@@ -2639,7 +2730,141 @@ closed_at:
 - .na.real
 - .na.real
 - .na.real
+- .na.real
+- .na.real
+closed_by:
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
+- .na.character
 creator:
+- TanguyBarthelemy
+- annasmyk
+- TanguyBarthelemy
 - MFatihTuzen
 - TanguyBarthelemy
 - TanguyBarthelemy
@@ -2648,7 +2873,6 @@ creator:
 - TanguyBarthelemy
 - TanguyBarthelemy
 - charphi
-- TanguyBarthelemy
 - TanguyBarthelemy
 - TanguyBarthelemy
 - TanguyBarthelemy
@@ -2767,6 +2991,9 @@ creator:
 - superjarle
 - AQLT
 assignee:
+- palatej
+- .na.character
+- .na.character
 - .na.character
 - .na.character
 - .na.character
@@ -2775,7 +3002,6 @@ assignee:
 - .na.character
 - .na.character
 - charphi
-- .na.character
 - .na.character
 - .na.character
 - .na.character
@@ -2901,8 +3127,10 @@ state_reason:
 - open
 - open
 - open
-- reopened
 - open
+- open
+- open
+- reopened
 - open
 - open
 - open
@@ -3021,6 +3249,8 @@ state_reason:
 - open
 - reopened
 owner:
+- jdemetra
+- jdemetra
 - jdemetra
 - jdemetra
 - jdemetra
@@ -3274,7 +3504,15 @@ repo:
 - jdplus-main
 - jdplus-main
 - jdplus-main
+- jdplus-main
+- jdplus-main
 labels:
+- name: []
+  color: []
+- name: bug
+  color: '#d73a4a'
+- name: enhancement
+  color: '#a2eeef'
 - name: []
   color: []
 - name: []
@@ -3301,8 +3539,6 @@ labels:
   color: '#d876e3'
 - name: bug
   color: '#d73a4a'
-- name: []
-  color: []
 - name: []
   color: []
 - name: []
@@ -3540,6 +3776,18 @@ labels:
 - name: bug
   color: '#d73a4a'
 comments:
+- text: |-
+    @palatej is it really necessary to remove all user pre-specified variables in https://github.com/palatej/jd3-main/blob/develop/jdplus-main-base/jdplus-x13-base-parent/jdplus-x13-base-api/src/main/java/jdplus/x13/base/api/regarima/RegArimaSpec.java#L128-L136 and TRAMO respectively?
+    Shouldn't they be independent from the frequency of the time series?
+  author: Immurb
+- text: []
+  author: []
+- text: "Interesting, the goal of this badge is to produce higher-quality **secure**
+    software.\nI have quickly checked the requirements and we already follow most
+    of it.\nhttps://www.bestpractices.dev/en/criteria/0  \nBut to meet all the critera
+    would involve a lot of work ... \nI let the issue opened since it might be a good
+    idea to invest in it."
+  author: charphi
 - text: []
   author: []
 - text: []
@@ -3581,20 +3829,6 @@ comments:
   - 'Seems to be related with #689 and #761, which were fixed through #801, and #859,
     which was introduced with #801.'
   - Yes you're right ! It was not the exact same issue but may be the same origin.
-  author:
-  - Immurb
-  - TanguyBarthelemy
-- text:
-  - |-
-    If you put \<refreshall\>false\</refreshall\>, the raw data should not be updated.
-
-    If you put no policy or \<policy\>None\</policy\>, it should not update the model. Or Current also says:
-
-    > The new sa series is only based on previously computed seasonal factors (estimates+forecasts)
-    > Nomenclature in line with the guidelines
-
-    Afaik it always creates the demetra_m file even if no matrix output is specified.
-  - "Ok thank you! \nI need to test that."
   author:
   - Immurb
   - TanguyBarthelemy
@@ -3717,8 +3951,16 @@ comments:
   author: TanguyBarthelemy
 - text: []
   author: []
-- text: []
-  author: []
+- text:
+  - |-
+    I tested, this behabiours appeared with the version 3.6.0.
+    But I can't fin any information about this changes in the CHANGELOG.
+  - |-
+    This behaviour was introduced with https://github.com/jdemetra/jdplus-main/pull/801.
+    It's probably not in the CHANGELOG because it is an unintentional side effect of the fix.
+  author:
+  - TanguyBarthelemy
+  - Immurb
 - text: []
   author: []
 - text:
@@ -3770,10 +4012,16 @@ comments:
   author: []
 - text: []
   author: []
-- text: "JD+ is designed to accept new formats.\nThe best way to do so is to create
-    a plugin outside JD+ and to merge it to the main repository if the plugin is stable
+- text:
+  - "JD+ is designed to accept new formats.\nThe best way to do so is to create a
+    plugin outside JD+ and to merge it to the main repository if the plugin is stable
     and useful enough. "
-  author: charphi
+  - 'Here is a new library to read parquet files: https://www.infoq.com/news/2026/07/hardwood-java-parquet/ '
+  - 'Another option would be to use duckdb: https://foojay.io/today/embedding-duckdb-in-a-maven-app-and-using-it-for-things-that-arent-databases/'
+  author:
+  - charphi
+  - charphi
+  - charphi
 - text: []
   author: []
 - text: []
@@ -4553,10 +4801,20 @@ comments:
   author:
   - charphi
   - a-s-russo
-- text: |-
+- text:
+  - |-
     Some blog post about it:
     https://web.archive.org/web/20131216134906/https://blogs.oracle.com/geertjan/entry/how_to_open_a_project
-  author: charphi
+  - |-
+    Also, why is the master XML file located outside the WS folder? Would it be possible to place it inside the WS folder (as is the case for other types of projects)?
+    I realise this would involve a significant change to how WS is typically handled… But it might simplify the management of these structures (particularly by making it easier to zip them without forgetting the XML file).
+  - |-
+    That is a design decision done a long time ago :)
+    You should ask @palatej about it and I aggree, it would simplify things (but significant changes...).
+  author:
+  - charphi
+  - TanguyBarthelemy
+  - charphi
 - text: []
   author: []
 - text:

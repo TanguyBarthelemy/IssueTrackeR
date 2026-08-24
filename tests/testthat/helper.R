@@ -39,7 +39,7 @@ cache <- rlang::new_environment()
 expect_issues <- function(x) {
     testthat::expect_type(x, "list")
     testthat::expect_s3_class(x, "IssuesTB")
-    expect_identical(ncol(x), 16L)
+    expect_identical(ncol(x), 17L)
     expect_in(x[["state"]], c("open", "closed"))
     testthat::expect_s3_class(x[["created_at"]], "POSIXct")
     testthat::expect_s3_class(x[["closed_at"]], "POSIXct")
@@ -66,6 +66,7 @@ expect_issues <- function(x) {
             "milestone",
             "created_at",
             "closed_at",
+            "closed_by",
             "creator",
             "assignee",
             "state_reason",
@@ -76,6 +77,61 @@ expect_issues <- function(x) {
         )
     )
 }
+
+expect_issue <- function(x) {
+    testthat::expect_type(x, "list")
+    testthat::expect_s3_class(x, "IssueTB")
+    expect_length(x, 17L)
+    expect_in(x[["state"]], c("open", "closed"))
+    testthat::expect_s3_class(x[["created_at"]], "POSIXct")
+    testthat::expect_s3_class(x[["closed_at"]], "POSIXct")
+    expect_in(
+        x[["state_reason"]],
+        c(
+            "open",
+            "reopened",
+            "completed",
+            "not_planned",
+            "duplicated",
+            "duplicate"
+        )
+    )
+    expect_identical(
+        names(x),
+        c(
+            "number",
+            "title",
+            "body",
+            "state",
+            "url",
+            "html_url",
+            "milestone",
+            "created_at",
+            "closed_at",
+            "closed_by",
+            "creator",
+            "assignee",
+            "state_reason",
+            "owner",
+            "repo",
+            "labels",
+            "comments"
+        )
+    )
+}
+
+# my_issues <- get_issues(
+#     source = "online",
+#     repo = "jdplus-main",
+#     owner = "jdemetra",
+#     state = "all"
+# ) |>
+#     subset(number %in% c(963, 958, 347, 323, 311, 154))
+# write_to_dataset(
+#     x = my_issues,
+#     dataset_dir = testthat::test_path("data"),
+#     dataset_name = "closed_issues.yaml"
+# )
 
 my_issues <- get_issues(
     source = "local",

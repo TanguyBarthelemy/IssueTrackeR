@@ -4,7 +4,11 @@
 \alias{reset_options}
 \title{Reset options}
 \usage{
-reset_options()
+reset_options(verbose = TRUE)
+}
+\arguments{
+\item{verbose}{A logical value indicating whether to print additional
+information. Default is \code{TRUE}.}
 }
 \value{
 \code{NULL} invisibly
@@ -13,8 +17,6 @@ reset_options()
 Reset options
 }
 \examples{
-getOption("IssueTrackeR.owner")
-options(IssueTrackeR.owner = "TanguyBarthelemy")
 getOption("IssueTrackeR.owner")
 reset_options()
 getOption("IssueTrackeR.owner")

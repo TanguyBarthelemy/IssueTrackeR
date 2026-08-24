@@ -3,7 +3,7 @@
 #' @description
 #' Returns a list of repos.
 #'
-#' @inheritParams get_issues
+#' @inheritParams get
 #' @param public Boolean. Should we include public repos?
 #' (Default \code{TRUE})
 #' @param private Boolean. Should we include private repos?
@@ -11,12 +11,10 @@
 #'
 #' @returns A string with the list of repo of a user or an organisation.
 #'
-#' @examples
-#'
-#' \dontrun{
+#' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
+#' \donttest{
 #' get_all_repos("rjdverse")
 #' }
-#'
 #' @export
 get_all_repos <- function(
     owner,

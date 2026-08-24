@@ -8,14 +8,7 @@
 \alias{write_to_dataset.default}
 \title{Save datasets in a yaml file}
 \usage{
-write_to_dataset(
-  x,
-  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-  dataset_name,
-  overwrite = TRUE,
-  verbose = TRUE,
-  ...
-)
+write_to_dataset(x, ...)
 
 \method{write_to_dataset}{IssuesTB}(
   x,
@@ -50,6 +43,8 @@ write_to_dataset(
 \item{x}{an object of class \code{IssuesTB}, \code{LabelsTB} or
 \code{MilestonesTB}.}
 
+\item{\dots}{Currently not used.}
+
 \item{dataset_dir}{A character string specifying the path which contains the
 datasets (only taken into account if \code{source} is set to \code{"local"}).
 Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
@@ -64,8 +59,6 @@ should it be overwrite? Default is TRUE.}
 
 \item{verbose}{A logical value indicating whether to print additional
 information. Default is \code{TRUE}.}
-
-\item{\dots}{Unused parameter.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was

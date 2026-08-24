@@ -11,9 +11,9 @@
 #'   By default, the name is `"object.yaml"`.
 #' @param overwrite Logical indicating whether to overwrite the file if it
 #'   already exists. Defaults to `TRUE`.
-#' @param verbose Logical indicating whether to display informative messages.
-#'   Defaults to `TRUE`.
-#' @param ... Currently not used.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
 #'
 #' @returns
 #' The function returns **invisibly** the full path of the written YAML file.
@@ -96,10 +96,10 @@
 #'
 #' @param x an object of class \code{IssuesTB}, \code{LabelsTB} or
 #' \code{MilestonesTB}.
-#' @inheritParams get_issues
+#' @inheritParams get
 #' @param overwrite Boolean. If the dataset file already exists,
 #'   should it be overwrite? Default is TRUE.
-#' @param \dots Unused parameter.
+#' @param \dots Currently not used.
 #'
 #' @details
 #' Depending on the object, the defaults value of the argument
@@ -148,10 +148,6 @@
 #'
 write_to_dataset <- function(
     x,
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name,
-    overwrite = TRUE,
-    verbose = TRUE,
     ...
 ) {
     UseMethod(generic = "write_to_dataset", object = x)

@@ -5,12 +5,14 @@
 \alias{with_comments.IssuesTB}
 \title{Check for comments in GitHub Issues}
 \usage{
-with_comments(x, negate = FALSE)
+with_comments(x, ...)
 
-\method{with_comments}{IssuesTB}(x, negate = FALSE)
+\method{with_comments}{IssuesTB}(x, negate = FALSE, ...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
+
+\item{\dots}{Currently not used.}
 
 \item{negate}{boolean indicating if we are searching for issues WITHOUT
 comments. Default is \code{FALSE}.}

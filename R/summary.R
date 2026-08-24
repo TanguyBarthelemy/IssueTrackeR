@@ -46,7 +46,7 @@ prepare_label_display <- function(x, html_url) {
 #' @title Compute a summary of an issue or a list of issues
 #'
 #' @param object a \code{IssueTB} or \code{IssuesTB} object.
-#' @param \dots Unused argument
+#' @param \dots Currently not used.
 #'
 #' @details
 #' This function compute the summary of an issue (\code{IssueTB} object) with
@@ -135,13 +135,13 @@ summary.LabelsTB <- function(object, ...) {
     object$labels_color <- c("grey8", "ivory")[
         isDark(object$labels_bgcolor) + 1L
     ]
-    object$labels_url <- paste(
+    object$labels_url <- file.path(
         "https://github.com",
         object$owner,
         object$repo,
         "labels",
-        utils::URLencode(object$labels_name),
-        sep = "/"
+        utils::URLencode(object$name),
+        fsep = "/"
     )
     object$formated_label <- vapply(
         X = seq_len(nrow(object)),

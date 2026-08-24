@@ -12,7 +12,7 @@ with_text(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{...}{Additional arguments passed to \code{\link[=grepl]{grepl()}}, such as \code{pattern}
+\item{\dots}{Additional arguments passed to \code{\link[=grepl]{grepl()}}, such as \code{pattern}
 and \code{ignore.case}.}
 
 \item{in_title}{Boolean. Does the function search for text in the title?

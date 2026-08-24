@@ -9,9 +9,11 @@
 #' @param number a string. The number of the issue.
 #' @param created_at a date (or timestamp). The creation date of the issue.
 #' @param closed_at a date (or timestamp). The closing date of the issue.
+#' @param closed_by a string. The GitHub username of the person who closed the
+#' issue.
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.
-#' @inheritParams get_issues
+#' @inheritParams get
 #' @param url a string. The URL of the API to the GitHub issue.
 #' @param html_url a string. The URL to the GitHub issue.
 #' @param comments vector of string (the comments of the issue)
@@ -32,7 +34,7 @@
 #' issue1 <- new_issue(
 #'     title = "Nouvelle issue",
 #'     body = "Un nouveau bug pour la fonction...",
-#'     number = 47,
+#'     number = 47L,
 #'     created_at = Sys.Date()
 #' )
 #'
@@ -87,14 +89,20 @@ new_issue.IssuesTB <- function(x, ...) {
 #' @exportS3Method new_issue default
 #' @method new_issue default
 #' @export
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_numeric
+#' @importFrom checkmate assert_scalar
+#' @importFrom checkmate assert_data_frame
 new_issue.default <- function(
     x,
     title = NA_character_,
     body = NA_character_,
     number = NA_integer_,
     state = NA_character_,
-    created_at = Sys.Date(),
+    created_at = as.Date(NA_integer_),
     closed_at = as.Date(NA_integer_),
+    closed_by = NA_character_,
     labels = NULL,
     milestone = NA_character_,
     repo = NA_character_,
@@ -107,6 +115,42 @@ new_issue.default <- function(
     state_reason = NA_character_,
     ...
 ) {
+
+    checkmate::assert_character(title)
+    checkmate::assert_character(body)
+    checkmate::assert_integer(number)
+    checkmate::assert_character(state)
+    checkmate::assert_numeric(created_at)
+    checkmate::assert_numeric(closed_at)
+    checkmate::assert_character(closed_by)
+    checkmate::assert_character(milestone)
+    checkmate::assert_character(repo)
+    checkmate::assert_character(owner)
+    checkmate::assert_character(url)
+    checkmate::assert_character(html_url)
+    checkmate::assert_character(creator)
+    checkmate::assert_character(assignee)
+    checkmate::assert_character(state_reason)
+
+    checkmate::assert_scalar(title, na.ok = TRUE)
+    checkmate::assert_scalar(body, na.ok = TRUE)
+    checkmate::assert_scalar(number, na.ok = TRUE)
+    checkmate::assert_scalar(state, na.ok = TRUE)
+    checkmate::assert_scalar(created_at, na.ok = TRUE)
+    checkmate::assert_scalar(closed_at, na.ok = TRUE)
+    checkmate::assert_scalar(closed_by, na.ok = TRUE)
+    checkmate::assert_scalar(milestone, na.ok = TRUE)
+    checkmate::assert_scalar(repo, na.ok = TRUE)
+    checkmate::assert_scalar(owner, na.ok = TRUE)
+    checkmate::assert_scalar(url, na.ok = TRUE)
+    checkmate::assert_scalar(html_url, na.ok = TRUE)
+    checkmate::assert_scalar(creator, na.ok = TRUE)
+    checkmate::assert_scalar(assignee, na.ok = TRUE)
+    checkmate::assert_scalar(state_reason, na.ok = TRUE)
+
+    checkmate::assert_data_frame(labels, null.ok = TRUE)
+    checkmate::assert_data_frame(comments, null.ok = TRUE)
+
     issue <- list(
         number = as.integer(number),
         title = title,
@@ -117,6 +161,7 @@ new_issue.default <- function(
         milestone = milestone,
         created_at = format_timestamp(created_at),
         closed_at = format_timestamp(closed_at),
+        closed_by = closed_by,
         creator = creator,
         assignee = assignee,
         state_reason = state_reason,
@@ -143,10 +188,12 @@ new_issue.default <- function(
 #' issues.
 #' @param closed_at a vector of date (or timestamp). The closing date of the
 #' issues.
+#' @param closed_by a vector of string. The GitHub usernames of the person who
+#' closed the issues.
 #' @param labels a list of vector string (or missing). The labels of the issues.
 #' @param milestone a vector of string (or missing). The milestones of the
 #' issues.
-#' @inheritParams get_issues
+#' @inheritParams get
 #' @param url a vector of string. The URLs of the API to the GitHub issues.
 #' @param html_url a vector of string. The URLs to the GitHub issues.
 #' @param comments a list of vector string. The comments of the issues.
@@ -170,7 +217,7 @@ new_issue.default <- function(
 #'     title = "Une autre issue",
 #'     state = "open",
 #'     body = "J'ai une question au sujet de...",
-#'     number = 2,
+#'     number = 2L,
 #'     created_at = Sys.Date()
 #' )
 #' issues2 <- new_issues(x = issue1)
@@ -180,7 +227,7 @@ new_issue.default <- function(
 #'     title = "Une autre issue",
 #'     state = "open",
 #'     body = "J'ai une question au sujet de...",
-#'     number = 2,
+#'     number = 2L,
 #'     created_at = Sys.Date()
 #' )
 #'
@@ -190,7 +237,7 @@ new_issue.default <- function(
 #'              "J'ai une question au sujet de..."),
 #'     state = c("open", "closed"),
 #'     number = 1:2,
-#'     created_at = Sys.Date()
+#'     created_at = c(Sys.Date() - 30, Sys.Date())
 #' )
 #' @rdname new_issues
 #'
@@ -239,14 +286,19 @@ new_issues.list <- function(x, ...) {
 #' @exportS3Method new_issues default
 #' @method new_issues default
 #' @export
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_numeric
+#' @importFrom checkmate assert_list
 new_issues.default <- function(
     x,
     title,
     body,
     number,
     state,
-    created_at = Sys.Date(),
+    created_at = as.Date(NA_integer_),
     closed_at = as.Date(NA_integer_),
+    closed_by = NA_character_,
     labels = list(),
     comments = list(),
     milestone = NA_character_,
@@ -266,6 +318,7 @@ new_issues.default <- function(
         state <- character(0L)
         created_at <- format_timestamp(as.Date(character(0L)))
         closed_at <- format_timestamp(as.Date(character(0L)))
+        closed_by <- character(0L)
         milestone <- character(0L)
         repo <- character(0L)
         owner <- character(0L)
@@ -275,6 +328,22 @@ new_issues.default <- function(
         assignee <- character(0L)
         state_reason <- character(0L)
     }
+
+    checkmate::assert_character(title)
+    checkmate::assert_character(body)
+    checkmate::assert_integer(number)
+    checkmate::assert_character(state)
+    checkmate::assert_numeric(created_at)
+    checkmate::assert_numeric(closed_at)
+    checkmate::assert_character(closed_by)
+    checkmate::assert_character(milestone)
+    checkmate::assert_character(repo)
+    checkmate::assert_character(owner)
+    checkmate::assert_character(url)
+    checkmate::assert_character(html_url)
+    checkmate::assert_character(creator)
+    checkmate::assert_character(assignee)
+    checkmate::assert_character(state_reason)
 
     if (missing(labels)) {
         labels <- rep(
@@ -297,6 +366,9 @@ new_issues.default <- function(
         )
     }
 
+    checkmate::assert_list(labels)
+    checkmate::assert_list(comments)
+
     issues <- data.frame(
         number = as.integer(number),
         title = title,
@@ -307,6 +379,7 @@ new_issues.default <- function(
         milestone = milestone,
         created_at = format_timestamp(created_at),
         closed_at = format_timestamp(closed_at),
+        closed_by = closed_by,
         creator = creator,
         assignee = assignee,
         state_reason = state_reason,
@@ -322,11 +395,13 @@ new_issues.default <- function(
     return(issues)
 }
 
-#' @name extraction-issues
 #' @title Extraction and replacement of information in issues
+#'
 #' @param x An object of class \code{IssuesTB}.
 #' @inheritParams base::`[`
+#'
 #' @returns Information inside the `IssuesTB` object
+#'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
 #' open_issues <- get_issues(
@@ -339,9 +414,12 @@ new_issues.default <- function(
 #' state <- open_issues[1, "state"]
 #' open_issues[1, "state"] <- "closed"
 #' open_issues[["number"]] <- seq_along(open_issues[["number"]])
+#'
 #' @exportS3Method `[` IssuesTB
 #' @method `[` IssuesTB
 #' @export
+#'
+#' @name extraction-issues
 #' @noRd
 `[.IssuesTB` <- function(x, i, j, drop = TRUE) {
     output <- NextMethod("[")
@@ -364,6 +442,7 @@ new_issues.default <- function(
 }
 
 #' @noRd
+#' @rdname extraction-issues
 #' @exportS3Method `[<-` IssuesTB
 #' @method `[<-` IssuesTB
 #' @export
@@ -372,6 +451,7 @@ new_issues.default <- function(
 }
 
 #' @noRd
+#' @rdname extraction-issues
 #' @exportS3Method `[[<-` IssuesTB
 #' @method `[[<-` IssuesTB
 #' @export
@@ -441,7 +521,7 @@ append.default <- function(x, values, after = length(x)) {
 #' @description
 #' S3 method for combining \code{IssueTB} objects by rows.
 #'
-#' @param ... Objects of class \code{IssueTB} or \code{IssuesTB}.
+#' @param \dots Objects of class \code{IssueTB} or \code{IssuesTB}.
 #'
 #' @returns An \code{IssueTB} object containing the combined rows of all input
 #' objects.
@@ -449,7 +529,7 @@ append.default <- function(x, values, after = length(x)) {
 #' @seealso
 #' \code{\link[base]{rbind}} for the generic function
 #'
-#' @name rbind
+#' @name rbind-issues
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
 #' open_issues <- get_issues(
@@ -468,7 +548,7 @@ rbind.IssueTB <- function(...) {
         new_issues()
 }
 
-#' @rdname rbind
+#' @rdname rbind-issues
 #' @exportS3Method rbind IssuesTB
 #' @method rbind IssuesTB
 #' @export
@@ -610,4 +690,45 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 #' @export
 unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
     return(x[!duplicated(x), ])
+}
+
+#' @title Count the number of Issues
+#'
+#' @description
+#' Generic function to count the number of issues in a list of issues.
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
+#'
+#' @returns Integer. The number of issues.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "open_issues.yaml"
+#' )
+#'
+#' count_issues(all_issues)
+#' @export
+count_issues <- function(x, ...) {
+    UseMethod("count_issues", x)
+}
+
+#' @rdname count_issues
+#' @exportS3Method count_issues IssuesTB
+#' @method count_issues IssuesTB
+#' @export
+count_issues.IssuesTB <- function(x, verbose = TRUE, ...) {
+    return(nrow(x))
+}
+
+#' @rdname count_issues
+#' @exportS3Method count_issues default
+#' @method count_issues default
+#' @export
+count_issues.default <- function(...) {
+    stop("`x` should be a `IssuesTB` object.", call. = FALSE)
 }

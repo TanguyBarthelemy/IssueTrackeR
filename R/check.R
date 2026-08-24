@@ -14,12 +14,14 @@
 #' - `is_orgs_call()`: Detects organization API calls
 #' - `is_user_call()`: Detects user API calls
 #' - `is_repo_call()`: Detects repository API calls
+#' - `is_api_down()`: Detects when GitHub APi is down
 #'
 #' @section Error Message Functions:
 #' These functions generate formatted error messages with troubleshooting tips:
 #' - `timeout_msg`: Timeout error message
 #' - `auth_msg`: Authentication error message
 #' - `api_rate_msg`: Rate limit error message
+#' - `api_down_msg`: API GitHub is down error message
 #' - `no_resource_msg`: Resource not found error message
 #' - `no_http_msg`: HTTP connection error message
 #' - `wrong_repo_msg()`: Repository not found error message
@@ -48,14 +50,17 @@
 #' unknown_error <- "Unknown error occurred"
 #' IssueTrackeR:::weird_msg(unknown_error)
 #'
+#' @noRd
 #' @name github_errors
 NULL
 
+#' @noRd
 #' @rdname github_errors
 has_timeout <- function(msg) {
     return(grepl("Timeout was reached", msg, ignore.case = TRUE))
 }
 
+#' @noRd
 #' @rdname github_errors
 need_auth <- function(msg) {
     return(grepl(
@@ -66,6 +71,7 @@ need_auth <- function(msg) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 api_rate_reached <- function(msg) {
     return(
@@ -78,6 +84,7 @@ api_rate_reached <- function(msg) {
     )
 }
 
+#' @noRd
 #' @rdname github_errors
 has_no_http <- function(msg) {
     return(grepl(
@@ -87,6 +94,7 @@ has_no_http <- function(msg) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 is_not_found <- function(msg) {
     return(grepl(
@@ -97,19 +105,32 @@ is_not_found <- function(msg) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 is_orgs_call <- function(msg) {
     return(grepl(pattern = "/orgs/", x = msg, fixed = TRUE))
 }
 
+#' @noRd
 #' @rdname github_errors
 is_user_call <- function(msg) {
     return(grepl(pattern = "/users/", x = msg, fixed = TRUE))
 }
 
+#' @noRd
 #' @rdname github_errors
 is_repo_call <- function(msg) {
     return(grepl(pattern = "/repos/", x = msg, fixed = TRUE))
+}
+
+#' @noRd
+#' @rdname github_errors
+is_api_down <- function(msg) {
+    return(grepl(
+        pattern = "Unexpected content type \"text/html\"",
+        x = msg,
+        fixed = TRUE
+    ))
 }
 
 timeout_msg <- c(
@@ -128,6 +149,10 @@ api_rate_msg <- c(
     "\u2192 Wait a few minutes\n",
     "\u2192 Or authenticate with a PAT to increase your limit."
 )
+api_down_msg <- c(
+    " GitHub API is currently down \U1F6D1\n",
+    "\u2192 Wait a few minutes and try again."
+)
 no_resource_msg <- c(
     "The requested resource was not found on GitHub \U274C.\n",
     "\u2192 Check the API endpoint and parameters."
@@ -141,6 +166,7 @@ no_http_msg <- c(
     "verify your proxy or firewall settings."
 )
 
+#' @noRd
 #' @rdname github_errors
 wrong_repo_msg <- function(owner, repo) {
     return(c(
@@ -155,6 +181,7 @@ wrong_repo_msg <- function(owner, repo) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 wrong_username_msg <- function(owner) {
     return(c(
@@ -166,6 +193,7 @@ wrong_username_msg <- function(owner) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 wrong_org_name_msg <- function(owner) {
     return(c(
@@ -177,6 +205,7 @@ wrong_org_name_msg <- function(owner) {
     ))
 }
 
+#' @noRd
 #' @rdname github_errors
 weird_msg <- function(msg) {
     return(c(
@@ -198,8 +227,6 @@ weird_msg <- function(msg) {
 #' @returns Invisibly returns NULL if no error is detected.
 #' Else, a error is generated with appropriate message.
 #'
-#' @dev
-#'
 #' @details
 #' The function handles these specific error cases:
 #' - Timeout errors
@@ -212,6 +239,7 @@ weird_msg <- function(msg) {
 #' @examples
 #' a <- try(gh::gh("/repos/owner/nonexistent"))
 #' try(IssueTrackeR:::check_response(a))
+#' @dev
 check_response <- function(x) {
     if (!inherits(x, "try-error")) {
         return(invisible(NULL))
@@ -229,6 +257,8 @@ check_response <- function(x) {
         stop(auth_msg, call. = FALSE)
     } else if (api_rate_reached(msg)) {
         stop(api_rate_msg, call. = FALSE)
+    } else if (is_api_down(msg)) {
+        stop(api_down_msg, call. = FALSE)
     } else if (
         inherits(x = cond, what = "http_error_404") || is_not_found(msg)
     ) {

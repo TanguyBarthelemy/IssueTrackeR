@@ -27,9 +27,9 @@ A string with the list of repo of a user or an organisation.
 Returns a list of repos.
 }
 \examples{
-
-\dontrun{
+\dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
+\donttest{
 get_all_repos("rjdverse")
 }
-
+\dontshow{\}) # examplesIf}
 }

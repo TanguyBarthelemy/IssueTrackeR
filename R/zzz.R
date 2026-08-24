@@ -15,5 +15,5 @@
 
 #' @keywords internal
 .onLoad <- function(libname, pkgname) {
-    reset_options()
+    reset_options(verbose = FALSE)
 }

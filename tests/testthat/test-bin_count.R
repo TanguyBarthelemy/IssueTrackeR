@@ -2,8 +2,12 @@ testthat::test_that("bin_count correctly counts observations in date bins", {
     # Test 1: Basic binning with predefined dates
     dates <- as.Date(c("2023-01-01", "2023-02-01", "2023-03-01"))
     x <- as.Date(c(
-        "2023-01-15", "2023-01-20", "2023-02-10",
-        "2023-02-28", "2023-03-15", "2023-03-20"
+        "2023-01-15",
+        "2023-01-20",
+        "2023-02-10",
+        "2023-02-28",
+        "2023-03-15",
+        "2023-03-20"
     ))
     result <- bin_count(x, dates)
     expected <- c(2L, 2L, 2L)
@@ -35,10 +39,28 @@ testthat::test_that("bin_count works with different format", {
     obj_POSIXct <- as.POSIXct(obj_chr)
     obj_POSIXlt <- as.POSIXlt(obj_chr)
 
-    expect_identical(bin_count(obj_chr), rep(c(1L, 2L, 0L), c(1L, 1L, 39L)))
-    expect_identical(bin_count(obj_date), rep(c(1L, 2L, 0L), c(1L, 1L, 39L)))
-    expect_identical(bin_count(obj_POSIXct), rep(c(1L, 2L, 0L), c(1L, 1L, 39L)))
-    expect_identical(bin_count(obj_POSIXlt), rep(c(1L, 2L, 0L), c(1L, 1L, 39L)))
+    dates <- seq.Date(
+        from = as.Date("2023-03-01"),
+        length.out = 41L,
+        by = "month"
+    )
+
+    expect_identical(
+        bin_count(obj_chr, dates = dates),
+        rep(c(1L, 2L, 0L), c(1L, 1L, 39L))
+    )
+    expect_identical(
+        bin_count(obj_date, dates = dates),
+        rep(c(1L, 2L, 0L), c(1L, 1L, 39L))
+    )
+    expect_identical(
+        bin_count(obj_POSIXct, dates = dates),
+        rep(c(1L, 2L, 0L), c(1L, 1L, 39L))
+    )
+    expect_identical(
+        bin_count(obj_POSIXlt, dates = dates),
+        rep(c(1L, 2L, 0L), c(1L, 1L, 39L))
+    )
 })
 
 testthat::test_that("bin_count generates an error with invalid x", {

@@ -6,19 +6,21 @@
 \alias{generate_age_mat.default}
 \title{Generate Age Matrix of Open Issues}
 \usage{
-generate_age_mat(x, n = 3L)
+generate_age_mat(x, ...)
 
-\method{generate_age_mat}{IssuesTB}(x, n = 3L)
+\method{generate_age_mat}{IssuesTB}(x, n = 3L, ...)
 
-\method{generate_age_mat}{default}(x, n)
+\method{generate_age_mat}{default}(...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
+\item{\dots}{Currently not used.}
+
 \item{n}{Number of age categories to create. Default: \code{3}.}
 }
 \value{
-Matrix of open issue counts by age category.
+\code{ts} matrix of open issue counts by age category.
 }
 \description{
 Generate Age Matrix of Open Issues
@@ -33,3 +35,4 @@ issues <- get_issues(
 age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
 
 }
+\keyword{internal}

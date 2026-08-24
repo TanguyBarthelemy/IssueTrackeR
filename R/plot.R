@@ -27,20 +27,222 @@ get_dates_vec <- function(x) {
     )
     return(dates)
 }
-get_dates_vec <- function(x) {
-    min_date <- x |>
-        as.Date() |>
-        min() |>
-        format("%Y-%m") |>
-        paste0(... = _, "-01") |>
-        as.Date()
-    dates <- seq.Date(
-        from = min_date,
-        to = Sys.Date(),
-        by = "month"
-    )
-    return(dates)
+
+#' @title Get Issue Resolution Times
+#'
+#' @description
+#' Calculates the time taken to resolve issues in seconds.
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
+#'
+#' @returns Integer vector of resolution times in seconds.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "closed_issues.yaml"
+#' )
+#'
+#' IssueTrackeR:::get_resolution_times(all_issues)
+#' @dev
+#' @name get_resolution_times
+get_resolution_times <- function(x, ...) {
+    UseMethod("get_resolution_times", x)
 }
+
+#' @rdname get_resolution_times
+#' @export
+#' @exportS3Method get_resolution_times IssuesTB
+#' @method get_resolution_times IssuesTB
+get_resolution_times.IssuesTB <- function(x, verbose = TRUE, ...) {
+    if (all(is.na(x$closed_at))) {
+        if (verbose) {
+            warning("x contains no closed issues.", call. = FALSE)
+        }
+        return(invisible(NULL))
+    }
+    x_solved <- x[!is.na(x$closed_at), ]
+    differences <- difftime(
+        time1 = x_solved$closed_at,
+        time2 = x_solved$created_at,
+        units = "secs"
+    ) |>
+        as.integer()
+    return(differences)
+}
+
+#' @rdname get_resolution_times
+#' @export
+#' @exportS3Method get_resolution_times default
+#' @method get_resolution_times default
+get_resolution_times.default <- function(...) {
+    stop(
+        "The function requires a IssuesTB object!",
+        call. = FALSE
+    )
+}
+
+#' @title Plot Issue Resolution Time Distribution
+#'
+#' @description
+#' Creates a bar plot showing the distribution of issue resolution times
+#' in predefined time categories (< 1 day, 1-7 days, 7-30 days, 1 month-1 year,
+#' 1-3 years, > 3 years).
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#'
+#' @returns Invisibly returns `NULL`.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "closed_issues.yaml"
+#' )
+#'
+#' IssueTrackeR:::plot_resolution_bars(all_issues)
+#'
+#' @importFrom graphics box
+#' @importFrom graphics text
+#' @importFrom graphics barplot
+#'
+#' @dev
+plot_resolution_bars <- function(x, verbose = TRUE) {
+    resolution_time <- get_resolution_times(x, verbose = FALSE) / 86400.0
+    if (length(resolution_time) == 0L) {
+        if (verbose) {
+            warning("x contains no closed issues.", call. = FALSE)
+        }
+        return(invisible(NULL))
+    }
+    resolution_time <- resolution_time[!is.na(resolution_time)]
+
+    breaks <- c(0L, 1L, 7L, 30L, 365L, 3L * 365L, max(resolution_time) + 1L)
+    axis_labels <- c(
+        "< 1 day",
+        "1-7 days",
+        "7-30 days",
+        "1 month-1 year",
+        "1-3 years",
+        "> 3 years"
+    )
+    classes <- cut(
+        resolution_time,
+        breaks = breaks,
+        labels = axis_labels,
+        right = FALSE,
+        include.lowest = TRUE
+    )
+    counts <- table(classes)
+
+    bp <- graphics::barplot(
+        counts,
+        main = "Resolution delay",
+        ylab = "Number of issues",
+        xlab = NULL,
+        col = "grey75",
+        border = NA,
+        las = 1L,
+        ylim = c(0.0, max(counts) * 1.15)
+    )
+
+    graphics::text(
+        bp,
+        counts,
+        labels = counts,
+        pos = 3L,
+        cex = 0.9
+    )
+
+    graphics::box()
+
+    return(invisible(NULL))
+}
+
+#' @title Plot Empirical Cumulative Distribution of Resolution Times
+#'
+#' @description
+#' Creates an ECDF plot showing the cumulative distribution of issue
+#' resolution times on a log scale (1 hour, 1 day, 1 week, 1 month, 1 year,
+#' 3 years).
+#'
+#' @param x An object of class \code{IssuesTB}.
+#' @param verbose A logical value indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#'
+#' @returns Invisibly returns `NULL`.
+#'
+#' @examples
+#' all_issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = "closed_issues.yaml"
+#' )
+#'
+#' IssueTrackeR:::plot_resolution_ecdf(all_issues)
+#' @importFrom graphics axis
+#'
+#' @dev
+#'
+plot_resolution_ecdf <- function(x, verbose = TRUE) {
+    resolution_time <- (1L + get_resolution_times(x, verbose = FALSE)) / 3600.0
+    if (length(resolution_time) == 0L) {
+        if (verbose) {
+            warning("x contains no closed issues.", call. = FALSE)
+        }
+        return(invisible(NULL))
+    }
+    resolution_time <- resolution_time[!is.na(resolution_time)]
+
+    ticks <- c(
+        1L,
+        24L,
+        24L * 7L,
+        24L * 30L,
+        24L * 365L,
+        3L * 365L * 24L,
+        max(resolution_time) + 1L
+    )
+    axis_labels <- c(
+        "1 hour",
+        "1 day",
+        "1 week",
+        "1 month",
+        "1 year",
+        "3 years",
+        "> 3 years"
+    )
+
+    x_ecdf <- sort(resolution_time)
+    y_ecdf <- seq_along(x_ecdf) / length(x_ecdf)
+
+    cond <- ticks >= min(x_ecdf) & ticks <= max(x_ecdf)
+
+    plot(
+        x_ecdf,
+        y_ecdf,
+        type = "s",
+        log = "x",
+        xaxt = "n",
+        main = "Cumulative distribution",
+        xlab = "Time",
+        ylab = "Proportion of issues"
+    )
+
+    graphics::axis(
+        side = 1L,
+        at = ticks[cond],
+        labels = axis_labels[cond]
+    )
+    return(invisible(NULL))
+}
+
 
 #' @title Split dates in bins
 #'
@@ -52,7 +254,7 @@ get_dates_vec <- function(x) {
 #' @param dates A vector of `Date` objects defining the bin boundaries. If not
 #'   provided, the function uses `get_dates_vec(x)` to generate the dates.
 #'
-#' @return
+#' @returns
 #' A integer vector with the number of element in each date bin
 #'
 #' @examples
@@ -146,8 +348,9 @@ add_n_years <- function(x, n) {
 #' @param x An object of class \code{IssuesTB}.
 #' @param lag Numeric. Number of years to look back for "still open" issues.
 #'   Default is 0.
+#' @param \dots Currently not used.
 #'
-#' @returns Named numeric vector of still open issues counts per month.
+#' @returns `ts` object with still open issues counts per month.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -159,7 +362,7 @@ add_n_years <- function(x, n) {
 #' open_issues <- IssueTrackeR:::get_still_open(issues, lag = 1L)
 #'
 #' @dev
-get_still_open <- function(x, lag = 0L) {
+get_still_open <- function(x, ...) {
     UseMethod("get_still_open", x)
 }
 
@@ -167,7 +370,8 @@ get_still_open <- function(x, lag = 0L) {
 #' @export
 #' @exportS3Method get_still_open IssuesTB
 #' @method get_still_open IssuesTB
-get_still_open.IssuesTB <- function(x, lag = 0L) {
+#' @importFrom stats ts
+get_still_open.IssuesTB <- function(x, lag = 0L, ...) {
     dates <- get_dates_vec(x$created_at)
 
     closed <- as.Date(x$closed_at)
@@ -179,7 +383,9 @@ get_still_open.IssuesTB <- function(x, lag = 0L) {
     new_created <- bin_count(created[keep], dates)
     new_closed <- bin_count(closed[keep], dates)
     still_open <- cumsum(new_created) - cumsum(new_closed)
-    names(still_open) <- dates
+
+    start_date <- as.integer(format(min(dates), format = c("%Y", "%m")))
+    still_open <- stats::ts(still_open, start = start_date, frequency = 12L)
 
     return(still_open)
 }
@@ -188,7 +394,7 @@ get_still_open.IssuesTB <- function(x, lag = 0L) {
 #' @export
 #' @exportS3Method get_still_open default
 #' @method get_still_open default
-get_still_open.default <- function(x, lag) {
+get_still_open.default <- function(...) {
     stop(
         "The function requires a IssuesTB object!",
         call. = FALSE
@@ -199,8 +405,9 @@ get_still_open.default <- function(x, lag) {
 #'
 #' @param x An object of class \code{IssuesTB}.
 #' @param n Number of age categories to create. Default: `3`.
+#' @param \dots Currently not used.
 #'
-#' @returns Matrix of open issue counts by age category.
+#' @returns `ts` matrix of open issue counts by age category.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -211,7 +418,8 @@ get_still_open.default <- function(x, lag) {
 #' )
 #' age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
 #'
-generate_age_mat <- function(x, n = 3L) {
+#' @dev
+generate_age_mat <- function(x, ...) {
     UseMethod("generate_age_mat", x)
 }
 
@@ -219,7 +427,7 @@ generate_age_mat <- function(x, n = 3L) {
 #' @export
 #' @exportS3Method generate_age_mat IssuesTB
 #' @method generate_age_mat IssuesTB
-generate_age_mat.IssuesTB <- function(x, n = 3L) {
+generate_age_mat.IssuesTB <- function(x, n = 3L, ...) {
     age_mat <- lapply(
         X = seq_len(n + 1L) - 1L,
         FUN = get_still_open,
@@ -242,23 +450,20 @@ generate_age_mat.IssuesTB <- function(x, n = 3L) {
 #' @export
 #' @exportS3Method generate_age_mat default
 #' @method generate_age_mat default
-generate_age_mat.default <- function(x, n) {
+generate_age_mat.default <- function(...) {
     stop(
         "The function requires a IssuesTB object!",
         call. = FALSE
     )
 }
 
-#' @title Plot Historical Evolution of Open Issues by Age Categories
+#' @title Generate Matrix of Open Issues by Author
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param n Integer. Number of age (in years) categories to display. Default: 3.
+#' @param n Number of author to create. Default: `5`.
+#' @param \dots Currently not used.
 #'
-#' @returns Invisibly returns NULL.
-#'
-#' @details
-#' The function generates a plot directly. The plot shows a stacked area chart
-#' where each coloured area represents an age category of open issues over time.
+#' @returns `ts` matrix of open issue counts by author.
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -267,41 +472,118 @@ generate_age_mat.default <- function(x, n) {
 #'     dataset_dir = path,
 #'     dataset_name = "open_issues.yaml"
 #' )
+#' author_matrix <- IssueTrackeR:::generate_author_mat(issues, n = 2)
 #'
-#' # Plot issues with 3 age categories
-#' IssueTrackeR:::plot_historic(issues, n = 3)
+#' @dev
+#' @name generate_author_mat
+generate_author_mat <- function(x, ...) {
+    UseMethod("generate_author_mat", x)
+}
+
+#' @rdname generate_author_mat
+#' @export
+#' @exportS3Method generate_author_mat IssuesTB
+#' @method generate_author_mat IssuesTB
+generate_author_mat.IssuesTB <- function(x, n = 5L, ...) {
+    authors <- unique(x$creator)
+
+    if (n > length(authors)) {
+        n <- length(authors)
+    }
+    issues_by_author <- lapply(
+        X = authors,
+        FUN = \(author) subset(x, x$creator == author)
+    ) |>
+        lapply(FUN = count_issues) |>
+        as.numeric()
+
+    cond_author <- issues_by_author >=
+        sort(issues_by_author, decreasing = TRUE)[n]
+    sub_authors <- authors[which(cond_author)]
+
+    authors_mat <- lapply(
+        X = sub_authors,
+        FUN = \(author) subset(x, x$creator == author)
+    ) |>
+        lapply(
+            FUN = get_still_open
+        ) |>
+        do.call(what = cbind)
+
+    if (n < length(authors)) {
+        authors_mat <- cbind(
+            authors_mat,
+            get_still_open(subset(x, !x$creator %in% sub_authors))
+        )
+        colnames(authors_mat) <- c(sub_authors, "Others")
+    } else {
+        colnames(authors_mat) <- sub_authors
+    }
+
+    authors_mat[is.na(authors_mat)] <- 0L
+    return(authors_mat)
+}
+
+#' @rdname generate_author_mat
+#' @export
+#' @exportS3Method generate_author_mat default
+#' @method generate_author_mat default
+generate_author_mat.default <- function(...) {
+    stop(
+        "The function requires a IssuesTB object!",
+        call. = FALSE
+    )
+}
+
+#' @title Plot Evolution of Open Issues by Categories
 #'
-#' # Plot issues with 2 age categories
-#' IssueTrackeR:::plot_historic(issues, n = 2)
+#' @param categorised_mat `mts` object with number of issues by categories.
+#'
+#' @returns Invisibly returns NULL.
+#'
+#' @details
+#' The function generates a plot directly. The plot shows a stacked area chart
+#' where each coloured area represents a category of open issues over time.
+#'
+#' @examples
+#' path <- system.file("data_issues", package = "IssueTrackeR")
+#' issues <- get_issues(
+#'     source = "local",
+#'     dataset_dir = path,
+#'     dataset_name = "open_issues.yaml"
+#' )
+#' age_mat <- IssueTrackeR:::generate_age_mat(issues, 3L)
+#'
+#' IssueTrackeR:::plot_barplot(age_mat)
 #'
 #' @importFrom graphics polygon legend
 #' @importFrom grDevices hcl.colors
+#' @importFrom zoo as.Date
+#' @importFrom stats time
 #'
 #' @dev
-plot_historic <- function(x, n = 3L) {
-    dates <- get_dates_vec(x$created_at)
-    age_mat <- generate_age_mat(x, n)
-
+plot_barplot <- function(categorised_mat, by = "Age") {
+    dates <- zoo::as.Date(stats::time(categorised_mat))
     cols <- grDevices::hcl.colors(
-        ncol(age_mat),
+        ncol(categorised_mat),
         palette = "Viridis",
         rev = TRUE
     )
 
     plot(
         range(dates),
-        c(0L, max(rowSums(age_mat))),
+        c(0L, max(rowSums(categorised_mat))),
         type = "n",
         xlab = "Date",
         ylab = "Open issues",
-        main = "Open Issues by Age"
+        main = paste("Open Issues by", by)
     )
 
-    cum <- rep(0L, nrow(age_mat))
+    cum <- rep(0L, nrow(categorised_mat))
 
-    for (j in seq_len(ncol(age_mat))) {
+    for (j in seq_len(ncol(categorised_mat))) {
         y1 <- cum
-        y2 <- cum + age_mat[, j]
+        y2 <- cum + categorised_mat[, j]
 
         graphics::polygon(
             c(dates, rev(dates)),
@@ -315,7 +597,7 @@ plot_historic <- function(x, n = 3L) {
 
     graphics::legend(
         "topleft",
-        legend = colnames(age_mat),
+        legend = colnames(categorised_mat),
         fill = cols,
         bty = "n"
     )
@@ -346,6 +628,7 @@ plot_historic <- function(x, n = 3L) {
 #'
 #' IssueTrackeR:::plot_created_closed(issues)
 #' @dev
+#'
 #' @importFrom graphics abline
 #' @importFrom graphics rect
 #' @importFrom graphics lines
@@ -433,7 +716,7 @@ plot_created_closed <- function(x) {
 #'   The default is \code{"historic"}.
 #' @param n Integer specifying the number of age classes to display when
 #'   \code{type = "historic"}.
-#' @param \dots Currently ignored.
+#' @param \dots Currently not used.
 #'
 #' @details
 #' When \code{type = "historic"}, a stacked area chart is produced showing
@@ -444,6 +727,9 @@ plot_created_closed <- function(x) {
 #' \code{1-2y}, ..., \code{(n-1)-ny}) and the last class groups all issues
 #' older than \code{n} years.
 #'
+#' When \code{type = "author"}, the same graph as \code{type = "historic"} but
+#' this time with the number of open issues by author over time.
+#'
 #' When \code{type = "created-closed"}, the total number of open issues is
 #' displayed together with the monthly numbers of newly created and newly
 #' closed issues. This visualization helps assess whether issue creation
@@ -451,6 +737,12 @@ plot_created_closed <- function(x) {
 #'
 #' All statistics are aggregated monthly, from the month of the first issue
 #' creation to the current date.
+#'
+#' When \code{type = "resolution-time"}, the resolution times are computed and
+#' displayed in two forms:
+#' - bar plot with categories from time
+#' - ECDF to show the cumulative distribution of issues resolution times on a
+#'   log scale
 #'
 #' @returns
 #' Invisibly returns \code{x}.
@@ -470,22 +762,43 @@ plot_created_closed <- function(x) {
 #' )
 #'
 #' plot(all_issues, type = "historic")
+#' plot(all_issues, type = "author")
 #' plot(all_issues, type = "created-closed")
+#' plot(all_issues, type = "resolution-time")
 #'
-#' @rdname plot
+#' @name plot-issues
+#'
 #' @method plot IssuesTB
+#' @exportS3Method base::plot
 #' @export
+#'
+#' @importFrom withr with_par
+#'
 plot.IssuesTB <- function(
     x,
-    type = c("historic", "created-closed"),
+    type = c("historic", "author", "created-closed", "resolution-time"),
     n = 3L,
     ...
 ) {
     type <- match.arg(type)
-    if (type == "historic") {
-        plot_historic(x, n)
-    } else if (type == "created-closed") {
-        plot_created_closed(x)
-    }
+    switch(
+        type,
+        historic = {
+            age_mat <- generate_age_mat(x, n)
+            plot_barplot(age_mat, by = "age")
+        },
+        author = {
+            age_mat <- generate_author_mat(x, n)
+            plot_barplot(age_mat, by = "author")
+        },
+        "created-closed" = plot_created_closed(x),
+        "resolution-time" = withr::with_par(
+            new = list(mfrow = c(1L, 2L)),
+            code = {
+                plot_resolution_bars(x)
+                plot_resolution_ecdf(x)
+            }
+        )
+    )
     return(invisible(x))
 }
