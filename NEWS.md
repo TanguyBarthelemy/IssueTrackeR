@@ -21,7 +21,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * `get_still_open()` and `generate_age_mat()` return `ts` and `mts` objects  [#41](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/41)
 * `author_last_comment()` works with a single issue.
 * `closed_at` and `created_at` are now timestamps and no more dates.
-* `summary()` has correct links and colors for `LabelsTB` objects.
+* `summary()` has correct links and colours for `LabelsTB` objects.
 
 
 ## [1.4.1] - 2026-07-31
