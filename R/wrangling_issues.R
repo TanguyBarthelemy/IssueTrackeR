@@ -115,7 +115,6 @@ new_issue.default <- function(
     state_reason = NA_character_,
     ...
 ) {
-
     checkmate::assert_character(title)
     checkmate::assert_character(body)
     checkmate::assert_integer(number)

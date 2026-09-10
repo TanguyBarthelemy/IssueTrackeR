@@ -491,7 +491,6 @@ generate_mat <- function(x, ...) {
 #' @exportS3Method generate_mat IssuesTB
 #' @method generate_mat IssuesTB
 generate_mat.IssuesTB <- function(x, by = "creator", n = 5L, ...) {
-
     if (by == "closed_by") {
         x <- subset(x, !is.na(x[[by]]))
     } else {
@@ -813,7 +812,10 @@ plot.IssuesTB <- function(
         "area-chart" = {
             checkmate::assert_character(by, len = 1L)
             age_mat <- generate_mat(x, by = by, n)
-            plot_area_chart(age_mat, title = paste("Number of issues opened by", by))
+            plot_area_chart(
+                age_mat,
+                title = paste("Number of issues opened by", by)
+            )
         },
         "created-closed" = plot_created_closed(x),
         "resolution-time" = withr::with_par(
