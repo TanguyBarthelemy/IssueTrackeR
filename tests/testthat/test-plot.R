@@ -12,7 +12,7 @@ test_that("plot return list of issues", {
         expected = my_issues
     )
     testthat::expect_identical(
-        object = plot(my_issues, type = "author"),
+        object = plot(my_issues, type = "area-chart", by = "creator"),
         expected = my_issues
     )
 })
