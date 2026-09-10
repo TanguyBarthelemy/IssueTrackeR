@@ -16,7 +16,7 @@
 <url><loc>/reference/extract_nth.html</loc></url>
 <url><loc>/reference/format_timestamp.html</loc></url>
 <url><loc>/reference/generate_age_mat.html</loc></url>
-<url><loc>/reference/generate_author_mat.html</loc></url>
+<url><loc>/reference/generate_mat.html</loc></url>
 <url><loc>/reference/get.html</loc></url>
 <url><loc>/reference/get_all_repos.html</loc></url>
 <url><loc>/reference/get_dates_vec.html</loc></url>
@@ -29,7 +29,7 @@
 <url><loc>/reference/new_issues.html</loc></url>
 <url><loc>/reference/null_to_default.html</loc></url>
 <url><loc>/reference/plot-issues.html</loc></url>
-<url><loc>/reference/plot_barplot.html</loc></url>
+<url><loc>/reference/plot_area_chart.html</loc></url>
 <url><loc>/reference/plot_created_closed.html</loc></url>
 <url><loc>/reference/plot_resolution_bars.html</loc></url>
 <url><loc>/reference/plot_resolution_ecdf.html</loc></url>
