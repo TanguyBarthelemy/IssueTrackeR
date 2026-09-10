@@ -7,7 +7,8 @@
 \usage{
 \method{plot}{IssuesTB}(
   x,
-  type = c("historic", "author", "created-closed", "resolution-time"),
+  type = c("historic", "area-chart", "created-closed", "resolution-time"),
+  by = NULL,
   n = 3L,
   ...
 )
@@ -18,6 +19,8 @@
 \item{type}{Character string indicating which plot to produce.
 Accepted values are \code{"historic"} and \code{"created-closed"}.
 The default is \code{"historic"}.}
+
+\item{by}{Character. The category}
 
 \item{n}{Integer specifying the number of age classes to display when
 \code{type = "historic"}.}
@@ -46,8 +49,9 @@ The first classes correspond to one-year intervals (\code{0-1y},
 \code{1-2y}, ..., \code{(n-1)-ny}) and the last class groups all issues
 older than \code{n} years.
 
-When \code{type = "author"}, the same graph as \code{type = "historic"} but
-this time with the number of open issues by author over time.
+When \code{type = "area-chart"}, the same graph as \code{type = "historic"}
+but this time with the number of issues by categories over time. The
+argument \code{by} is mandatory to specify which category to display.
 
 When \code{type = "created-closed"}, the total number of open issues is
 displayed together with the monthly numbers of newly created and newly
@@ -80,8 +84,11 @@ all_issues <- rbind(
 )
 
 plot(all_issues, type = "historic")
-plot(all_issues, type = "author")
 plot(all_issues, type = "created-closed")
 plot(all_issues, type = "resolution-time")
+plot(all_issues, type = "area-chart", by = "closed_by")
+plot(all_issues, type = "area-chart", by = "milestone", n = 5)
+plot(all_issues, type = "area-chart", by = "state_reason", n = 5)
+plot(all_issues, type = "area-chart", by = "repo", n = 5)
 
 }

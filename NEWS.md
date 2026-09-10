@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## Changed
+
+* `plot` now takes a `by` argument to display area chart by any variable in the list of issues. [#51](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/51)
+
+
 ## [1.5.0] - 2026-08-24
 
 ### Added

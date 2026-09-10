@@ -457,13 +457,19 @@ generate_age_mat.default <- function(...) {
     )
 }
 
-#' @title Generate Matrix of Open Issues by Author
+#' @title Generate Matrix of Open Issues by Categories
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param n Number of author to create. Default: `5`.
+#' @param by Character. The category
+#' @param n Number of item to create. Default: `5`.
 #' @param \dots Currently not used.
 #'
-#' @returns `ts` matrix of open issue counts by author.
+#' @returns `ts` matrix of open issue counts by categories.
+#'
+#' @details
+#' The categories are variables of the list of issues. For example, issues
+#' creators, issue closer, milestones...
+#'
 #'
 #' @examples
 #' path <- system.file("data_issues", package = "IssueTrackeR")
@@ -472,63 +478,74 @@ generate_age_mat.default <- function(...) {
 #'     dataset_dir = path,
 #'     dataset_name = "open_issues.yaml"
 #' )
-#' author_matrix <- IssueTrackeR:::generate_author_mat(issues, n = 2)
+#' a_matrix <- IssueTrackeR:::generate_mat(issues, by = "creator", n = 2)
 #'
 #' @dev
-#' @name generate_author_mat
-generate_author_mat <- function(x, ...) {
-    UseMethod("generate_author_mat", x)
+#' @name generate_mat
+generate_mat <- function(x, ...) {
+    UseMethod("generate_mat", x)
 }
 
-#' @rdname generate_author_mat
+#' @rdname generate_mat
 #' @export
-#' @exportS3Method generate_author_mat IssuesTB
-#' @method generate_author_mat IssuesTB
-generate_author_mat.IssuesTB <- function(x, n = 5L, ...) {
-    authors <- unique(x$creator)
+#' @exportS3Method generate_mat IssuesTB
+#' @method generate_mat IssuesTB
+generate_mat.IssuesTB <- function(x, by = "creator", n = 5L, ...) {
 
-    if (n > length(authors)) {
-        n <- length(authors)
+    if (by == "closed_by") {
+        x <- subset(x, !is.na(x[[by]]))
+    } else {
+        x[is.na(x[[by]]), by] <- "Missing value"
     }
-    issues_by_author <- lapply(
-        X = authors,
-        FUN = \(author) subset(x, x$creator == author)
+    values <- unique(x[[by]])
+
+    if (n > length(values)) {
+        n <- length(values)
+    }
+    issues_by_category <- lapply(
+        X = values,
+        FUN = \(category) subset(x, x[[by]] == category)
     ) |>
         lapply(FUN = count_issues) |>
         as.numeric()
 
-    cond_author <- issues_by_author >=
-        sort(issues_by_author, decreasing = TRUE)[n]
-    sub_authors <- authors[which(cond_author)]
+    cond_category <- issues_by_category >=
+        sort(issues_by_category, decreasing = TRUE)[n]
+    sub_values <- values[which(cond_category)]
 
-    authors_mat <- lapply(
-        X = sub_authors,
-        FUN = \(author) subset(x, x$creator == author)
+    values_mat <- lapply(
+        X = sub_values,
+        FUN = \(category) subset(x, x[[by]] == category)
     ) |>
         lapply(
             FUN = get_still_open
         ) |>
         do.call(what = cbind)
 
-    if (n < length(authors)) {
-        authors_mat <- cbind(
-            authors_mat,
-            get_still_open(subset(x, !x$creator %in% sub_authors))
-        )
-        colnames(authors_mat) <- c(sub_authors, "Others")
-    } else {
-        colnames(authors_mat) <- sub_authors
+    if (is.null(dim(values_mat))) {
+        attr(values_mat, "dim") <- c(length(values_mat), 1L)
+        attr(values_mat, "class") <- c("mts", "ts", "matrix", "array")
     }
 
-    authors_mat[is.na(authors_mat)] <- 0L
-    return(authors_mat)
+    if (n < length(values)) {
+        values_mat <- cbind(
+            values_mat,
+            get_still_open(subset(x, !x[[by]] %in% sub_values))
+        )
+        colnames(values_mat) <- c(sub_values, "Others")
+    } else {
+        colnames(values_mat) <- sub_values
+    }
+
+    values_mat[is.na(values_mat)] <- 0L
+    return(values_mat)
 }
 
-#' @rdname generate_author_mat
+#' @rdname generate_mat
 #' @export
-#' @exportS3Method generate_author_mat default
-#' @method generate_author_mat default
-generate_author_mat.default <- function(...) {
+#' @exportS3Method generate_mat default
+#' @method generate_mat default
+generate_mat.default <- function(...) {
     stop(
         "The function requires a IssuesTB object!",
         call. = FALSE
@@ -554,7 +571,7 @@ generate_author_mat.default <- function(...) {
 #' )
 #' age_mat <- IssueTrackeR:::generate_age_mat(issues, 3L)
 #'
-#' IssueTrackeR:::plot_barplot(age_mat)
+#' IssueTrackeR:::plot_area_chart(age_mat)
 #'
 #' @importFrom graphics polygon legend
 #' @importFrom grDevices hcl.colors
@@ -562,7 +579,7 @@ generate_author_mat.default <- function(...) {
 #' @importFrom stats time
 #'
 #' @dev
-plot_barplot <- function(categorised_mat, by = "Age") {
+plot_area_chart <- function(categorised_mat, title = "Number of issues") {
     dates <- zoo::as.Date(stats::time(categorised_mat))
     cols <- grDevices::hcl.colors(
         ncol(categorised_mat),
@@ -576,7 +593,7 @@ plot_barplot <- function(categorised_mat, by = "Age") {
         type = "n",
         xlab = "Date",
         ylab = "Open issues",
-        main = paste("Open Issues by", by)
+        main = title
     )
 
     cum <- rep(0L, nrow(categorised_mat))
@@ -714,6 +731,7 @@ plot_created_closed <- function(x) {
 #' @param type Character string indicating which plot to produce.
 #'   Accepted values are \code{"historic"} and \code{"created-closed"}.
 #'   The default is \code{"historic"}.
+#' @param by Character. The category
 #' @param n Integer specifying the number of age classes to display when
 #'   \code{type = "historic"}.
 #' @param \dots Currently not used.
@@ -727,8 +745,9 @@ plot_created_closed <- function(x) {
 #' \code{1-2y}, ..., \code{(n-1)-ny}) and the last class groups all issues
 #' older than \code{n} years.
 #'
-#' When \code{type = "author"}, the same graph as \code{type = "historic"} but
-#' this time with the number of open issues by author over time.
+#' When \code{type = "area-chart"}, the same graph as \code{type = "historic"}
+#' but this time with the number of issues by categories over time. The
+#' argument `by` is mandatory to specify which category to display.
 #'
 #' When \code{type = "created-closed"}, the total number of open issues is
 #' displayed together with the monthly numbers of newly created and newly
@@ -762,9 +781,12 @@ plot_created_closed <- function(x) {
 #' )
 #'
 #' plot(all_issues, type = "historic")
-#' plot(all_issues, type = "author")
 #' plot(all_issues, type = "created-closed")
 #' plot(all_issues, type = "resolution-time")
+#' plot(all_issues, type = "area-chart", by = "closed_by")
+#' plot(all_issues, type = "area-chart", by = "milestone", n = 5)
+#' plot(all_issues, type = "area-chart", by = "state_reason", n = 5)
+#' plot(all_issues, type = "area-chart", by = "repo", n = 5)
 #'
 #' @name plot-issues
 #'
@@ -776,7 +798,8 @@ plot_created_closed <- function(x) {
 #'
 plot.IssuesTB <- function(
     x,
-    type = c("historic", "author", "created-closed", "resolution-time"),
+    type = c("historic", "area-chart", "created-closed", "resolution-time"),
+    by = NULL,
     n = 3L,
     ...
 ) {
@@ -785,11 +808,12 @@ plot.IssuesTB <- function(
         type,
         historic = {
             age_mat <- generate_age_mat(x, n)
-            plot_barplot(age_mat, by = "age")
+            plot_area_chart(age_mat, title = "Number of issues opened by age")
         },
-        author = {
-            age_mat <- generate_author_mat(x, n)
-            plot_barplot(age_mat, by = "author")
+        "area-chart" = {
+            checkmate::assert_character(by, len = 1L)
+            age_mat <- generate_mat(x, by = by, n)
+            plot_area_chart(age_mat, title = paste("Number of issues opened by", by))
         },
         "created-closed" = plot_created_closed(x),
         "resolution-time" = withr::with_par(
