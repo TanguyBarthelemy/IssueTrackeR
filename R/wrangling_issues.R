@@ -282,6 +282,14 @@ new_issues.list <- function(x, ...) {
 }
 
 #' @rdname new_issues
+#' @exportS3Method new_issues NULL
+#' @method new_issues NULL
+#' @export
+new_issues.NULL <- function(x, ...) {
+    return(new_issues.default(...))
+}
+
+#' @rdname new_issues
 #' @exportS3Method new_issues default
 #' @method new_issues default
 #' @export

@@ -60,7 +60,7 @@ format_timestamp <- function(x) {
 #' @returns
 #' - `format_labels`: A data frame with columns: `name`, `description`, `color`.
 #' - `format_comments`: A list of data frames with columns: `text`, `author`.
-#' - `format_issues`: A list of IssuesTB objects with complete issue data.
+#' - `format_gh_issues`: A list of IssuesTB objects with complete issue data.
 #' - `format_milestone`: A data frame with milestone information.
 #' - `format_milestones`: A list representing milestones with `title`,
 #'   `description` and `due_on` date)
@@ -118,7 +118,7 @@ format_timestamp <- function(x) {
 #' )
 #' formatted_comments <- IssueTrackeR:::format_comments(raw_comments, urls)
 #'
-#' formatted_issues <- IssueTrackeR:::format_issues(raw_issues = raw_issues,
+#' formatted_issues <- IssueTrackeR:::format_gh_issues(raw_issues = raw_issues,
 #'                             raw_comments = raw_comments,
 #'                             verbose = FALSE)
 #' }

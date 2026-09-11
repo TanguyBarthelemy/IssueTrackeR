@@ -178,7 +178,7 @@ get_issues <- function(
         })
         check_response(raw_comments)
 
-        issues <- format_issues(
+        issues <- format_gh_issues(
             raw_issues = raw_issues,
             raw_comments = raw_comments,
             verbose = verbose
@@ -295,7 +295,7 @@ format_comments <- function(
 
 #' @rdname format
 #' @noRd
-format_issues <- function(
+format_gh_issues <- function(
     raw_issues,
     raw_comments,
     verbose = TRUE
