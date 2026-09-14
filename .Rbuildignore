@@ -46,6 +46,9 @@ heylogs.properties
 ^data-raw$
 ^man/check_response\.Rd$
 ^man/format_timestamp\.Rd$
+^man/get_issues_github\.Rd$
+^man/get_issues_gitlab\.Rd$
+^man/get_issues_local\.Rd$
 ^man/get_dates_vec\.Rd$
 ^man/get_resolution_times\.Rd$
 ^man/plot_resolution_bars\.Rd$
@@ -57,6 +60,11 @@ heylogs.properties
 ^man/generate_mat\.Rd$
 ^man/plot_area_chart\.Rd$
 ^man/plot_created_closed\.Rd$
+^man/is_empty\.Rd$
+^man/empty_selector\.Rd$
+^man/init_selector_github\.Rd$
+^man/init_selector_gitlab\.Rd$
+^man/init_selector_local\.Rd$
 ^man/isDark\.Rd$
 ^man/null_to_default\.Rd$
 ^man/dot-write\.Rd$

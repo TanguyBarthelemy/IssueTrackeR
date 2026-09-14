@@ -22,10 +22,10 @@ saved. By default, the system's temporary directory is used (\code{tempdir()}).}
 \item{dataset_name}{The name of the output file (without extension).
 By default, the name is \code{"object.yaml"}.}
 
-\item{overwrite}{Logical indicating whether to overwrite the file if it
+\item{overwrite}{A boolean indicating whether to overwrite the file if it
 already exists. Defaults to \code{TRUE}.}
 
-\item{verbose}{A logical value indicating whether to print additional
+\item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
 
 \item{\dots}{Currently not used.}

@@ -182,7 +182,7 @@ get_nbr_comments.IssuesTB <- function(x) {
 #' Retrieve the name of the last commentator
 #'
 #' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'
@@ -244,7 +244,7 @@ author_last_comment.IssuesTB <- function(x, verbose = TRUE, ...) {
 #' @param x An object of class \code{IssuesTB}.
 #' @param n Integer. Position of the element to extract. 1 is for the first
 #'   element.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'
@@ -295,9 +295,38 @@ extract_nth.IssuesTB <- function(x, n, verbose = TRUE, ...) {
 }
 
 #' @rdname extract_nth
+#' @exportS3Method extract_nth SelectorTB
+#' @method extract_nth SelectorTB
+#' @export
+extract_nth.SelectorTB <- function(x, n, verbose = TRUE, ...) {
+    if (length(x) == 0L) {
+        if (verbose) {
+            message("The list of selector is empty. No selector to extract.")
+        }
+        output <- empty_selector()
+    } else if (n > length(x)) {
+        if (verbose) {
+            warning(
+                "n > number of issues. The last issue will be extracted.",
+                call. = FALSE
+            )
+        }
+        output <- x[length(x)]
+        class(output) <- "SelectorTB"
+    } else {
+        if (verbose) {
+            message("The ", n, "th selector will be extracted.")
+        }
+        output <- x[n]
+        class(output) <- "SelectorTB"
+    }
+    return(output)
+}
+
+#' @rdname extract_nth
 #' @exportS3Method extract_nth default
 #' @method extract_nth default
 #' @export
 extract_nth.default <- function(...) {
-    stop("`x` should be a `IssuesTB` object.", call. = FALSE)
+    stop("`x` should be a `IssuesTB` or a `SelectorTB` object.", call. = FALSE)
 }

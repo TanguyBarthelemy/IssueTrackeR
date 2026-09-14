@@ -705,7 +705,7 @@ unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
 #' Generic function to count the number of issues in a list of issues.
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'

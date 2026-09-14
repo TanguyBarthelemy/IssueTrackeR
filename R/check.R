@@ -33,7 +33,7 @@
 #' @param owner Character string containing the owner name
 #' @param repo Character string containing the repository name
 #'
-#' @returns For detection functions: Logical TRUE if the error condition is met.
+#' @returns For detection functions: `TRUE` if the error condition is met.
 #' For message functions: Character vector with the error message.
 #'
 #' @examples

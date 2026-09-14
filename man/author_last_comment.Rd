@@ -17,7 +17,7 @@ author_last_comment(x, ...)
 
 \item{\dots}{Currently not used.}
 
-\item{verbose}{A logical value indicating whether to print additional
+\item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
 }
 \value{

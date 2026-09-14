@@ -13,7 +13,7 @@ by \code{grDevices::col2rgb()}. It can be a character string (e.g.,
 RGB values.}
 }
 \value{
-A logical value:
+A boolean:
 \itemize{
 \item \code{TRUE} if the colour is dark.
 \item \code{FALSE} if the colour is light.

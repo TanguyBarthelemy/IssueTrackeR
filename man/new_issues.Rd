@@ -6,6 +6,7 @@
 \alias{new_issues.IssuesTB}
 \alias{new_issues.data.frame}
 \alias{new_issues.list}
+\alias{new_issues.NULL}
 \alias{new_issues.default}
 \title{Create a new \code{IssuesTB} object}
 \usage{
@@ -18,6 +19,8 @@ new_issues(x = NULL, ...)
 \method{new_issues}{data.frame}(x, ...)
 
 \method{new_issues}{list}(x, ...)
+
+\method{new_issues}{`NULL`}(x, ...)
 
 \method{new_issues}{default}(
   x,

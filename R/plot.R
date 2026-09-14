@@ -34,7 +34,7 @@ get_dates_vec <- function(x) {
 #' Calculates the time taken to resolve issues in seconds.
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'
@@ -94,7 +94,7 @@ get_resolution_times.default <- function(...) {
 #' 1-3 years, > 3 years).
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #'
 #' @returns Invisibly returns `NULL`.
@@ -173,7 +173,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
 #' 3 years).
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #'
 #' @returns Invisibly returns `NULL`.

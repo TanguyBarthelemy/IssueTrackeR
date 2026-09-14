@@ -28,7 +28,7 @@ c(open = "open_issues.yaml",
   milestones = "list_milestones.yaml")
 }.}
 
-\item{verbose}{A logical value indicating whether to print additional
+\item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
 
 \item{\dots}{Additional arguments for connecting to the GitHub repository:

@@ -9,9 +9,9 @@
 #'   saved. By default, the system's temporary directory is used (`tempdir()`).
 #' @param dataset_name The name of the output file (without extension).
 #'   By default, the name is `"object.yaml"`.
-#' @param overwrite Logical indicating whether to overwrite the file if it
+#' @param overwrite A boolean indicating whether to overwrite the file if it
 #'   already exists. Defaults to `TRUE`.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'
