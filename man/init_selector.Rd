@@ -41,5 +41,11 @@ gh_sel <- init_selector(source = "GitHub", owner = "TanguyBarthelemy", repo = "I
 gl_sel <- init_selector(source = "GitLab", project_id = c(4578, 2384))
 
 # Local selector for a YAML file
-local_sel <- init_selector(source = "local", file = "path/to/issues.yaml")
+local_sel <- init_selector(
+    source = "local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
+)
 }

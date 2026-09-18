@@ -22,7 +22,7 @@ Reads issues from a local YAML file and formats them into an IssuesTB object.
 my_issues <- IssueTrackeR:::get_issues_local(
     file = system.file(
         "data_issues",
-        "open_issues.yaml",
+        "list_issues.yaml",
         package = "IssueTrackeR"
     )
 )

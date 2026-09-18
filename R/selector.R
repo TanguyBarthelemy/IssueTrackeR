@@ -66,7 +66,13 @@ empty_selector <- function() {
 #' gl_sel <- init_selector(source = "GitLab", project_id = c(4578, 2384))
 #'
 #' # Local selector for a YAML file
-#' local_sel <- init_selector(source = "local", file = "path/to/issues.yaml")
+#' local_sel <- init_selector(
+#'     source = "local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
+#' )
 #' @export
 #' @importFrom checkmate assert_character
 init_selector <- function(source, ...) {
@@ -194,18 +200,11 @@ init_selector_gitlab <- function(project_id = NULL, ...) {
 #' local_sel <- IssueTrackeR:::init_selector_local(
 #'     file = system.file(
 #'         "data_issues",
-#'         "open_issues.yaml",
+#'         "list_issues.yaml",
 #'         package = "IssueTrackeR"
 #'     )
 #' )
 #'
-#' # Select multiple YAML files
-#' multi_file_sel <- IssueTrackeR:::init_selector_local(
-#'     file = c(
-#'         "path/to/open_issues.yaml",
-#'         "path/to/closed_issues.yaml"
-#'     )
-#' )
 #' @dev
 init_selector_local <- function(file) {
     file <- normalizePath(file, mustWork = TRUE)

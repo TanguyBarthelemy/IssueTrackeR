@@ -39,8 +39,15 @@ Filters out pull requests and formats the results.
 \examples{
 \dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
 \donttest{
-my_issues <- IssueTrackeR:::get_issues_github(owner = "rjdverse", repo = "rjd3toolkit")
-my_issues <- IssueTrackeR:::get_issues_github(source = "jdemetra", state = "all")
+my_issues1 <- IssueTrackeR:::get_issues_github(
+    owner = "rjdverse",
+    repo = "rjd3toolkit"
+)
+my_issues2 <- IssueTrackeR:::get_issues_github(
+    owner = "jdemetra",
+    repo = "jwsacruncher",
+    state = "all"
+)
 }
 \dontshow{\}) # examplesIf}
 }

@@ -52,7 +52,7 @@ Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
 \item{dataset_name}{A character string specifying the name of the datasets
 which will be written (only taken into account if \code{source} is set to
 \code{"local"}).
-Defaults to \code{"open_issues.yaml"}.}
+Defaults to \code{"list_issues.yaml"}.}
 
 \item{overwrite}{Boolean. If the dataset file already exists,
 should it be overwrite? Default is TRUE.}
@@ -82,7 +82,7 @@ path <- system.file("data_issues", package = "IssueTrackeR")
 issues <- get_issues(
     source = "local",
     dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+    dataset_name = "list_issues.yaml"
 )
 milestones <- get_milestones(
     source = "local",

@@ -57,11 +57,14 @@ prepare_label_display <- function(x, html_url) {
 #' @returns invisibly (with \code{invisible()}) \code{NULL}.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' all_issues <- get_issues(selector = local_issues_selector)
 #'
 #' # Summarise one issue
 #' summary(all_issues[1, ])

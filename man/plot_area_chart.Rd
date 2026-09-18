@@ -20,13 +20,15 @@ The function generates a plot directly. The plot shows a stacked area chart
 where each coloured area represents a category of open issues over time.
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
-age_mat <- IssueTrackeR:::generate_age_mat(issues, 3L)
+all_issues <- get_issues(selector = local_issues_selector)
+age_mat <- IssueTrackeR:::generate_age_mat(all_issues, 3L)
 
 IssueTrackeR:::plot_area_chart(age_mat)
 

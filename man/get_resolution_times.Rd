@@ -27,11 +27,14 @@ Integer vector of resolution times in seconds.
 Calculates the time taken to resolve issues in seconds.
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
-    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "closed_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
+all_issues <- get_issues(selector = local_issues_selector)
 
 IssueTrackeR:::get_resolution_times(all_issues)
 }

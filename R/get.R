@@ -13,7 +13,7 @@
 #' @param dataset_name A character string specifying the name of the datasets
 #' which will be written (only taken into account if \code{source} is set to
 #' \code{"local"}).
-#' Defaults to \code{"open_issues.yaml"}.
+#' Defaults to \code{"list_issues.yaml"}.
 #' @param repo A character string specifying the GitHub repository name (only
 #' taken into account if \code{source} is set to \code{"online"}).
 #' Defaults to the package option \code{IssueTrackeR.repo}.
@@ -55,38 +55,52 @@
 #' @name get
 #'
 #' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
+#'
 #' \donttest{
 #' # From online
 #'
-#' issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
-#' issues <- get_issues(source = "online")
+#' online_selector <- init_selector(
+#'     source = "GitHub",
+#'     owner = "TanguyBarthelemy",
+#'     repo = "IssueTrackeR"
+#' )
+#' issues <- get_issues(selector = online_selector)
 #' print(issues)
 #'
-#' labels <- get_labels(source = "online")
+#' labels <- get_labels(selector = online_selector)
 #' print(labels)
 #'
-#' milestones <- get_milestones(source = "online")
+#' milestones <- get_milestones(selector = online_selector)
 #' print(milestones)
+#' }
 #'
 #' # From local
 #'
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' local_issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' milestones <- get_milestones(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_milestones.yaml"
+#' local_labels_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_labels.yaml"
+#'     )
 #' )
-#' labels <- get_labels(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_labels.yaml"
+#' local_milestones_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_milestones.yaml"
+#'     )
 #' )
-#' }
+#'
+#' issues <- get_issues(selector = local_issues_selector)
+#' labels <- get_labels(selector = local_labels_selector)
+#' milestones <- get_milestones(selector = local_milestones_selector)
 #'
 get_issues <- function(selector, verbose = TRUE, ...) {
     if (is_empty(selector)) {
@@ -142,8 +156,15 @@ get_issues <- function(selector, verbose = TRUE, ...) {
 #'
 #' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
 #' \donttest{
-#' my_issues <- IssueTrackeR:::get_issues_github(owner = "rjdverse", repo = "rjd3toolkit")
-#' my_issues <- IssueTrackeR:::get_issues_github(source = "jdemetra", state = "all")
+#' my_issues1 <- IssueTrackeR:::get_issues_github(
+#'     owner = "rjdverse",
+#'     repo = "rjd3toolkit"
+#' )
+#' my_issues2 <- IssueTrackeR:::get_issues_github(
+#'     owner = "jdemetra",
+#'     repo = "jwsacruncher",
+#'     state = "all"
+#' )
 #' }
 #'
 #' @importFrom checkmate assert_flag
@@ -216,8 +237,10 @@ get_issues_github <- function(
 #' @returns An `IssuesTB` object containing the issues from the specified project.
 #'
 #' @examples
+#' \dontrun{
 #' # Get issues from a GitLab project
 #' my_issues <- IssueTrackeR:::get_issues_gitlab(project_id = 4578)
+#' }
 #'
 #' @dev
 #' @importFrom gitlabr gl_list_issues
@@ -265,7 +288,7 @@ get_issues_gitlab <- function(
 #' my_issues <- IssueTrackeR:::get_issues_local(
 #'     file = system.file(
 #'         "data_issues",
-#'         "open_issues.yaml",
+#'         "list_issues.yaml",
 #'         package = "IssueTrackeR"
 #'     )
 #' )

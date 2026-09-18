@@ -410,12 +410,15 @@ new_issues.default <- function(
 #' @returns Information inside the `IssuesTB` object
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = local_issues_selector)
+#'
 #' first_issue <- open_issues[1, ]
 #' number <- open_issues[1, 1]
 #' state <- open_issues[1, "state"]
@@ -479,18 +482,15 @@ append <- function(x, values, after = length(x)) {
 #' @method append IssuesTB
 #' @export
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' closed_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "closed_issues.yaml"
-#' )
-#' new_issues <- append(open_issues, closed_issues)
+#' all_issues <- get_issues(selector = local_issues_selector)
+#' new_issues <- append(all_issues, all_issues)
 append.IssuesTB <- function(x, values, after = nrow(x)) {
     if (after > nrow(x)) {
         after <- nrow(x)
@@ -538,12 +538,14 @@ append.default <- function(x, values, after = length(x)) {
 #'
 #' @name rbind-issues
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = local_issues_selector)
 #' new_issues <- rbind(open_issues[1, ], open_issues[-1, ])
 #' @exportS3Method rbind IssueTB
 #' @method rbind IssueTB
@@ -560,18 +562,15 @@ rbind.IssueTB <- function(...) {
 #' @method rbind IssuesTB
 #' @export
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' closed_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "closed_issues.yaml"
-#' )
-#' new_issues <- rbind(open_issues, closed_issues)
+#' open_issues <- get_issues(selector = local_issues_selector)
+#' new_issues <- rbind(open_issues, open_issues)
 rbind.IssuesTB <- function(...) {
     list(...) |>
         lapply(FUN = new_issues) |>
@@ -590,7 +589,7 @@ rbind.IssuesTB <- function(...) {
 #' open_issues <- get_issues(
 #'     source = "local",
 #'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = "list_issues.yaml"
 #' )
 #' new_issues <- subset(open_issues, number < 150)
 subset.IssuesTB <- function(x, ...) {
@@ -629,12 +628,14 @@ sample <- function(x, size, replace = FALSE, prob = NULL) {
 
 #' @param x An object of class \code{IssuesTB}.
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = local_issues_selector)
 #' new_issues <- sample(open_issues, size = 5L)
 #' @rdname sample-issues
 #' @exportS3Method sample IssuesTB
@@ -681,12 +682,14 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 #' https://stat.ethz.ch/R-manual/R-devel/library/base/html/unique.html
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = local_issues_selector)
 #' new_issues <- unique(open_issues)
 #'
 #' @seealso [base::unique()], [base::duplicated()]
@@ -712,11 +715,14 @@ unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
 #' @returns Integer. The number of issues.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' all_issues <- get_issues(selector = local_issues_selector)
 #'
 #' count_issues(all_issues)
 #' @export

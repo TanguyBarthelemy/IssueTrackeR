@@ -27,13 +27,15 @@ Default is 0.}
 Count Still Open Issues Over Time
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
-open_issues <- IssueTrackeR:::get_still_open(issues, lag = 1L)
+all_issues <- get_issues(selector = local_issues_selector)
+all_issues <- IssueTrackeR:::get_still_open(all_issues, lag = 1L)
 
 }
 \keyword{internal}

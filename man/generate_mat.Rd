@@ -32,13 +32,15 @@ The categories are variables of the list of issues. For example, issues
 creators, issue closer, milestones...
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
-a_matrix <- IssueTrackeR:::generate_mat(issues, by = "creator", n = 2)
+all_issues <- get_issues(selector = local_issues_selector)
+a_matrix <- IssueTrackeR:::generate_mat(all_issues, by = "creator", n = 2)
 
 }
 \keyword{internal}

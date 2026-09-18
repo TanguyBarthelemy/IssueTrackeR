@@ -29,8 +29,10 @@ An \code{IssuesTB} object containing the issues from the specified project.
 Internal function to fetch issues from GitLab API for a specific project.
 }
 \examples{
+\dontrun{
 # Get issues from a GitLab project
 my_issues <- IssueTrackeR:::get_issues_gitlab(project_id = 4578)
+}
 
 }
 \keyword{internal}

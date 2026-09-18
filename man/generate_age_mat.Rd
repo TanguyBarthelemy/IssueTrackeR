@@ -26,12 +26,14 @@ generate_age_mat(x, ...)
 Generate Age Matrix of Open Issues
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
+all_issues <- get_issues(selector = local_issues_selector)
 age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
 
 }

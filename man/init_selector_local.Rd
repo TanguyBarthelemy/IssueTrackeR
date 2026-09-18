@@ -21,17 +21,10 @@ Creates a selector for local YAML files containing issue data.
 local_sel <- IssueTrackeR:::init_selector_local(
     file = system.file(
         "data_issues",
-        "open_issues.yaml",
+        "list_issues.yaml",
         package = "IssueTrackeR"
     )
 )
 
-# Select multiple YAML files
-multi_file_sel <- IssueTrackeR:::init_selector_local(
-    file = c(
-        "path/to/open_issues.yaml",
-        "path/to/closed_issues.yaml"
-    )
-)
 }
 \keyword{internal}

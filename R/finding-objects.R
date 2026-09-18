@@ -17,11 +17,16 @@
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#'
+#' all_issues <- get_issues(selector = local_issues_selector)
+#'
 #' with_text(all_issues, pattern = "Excel")
 #'
 #' @rdname with_text
@@ -71,11 +76,16 @@ with_text.IssuesTB <- function(
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#'
+#' all_issues <- get_issues(selector = local_issues_selector)
+#'
 #' with_labels(all_issues, pattern = "Bug")
 #'
 #' @rdname with_labels
@@ -106,11 +116,15 @@ with_labels.IssuesTB <- function(x, ...) {
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' all_issues <- get_issues(selector = local_issues_selector)
+#'
 #' with_comments(all_issues)
 #' with_comments(all_issues, negate = TRUE)
 #'
@@ -144,11 +158,16 @@ with_comments.IssuesTB <- function(x, negate = FALSE, ...) {
 #' different issues in \code{x}.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#'
+#' all_issues <- get_issues(selector = local_issues_selector)
+#'
 #' get_nbr_comments(all_issues)
 #' get_nbr_comments(all_issues[1L, ])
 #'
@@ -190,11 +209,16 @@ get_nbr_comments.IssuesTB <- function(x) {
 #' If there is no comments, it returns an empty string.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#'
+#' all_issues <- get_issues(selector = local_issues_selector)
+#'
 #' author_last_comment(all_issues)
 #' author_last_comment(all_issues[1L, ])
 #'
@@ -253,11 +277,15 @@ author_last_comment.IssuesTB <- function(x, verbose = TRUE, ...) {
 #' warning. Returns `NULL` if the issues list is empty.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#'
+#' all_issues <- get_issues(selector = local_issues_selector)
 #'
 #' first_issue <- extract_nth(all_issues, 1)
 #' third_issue <- extract_nth(all_issues, 3)

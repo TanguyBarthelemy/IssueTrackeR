@@ -28,11 +28,16 @@ If there is no comments, it returns an empty string.
 Retrieve the name of the last commentator
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
-    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
+
+all_issues <- get_issues(selector = local_issues_selector)
+
 author_last_comment(all_issues)
 author_last_comment(all_issues[1L, ])
 

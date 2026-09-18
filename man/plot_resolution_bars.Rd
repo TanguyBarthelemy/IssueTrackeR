@@ -21,11 +21,14 @@ in predefined time categories (< 1 day, 1-7 days, 7-30 days, 1 month-1 year,
 1-3 years, > 3 years).
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
-    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "closed_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
+all_issues <- get_issues(selector = local_issues_selector)
 
 IssueTrackeR:::plot_resolution_bars(all_issues)
 

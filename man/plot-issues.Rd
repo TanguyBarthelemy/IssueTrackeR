@@ -70,18 +70,14 @@ log scale
 }
 }
 \examples{
-all_issues <- rbind(
-    get_issues(
-        source = "local",
-        dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-        dataset_name = "open_issues.yaml"
-    ),
-    get_issues(
-        source = "local",
-        dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-        dataset_name = "closed_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
     )
 )
+all_issues <- get_issues(selector = local_issues_selector)
 
 plot(all_issues, type = "historic")
 plot(all_issues, type = "created-closed")

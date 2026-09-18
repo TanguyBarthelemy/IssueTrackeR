@@ -28,7 +28,7 @@ Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
 \item{dataset_name}{A character string specifying the name of the datasets
 which will be written (only taken into account if \code{source} is set to
 \code{"local"}).
-Defaults to \code{"open_issues.yaml"}.}
+Defaults to \code{"list_issues.yaml"}.}
 
 \item{repo}{A character string specifying the GitHub repository name (only
 taken into account if \code{source} is set to \code{"online"}).
@@ -74,37 +74,51 @@ function:
 }
 \examples{
 \dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
+
 \donttest{
 # From online
 
-issues <- get_issues(source = "online", owner = "rjdverse", repo = NULL)
-issues <- get_issues(source = "online")
+online_selector <- init_selector(
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
+    repo = "IssueTrackeR"
+)
+issues <- get_issues(selector = online_selector)
 print(issues)
 
-labels <- get_labels(source = "online")
+labels <- get_labels(selector = online_selector)
 print(labels)
 
-milestones <- get_milestones(source = "online")
+milestones <- get_milestones(selector = online_selector)
 print(milestones)
+}
 
 # From local
 
-path <- system.file("data_issues", package = "IssueTrackeR")
-issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+local_issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
-milestones <- get_milestones(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "list_milestones.yaml"
+local_labels_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_labels.yaml"
+    )
 )
-labels <- get_labels(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "list_labels.yaml"
+local_milestones_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_milestones.yaml"
+    )
 )
-}
+
+issues <- get_issues(selector = local_issues_selector)
+labels <- get_labels(selector = local_labels_selector)
+milestones <- get_milestones(selector = local_milestones_selector)
 \dontshow{\}) # examplesIf}
 }
