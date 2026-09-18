@@ -152,10 +152,10 @@ get_issues <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_issues_github <- function(
-        repo = NULL,
-        owner = NULL,
-        state = c("open", "opened", "closed", "all"),
-        verbose = TRUE
+    repo = NULL,
+    owner = NULL,
+    state = c("open", "opened", "closed", "all"),
+    verbose = TRUE
 ) {
     state <- match.arg(state)
     if (state == "opened") {
@@ -194,7 +194,7 @@ get_issues_github <- function(
     })
     check_response(raw_comments)
 
-    issues <- format_github_issues(
+    issues <- format_issues_github(
         raw_issues = raw_issues,
         raw_comments = raw_comments,
         verbose = verbose
@@ -227,10 +227,10 @@ get_issues_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_issues_gitlab <- function(
-        project_id,
-        state = c("open", "opened", "closed", "all"),
-        verbose = TRUE,
-        ...
+    project_id,
+    state = c("open", "opened", "closed", "all"),
+    verbose = TRUE,
+    ...
 ) {
     state <- match.arg(state)
     if (state == "open") {
@@ -243,8 +243,12 @@ get_issues_gitlab <- function(
         cat("Project id:", project_id, "\n")
     }
 
-    raw_issues <- gitlabr::gl_list_issues(project = project_id, state = state, ...)
-    issues <- format_gitlab_issues(raw_issues)
+    raw_issues <- gitlabr::gl_list_issues(
+        project = project_id,
+        state = state,
+        ...
+    )
+    issues <- format_issues_gitlab(raw_issues)
 
     return(issues)
 }
@@ -272,8 +276,8 @@ get_issues_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_issues_local <- function(
-        file = NULL,
-        verbose = TRUE
+    file = NULL,
+    verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)
@@ -363,14 +367,17 @@ get_labels <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_labels_github <- function(
-        repo = NULL,
-        owner = NULL,
-        verbose = TRUE
+    repo = NULL,
+    owner = NULL,
+    verbose = TRUE
 ) {
     checkmate::assert_flag(verbose)
     checkmate::assert_character(repo, len = 1L)
     checkmate::assert_character(owner, len = 1L)
 
+    if (verbose) {
+        cat("Repo:", repo, " owner:", owner, "\n")
+    }
     raw_labels <- try(expr = {
         gh::gh(
             repo = repo,
@@ -382,13 +389,26 @@ get_labels_github <- function(
     })
     check_response(raw_labels)
 
-    if (verbose) {
-        cat("Repo:", repo, " owner:", owner, "\n")
-    }
-    list_labels <- format_labels(raw_labels = raw_labels, verbose = verbose)
+    list_labels <- format_labels_github(
+        raw_labels = raw_labels,
+        verbose = verbose
+    )
 
     if (!is.null(list_labels)) {
-        list_labels <- cbind(list_labels, repo = repo, owner = owner)
+        list_labels <- cbind(
+            source = "https://github.com/",
+            list_labels,
+            repo = repo,
+            owner = owner,
+            url = file.path(
+                "https://github.com",
+                owner,
+                repo,
+                "labels",
+                utils::URLencode(list_labels$name),
+                fsep = "/"
+            )
+        )
     }
 
     class(list_labels) <- c("LabelsTB", "data.frame")
@@ -400,15 +420,15 @@ get_labels_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_labels_gitlab <- function(
-        project_id,
-        verbose = TRUE,
-        ...
+    project_id,
+    verbose = TRUE,
+    ...
 ) {
     checkmate::assert_flag(verbose)
     checkmate::assert_count(project_id)
 
     if (verbose) {
-        cat("Repo:", repo, " owner:", owner, "\n")
+        cat("Project id:", project_id, "\n")
     }
     structurel <- gitlabr::gl_get_project(project = project_id, ...)
     raw_labels <- gitlabr::gitlab(
@@ -418,21 +438,43 @@ get_labels_gitlab <- function(
     if (nrow(raw_labels) == 0L) {
         return(NULL)
     }
+    labels_name <- null_to_default(
+        raw_labels[["name"]],
+        default = NA_character_
+    )
     list_labels <- data.frame(
-        name = null_to_default(raw_labels[["name"]], default = NA_character_),
-        description = null_to_default(raw_labels[["description"]], default = NA_character_),
+        source = gsub(
+            x = structurel$web_url,
+            pattern = paste0(structurel$path_with_namespace, "$"),
+            replacement = ""
+        ),
+        name = labels_name,
+        description = null_to_default(
+            raw_labels[["description"]],
+            default = NA_character_
+        ),
         color = null_to_default(raw_labels[["color"]], default = NA_character_),
         repo = structurel$path,
-        owner = structurel$namespace.full_path
+        owner = structurel$namespace.full_path,
+        url = file.path(
+            structurel$web_url,
+            "-",
+            paste0("work_items?label_name%5B%5D=", labels_name),
+            fsep = "/"
+        )
     )
 
     class(list_labels) <- c("LabelsTB", "data.frame")
     return(list_labels)
 }
 
+#' @importFrom tools file_ext
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_flag
+#' @importFrom yaml yaml.load
 get_labels_local <- function(
-        file = NULL,
-        verbose = TRUE
+    file = NULL,
+    verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)
@@ -459,94 +501,152 @@ get_labels_local <- function(
 
 #' @rdname get
 #' @export
-get_milestones <- function(
-        source = c("local", "online"),
-        dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-        dataset_name = "list_milestones.yaml",
-        repo = getOption("IssueTrackeR.repo"),
-        owner = getOption("IssueTrackeR.owner"),
-        state = c("open", "closed", "all"),
-        verbose = TRUE
+get_milestones <- function(selector, verbose = TRUE, ...) {
+    if (is_empty(selector)) {
+        if (verbose) {
+            message("The selector is empty.")
+        }
+        return(NULL)
+    } else if (length(selector) == 1L) {
+        args <- selector[[1L]]
+        args <- args[names(args) != "source"]
+        milestones <- do.call(
+            what = switch(
+                selector[[1L]][["source"]],
+                GitHub = get_milestones_github,
+                GitLab = get_milestones_gitlab,
+                local = get_milestones_local
+            ),
+            args = c(args, list(...))
+        )
+        return(milestones)
+    }
+
+    milestones <- selector |>
+        seq_along() |>
+        lapply(FUN = extract_nth, x = selector, verbose = FALSE) |>
+        lapply(FUN = get_milestones, verbose = verbose) |>
+        do.call(what = rbind)
+    return(milestones)
+}
+
+#' @importFrom checkmate assert_flag
+#' @importFrom checkmate assert_character
+get_milestones_github <- function(
+    repo = NULL,
+    owner = NULL,
+    verbose = TRUE
 ) {
-    source <- match.arg(source)
-    state <- match.arg(state)
+    checkmate::assert_flag(verbose)
+    checkmate::assert_character(repo, len = 1L)
+    checkmate::assert_character(owner, len = 1L)
 
-    if (source == "online") {
-        if (is.null(repo)) {
-            if (length(owner) > 1L) {
-                milestones <- lapply(
-                    X = owner,
-                    FUN = get_milestones,
-                    source = "online",
-                    repo = NULL,
-                    state = state,
-                    verbose = verbose,
-                    dataset_dir = NULL,
-                    dataset_name = NULL
-                ) |>
-                    do.call(what = rbind)
+    if (verbose) {
+        cat("Repo:", repo, " owner:", owner, "\n")
+    }
+    raw_milestones <- try(expr = {
+        gh::gh(
+            repo = repo,
+            owner = owner,
+            endpoint = "/repos/:owner/:repo/milestones",
+            state = state,
+            .limit = Inf,
+            .progress = FALSE
+        )
+    })
+    check_response(raw_milestones)
 
-                return(milestones)
-            }
-            list_repo <- get_all_repos(owner, verbose = verbose)
-
-            milestones <- lapply(
-                X = list_repo,
-                FUN = get_milestones,
-                source = "online",
-                owner = owner,
-                state = state,
-                verbose = verbose,
-                dataset_dir = NULL,
-                dataset_name = NULL
-            ) |>
-                do.call(what = rbind)
-
-            return(milestones)
-        }
-
-        if (verbose) {
-            cat("Repo:", repo, " owner:", owner, "\n")
-        }
-        raw_milestones <- try(expr = {
-            gh::gh(
-                repo = repo,
-                owner = owner,
-                endpoint = "/repos/:owner/:repo/milestones",
-                state = state,
-                .limit = Inf,
-                .progress = FALSE
-            )
-        })
-        check_response(raw_milestones)
-        milestones <- format_milestones(raw_milestones, verbose = verbose)
-
-        if (nrow(milestones) > 0L) {
-            milestones <- cbind(milestones, repo = repo, owner = owner)
-        }
-    } else if (source == "local") {
-        if (tools::file_ext(dataset_name) == "yaml") {
-            input_file <- tools::file_path_sans_ext(dataset_name)
-        }
-        input_path <- file.path(dataset_dir, input_file) |>
-            paste0(".yaml") |>
-            normalizePath(mustWork = TRUE)
-
-        if (verbose) {
-            message("The milestones will be read from ", input_path, ".")
-        }
-        milestones <- readLines(con = input_path, encoding = "UTF-8") |>
-            yaml::yaml.load() |>
-            as.data.frame()
-        if (nrow(milestones) > 0L) {
-            milestones[["due_on"]] <- format_timestamp(
-                x = milestones[["due_on"]]
-            )
-        }
-    } else {
-        stop("wrong argument source", call. = FALSE)
+    milestones <- format_milestones_github(raw_milestones, verbose = verbose)
+    if (nrow(milestones) > 0L) {
+        milestones <- cbind(milestones, repo = repo, owner = owner)
     }
 
     class(milestones) <- c("MilestonesTB", "data.frame")
     return(milestones)
+}
+
+
+#' @importFrom gitlabr gl_get_project
+#' @importFrom gitlabr gitlab
+#' @importFrom checkmate assert_flag
+#' @importFrom checkmate assert_count
+get_milestones_gitlab <- function(
+    project_id,
+    verbose = TRUE,
+    ...
+) {
+    checkmate::assert_flag(verbose)
+    checkmate::assert_count(project_id)
+
+    structurel <- gitlabr::gl_get_project(project = project_id, ...)
+    raw_milestones <- gitlabr::gitlab(
+        req = c("projects", project_id, "milestones"),
+        state = "all",
+        ...
+    )
+
+    milestones <- data.frame(
+        source = gsub(
+            x = structurel$web_url,
+            pattern = paste0(structurel$path_with_namespace, "$"),
+            replacement = ""
+        ),
+        title = null_to_default(
+            raw_milestones[["title"]],
+            default = NA_character_
+        ),
+        description = null_to_default(
+            raw_labels[["description"]],
+            default = NA_character_
+        ),
+        due_on = format_timestamp(null_to_default(
+            raw_labels[["due_date"]],
+            default = NA_character_
+        )),
+        closed_at = format_timestamp(NA_character_),
+        creator = NA_character_,
+        state = null_to_default(
+            raw_milestones[["state"]],
+            default = NA_character_
+        ),
+        nb_issues_open = NA_integer_,
+        nb_issues_closed = NA_integer_,
+        repo = structurel$path,
+        owner = structurel$namespace.full_path,
+        url = raw_milestones$web_url
+    )
+
+    class(milestones) <- c("MilestonesTB", "data.frame")
+    return(milestones)
+}
+
+#' @importFrom tools file_ext
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_flag
+#' @importFrom yaml yaml.load
+get_milestones_local <- function(
+    file = NULL,
+    verbose = TRUE
+) {
+    file <- normalizePath(file, mustWork = TRUE)
+    checkmate::assert_character(file, len = 1L)
+    checkmate::assert_flag(verbose)
+
+    if (dir.exists(file)) {
+        stop("The path corresponds to a directory.")
+    }
+    if (tools::file_ext(file) != "yaml") {
+        stop("The path should lead to a yaml file.")
+    }
+
+    if (verbose) {
+        message("The milestones will be read from ", file, ".")
+    }
+
+    list_milestones <- readLines(con = file, encoding = "UTF-8") |>
+        yaml::yaml.load() |>
+        as.data.frame()
+
+    class(list_milestones) <- c("MilestonesTB", "data.frame")
+    return(list_milestones)
 }

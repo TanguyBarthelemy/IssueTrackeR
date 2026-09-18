@@ -58,11 +58,11 @@ format_timestamp <- function(x) {
 #' @inheritParams get
 #'
 #' @returns
-#' - `format_labels`: A data frame with columns: `name`, `description`, `color`.
-#' - `format_comments`: A list of data frames with columns: `text`, `author`.
-#' - `format_github_issues`: A list of IssuesTB objects with complete issue data.
-#' - `format_milestone`: A data frame with milestone information.
-#' - `format_milestones`: A list representing milestones with `title`,
+#' - `format_labels_github`: A data frame with columns: `name`, `description`, `color`.
+#' - `format_comments_github`: A list of data frames with columns: `text`, `author`.
+#' - `format_issues_github`: A list of IssuesTB objects with complete issue data.
+#' - `format_milestone_github`: A data frame with milestone information.
+#' - `format_milestones_github`: A list representing milestones with `title`,
 #'   `description` and `due_on` date)
 #'
 #' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
@@ -75,7 +75,7 @@ format_timestamp <- function(x) {
 #'    .limit = Inf,
 #'    .progress = FALSE
 #' )
-#' IssueTrackeR:::format_labels(raw_labels)
+#' IssueTrackeR:::format_labels_github(raw_labels)
 #'
 #' # Formatting milestone
 #' raw_milestones <- gh::gh(
@@ -87,7 +87,7 @@ format_timestamp <- function(x) {
 #'     .progress = FALSE
 #' )
 #' raw_milestone <- raw_milestones[[5L]]
-#' IssueTrackeR:::format_milestone(raw_milestone)
+#' IssueTrackeR:::format_milestone_github(raw_milestone)
 #'
 #' # Formatting milestones
 #' milestones_jdplus_main <- gh::gh(
@@ -98,7 +98,7 @@ format_timestamp <- function(x) {
 #'     .limit = Inf,
 #'     .progress = FALSE
 #'  )
-#' IssueTrackeR:::format_milestones(milestones_jdplus_main)
+#' IssueTrackeR:::format_milestones_github(milestones_jdplus_main)
 #'
 #' # Formatting issues
 #' raw_issues <- gh::gh(
@@ -116,9 +116,9 @@ format_timestamp <- function(x) {
 #'     .limit = Inf,
 #'     .progress = FALSE
 #' )
-#' formatted_comments <- IssueTrackeR:::format_comments(raw_comments, urls)
+#' formatted_comments <- IssueTrackeR:::format_comments_github(raw_comments, urls)
 #'
-#' formatted_issues <- IssueTrackeR:::format_github_issues(raw_issues = raw_issues,
+#' formatted_issues <- IssueTrackeR:::format_issues_github(raw_issues = raw_issues,
 #'                             raw_comments = raw_comments,
 #'                             verbose = FALSE)
 #' }
@@ -131,7 +131,7 @@ NULL
 
 #' @rdname format
 #' @noRd
-format_comments <- function(
+format_comments_github <- function(
     raw_comments,
     urls,
     verbose = TRUE
@@ -184,7 +184,7 @@ format_comments <- function(
 
 #' @rdname format
 #' @noRd
-format_github_issues <- function(
+format_issues_github <- function(
     raw_issues,
     raw_comments,
     verbose = TRUE
@@ -271,7 +271,10 @@ format_github_issues <- function(
             },
             FUN.VALUE = character(1L)
         ),
-        comments = format_comments(raw_comments = raw_comments, urls = urls),
+        comments = format_comments_github(
+            raw_comments = raw_comments,
+            urls = urls
+        ),
         created_at = vapply(
             X = raw_issues,
             FUN = function(.x) {
@@ -327,7 +330,7 @@ format_github_issues <- function(
     return(issues)
 }
 
-format_gitlab_issues <- function(
+format_issues_gitlab <- function(
     raw_issues,
     verbose = TRUE
 ) {
@@ -379,7 +382,7 @@ format_gitlab_issues <- function(
             raw_issues[["milestone.title"]],
             default = NA_character_
         ),
-        comments = format_comments(
+        comments = format_comments_github(
             raw_comments = list(),
             urls = raw_issues[["_links.self"]]
         ),
@@ -409,7 +412,7 @@ format_gitlab_issues <- function(
 
 #' @rdname format
 #' @noRd
-format_labels <- function(raw_labels, verbose = TRUE) {
+format_labels_github <- function(raw_labels, verbose = TRUE) {
     if (verbose) {
         cat("Reading labels... ")
     }
@@ -435,7 +438,7 @@ format_labels <- function(raw_labels, verbose = TRUE) {
 
 #' @rdname format
 #' @noRd
-format_milestone <- function(raw_milestone, verbose = TRUE) {
+format_milestone_github <- function(raw_milestone, verbose = TRUE) {
     if (verbose) {
         cat("\t- ", raw_milestone[["title"]], "... Done!\n")
     }
@@ -471,12 +474,12 @@ format_milestone <- function(raw_milestone, verbose = TRUE) {
 
 #' @rdname format
 #' @noRd
-format_milestones <- function(raw_milestones, verbose = TRUE) {
+format_milestones_github <- function(raw_milestones, verbose = TRUE) {
     if (verbose) {
         cat("Reading milestones... \n")
     }
     new_mlst_structure <- raw_milestones |>
-        lapply(FUN = format_milestone, verbose = verbose) |>
+        lapply(FUN = format_milestone_github, verbose = verbose) |>
         do.call(what = rbind) |>
         as.data.frame()
     if (verbose) {

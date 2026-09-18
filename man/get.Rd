@@ -8,15 +8,7 @@
 \usage{
 get_labels(selector, verbose = TRUE, ...)
 
-get_milestones(
-  source = c("local", "online"),
-  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-  dataset_name = "list_milestones.yaml",
-  repo = getOption("IssueTrackeR.repo"),
-  owner = getOption("IssueTrackeR.owner"),
-  state = c("open", "closed", "all"),
-  verbose = TRUE
-)
+get_milestones(selector, verbose = TRUE, ...)
 }
 \arguments{
 \item{verbose}{A boolean indicating whether to print additional

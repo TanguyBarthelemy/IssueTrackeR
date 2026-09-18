@@ -190,14 +190,7 @@ print.LabelsTB <- function(x, ...) {
     x$labels_color <- c("grey8", "ivory")[
         isDark(x$labels_bgcolor) + 1L
     ]
-    x$labels_url <- file.path(
-        "https://github.com",
-        x$owner,
-        x$repo,
-        "labels",
-        utils::URLencode(x$name),
-        fsep = "/"
-    )
+    x$labels_url <- x$url
     x$formated_label <- vapply(
         X = seq_len(nrow(x)),
         FUN = function(k) {
