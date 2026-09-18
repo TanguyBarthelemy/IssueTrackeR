@@ -140,6 +140,7 @@ init_selector_github <- function(owner = NULL, repo = NULL, ...) {
     selector <- lapply(repo, \(r) {
         list(source = "GitHub", repo = r, owner = owner, ...)
     })
+    class(selector) <- "SelectorTB"
     return(selector)
 }
 

@@ -31,60 +31,32 @@
 #' update_database(dataset_dir = tempdir())
 #' }
 update_database <- function(
-    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    datasets_name = c(
-        open = "open_issues.yaml",
-        closed = "closed_issues.yaml",
-        labels = "list_labels.yaml",
-        milestones = "list_milestones.yaml"
-    ),
+    selector,
+    dataset_dir,
     verbose = TRUE,
     ...
 ) {
-    issues_open <- get_issues(
-        source = "online",
-        state = "open",
-        verbose = verbose,
-        ...
-    )
+    issues <- get_issues(selector, verbose = verbose,...)
     write_to_dataset(
-        x = issues_open,
+        x = issues,
         dataset_dir = dataset_dir,
-        dataset_name = datasets_name[["open"]],
+        dataset_name = "list_issues.yaml",
         verbose = verbose
     )
 
-    issues_closed <- get_issues(
-        source = "online",
-        state = "closed",
-        verbose = verbose,
-        ...
-    )
-    write_to_dataset(
-        x = issues_closed,
-        dataset_dir = dataset_dir,
-        dataset_name = datasets_name[["closed"]],
-        verbose = verbose
-    )
-
-    list_labels <- get_labels(source = "online", verbose = verbose, ...)
+    list_labels <- get_labels(selector, verbose = verbose, ...)
     write_to_dataset(
         x = list_labels,
         dataset_dir = dataset_dir,
-        dataset_name = datasets_name[["labels"]],
+        dataset_name = "list_labels.yaml",
         verbose = verbose
     )
 
-    milestones <- get_milestones(
-        source = "online",
-        verbose = verbose,
-        state = "all",
-        ...
-    )
+    milestones <- get_milestones(selector, verbose = verbose,...)
     write_to_dataset(
         x = milestones,
         dataset_dir = dataset_dir,
-        dataset_name = datasets_name[["milestones"]],
+        dataset_name = "list_milestones.yaml",
         verbose = verbose
     )
 

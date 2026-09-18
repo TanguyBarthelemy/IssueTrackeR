@@ -88,9 +88,6 @@
 #' )
 #' }
 #'
-NULL
-
-#' @export
 get_issues <- function(selector, verbose = TRUE, ...) {
     if (is_empty(selector)) {
         if (verbose) {
@@ -369,7 +366,8 @@ get_labels <- function(selector, verbose = TRUE, ...) {
 get_labels_github <- function(
     repo = NULL,
     owner = NULL,
-    verbose = TRUE
+    verbose = TRUE,
+    ...
 ) {
     checkmate::assert_flag(verbose)
     checkmate::assert_character(repo, len = 1L)
@@ -535,8 +533,13 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
 get_milestones_github <- function(
     repo = NULL,
     owner = NULL,
+    state = c("open", "opened", "closed", "all"),
     verbose = TRUE
 ) {
+    state <- match.arg(state)
+    if (state == "opened") {
+        state <- "open"
+    }
     checkmate::assert_flag(verbose)
     checkmate::assert_character(repo, len = 1L)
     checkmate::assert_character(owner, len = 1L)
@@ -572,9 +575,14 @@ get_milestones_github <- function(
 #' @importFrom checkmate assert_count
 get_milestones_gitlab <- function(
     project_id,
+    state = c("open", "opened", "closed", "all"),
     verbose = TRUE,
     ...
 ) {
+    state <- match.arg(state)
+    if (state == "open") {
+        state <- "opened"
+    }
     checkmate::assert_flag(verbose)
     checkmate::assert_count(project_id)
 

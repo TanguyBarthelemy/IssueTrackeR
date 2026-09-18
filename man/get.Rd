@@ -2,10 +2,13 @@
 % Please edit documentation in R/get.R
 \name{get}
 \alias{get}
+\alias{get_issues}
 \alias{get_labels}
 \alias{get_milestones}
 \title{Retrieve information from the issues of GitHub}
 \usage{
+get_issues(selector, verbose = TRUE, ...)
+
 get_labels(selector, verbose = TRUE, ...)
 
 get_milestones(selector, verbose = TRUE, ...)
