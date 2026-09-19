@@ -148,4 +148,4 @@ selector_milestones <- init_selector(
 
 my_issues <- get_issues(selector_issues)
 my_labels <- get_labels(selector_labels)
-my_milestones <- get_labels(selector_milestones)
+my_milestones <- get_milestones(selector_milestones)

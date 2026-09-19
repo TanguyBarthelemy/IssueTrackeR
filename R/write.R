@@ -116,22 +116,31 @@
 #' @export
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' milestones <- get_milestones(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_milestones.yaml"
+#' labels_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_labels.yaml"
+#'     )
 #' )
-#' labels <- get_labels(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_labels.yaml"
+#' milestones_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_milestones.yaml"
+#'     )
 #' )
+#'
+#' issues <- get_issues(selector = issues_selector)
+#' labels <- get_labels(selector = labels_selector)
+#' milestones <- get_milestones(selector = milestones_selector)
 #'
 #' write_to_dataset(x = issues, dataset_dir = tempdir())
 #' write_to_dataset(x = labels, dataset_dir = tempdir())

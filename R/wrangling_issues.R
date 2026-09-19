@@ -585,12 +585,14 @@ rbind.IssuesTB <- function(...) {
 #' @method subset IssuesTB
 #' @export
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = local_issues_selector)
 #' new_issues <- subset(open_issues, number < 150)
 subset.IssuesTB <- function(x, ...) {
     output <- new_issues(NextMethod())
