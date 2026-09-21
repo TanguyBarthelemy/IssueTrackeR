@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.WORKFLOW_TOKEN }}
+      GITLAB_SSPCLOUD_API: ${{ secrets.GITLAB_SSPCLOUD_API }}
+      GITLAB_TRACTORTOM_API: ${{ secrets.GITLAB_TRACTORTOM_API }}
 
     steps:
       - uses: actions/checkout@v6
