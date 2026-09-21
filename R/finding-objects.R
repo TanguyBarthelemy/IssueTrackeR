@@ -25,7 +25,7 @@
 #'     )
 #' )
 #'
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' with_text(all_issues, pattern = "Excel")
 #'
@@ -84,7 +84,7 @@ with_text.IssuesTB <- function(
 #'     )
 #' )
 #'
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' with_labels(all_issues, pattern = "Bug")
 #'
@@ -123,7 +123,7 @@ with_labels.IssuesTB <- function(x, ...) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' with_comments(all_issues)
 #' with_comments(all_issues, negate = TRUE)
@@ -166,7 +166,7 @@ with_comments.IssuesTB <- function(x, negate = FALSE, ...) {
 #'     )
 #' )
 #'
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' get_nbr_comments(all_issues)
 #' get_nbr_comments(all_issues[1L, ])
@@ -217,7 +217,7 @@ get_nbr_comments.IssuesTB <- function(x) {
 #'     )
 #' )
 #'
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' author_last_comment(all_issues)
 #' author_last_comment(all_issues[1L, ])
@@ -260,21 +260,26 @@ author_last_comment.IssuesTB <- function(x, verbose = TRUE, ...) {
     return(authors)
 }
 
-#' @title Extract the nth Issue from an List of Issues
+#' @title Extract the nth Item from an List
 #'
 #' @description
-#' Extract the nth issue from a `IssuesTB` object.
+#' Extract the nth issue from a `IssuesTB` object or the nth selector from a
+#' `SelectorTB` object.
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @param x An object of class \code{IssuesTB} or `SelectorTB`.
 #' @param n Integer. Position of the element to extract. 1 is for the first
 #'   element.
 #' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'
-#' @returns The nth issue as a `IssueTB` object.
-#' If \code{n} exceeds the number of issues, returns the last issue with a
-#' warning. Returns `NULL` if the issues list is empty.
+#' @returns If `x` is a `IssuesTB`, it returns the nth issue as a `IssueTB`
+#' object. If `x` is a `SelectorTB`, it returns the nth selector as a
+#' `SelectorTB` object.
+#' If \code{n} exceeds the number of issues or selector, returns the last
+#' issue / selector with a warning.
+#'
+#' Returns `NULL` if the list is empty.
 #'
 #' @examples
 #' issues_selector <- init_selector(
@@ -285,7 +290,7 @@ author_last_comment.IssuesTB <- function(x, verbose = TRUE, ...) {
 #'     )
 #' )
 #'
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' first_issue <- extract_nth(all_issues, 1)
 #' third_issue <- extract_nth(all_issues, 3)
@@ -335,7 +340,7 @@ extract_nth.SelectorTB <- function(x, n, verbose = TRUE, ...) {
     } else if (n > length(x)) {
         if (verbose) {
             warning(
-                "n > number of issues. The last issue will be extracted.",
+                "n > number of selectors The last selector will be extracted.",
                 call. = FALSE
             )
         }
@@ -356,5 +361,96 @@ extract_nth.SelectorTB <- function(x, n, verbose = TRUE, ...) {
 #' @method extract_nth default
 #' @export
 extract_nth.default <- function(...) {
+    stop("`x` should be a `IssuesTB` or a `SelectorTB` object.", call. = FALSE)
+}
+
+#' @title Remove the nth Item from an List
+#'
+#' @description
+#' Remove the nth issue from a `IssuesTB` object or the nth selector from a
+#' `SelectorTB` object.
+#'
+#' @param x An object of class \code{IssuesTB} or `SelectorTB`.
+#' @param n Integer. Position of the element to remove. 1 is for the first
+#'   element.
+#' @param verbose A boolean indicating whether to print additional
+#' information. Default is \code{TRUE}.
+#' @param \dots Currently not used.
+#'
+#' @returns If `x` is a `IssuesTB`, it returns the list of issues (a `IssuesTB`
+#' object) without the nth issue.
+#' If `x` is a `SelectorTB`, it returns the list of selector (a `SelectorTB`
+#' object) without the nth selector
+#' If \code{n} exceeds the number of issues or selector, returns the initial
+#' list with a warning.
+#'
+#' @examples
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
+#' )
+#'
+#' all_issues <- get_issues(selector = issues_selector)
+#'
+#' issues_wo_1 <- remove_nth(all_issues, 1)
+#' issues_wo_3 <- remove_nth(all_issues, 3)
+#'
+#' @name remove_nth
+#' @export
+remove_nth <- function(x, ...) {
+    UseMethod("remove_nth", x)
+}
+
+#' @rdname remove_nth
+#' @exportS3Method remove_nth IssuesTB
+#' @method remove_nth IssuesTB
+#' @export
+remove_nth.IssuesTB <- function(x, n, verbose = TRUE, ...) {
+    if (n > nrow(x)) {
+        if (verbose) {
+            warning(
+                "n > number of issues. No issues will be removed.",
+                call. = FALSE
+            )
+        }
+        return(x)
+    } else {
+        if (verbose) {
+            message("The ", n, "th issue will be removed")
+        }
+        return(x[-n, , drop = FALSE])
+    }
+}
+
+#' @rdname remove_nth
+#' @exportS3Method remove_nth SelectorTB
+#' @method remove_nth SelectorTB
+#' @export
+remove_nth.SelectorTB <- function(x, n, verbose = TRUE, ...) {
+    if (n > length(x)) {
+        if (verbose) {
+            warning(
+                "n > number of selectors. No selector will be removed.",
+                call. = FALSE
+            )
+        }
+        return(x)
+    }
+    if (verbose) {
+        message("The ", n, "th selector will be removed")
+    }
+    output <- x[-n, , drop = FALSE]
+    class(output) <- "SelectorTB"
+    return(output)
+}
+
+#' @rdname remove_nth
+#' @exportS3Method remove_nth default
+#' @method remove_nth default
+#' @export
+remove_nth.default <- function(...) {
     stop("`x` should be a `IssuesTB` or a `SelectorTB` object.", call. = FALSE)
 }

@@ -20,7 +20,7 @@
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' # Display one issue
 #' print(all_issues[1, ])

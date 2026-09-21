@@ -7,9 +7,11 @@
 update_database(selector, dataset_dir, verbose = TRUE, ...)
 }
 \arguments{
-\item{dataset_dir}{A character string specifying the path which contains the
-datasets (only taken into account if \code{source} is set to \code{"local"}).
-Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
+\item{selector}{A \code{SelectorTB} object (to define the range of the repo /
+source used). Created with \code{\link[=init_selector]{init_selector()}}.}
+
+\item{dataset_dir}{The destination directory where the YAML file will be
+saved. By default, the system's temporary directory is used (\code{tempdir()}).}
 
 \item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
@@ -23,17 +25,6 @@ Defaults to the package option \code{IssueTrackeR.owner}.
 (See the documentation of \code{\link[IssueTrackeR]{get}} to have more
 information on theses parameters):
 }}
-
-\item{datasets_name}{A named character string of length 4, specifying the
-names of the different datasets which will be written. The names
-\code{datasets_name} have to be \code{"open"}, \code{"closed"},
-\code{"labels"} and \code{"milestones"}.
-Defaults to \code{
-c(open = "open_issues.yaml",
-  closed = "closed_issues.yaml",
-  labels = "list_labels.yaml",
-  milestones = "list_milestones.yaml")
-}.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE}.
@@ -48,7 +39,7 @@ online reference.
 jdemetra_selector <- init_selector(
     source = "GitHub",
     owner = "jdemetra",
-    repo = "jdplus-main",
+    repo = "jdplus-revisions",
     state = "all"
 )
 

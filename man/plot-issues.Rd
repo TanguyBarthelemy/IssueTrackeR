@@ -77,7 +77,7 @@ issues_selector <- init_selector(
         "list_issues.yaml"
     )
 )
-all_issues <- get_issues(selector = local_issues_selector)
+all_issues <- get_issues(selector = issues_selector)
 
 plot(all_issues, type = "historic")
 plot(all_issues, type = "created-closed")

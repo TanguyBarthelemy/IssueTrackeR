@@ -5,7 +5,7 @@
 \alias{extract_nth.IssuesTB}
 \alias{extract_nth.SelectorTB}
 \alias{extract_nth.default}
-\title{Extract the nth Issue from an List of Issues}
+\title{Extract the nth Item from an List}
 \usage{
 extract_nth(x, ...)
 
@@ -16,7 +16,7 @@ extract_nth(x, ...)
 \method{extract_nth}{default}(...)
 }
 \arguments{
-\item{x}{An object of class \code{IssuesTB}.}
+\item{x}{An object of class \code{IssuesTB} or \code{SelectorTB}.}
 
 \item{\dots}{Currently not used.}
 
@@ -27,12 +27,17 @@ element.}
 information. Default is \code{TRUE}.}
 }
 \value{
-The nth issue as a \code{IssueTB} object.
-If \code{n} exceeds the number of issues, returns the last issue with a
-warning. Returns \code{NULL} if the issues list is empty.
+If \code{x} is a \code{IssuesTB}, it returns the nth issue as a \code{IssueTB}
+object. If \code{x} is a \code{SelectorTB}, it returns the nth selector as a
+\code{SelectorTB} object.
+If \code{n} exceeds the number of issues or selector, returns the last
+issue / selector with a warning.
+
+Returns \code{NULL} if the list is empty.
 }
 \description{
-Extract the nth issue from a \code{IssuesTB} object.
+Extract the nth issue from a \code{IssuesTB} object or the nth selector from a
+\code{SelectorTB} object.
 }
 \examples{
 issues_selector <- init_selector(
@@ -43,7 +48,7 @@ issues_selector <- init_selector(
     )
 )
 
-all_issues <- get_issues(selector = local_issues_selector)
+all_issues <- get_issues(selector = issues_selector)
 
 first_issue <- extract_nth(all_issues, 1)
 third_issue <- extract_nth(all_issues, 3)

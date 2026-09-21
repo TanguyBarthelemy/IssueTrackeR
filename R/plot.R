@@ -48,7 +48,7 @@ get_dates_vec <- function(x) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' IssueTrackeR:::get_resolution_times(all_issues)
 #' @dev
@@ -110,7 +110,7 @@ get_resolution_times.default <- function(...) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' IssueTrackeR:::plot_resolution_bars(all_issues)
 #'
@@ -192,7 +192,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' IssueTrackeR:::plot_resolution_ecdf(all_issues)
 #' @importFrom graphics axis
@@ -369,7 +369,7 @@ add_n_years <- function(x, n) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #' all_issues <- IssueTrackeR:::get_still_open(all_issues, lag = 1L)
 #'
 #' @dev
@@ -428,8 +428,8 @@ get_still_open.default <- function(...) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
-#' age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
+#' all_issues <- get_issues(selector = issues_selector)
+#' age_matrix <- IssueTrackeR:::generate_age_mat(all_issues, n = 2)
 #'
 #' @dev
 generate_age_mat <- function(x, ...) {
@@ -492,7 +492,7 @@ generate_age_mat.default <- function(...) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #' a_matrix <- IssueTrackeR:::generate_mat(all_issues, by = "creator", n = 2)
 #'
 #' @dev
@@ -584,7 +584,7 @@ generate_mat.default <- function(...) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #' age_mat <- IssueTrackeR:::generate_age_mat(all_issues, 3L)
 #'
 #' IssueTrackeR:::plot_area_chart(age_mat)
@@ -659,8 +659,8 @@ plot_area_chart <- function(categorised_mat, title = "Number of issues") {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
-#' IssueTrackeR:::plot_created_closed(issues)
+#' all_issues <- get_issues(selector = issues_selector)
+#' IssueTrackeR:::plot_created_closed(all_issues)
 #' @dev
 #'
 #' @importFrom graphics abline
@@ -791,7 +791,7 @@ plot_created_closed <- function(x) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' plot(all_issues, type = "historic")
 #' plot(all_issues, type = "created-closed")

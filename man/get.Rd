@@ -14,35 +14,13 @@ get_labels(selector, verbose = TRUE, ...)
 get_milestones(selector, verbose = TRUE, ...)
 }
 \arguments{
+\item{selector}{A \code{SelectorTB} object (to define the range of the repo /
+source used). Created with \code{\link[=init_selector]{init_selector()}}.}
+
 \item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
 
-\item{source}{a character string that is either \code{"online"} if you want
-to fetch information from GitHub or \code{"local"} (by default) if you want
-to fetch information locally.}
-
-\item{dataset_dir}{A character string specifying the path which contains the
-datasets (only taken into account if \code{source} is set to \code{"local"}).
-Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
-
-\item{dataset_name}{A character string specifying the name of the datasets
-which will be written (only taken into account if \code{source} is set to
-\code{"local"}).
-Defaults to \code{"list_issues.yaml"}.}
-
-\item{repo}{A character string specifying the GitHub repository name (only
-taken into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.repo}.}
-
-\item{owner}{A character string specifying the GitHub owner (only taken
-into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.owner}.}
-
-\item{state}{a character string that is either \code{"open"} (by default) if
-you want to fetch only open issues from GitHub, \code{"closed"} if you want
-to fetch only closed issues from GitHub or \code{"all"} if you want to fetch
-all issues from GitHub (closed and open).
-Only taken into account if \code{source} is set to \code{"online"}.}
+\item{\dots}{Other parameters for GitLab as \code{gitlab_url} and \code{private_token}.}
 }
 \value{
 The function \code{get_issues} returns an object of class \code{IssuesTB}. It

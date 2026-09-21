@@ -1,7 +1,7 @@
 #' @title Check if a selector is Empty
 #'
 #' @description
-#' Checks whether a SetectorTB object contains any elements.
+#' Checks whether a SelectorTB object contains any elements.
 #'
 #' @param selector A `SelectorTB` object to check.
 #'
@@ -124,6 +124,7 @@ init_selector <- function(source, ...) {
 #' )
 #' @importFrom checkmate assert_character
 #' @dev
+#'
 init_selector_github <- function(owner = NULL, repo = NULL, ...) {
     checkmate::assert_character(owner, null.ok = TRUE)
     checkmate::assert_character(repo, null.ok = TRUE)

@@ -31,7 +31,7 @@ issues_selector <- init_selector(
         "list_issues.yaml"
     )
 )
-all_issues <- get_issues(selector = local_issues_selector)
+all_issues <- get_issues(selector = issues_selector)
 
 with_comments(all_issues)
 with_comments(all_issues, negate = TRUE)

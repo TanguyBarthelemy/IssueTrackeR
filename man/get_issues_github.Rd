@@ -44,8 +44,8 @@ my_issues1 <- IssueTrackeR:::get_issues_github(
     repo = "rjd3toolkit"
 )
 my_issues2 <- IssueTrackeR:::get_issues_github(
-    owner = "jdemetra",
-    repo = "jwsacruncher",
+    owner = "TanguyBarthelemy",
+    repo = "IssueTrackeR",
     state = "all"
 )
 }

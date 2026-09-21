@@ -39,7 +39,7 @@ issues_selector <- init_selector(
         "list_issues.yaml"
     )
 )
-all_issues <- get_issues(selector = local_issues_selector)
+all_issues <- get_issues(selector = issues_selector)
 a_matrix <- IssueTrackeR:::generate_mat(all_issues, by = "creator", n = 2)
 
 }

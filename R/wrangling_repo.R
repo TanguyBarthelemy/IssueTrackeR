@@ -3,6 +3,7 @@
 #' @description
 #' Returns a list of repos.
 #'
+#' @param owner Character string containing the owner name
 #' @inheritParams get
 #' @param public Boolean. Should we include public repos?
 #' (Default \code{TRUE})

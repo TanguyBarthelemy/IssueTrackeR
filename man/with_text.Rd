@@ -40,7 +40,7 @@ issues_selector <- init_selector(
     )
 )
 
-all_issues <- get_issues(selector = local_issues_selector)
+all_issues <- get_issues(selector = issues_selector)
 
 with_text(all_issues, pattern = "Excel")
 

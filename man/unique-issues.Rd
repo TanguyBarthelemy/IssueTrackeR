@@ -38,7 +38,7 @@ issues_selector <- init_selector(
         "list_issues.yaml"
     )
 )
-open_issues <- get_issues(selector = local_issues_selector)
+open_issues <- get_issues(selector = issues_selector)
 new_issues <- unique(open_issues)
 
 }

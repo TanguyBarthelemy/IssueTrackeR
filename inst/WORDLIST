@@ -2,6 +2,7 @@ etc
 
 IssueTB
 IssuesTB
+SelectorTB
 
 booleans
 Booleans
@@ -9,6 +10,7 @@ Booleans
 Codecov
 CodeFactor
 
+GitLab
 GH
 gh
 tidyverse

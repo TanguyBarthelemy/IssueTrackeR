@@ -4,29 +4,11 @@
 #' use \code{\link[gh]{gh}} to ask the API of GitHub and et a list of issues
 #' with their labels and milestones.
 #'
-#' @param source a character string that is either \code{"online"} if you want
-#' to fetch information from GitHub or \code{"local"} (by default) if you want
-#' to fetch information locally.
-#' @param dataset_dir A character string specifying the path which contains the
-#' datasets (only taken into account if \code{source} is set to \code{"local"}).
-#' Defaults to the package option \code{IssueTrackeR.dataset.dir}.
-#' @param dataset_name A character string specifying the name of the datasets
-#' which will be written (only taken into account if \code{source} is set to
-#' \code{"local"}).
-#' Defaults to \code{"list_issues.yaml"}.
-#' @param repo A character string specifying the GitHub repository name (only
-#' taken into account if \code{source} is set to \code{"online"}).
-#' Defaults to the package option \code{IssueTrackeR.repo}.
-#' @param owner A character string specifying the GitHub owner (only taken
-#' into account if \code{source} is set to \code{"online"}).
-#' Defaults to the package option \code{IssueTrackeR.owner}.
-#' @param state a character string that is either \code{"open"} (by default) if
-#' you want to fetch only open issues from GitHub, \code{"closed"} if you want
-#' to fetch only closed issues from GitHub or \code{"all"} if you want to fetch
-#' all issues from GitHub (closed and open).
-#' Only taken into account if \code{source} is set to \code{"online"}.
+#' @param selector A `SelectorTB` object (to define the range of the repo /
+#'   source used). Created with [`init_selector()`].
 #' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
+#' @param \dots Other parameters for GitLab as `gitlab_url` and `private_token`.
 #'
 #' @details
 #' The functions of get type are useful to retrieve object related to issues
@@ -161,8 +143,8 @@ get_issues <- function(selector, verbose = TRUE, ...) {
 #'     repo = "rjd3toolkit"
 #' )
 #' my_issues2 <- IssueTrackeR:::get_issues_github(
-#'     owner = "jdemetra",
-#'     repo = "jwsacruncher",
+#'     owner = "TanguyBarthelemy",
+#'     repo = "IssueTrackeR",
 #'     state = "all"
 #' )
 #' }
@@ -170,10 +152,10 @@ get_issues <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_issues_github <- function(
-    repo = NULL,
-    owner = NULL,
-    state = c("open", "opened", "closed", "all"),
-    verbose = TRUE
+        repo = NULL,
+        owner = NULL,
+        state = c("open", "opened", "closed", "all"),
+        verbose = TRUE
 ) {
     state <- match.arg(state)
     if (state == "opened") {
@@ -247,10 +229,10 @@ get_issues_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_issues_gitlab <- function(
-    project_id,
-    state = c("open", "opened", "closed", "all"),
-    verbose = TRUE,
-    ...
+        project_id,
+        state = c("open", "opened", "closed", "all"),
+        verbose = TRUE,
+        ...
 ) {
     state <- match.arg(state)
     if (state == "open") {
@@ -296,8 +278,8 @@ get_issues_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_issues_local <- function(
-    file = NULL,
-    verbose = TRUE
+        file = NULL,
+        verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)
@@ -387,10 +369,10 @@ get_labels <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_labels_github <- function(
-    repo = NULL,
-    owner = NULL,
-    verbose = TRUE,
-    ...
+        repo = NULL,
+        owner = NULL,
+        verbose = TRUE,
+        ...
 ) {
     checkmate::assert_flag(verbose)
     checkmate::assert_character(repo, len = 1L)
@@ -441,9 +423,9 @@ get_labels_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_labels_gitlab <- function(
-    project_id,
-    verbose = TRUE,
-    ...
+        project_id,
+        verbose = TRUE,
+        ...
 ) {
     checkmate::assert_flag(verbose)
     checkmate::assert_count(project_id)
@@ -494,8 +476,8 @@ get_labels_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
 get_labels_local <- function(
-    file = NULL,
-    verbose = TRUE
+        file = NULL,
+        verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)
@@ -554,10 +536,10 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_milestones_github <- function(
-    repo = NULL,
-    owner = NULL,
-    state = c("open", "opened", "closed", "all"),
-    verbose = TRUE
+        repo = NULL,
+        owner = NULL,
+        state = c("open", "opened", "closed", "all"),
+        verbose = TRUE
 ) {
     state <- match.arg(state)
     if (state == "opened") {
@@ -597,10 +579,10 @@ get_milestones_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_milestones_gitlab <- function(
-    project_id,
-    state = c("open", "opened", "closed", "all"),
-    verbose = TRUE,
-    ...
+        project_id,
+        state = c("open", "opened", "closed", "all"),
+        verbose = TRUE,
+        ...
 ) {
     state <- match.arg(state)
     if (state == "open") {
@@ -627,11 +609,11 @@ get_milestones_gitlab <- function(
             default = NA_character_
         ),
         description = null_to_default(
-            raw_labels[["description"]],
+            raw_milestones[["description"]],
             default = NA_character_
         ),
         due_on = format_timestamp(null_to_default(
-            raw_labels[["due_date"]],
+            raw_milestones[["due_date"]],
             default = NA_character_
         )),
         closed_at = format_timestamp(NA_character_),
@@ -656,8 +638,8 @@ get_milestones_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
 get_milestones_local <- function(
-    file = NULL,
-    verbose = TRUE
+        file = NULL,
+        verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)

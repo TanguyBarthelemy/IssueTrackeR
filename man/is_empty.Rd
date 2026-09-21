@@ -13,7 +13,7 @@ is_empty(selector)
 \code{TRUE} if the selector is empty, \code{FALSE} otherwise.
 }
 \description{
-Checks whether a SetectorTB object contains any elements.
+Checks whether a SelectorTB object contains any elements.
 }
 \examples{
 empty_sel <- IssueTrackeR:::empty_selector()

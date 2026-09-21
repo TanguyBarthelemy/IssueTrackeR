@@ -5,10 +5,7 @@
 #' to a YAML file.
 #'
 #' @param x An R object to export.
-#' @param dataset_dir The destination directory where the YAML file will be
-#'   saved. By default, the system's temporary directory is used (`tempdir()`).
-#' @param dataset_name The name of the output file (without extension).
-#'   By default, the name is `"object.yaml"`.
+#' @inheritParams write
 #' @param overwrite A boolean indicating whether to overwrite the file if it
 #'   already exists. Defaults to `TRUE`.
 #' @param verbose A boolean indicating whether to print additional
@@ -97,6 +94,10 @@
 #' @param x an object of class \code{IssuesTB}, \code{LabelsTB} or
 #' \code{MilestonesTB}.
 #' @inheritParams get
+#' @param dataset_dir The destination directory where the YAML file will be
+#'   saved. By default, the system's temporary directory is used (`tempdir()`).
+#' @param dataset_name The name of the output file (without extension).
+#'   By default, the name is `"object.yaml"`.
 #' @param overwrite Boolean. If the dataset file already exists,
 #'   should it be overwrite? Default is TRUE.
 #' @param \dots Currently not used.
@@ -153,7 +154,7 @@
 #' write_to_dataset(x = milestones, dataset_dir = tempdir(),
 #'                  dataset_name = "my_milestones")
 #'
-#' @rdname write
+#' @name write
 #'
 write_to_dataset <- function(
     x,

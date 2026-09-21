@@ -31,7 +31,7 @@ issues_selector <- init_selector(
         "list_issues.yaml"
     )
 )
-all_issues <- get_issues(selector = local_issues_selector)
-IssueTrackeR:::plot_created_closed(issues)
+all_issues <- get_issues(selector = issues_selector)
+IssueTrackeR:::plot_created_closed(all_issues)
 }
 \keyword{internal}

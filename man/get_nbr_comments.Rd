@@ -31,7 +31,7 @@ issues_selector <- init_selector(
     )
 )
 
-all_issues <- get_issues(selector = local_issues_selector)
+all_issues <- get_issues(selector = issues_selector)
 
 get_nbr_comments(all_issues)
 get_nbr_comments(all_issues[1L, ])

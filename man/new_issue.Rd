@@ -67,13 +67,9 @@ issue.}
 
 \item{milestone}{a string (or missing). The milestone of the issue.}
 
-\item{repo}{A character string specifying the GitHub repository name (only
-taken into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.repo}.}
+\item{repo}{Character string containing the repository name}
 
-\item{owner}{A character string specifying the GitHub owner (only taken
-into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.owner}.}
+\item{owner}{Character string containing the owner name}
 
 \item{url}{a string. The URL of the API to the GitHub issue.}
 
@@ -99,12 +95,15 @@ Create a new \code{IssueTB} object
 issue1 <- new_issue()
 
 # Custom issue
-issue1 <- new_issue(
+issue2 <- new_issue(
     title = "Nouvelle issue",
     body = "Un nouveau bug pour la fonction...",
     number = 47L,
     created_at = Sys.Date()
 )
 
-issue2 <- new_issue(x = issue1)
+dput(issue1)
+dput(issue2)
+
+issue3 <- new_issue(x = issue2)
 }

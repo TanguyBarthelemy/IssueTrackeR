@@ -30,7 +30,7 @@ issues_selector <- init_selector(
     )
 )
 
-all_issues <- get_issues(selector = local_issues_selector)
+all_issues <- get_issues(selector = issues_selector)
 
 with_labels(all_issues, pattern = "Bug")
 

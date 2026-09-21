@@ -33,8 +33,8 @@ issues_selector <- init_selector(
         "list_issues.yaml"
     )
 )
-all_issues <- get_issues(selector = local_issues_selector)
-age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
+all_issues <- get_issues(selector = issues_selector)
+age_matrix <- IssueTrackeR:::generate_age_mat(all_issues, n = 2)
 
 }
 \keyword{internal}

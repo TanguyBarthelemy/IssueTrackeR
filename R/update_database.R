@@ -4,17 +4,8 @@
 #' Update the different local database (issues, labels and milestones) with the
 #' online reference.
 #'
-#' @param datasets_name A named character string of length 4, specifying the
-#' names of the different datasets which will be written. The names
-#' \code{datasets_name} have to be \code{"open"}, \code{"closed"},
-#' \code{"labels"} and \code{"milestones"}.
-#' Defaults to \code{
-#' c(open = "open_issues.yaml",
-#'   closed = "closed_issues.yaml",
-#'   labels = "list_labels.yaml",
-#'   milestones = "list_milestones.yaml")
-#' }.
 #' @inheritParams get
+#' @inheritParams write
 #' @param \dots Additional arguments for connecting to the GitHub repository:
 #' * \code{repo} A character string specifying the GitHub repository name.
 #' Defaults to the package option \code{IssueTrackeR.repo}.
@@ -31,7 +22,7 @@
 #' jdemetra_selector <- init_selector(
 #'     source = "GitHub",
 #'     owner = "jdemetra",
-#'     repo = "jdplus-main",
+#'     repo = "jdplus-revisions",
 #'     state = "all"
 #' )
 #'

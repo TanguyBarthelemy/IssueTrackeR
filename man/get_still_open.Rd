@@ -34,7 +34,7 @@ issues_selector <- init_selector(
         "list_issues.yaml"
     )
 )
-all_issues <- get_issues(selector = local_issues_selector)
+all_issues <- get_issues(selector = issues_selector)
 all_issues <- IssueTrackeR:::get_still_open(all_issues, lag = 1L)
 
 }

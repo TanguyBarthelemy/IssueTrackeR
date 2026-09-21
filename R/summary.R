@@ -64,7 +64,7 @@ prepare_label_display <- function(x, html_url) {
 #'         "list_issues.yaml"
 #'     )
 #' )
-#' all_issues <- get_issues(selector = local_issues_selector)
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' # Summarise one issue
 #' summary(all_issues[1, ])
