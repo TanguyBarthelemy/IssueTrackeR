@@ -10,7 +10,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 * Support for GitLab repositories
-* New ways of selecting repositories with selector objects
+* New ways of selecting repositories with selector objects (`SelectorTB` class).
 
 ### Changed
 
