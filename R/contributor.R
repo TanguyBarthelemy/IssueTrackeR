@@ -1,5 +1,5 @@
-# Who contributes?
-
+#' @title Who contributes?
+#' @noRd
 report_contribution <- function(x) {
     opener <- table(x$creator)
     commenter <- x$comments |>

@@ -9,7 +9,7 @@ plot_resolution_ecdf(x, verbose = TRUE)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{verbose}{A logical value indicating whether to print additional
+\item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
 }
 \value{
@@ -21,11 +21,14 @@ resolution times on a log scale (1 hour, 1 day, 1 week, 1 month, 1 year,
 3 years).
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
-    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "closed_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
+all_issues <- get_issues(selector = issues_selector)
 
 IssueTrackeR:::plot_resolution_ecdf(all_issues)
 }

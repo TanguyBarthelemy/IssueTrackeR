@@ -4,31 +4,16 @@
 \alias{update_database}
 \title{Update database}
 \usage{
-update_database(
-  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-  datasets_name = c(open = "open_issues.yaml", closed = "closed_issues.yaml", labels =
-    "list_labels.yaml", milestones = "list_milestones.yaml"),
-  verbose = TRUE,
-  ...
-)
+update_database(selector, dataset_dir, verbose = TRUE, ...)
 }
 \arguments{
-\item{dataset_dir}{A character string specifying the path which contains the
-datasets (only taken into account if \code{source} is set to \code{"local"}).
-Defaults to the package option \code{IssueTrackeR.dataset.dir}.}
+\item{selector}{A \code{SelectorTB} object (to define the range of the repo /
+source used). Created with \code{\link[=init_selector]{init_selector()}}.}
 
-\item{datasets_name}{A named character string of length 4, specifying the
-names of the different datasets which will be written. The names
-\code{datasets_name} have to be \code{"open"}, \code{"closed"},
-\code{"labels"} and \code{"milestones"}.
-Defaults to \code{
-c(open = "open_issues.yaml",
-  closed = "closed_issues.yaml",
-  labels = "list_labels.yaml",
-  milestones = "list_milestones.yaml")
-}.}
+\item{dataset_dir}{The destination directory where the YAML file will be
+saved. By default, the system's temporary directory is used (\code{tempdir()}).}
 
-\item{verbose}{A logical value indicating whether to print additional
+\item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
 
 \item{\dots}{Additional arguments for connecting to the GitHub repository:
@@ -51,7 +36,17 @@ online reference.
 \examples{
 \dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
 \donttest{
-update_database(dataset_dir = tempdir())
+jdemetra_selector <- init_selector(
+    source = "GitHub",
+    owner = "jdemetra",
+    repo = "jdplus-revisions",
+    state = "all"
+)
+
+update_database(
+    selector = jdemetra_selector,
+    dataset_dir = tempdir()
+)
 }
 \dontshow{\}) # examplesIf}
 }

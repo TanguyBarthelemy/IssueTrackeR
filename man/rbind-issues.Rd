@@ -21,25 +21,24 @@ objects.
 S3 method for combining \code{IssueTB} objects by rows.
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-open_issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
+open_issues <- get_issues(selector = issues_selector)
 new_issues <- rbind(open_issues[1, ], open_issues[-1, ])
-path <- system.file("data_issues", package = "IssueTrackeR")
-open_issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
-closed_issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "closed_issues.yaml"
-)
-new_issues <- rbind(open_issues, closed_issues)
+open_issues <- get_issues(selector = issues_selector)
+new_issues <- rbind(open_issues, open_issues)
 }
 \seealso{
 \code{\link[base]{rbind}} for the generic function

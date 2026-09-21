@@ -5,13 +5,10 @@
 #' to a YAML file.
 #'
 #' @param x An R object to export.
-#' @param dataset_dir The destination directory where the YAML file will be
-#'   saved. By default, the system's temporary directory is used (`tempdir()`).
-#' @param dataset_name The name of the output file (without extension).
-#'   By default, the name is `"object.yaml"`.
-#' @param overwrite Logical indicating whether to overwrite the file if it
+#' @inheritParams write
+#' @param overwrite A boolean indicating whether to overwrite the file if it
 #'   already exists. Defaults to `TRUE`.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'
@@ -97,6 +94,10 @@
 #' @param x an object of class \code{IssuesTB}, \code{LabelsTB} or
 #' \code{MilestonesTB}.
 #' @inheritParams get
+#' @param dataset_dir The destination directory where the YAML file will be
+#'   saved. By default, the system's temporary directory is used (`tempdir()`).
+#' @param dataset_name The name of the output file (without extension).
+#'   By default, the name is `"object.yaml"`.
 #' @param overwrite Boolean. If the dataset file already exists,
 #'   should it be overwrite? Default is TRUE.
 #' @param \dots Currently not used.
@@ -116,22 +117,31 @@
 #' @export
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' milestones <- get_milestones(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_milestones.yaml"
+#' labels_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_labels.yaml"
+#'     )
 #' )
-#' labels <- get_labels(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "list_labels.yaml"
+#' milestones_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_milestones.yaml"
+#'     )
 #' )
+#'
+#' issues <- get_issues(selector = issues_selector)
+#' labels <- get_labels(selector = labels_selector)
+#' milestones <- get_milestones(selector = milestones_selector)
 #'
 #' write_to_dataset(x = issues, dataset_dir = tempdir())
 #' write_to_dataset(x = labels, dataset_dir = tempdir())
@@ -144,7 +154,7 @@
 #' write_to_dataset(x = milestones, dataset_dir = tempdir(),
 #'                  dataset_name = "my_milestones")
 #'
-#' @rdname write
+#' @name write
 #'
 write_to_dataset <- function(
     x,

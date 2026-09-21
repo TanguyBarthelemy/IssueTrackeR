@@ -14,6 +14,8 @@
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.
 #' @inheritParams get
+#' @inheritParams get_all_repos
+#' @inheritParams new_issues
 #' @param url a string. The URL of the API to the GitHub issue.
 #' @param html_url a string. The URL to the GitHub issue.
 #' @param comments vector of string (the comments of the issue)
@@ -31,14 +33,19 @@
 #' issue1 <- new_issue()
 #'
 #' # Custom issue
-#' issue1 <- new_issue(
+#' issue2 <- new_issue(
 #'     title = "Nouvelle issue",
 #'     body = "Un nouveau bug pour la fonction...",
 #'     number = 47L,
 #'     created_at = Sys.Date()
 #' )
 #'
-#' issue2 <- new_issue(x = issue1)
+#' dput(issue1)
+#' dput(issue2)
+#'
+#' issue3 <- new_issue(x = issue2)
+#' @name new_issue
+#'
 new_issue <- function(x = NULL, ...) {
     UseMethod("new_issue", x)
 }
@@ -192,7 +199,8 @@ new_issue.default <- function(
 #' @param labels a list of vector string (or missing). The labels of the issues.
 #' @param milestone a vector of string (or missing). The milestones of the
 #' issues.
-#' @inheritParams get
+#' @param owner Character string containing the owner name
+#' @param repo Character string containing the repository name
 #' @param url a vector of string. The URLs of the API to the GitHub issues.
 #' @param html_url a vector of string. The URLs to the GitHub issues.
 #' @param comments a list of vector string. The comments of the issues.
@@ -238,7 +246,7 @@ new_issue.default <- function(
 #'     number = 1:2,
 #'     created_at = c(Sys.Date() - 30, Sys.Date())
 #' )
-#' @rdname new_issues
+#' @name new_issues
 #'
 new_issues <- function(x = NULL, ...) {
     UseMethod("new_issues", x)
@@ -279,6 +287,14 @@ new_issues.data.frame <- function(x, ...) {
 new_issues.list <- function(x, ...) {
     issues <- do.call(args = x, what = new_issues)
     return(issues)
+}
+
+#' @rdname new_issues
+#' @exportS3Method new_issues NULL
+#' @method new_issues NULL
+#' @export
+new_issues.NULL <- function(x, ...) {
+    return(new_issues.default(...))
 }
 
 #' @rdname new_issues
@@ -402,12 +418,15 @@ new_issues.default <- function(
 #' @returns Information inside the `IssuesTB` object
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
+#'
 #' first_issue <- open_issues[1, ]
 #' number <- open_issues[1, 1]
 #' state <- open_issues[1, "state"]
@@ -422,14 +441,14 @@ new_issues.default <- function(
 #' @noRd
 `[.IssuesTB` <- function(x, i, j, drop = TRUE) {
     output <- NextMethod("[")
-    Narg <- nargs() - !missing(drop)
+    nb_args <- nargs() - !missing(drop)
     # Cas sélection de colonne
     if (!missing(j)) {
         if (length(j) > 1L || !drop) {
             return(as.data.frame(output))
         }
         return(output)
-    } else if (Narg == 2L && !missing(i)) {
+    } else if (nb_args == 2L && !missing(i)) {
         return(as.data.frame(output))
     }
 
@@ -471,18 +490,15 @@ append <- function(x, values, after = length(x)) {
 #' @method append IssuesTB
 #' @export
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' closed_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "closed_issues.yaml"
-#' )
-#' new_issues <- append(open_issues, closed_issues)
+#' all_issues <- get_issues(selector = issues_selector)
+#' new_issues <- append(all_issues, all_issues)
 append.IssuesTB <- function(x, values, after = nrow(x)) {
     if (after > nrow(x)) {
         after <- nrow(x)
@@ -530,12 +546,14 @@ append.default <- function(x, values, after = length(x)) {
 #'
 #' @name rbind-issues
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- rbind(open_issues[1, ], open_issues[-1, ])
 #' @exportS3Method rbind IssueTB
 #' @method rbind IssueTB
@@ -552,18 +570,15 @@ rbind.IssueTB <- function(...) {
 #' @method rbind IssuesTB
 #' @export
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' closed_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "closed_issues.yaml"
-#' )
-#' new_issues <- rbind(open_issues, closed_issues)
+#' open_issues <- get_issues(selector = issues_selector)
+#' new_issues <- rbind(open_issues, open_issues)
 rbind.IssuesTB <- function(...) {
     list(...) |>
         lapply(FUN = new_issues) |>
@@ -578,12 +593,14 @@ rbind.IssuesTB <- function(...) {
 #' @method subset IssuesTB
 #' @export
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- subset(open_issues, number < 150)
 subset.IssuesTB <- function(x, ...) {
     output <- new_issues(NextMethod())
@@ -621,12 +638,14 @@ sample <- function(x, size, replace = FALSE, prob = NULL) {
 
 #' @param x An object of class \code{IssuesTB}.
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- sample(open_issues, size = 5L)
 #' @rdname sample-issues
 #' @exportS3Method sample IssuesTB
@@ -673,12 +692,14 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 #' https://stat.ethz.ch/R-manual/R-devel/library/base/html/unique.html
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- unique(open_issues)
 #'
 #' @seealso [base::unique()], [base::duplicated()]
@@ -697,18 +718,21 @@ unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
 #' Generic function to count the number of issues in a list of issues.
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'
 #' @returns Integer. The number of issues.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' count_issues(all_issues)
 #' @export

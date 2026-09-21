@@ -34,18 +34,21 @@ get_dates_vec <- function(x) {
 #' Calculates the time taken to resolve issues in seconds.
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #' @param \dots Currently not used.
 #'
 #' @returns Integer vector of resolution times in seconds.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "closed_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' IssueTrackeR:::get_resolution_times(all_issues)
 #' @dev
@@ -94,17 +97,20 @@ get_resolution_times.default <- function(...) {
 #' 1-3 years, > 3 years).
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #'
 #' @returns Invisibly returns `NULL`.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "closed_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' IssueTrackeR:::plot_resolution_bars(all_issues)
 #'
@@ -173,17 +179,20 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
 #' 3 years).
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
+#' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #'
 #' @returns Invisibly returns `NULL`.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "closed_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' IssueTrackeR:::plot_resolution_ecdf(all_issues)
 #' @importFrom graphics axis
@@ -353,13 +362,15 @@ add_n_years <- function(x, n) {
 #' @returns `ts` object with still open issues counts per month.
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' open_issues <- IssueTrackeR:::get_still_open(issues, lag = 1L)
+#' all_issues <- get_issues(selector = issues_selector)
+#' all_issues <- IssueTrackeR:::get_still_open(all_issues, lag = 1L)
 #'
 #' @dev
 get_still_open <- function(x, ...) {
@@ -410,13 +421,15 @@ get_still_open.default <- function(...) {
 #' @returns `ts` matrix of open issue counts by age category.
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
+#' all_issues <- get_issues(selector = issues_selector)
+#' age_matrix <- IssueTrackeR:::generate_age_mat(all_issues, n = 2)
 #'
 #' @dev
 generate_age_mat <- function(x, ...) {
@@ -472,13 +485,15 @@ generate_age_mat.default <- function(...) {
 #'
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' a_matrix <- IssueTrackeR:::generate_mat(issues, by = "creator", n = 2)
+#' all_issues <- get_issues(selector = issues_selector)
+#' a_matrix <- IssueTrackeR:::generate_mat(all_issues, by = "creator", n = 2)
 #'
 #' @dev
 #' @name generate_mat
@@ -562,13 +577,15 @@ generate_mat.default <- function(...) {
 #' where each coloured area represents a category of open issues over time.
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#' age_mat <- IssueTrackeR:::generate_age_mat(issues, 3L)
+#' all_issues <- get_issues(selector = issues_selector)
+#' age_mat <- IssueTrackeR:::generate_age_mat(all_issues, 3L)
 #'
 #' IssueTrackeR:::plot_area_chart(age_mat)
 #'
@@ -635,14 +652,15 @@ plot_area_chart <- function(categorised_mat, title = "Number of issues") {
 #' - Black line: Cumulative backlog of open issues
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
-#'
-#' IssueTrackeR:::plot_created_closed(issues)
+#' all_issues <- get_issues(selector = issues_selector)
+#' IssueTrackeR:::plot_created_closed(all_issues)
 #' @dev
 #'
 #' @importFrom graphics abline
@@ -766,18 +784,14 @@ plot_created_closed <- function(x) {
 #' Invisibly returns \code{x}.
 #'
 #' @examples
-#' all_issues <- rbind(
-#'     get_issues(
-#'         source = "local",
-#'         dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'         dataset_name = "open_issues.yaml"
-#'     ),
-#'     get_issues(
-#'         source = "local",
-#'         dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'         dataset_name = "closed_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
 #'     )
 #' )
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' plot(all_issues, type = "historic")
 #' plot(all_issues, type = "created-closed")

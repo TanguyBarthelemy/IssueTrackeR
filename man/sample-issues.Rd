@@ -43,12 +43,14 @@ cases, refer to the original documentation:
 https://stat.ethz.ch/R-manual/R-devel/library/base/html/sample.html
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-open_issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
+open_issues <- get_issues(selector = issues_selector)
 new_issues <- sample(open_issues, size = 5L)
 }
 \seealso{

@@ -13,11 +13,14 @@
 #' @returns invisibly (with \code{invisible()}) \code{NULL}.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     file = file.path(
+#'         system.file("data_issues", package = "IssueTrackeR"),
+#'         "list_issues.yaml"
+#'     )
 #' )
+#' all_issues <- get_issues(selector = issues_selector)
 #'
 #' # Display one issue
 #' print(all_issues[1, ])
@@ -188,16 +191,9 @@ print.summary.IssuesTB <- function(x, ...) {
 print.LabelsTB <- function(x, ...) {
     x$labels_bgcolor <- x$color
     x$labels_color <- c("grey8", "ivory")[
-        isDark(x$labels_bgcolor) + 1L
+        is_dark(x$labels_bgcolor) + 1L
     ]
-    x$labels_url <- file.path(
-        "https://github.com",
-        x$owner,
-        x$repo,
-        "labels",
-        utils::URLencode(x$name),
-        fsep = "/"
-    )
+    x$labels_url <- x$url
     x$formated_label <- vapply(
         X = seq_len(nrow(x)),
         FUN = function(k) {
@@ -233,12 +229,12 @@ print.LabelsTB <- function(x, ...) {
             paste0(
                 "\n- ",
                 cli::style_hyperlink(
-                    text = paste(owner_name, repo_name, sep = "/"),
-                    url = paste(
+                    text = file.path(owner_name, repo_name, fsep = "/"),
+                    url = file.path(
                         "https://github.com",
                         owner_name,
                         repo_name,
-                        sep = "/"
+                        fsep = "/"
                     )
                 ),
                 ":"

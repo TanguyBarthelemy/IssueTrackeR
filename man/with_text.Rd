@@ -32,11 +32,16 @@ Generic function to filter issues with a given text pattern in the title,
 body, or comments of a GitHub Issue object or a collection of Issues.
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
-    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
+
+all_issues <- get_issues(selector = issues_selector)
+
 with_text(all_issues, pattern = "Excel")
 
 }

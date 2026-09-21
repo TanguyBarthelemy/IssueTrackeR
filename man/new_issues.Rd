@@ -6,6 +6,7 @@
 \alias{new_issues.IssuesTB}
 \alias{new_issues.data.frame}
 \alias{new_issues.list}
+\alias{new_issues.NULL}
 \alias{new_issues.default}
 \title{Create a new \code{IssuesTB} object}
 \usage{
@@ -18,6 +19,8 @@ new_issues(x = NULL, ...)
 \method{new_issues}{data.frame}(x, ...)
 
 \method{new_issues}{list}(x, ...)
+
+\method{new_issues}{`NULL`}(x, ...)
 
 \method{new_issues}{default}(
   x,
@@ -72,13 +75,9 @@ closed the issues.}
 \item{milestone}{a vector of string (or missing). The milestones of the
 issues.}
 
-\item{repo}{A character string specifying the GitHub repository name (only
-taken into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.repo}.}
+\item{repo}{Character string containing the repository name}
 
-\item{owner}{A character string specifying the GitHub owner (only taken
-into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.owner}.}
+\item{owner}{Character string containing the owner name}
 
 \item{url}{a vector of string. The URLs of the API to the GitHub issues.}
 

@@ -133,18 +133,19 @@ expect_issue <- function(x) {
 #     dataset_name = "closed_issues.yaml"
 # )
 
-my_issues <- get_issues(
+selector_issues <- init_selector(
     source = "local",
-    dataset_dir = testthat::test_path("data"),
-    dataset_name = "closed_issues.yaml"
+    file = file.path(testthat::test_path("data"), "closed_issues.yaml")
 )
-my_labels <- get_labels(
+selector_labels <- init_selector(
     source = "local",
-    dataset_dir = testthat::test_path("data"),
-    dataset_name = "list_labels.yaml"
+    file = file.path(testthat::test_path("data"), "list_labels.yaml")
 )
-my_milestones <- get_milestones(
+selector_milestones <- init_selector(
     source = "local",
-    dataset_dir = testthat::test_path("data"),
-    dataset_name = "list_milestones.yaml"
+    file = file.path(testthat::test_path("data"), "list_milestones.yaml")
 )
+
+my_issues <- get_issues(selector_issues)
+my_labels <- get_labels(selector_labels)
+my_milestones <- get_milestones(selector_milestones)

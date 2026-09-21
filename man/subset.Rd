@@ -56,12 +56,14 @@ This is a generic function, with methods supplied for matrices, data
 }
 
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-open_issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
+open_issues <- get_issues(selector = issues_selector)
 new_issues <- subset(open_issues, number < 150)
 }
 \seealso{

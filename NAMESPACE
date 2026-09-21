@@ -11,6 +11,7 @@ S3method(base::plot,IssuesTB)
 S3method(count_issues,IssuesTB)
 S3method(count_issues,default)
 S3method(extract_nth,IssuesTB)
+S3method(extract_nth,SelectorTB)
 S3method(extract_nth,default)
 S3method(generate_age_mat,IssuesTB)
 S3method(generate_age_mat,default)
@@ -27,8 +28,10 @@ S3method(new_issue,IssuesTB)
 S3method(new_issue,data.frame)
 S3method(new_issue,default)
 S3method(new_issue,list)
+S3method(new_issues,"NULL")
 S3method(new_issues,IssueTB)
 S3method(new_issues,IssuesTB)
+S3method(new_issues,NULL)
 S3method(new_issues,data.frame)
 S3method(new_issues,default)
 S3method(new_issues,list)
@@ -41,6 +44,9 @@ S3method(print,summary.IssuesTB)
 S3method(print,summary.LabelsTB)
 S3method(rbind,IssueTB)
 S3method(rbind,IssuesTB)
+S3method(remove_nth,IssuesTB)
+S3method(remove_nth,SelectorTB)
+S3method(remove_nth,default)
 S3method(sample,IssuesTB)
 S3method(sample,default)
 S3method(subset,IssuesTB)
@@ -64,8 +70,11 @@ export(get_issues)
 export(get_labels)
 export(get_milestones)
 export(get_nbr_comments)
+export(init_selector)
+export(merge_selector)
 export(new_issue)
 export(new_issues)
+export(remove_nth)
 export(reset_options)
 export(sample)
 export(update_database)
@@ -75,8 +84,12 @@ export(with_text)
 export(write_to_dataset)
 importFrom(checkmate,
   assert_character,
+  assert_class,
+  assert_count,
   assert_data_frame,
+  assert_flag,
   assert_integer,
+  assert_integerish,
   assert_list,
   assert_numeric,
   assert_scalar
@@ -97,6 +110,11 @@ importFrom(gh,
   gh_rate_limit,
   gh_token,
   gh_whoami
+)
+importFrom(gitlabr,
+  gitlab,
+  gl_get_project,
+  gl_list_issues
 )
 importFrom(grDevices,
   col2rgb,

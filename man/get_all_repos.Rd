@@ -7,9 +7,7 @@
 get_all_repos(owner, public = TRUE, private = TRUE, verbose = TRUE)
 }
 \arguments{
-\item{owner}{A character string specifying the GitHub owner (only taken
-into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.owner}.}
+\item{owner}{Character string containing the owner name}
 
 \item{public}{Boolean. Should we include public repos?
 (Default \code{TRUE})}
@@ -17,7 +15,7 @@ Defaults to the package option \code{IssueTrackeR.owner}.}
 \item{private}{Boolean. Should we include private repos?
 (Default \code{TRUE})}
 
-\item{verbose}{A logical value indicating whether to print additional
+\item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
 }
 \value{

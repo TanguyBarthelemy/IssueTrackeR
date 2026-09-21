@@ -24,13 +24,14 @@ Generates a composite plot showing:
 }
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
 )
-
-IssueTrackeR:::plot_created_closed(issues)
+all_issues <- get_issues(selector = issues_selector)
+IssueTrackeR:::plot_created_closed(all_issues)
 }
 \keyword{internal}

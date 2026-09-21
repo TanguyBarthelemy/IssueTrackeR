@@ -8,6 +8,9 @@ on:
 jobs:
   mutation-test:
     runs-on: ubuntu-latest
+    env:
+      GITLAB_SSPCLOUD_API: ${{ secrets.GITLAB_SSPCLOUD_API }}
+      GITLAB_TRACTORTOM_API: ${{ secrets.GITLAB_TRACTORTOM_API }}
     permissions:
       contents: write
     steps:

@@ -46,19 +46,19 @@ pak::pak("TanguyBarthelemy/IssueTrackeR")
 
 ## Features
 
-- **Retrieve Issues**: Fetch issues from any (with sufficient rights)
-  GitHub repository.
-- **Issue Management**: Class S3 to manage the issues as a datasets
-  within R.
-- **Filtering**: Filter issues by labels, content (title, body and
-  comments) and milestones.
+- **Multi-source support**: Fetch issues from GitHub, GitLab, or local
+  YAML files.
+- **Visualization**: Plot issue trends, resolution times, and backlog
+  evolution.
+- **Save issues locally**: Write the issues, labels and milestones
+  locally to access it without connection.
 
 ## Usage
 
 ``` r
 library("IssueTrackeR")
 #> Currently, the default options are:
-#> - location for datasets is /tmp/RtmpAaWI8a/data
+#> - location for datasets is /tmp/RtmpMbmZ7e/data
 #> - owner: rjdverse
 #> - repo: rjdemetra
 #> 
@@ -68,37 +68,72 @@ library("IssueTrackeR")
 #>     append, sample
 ```
 
-### Retrieve information from GitHub
-
-To get information from a repository, you can call the functions
-`get_issues`, `get_labels` and `get_milestones`
+### Create a selector
 
 ``` r
-# From online
-my_issues <- get_issues(
-    source = "online",
-    owner = "jdemetra",
-    repo = "jdplus-main",
-    verbose = FALSE
+# Configure {gitlabr} to retrieve issues from GitLab
+gitlabr::set_gitlab_connection(
+    gitlab_url = "https://gitlab.com",
+    private_token = Sys.getenv("GITLAB_TRACTORTOM_API")
 )
-my_labels <- get_labels(
-    source = "online",
-    owner = "jdemetra",
-    repo = "jdplus-main"
+
+# Select repos from GitHub
+selector1 <- init_selector(
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
+    repo = "IssueTrackeR"
 )
-#> Repo: jdplus-main  owner: jdemetra 
+
+# Select project from GitLab
+selector2 <- init_selector(
+    source = "GitLab",
+    project_id = c(51699988, 29346974, 15028532)
+)
+
+# Select list of issues from local files
+selector3 <- init_selector(
+    source = "local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
+)
+
+selector_issues <- merge_selector(selector1, selector2, selector3)
+selector_other <- merge_selector(selector1, selector2)
+```
+
+### Get the issues
+
+To get information from a repository, you can call the functions
+`get_issues`, `get_labels` and `get_milestones`:
+
+``` r
+my_issues <- get_issues(selector = selector_issues)
+#> Repo: IssueTrackeR  owner: TanguyBarthelemy 
+#> Project id: 51699988 
+#> Project id: 29346974 
+#> Project id: 15028532
+#> The issues will be read from /usr/local/lib/R/site-library/IssueTrackeR/data_issues/list_issues.yaml.
+my_labels <- get_labels(selector = selector_other)
+#> Repo: IssueTrackeR  owner: TanguyBarthelemy 
 #> Reading labels... Done!
-#> 12 labels found.
-my_milestones <- get_milestones(
-    source = "online",
-    owner = "jdemetra",
-    repo = "jdplus-main"
-)
-#> Repo: jdplus-main  owner: jdemetra 
+#> 41 labels found.
+#> Project id: 51699988 
+#> Project id: 29346974 
+#> Project id: 15028532
+my_milestones <- get_milestones(selector = selector_other)
+#> Repo: IssueTrackeR  owner: TanguyBarthelemy 
 #> Reading milestones... 
-#>  -  backlog ... Done!
-#>  -  3.8.0 ... Done!
+#>  -  v2.1.0 ... Done!
+#>  -  v2.0.0 ... Done!
 #> Done! 2 milestones found.
+#> Project id: 51699988 
+#> Done! 2 milestones found.
+#> Project id: 29346974 
+#> Done! 0 milestones found.
+#> Project id: 15028532 
+#> Done! 0 milestones found.
 ```
 
 ### Save issues in local
@@ -110,54 +145,57 @@ write_to_dataset(
     x = my_issues,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/RtmpAaWI8a/list_issues.yaml.
+#> The datasets will be exported to /tmp/RtmpMbmZ7e/list_issues.yaml.
 
 write_to_dataset(
     x = my_labels,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/RtmpAaWI8a/list_labels.yaml.
+#> The datasets will be exported to /tmp/RtmpMbmZ7e/list_labels.yaml.
 
 write_to_dataset(
     x = my_milestones,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/RtmpAaWI8a/list_milestones.yaml.
+#> The datasets will be exported to /tmp/RtmpMbmZ7e/list_milestones.yaml.
 ```
 
-### Options
+### Filtering
 
-It is also possible to set option for a R session:
+You can filter the output based on its content using the `with_text()`
+function:
 
 ``` r
-# The directory containing the yaml files in local
-options(IssueTrackeR.dataset.dir = tempdir())
-# The default GitHub owner
-options(IssueTrackeR.owner = "jdemetra")
-# the default GitHub repository
-options(IssueTrackeR.repo = "jdplus-main")
+filtered_issues <- my_issues |> 
+    with_labels("bug") |> 
+    with_text("format") |>
+    with_comments()
 ```
 
-### Retrieve issues from local
-
-Then it’s possible to read Issues from local yaml files:
+### Visualisation
 
 ``` r
-# From local
-my_issues <- get_issues(source = "local")
-my_labels <- get_labels(source = "local")
-my_milestones <- get_milestones(source = "local")
+# Plot creation/closure rates
+plot(my_issues, type = "created-closed")
 ```
 
-### Update full database
-
-You can update your full database of issues, labels and milestones with
-`update_database()`:
+<img src="man/figures/README-plot-1.png" alt="" width="100%" />
 
 ``` r
-# From online
-update_database(verbose = FALSE)
+
+# Plot resolution time distribution
+plot(my_issues, type = "resolution-time")
 ```
+
+<img src="man/figures/README-plot-2.png" alt="" width="100%" />
+
+``` r
+
+# Plot by category (e.g., by creator, milestone, or repo)
+plot(my_issues, type = "area-chart", by = "creator", n = 5)
+```
+
+<img src="man/figures/README-plot-3.png" alt="" width="100%" />
 
 ## Contributing
 
