@@ -8,6 +8,7 @@ linters: lintr::all_linters(
         paste_linter = NULL,
         absolute_path_linter = NULL,
         nonportable_path_linter = NULL,
+        object_overwrite_linter = NULL,
         cyclocomp_linter = NULL,
         function_argument_linter = NULL
     )

@@ -152,10 +152,10 @@ get_issues <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_issues_github <- function(
-        repo = NULL,
-        owner = NULL,
-        state = c("open", "opened", "closed", "all"),
-        verbose = TRUE
+    repo = NULL,
+    owner = NULL,
+    state = c("open", "opened", "closed", "all"),
+    verbose = TRUE
 ) {
     state <- match.arg(state)
     if (state == "opened") {
@@ -229,10 +229,10 @@ get_issues_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_issues_gitlab <- function(
-        project_id,
-        state = c("open", "opened", "closed", "all"),
-        verbose = TRUE,
-        ...
+    project_id,
+    state = c("open", "opened", "closed", "all"),
+    verbose = TRUE,
+    ...
 ) {
     state <- match.arg(state)
     if (state == "open") {
@@ -278,8 +278,8 @@ get_issues_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_issues_local <- function(
-        file = NULL,
-        verbose = TRUE
+    file = NULL,
+    verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)
@@ -369,10 +369,10 @@ get_labels <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_labels_github <- function(
-        repo = NULL,
-        owner = NULL,
-        verbose = TRUE,
-        ...
+    repo = NULL,
+    owner = NULL,
+    verbose = TRUE,
+    ...
 ) {
     checkmate::assert_flag(verbose)
     checkmate::assert_character(repo, len = 1L)
@@ -423,9 +423,9 @@ get_labels_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_labels_gitlab <- function(
-        project_id,
-        verbose = TRUE,
-        ...
+    project_id,
+    verbose = TRUE,
+    ...
 ) {
     checkmate::assert_flag(verbose)
     checkmate::assert_count(project_id)
@@ -476,8 +476,8 @@ get_labels_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
 get_labels_local <- function(
-        file = NULL,
-        verbose = TRUE
+    file = NULL,
+    verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)
@@ -536,10 +536,10 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_milestones_github <- function(
-        repo = NULL,
-        owner = NULL,
-        state = c("open", "opened", "closed", "all"),
-        verbose = TRUE
+    repo = NULL,
+    owner = NULL,
+    state = c("open", "opened", "closed", "all"),
+    verbose = TRUE
 ) {
     state <- match.arg(state)
     if (state == "opened") {
@@ -579,10 +579,10 @@ get_milestones_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_milestones_gitlab <- function(
-        project_id,
-        state = c("open", "opened", "closed", "all"),
-        verbose = TRUE,
-        ...
+    project_id,
+    state = c("open", "opened", "closed", "all"),
+    verbose = TRUE,
+    ...
 ) {
     state <- match.arg(state)
     if (state == "open") {
@@ -638,8 +638,8 @@ get_milestones_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
 get_milestones_local <- function(
-        file = NULL,
-        verbose = TRUE
+    file = NULL,
+    verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)

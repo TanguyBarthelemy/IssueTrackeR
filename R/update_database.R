@@ -38,7 +38,7 @@ update_database <- function(
     verbose = TRUE,
     ...
 ) {
-    issues <- get_issues(selector, verbose = verbose,...)
+    issues <- get_issues(selector, verbose = verbose, ...)
     write_to_dataset(
         x = issues,
         dataset_dir = dataset_dir,
@@ -54,7 +54,7 @@ update_database <- function(
         verbose = verbose
     )
 
-    milestones <- get_milestones(selector, verbose = verbose,...)
+    milestones <- get_milestones(selector, verbose = verbose, ...)
     write_to_dataset(
         x = milestones,
         dataset_dir = dataset_dir,
