@@ -50,9 +50,9 @@ pak::pak("TanguyBarthelemy/IssueTrackeR")
 
 ## Features
 
-- **Retrieve Issues**: Fetch issues from any (with sufficient rights) GitHub repository.
-- **Issue Management**: Class S3 to manage the issues as a datasets within R.
-- **Filtering**: Filter issues by labels, content (title, body and comments) and milestones.
+- **Multi-source support**: Fetch issues from GitHub, GitLab, or local YAML files.
+- **Visualization**: Plot issue trends, resolution times, and backlog evolution.
+- **Save issues locally**: Write the issues, labels and milestones locally to access it without connection.
 
 
 ## Usage
@@ -61,36 +61,59 @@ pak::pak("TanguyBarthelemy/IssueTrackeR")
 library("IssueTrackeR")
 ```
 
-### Retrieve information from GitHub
 
-To get information from a repository, you can call the functions `get_issues`, `get_labels` and `get_milestones`
+### Create a selector
 
-```{r retrieve, eval = TRUE, echo = TRUE}
-# From online
-my_issues <- get_issues(
-    source = "online",
-    owner = "jdemetra",
-    repo = "jdplus-main",
-    verbose = FALSE
-)
-my_labels <- get_labels(
-    source = "online",
-    owner = "jdemetra",
-    repo = "jdplus-main"
-)
-my_milestones <- get_milestones(
-    source = "online",
-    owner = "jdemetra",
-    repo = "jdplus-main"
+```{r selector, eval = TRUE, echo = TRUE}
+# Configure {gitlabr} to retrieve issues from GitLab
+gitlabr::set_gitlab_connection(
+    gitlab_url = "https://gitlab.com",
+    private_token = Sys.getenv("GITLAB_TRACTORTOM_API")
 )
 
+# Select repos from GitHub
+selector1 <- init_selector(
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
+    repo = "IssueTrackeR"
+)
+
+# Select project from GitLab
+selector2 <- init_selector(
+    source = "GitLab",
+    project_id = c(51699988, 29346974, 15028532)
+)
+
+# Select list of issues from local files
+selector3 <- init_selector(
+    source = "local",
+    file = file.path(
+        system.file("data_issues", package = "IssueTrackeR"),
+        "list_issues.yaml"
+    )
+)
+
+selector_issues <- merge_selector(selector1, selector2, selector3)
+selector_other <- merge_selector(selector1, selector2)
 ```
+
+
+### Get the issues
+
+To get information from a repository, you can call the functions `get_issues`, `get_labels` and `get_milestones`:
+
+```{r get, eval = TRUE, echo = TRUE}
+my_issues <- get_issues(selector = selector_issues)
+my_labels <- get_labels(selector = selector_other)
+my_milestones <- get_milestones(selector = selector_other)
+```
+
 
 ### Save issues in local
 
 You can also write the datasets in local with `write_to_dataset()`:
 
-```{r export, eval = TRUE, echo = TRUE}
+```{r write, eval = TRUE, echo = TRUE}
 write_to_dataset(
     x = my_issues,
     dataset_dir = tempdir()
@@ -107,38 +130,33 @@ write_to_dataset(
 )
 ```
 
-### Options
 
-It is also possible to set option for a R session:
+### Filtering
 
-```{r set-options, eval = TRUE, echo = TRUE}
-# The directory containing the yaml files in local
-options(IssueTrackeR.dataset.dir = tempdir())
-# The default GitHub owner
-options(IssueTrackeR.owner = "jdemetra")
-# the default GitHub repository
-options(IssueTrackeR.repo = "jdplus-main")
+You can filter the output based on its content using the `with_text()` function:
+
+```{r filter, eval = TRUE, echo = TRUE}
+filtered_issues <- my_issues |> 
+    with_labels("bug") |> 
+    with_text("format") |>
+    with_comments()
 ```
 
-### Retrieve issues from local
 
-Then it's possible to read Issues from local yaml files:
+### Visualisation 
 
-```{r retriev-local, eval = FALSE, echo = TRUE}
-# From local
-my_issues <- get_issues(source = "local")
-my_labels <- get_labels(source = "local")
-my_milestones <- get_milestones(source = "local")
+
+```{r plot, eval = TRUE, echo = TRUE, fig.width = 10, fig.height = 7}
+# Plot creation/closure rates
+plot(my_issues, type = "created-closed")
+
+# Plot resolution time distribution
+plot(my_issues, type = "resolution-time")
+
+# Plot by category (e.g., by creator, milestone, or repo)
+plot(my_issues, type = "area-chart", by = "creator", n = 5)
 ```
 
-### Update full database
-
-You can update your full database of issues, labels and milestones with `update_database()`:
-
-```{r update-database, eval = TRUE, echo = TRUE}
-# From online
-update_database(verbose = FALSE)
-```
 
 ## Contributing
 

@@ -15,6 +15,7 @@
 #' - `is_user_call()`: Detects user API calls
 #' - `is_repo_call()`: Detects repository API calls
 #' - `is_api_down()`: Detects when GitHub APi is down
+#' - `is_operation_cancelled()`: Detects whenan operation has been cancelled.
 #'
 #' @section Error Message Functions:
 #' These functions generate formatted error messages with troubleshooting tips:
@@ -107,6 +108,12 @@ is_not_found <- function(msg) {
 
 #' @noRd
 #' @rdname github_errors
+is_operation_cancelled <- function(msg) {
+    return(msg == "NA/NaN argument")
+}
+
+#' @noRd
+#' @rdname github_errors
 is_orgs_call <- function(msg) {
     return(grepl(pattern = "/orgs/", x = msg, fixed = TRUE))
 }
@@ -164,6 +171,10 @@ no_http_msg <- c(
     "wait a few seconds and try again.\n",
     "\u2192 If the problem persists, ",
     "verify your proxy or firewall settings."
+)
+op_cancel_msg <- c(
+    "The operation has been cancelled.",
+    "\u21bb Please try again?"
 )
 
 #' @noRd
@@ -257,6 +268,8 @@ check_response <- function(x) {
         stop(auth_msg, call. = FALSE)
     } else if (api_rate_reached(msg)) {
         stop(api_rate_msg, call. = FALSE)
+    } else if (is_operation_cancelled(msg)) {
+        stop(op_cancel_msg, call. = FALSE)
     } else if (is_api_down(msg)) {
         stop(api_down_msg, call. = FALSE)
     } else if (

@@ -568,6 +568,15 @@ get_milestones_github <- function(
     milestones <- format_milestones_github(raw_milestones, verbose = verbose)
     if (nrow(milestones) > 0L) {
         milestones <- cbind(milestones, repo = repo, owner = owner)
+        col_names <- c(
+            "source", "title", "description", "due_on", "closed_at", "creator",
+            "state", "nb_issues_open", "nb_issues_closed", "repo", "owner",
+            "url"
+        )
+        milestones <- milestones[, col_names]
+    }
+    if (verbose) {
+        cat("Done!", nrow(milestones), "milestones found.\n", sep = " ")
     }
 
     class(milestones) <- c("MilestonesTB", "data.frame")
@@ -591,6 +600,10 @@ get_milestones_gitlab <- function(
     }
     checkmate::assert_flag(verbose)
     checkmate::assert_count(project_id)
+
+    if (verbose) {
+        cat("Project id:", project_id, "\n")
+    }
 
     structurel <- gitlabr::gl_get_project(project = project_id, ...)
     raw_milestones <- gitlabr::gitlab(
@@ -646,6 +659,10 @@ get_milestones_gitlab <- function(
             owner = structurel$namespace.full_path,
             url = raw_milestones$web_url
         )
+    }
+
+    if (verbose) {
+        cat("Done!", nrow(milestones), "milestones found.\n", sep = " ")
     }
 
     class(milestones) <- c("MilestonesTB", "data.frame")

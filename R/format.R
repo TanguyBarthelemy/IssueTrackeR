@@ -472,6 +472,7 @@ format_milestone_github <- function(raw_milestone, verbose = TRUE) {
     )
 
     output <- data.frame(
+        source = "GitHub",
         title = raw_milestone[["title"]],
         description = description,
         due_on = due_on,
@@ -479,8 +480,10 @@ format_milestone_github <- function(raw_milestone, verbose = TRUE) {
         creator = creator,
         state = raw_milestone[["state"]],
         nb_issues_open = raw_milestone[["open_issues"]],
-        nb_issues_closed = raw_milestone[["closed_issues"]]
+        nb_issues_closed = raw_milestone[["closed_issues"]],
+        url = raw_milestone[["html_url"]]
     )
+
     return(output)
 }
 
@@ -490,12 +493,10 @@ format_milestones_github <- function(raw_milestones, verbose = TRUE) {
     if (verbose) {
         cat("Reading milestones... \n")
     }
-    new_mlst_structure <- raw_milestones |>
+    milestones <- raw_milestones |>
         lapply(FUN = format_milestone_github, verbose = verbose) |>
         do.call(what = rbind) |>
         as.data.frame()
-    if (verbose) {
-        cat("Done!", nrow(new_mlst_structure), "milestones found.\n", sep = " ")
-    }
-    return(new_mlst_structure)
+
+    return(milestones)
 }
