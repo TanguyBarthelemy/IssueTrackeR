@@ -612,7 +612,8 @@ get_milestones_gitlab <- function(
             nb_issues_closed = integer(0L),
             repo = character(0L),
             owner = character(0L),
-            url = character(0L)
+            url = character(0L),
+            stringsAsFactors = FALSE
         )
     } else {
         milestones <- data.frame(
