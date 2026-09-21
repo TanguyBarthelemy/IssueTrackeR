@@ -75,7 +75,7 @@
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>A logical value indicating whether to print additional
+<dd><p>A boolean indicating whether to print additional
 information. Default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
@@ -86,35 +86,37 @@ information. Default is <code>TRUE</code>.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
-<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"closed_issues.yaml"</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">issues_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
+<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"list_issues.yaml"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Looking into closed_issues.yaml ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/closed_issues.yaml.</span>
+<span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">get_resolution_times</span><span class="op">(</span><span class="va">all_issues</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]   795772    40354     2516    74744     3186     7006    29159  6409589</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [9]     1822     1412  4173975  2005572  3816811    46108  3003183 11589816</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [17]  2998485  3001027    11707   106626  2052102    69964   321631     2887</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] 11926580     4660   143264 19958504  2320484    53410  2286554    43063</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [33]  2871573    91951   356070  6624869 10630398    74819 11617698 13353790</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41]  1573570      282  1285502    74577  1450027  1988500  1989092     2284</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [49]  2623626  2403643 29338197   267720  3802548   100418  4441149 18182470</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [57]    11350  4338920 18340093  5381303  6074413    17742    18418  6801477</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [65]  6711052     6867   252490   427328 29557366 15395346    17700   169541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [73]  1454827  1957134  3435665  3351767      464    41124   278538  3532737</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81]  5500553  9610519 19345329    63540  9899028  1755351   145572    56498</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [89]   125364    50784 13063753 13480290 13481938 10062053 37685179   103847</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [97]  1229316 14861984 50753630   366086    54902 54462016      820 55032616</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [105]   150528     1133     3640     2292    70687    26326    91858  1391163</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [113]  1150512 33810240 27914025  1300780  1916582  2594054  2098309   535259</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121]  3801774  3968699 60029644  5071133  5096460  8444428    88926   165525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [129]     2257  9184177    11653   273667  9983673  1236214  1244985  2805127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [137]  3711033 12769776 15801580 16221804 76033053 71353456 51149524   228380</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [145]   137734 17690158  9724963 18155456  5923000    16185 28281032    21219</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [153]    30204 28772822 30980021   320499</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]   247440  2593293   795772    40354     2516    74744     3186     7006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [9]    29159  6409589     1822     1412  4173975  2005572  3816811    46108</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [17]  3003183 11589816  2998485  3001027 19179668    11707   106626  2052102</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [25]    69964   321631     2887 11926580     4660   143264 19958504  2320484</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [33]    53410  2286554    43063  2871573    91951   356070  6624869 10630398</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [41]    74819 11617698 13353790  1573570      282  1285502    74577  1450027</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [49]  1988500  1989092     2284  2623626  2403643 29338197   267720  3802548</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [57]   100418  4441149 18182470    11350  4338920 18340093  5381303  6074413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [65]    17742    18418  6801477  6711052     6867   252490   427328 29557366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] 15395346    17700   169541  1454827  1957134  3435665  3351767      464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81]    41124   278538  3532737  5500553  9610519 19345329    63540  9899028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [89]  1755351   145572    56498   125364    50784 13063753 13480290 13481938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] 10062053 37685179   103847  1229316 14861984 50753630   366086    54902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [105] 54462016      820 55032616   150528     1133     3640     2292    70687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [113]    26326    91858  1391163  1150512 33810240 27914025  1300780  1916582</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [121]  2594054  2098309   535259  3801774  3968699 60029644  5071133  5096460</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [129]  8444428    88926   165525     2257  9184177    11653   273667  9983673</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [137]  1236214  1244985  2805127  3711033 12769776 15801580 16221804 76033053</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [145] 71353456 51149524   228380   137734 17690158  9724963 18155456  5923000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [153]    16185 28281032    21219    30204 28772822 30980021   320499</span>
 </code></pre></div>
     </div>
   </div>

@@ -13,6 +13,7 @@
 <url><loc>/reference/check_response.html</loc></url>
 <url><loc>/reference/count_issues.html</loc></url>
 <url><loc>/reference/dot-write.html</loc></url>
+<url><loc>/reference/empty_selector.html</loc></url>
 <url><loc>/reference/extract_nth.html</loc></url>
 <url><loc>/reference/format_timestamp.html</loc></url>
 <url><loc>/reference/generate_age_mat.html</loc></url>
@@ -20,11 +21,20 @@
 <url><loc>/reference/get.html</loc></url>
 <url><loc>/reference/get_all_repos.html</loc></url>
 <url><loc>/reference/get_dates_vec.html</loc></url>
+<url><loc>/reference/get_issues_github.html</loc></url>
+<url><loc>/reference/get_issues_gitlab.html</loc></url>
+<url><loc>/reference/get_issues_local.html</loc></url>
 <url><loc>/reference/get_nbr_comments.html</loc></url>
 <url><loc>/reference/get_resolution_times.html</loc></url>
 <url><loc>/reference/get_still_open.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
-<url><loc>/reference/isDark.html</loc></url>
+<url><loc>/reference/init_selector.html</loc></url>
+<url><loc>/reference/init_selector_github.html</loc></url>
+<url><loc>/reference/init_selector_gitlab.html</loc></url>
+<url><loc>/reference/init_selector_local.html</loc></url>
+<url><loc>/reference/is_dark.html</loc></url>
+<url><loc>/reference/is_empty.html</loc></url>
+<url><loc>/reference/merge_selector.html</loc></url>
 <url><loc>/reference/new_issue.html</loc></url>
 <url><loc>/reference/new_issues.html</loc></url>
 <url><loc>/reference/null_to_default.html</loc></url>
@@ -35,6 +45,7 @@
 <url><loc>/reference/plot_resolution_ecdf.html</loc></url>
 <url><loc>/reference/print-issues.html</loc></url>
 <url><loc>/reference/rbind-issues.html</loc></url>
+<url><loc>/reference/remove_nth.html</loc></url>
 <url><loc>/reference/reset_options.html</loc></url>
 <url><loc>/reference/sample-issues.html</loc></url>
 <url><loc>/reference/subset.html</loc></url>

@@ -94,123 +94,55 @@ information with statistics by modalities.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
-<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"open_issues.yaml"</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">issues_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
+<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"list_issues.yaml"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Looking into open_issues.yaml ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/open_issues.yaml.</span>
+<span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Summarise one issue</span></span></span>
 <span class="r-in"><span><span class="fu">summary</span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1039</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1058</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> 🟢 Open</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> ✔ Completed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Older WS are read not correctly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Friedman Test function calls QS Test in SeasonalityTests</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I created a WS with the version **3.7.1** with 1 SA-Processing with 1 SA-Item with:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/jdemetra/jdplus-main/blob/c91573b85827831899e58ee1c89a6a1cb8760a7e/jdplus-main-base/jdplus-sa-base-parent/jdplus-sa-base-api/src/main/java/jdplus/sa/base/api/diagnostics/SeasonalityTests.java#L58-L60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - the series AirPassengers ([air.csv](https://github.com/user-attachments/files/30928390/air.csv))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - the specification:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - X13 RSA3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - 1 outliers (AO in 1956-08-01) in the estimation spec</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - a basic span (series span) from 1949-01-01 in the reference spec</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## My problem</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> With the version **3.8.0** of JDemetra+, the outlier is not recognised.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## Appendix contents</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Here is my WS in version [3.7.1.zip](https://github.com/user-attachments/files/30928503/3.7.1.zip).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> And I created a identical (in terms of series and specification) in version [3.8.0.zip](https://github.com/user-attachments/files/30928502/3.8.0.zip).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## Comparison</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> To explore "more" I compared the SAProcessing.xml files. In the version **3.8.0**, there are added lines.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In the estimation spec:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "    &lt;item name=\"frequency\"&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "        &lt;integer&gt;12&lt;/integer&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "    &lt;/item&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                            &lt;/item&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                        &lt;/subset&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                    &lt;/item&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                    &lt;item name=\"x11\"&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                        &lt;subset&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                            &lt;item name=\"seasonalma\"&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "&lt;strings&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "    &lt;items&gt;Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr&lt;/items&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "&lt;/strings&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                            &lt;/item&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                            &lt;item name=\"fcasts\"&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "&lt;integer&gt;-1&lt;/integer&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> And the same lines in the result spec:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "    &lt;item name=\"frequency\"&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "        &lt;integer&gt;12&lt;/integer&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "    &lt;/item&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                            &lt;/item&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                        &lt;/subset&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                    &lt;/item&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                    &lt;item name=\"x11\"&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                        &lt;subset&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                            &lt;item name=\"seasonalma\"&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "&lt;strings&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "    &lt;items&gt;Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr Msr&lt;/items&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "&lt;/strings&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                            &lt;/item&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "                            &lt;item name=\"fcasts\"&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + "&lt;integer&gt;-1&lt;/integer&gt;"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## Question</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Is it an intended behaviour?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The changelog mentions that a new field `frequency` is added in the SA Specification but he doesn’t mention that this would break the WS’s backwards compatibility...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Thank you</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hi, I just noticed that in this file the friedmanTest function actually calls the QS test. I'm assuming that's a mistake.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Comments:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Comment n°1 by Immurb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Comment n°1 by palatej:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> @palatej is it really necessary to remove all user pre-specified variables in https://github.com/palatej/jd3-main/blob/develop/jdplus-main-base/jdplus-x13-base-parent/jdplus-x13-base-api/src/main/java/jdplus/x13/base/api/regarima/RegArimaSpec.java#L128-L136 and TRAMO respectively?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Shouldn't they be independent from the frequency of the time series?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Yes. Of course. Thank you. I correct it immediately</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Comment n°2 by charphi:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> This bug has been fixed in https://github.com/jdemetra/jdplus-main/pull/1059</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Summarise several issues</span></span></span>
 <span class="r-in"><span><span class="fu">summary</span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues.</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1039 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1058 ✔ Completed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1049 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1039 ✔ Completed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1029 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1028 ✔ Completed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1023 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1006 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1004 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#987 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#962 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#961 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#943 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#940 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1002 ✔ Completed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#989 ✔ Completed </span>
 </code></pre></div>
     </div>
   </div>

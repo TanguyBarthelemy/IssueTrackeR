@@ -75,7 +75,7 @@
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>A logical value indicating whether to print additional
+<dd><p>A boolean indicating whether to print additional
 information. Default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
@@ -87,60 +87,117 @@ If there is no comments, it returns an empty string.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
-<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"open_issues.yaml"</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">issues_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
+<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"list_issues.yaml"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Looking into open_issues.yaml ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/open_issues.yaml.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">all_issues</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Try to retrieve comments from the list of issues.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "Immurb"            ""                  "charphi"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [4] ""                  ""                  "TanguyBarthelemy" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [7] ""                  "TanguyBarthelemy"  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [10] ""                  "charphi"           ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [13] ""                  "TanguyBarthelemy"  "TanguyBarthelemy" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] "OlesjaL"           ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [19] ""                  "TanguyBarthelemy"  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [22] "Immurb"            ""                  "charphi"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] ""                  "Immurb"            "TanguyBarthelemy" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [28] "TanguyBarthelemy"  ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] ""                  ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [34] ""                  "charphi"           ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [37] ""                  ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [40] "palatej"           "palatej"           ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [43] "AQLT"              ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] ""                  "AQLT"              ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] "TanguyBarthelemy"  ""                  "AlessandroPiovani"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [52] ""                  "TanguyBarthelemy"  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] "palatej"           "palatej"           ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [58] ""                  ""                  "MichelleHedger"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "annasmyk"          ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [64] ""                  ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [67] "TanguyBarthelemy"  "charphi"           ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [70] ""                  ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] ""                  ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "a-s-russo"         ""                  "TanguyBarthelemy" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [79] "Ciamman"           ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [82] "a-s-russo"         "a-s-russo"         "a-s-russo"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [85] "CyLuGh"            ""                  "Immurb"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [88] ""                  ""                  "Immurb"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] ""                  "a-s-russo"         ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [94] "charphi"           "Immurb"            ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] ""                  ""                  "a-s-russo"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [100] "palatej"           "AQLT"              ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [103] ""                  ""                  "a-s-russo"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "a-s-russo"         "Immurb"            ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [109] ""                  "charphi"           "a-s-russo"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [112] "charphi"           ""                  "palatej"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [115] ""                  ""                  ""                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [118] "a-s-russo"         "m20l22"            "charphi"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "charphi"           ""                  "charphi"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [124] ""                  "charphi"           "AQLT"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [127] ""                  "charphi"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "charphi"             ""                    "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4] ""                    "palatej"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7] ""                    ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [10] ""                    "TanguyBarthelemy"    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [13] ""                    ""                    "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] ""                    ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [19] ""                    "annasmyk"            "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [22] "charphi"             ""                    "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] "palatej"             "TanguyBarthelemy"    "Blassik"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [28] ""                    ""                    "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "TanguyBarthelemy"    "TanguyBarthelemy"    "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [34] "TanguyBarthelemy"    "palatej"             "OlesjaL"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [37] ""                    ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [40] "TanguyBarthelemy"    ""                    "Immurb"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [43] ""                    "charphi"             ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] "Immurb"              "TanguyBarthelemy"    "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] "TanguyBarthelemy"    ""                    "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [52] ""                    ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] "charphi"             ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [58] ""                    "charphi"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "charphi"             "charphi"             ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [64] ""                    ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [67] "a-s-russo"           ""                    "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [70] "palatej"             "Immurb"              "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] ""                    "AQLT"                ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "TanguyBarthelemy"    "TanguyBarthelemy"    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [79] ""                    "AQLT"                "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [82] ""                    "charphi"             "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [85] "palatej"             "TanguyBarthelemy"    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [88] "AlessandroPiovani"   ""                    "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] ""                    ""                    "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [94] "palatej"             "charphi"             "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] ""                    ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [100] ""                    "MichelleHedger"      "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [103] "charphi"             ""                    "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "annasmyk"            ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [109] ""                    ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [112] "charphi"             "TanguyBarthelemy"    "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [115] "TanguyBarthelemy"    "palatej"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [118] ""                    "a-s-russo"           "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "charphi"             "palatej"             "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [124] "MichelleHedger"      "annasmyk"            ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [127] ""                    "pmbyron"             ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [130] "palatej"             "annasmyk"            "annasmyk"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [133] ""                    ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [136] "annasmyk"            ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [139] "carlos-saez"         "carlos-saez"         "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [142] "a-s-russo"           ""                    "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [145] "palatej"             "palatej"             "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [148] "Ciamman"             "palatej"             ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [151] ""                    "a-s-russo"           "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [154] ""                    "charphi"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [157] "TanguyBarthelemy"    "charphi"             "a-s-russo"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [160] "a-s-russo"           "palatej"             "CyLuGh"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [163] "charphi"             ""                    "pmbyron"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [166] "palatej"             "palatej"             ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [169] "Immurb"              "Immurb"              ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [172] "TanguyBarthelemy"    "TanguyBarthelemy"    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [175] "MichelleHedger"      "Immurb"              ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [178] "a-s-russo"           "walkman-w902"        "a-s-russo"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [181] ""                    "Immurb"              "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [184] "palatej"             "AQLT"                "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [187] "Immurb"              "Immurb"              ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [190] "MFatihTuzen"         ""                    "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [193] ""                    "a-s-russo"           "a-s-russo"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [196] "palatej"             "AQLT"                ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [199] ""                    ""                    "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [202] ""                    "a-s-russo"           "a-s-russo"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [205] "Immurb"              "charphi"             "a-s-russo"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [208] "Immurb"              ""                    "Immurb"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [211] "palatej"             ""                    "a-s-russo"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [214] ""                    "charphi"             "a-s-russo"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [217] "charphi"             "TanguyBarthelemy"    "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [220] ""                    "charphi"             ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [223] "palatej"             "palatej"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [226] ""                    "charphi"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [229] "palatej"             ""                    "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [232] "TanguyBarthelemy"    ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [235] "charphi"             "palatej"             "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [238] ""                    "mr-abdullah-shahzad" "a-s-russo"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [241] "charphi"             "charphi"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [244] "palatej"             "m20l22"              "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [247] "charphi"             "charphi"             "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [250] "charphi"             ""                    ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [253] "charphi"             "a-s-russo"           "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [256] "palatej"             "charphi"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [259] "charphi"             "charphi"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [262] "palatej"             "ChristianeHofer"     "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [265] "charphi"             "charphi"             ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [268] "charphi"             "TanguyBarthelemy"    "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [271] "charphi"             "AQLT"                "palatej"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [274] "a-s-russo"           "AQLT"                ""                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [277] "charphi"             "palatej"             "charphi"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [280] "charphi"             "TanguyBarthelemy"    "TanguyBarthelemy"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [283] "TanguyBarthelemy"    "palatej"             "ChristianeHofer"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [286] "ChristianeHofer"    </span>
 <span class="r-in"><span><span class="fu">author_last_comment</span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1L</span>, <span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Immurb"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "charphi"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

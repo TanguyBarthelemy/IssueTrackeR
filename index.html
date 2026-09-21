@@ -100,11 +100,11 @@
 </h2>
 <ul>
 <li>
-<strong>Retrieve Issues</strong>: Fetch issues from any (with sufficient rights) GitHub repository.</li>
+<strong>Multi-source support</strong>: Fetch issues from GitHub, GitLab, or local YAML files.</li>
 <li>
-<strong>Issue Management</strong>: Class S3 to manage the issues as a datasets within R.</li>
+<strong>Visualization</strong>: Plot issue trends, resolution times, and backlog evolution.</li>
 <li>
-<strong>Filtering</strong>: Filter issues by labels, content (title, body and comments) and milestones.</li>
+<strong>Save issues locally</strong>: Write the issues, labels and milestones locally to access it without connection.</li>
 </ul>
 </div>
 <div class="section level2">
@@ -113,7 +113,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/TanguyBarthelemy/IssueTrackeR" class="external-link">"IssueTrackeR"</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Currently, the default options are:</span></span>
-<span><span class="co">#&gt; - location for datasets is /tmp/RtmpAaWI8a/data</span></span>
+<span><span class="co">#&gt; - location for datasets is /tmp/RtmpMbmZ7e/data</span></span>
 <span><span class="co">#&gt; - owner: rjdverse</span></span>
 <span><span class="co">#&gt; - repo: rjdemetra</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -122,88 +122,121 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     append, sample</span></span></code></pre></div>
 <div class="section level3">
-<h3 id="retrieve-information-from-github">Retrieve information from GitHub<a class="anchor" aria-label="anchor" href="#retrieve-information-from-github"></a>
+<h3 id="create-a-selector">Create a selector<a class="anchor" aria-label="anchor" href="#create-a-selector"></a>
 </h3>
-<p>To get information from a repository, you can call the functions <code>get_issues</code>, <code>get_labels</code> and <code>get_milestones</code></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># From online</span></span>
-<span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_issues</a></span><span class="op">(</span></span>
-<span>    source <span class="op">=</span> <span class="st">"online"</span>,</span>
-<span>    owner <span class="op">=</span> <span class="st">"jdemetra"</span>,</span>
-<span>    repo <span class="op">=</span> <span class="st">"jdplus-main"</span>,</span>
-<span>    verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<code class="sourceCode R"><span><span class="co"># Configure {gitlabr} to retrieve issues from GitLab</span></span>
+<span><span class="fu">gitlabr</span><span class="fu">::</span><span class="fu"><a href="https://thinkr-open.github.io/gitlabr/reference/set_gitlab_connection.html" class="external-link">set_gitlab_connection</a></span><span class="op">(</span></span>
+<span>    gitlab_url <span class="op">=</span> <span class="st">"https://gitlab.com"</span>,</span>
+<span>    private_token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"GITLAB_TRACTORTOM_API"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">my_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_labels</a></span><span class="op">(</span></span>
-<span>    source <span class="op">=</span> <span class="st">"online"</span>,</span>
-<span>    owner <span class="op">=</span> <span class="st">"jdemetra"</span>,</span>
-<span>    repo <span class="op">=</span> <span class="st">"jdplus-main"</span></span>
+<span></span>
+<span><span class="co"># Select repos from GitHub</span></span>
+<span><span class="va">selector1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/init_selector.html">init_selector</a></span><span class="op">(</span></span>
+<span>    source <span class="op">=</span> <span class="st">"GitHub"</span>,</span>
+<span>    owner <span class="op">=</span> <span class="st">"TanguyBarthelemy"</span>,</span>
+<span>    repo <span class="op">=</span> <span class="st">"IssueTrackeR"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Repo: jdplus-main  owner: jdemetra </span></span>
+<span></span>
+<span><span class="co"># Select project from GitLab</span></span>
+<span><span class="va">selector2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/init_selector.html">init_selector</a></span><span class="op">(</span></span>
+<span>    source <span class="op">=</span> <span class="st">"GitLab"</span>,</span>
+<span>    project_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">51699988</span>, <span class="fl">29346974</span>, <span class="fl">15028532</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Select list of issues from local files</span></span>
+<span><span class="va">selector3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/init_selector.html">init_selector</a></span><span class="op">(</span></span>
+<span>    source <span class="op">=</span> <span class="st">"local"</span>,</span>
+<span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span>
+<span>        <span class="st">"list_issues.yaml"</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">selector_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/merge_selector.html">merge_selector</a></span><span class="op">(</span><span class="va">selector1</span>, <span class="va">selector2</span>, <span class="va">selector3</span><span class="op">)</span></span>
+<span><span class="va">selector_other</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/merge_selector.html">merge_selector</a></span><span class="op">(</span><span class="va">selector1</span>, <span class="va">selector2</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="get-the-issues">Get the issues<a class="anchor" aria-label="anchor" href="#get-the-issues"></a>
+</h3>
+<p>To get information from a repository, you can call the functions <code>get_issues</code>, <code>get_labels</code> and <code>get_milestones</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">selector_issues</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Repo: IssueTrackeR  owner: TanguyBarthelemy </span></span>
+<span><span class="co">#&gt; Project id: 51699988 </span></span>
+<span><span class="co">#&gt; Project id: 29346974 </span></span>
+<span><span class="co">#&gt; Project id: 15028532</span></span>
+<span><span class="co">#&gt; The issues will be read from /usr/local/lib/R/site-library/IssueTrackeR/data_issues/list_issues.yaml.</span></span>
+<span><span class="va">my_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_labels</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">selector_other</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Repo: IssueTrackeR  owner: TanguyBarthelemy </span></span>
 <span><span class="co">#&gt; Reading labels... Done!</span></span>
-<span><span class="co">#&gt; 12 labels found.</span></span>
-<span><span class="va">my_milestones</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_milestones</a></span><span class="op">(</span></span>
-<span>    source <span class="op">=</span> <span class="st">"online"</span>,</span>
-<span>    owner <span class="op">=</span> <span class="st">"jdemetra"</span>,</span>
-<span>    repo <span class="op">=</span> <span class="st">"jdplus-main"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; Repo: jdplus-main  owner: jdemetra </span></span>
+<span><span class="co">#&gt; 41 labels found.</span></span>
+<span><span class="co">#&gt; Project id: 51699988 </span></span>
+<span><span class="co">#&gt; Project id: 29346974 </span></span>
+<span><span class="co">#&gt; Project id: 15028532</span></span>
+<span><span class="va">my_milestones</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_milestones</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">selector_other</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Repo: IssueTrackeR  owner: TanguyBarthelemy </span></span>
 <span><span class="co">#&gt; Reading milestones... </span></span>
-<span><span class="co">#&gt;  -  backlog ... Done!</span></span>
-<span><span class="co">#&gt;  -  3.8.0 ... Done!</span></span>
-<span><span class="co">#&gt; Done! 2 milestones found.</span></span></code></pre></div>
+<span><span class="co">#&gt;  -  v2.1.0 ... Done!</span></span>
+<span><span class="co">#&gt;  -  v2.0.0 ... Done!</span></span>
+<span><span class="co">#&gt; Done! 2 milestones found.</span></span>
+<span><span class="co">#&gt; Project id: 51699988 </span></span>
+<span><span class="co">#&gt; Done! 2 milestones found.</span></span>
+<span><span class="co">#&gt; Project id: 29346974 </span></span>
+<span><span class="co">#&gt; Done! 0 milestones found.</span></span>
+<span><span class="co">#&gt; Project id: 15028532 </span></span>
+<span><span class="co">#&gt; Done! 0 milestones found.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="save-issues-in-local">Save issues in local<a class="anchor" aria-label="anchor" href="#save-issues-in-local"></a>
 </h3>
 <p>You can also write the datasets in local with <code><a href="reference/write.html">write_to_dataset()</a></code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/write.html">write_to_dataset</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="va">my_issues</span>,</span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to /tmp/RtmpAaWI8a/list_issues.yaml.</span></span>
+<span><span class="co">#&gt; The datasets will be exported to /tmp/RtmpMbmZ7e/list_issues.yaml.</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/write.html">write_to_dataset</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="va">my_labels</span>,</span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to /tmp/RtmpAaWI8a/list_labels.yaml.</span></span>
+<span><span class="co">#&gt; The datasets will be exported to /tmp/RtmpMbmZ7e/list_labels.yaml.</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/write.html">write_to_dataset</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="va">my_milestones</span>,</span>
 <span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; The datasets will be exported to /tmp/RtmpAaWI8a/list_milestones.yaml.</span></span></code></pre></div>
+<span><span class="co">#&gt; The datasets will be exported to /tmp/RtmpMbmZ7e/list_milestones.yaml.</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="options">Options<a class="anchor" aria-label="anchor" href="#options"></a>
+<h3 id="filtering">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a>
 </h3>
-<p>It is also possible to set option for a R session:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># The directory containing the yaml files in local</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>IssueTrackeR.dataset.dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># The default GitHub owner</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>IssueTrackeR.owner <span class="op">=</span> <span class="st">"jdemetra"</span><span class="op">)</span></span>
-<span><span class="co"># the default GitHub repository</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>IssueTrackeR.repo <span class="op">=</span> <span class="st">"jdplus-main"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="retrieve-issues-from-local">Retrieve issues from local<a class="anchor" aria-label="anchor" href="#retrieve-issues-from-local"></a>
-</h3>
-<p>Then it’s possible to read Issues from local yaml files:</p>
+<p>You can filter the output based on its content using the <code><a href="reference/with_text.html">with_text()</a></code> function:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># From local</span></span>
-<span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_issues</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span>
-<span><span class="va">my_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_labels</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span>
-<span><span class="va">my_milestones</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.html">get_milestones</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">filtered_issues</span> <span class="op">&lt;-</span> <span class="va">my_issues</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="reference/with_labels.html">with_labels</a></span><span class="op">(</span><span class="st">"bug"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="reference/with_text.html">with_text</a></span><span class="op">(</span><span class="st">"format"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="reference/with_comments.html">with_comments</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="update-full-database">Update full database<a class="anchor" aria-label="anchor" href="#update-full-database"></a>
+<h3 id="visualisation">Visualisation<a class="anchor" aria-label="anchor" href="#visualisation"></a>
 </h3>
-<p>You can update your full database of issues, labels and milestones with <code><a href="reference/update_database.html">update_database()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># From online</span></span>
-<span><span class="fu"><a href="reference/update_database.html">update_database</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Plot creation/closure rates</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">my_issues</span>, type <span class="op">=</span> <span class="st">"created-closed"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot-1.png" alt="" width="100%"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Plot resolution time distribution</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">my_issues</span>, type <span class="op">=</span> <span class="st">"resolution-time"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot-2.png" alt="" width="100%"></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Plot by category (e.g., by creator, milestone, or repo)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">my_issues</span>, type <span class="op">=</span> <span class="st">"area-chart"</span>, by <span class="op">=</span> <span class="st">"creator"</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot-3.png" alt="" width="100%"></p>
 </div>
 </div>
 <div class="section level2">

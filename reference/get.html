@@ -45,7 +45,7 @@ with their labels and milestones."><meta property="og:image" content="/logo.svg"
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Retrieve information from the issues of GitHub</h1>
-    <small class="dont-index">Source: <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/blob/develop/R/wrangling_dataset_issues.R" class="external-link"><code>R/wrangling_dataset_issues.R</code></a>, <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/blob/develop/R/wrangling_dataset_labels.R" class="external-link"><code>R/wrangling_dataset_labels.R</code></a>, <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/blob/develop/R/wrangling_dataset_milestones.R" class="external-link"><code>R/wrangling_dataset_milestones.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/blob/develop/R/get.R" class="external-link"><code>R/get.R</code></a></small>
     <div class="hidden name"><code>get.Rd</code></div>
     </div>
 
@@ -55,82 +55,29 @@ with their labels and milestones.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_issues</span><span class="op">(</span></span>
-<span>  source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"local"</span>, <span class="st">"online"</span><span class="op">)</span>,</span>
-<span>  dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.dataset.dir"</span><span class="op">)</span>,</span>
-<span>  dataset_name <span class="op">=</span> <span class="st">"open_issues.yaml"</span>,</span>
-<span>  repo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.repo"</span><span class="op">)</span>,</span>
-<span>  owner <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.owner"</span><span class="op">)</span>,</span>
-<span>  state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"open"</span>, <span class="st">"closed"</span>, <span class="st">"all"</span><span class="op">)</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_issues</span><span class="op">(</span><span class="va">selector</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">get_labels</span><span class="op">(</span></span>
-<span>  source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"local"</span>, <span class="st">"online"</span><span class="op">)</span>,</span>
-<span>  dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.dataset.dir"</span><span class="op">)</span>,</span>
-<span>  dataset_name <span class="op">=</span> <span class="st">"list_labels.yaml"</span>,</span>
-<span>  repo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.repo"</span><span class="op">)</span>,</span>
-<span>  owner <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.owner"</span><span class="op">)</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">get_labels</span><span class="op">(</span><span class="va">selector</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">get_milestones</span><span class="op">(</span></span>
-<span>  source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"local"</span>, <span class="st">"online"</span><span class="op">)</span>,</span>
-<span>  dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.dataset.dir"</span><span class="op">)</span>,</span>
-<span>  dataset_name <span class="op">=</span> <span class="st">"list_milestones.yaml"</span>,</span>
-<span>  repo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.repo"</span><span class="op">)</span>,</span>
-<span>  owner <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.owner"</span><span class="op">)</span>,</span>
-<span>  state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"open"</span>, <span class="st">"closed"</span>, <span class="st">"all"</span><span class="op">)</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">get_milestones</span><span class="op">(</span><span class="va">selector</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
 
 
-<dl><dt id="arg-source">source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
-<dd><p>a character string that is either <code>"online"</code> if you want
-to fetch information from GitHub or <code>"local"</code> (by default) if you want
-to fetch information locally.</p></dd>
-
-
-<dt id="arg-dataset-dir">dataset_dir<a class="anchor" aria-label="anchor" href="#arg-dataset-dir"></a></dt>
-<dd><p>A character string specifying the path which contains the
-datasets (only taken into account if <code>source</code> is set to <code>"local"</code>).
-Defaults to the package option <code>IssueTrackeR.dataset.dir</code>.</p></dd>
-
-
-<dt id="arg-dataset-name">dataset_name<a class="anchor" aria-label="anchor" href="#arg-dataset-name"></a></dt>
-<dd><p>A character string specifying the name of the datasets
-which will be written (only taken into account if <code>source</code> is set to
-<code>"local"</code>).
-Defaults to <code>"open_issues.yaml"</code>.</p></dd>
-
-
-<dt id="arg-repo">repo<a class="anchor" aria-label="anchor" href="#arg-repo"></a></dt>
-<dd><p>A character string specifying the GitHub repository name (only
-taken into account if <code>source</code> is set to <code>"online"</code>).
-Defaults to the package option <code>IssueTrackeR.repo</code>.</p></dd>
-
-
-<dt id="arg-owner">owner<a class="anchor" aria-label="anchor" href="#arg-owner"></a></dt>
-<dd><p>A character string specifying the GitHub owner (only taken
-into account if <code>source</code> is set to <code>"online"</code>).
-Defaults to the package option <code>IssueTrackeR.owner</code>.</p></dd>
-
-
-<dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p>a character string that is either <code>"open"</code> (by default) if
-you want to fetch only open issues from GitHub, <code>"closed"</code> if you want
-to fetch only closed issues from GitHub or <code>"all"</code> if you want to fetch
-all issues from GitHub (closed and open).
-Only taken into account if <code>source</code> is set to <code>"online"</code>.</p></dd>
+<dl><dt id="arg-selector">selector<a class="anchor" aria-label="anchor" href="#arg-selector"></a></dt>
+<dd><p>A <code>SelectorTB</code> object (to define the range of the repo /
+source used). Created with <code><a href="init_selector.html">init_selector()</a></code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>A logical value indicating whether to print additional
+<dd><p>A boolean indicating whether to print additional
 information. Default is <code>TRUE</code>.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Other parameters for GitLab as <code>gitlab_url</code> and <code>private_token</code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -156,96 +103,205 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># From online</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span>, owner <span class="op">=</span> <span class="st">"rjdverse"</span>, repo <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Try to find all repositories from rjdverse...Error in gh::gh(endpoint = "/user/repos", .limit = Inf, visibility = "private",  : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   GitHub API error (403): Resource not accessible by integration</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Read more at</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB; font-style: italic;">&lt;https://docs.github.com/rest/repos/repos#list-repositories-for-the-authenticated-user&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span>  Weird message...</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> → Please contact the maintainer of the package with the error message:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> GitHub API error (403): Resource not accessible by integration</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Read more at</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB; font-style: italic;">&lt;https://docs.github.com/rest/repos/repos#list-repositories-for-the-authenticated-user&gt;</span></span>
-<span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Repo: rjdemetra  owner: rjdverse </span>
+<span class="r-in"><span><span class="va">online_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"GitHub"</span>,</span></span>
+<span class="r-in"><span>    owner <span class="op">=</span> <span class="st">"TanguyBarthelemy"</span>,</span></span>
+<span class="r-in"><span>    repo <span class="op">=</span> <span class="st">"IssueTrackeR"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">online_selector</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Repo: IssueTrackeR  owner: TanguyBarthelemy </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">issues</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 3 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 14 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue rjdverse/rjdemetra#162</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#53</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> How to differentiate a WS in V2 and in V3?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Coverage v2.1.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *related to rjdverse/rjd3workspace#53*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> To continue the coverage, we put a goal of **90%** for v2.1.0.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> When I try to load a WS in v3 with **{RJDemetra}** (with `load_workspace()`), I get no error but I will get error when trying to access other elements.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> How to know if a WS is in V3 with **{RJDemetra}**? Is it possible?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue rjdverse/rjdemetra#156</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#52</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Possible to extract slidingspan main diagnostics ?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Mutators test coverage for v2.1.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I wondered if it was possible in rjdemetra to extract and save the main slidingspan diagnostics of % unstable observations (A% and MM%) that are calculated  and displayed (but not saved) in JDemetra+ ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I guess this is not an “issue”, but rather a (Christmas) wish</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Best regards </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Jørn Ivar Hamre</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Statistics Norway</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I am setting a coverage target of **30%** for version 2.1.0, using mutators.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#50</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> no default for repo and owner and dir</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BY default, we should set dir to `NULL` or to `""`. So when getting the issues (`get_issues`) we can switch source to "online" if dir is not defined.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#49</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Extract labels and milestones from issues</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The functions `get_labels` and `get_milestones` should work with `IssueTB` and `IssuesTB` objects.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The goal is to extract all the labels and milestones used in a list of issues or in an issue.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#47</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Bonnes pratiques de documentation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Suivre les bonnes pratiques de documentation :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] Boolean et non Logical</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] Suivre le guide écrit pour le rjdverse</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#44</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Complete `goodpractice::goodpractice()` checkup</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Here is the output from {goodpractice}:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; gp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── It is good practice to ───────────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ keep functions short and focused. Long functions are harder to understand, test, and maintain.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Consider splitting into smaller helpers. (Default limit of 50 set with o</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue rjdverse/rjdemetra#76</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#43</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Leap Year Effect</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> What to do with type?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I am running into problems including the leap year:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/statistikat/persephone/issues/21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Am I missing some additional parameters that need to be set?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Une question que je me pose : Si  j'ouvre une issue (mais task, bug ou autre) et que je la ferme avec différent attribut (won't do, duplicated...) qu'est ce qu'il va s'afficher dans l'appel gh::gh ?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Aussi est ce que je peux récupérer cette nouvelle info (type) et l'ajouter ? -&gt; que se passe t-il pour les anciennes issu</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#36</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> `get_issue()` missing warning</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Lorsqu'on appelle `get_issues()` avec repo et owner (et sans source), de base il va dans la local et se fiche de ces arguments:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```r</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> get_issues(owner = "r-lib", repo = "devtools") |&gt; filter_issues(fields = c("title", "body"), values = "java") </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; The issues will be read from C:\Users\UTZK0M\Documents\Projets R\TODO\dat</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#31</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Coverage v2.0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> To continue the coverage, we put a goal of **80%** for v2.0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#24</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Continue coverage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The current coverage is 26%. We should update it a lot!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Some functions are not tested:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [x] `[.IssuesTB`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] `[[&lt;-.IssuesTB`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] `[&lt;-.IssuesTB`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] `add_n_years`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] `append`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] `append.default`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] `append.IssuesTB`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] `author_last_comment`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] `author_last_comment.IssuesTB`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] `author_last_com</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#22</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Change yaml to parquet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Is it possible to add this *new feature*?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#20</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [New feature] Who contributes?</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Créer un nouveau graphiques / nouvelle statistiques sur la contribution des personnes (ouvrir des issues, répondre, les fermer, mettre des commentaires...)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#19</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Renommer `write_to_datasets` en `write`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#16</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [Bug] `update_database()` needs a new argument for `list_issues.yaml`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hi there, thank you so much for the fantastic package. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When I download the issues as `get_issues(source = "online", state = "all")` and then write the database to local, I get a `list_issues.yaml` output. However, the `update_database()` function does not have a `list_issues` argument to read this issue table that co</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Repo: rjdemetra  owner: rjdverse </span>
+<span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">online_selector</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Repo: IssueTrackeR  owner: TanguyBarthelemy </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading labels... Done!</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8 labels found.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41 labels found.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">labels</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There is 1 repo.</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - rjdverse/rjdemetra:, <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span>, <span style="color: #1C1C1C; background-color: #D7D7FF;">duplicate</span>, <span style="color: #1C1C1C; background-color: #AFFFFF;">enhancement</span>, <span style="color: #FFFFFF; background-color: #8787FF;">good first issue</span>, <span style="color: #FFFFFF; background-color: #00AF87;">help wanted</span>, <span style="color: #1C1C1C; background-color: #FFFF87;">invalid</span>, <span style="color: #1C1C1C; background-color: #FF87FF;">question</span>, <span style="color: #1C1C1C; background-color: #EEEEEE;">wontfix</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - TanguyBarthelemy/IssueTrackeR:, <span style="color: #1C1C1C; background-color: #E4E4E4;">automated issue</span>, <span style="color: #1C1C1C; background-color: #D7D7FF;">communication</span>, <span style="color: #FFFFFF; background-color: #AF875F;">complexity: complex</span>, <span style="color: #1C1C1C; background-color: #D7AF87;">complexity: moderate</span>, <span style="color: #1C1C1C; background-color: #FFD7D7;">complexity: trivial/easy</span>, <span style="color: #FFFFFF; background-color: #AF5F00;">complexity: very-complex</span>, <span style="color: #1C1C1C; background-color: #D7D7FF;">duplicate</span>, <span style="color: #1C1C1C; background-color: #87AF87;">effort: long</span>, <span style="color: #1C1C1C; background-color: #AFD7AF;">effort: medium</span>, <span style="color: #1C1C1C; background-color: #D7FFD7;">effort: short</span>, <span style="color: #FFFFFF; background-color: #00875F;">effort: unknown</span>, <span style="color: #FFFFFF; background-color: #5FAF5F;">effort: very-long</span>, <span style="color: #FFFFFF; background-color: #8787FF;">good first issue</span>, <span style="color: #FFFFFF; background-color: #00875F;">good practice</span>, <span style="color: #FFFFFF; background-color: #00AF87;">help wanted</span>, <span style="color: #1C1C1C; background-color: #FFFF87;">invalid</span>, <span style="color: #FFFFFF; background-color: #0087D7;">missing documentation</span>, <span style="color: #1C1C1C; background-color: #5FD7FF;">missing examples</span>, <span style="color: #1C1C1C; background-color: #AF87FF;">missing tests</span>, <span style="color: #FFFFFF; background-color: #AF0000;">priority: critical</span>, <span style="color: #FFFFFF; background-color: #D75F87;">priority: high</span>, <span style="color: #1C1C1C; background-color: #FFD7D7;">priority: low</span>, <span style="color: #1C1C1C; background-color: #D7AFAF;">priority: medium</span>, <span style="color: #1C1C1C; background-color: #FF87FF;">question</span>, <span style="color: #1C1C1C; background-color: #E4E4E4;">report</span>, <span style="color: #FFFFFF; background-color: #0087D7;">status: can't-reproduce</span>, <span style="color: #FFFFFF; background-color: #5F87D7;">status: completed</span>, <span style="color: #1C1C1C; background-color: #AFD7FF;">status: duplicate</span>, <span style="color: #1C1C1C; background-color: #87AFD7;">status: in-progress</span>, <span style="color: #1C1C1C; background-color: #D7D7FF;">status: needs-information</span>, <span style="color: #1C1C1C; background-color: #87AFD7;">status: on-hold</span>, <span style="color: #FFFFFF; background-color: #005FAF;">status: review-needed</span>, <span style="color: #1C1C1C; background-color: #DADADA;">status: triage</span>, <span style="color: #1C1C1C; background-color: #AFD7D7;">status: won't-do/fix</span>, <span style="color: #FFFFFF; background-color: #875FAF;">type: bug</span>, <span style="color: #1C1C1C; background-color: #AFAFD7;">type: enhancement</span>, <span style="color: #FFFFFF; background-color: #AF87D7;">type: feature</span>, <span style="color: #1C1C1C; background-color: #D7AFFF;">type: maintenance</span>, <span style="color: #1C1C1C; background-color: #FFD7FF;">type: question</span>, <span style="color: #1C1C1C; background-color: #D7D7FF;">typo</span>, <span style="color: #1C1C1C; background-color: #EEEEEE;">wontfix</span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu">get_milestones</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"online"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Repo: rjdemetra  owner: rjdverse </span>
+<span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu">get_milestones</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">online_selector</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Repo: IssueTrackeR  owner: TanguyBarthelemy </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading milestones... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Done! 0 milestones found.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	-  v2.1.0 ... Done!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	-  v2.0.0 ... Done!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Done! 2 milestones found.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">milestones</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> data frame with 0 columns and 0 rows</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   source  title description     due_on closed_at          creator state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 GitHub v2.1.0                   &lt;NA&gt;      &lt;NA&gt; TanguyBarthelemy  open</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 GitHub v2.0.0             2026-09-30      &lt;NA&gt; TanguyBarthelemy  open</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nb_issues_open nb_issues_closed         repo            owner</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1              7                0 IssueTrackeR TanguyBarthelemy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              6                5 IssueTrackeR TanguyBarthelemy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            url</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/2</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># From local</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
-<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="va">path</span>,</span></span>
-<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"open_issues.yaml"</span></span></span>
+<span class="r-in"><span><span class="va">local_issues_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
+<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"list_issues.yaml"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Looking into open_issues.yaml ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/open_issues.yaml.</span>
-<span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu">get_milestones</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
-<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="va">path</span>,</span></span>
-<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"list_milestones.yaml"</span></span></span>
+<span class="r-in"><span><span class="va">local_labels_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
+<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"list_labels.yaml"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The milestones will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_milestones.yaml.</span>
-<span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
-<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="va">path</span>,</span></span>
-<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"list_labels.yaml"</span></span></span>
+<span class="r-in"><span><span class="va">local_milestones_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
+<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"list_milestones.yaml"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_issues_selector</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
+<span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_labels_selector</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The labels will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_labels.yaml.</span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu">get_milestones</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_milestones_selector</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The milestones will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_milestones.yaml.</span>
 </code></pre></div>
     </div>
   </div>

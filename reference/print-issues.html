@@ -96,34 +96,51 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"local"</span>,</span></span>
-<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="st">"open_issues.yaml"</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">issues_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
+<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"list_issues.yaml"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Looking into open_issues.yaml ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/open_issues.yaml.</span>
+<span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1039</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1058</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Older WS are read not correctly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Friedman Test function calls QS Test in SeasonalityTests</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I created a WS with the version **3.7.1** with 1 SA-Processing with 1 SA-Item with:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/jdemetra/jdplus-main/blob/c91573b85827831899e58ee1c89a6a1cb8760a7e/jdplus-main-base/jdplus-sa-base-parent/jdplus-sa-base-api/src/main/java/jdplus/sa/base/api/diagnostics/SeasonalityTests.java#L58-L60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - the series AirPassengers ([air.csv](https://github.com/user-attachments/files/30928390/air.csv))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - the specification:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - X13 RSA3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - 1 outliers (AO in 1956-08-01) in the estimation spec</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - a basic span (series span) from 1949-01-0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hi, I just noticed that in this file the friedmanTest function actually calls the QS test. I'm assum</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display several issues</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1058</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Friedman Test function calls QS Test in SeasonalityTests</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/jdemetra/jdplus-main/blob/c91573b85827831899e58ee1c89a6a1cb8760a7e/jdplus-main-base/jdplus-sa-base-parent/jdplus-sa-base-api/src/main/java/jdplus/sa/base/api/diagnostics/SeasonalityTests.java#L58-L60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hi, I just noticed that in this file the friedmanTest function actually calls the QS test. I'm assum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1049</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Different Default Thresholds for Combined Seasonality Test Between Versions 2.2.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We have noticed that the Combined Seasonality Test diagnostic is labelled differently across software versions. In version 2.2.4, the diagnostic is classified as Severe, whereas in version 3.7.1 it is classified as Good for the same series (see attached screenshot).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In version 3, the threshold values are no longer visi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1039</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -154,6 +171,15 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> the estimation appears as invalid </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="647" height="40" alt="I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1028</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Lack of documentation regarding assignment of roots in SEATS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hello,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> I was working with a jsai item with an ARIMA model with regular order (3,1,0). The three regular autorregressive roots are one real (negative) and two complex. According to the SEATS documentation, the complex roots go to the seasonal or the transitory component, but JDemetra+ is allocating them in the trend com</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -192,109 +218,57 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#987</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1002</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> The variable `regression.td-ftest` is missing in JD+ output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Fix warnings when running CLI with Java25+</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I generate a `demetra_m` output using the graphical interface (version 3.7.1) and I notice that the `td-ftest` column (`regression.td-ftest` item) is completely empty.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Is this a connection error between the input and output?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> However, in version 2 (I tested version 2.2.6), for the same specifications and the same series</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When running with Java25+, the following warnings are displayed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> **CLI**</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARNING: A restricted method in java.lang.System has been called</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARNING: java.lang.System::loadLibrary has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/C:/.../appassembler/lib/jansi-1.18.jar)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARNING: Use</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#962</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#989</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> JDemetra+ doesn't import duplicated variables</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Fix parsing of legacy TS meta</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> If two variables have the same value, only the last one will be read.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Here is an example in R:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ``` r</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> library("rjd3workspace")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> path_xml &lt;- tempfile(fileext = ".xml")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> writeLines(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     text = '&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tsVariables xmlns="ec/tss.core"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tsVariable name="VAR1"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;t</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#961</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Calendario - JDemetra V3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Buenos días. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> En la versión 3 de JJDemetra+ intento cargar el calendario para Argentina creado por mi, pero no lo reconoce la aplicación. El calendario se encuentra en formato cfgx y podía agregarlo en las versiones 2.0. De no agregar en las versiones 3, ¿cuál sería la forma para agregar los calendarios particulares po</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#943</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Generating output only if the SAP is computed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I try to understand why the output generation wors with the GUI sometimes and sometimes not.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In this issue, I will use the verbs "compute" and "estimate" to refer to the same thing: obtaining the results of the SA estimate for my series. But perhaps there is a fundamental difference between the two actions...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## Exam</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#940</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> How the GUI sort by specification?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> In the GUI, it's possible to sort the SA-Item of a SA-Processing by **Reference spec**. But how is it handle?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I notice (in this example) that this isn’t done by name and that the `^` and `v` keys aren’t used to reverse the direction.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/user-attachments/assets/c627e166-e28b-4de2-818f-821dd96c6b6c</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parsing of legacy TS meta fails on Java25+ with some regional settings (`-Duser.language=fr -Duser.region=BE`)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1029</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1049</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">State:</span> 🟢 Open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Nb comments:</span> 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Seasonal component in X11 spec : if set to NO, no info displayed in GUI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Different Default Thresholds for Combined Seasonality Test Between Versions 2.2.4 and 3.7.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> HI ,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We have noticed that the Combined Seasonality Test diagnostic is labelled differently across software versions. In version 2.2.4, the diagnostic is classified as Severe, whereas in version 3.7.1 it is classified as Good for the same series (see attached screenshot).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In version 3, the threshold values are no longer visible and cannot be adjusted manually. Could you please clarify whether the default thresholds have changed between versions and which diagnostic label should be considered?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> in v 3.8.0 if seasonal component is unticked in the X11 part of the spec </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="674" height="492" alt="Image" src="https://github.com/user-attachments/assets/a15b2a38-d816-4aa4-bf13-3f415ff1d851" /&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> No information is diplayed in GUI  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="246" height="62" alt="Image" src="https://github.com/user-attachments/assets/a57354d6-256f-4bac-aff8-fa68720aee74" /&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> the estimation appears as invalid </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="647" height="40" alt="Image" src="https://github.com/user-attachments/assets/26b7da59-8cbc-43a7-ae8d-2d396912681b" /&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Expected behaviour is that all X11 estimations of S (from B5 to D10) are set to 0 or 1...and everthing is displayed and estimated </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> it was the case in v2.2.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="773" height="456" alt="Image" src="https://github.com/user-attachments/assets/72172828-2d4a-478b-bb92-ba50c6fffb23" /&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues.</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1039 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1058 ✔ Completed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1049 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1039 ✔ Completed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1029 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1028 ✔ Completed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1023 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1006 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1004 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#987 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#962 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#961 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#943 🟢 Open </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#940 🟢 Open </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1002 ✔ Completed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#989 ✔ Completed </span>
 </code></pre></div>
     </div>
   </div>
