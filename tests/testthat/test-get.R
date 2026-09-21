@@ -42,7 +42,6 @@ testthat::test_that("get works for GitLab", {
     testthat::expect_type(milestones, "list")
     testthat::expect_s3_class(milestones, "MilestonesTB")
 
-
     skip_if_not(nzchar(Sys.getenv("GITLAB_TRACTORTOM_API")))
     gitlabr::set_gitlab_connection(
         gitlab_url = "https://gitlab.com",
