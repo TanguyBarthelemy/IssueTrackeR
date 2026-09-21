@@ -152,10 +152,10 @@ get_issues <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_issues_github <- function(
-    repo = NULL,
-    owner = NULL,
-    state = c("open", "opened", "closed", "all"),
-    verbose = TRUE
+        repo = NULL,
+        owner = NULL,
+        state = c("open", "opened", "closed", "all"),
+        verbose = TRUE
 ) {
     state <- match.arg(state)
     if (state == "opened") {
@@ -230,10 +230,10 @@ get_issues_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_issues_gitlab <- function(
-    project_id,
-    state = c("open", "opened", "closed", "all"),
-    verbose = TRUE,
-    ...
+        project_id,
+        state = c("open", "opened", "closed", "all"),
+        verbose = TRUE,
+        ...
 ) {
     state <- match.arg(state)
     if (state == "open") {
@@ -279,8 +279,8 @@ get_issues_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_issues_local <- function(
-    file = NULL,
-    verbose = TRUE
+        file = NULL,
+        verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)
@@ -370,10 +370,10 @@ get_labels <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_labels_github <- function(
-    repo = NULL,
-    owner = NULL,
-    verbose = TRUE,
-    ...
+        repo = NULL,
+        owner = NULL,
+        verbose = TRUE,
+        ...
 ) {
     checkmate::assert_flag(verbose)
     checkmate::assert_character(repo, len = 1L)
@@ -424,9 +424,9 @@ get_labels_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_labels_gitlab <- function(
-    project_id,
-    verbose = TRUE,
-    ...
+        project_id,
+        verbose = TRUE,
+        ...
 ) {
     checkmate::assert_flag(verbose)
     checkmate::assert_count(project_id)
@@ -477,8 +477,8 @@ get_labels_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
 get_labels_local <- function(
-    file = NULL,
-    verbose = TRUE
+        file = NULL,
+        verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)
@@ -537,10 +537,10 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_milestones_github <- function(
-    repo = NULL,
-    owner = NULL,
-    state = c("open", "opened", "closed", "all"),
-    verbose = TRUE
+        repo = NULL,
+        owner = NULL,
+        state = c("open", "opened", "closed", "all"),
+        verbose = TRUE
 ) {
     state <- match.arg(state)
     if (state == "opened") {
@@ -580,10 +580,10 @@ get_milestones_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_milestones_gitlab <- function(
-    project_id,
-    state = c("open", "opened", "closed", "all"),
-    verbose = TRUE,
-    ...
+        project_id,
+        state = c("open", "opened", "closed", "all"),
+        verbose = TRUE,
+        ...
 ) {
     state <- match.arg(state)
     if (state == "open") {
@@ -599,36 +599,54 @@ get_milestones_gitlab <- function(
         ...
     )
 
-    milestones <- data.frame(
-        source = gsub(
-            x = structurel$web_url,
-            pattern = paste0(structurel$path_with_namespace, "$"),
-            replacement = ""
-        ),
-        title = null_to_default(
-            raw_milestones[["title"]],
-            default = NA_character_
-        ),
-        description = null_to_default(
-            raw_milestones[["description"]],
-            default = NA_character_
-        ),
-        due_on = format_timestamp(null_to_default(
-            raw_milestones[["due_date"]],
-            default = NA_character_
-        )),
-        closed_at = format_timestamp(NA_character_),
-        creator = NA_character_,
-        state = null_to_default(
-            raw_milestones[["state"]],
-            default = NA_character_
-        ),
-        nb_issues_open = NA_integer_,
-        nb_issues_closed = NA_integer_,
-        repo = structurel$path,
-        owner = structurel$namespace.full_path,
-        url = raw_milestones$web_url
-    )
+    if (nrow(raw_milestones) == 0L) {
+        milestones <- data.frame(
+            source = character(0L),
+            title = character(0L),
+            description = character(0L),
+            due_on = format_timestamp(character(0L)),
+            closed_at = format_timestamp(character(0L)),
+            creator = character(0L),
+            state = character(0L),
+            nb_issues_open = integer(0L),
+            nb_issues_closed = integer(0L),
+            repo = character(0L),
+            owner = character(0L),
+            url = character(0L)
+        )
+    } else {
+        milestones <- data.frame(
+            source = gsub(
+                x = structurel$web_url,
+                pattern = paste0(structurel$path_with_namespace, "$"),
+                replacement = ""
+            ),
+            title = null_to_default(
+                raw_milestones[["title"]],
+                default = NA_character_
+            ),
+            description = null_to_default(
+                raw_milestones[["description"]],
+                default = NA_character_
+            ),
+            due_on = format_timestamp(null_to_default(
+                raw_milestones[["due_date"]],
+                default = NA_character_
+            )),
+            closed_at = format_timestamp(NA_character_),
+            creator = NA_character_,
+            state = null_to_default(
+                raw_milestones[["state"]],
+                default = NA_character_
+            ),
+            nb_issues_open = NA_integer_,
+            nb_issues_closed = NA_integer_,
+            repo = structurel$path,
+            owner = structurel$namespace.full_path,
+            url = raw_milestones$web_url
+        )
+
+    }
 
     class(milestones) <- c("MilestonesTB", "data.frame")
     return(milestones)
@@ -639,8 +657,8 @@ get_milestones_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
 get_milestones_local <- function(
-    file = NULL,
-    verbose = TRUE
+        file = NULL,
+        verbose = TRUE
 ) {
     file <- normalizePath(file, mustWork = TRUE)
     checkmate::assert_character(file, len = 1L)

@@ -1,10 +1,34 @@
-testthat::test_that("get works", {
+testthat::test_that("get works for GitHub", {
     skip_if_no_github()
 
     selector <- init_selector(
         source = "GitHub",
         owner = "rjdverse",
         repo = "rjd3toolkit"
+    )
+    issues <- get_issues(selector = selector)
+    testthat::expect_type(issues, "list")
+    testthat::expect_s3_class(issues, "IssuesTB")
+
+    labels <- get_labels(selector = selector)
+    testthat::expect_type(labels, "list")
+    testthat::expect_s3_class(labels, "LabelsTB")
+
+    milestones <- get_milestones(selector = selector)
+    testthat::expect_type(milestones, "list")
+    testthat::expect_s3_class(milestones, "MilestonesTB")
+})
+
+testthat::test_that("get works for GitLab", {
+    skip_if_not(nzchar(Sys.getenv("GITLAB_SSPCLOUD_API")))
+
+    gitlabr::set_gitlab_connection(
+        gitlab_url = "https://git.lab.sspcloud.fr",
+        private_token = Sys.getenv("GITLAB_SSPCLOUD_API")
+    )
+    selector <- init_selector(
+        source = "GitLab",
+        project_id = c(2075, 2530)
     )
     issues <- get_issues(selector = selector)
     testthat::expect_type(issues, "list")
