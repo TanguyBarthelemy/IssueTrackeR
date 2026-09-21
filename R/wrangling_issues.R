@@ -441,14 +441,14 @@ new_issues.default <- function(
 #' @noRd
 `[.IssuesTB` <- function(x, i, j, drop = TRUE) {
     output <- NextMethod("[")
-    Narg <- nargs() - !missing(drop)
+    nb_args <- nargs() - !missing(drop)
     # Cas sélection de colonne
     if (!missing(j)) {
         if (length(j) > 1L || !drop) {
             return(as.data.frame(output))
         }
         return(output)
-    } else if (Narg == 2L && !missing(i)) {
+    } else if (nb_args == 2L && !missing(i)) {
         return(as.data.frame(output))
     }
 

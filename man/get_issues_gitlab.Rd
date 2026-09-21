@@ -23,7 +23,8 @@ want to fetch all issues from GitHub (closed and open).}
 information. Default is \code{TRUE}.}
 }
 \value{
-An \code{IssuesTB} object containing the issues from the specified project.
+An \code{IssuesTB} object containing the issues from the specified
+project.
 }
 \description{
 Internal function to fetch issues from GitLab API for a specific project.

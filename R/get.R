@@ -91,8 +91,8 @@ get_issues <- function(selector, verbose = TRUE, ...) {
         }
         return(new_issues())
     } else if (length(selector) == 1L) {
-        args <- selector[[1L]]
-        args <- args[names(args) != "source"]
+        sel_args <- selector[[1L]]
+        sel_args <- sel_args[names(sel_args) != "source"]
         issues <- do.call(
             what = switch(
                 selector[[1L]][["source"]],
@@ -100,7 +100,7 @@ get_issues <- function(selector, verbose = TRUE, ...) {
                 GitLab = get_issues_gitlab,
                 local = get_issues_local
             ),
-            args = c(args, list(...))
+            args = c(sel_args, list(...))
         )
         return(issues)
     }
@@ -216,7 +216,8 @@ get_issues_github <- function(
 #' @param verbose A boolean indicating whether to print additional
 #' information. Default is \code{TRUE}.
 #'
-#' @returns An `IssuesTB` object containing the issues from the specified project.
+#' @returns An `IssuesTB` object containing the issues from the specified
+#' project.
 #'
 #' @examples
 #' \dontrun{
@@ -286,10 +287,10 @@ get_issues_local <- function(
     checkmate::assert_flag(verbose)
 
     if (dir.exists(file)) {
-        stop("The path corresponds to a directory.")
+        stop("The path corresponds to a directory.", call. = FALSE)
     }
     if (tools::file_ext(file) != "yaml") {
-        stop("The path should lead to a yaml file.")
+        stop("The path should lead to a yaml file.", call. = FALSE)
     }
 
     if (verbose) {
@@ -344,26 +345,26 @@ get_labels <- function(selector, verbose = TRUE, ...) {
         }
         return(NULL)
     } else if (length(selector) == 1L) {
-        args <- selector[[1L]]
-        args <- args[names(args) != "source"]
-        labels <- do.call(
+        sel_args <- selector[[1L]]
+        sel_args <- sel_args[names(sel_args) != "source"]
+        list_labels <- do.call(
             what = switch(
                 selector[[1L]][["source"]],
                 GitHub = get_labels_github,
                 GitLab = get_labels_gitlab,
                 local = get_labels_local
             ),
-            args = c(args, list(...))
+            args = c(sel_args, list(...))
         )
-        return(labels)
+        return(list_labels)
     }
 
-    labels <- selector |>
+    list_labels <- selector |>
         seq_along() |>
         lapply(FUN = extract_nth, x = selector, verbose = FALSE) |>
         lapply(FUN = get_labels, verbose = verbose) |>
         do.call(what = rbind)
-    return(labels)
+    return(list_labels)
 }
 
 #' @importFrom checkmate assert_flag
@@ -484,10 +485,10 @@ get_labels_local <- function(
     checkmate::assert_flag(verbose)
 
     if (dir.exists(file)) {
-        stop("The path corresponds to a directory.")
+        stop("The path corresponds to a directory.", call. = FALSE)
     }
     if (tools::file_ext(file) != "yaml") {
-        stop("The path should lead to a yaml file.")
+        stop("The path should lead to a yaml file.", call. = FALSE)
     }
 
     if (verbose) {
@@ -511,8 +512,8 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
         }
         return(NULL)
     } else if (length(selector) == 1L) {
-        args <- selector[[1L]]
-        args <- args[names(args) != "source"]
+        sel_args <- selector[[1L]]
+        sel_args <- sel_args[names(sel_args) != "source"]
         milestones <- do.call(
             what = switch(
                 selector[[1L]][["source"]],
@@ -520,7 +521,7 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
                 GitLab = get_milestones_gitlab,
                 local = get_milestones_local
             ),
-            args = c(args, list(...))
+            args = c(sel_args, list(...))
         )
         return(milestones)
     }
@@ -646,10 +647,10 @@ get_milestones_local <- function(
     checkmate::assert_flag(verbose)
 
     if (dir.exists(file)) {
-        stop("The path corresponds to a directory.")
+        stop("The path corresponds to a directory.", call. = FALSE)
     }
     if (tools::file_ext(file) != "yaml") {
-        stop("The path should lead to a yaml file.")
+        stop("The path should lead to a yaml file.", call. = FALSE)
     }
 
     if (verbose) {

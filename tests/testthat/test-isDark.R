@@ -1,9 +1,9 @@
-test_that("isDark works for bright colours", {
-    expect_false(isDark("white"))
-    expect_false(isDark("#00AEB7"))
+test_that("is_dark works for bright colours", {
+    expect_false(is_dark("white"))
+    expect_false(is_dark("#00AEB7"))
 })
 
-test_that("isDark works for dark colour", {
-    expect_true(isDark("black"))
-    expect_true(isDark("#0800D6"))
+test_that("is_dark works for dark colour", {
+    expect_true(is_dark("black"))
+    expect_true(is_dark("#0800D6"))
 })

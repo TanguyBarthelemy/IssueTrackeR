@@ -19,7 +19,11 @@ Checks whether a SelectorTB object contains any elements.
 empty_sel <- IssueTrackeR:::empty_selector()
 IssueTrackeR:::is_empty(empty_sel)  # Returns TRUE
 
-full_sel <- init_selector(source = "GitHub", owner = "TanguyBarthelemy", repo = "IssueTrackeR")
+full_sel <- init_selector(
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
+    repo = "IssueTrackeR"
+)
 IssueTrackeR:::is_empty(full_sel)  # Returns FALSE
 }
 \keyword{internal}

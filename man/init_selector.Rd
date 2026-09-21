@@ -25,7 +25,8 @@ init_selector(source, ...)
 A \code{SelectorTB} object configured for the specified source.
 }
 \description{
-Creates a SelectorTB object for specifying data sources (GitHub, GitLab, or local).
+Creates a SelectorTB object for specifying data sources (GitHub, GitLab, or
+local).
 The selector can be used to fetch issues from different sources.
 }
 \details{
@@ -35,7 +36,11 @@ into a single query using \code{merge_selector()}.
 }
 \examples{
 # GitHub selector for a specific repository
-gh_sel <- init_selector(source = "GitHub", owner = "TanguyBarthelemy", repo = "IssueTrackeR")
+gh_sel <- init_selector(
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
+    repo = "IssueTrackeR"
+)
 
 # GitLab selector for multiple projects
 gl_sel <- init_selector(source = "GitLab", project_id = c(4578, 2384))

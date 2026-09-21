@@ -11,7 +11,11 @@
 #' empty_sel <- IssueTrackeR:::empty_selector()
 #' IssueTrackeR:::is_empty(empty_sel)  # Returns TRUE
 #'
-#' full_sel <- init_selector(source = "GitHub", owner = "TanguyBarthelemy", repo = "IssueTrackeR")
+#' full_sel <- init_selector(
+#'     source = "GitHub",
+#'     owner = "TanguyBarthelemy",
+#'     repo = "IssueTrackeR"
+#' )
 #' IssueTrackeR:::is_empty(full_sel)  # Returns FALSE
 #' @dev
 #' @importFrom checkmate assert_class
@@ -39,7 +43,8 @@ empty_selector <- function() {
 #' @title Initialise a SelectorTB object
 #'
 #' @description
-#' Creates a SelectorTB object for specifying data sources (GitHub, GitLab, or local).
+#' Creates a SelectorTB object for specifying data sources (GitHub, GitLab, or
+#' local).
 #' The selector can be used to fetch issues from different sources.
 #'
 #' @param source a character string that is either:
@@ -60,7 +65,11 @@ empty_selector <- function() {
 #'
 #' @examples
 #' # GitHub selector for a specific repository
-#' gh_sel <- init_selector(source = "GitHub", owner = "TanguyBarthelemy", repo = "IssueTrackeR")
+#' gh_sel <- init_selector(
+#'     source = "GitHub",
+#'     owner = "TanguyBarthelemy",
+#'     repo = "IssueTrackeR"
+#' )
 #'
 #' # GitLab selector for multiple projects
 #' gl_sel <- init_selector(source = "GitLab", project_id = c(4578, 2384))
@@ -76,24 +85,25 @@ empty_selector <- function() {
 #' @export
 #' @importFrom checkmate assert_character
 init_selector <- function(source, ...) {
-    args <- list(...)
-    if (length(args) == 0L) {
+    sel_args <- list(...)
+    if (length(sel_args) == 0L) {
         return(empty_selector())
     }
 
     checkmate::assert_character(source, len = 1L)
     source <- tolower(source)
-    checkmate::assert_character(source, len = 1L)
+    checkmate::assert_choice(source, choices = c("local", "github", "gitlab"))
 
-    if (source == "github") {
-        return(init_selector_github(...))
-    } else if (source == "gitlab") {
-        return(init_selector_gitlab(...))
-    } else if (source == "local") {
-        return(init_selector_local(...))
-    }
-
-    stop("Wrong source. Source should be \"GitHub\", \"GitLab\" or \"local\".")
+    selectors <- do.call(
+        what = switch(
+            source,
+            github = init_selector_github,
+            gitlab = init_selector_gitlab,
+            local = init_selector_local
+        ),
+        args = sel_args
+    )
+    return(selectors)
 }
 
 #' @title Initialize GitHub Selector
@@ -112,10 +122,13 @@ init_selector <- function(source, ...) {
 #'
 #' @examples
 #' # Select a specific repository
-#' gh_sel <- IssueTrackeR:::init_selector_github(owner = "TanguyBarthelemy", repo = "IssueTrackeR")
+#' gh_sel <- IssueTrackeR:::init_selector_github(
+#'     owner = "TanguyBarthelemy",
+#'     repo = "IssueTrackeR"
+#' )
 #'
 #' # Select all repositories for an owner
-#' all_repos_sel <- IssueTrackeR:::init_selector_github(owner = "TanguyBarthelemy")
+#' tb_sel <- IssueTrackeR:::init_selector_github(owner = "TanguyBarthelemy")
 #'
 #' # Select multiple repositories
 #' multi_repo_sel <- IssueTrackeR:::init_selector_github(
@@ -130,9 +143,9 @@ init_selector_github <- function(owner = NULL, repo = NULL, ...) {
     checkmate::assert_character(repo, null.ok = TRUE)
 
     if (is.null(owner)) {
-        warning("There is no owner Please provide a owner.")
+        warning("There is no owner Please provide a owner.", call. = FALSE)
         return(empty_selector())
-    } else if (length(owner) > 1) {
+    } else if (length(owner) > 1L) {
         selector <- lapply(owner, init_selector_github, repo = repo, ...) |>
             do.call(what = merge_selector)
         return(selector)
@@ -176,7 +189,10 @@ init_selector_github <- function(owner = NULL, repo = NULL, ...) {
 init_selector_gitlab <- function(project_id = NULL, ...) {
     checkmate::assert_integerish(project_id, null.ok = TRUE)
     if (is.null(project_id)) {
-        warning("There is no project_id. Please provide a project_id.")
+        warning(
+            "There is no project_id. Please provide a project_id.",
+            call. = FALSE
+        )
         return(empty_selector())
     }
     selector <- lapply(project_id, \(id) {
@@ -222,10 +238,15 @@ init_selector_local <- function(file) {
 #'
 #' @param \dots `SelectorTB` objects to merge.
 #'
-#' @returns A merged `SelectorTB` object containing all elements from the input selectors.
+#' @returns A merged `SelectorTB` object containing all elements from the input
+#' selectors.
 #'
 #' @examples
-#' s1 <- init_selector(source = "GitHub", owner = "TanguyBarthelemy", repo = "IssueTrackeR")
+#' s1 <- init_selector(
+#'     source = "GitHub",
+#'     owner = "TanguyBarthelemy",
+#'     repo = "IssueTrackeR"
+#' )
 #' s2 <- init_selector(source = "GitHub", owner = "TractorTom", repo = NULL)
 #' merged <- merge_selector(s1, s2)
 #' @export

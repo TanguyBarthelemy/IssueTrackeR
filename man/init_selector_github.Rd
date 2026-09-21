@@ -24,10 +24,13 @@ it automatically fetches all repositories for the given owner.
 }
 \examples{
 # Select a specific repository
-gh_sel <- IssueTrackeR:::init_selector_github(owner = "TanguyBarthelemy", repo = "IssueTrackeR")
+gh_sel <- IssueTrackeR:::init_selector_github(
+    owner = "TanguyBarthelemy",
+    repo = "IssueTrackeR"
+)
 
 # Select all repositories for an owner
-all_repos_sel <- IssueTrackeR:::init_selector_github(owner = "TanguyBarthelemy")
+tb_sel <- IssueTrackeR:::init_selector_github(owner = "TanguyBarthelemy")
 
 # Select multiple repositories
 multi_repo_sel <- IssueTrackeR:::init_selector_github(

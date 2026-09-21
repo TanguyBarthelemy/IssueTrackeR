@@ -65,6 +65,6 @@ heylogs.properties
 ^man/init_selector_github\.Rd$
 ^man/init_selector_gitlab\.Rd$
 ^man/init_selector_local\.Rd$
-^man/isDark\.Rd$
+^man/is_dark\.Rd$
 ^man/null_to_default\.Rd$
 ^man/dot-write\.Rd$

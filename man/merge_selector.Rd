@@ -10,14 +10,19 @@ merge_selector(...)
 \item{\dots}{\code{SelectorTB} objects to merge.}
 }
 \value{
-A merged \code{SelectorTB} object containing all elements from the input selectors.
+A merged \code{SelectorTB} object containing all elements from the input
+selectors.
 }
 \description{
 Combines multiple selector objects into a single selector.
 Useful for fetching issues from multiple sources in one operation.
 }
 \examples{
-s1 <- init_selector(source = "GitHub", owner = "TanguyBarthelemy", repo = "IssueTrackeR")
+s1 <- init_selector(
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
+    repo = "IssueTrackeR"
+)
 s2 <- init_selector(source = "GitHub", owner = "TractorTom", repo = NULL)
 merged <- merge_selector(s1, s2)
 }

@@ -191,7 +191,7 @@ print.summary.IssuesTB <- function(x, ...) {
 print.LabelsTB <- function(x, ...) {
     x$labels_bgcolor <- x$color
     x$labels_color <- c("grey8", "ivory")[
-        isDark(x$labels_bgcolor) + 1L
+        is_dark(x$labels_bgcolor) + 1L
     ]
     x$labels_url <- x$url
     x$formated_label <- vapply(

@@ -25,18 +25,18 @@
 #'
 #' @examples
 #' # Check a hexadecimal color
-#' IssueTrackeR:::isDark("#000000")  # black is dark
-#' IssueTrackeR:::isDark("#FFFFFF")  # white is light
+#' IssueTrackeR:::is_dark("#000000")  # black is dark
+#' IssueTrackeR:::is_dark("#FFFFFF")  # white is light
 #'
 #' # Check a named color
-#' IssueTrackeR:::isDark("navy")
-#' IssueTrackeR:::isDark("yellow")
+#' IssueTrackeR:::is_dark("navy")
+#' IssueTrackeR:::is_dark("yellow")
 #'
 #' # Check an RGB vector
-#' IssueTrackeR:::isDark(grDevices::rgb(0, 0, 0))
-#' IssueTrackeR:::isDark(grDevices::rgb(255, 255, 255, maxColorValue = 255))
+#' IssueTrackeR:::is_dark(grDevices::rgb(0, 0, 0))
+#' IssueTrackeR:::is_dark(grDevices::rgb(255, 255, 255, maxColorValue = 255))
 #' @dev
-isDark <- function(colr) {
+is_dark <- function(colr) {
     col1 <- grDevices::col2rgb(colr) * c(299L, 587L, 114L)
     contrast <- colSums(col1) / 1000L < 123L
     return(contrast)

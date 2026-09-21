@@ -15,7 +15,7 @@ prepare_label_display <- function(x, html_url) {
     labels_name <- x$name
     labels_bgcolor <- x$color
 
-    labels_color <- c("grey8", "ivory")[isDark(x$color) + 1L]
+    labels_color <- c("grey8", "ivory")[is_dark(x$color) + 1L]
     labels_url <- paste0(
         gsub(
             x = html_url,
@@ -136,7 +136,7 @@ summary.IssuesTB <- function(object, with_labels = FALSE, ...) {
 summary.LabelsTB <- function(object, ...) {
     object$labels_bgcolor <- object$color
     object$labels_color <- c("grey8", "ivory")[
-        isDark(object$labels_bgcolor) + 1L
+        is_dark(object$labels_bgcolor) + 1L
     ]
     object$labels_url <- file.path(
         "https://github.com",

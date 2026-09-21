@@ -58,9 +58,12 @@ format_timestamp <- function(x) {
 #' @inheritParams get
 #'
 #' @returns
-#' - `format_labels_github`: A data frame with columns: `name`, `description`, `color`.
-#' - `format_comments_github`: A list of data frames with columns: `text`, `author`.
-#' - `format_issues_github`: A list of IssuesTB objects with complete issue data.
+#' - `format_labels_github`: A data frame with columns: `name`, `description`,
+#'   `color`.
+#' - `format_comments_github`: A list of data frames with columns: `text`,
+#'   `author`.
+#' - `format_issues_github`: A list of IssuesTB objects with complete issue
+#'   data.
 #' - `format_milestone_github`: A data frame with milestone information.
 #' - `format_milestones_github`: A list representing milestones with `title`,
 #'   `description` and `due_on` date)
@@ -116,11 +119,16 @@ format_timestamp <- function(x) {
 #'     .limit = Inf,
 #'     .progress = FALSE
 #' )
-#' formatted_comments <- IssueTrackeR:::format_comments_github(raw_comments, urls)
+#' formatted_comments <- IssueTrackeR:::format_comments_github(
+#'     raw_comments,
+#'     urls
+#' )
 #'
-#' formatted_issues <- IssueTrackeR:::format_issues_github(raw_issues = raw_issues,
-#'                             raw_comments = raw_comments,
-#'                             verbose = FALSE)
+#' formatted_issues <- IssueTrackeR:::format_issues_github(
+#'     raw_issues = raw_issues,
+#'     raw_comments = raw_comments,
+#'     verbose = FALSE
+#' )
 #' }
 #'
 #' @name format
@@ -334,14 +342,15 @@ format_issues_gitlab <- function(
     raw_issues,
     verbose = TRUE
 ) {
-    if (nrow(raw_issues) == 0) {
+    if (nrow(raw_issues) == 0L) {
         return(new_issues())
     }
     structurel <- strsplit(raw_issues[["references.full"]], split = "/|#") |>
         lapply(\(x) {
             data.frame(
-                owner = paste0(x[seq_len(length(x) - 2L)], collapse = "/"),
-                repo = x[length(x) - 1L]
+                owner = paste(x[seq_len(length(x) - 2L)], collapse = "/"),
+                repo = x[length(x) - 1L],
+                stringsAsFactors = FALSE
             )
         }) |>
         do.call(what = rbind)
@@ -370,6 +379,14 @@ format_issues_gitlab <- function(
             times = nrow(raw_issues)
         )
     }
+    created_at <- raw_issues[["created_at"]] |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+    closed_at <- raw_issues[["closed_at"]] |>
+        null_to_default(default = NA_character_) |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+
     issues <- new_issues(
         url = raw_issues[["_links.self"]],
         html_url = raw_issues[["web_url"]],
@@ -386,13 +403,8 @@ format_issues_gitlab <- function(
             raw_comments = list(),
             urls = raw_issues[["_links.self"]]
         ),
-        created_at = raw_issues[["created_at"]] |>
-            strptime(format = "%Y-%m-%dT%H:%M:%S") |>
-            format_timestamp(),
-        closed_at = raw_issues[["closed_at"]] |>
-            null_to_default(default = NA_character_) |>
-            strptime(format = "%Y-%m-%dT%H:%M:%S") |>
-            format_timestamp(),
+        created_at = created_at,
+        closed_at = closed_at,
         closed_by = null_to_default(
             raw_issues[["closed_by.username"]],
             default = NA_character_
