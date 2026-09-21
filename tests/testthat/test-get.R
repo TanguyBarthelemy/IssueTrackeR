@@ -41,6 +41,28 @@ testthat::test_that("get works for GitLab", {
     milestones <- get_milestones(selector = selector)
     testthat::expect_type(milestones, "list")
     testthat::expect_s3_class(milestones, "MilestonesTB")
+
+
+    skip_if_not(nzchar(Sys.getenv("GITLAB_TRACTORTOM_API")))
+    gitlabr::set_gitlab_connection(
+        gitlab_url = "https://gitlab.com",
+        private_token = Sys.getenv("GITLAB_TRACTORTOM_API")
+    )
+    selector <- init_selector(
+        source = "GitLab",
+        project_id = c(51699988, 29346974, 15028532)
+    )
+    issues <- get_issues(selector = selector)
+    testthat::expect_type(issues, "list")
+    testthat::expect_s3_class(issues, "IssuesTB")
+
+    labels <- get_labels(selector = selector)
+    testthat::expect_type(labels, "list")
+    testthat::expect_s3_class(labels, "LabelsTB")
+
+    milestones <- get_milestones(selector = selector)
+    testthat::expect_type(milestones, "list")
+    testthat::expect_s3_class(milestones, "MilestonesTB")
 })
 
 testthat::test_that("get_issues with multiple repos works", {
