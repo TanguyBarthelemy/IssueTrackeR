@@ -481,7 +481,8 @@ format_milestone_github <- function(raw_milestone, verbose = TRUE) {
         state = raw_milestone[["state"]],
         nb_issues_open = raw_milestone[["open_issues"]],
         nb_issues_closed = raw_milestone[["closed_issues"]],
-        url = raw_milestone[["html_url"]]
+        url = raw_milestone[["html_url"]],
+        stringsAsFactors = FALSE
     )
 
     return(output)
