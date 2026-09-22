@@ -569,8 +569,17 @@ get_milestones_github <- function(
     if (nrow(milestones) > 0L) {
         milestones <- cbind(milestones, repo = repo, owner = owner)
         col_names <- c(
-            "source", "title", "description", "due_on", "closed_at", "creator",
-            "state", "nb_issues_open", "nb_issues_closed", "repo", "owner",
+            "source",
+            "title",
+            "description",
+            "due_on",
+            "closed_at",
+            "creator",
+            "state",
+            "nb_issues_open",
+            "nb_issues_closed",
+            "repo",
+            "owner",
             "url"
         )
         milestones <- milestones[, col_names]

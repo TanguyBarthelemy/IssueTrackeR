@@ -10,36 +10,43 @@ compute_contribution <- function(x, n) {
 #' @method compute_contribution IssuesTB
 #' @export
 #' @importFrom checkmate assert_number
+#' @importFrom utils tail
+#' @importFrom utils head
 compute_contribution.IssuesTB <- function(x, n = Inf) {
-    checkmate::assert_number(n, lower = 0)
+    checkmate::assert_number(n, lower = 0L)
     if (!is.infinite(n)) {
         checkmate::assert_integerish(n, len = 1L, lower = 1L)
     }
 
     opener <- table(x$creator)
-
     if (n < length(opener)) {
-        opener <- c(
-            opener |> sort(decreasing = TRUE) |> head(n),
-            other = opener |> sort(decreasing = TRUE) |> tail(-n) |> sum()
-        )
+        head_opener <- opener |> sort(decreasing = TRUE) |> utils::head(n)
+        other_opener <- opener |>
+            sort(decreasing = TRUE) |>
+            utils::tail(-n) |>
+            sum()
+        opener <- c(head_opener, other = other_opener)
     }
     commenter <- x$comments |>
         lapply(FUN = `[[`, "author") |>
         do.call(what = c) |>
         table()
     if (n < length(commenter)) {
-        commenter <- c(
-            commenter |> sort(decreasing = TRUE) |> head(n),
-            other = commenter |> sort(decreasing = TRUE) |> tail(-n) |> sum()
-        )
+        head_commenter <- commenter |> sort(decreasing = TRUE) |> utils::head(n)
+        other_commenter <- commenter |>
+            sort(decreasing = TRUE) |>
+            utils::tail(-n) |>
+            sum()
+        commenter <- c(head_commenter, other = other_commenter)
     }
     closer <- table(x$closed_by)
     if (n < length(closer)) {
-        closer <- c(
-            closer |> sort(decreasing = TRUE) |> head(n),
-            other = closer |> sort(decreasing = TRUE) |> tail(-n) |> sum()
-        )
+        head_closer <- closer |> sort(decreasing = TRUE) |> utils::head(n)
+        other_closer <- closer |>
+            sort(decreasing = TRUE) |>
+            utils::tail(-n) |>
+            sum()
+        closer <- c(head_closer, other = other_closer)
     }
 
     all_id <- unique(c(names(opener), names(commenter), names(closer)))

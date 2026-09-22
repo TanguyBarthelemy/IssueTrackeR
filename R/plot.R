@@ -846,19 +846,30 @@ plot.IssuesTB <- function(
 #' @exportS3Method plot ContributionsTB
 #' @method plot ContributionsTB
 #' @export
+#' @importFrom graphics pie
+#' @importFrom withr with_par
 plot.ContributionsTB <- function(x) {
-    if (any(x > 0)) {
+    if (any(x > 0L)) {
         withr::with_par(
             new = list(mfrow = c(1L, sum(rowSums(x) > 0L))),
             code = {
-                if (any(x[1, ] > 0L)) {
-                    pie(x[1, ][x[1, ] > 0], main = "Nb Issues open")
+                if (any(x[1L, ] > 0L)) {
+                    graphics::pie(
+                        x[1L, ][x[1L, ] > 0L],
+                        main = "Nb Issues open"
+                    )
                 }
-                if (any(x[2, ] > 0L)) {
-                    pie(x[2, ][x[2, ] > 0], main = "Nb Issues commented")
+                if (any(x[2L, ] > 0L)) {
+                    graphics::pie(
+                        x[2L, ][x[2L, ] > 0L],
+                        main = "Nb Issues commented"
+                    )
                 }
-                if (any(x[3, ] > 0L)) {
-                    pie(x[3, ][x[3, ] > 0], main = "Nb Issues closed")
+                if (any(x[3L, ] > 0L)) {
+                    graphics::pie(
+                        x[3L, ][x[3L, ] > 0L],
+                        main = "Nb Issues closed"
+                    )
                 }
             }
         )

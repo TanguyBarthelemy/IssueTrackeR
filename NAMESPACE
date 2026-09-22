@@ -131,6 +131,7 @@ importFrom(graphics,
   box,
   legend,
   lines,
+  pie,
   polygon,
   rect,
   text
@@ -146,7 +147,9 @@ importFrom(tools,
 )
 importFrom(utils,
   URLencode,
-  strcapture
+  head,
+  strcapture,
+  tail
 )
 importFrom(withr,with_par)
 importFrom(yaml,
