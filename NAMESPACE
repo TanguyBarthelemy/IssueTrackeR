@@ -8,6 +8,8 @@ S3method(append,default)
 S3method(author_last_comment,IssueTB)
 S3method(author_last_comment,IssuesTB)
 S3method(base::plot,IssuesTB)
+S3method(compute_contribution,IssuesTB)
+S3method(compute_contribution,default)
 S3method(count_issues,IssuesTB)
 S3method(count_issues,default)
 S3method(extract_nth,IssuesTB)
@@ -35,6 +37,7 @@ S3method(new_issues,NULL)
 S3method(new_issues,data.frame)
 S3method(new_issues,default)
 S3method(new_issues,list)
+S3method(plot,ContributionsTB)
 S3method(plot,IssuesTB)
 S3method(print,IssueTB)
 S3method(print,IssuesTB)
@@ -91,6 +94,7 @@ importFrom(checkmate,
   assert_integer,
   assert_integerish,
   assert_list,
+  assert_number,
   assert_numeric,
   assert_scalar
 )

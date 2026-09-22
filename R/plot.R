@@ -842,3 +842,26 @@ plot.IssuesTB <- function(
     )
     return(invisible(x))
 }
+
+#' @exportS3Method plot ContributionsTB
+#' @method plot ContributionsTB
+#' @export
+plot.ContributionsTB <- function(x) {
+    if (any(x > 0)) {
+        withr::with_par(
+            new = list(mfrow = c(1L, sum(rowSums(x) > 0L))),
+            code = {
+                if (any(x[1, ] > 0L)) {
+                    pie(x[1, ][x[1, ] > 0], main = "Nb Issues open")
+                }
+                if (any(x[2, ] > 0L)) {
+                    pie(x[2, ][x[2, ] > 0], main = "Nb Issues commented")
+                }
+                if (any(x[3, ] > 0L)) {
+                    pie(x[3, ][x[3, ] > 0], main = "Nb Issues closed")
+                }
+            }
+        )
+    }
+    return(invisible(x))
+}
