@@ -55,8 +55,10 @@
 <h3 id="unreleased-1-5-0-9000"><a href="https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.5.0...HEAD" class="external-link">Unreleased</a><a class="anchor" aria-label="anchor" href="#unreleased-1-5-0-9000"></a></h3>
 <div class="section level4">
 <h4 id="added-1-5-0-9000">Added<a class="anchor" aria-label="anchor" href="#added-1-5-0-9000"></a></h4>
-<ul><li>Support for GitLab repositories</li>
-<li>New ways of selecting repositories with selector objects (<code>SelectorTB</code> class).</li>
+<ul><li>Support for GitLab repositories <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/issues/15" class="external-link">#15</a>
+</li>
+<li>New ways of selecting repositories with selector objects (<code>SelectorTB</code> class). <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/issues/3" class="external-link">#3</a>
+</li>
 </ul></div>
 <div class="section level4">
 <h4 id="changed-1-5-0-9000">Changed<a class="anchor" aria-label="anchor" href="#changed-1-5-0-9000"></a></h4>
@@ -65,6 +67,9 @@
 </li>
 <li>
 <code>format_XXX</code> functions are renamed <code>format_XXX_github</code>
+</li>
+<li>
+<code>write_to_datasets()</code> is renamed <code><a href="../reference/write.html">write()</a></code> <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/issues/19" class="external-link">#19</a>
 </li>
 </ul></div>
 </div>
@@ -132,7 +137,7 @@
 <li>
 <code><a href="../reference/update_database.html">update_database()</a></code> updates all the milestones (closed and open)</li>
 <li>
-<code>write_issues_to_dataset()</code>, <code>write_labels_to_dataset()</code> and <code>write_milestones_to_dataset()</code> are regrouped into <code><a href="../reference/write.html">write_to_dataset()</a></code>
+<code>write_issues_to_dataset()</code>, <code>write_labels_to_dataset()</code> and <code>write_milestones_to_dataset()</code> are regrouped into <code>write_to_dataset()</code>
 </li>
 <li>
 <code><a href="../reference/get.html">get_issues()</a></code> accept now several repos to look for issues. Argument <code>repo</code> can be a vector of several repos.</li>
