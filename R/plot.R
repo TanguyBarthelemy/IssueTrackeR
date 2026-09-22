@@ -848,7 +848,7 @@ plot.IssuesTB <- function(
 #' @export
 #' @importFrom graphics pie
 #' @importFrom withr with_par
-plot.ContributionsTB <- function(x) {
+plot.ContributionsTB <- function(x, ...) {
     if (any(x > 0L)) {
         withr::with_par(
             new = list(mfrow = c(1L, sum(rowSums(x) > 0L))),
