@@ -9,13 +9,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-* Support for GitLab repositories
-* New ways of selecting repositories with selector objects (`SelectorTB` class).
+* Support for GitLab repositories [#15](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/15)
+* New ways of selecting repositories with selector objects (`SelectorTB` class).  [#3](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/3)
 
 ### Changed
 
 * `plot` now takes a `by` argument to display area chart by any variable in the list of issues. [#51](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/51)
 * `format_XXX` functions are renamed `format_XXX_github`
+* `write_to_datasets()` is renamed `write()` [#19](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/19)
 
 
 ## [1.5.0] - 2026-08-24

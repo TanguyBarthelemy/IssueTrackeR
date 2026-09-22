@@ -143,31 +143,31 @@
 #' labels <- get_labels(selector = labels_selector)
 #' milestones <- get_milestones(selector = milestones_selector)
 #'
-#' write_to_dataset(x = issues, dataset_dir = tempdir())
-#' write_to_dataset(x = labels, dataset_dir = tempdir())
-#' write_to_dataset(x = milestones, dataset_dir = tempdir())
+#' write(x = issues, dataset_dir = tempdir())
+#' write(x = labels, dataset_dir = tempdir())
+#' write(x = milestones, dataset_dir = tempdir())
 #'
-#' write_to_dataset(x = issues, dataset_dir = tempdir(),
+#' write(x = issues, dataset_dir = tempdir(),
 #'                  dataset_name = "my_issues")
-#' write_to_dataset(x = labels, dataset_dir = tempdir(),
+#' write(x = labels, dataset_dir = tempdir(),
 #'                  dataset_name = "my_labels")
-#' write_to_dataset(x = milestones, dataset_dir = tempdir(),
+#' write(x = milestones, dataset_dir = tempdir(),
 #'                  dataset_name = "my_milestones")
 #'
 #' @name write
 #'
-write_to_dataset <- function(
+write <- function(
     x,
     ...
 ) {
-    UseMethod(generic = "write_to_dataset", object = x)
+    UseMethod(generic = "write", object = x)
 }
 
 #' @rdname write
-#' @exportS3Method write_to_dataset IssuesTB
-#' @method write_to_dataset IssuesTB
+#' @exportS3Method write IssuesTB
+#' @method write IssuesTB
 #' @export
-write_to_dataset.IssuesTB <- function(
+write.IssuesTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = "list_issues.yaml",
@@ -181,10 +181,10 @@ write_to_dataset.IssuesTB <- function(
 
 
 #' @rdname write
-#' @exportS3Method write_to_dataset LabelsTB
-#' @method write_to_dataset LabelsTB
+#' @exportS3Method write LabelsTB
+#' @method write LabelsTB
 #' @export
-write_to_dataset.LabelsTB <- function(
+write.LabelsTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = "list_labels.yaml",
@@ -197,10 +197,10 @@ write_to_dataset.LabelsTB <- function(
 }
 
 #' @rdname write
-#' @exportS3Method write_to_dataset MilestonesTB
-#' @method write_to_dataset MilestonesTB
+#' @exportS3Method write MilestonesTB
+#' @method write MilestonesTB
 #' @export
-write_to_dataset.MilestonesTB <- function(
+write.MilestonesTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = "list_milestones.yaml",
@@ -213,10 +213,10 @@ write_to_dataset.MilestonesTB <- function(
 }
 
 #' @rdname write
-#' @exportS3Method write_to_dataset default
-#' @method write_to_dataset default
+#' @exportS3Method write default
+#' @method write default
 #' @export
-write_to_dataset.default <- function(...) {
+write.default <- function(...) {
     stop(
         "This function requires a IssuesTB, LabelsTB or MilestonesTB object.",
         call. = FALSE

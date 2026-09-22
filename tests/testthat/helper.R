@@ -127,7 +127,7 @@ expect_issue <- function(x) {
 #     state = "all"
 # ) |>
 #     subset(number %in% c(963, 958, 347, 323, 311, 154))
-# write_to_dataset(
+# write(
 #     x = my_issues,
 #     dataset_dir = testthat::test_path("data"),
 #     dataset_name = "closed_issues.yaml"

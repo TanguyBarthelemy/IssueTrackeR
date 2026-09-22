@@ -2,16 +2,15 @@
 % Please edit documentation in R/write.R
 \name{write}
 \alias{write}
-\alias{write_to_dataset}
-\alias{write_to_dataset.IssuesTB}
-\alias{write_to_dataset.LabelsTB}
-\alias{write_to_dataset.MilestonesTB}
-\alias{write_to_dataset.default}
+\alias{write.IssuesTB}
+\alias{write.LabelsTB}
+\alias{write.MilestonesTB}
+\alias{write.default}
 \title{Save datasets in a yaml file}
 \usage{
-write_to_dataset(x, ...)
+write(x, ...)
 
-\method{write_to_dataset}{IssuesTB}(
+\method{write}{IssuesTB}(
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   dataset_name = "list_issues.yaml",
@@ -20,7 +19,7 @@ write_to_dataset(x, ...)
   ...
 )
 
-\method{write_to_dataset}{LabelsTB}(
+\method{write}{LabelsTB}(
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   dataset_name = "list_labels.yaml",
@@ -29,7 +28,7 @@ write_to_dataset(x, ...)
   ...
 )
 
-\method{write_to_dataset}{MilestonesTB}(
+\method{write}{MilestonesTB}(
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
   dataset_name = "list_milestones.yaml",
@@ -38,7 +37,7 @@ write_to_dataset(x, ...)
   ...
 )
 
-\method{write_to_dataset}{default}(...)
+\method{write}{default}(...)
 }
 \arguments{
 \item{x}{an object of class \code{IssuesTB}, \code{LabelsTB} or
@@ -102,15 +101,15 @@ issues <- get_issues(selector = issues_selector)
 labels <- get_labels(selector = labels_selector)
 milestones <- get_milestones(selector = milestones_selector)
 
-write_to_dataset(x = issues, dataset_dir = tempdir())
-write_to_dataset(x = labels, dataset_dir = tempdir())
-write_to_dataset(x = milestones, dataset_dir = tempdir())
+write(x = issues, dataset_dir = tempdir())
+write(x = labels, dataset_dir = tempdir())
+write(x = milestones, dataset_dir = tempdir())
 
-write_to_dataset(x = issues, dataset_dir = tempdir(),
+write(x = issues, dataset_dir = tempdir(),
                  dataset_name = "my_issues")
-write_to_dataset(x = labels, dataset_dir = tempdir(),
+write(x = labels, dataset_dir = tempdir(),
                  dataset_name = "my_labels")
-write_to_dataset(x = milestones, dataset_dir = tempdir(),
+write(x = milestones, dataset_dir = tempdir(),
                  dataset_name = "my_milestones")
 
 }

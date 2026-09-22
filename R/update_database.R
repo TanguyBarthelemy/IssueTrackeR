@@ -39,7 +39,7 @@ update_database <- function(
     ...
 ) {
     issues <- get_issues(selector, verbose = verbose, ...)
-    write_to_dataset(
+    write(
         x = issues,
         dataset_dir = dataset_dir,
         dataset_name = "list_issues.yaml",
@@ -47,7 +47,7 @@ update_database <- function(
     )
 
     list_labels <- get_labels(selector, verbose = verbose, ...)
-    write_to_dataset(
+    write(
         x = list_labels,
         dataset_dir = dataset_dir,
         dataset_name = "list_labels.yaml",
@@ -55,7 +55,7 @@ update_database <- function(
     )
 
     milestones <- get_milestones(selector, verbose = verbose, ...)
-    write_to_dataset(
+    write(
         x = milestones,
         dataset_dir = dataset_dir,
         dataset_name = "list_milestones.yaml",

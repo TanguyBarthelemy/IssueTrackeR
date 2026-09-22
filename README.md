@@ -58,14 +58,14 @@ pak::pak("TanguyBarthelemy/IssueTrackeR")
 ``` r
 library("IssueTrackeR")
 #> Currently, the default options are:
-#> - location for datasets is /tmp/RtmpMbmZ7e/data
+#> - location for datasets is /tmp/Rtmp45fCJp/data
 #> - owner: rjdverse
 #> - repo: rjdemetra
 #> 
 #> Attaching package: 'IssueTrackeR'
 #> The following objects are masked from 'package:base':
 #> 
-#>     append, sample
+#>     append, sample, write
 ```
 
 ### Create a selector
@@ -138,26 +138,26 @@ my_milestones <- get_milestones(selector = selector_other)
 
 ### Save issues in local
 
-You can also write the datasets in local with `write_to_dataset()`:
+You can also write the datasets in local with `write()`:
 
 ``` r
-write_to_dataset(
+write(
     x = my_issues,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/RtmpMbmZ7e/list_issues.yaml.
+#> The datasets will be exported to /tmp/Rtmp45fCJp/list_issues.yaml.
 
-write_to_dataset(
+write(
     x = my_labels,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/RtmpMbmZ7e/list_labels.yaml.
+#> The datasets will be exported to /tmp/Rtmp45fCJp/list_labels.yaml.
 
-write_to_dataset(
+write(
     x = my_milestones,
     dataset_dir = tempdir()
 )
-#> The datasets will be exported to /tmp/RtmpMbmZ7e/list_milestones.yaml.
+#> The datasets will be exported to /tmp/Rtmp45fCJp/list_milestones.yaml.
 ```
 
 ### Filtering

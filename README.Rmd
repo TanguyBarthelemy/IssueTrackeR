@@ -111,20 +111,20 @@ my_milestones <- get_milestones(selector = selector_other)
 
 ### Save issues in local
 
-You can also write the datasets in local with `write_to_dataset()`:
+You can also write the datasets in local with `write()`:
 
 ```{r write, eval = TRUE, echo = TRUE}
-write_to_dataset(
+write(
     x = my_issues,
     dataset_dir = tempdir()
 )
 
-write_to_dataset(
+write(
     x = my_labels,
     dataset_dir = tempdir()
 )
 
-write_to_dataset(
+write(
     x = my_milestones,
     dataset_dir = tempdir()
 )
