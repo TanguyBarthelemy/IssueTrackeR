@@ -115,9 +115,232 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">online_selector</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Repo: IssueTrackeR  owner: TanguyBarthelemy </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">issues</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 12 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 24 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#66</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Bug: no class with no selector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ``` r</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> library("IssueTrackeR")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Currently, the default options are:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - location for datasets: /tmp/Rtmp5CLf0Q/data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - name for the datasets: fqkvb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - selector:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Attaching package: 'IssueTrackeR'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; The following objects are masked from 'package:base':</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt;     append, sample, write</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class(get_labels(init_</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#65</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] roxygen2_has_export_or_nord</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ Tag every documented function with either `@export`, `@noRd`, or `@rdname`. Functions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   without roxygen2 documentation are implicitly internal and do not need tagging.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/check.R:254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/get.R:154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/get.R:232</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/get.R:281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ... and 27 more lines</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#64</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] roxygen2_valid_inherit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ Ensure functions referenced by `@inheritParams` and `@inheritDotParams` exist within the</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   package. Use `pkg::func` syntax for external functions.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:137</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/update_database.R:35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_issues.R:49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_repo.R:20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/write.R:159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#63</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] roxygen2_duplicate_params</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ use `@inheritParams` to avoid duplicating parameter documentation. Identical `@param`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   descriptions across files suggest shared docs should be inherited from a single source.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R:34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R:93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R:133</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/plot.R:56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/plot.R:122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ... and 46 more li</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#62</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_object_usage_linter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ avoid defining variables that are never used and ensure all referenced objects are defined</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   or imported.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R:339:19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:241:15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:264:17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:278:17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:290:21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ... and 64 more lines</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are results </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#61</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_r_file_names</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ name R files using `-` or `_` to delimit words and use a .R extension, e.g.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prefix-my_function.R. Avoid capital letters and spaces.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ./R/IssueTrackeR-package.R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are results from the [{goodpractice}](https://github.com/ropensci-review-tools/goodpractice) packa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#60</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_test_file_names</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ name test files to mirror the R source file they test, e.g. R/my_function.R should have</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   tests/testthat/test-my_function.R.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/comments.R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/contributor.R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/IssueTrackeR-package.R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ... and 4 more lines</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are resu</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#59</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_no_missing</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ avoid using `missing()` to check whether arguments were supplied. The tidyverse style guide</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   recommends using `NULL` defaults with `is.null()` instead, as `missing()` makes functions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   difficult to call programmatically.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_issues.R:308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_issues.R:442</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting wit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#58</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_export_order</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ define exported (user-facing) functions before internal helper functions within each R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   source file.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/contributor.R:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/get.R:154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/get.R:232</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/get.R:281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/get.R:372</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ... and 23 more lines</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are results from the [{goodpractice}](https://git</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#57</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] covr</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ write unit tests for all functions, and all package code in general. 62% of code lines are covered by</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   test cases.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/check.R:222</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/check.R:223</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/check.R:224</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/check.R:225</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/check.R:226</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ... and 737 more lines</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are results from the [{goodpra</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#56</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] complexity_unused_internal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ remove or use internal functions that are defined but never called. Dead code increases maintenance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   burden.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/contributor.R:4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_issues.R:442</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_issues.R:467</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_issues.R:476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are results from the [{goodpractice}](https:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#55</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] complexity_function_length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ keep functions short and focused. Long functions are harder to understand, test, and maintain. Consider</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   splitting into smaller helpers. (Default limit of 50 set with option</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   'goodpractice.function_length_limit').</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/check.R:254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:341</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/get.R:281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     R/get.R:600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ... a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#53</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Coverage v2.1.0</span>
@@ -254,7 +477,7 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 GitHub v2.0.0             2026-09-30      &lt;NA&gt; TanguyBarthelemy  open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   nb_issues_open nb_issues_closed         repo            owner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1              7                0 IssueTrackeR TanguyBarthelemy</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2              4                7 IssueTrackeR TanguyBarthelemy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              3                7 IssueTrackeR TanguyBarthelemy</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                            url</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/2</span>
