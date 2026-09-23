@@ -4,7 +4,13 @@
 \alias{update_database}
 \title{Update database}
 \usage{
-update_database(selector, dataset_dir, verbose = TRUE, ...)
+update_database(
+  selector = getOption("IssueTrackeR.selector"),
+  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+  dataset_name = getOption("IssueTrackeR.dataset.name"),
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{selector}{A \code{SelectorTB} object (to define the range of the repo /
@@ -13,18 +19,15 @@ source used). Created with \code{\link[=init_selector]{init_selector()}}.}
 \item{dataset_dir}{The destination directory where the YAML file will be
 saved. By default, the system's temporary directory is used (\code{tempdir()}).}
 
+\item{dataset_name}{The name of the output file (without extension).
+By default, the name is \code{"object.yaml"}.}
+
 \item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
 
-\item{\dots}{Additional arguments for connecting to the GitHub repository:
-\itemize{
-\item \code{repo} A character string specifying the GitHub repository name.
-Defaults to the package option \code{IssueTrackeR.repo}.
-\item \code{owner} A character string specifying the GitHub owner.
-Defaults to the package option \code{IssueTrackeR.owner}.
+\item{\dots}{Additional arguments for connecting to the GitLab.
 (See the documentation of \code{\link[IssueTrackeR]{get}} to have more
-information on theses parameters):
-}}
+information on theses parameters)}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE}.

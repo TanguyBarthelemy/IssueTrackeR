@@ -273,7 +273,7 @@ print.summary.LabelsTB <- function(x, ...) {
             paste0(
                 "\n- ",
                 cli::style_hyperlink(
-                    text = paste(owner_name, repo_name, sep = "/"),
+                    text = file.path(owner_name, repo_name, fsep = "/"),
                     url = file.path(
                         "https://github.com",
                         owner_name,

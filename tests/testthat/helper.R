@@ -146,6 +146,6 @@ selector_milestones <- init_selector(
     file = file.path(testthat::test_path("data"), "list_milestones.yaml")
 )
 
-my_issues <- get_issues(selector_issues)
-my_labels <- get_labels(selector_labels)
-my_milestones <- get_milestones(selector_milestones)
+my_issues <- get_issues(selector_issues, verbose = FALSE)
+my_labels <- get_labels(selector_labels, verbose = FALSE)
+my_milestones <- get_milestones(selector_milestones, verbose = FALSE)

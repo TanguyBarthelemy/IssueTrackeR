@@ -25,6 +25,7 @@
 #' @importFrom yaml as.yaml
 #' @importFrom tools file_ext
 #' @importFrom tools file_path_sans_ext
+#' @importFrom checkmate assert_character
 #'
 #' @examples
 #' my_list <- list(name = "John", age = 30, city = "Paris")
@@ -51,9 +52,20 @@
     verbose = TRUE,
     ...
 ) {
-    output_file <- dataset_name
-    if (tools::file_ext(output_file) == "yaml") {
-        output_file <- tools::file_path_sans_ext(output_file)
+    checkmate::assert_character(dataset_name, len = 1L)
+
+    output_file <- basename(dataset_name)
+    file_ext <- tools::file_ext(output_file)
+    if (file_ext %in% c("yaml", "yml")) {
+        output_file <- output_file |>
+            basename() |>
+            tools::file_path_sans_ext()
+    } else if (nzchar(file_ext)) {
+        stop(
+            "The `dataset_name` argument must be a name",
+            " or a file with a YAML extension (.yml or .yaml).",
+            call. = FALSE
+        )
     }
     output_path <- file.path(dataset_dir, output_file) |>
         paste0(".yaml") |>
@@ -170,11 +182,16 @@ write <- function(
 write.IssuesTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_issues.yaml",
+    dataset_name = getOption("IssueTrackeR.dataset.name"),
     overwrite = TRUE,
     verbose = TRUE,
     ...
 ) {
+    if (is.null(dataset_name)) {
+        dataset_name <- "list_issues.yaml"
+    } else {
+        dataset_name <- paste0("list_issues_", dataset_name, ".yaml")
+    }
     .write(x, dataset_dir, dataset_name, overwrite, verbose)
     return(invisible(TRUE))
 }
@@ -187,11 +204,16 @@ write.IssuesTB <- function(
 write.LabelsTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_labels.yaml",
+    dataset_name = getOption("IssueTrackeR.dataset.name"),
     overwrite = TRUE,
     verbose = TRUE,
     ...
 ) {
+    if (is.null(dataset_name)) {
+        dataset_name <- "list_labels.yaml"
+    } else {
+        dataset_name <- paste0("list_labels_", dataset_name, ".yaml")
+    }
     .write(x, dataset_dir, dataset_name, overwrite, verbose)
     return(invisible(TRUE))
 }
@@ -203,11 +225,16 @@ write.LabelsTB <- function(
 write.MilestonesTB <- function(
     x,
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-    dataset_name = "list_milestones.yaml",
+    dataset_name = getOption("IssueTrackeR.dataset.name"),
     overwrite = TRUE,
     verbose = TRUE,
     ...
 ) {
+    if (is.null(dataset_name)) {
+        dataset_name <- "list_milestones.yaml"
+    } else {
+        dataset_name <- paste0("list_milestones_", dataset_name, ".yaml")
+    }
     .write(x, dataset_dir, dataset_name, overwrite, verbose)
     return(invisible(TRUE))
 }

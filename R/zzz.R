@@ -1,15 +1,13 @@
 #' @keywords internal
 .onAttach <- function(libname, pkgname) {
     packageStartupMessage(
-        c(
-            "Currently, the default options are:",
-            paste(
-                "\n- location for datasets is",
-                getOption("IssueTrackeR.dataset.dir")
-            ),
-            paste("\n- owner:", getOption("IssueTrackeR.owner")),
-            paste("\n- repo:", getOption("IssueTrackeR.repo"))
-        )
+        "Currently, the default options are:",
+        "\n- location for datasets: ",
+        getOption("IssueTrackeR.dataset.dir"),
+        "\n- name for the datasets: ",
+        getOption("IssueTrackeR.dataset.name"),
+        "\n- selector: ",
+        getOption("IssueTrackeR.selector")
     )
 }
 

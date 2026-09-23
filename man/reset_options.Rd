@@ -17,7 +17,8 @@ information. Default is \code{TRUE}.}
 Reset options
 }
 \examples{
-getOption("IssueTrackeR.owner")
+set.seed(5L)
+getOption("IssueTrackeR.dataset.name")
 reset_options()
-getOption("IssueTrackeR.owner")
+getOption("IssueTrackeR.dataset.name")
 }

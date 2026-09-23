@@ -13,12 +13,10 @@ get_issues_github(
 }
 \arguments{
 \item{repo}{A character string specifying the GitHub repository name (only
-taken into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.repo}.}
+taken into account if \code{source} is set to \code{"online"}).}
 
 \item{owner}{A character string specifying the GitHub owner (only taken
-into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.owner}.}
+into account if \code{source} is set to \code{"online"}).}
 
 \item{state}{a character string that is either \code{"open"} (by default) if
 you want to fetch only open issues from GitHub, \code{"closed"} if you want

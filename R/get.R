@@ -100,7 +100,7 @@ get_issues <- function(selector, verbose = TRUE, ...) {
                 GitLab = get_issues_gitlab,
                 local = get_issues_local
             ),
-            args = c(sel_args, list(...))
+            args = c(sel_args, list(..., verbose = verbose))
         )
         return(issues)
     }
@@ -121,10 +121,8 @@ get_issues <- function(selector, verbose = TRUE, ...) {
 #'
 #' @param repo A character string specifying the GitHub repository name (only
 #' taken into account if \code{source} is set to \code{"online"}).
-#' Defaults to the package option \code{IssueTrackeR.repo}.
 #' @param owner A character string specifying the GitHub owner (only taken
 #' into account if \code{source} is set to \code{"online"}).
-#' Defaults to the package option \code{IssueTrackeR.owner}.
 #' @param state a character string that is either \code{"open"} (by default) if
 #' you want to fetch only open issues from GitHub, \code{"closed"} if you want
 #' to fetch only closed issues from GitHub or \code{"all"} if you want to fetch
@@ -354,7 +352,7 @@ get_labels <- function(selector, verbose = TRUE, ...) {
                 GitLab = get_labels_gitlab,
                 local = get_labels_local
             ),
-            args = c(sel_args, list(...))
+            args = c(sel_args, list(..., verbose = verbose))
         )
         return(list_labels)
     }
@@ -521,7 +519,7 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
                 GitLab = get_milestones_gitlab,
                 local = get_milestones_local
             ),
-            args = c(sel_args, list(...))
+            args = c(sel_args, list(..., verbose = verbose))
         )
         return(milestones)
     }

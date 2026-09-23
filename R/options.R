@@ -7,30 +7,31 @@
 #' @export
 #'
 #' @examples
-#' getOption("IssueTrackeR.owner")
+#' set.seed(5L)
+#' getOption("IssueTrackeR.dataset.name")
 #' reset_options()
-#' getOption("IssueTrackeR.owner")
+#' getOption("IssueTrackeR.dataset.name")
 reset_options <- function(verbose = TRUE) {
     dataset_dir <- file.path(tempdir(), "data") |>
         normalizePath(mustWork = FALSE)
 
     # nolint start undesirable_function_linter
     options(IssueTrackeR.dataset.dir = dataset_dir)
-    options(IssueTrackeR.owner = "rjdverse")
-    options(IssueTrackeR.repo = "rjdemetra")
+    new_name <- letters |>
+        sample(size = 5L, replace = TRUE) |>
+        paste(collapse = "")
+    options(IssueTrackeR.dataset.name = new_name)
+    options(IssueTrackeR.selector = init_selector())
     # nolint end
 
     if (verbose) {
         cat(
             "Reset the default options to:",
-            paste(
-                "\n- location for datasets is",
-                dataset_dir
-            ),
-            paste("\n- owner: rjdverse"),
-            paste("\n- repo: rjdemetra"),
-            "\n"
+            paste("\n- location for datasets: ", dataset_dir),
+            paste("\n- name for the datasets: ", new_name),
+            paste("\n- selector: NULL")
         )
+        cat("\n")
     }
 
     return(invisible(NULL))

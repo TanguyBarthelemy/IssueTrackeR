@@ -6,13 +6,9 @@
 #'
 #' @inheritParams get
 #' @inheritParams write
-#' @param \dots Additional arguments for connecting to the GitHub repository:
-#' * \code{repo} A character string specifying the GitHub repository name.
-#' Defaults to the package option \code{IssueTrackeR.repo}.
-#' * \code{owner} A character string specifying the GitHub owner.
-#' Defaults to the package option \code{IssueTrackeR.owner}.
+#' @param \dots Additional arguments for connecting to the GitLab.
 #' (See the documentation of \code{\link[IssueTrackeR]{get}} to have more
-#' information on theses parameters):
+#' information on theses parameters)
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE}.
 #' @export
@@ -33,8 +29,9 @@
 #' }
 #'
 update_database <- function(
-    selector,
-    dataset_dir,
+    selector = getOption("IssueTrackeR.selector"),
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = getOption("IssueTrackeR.dataset.name"),
     verbose = TRUE,
     ...
 ) {
@@ -42,7 +39,7 @@ update_database <- function(
     write(
         x = issues,
         dataset_dir = dataset_dir,
-        dataset_name = "list_issues.yaml",
+        dataset_name = dataset_name,
         verbose = verbose
     )
 
@@ -50,7 +47,7 @@ update_database <- function(
     write(
         x = list_labels,
         dataset_dir = dataset_dir,
-        dataset_name = "list_labels.yaml",
+        dataset_name = dataset_name,
         verbose = verbose
     )
 
@@ -58,7 +55,7 @@ update_database <- function(
     write(
         x = milestones,
         dataset_dir = dataset_dir,
-        dataset_name = "list_milestones.yaml",
+        dataset_name = dataset_name,
         verbose = verbose
     )
 

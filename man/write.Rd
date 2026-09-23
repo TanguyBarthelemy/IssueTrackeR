@@ -13,7 +13,7 @@ write(x, ...)
 \method{write}{IssuesTB}(
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-  dataset_name = "list_issues.yaml",
+  dataset_name = getOption("IssueTrackeR.dataset.name"),
   overwrite = TRUE,
   verbose = TRUE,
   ...
@@ -22,7 +22,7 @@ write(x, ...)
 \method{write}{LabelsTB}(
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-  dataset_name = "list_labels.yaml",
+  dataset_name = getOption("IssueTrackeR.dataset.name"),
   overwrite = TRUE,
   verbose = TRUE,
   ...
@@ -31,7 +31,7 @@ write(x, ...)
 \method{write}{MilestonesTB}(
   x,
   dataset_dir = getOption("IssueTrackeR.dataset.dir"),
-  dataset_name = "list_milestones.yaml",
+  dataset_name = getOption("IssueTrackeR.dataset.name"),
   overwrite = TRUE,
   verbose = TRUE,
   ...
