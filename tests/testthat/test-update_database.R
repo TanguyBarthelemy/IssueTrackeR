@@ -1,4 +1,4 @@
-my_dir <- tempfile(pattern = "test-write")
+my_dir <- tempfile(pattern = "test-update_database")
 
 test_that("test update_database", {
     skip_if_no_github()
