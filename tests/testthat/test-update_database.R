@@ -1,4 +1,4 @@
-my_dir <- tempdir()
+my_dir <- tempfile(pattern = "test-write")
 
 test_that("test update_database", {
     skip_if_no_github()
@@ -9,7 +9,10 @@ test_that("test update_database", {
         state = "all"
     )
 
-    expect_true(update_database(selector = selector, dataset_dir = my_dir))
+    expect_true(object = {
+        update_database(selector = selector, dataset_dir = my_dir, dataset_name = NULL)
+        }
+        )
     tmp_content <- list.files(
         path = my_dir,
         pattern = "*.yaml",

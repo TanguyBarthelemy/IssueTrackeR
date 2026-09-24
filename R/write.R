@@ -55,12 +55,12 @@
     checkmate::assert_character(dataset_name, len = 1L)
 
     output_file <- basename(dataset_name)
-    file_ext <- tools::file_ext(output_file)
-    if (file_ext %in% c("yaml", "yml")) {
+    ext_file <- tools::file_ext(output_file)
+    if (ext_file %in% c("yaml", "yml")) {
         output_file <- output_file |>
             basename() |>
             tools::file_path_sans_ext()
-    } else if (nzchar(file_ext)) {
+    } else if (nzchar(ext_file)) {
         stop(
             "The `dataset_name` argument must be a name",
             " or a file with a YAML extension (.yml or .yaml).",

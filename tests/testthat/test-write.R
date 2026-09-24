@@ -1,4 +1,4 @@
-my_dir <- tempdir()
+my_dir <- tempfile(pattern = "test-write")
 
 test_that("writing works", {
     expect_true(write(my_issues, dataset_dir = my_dir))

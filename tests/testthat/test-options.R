@@ -8,7 +8,7 @@ test_that("options are set", {
     # nolint end
 
     expect_identical(getOption("IssueTrackeR.dataset.dir"), "my_dir")
-    expect_identical(getOption("IssueTrackeR.dataset.dir"), "new_name")
+    expect_identical(getOption("IssueTrackeR.dataset.name"), "new_name")
 
     set.seed(5L)
     expect_null(reset_options())
