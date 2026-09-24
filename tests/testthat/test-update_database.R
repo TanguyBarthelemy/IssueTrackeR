@@ -10,9 +10,12 @@ test_that("test update_database", {
     )
 
     expect_true(object = {
-        update_database(selector = selector, dataset_dir = my_dir, dataset_name = NULL)
-        }
+        update_database(
+            selector = selector,
+            dataset_dir = my_dir,
+            dataset_name = NULL
         )
+    })
     tmp_content <- list.files(
         path = my_dir,
         pattern = "*.yaml",
