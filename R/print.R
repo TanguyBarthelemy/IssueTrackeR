@@ -132,7 +132,10 @@ print.SelectorTB <- function(x, ...) {
             as.character(selector),
             sep = ": "
         ) |>
-            c(crayon::bold(paste0("\nSelector n\U00B0", id_selector)), ... = _) |>
+            c(
+                crayon::bold(paste0("\nSelector n\U00B0", id_selector)),
+                ... = _
+            ) |>
             paste("\n")
         cat(txt_selector, sep = "")
     }
