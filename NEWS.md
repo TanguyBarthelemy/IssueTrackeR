@@ -11,6 +11,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * Support for GitLab repositories [#15](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/15)
 * New ways of selecting repositories with selector objects (`SelectorTB` class).  [#3](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/3)
+* New method `print` for selector objects (`SelectorTB` class) [#67](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/67)
 
 ### Changed
 

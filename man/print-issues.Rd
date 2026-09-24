@@ -4,6 +4,7 @@
 \alias{print-issues}
 \alias{print.IssueTB}
 \alias{print.IssuesTB}
+\alias{print.SelectorTB}
 \alias{print.summary.IssueTB}
 \alias{print.summary.IssuesTB}
 \alias{print.LabelsTB}
@@ -13,6 +14,8 @@
 \method{print}{IssueTB}(x, ...)
 
 \method{print}{IssuesTB}(x, ...)
+
+\method{print}{SelectorTB}(x, ...)
 
 \method{print}{summary.IssueTB}(x, ...)
 

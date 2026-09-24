@@ -1,16 +1,18 @@
-#' @title Display IssueTB and IssuesTB object
+#' @title Display IssueTB, IssuesTB or SelectorTB object
 #'
 #' @description
-#' Display IssueTB and IssuesTB with formatted output in the console
+#' Display IssueTB, IssuesTB or SelectorTB with formatted output in the console
 #'
-#' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
+#' @param x An object of class \code{IssueTB}, \code{IssuesTB} or
+#'   \code{SelectorTB}.
 #' @param \dots Currently not used.
 #'
 #' @details
-#' This function displays an issue (\code{IssueTB} object) or a list of issues
-#' (\code{IssuesTB} object) with a formatted output.
+#' This function displays an issue (\code{IssueTB} object), a list of issues
+#' (\code{IssuesTB} object) or a list of selectors (`SelectorTB` objects) with
+#' a formatted output.
 #'
-#' @returns invisibly (with \code{invisible()}) \code{NULL}.
+#' @returns The object `x` invisibly.
 #'
 #' @examples
 #' issues_selector <- init_selector(
@@ -27,6 +29,9 @@
 #'
 #' # Display several issues
 #' print(all_issues[1:10, ])
+#'
+#' # Display a selector
+#' print(issues_selector)
 #'
 #' # Display the summary of one issue
 #' summary(all_issues[2, ])
@@ -95,6 +100,43 @@ print.IssuesTB <- function(x, ...) {
         cat("\n")
         print(x[id_issue, , drop = TRUE])
     }
+    return(invisible(x))
+}
+
+#' @rdname print-issues
+#' @exportS3Method print SelectorTB
+#' @method print SelectorTB
+#' @export
+print.SelectorTB <- function(x, ...) {
+    cat(
+        crayon::bold(
+            switch(
+                EXPR = as.character(length(x)),
+                "0" = "No selectors",
+                "1" = "There is 1 selector.",
+                paste("There are", length(x), "selectors.")
+            )
+        ),
+        "\n"
+    )
+
+    if (is_empty(x)) {
+        return(invisible(x))
+    }
+
+    for (id_selector in seq_along(x)) {
+        selector <- x[[id_selector]]
+
+        txt_selector <- paste(
+            crayon::underline(names(selector)),
+            as.character(selector),
+            sep = ": "
+        ) |>
+            c(crayon::bold(paste0("\nSelector n\U00B0", id_selector)), ... = _) |>
+            paste("\n")
+        cat(txt_selector, sep = "")
+    }
+
     return(invisible(x))
 }
 
