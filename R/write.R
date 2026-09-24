@@ -187,7 +187,7 @@ write.IssuesTB <- function(
     verbose = TRUE,
     ...
 ) {
-    if (is.null(dataset_name)) {
+    if (is.null(dataset_name) || !nzchar(dataset_name)) {
         dataset_name <- "list_issues.yaml"
     } else {
         dataset_name <- paste0("list_issues_", dataset_name, ".yaml")
@@ -209,7 +209,7 @@ write.LabelsTB <- function(
     verbose = TRUE,
     ...
 ) {
-    if (is.null(dataset_name)) {
+    if (is.null(dataset_name) || !nzchar(dataset_name)) {
         dataset_name <- "list_labels.yaml"
     } else {
         dataset_name <- paste0("list_labels_", dataset_name, ".yaml")
@@ -230,7 +230,7 @@ write.MilestonesTB <- function(
     verbose = TRUE,
     ...
 ) {
-    if (is.null(dataset_name)) {
+    if (is.null(dataset_name) || !nzchar(dataset_name)) {
         dataset_name <- "list_milestones.yaml"
     } else {
         dataset_name <- paste0("list_milestones_", dataset_name, ".yaml")

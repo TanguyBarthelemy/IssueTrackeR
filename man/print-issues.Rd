@@ -9,7 +9,7 @@
 \alias{print.summary.IssuesTB}
 \alias{print.LabelsTB}
 \alias{print.summary.LabelsTB}
-\title{Display IssueTB and IssuesTB object}
+\title{Display IssueTB, IssuesTB or SelectorTB object}
 \usage{
 \method{print}{IssueTB}(x, ...)
 
@@ -26,19 +26,21 @@
 \method{print}{summary.LabelsTB}(x, ...)
 }
 \arguments{
-\item{x}{An object of class \code{IssueTB} or \code{IssuesTB}.}
+\item{x}{An object of class \code{IssueTB}, \code{IssuesTB} or
+\code{SelectorTB}.}
 
 \item{\dots}{Currently not used.}
 }
 \value{
-invisibly (with \code{invisible()}) \code{NULL}.
+The object \code{x} invisibly.
 }
 \description{
-Display IssueTB and IssuesTB with formatted output in the console
+Display IssueTB, IssuesTB or SelectorTB with formatted output in the console
 }
 \details{
-This function displays an issue (\code{IssueTB} object) or a list of issues
-(\code{IssuesTB} object) with a formatted output.
+This function displays an issue (\code{IssueTB} object), a list of issues
+(\code{IssuesTB} object) or a list of selectors (\code{SelectorTB} objects) with
+a formatted output.
 }
 \examples{
 issues_selector <- init_selector(
@@ -55,6 +57,9 @@ print(all_issues[1, ])
 
 # Display several issues
 print(all_issues[1:10, ])
+
+# Display a selector
+print(issues_selector)
 
 # Display the summary of one issue
 summary(all_issues[2, ])
