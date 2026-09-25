@@ -59,9 +59,8 @@ gl_sel <- init_selector(source = "GitLab", project_id = 4578L)
 # Local selector
 local_sel <- init_selector(
     source = "local",
-    file = system.file(
-        "data_issues", "list_issues.yaml", package = "IssueTrackeR"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"), 
+    dataset_name = NULL
 )
 
 # Inspecting them
