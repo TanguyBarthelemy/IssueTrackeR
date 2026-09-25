@@ -1,17 +1,17 @@
-my_dir <- tempfile(pattern = "test-write")
+tested_dir <- tempfile(pattern = "test-write")
 
 test_that("writing works", {
     expect_true(object = {
-        write(my_issues, dataset_dir = my_dir, dataset_name = NULL)
+        write(tested_issues, dataset_dir = tested_dir, dataset_name = NULL)
     })
     expect_true(object = {
-        write(my_labels, dataset_dir = my_dir, dataset_name = NULL)
+        write(tested_labels, dataset_dir = tested_dir, dataset_name = NULL)
     })
     expect_true(object = {
-        write(my_milestones, dataset_dir = my_dir, dataset_name = NULL)
+        write(tested_milestones, dataset_dir = tested_dir, dataset_name = NULL)
     })
     tmp_content <- list.files(
-        path = my_dir,
+        path = tested_dir,
         pattern = "*.yaml",
         recursive = FALSE,
         full.names = FALSE

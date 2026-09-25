@@ -1,4 +1,4 @@
-my_dir <- tempfile(pattern = "test-update_database")
+tested_dir <- tempfile(pattern = "test-update_database")
 
 test_that("test update_database", {
     skip_if_no_github()
@@ -12,12 +12,12 @@ test_that("test update_database", {
     expect_true(object = {
         update_database(
             selector = selector,
-            dataset_dir = my_dir,
+            dataset_dir = tested_dir,
             dataset_name = NULL
         )
     })
     tmp_content <- list.files(
-        path = my_dir,
+        path = tested_dir,
         pattern = "*.yaml",
         recursive = FALSE,
         full.names = FALSE

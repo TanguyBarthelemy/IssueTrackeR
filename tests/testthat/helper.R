@@ -120,25 +120,26 @@ expect_issue <- function(x) {
     )
 }
 
-# my_issues <- get_issues(
-#     source = "online",
+# selector <- init_selector(
+#     source = "GitHub",
 #     repo = "jdplus-main",
 #     owner = "jdemetra",
-#     state = "all"
-# ) |>
+#     state = "closed"
+# )
+# tested_issues <- get_issues(selector, verbose = FALSE) |>
 #     subset(number %in% c(963, 958, 347, 323, 311, 154))
 # write(
-#     x = my_issues,
+#     x = tested_issues,
 #     dataset_dir = testthat::test_path("data"),
-#     dataset_name = "closed_issues.yaml"
+#     dataset_name = NULL
 # )
 
 local_selector <- init_selector(
     source = "Local",
-    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_dir = testthat::test_path("data"),
     dataset_name = NULL
 )
 
-my_issues <- get_issues(local_selector, verbose = FALSE)
-my_labels <- get_labels(local_selector, verbose = FALSE)
-my_milestones <- get_milestones(local_selector, verbose = FALSE)
+tested_issues <- get_issues(local_selector, verbose = FALSE)
+tested_labels <- get_labels(local_selector, verbose = FALSE)
+tested_milestones <- get_milestones(local_selector, verbose = FALSE)

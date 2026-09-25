@@ -3,11 +3,11 @@ test_that("options are set", {
         normalizePath(mustWork = FALSE)
 
     # nolint start undesirable_function_linter
-    options(IssueTrackeR.dataset.dir = "my_dir")
+    options(IssueTrackeR.dataset.dir = "tested_dir")
     options(IssueTrackeR.dataset.name = "new_name")
     # nolint end
 
-    expect_identical(getOption("IssueTrackeR.dataset.dir"), "my_dir")
+    expect_identical(getOption("IssueTrackeR.dataset.dir"), "tested_dir")
     expect_identical(getOption("IssueTrackeR.dataset.name"), "new_name")
 
     set.seed(5L)

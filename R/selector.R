@@ -223,14 +223,17 @@ init_selector_local <- function(
     dataset_name = getOption("IssueTrackeR.dataset.name"),
     ...
 ) {
+    additional_args <- list(...)
+    if (length(additional_args) > 0L) {
+        stop("The only accepted argument for \"source = local\" are dataset_dir and dataset_name")
+    }
     checkmate::assert_character(dataset_dir, len = 1L)
     checkmate::assert_character(dataset_name, len = 1L, null.ok = TRUE)
 
     selector <- list(list(
         source = "local",
         dataset_name = dataset_name,
-        dataset_dir = dataset_dir,
-        ...
+        dataset_dir = dataset_dir
     ))
     class(selector) <- "SelectorTB"
     return(selector)
