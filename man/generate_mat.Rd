@@ -34,13 +34,11 @@ creators, issue closer, milestones...
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-all_issues <- get_issues(selector = issues_selector)
-a_matrix <- IssueTrackeR:::generate_mat(all_issues, by = "creator", n = 2)
+my_issues <- get_issues(selector = issues_selector)
+a_matrix <- IssueTrackeR:::generate_mat(my_issues, by = "creator", n = 2)
 
 }
 \keyword{internal}

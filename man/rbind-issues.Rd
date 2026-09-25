@@ -23,19 +23,15 @@ S3 method for combining \code{IssueTB} objects by rows.
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
 open_issues <- get_issues(selector = issues_selector)
 new_issues <- rbind(open_issues[1, ], open_issues[-1, ])
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
 open_issues <- get_issues(selector = issues_selector)
 new_issues <- rbind(open_issues, open_issues)

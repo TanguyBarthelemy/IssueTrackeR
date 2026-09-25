@@ -420,10 +420,8 @@ new_issues.default <- function(
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #' open_issues <- get_issues(selector = issues_selector)
 #'
@@ -492,13 +490,11 @@ append <- function(x, values, after = length(x)) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
-#' new_issues <- append(all_issues, all_issues)
+#' my_issues <- get_issues(selector = issues_selector)
+#' new_issues <- append(my_issues, my_issues)
 append.IssuesTB <- function(x, values, after = nrow(x)) {
     if (after > nrow(x)) {
         after <- nrow(x)
@@ -548,10 +544,8 @@ append.default <- function(x, values, after = length(x)) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- rbind(open_issues[1, ], open_issues[-1, ])
@@ -572,10 +566,8 @@ rbind.IssueTB <- function(...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- rbind(open_issues, open_issues)
@@ -595,10 +587,8 @@ rbind.IssuesTB <- function(...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- subset(open_issues, number < 150)
@@ -640,10 +630,8 @@ sample <- function(x, size, replace = FALSE, prob = NULL) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- sample(open_issues, size = 5L)
@@ -694,10 +682,8 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- unique(open_issues)
@@ -727,14 +713,12 @@ unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
+#' my_issues <- get_issues(selector = issues_selector)
 #'
-#' count_issues(all_issues)
+#' count_issues(my_issues)
 #' @export
 count_issues <- function(x, ...) {
     UseMethod("count_issues", x)

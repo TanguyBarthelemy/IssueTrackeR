@@ -58,10 +58,8 @@ This is a generic function, with methods supplied for matrices, data
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
 open_issues <- get_issues(selector = issues_selector)
 new_issues <- subset(open_issues, number < 150)

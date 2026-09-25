@@ -73,30 +73,14 @@ print(milestones)
 
 # From local
 
-local_issues_selector <- init_selector(
+local_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
-)
-local_labels_selector <- init_selector(
-    source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_labels.yaml"
-    )
-)
-local_milestones_selector <- init_selector(
-    source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_milestones.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
 
-issues <- get_issues(selector = local_issues_selector)
-labels <- get_labels(selector = local_labels_selector)
-milestones <- get_milestones(selector = local_milestones_selector)
+issues <- get_issues(selector = local_selector)
+labels <- get_labels(selector = local_selector)
+milestones <- get_milestones(selector = local_selector)
 \dontshow{\}) # examplesIf}
 }

@@ -41,15 +41,11 @@ Remove the nth issue from a \code{IssuesTB} object or the nth selector from a
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-
-all_issues <- get_issues(selector = issues_selector)
-
-issues_wo_1 <- remove_nth(all_issues, 1)
-issues_wo_3 <- remove_nth(all_issues, 3)
+my_issues <- get_issues(selector = issues_selector)
+issues_wo_1 <- remove_nth(my_issues, 1)
+issues_wo_3 <- remove_nth(my_issues, 3)
 
 }

@@ -17,27 +17,25 @@
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
+#' my_issues <- get_issues(selector = issues_selector)
 #'
 #' # Display one issue
-#' print(all_issues[1, ])
+#' print(my_issues[1, ])
 #'
 #' # Display several issues
-#' print(all_issues[1:10, ])
+#' print(my_issues[1:10, ])
 #'
 #' # Display a selector
 #' print(issues_selector)
 #'
 #' # Display the summary of one issue
-#' summary(all_issues[2, ])
+#' summary(my_issues[2, ])
 #'
 #' # Display the summary of
-#' summary(all_issues[1:10, ])
+#' summary(my_issues[1:10, ])
 #' @name print-issues
 #'
 #' @exportS3Method print IssueTB

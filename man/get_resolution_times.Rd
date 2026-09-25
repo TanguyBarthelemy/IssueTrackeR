@@ -29,13 +29,11 @@ Calculates the time taken to resolve issues in seconds.
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-all_issues <- get_issues(selector = issues_selector)
+my_issues <- get_issues(selector = issues_selector)
 
-IssueTrackeR:::get_resolution_times(all_issues)
+IssueTrackeR:::get_resolution_times(my_issues)
 }
 \keyword{internal}

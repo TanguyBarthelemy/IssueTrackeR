@@ -43,14 +43,12 @@ get_dates_vec <- function(x) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
+#' my_issues <- get_issues(selector = issues_selector)
 #'
-#' IssueTrackeR:::get_resolution_times(all_issues)
+#' IssueTrackeR:::get_resolution_times(my_issues)
 #' @dev
 #' @name get_resolution_times
 get_resolution_times <- function(x, ...) {
@@ -105,14 +103,12 @@ get_resolution_times.default <- function(...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
+#' my_issues <- get_issues(selector = issues_selector)
 #'
-#' IssueTrackeR:::plot_resolution_bars(all_issues)
+#' IssueTrackeR:::plot_resolution_bars(my_issues)
 #'
 #' @importFrom graphics box
 #' @importFrom graphics text
@@ -187,14 +183,12 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
+#' my_issues <- get_issues(selector = issues_selector)
 #'
-#' IssueTrackeR:::plot_resolution_ecdf(all_issues)
+#' IssueTrackeR:::plot_resolution_ecdf(my_issues)
 #' @importFrom graphics axis
 #'
 #' @dev
@@ -364,13 +358,12 @@ add_n_years <- function(x, n) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
-#' all_issues <- IssueTrackeR:::get_still_open(all_issues, lag = 1L)
+#' my_issues <- get_issues(selector = issues_selector)
+#'
+#' IssueTrackeR:::get_still_open(my_issues, lag = 1L)
 #'
 #' @dev
 get_still_open <- function(x, ...) {
@@ -423,13 +416,11 @@ get_still_open.default <- function(...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
-#' age_matrix <- IssueTrackeR:::generate_age_mat(all_issues, n = 2)
+#' my_issues <- get_issues(selector = issues_selector)
+#' age_matrix <- IssueTrackeR:::generate_age_mat(my_issues, n = 2)
 #'
 #' @dev
 generate_age_mat <- function(x, ...) {
@@ -487,13 +478,11 @@ generate_age_mat.default <- function(...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
-#' a_matrix <- IssueTrackeR:::generate_mat(all_issues, by = "creator", n = 2)
+#' my_issues <- get_issues(selector = issues_selector)
+#' a_matrix <- IssueTrackeR:::generate_mat(my_issues, by = "creator", n = 2)
 #'
 #' @dev
 #' @name generate_mat
@@ -579,13 +568,11 @@ generate_mat.default <- function(...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
-#' age_mat <- IssueTrackeR:::generate_age_mat(all_issues, 3L)
+#' my_issues <- get_issues(selector = issues_selector)
+#' age_mat <- IssueTrackeR:::generate_age_mat(my_issues, 3L)
 #'
 #' IssueTrackeR:::plot_area_chart(age_mat)
 #'
@@ -654,13 +641,11 @@ plot_area_chart <- function(categorised_mat, title = "Number of issues") {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
-#' IssueTrackeR:::plot_created_closed(all_issues)
+#' my_issues <- get_issues(selector = issues_selector)
+#' IssueTrackeR:::plot_created_closed(my_issues)
 #' @dev
 #'
 #' @importFrom graphics abline
@@ -786,20 +771,18 @@ plot_created_closed <- function(x) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
+#' my_issues <- get_issues(selector = issues_selector)
 #'
-#' plot(all_issues, type = "historic")
-#' plot(all_issues, type = "created-closed")
-#' plot(all_issues, type = "resolution-time")
-#' plot(all_issues, type = "area-chart", by = "closed_by")
-#' plot(all_issues, type = "area-chart", by = "milestone", n = 5)
-#' plot(all_issues, type = "area-chart", by = "state_reason", n = 5)
-#' plot(all_issues, type = "area-chart", by = "repo", n = 5)
+#' plot(my_issues, type = "historic")
+#' plot(my_issues, type = "created-closed")
+#' plot(my_issues, type = "resolution-time")
+#' plot(my_issues, type = "area-chart", by = "closed_by")
+#' plot(my_issues, type = "area-chart", by = "milestone", n = 5)
+#' plot(my_issues, type = "area-chart", by = "state_reason", n = 5)
+#' plot(my_issues, type = "area-chart", by = "repo", n = 5)
 #'
 #' @name plot-issues
 #'

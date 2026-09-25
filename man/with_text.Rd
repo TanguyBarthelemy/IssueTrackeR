@@ -34,14 +34,10 @@ body, or comments of a GitHub Issue object or a collection of Issues.
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-
-all_issues <- get_issues(selector = issues_selector)
-
-with_text(all_issues, pattern = "Excel")
+my_issues <- get_issues(selector = issues_selector)
+with_text(my_issues, pattern = "Excel")
 
 }

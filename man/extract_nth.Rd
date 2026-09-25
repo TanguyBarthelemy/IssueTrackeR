@@ -42,15 +42,13 @@ Extract the nth issue from a \code{IssuesTB} object or the nth selector from a
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
 
-all_issues <- get_issues(selector = issues_selector)
+my_issues <- get_issues(selector = issues_selector)
 
-first_issue <- extract_nth(all_issues, 1)
-third_issue <- extract_nth(all_issues, 3)
+first_issue <- extract_nth(my_issues, 1)
+third_issue <- extract_nth(my_issues, 3)
 
 }

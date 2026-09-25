@@ -75,31 +75,15 @@ Depending on the object, the defaults value of the argument
 }
 }
 \examples{
-issues_selector <- init_selector(
+local_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
-)
-labels_selector <- init_selector(
-    source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_labels.yaml"
-    )
-)
-milestones_selector <- init_selector(
-    source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_milestones.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
 
-issues <- get_issues(selector = issues_selector)
-labels <- get_labels(selector = labels_selector)
-milestones <- get_milestones(selector = milestones_selector)
+issues <- get_issues(selector = local_selector)
+labels <- get_labels(selector = local_selector)
+milestones <- get_milestones(selector = local_selector)
 
 write(x = issues, dataset_dir = tempdir())
 write(x = labels, dataset_dir = tempdir())

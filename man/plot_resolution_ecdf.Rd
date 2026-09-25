@@ -23,13 +23,11 @@ resolution times on a log scale (1 hour, 1 day, 1 week, 1 month, 1 year,
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-all_issues <- get_issues(selector = issues_selector)
+my_issues <- get_issues(selector = issues_selector)
 
-IssueTrackeR:::plot_resolution_ecdf(all_issues)
+IssueTrackeR:::plot_resolution_ecdf(my_issues)
 }
 \keyword{internal}

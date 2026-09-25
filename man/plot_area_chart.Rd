@@ -22,13 +22,11 @@ where each coloured area represents a category of open issues over time.
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-all_issues <- get_issues(selector = issues_selector)
-age_mat <- IssueTrackeR:::generate_age_mat(all_issues, 3L)
+my_issues <- get_issues(selector = issues_selector)
+age_mat <- IssueTrackeR:::generate_age_mat(my_issues, 3L)
 
 IssueTrackeR:::plot_area_chart(age_mat)
 

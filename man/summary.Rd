@@ -36,16 +36,14 @@ information with statistics by modalities.
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-all_issues <- get_issues(selector = issues_selector)
+my_issues <- get_issues(selector = issues_selector)
 
 # Summarise one issue
-summary(all_issues[1, ])
+summary(my_issues[1, ])
 
 # Summarise several issues
-summary(all_issues[1:10, ])
+summary(my_issues[1:10, ])
 }

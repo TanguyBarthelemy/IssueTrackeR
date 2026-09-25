@@ -30,15 +30,11 @@ Retrieve the name of the last commentator
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-
-all_issues <- get_issues(selector = issues_selector)
-
-author_last_comment(all_issues)
-author_last_comment(all_issues[1L, ])
+my_issues <- get_issues(selector = issues_selector)
+author_last_comment(my_issues)
+author_last_comment(my_issues[1L, ])
 
 }

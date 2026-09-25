@@ -133,19 +133,12 @@ expect_issue <- function(x) {
 #     dataset_name = "closed_issues.yaml"
 # )
 
-selector_issues <- init_selector(
-    source = "local",
-    file = file.path(testthat::test_path("data"), "closed_issues.yaml")
-)
-selector_labels <- init_selector(
-    source = "local",
-    file = file.path(testthat::test_path("data"), "list_labels.yaml")
-)
-selector_milestones <- init_selector(
-    source = "local",
-    file = file.path(testthat::test_path("data"), "list_milestones.yaml")
+local_selector <- init_selector(
+    source = "Local",
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
 
-my_issues <- get_issues(selector_issues, verbose = FALSE)
-my_labels <- get_labels(selector_labels, verbose = FALSE)
-my_milestones <- get_milestones(selector_milestones, verbose = FALSE)
+my_issues <- get_issues(local_selector, verbose = FALSE)
+my_labels <- get_labels(local_selector, verbose = FALSE)
+my_milestones <- get_milestones(local_selector, verbose = FALSE)

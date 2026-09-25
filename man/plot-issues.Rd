@@ -72,19 +72,17 @@ log scale
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-all_issues <- get_issues(selector = issues_selector)
+my_issues <- get_issues(selector = issues_selector)
 
-plot(all_issues, type = "historic")
-plot(all_issues, type = "created-closed")
-plot(all_issues, type = "resolution-time")
-plot(all_issues, type = "area-chart", by = "closed_by")
-plot(all_issues, type = "area-chart", by = "milestone", n = 5)
-plot(all_issues, type = "area-chart", by = "state_reason", n = 5)
-plot(all_issues, type = "area-chart", by = "repo", n = 5)
+plot(my_issues, type = "historic")
+plot(my_issues, type = "created-closed")
+plot(my_issues, type = "resolution-time")
+plot(my_issues, type = "area-chart", by = "closed_by")
+plot(my_issues, type = "area-chart", by = "milestone", n = 5)
+plot(my_issues, type = "area-chart", by = "state_reason", n = 5)
+plot(my_issues, type = "area-chart", by = "repo", n = 5)
 
 }

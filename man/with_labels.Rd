@@ -24,14 +24,10 @@ Generic function to filter issues with labels
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-
-all_issues <- get_issues(selector = issues_selector)
-
-with_labels(all_issues, pattern = "Bug")
+my_issues <- get_issues(selector = issues_selector)
+with_labels(my_issues, pattern = "Bug")
 
 }

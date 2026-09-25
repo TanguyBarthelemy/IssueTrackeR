@@ -26,13 +26,11 @@ Add elements to a vector.
 \examples{
 issues_selector <- init_selector(
     source = "Local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-all_issues <- get_issues(selector = issues_selector)
-new_issues <- append(all_issues, all_issues)
+my_issues <- get_issues(selector = issues_selector)
+new_issues <- append(my_issues, my_issues)
 }
 \references{
 {\if{html}{\out{<span id="reference+append.Rd+R+3ABecker+2BChambers+2BWilks+3A1988"></span>}}Becker RA, Chambers JM, Wilks AR (1988).

@@ -19,15 +19,11 @@
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#'
-#' all_issues <- get_issues(selector = issues_selector)
-#'
-#' with_text(all_issues, pattern = "Excel")
+#' my_issues <- get_issues(selector = issues_selector)
+#' with_text(my_issues, pattern = "Excel")
 #'
 #' @rdname with_text
 #' @export
@@ -78,15 +74,11 @@ with_text.IssuesTB <- function(
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#'
-#' all_issues <- get_issues(selector = issues_selector)
-#'
-#' with_labels(all_issues, pattern = "Bug")
+#' my_issues <- get_issues(selector = issues_selector)
+#' with_labels(my_issues, pattern = "Bug")
 #'
 #' @rdname with_labels
 #' @export
@@ -118,15 +110,12 @@ with_labels.IssuesTB <- function(x, ...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' all_issues <- get_issues(selector = issues_selector)
-#'
-#' with_comments(all_issues)
-#' with_comments(all_issues, negate = TRUE)
+#' my_issues <- get_issues(selector = issues_selector)
+#' with_comments(my_issues)
+#' with_comments(my_issues, negate = TRUE)
 #'
 #' @rdname with_comments
 #' @export
@@ -160,16 +149,14 @@ with_comments.IssuesTB <- function(x, negate = FALSE, ...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #'
-#' all_issues <- get_issues(selector = issues_selector)
+#' my_issues <- get_issues(selector = issues_selector)
 #'
-#' get_nbr_comments(all_issues)
-#' get_nbr_comments(all_issues[1L, ])
+#' get_nbr_comments(my_issues)
+#' get_nbr_comments(my_issues[1L, ])
 #'
 #' @rdname get_nbr_comments
 #' @export
@@ -211,16 +198,12 @@ get_nbr_comments.IssuesTB <- function(x) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#'
-#' all_issues <- get_issues(selector = issues_selector)
-#'
-#' author_last_comment(all_issues)
-#' author_last_comment(all_issues[1L, ])
+#' my_issues <- get_issues(selector = issues_selector)
+#' author_last_comment(my_issues)
+#' author_last_comment(my_issues[1L, ])
 #'
 #' @rdname author_last_comment
 #' @export
@@ -284,16 +267,14 @@ author_last_comment.IssuesTB <- function(x, verbose = TRUE, ...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #'
-#' all_issues <- get_issues(selector = issues_selector)
+#' my_issues <- get_issues(selector = issues_selector)
 #'
-#' first_issue <- extract_nth(all_issues, 1)
-#' third_issue <- extract_nth(all_issues, 3)
+#' first_issue <- extract_nth(my_issues, 1)
+#' third_issue <- extract_nth(my_issues, 3)
 #'
 #' @name extract_nth
 #' @export
@@ -387,16 +368,12 @@ extract_nth.default <- function(...) {
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#'
-#' all_issues <- get_issues(selector = issues_selector)
-#'
-#' issues_wo_1 <- remove_nth(all_issues, 1)
-#' issues_wo_3 <- remove_nth(all_issues, 3)
+#' my_issues <- get_issues(selector = issues_selector)
+#' issues_wo_1 <- remove_nth(my_issues, 1)
+#' issues_wo_3 <- remove_nth(my_issues, 3)
 #'
 #' @name remove_nth
 #' @export

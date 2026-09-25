@@ -24,11 +24,8 @@ Reads issues from a local YAML file and formats them into an IssuesTB object.
 }
 \examples{
 my_issues <- IssueTrackeR:::get_issues_local(
-    file = system.file(
-        "data_issues",
-        "list_issues.yaml",
-        package = "IssueTrackeR"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
 }
 \keyword{internal}

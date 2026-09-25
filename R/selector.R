@@ -224,14 +224,14 @@ init_selector_local <- function(
     ...
 ) {
     checkmate::assert_character(dataset_dir, len = 1L)
-    checkmate::assert_character(dataset_name, len = 1L)
+    checkmate::assert_character(dataset_name, len = 1L, null.ok = TRUE)
 
-    selector <- list(
+    selector <- list(list(
         source = "local",
         dataset_name = dataset_name,
         dataset_dir = dataset_dir,
         ...
-    )
+    ))
     class(selector) <- "SelectorTB"
     return(selector)
 }

@@ -58,31 +58,15 @@
 #'
 #' # From local
 #'
-#' local_issues_selector <- init_selector(
+#' local_selector <- init_selector(
 #'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
-#' )
-#' local_labels_selector <- init_selector(
-#'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_labels.yaml"
-#'     )
-#' )
-#' local_milestones_selector <- init_selector(
-#'     source = "Local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_milestones.yaml"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #'
-#' issues <- get_issues(selector = local_issues_selector)
-#' labels <- get_labels(selector = local_labels_selector)
-#' milestones <- get_milestones(selector = local_milestones_selector)
+#' issues <- get_issues(selector = local_selector)
+#' labels <- get_labels(selector = local_selector)
+#' milestones <- get_milestones(selector = local_selector)
 #'
 get_issues <- function(selector, verbose = TRUE, ...) {
     if (is_empty(selector)) {
@@ -267,11 +251,8 @@ get_issues_gitlab <- function(
 #'
 #' @examples
 #' my_issues <- IssueTrackeR:::get_issues_local(
-#'     file = system.file(
-#'         "data_issues",
-#'         "list_issues.yaml",
-#'         package = "IssueTrackeR"
-#'     )
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
 #' @dev
 #' @importFrom checkmate assert_flag
@@ -282,7 +263,7 @@ get_issues_local <- function(
     verbose = TRUE
 ) {
     checkmate::assert_character(dataset_dir, len = 1L)
-    checkmate::assert_character(dataset_name, len = 1L)
+    checkmate::assert_character(dataset_name, len = 1L, null.ok = TRUE)
     checkmate::assert_flag(verbose)
 
     if (is.null(dataset_name) || !nzchar(dataset_name)) {
@@ -483,7 +464,7 @@ get_labels_local <- function(
     verbose = TRUE
 ) {
     checkmate::assert_character(dataset_dir, len = 1L)
-    checkmate::assert_character(dataset_name, len = 1L)
+    checkmate::assert_character(dataset_name, len = 1L, null.ok = TRUE)
     checkmate::assert_flag(verbose)
 
     if (is.null(dataset_name) || !nzchar(dataset_name)) {
@@ -692,7 +673,7 @@ get_milestones_local <- function(
     verbose = TRUE
 ) {
     checkmate::assert_character(dataset_dir, len = 1L)
-    checkmate::assert_character(dataset_name, len = 1L)
+    checkmate::assert_character(dataset_name, len = 1L, null.ok = TRUE)
     checkmate::assert_flag(verbose)
 
     if (is.null(dataset_name) || !nzchar(dataset_name)) {
