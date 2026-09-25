@@ -86,7 +86,10 @@ test_that("[ function is good", {
     testthat::expect_identical(tested_issues2[, 1, drop = FALSE], l[[1]])
 
     testthat::expect_identical(tested_issues2[1, "labels"], l[[4L]])
-    testthat::expect_identical(tested_issues2[1, "labels", drop = TRUE], l[[4L]])
+    testthat::expect_identical(
+        tested_issues2[1, "labels", drop = TRUE],
+        l[[4L]]
+    )
     testthat::expect_identical(
         tested_issues2[1, "labels", drop = FALSE],
         list(labels = l[[4L]]) |>

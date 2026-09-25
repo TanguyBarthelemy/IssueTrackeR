@@ -11,7 +11,8 @@ init_selector_local(
 )
 }
 \arguments{
-\item{dataset_dir}{Character. The directory where the dataset files are located.}
+\item{dataset_dir}{Character. The directory where the dataset files are
+located.}
 
 \item{dataset_name}{Character. The name of the dataset (e.g., "my_dataset").}
 }

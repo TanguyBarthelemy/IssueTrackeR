@@ -206,7 +206,8 @@ init_selector_gitlab <- function(project_id = NULL, ...) {
 #' Creates a selector for local YAML files containing issue data.
 #'
 #' @param dataset_name Character. The name of the dataset (e.g., "my_dataset").
-#' @param dataset_dir Character. The directory where the dataset files are located.
+#' @param dataset_dir Character. The directory where the dataset files are
+#'   located.
 #'
 #' @returns A `SelectorTB` object configured for local YAML files.
 #'
@@ -225,7 +226,11 @@ init_selector_local <- function(
 ) {
     additional_args <- list(...)
     if (length(additional_args) > 0L) {
-        stop("The only accepted argument for \"source = local\" are dataset_dir and dataset_name")
+        stop(
+            "The only accepted argument for \"source = local\" are ",
+            "dataset_dir and dataset_name",
+            call. = FALSE
+        )
     }
     checkmate::assert_character(dataset_dir, len = 1L)
     checkmate::assert_character(dataset_name, len = 1L, null.ok = TRUE)

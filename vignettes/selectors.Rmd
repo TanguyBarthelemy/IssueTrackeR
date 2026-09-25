@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 # Handle credentials for GitLab if available
 if (Sys.getenv("GITLAB_TRACTORTOM_API") != "") {
     gitlabr::set_gitlab_connection(
-        gitlab_url = "https://gitlab.com", 
+        gitlab_url = "https://gitlab.com",
         private_token = Sys.getenv("GITLAB_TRACTORTOM_API")
     )
 }
@@ -44,19 +44,21 @@ A selector can contain different types of sources:
 2.  **GitLab**: Uses `project_id`.
 3.  **Local**: Uses a path to a `YAML` file containing issue data.
     
-    **Note**: When using `source = "local"`, functions `get_issues()`, `get_labels()` and `get_milestones()` and `update_database()` will use the `dataset_dir` argument to look for files following the pattern `list_issues_<dataset_name>.yaml`, `list_labels_<dataset_name>.yaml`, or `list_milestones_<dataset_name>.yaml`.
+**Note**: When using `source = "local"`, functions `get_issues()`, `get_labels()` and `get_milestones()` and `update_database()` will use the `dataset_dir` argument to look for files following the pattern `list_issues_<dataset_name>.yaml`, `list_labels_<dataset_name>.yaml`, or `list_milestones_<dataset_name>.yaml`.
+
+```{r different-sources, eval = TRUE, echo = FALSE}
 gh_sel <- init_selector(
-    source = "GitHub", 
-    owner = "TanguyBarthelemy", 
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
     repo = "IssueTrackeR"
 )
 
 # GitLab selector
-gl_sel <- init_selector(source = "GitLab", project_id = 4578)
+gl_sel <- init_selector(source = "GitLab", project_id = 4578L)
 
 # Local selector
 local_sel <- init_selector(
-    source = "local", 
+    source = "local",
     file = system.file(
         "data_issues", "list_issues.yaml", package = "IssueTrackeR"
     )
@@ -75,8 +77,8 @@ The main way to create a selector is using the `init_selector()` function.
 ```{r create_selector}
 # Creating a simple GitHub selector
 my_sel <- init_selector(
-    source = "GitHub", 
-    owner = "TanguyBarthelemy", 
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
     repo = "IssueTrackeR"
 )
 ```
@@ -99,12 +101,12 @@ Use `merge_selector()` to combine multiple selectors into one.
 
 ```{r add_selector}
 sel1 <- init_selector(
-    source = "GitHub", 
-    owner = "TanguyBarthelemy", 
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
     repo = "IssueTrackeR"
 )
 sel2 <- init_selector(
-    source = "local", 
+    source = "local",
     file = system.file(
         "data_issues", "list_issues.yaml", package = "IssueTrackeR"
     )
@@ -119,7 +121,7 @@ print(combined_sel)
 Use `extract_nth()` to retrieve a specific selector by its index.
 
 ```{r extract_selector}
-extracted <- extract_nth(combined_sel, 1)
+extracted <- extract_nth(combined_sel, 1L)
 print(extracted)
 ```
 
@@ -130,14 +132,14 @@ Use `remove_nth()` to remove a selector at a specific position.
 ```{r remove_selector}
 # Let's create a list of 3 selectors to demonstrate
 sel3 <- init_selector(
-    source = "GitHub", 
-    owner = "TanguyBarthelemy", 
+    source = "GitHub",
+    owner = "TanguyBarthelemy",
     repo = "IssueTrackeR"
 )
 list_sel <- merge_selector(sel1, sel2, sel3)
 
 # Remove the second one
-reduced_sel <- remove_nth(list_sel, 2)
+reduced_sel <- remove_nth(list_sel, 2L)
 print(reduced_sel)
 ```
 
@@ -156,5 +158,5 @@ options(IssueTrackeR.selector = sel1)
 # Note: This requires a working environment/token to actually run get_issues()
 
 # Reset the option
-options(IssueTrackeR.selector = empty_selector())
+options(IssueTrackeR.selector = init_selector())
 ```

@@ -14,5 +14,9 @@ encoding: "UTF-8"
 exclusions: list(
     "tests" = list(
         undesirable_operator_linter = Inf
+    ),
+    "vignettes" = list(
+        library_call_linter = Inf,
+        undesirable_function_linter = Inf
     )
   )

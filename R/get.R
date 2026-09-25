@@ -271,15 +271,15 @@ get_issues_local <- function(
     } else {
         dataset_name <- paste0("list_issues_", dataset_name, ".yaml")
     }
-    file <- file.path(dataset_dir, dataset_name)
-    file <- normalizePath(file, mustWork = TRUE)
-    checkmate::assert_character(file, len = 1L)
+    dataset_path <- file.path(dataset_dir, dataset_name)
+    dataset_path <- normalizePath(dataset_path, mustWork = TRUE)
+    checkmate::assert_character(dataset_path, len = 1L)
 
     if (verbose) {
-        message("The issues will be read from ", file, ".")
+        message("The issues will be read from ", dataset_path, ".")
     }
 
-    raw_yaml <- readLines(con = file, encoding = "UTF-8")
+    raw_yaml <- readLines(con = dataset_path, encoding = "UTF-8")
     raw_yaml <- yaml::yaml.load(raw_yaml)
 
     raw_yaml$comments <- lapply(
@@ -472,15 +472,15 @@ get_labels_local <- function(
     } else {
         dataset_name <- paste0("list_labels_", dataset_name, ".yaml")
     }
-    file <- file.path(dataset_dir, dataset_name)
-    file <- normalizePath(file, mustWork = TRUE)
-    checkmate::assert_character(file, len = 1L)
+    dataset_path <- file.path(dataset_dir, dataset_name)
+    dataset_path <- normalizePath(dataset_path, mustWork = TRUE)
+    checkmate::assert_character(dataset_path, len = 1L)
 
     if (verbose) {
-        message("The labels will be read from ", file, ".")
+        message("The labels will be read from ", dataset_path, ".")
     }
 
-    list_labels <- readLines(con = file, encoding = "UTF-8") |>
+    list_labels <- readLines(con = dataset_path, encoding = "UTF-8") |>
         yaml::yaml.load() |>
         as.data.frame()
 
@@ -681,15 +681,15 @@ get_milestones_local <- function(
     } else {
         dataset_name <- paste0("list_milestones_", dataset_name, ".yaml")
     }
-    file <- file.path(dataset_dir, dataset_name)
-    file <- normalizePath(file, mustWork = TRUE)
-    checkmate::assert_character(file, len = 1L)
+    dataset_path <- file.path(dataset_dir, dataset_name)
+    dataset_path <- normalizePath(dataset_path, mustWork = TRUE)
+    checkmate::assert_character(dataset_path, len = 1L)
 
     if (verbose) {
-        message("The milestones will be read from ", file, ".")
+        message("The milestones will be read from ", dataset_path, ".")
     }
 
-    list_milestones <- readLines(con = file, encoding = "UTF-8") |>
+    list_milestones <- readLines(con = dataset_path, encoding = "UTF-8") |>
         yaml::yaml.load() |>
         as.data.frame()
 
