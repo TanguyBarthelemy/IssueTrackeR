@@ -4,13 +4,17 @@
 \alias{get_issues_local}
 \title{Get Issues from Local YAML File}
 \usage{
-get_issues_local(file = NULL, verbose = TRUE)
+get_issues_local(
+  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+  dataset_name = getOption("IssueTrackeR.dataset.name"),
+  verbose = TRUE
+)
 }
 \arguments{
-\item{file}{Character. Path to the YAML file containing issues.}
-
 \item{verbose}{A boolean indicating whether to print additional
 information. Default is \code{TRUE}.}
+
+\item{file}{Character. Path to the YAML file containing issues.}
 }
 \value{
 An IssuesTB object containing the issues from the YAML file.

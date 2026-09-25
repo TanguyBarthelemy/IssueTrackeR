@@ -4,11 +4,16 @@
 \alias{init_selector_local}
 \title{Initialize Local Selector}
 \usage{
-init_selector_local(file)
+init_selector_local(
+  dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+  dataset_name = getOption("IssueTrackeR.dataset.name"),
+  ...
+)
 }
 \arguments{
-\item{file}{Character. Path(s) to YAML file(s) containing issue data.
-Can be a vector to select multiple files.}
+\item{dataset_dir}{Character. The directory where the dataset files are located.}
+
+\item{dataset_name}{Character. The name of the dataset (e.g., "my_dataset").}
 }
 \value{
 A \code{SelectorTB} object configured for local YAML files.
@@ -17,13 +22,10 @@ A \code{SelectorTB} object configured for local YAML files.
 Creates a selector for local YAML files containing issue data.
 }
 \examples{
-# Select a single YAML file
+# Select a local dataset
 local_sel <- IssueTrackeR:::init_selector_local(
-    file = system.file(
-        "data_issues",
-        "list_issues.yaml",
-        package = "IssueTrackeR"
-    )
+    dataset_name = "my_dataset",
+    dataset_dir = "/path/to/data"
 )
 
 }

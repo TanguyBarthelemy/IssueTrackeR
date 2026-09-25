@@ -54,7 +54,7 @@ empty_selector <- function() {
 #' @param ... Additional arguments specific to the source type:
 #'          - For GitHub: `owner`, `repo`
 #'          - For GitLab: `project_id`
-#'          - For local: `file`
+#'          - For local: `dataset_name`, `dataset_dir`
 #'
 #' @returns A `SelectorTB` object configured for the specified source.
 #'
@@ -74,13 +74,11 @@ empty_selector <- function() {
 #' # GitLab selector for multiple projects
 #' gl_sel <- init_selector(source = "GitLab", project_id = c(4578, 2384))
 #'
-#' # Local selector for a YAML file
+#' # Local selector for a dataset
 #' local_sel <- init_selector(
 #'     source = "local",
-#'     file = file.path(
-#'         system.file("data_issues", package = "IssueTrackeR"),
-#'         "list_issues.yaml"
-#'     )
+#'     dataset_name = "my_dataset",
+#'     dataset_dir = "/path/to/data"
 #' )
 #' @export
 #' @importFrom checkmate assert_character
@@ -207,25 +205,33 @@ init_selector_gitlab <- function(project_id = NULL, ...) {
 #' @description
 #' Creates a selector for local YAML files containing issue data.
 #'
-#' @param file Character. Path(s) to YAML file(s) containing issue data.
-#'   Can be a vector to select multiple files.
+#' @param dataset_name Character. The name of the dataset (e.g., "my_dataset").
+#' @param dataset_dir Character. The directory where the dataset files are located.
 #'
 #' @returns A `SelectorTB` object configured for local YAML files.
 #'
 #' @examples
-#' # Select a single YAML file
+#' # Select a local dataset
 #' local_sel <- IssueTrackeR:::init_selector_local(
-#'     file = system.file(
-#'         "data_issues",
-#'         "list_issues.yaml",
-#'         package = "IssueTrackeR"
-#'     )
+#'     dataset_name = "my_dataset",
+#'     dataset_dir = "/path/to/data"
 #' )
 #'
 #' @dev
-init_selector_local <- function(file) {
-    file <- normalizePath(file, mustWork = TRUE)
-    selector <- lapply(file, \(f) list(source = "local", file = f))
+init_selector_local <- function(
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = getOption("IssueTrackeR.dataset.name"),
+    ...
+) {
+    checkmate::assert_character(dataset_dir, len = 1L)
+    checkmate::assert_character(dataset_name, len = 1L)
+
+    selector <- list(
+        source = "local",
+        dataset_name = dataset_name,
+        dataset_dir = dataset_dir,
+        ...
+    )
     class(selector) <- "SelectorTB"
     return(selector)
 }

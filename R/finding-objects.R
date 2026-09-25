@@ -442,7 +442,7 @@ remove_nth.SelectorTB <- function(x, n, verbose = TRUE, ...) {
     if (verbose) {
         message("The ", n, "th selector will be removed")
     }
-    output <- x[-n, , drop = FALSE]
+    output <- x[-n]
     class(output) <- "SelectorTB"
     return(output)
 }

@@ -1,0 +1,160 @@
+---
+title: "The role of selector in {IssueTrackeR}"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The role of selector in {IssueTrackeR}}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup-knitr-vignette, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+)
+```
+
+```{r setup-IssueTrackeR, eval = TRUE, echo = FALSE}
+# Handle credentials for GitLab if available
+if (Sys.getenv("GITLAB_TRACTORTOM_API") != "") {
+    gitlabr::set_gitlab_connection(
+        gitlab_url = "https://gitlab.com", 
+        private_token = Sys.getenv("GITLAB_TRACTORTOM_API")
+    )
+}
+```
+
+# Introduction
+
+In {IssueTrackeR}, a **selector** is a fundamental object used to specify the data sources from which you want to retrieve information (issues, labels, milestones, etc.).
+
+```{r loading-IssueTrackeR}
+library("IssueTrackeR")
+```
+
+## What is a selector?
+
+A selector is an object of class `SelectorTB`. Technically, it is a list of configurations, where each configuration describes a specific source and the parameters needed to access it.
+
+## Supported sources
+
+A selector can contain different types of sources:
+
+1.  **GitHub**: Uses `owner` and `repo` (or just `owner` to fetch all repositories).
+2.  **GitLab**: Uses `project_id`.
+3.  **Local**: Uses a path to a `YAML` file containing issue data.
+    
+    **Note**: When using `source = "local"`, functions `get_issues()`, `get_labels()` and `get_milestones()` and `update_database()` will use the `dataset_dir` argument to look for files following the pattern `list_issues_<dataset_name>.yaml`, `list_labels_<dataset_name>.yaml`, or `list_milestones_<dataset_name>.yaml`.
+gh_sel <- init_selector(
+    source = "GitHub", 
+    owner = "TanguyBarthelemy", 
+    repo = "IssueTrackeR"
+)
+
+# GitLab selector
+gl_sel <- init_selector(source = "GitLab", project_id = 4578)
+
+# Local selector
+local_sel <- init_selector(
+    source = "local", 
+    file = system.file(
+        "data_issues", "list_issues.yaml", package = "IssueTrackeR"
+    )
+)
+
+# Inspecting them
+print(gh_sel)
+print(gl_sel)
+print(local_sel)
+```
+
+## How to create a selector?
+
+The main way to create a selector is using the `init_selector()` function.
+
+```{r create_selector}
+# Creating a simple GitHub selector
+my_sel <- init_selector(
+    source = "GitHub", 
+    owner = "TanguyBarthelemy", 
+    repo = "IssueTrackeR"
+)
+```
+
+## How is it displayed?
+
+When you `print()` a `SelectorTB` object, it provides a formatted summary showing the number of selectors and the details for each one.
+
+```{r display_selector}
+print(my_sel)
+```
+
+## Manipulating a list of selectors
+
+Since a `SelectorTB` is a list, you can combine, extract, or remove selectors.
+
+### Adding a new selector to a list
+
+Use `merge_selector()` to combine multiple selectors into one.
+
+```{r add_selector}
+sel1 <- init_selector(
+    source = "GitHub", 
+    owner = "TanguyBarthelemy", 
+    repo = "IssueTrackeR"
+)
+sel2 <- init_selector(
+    source = "local", 
+    file = system.file(
+        "data_issues", "list_issues.yaml", package = "IssueTrackeR"
+    )
+)
+
+combined_sel <- merge_selector(sel1, sel2)
+print(combined_sel)
+```
+
+### Extracting a selector from a list
+
+Use `extract_nth()` to retrieve a specific selector by its index.
+
+```{r extract_selector}
+extracted <- extract_nth(combined_sel, 1)
+print(extracted)
+```
+
+### Removing a selector from a list
+
+Use `remove_nth()` to remove a selector at a specific position.
+
+```{r remove_selector}
+# Let's create a list of 3 selectors to demonstrate
+sel3 <- init_selector(
+    source = "GitHub", 
+    owner = "TanguyBarthelemy", 
+    repo = "IssueTrackeR"
+)
+list_sel <- merge_selector(sel1, sel2, sel3)
+
+# Remove the second one
+reduced_sel <- remove_nth(list_sel, 2)
+print(reduced_sel)
+```
+
+## The `IssueTrackeR.selector` option
+
+The package provides a global option `IssueTrackeR.selector`. This option defines the **default selector** used by retrieval functions (like `get_issues()`, `get_labels()`, etc.) when no `selector` argument is explicitly provided.
+
+```{r global_option}
+# Check the current default (usually empty)
+getOption("IssueTrackeR.selector")
+
+# Set a default selector
+options(IssueTrackeR.selector = sel1)
+
+# Now, get_issues() will use sel1 by default
+# Note: This requires a working environment/token to actually run get_issues()
+
+# Reset the option
+options(IssueTrackeR.selector = empty_selector())
+```

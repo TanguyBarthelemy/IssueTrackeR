@@ -31,7 +31,9 @@ Imports:
     checkmate,
     zoo
 Suggests:
+    knitr,
     rlang,
+    rmarkdown,
     spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -41,3 +43,4 @@ LazyData: TRUE
 Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace", "devtag::dev_roclet"))
 Config/roxygen2/version: 8.1.0
 Config/Needs/build: moodymudskipper/devtag
+VignetteBuilder: knitr

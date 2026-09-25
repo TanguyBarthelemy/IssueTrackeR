@@ -277,19 +277,22 @@ get_issues_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 get_issues_local <- function(
-    file = NULL,
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = getOption("IssueTrackeR.dataset.name"),
     verbose = TRUE
 ) {
-    file <- normalizePath(file, mustWork = TRUE)
-    checkmate::assert_character(file, len = 1L)
+    checkmate::assert_character(dataset_dir, len = 1L)
+    checkmate::assert_character(dataset_name, len = 1L)
     checkmate::assert_flag(verbose)
 
-    if (dir.exists(file)) {
-        stop("The path corresponds to a directory.", call. = FALSE)
+    if (is.null(dataset_name) || !nzchar(dataset_name)) {
+        dataset_name <- "list_issues.yaml"
+    } else {
+        dataset_name <- paste0("list_issues_", dataset_name, ".yaml")
     }
-    if (tools::file_ext(file) != "yaml") {
-        stop("The path should lead to a yaml file.", call. = FALSE)
-    }
+    file <- file.path(dataset_dir, dataset_name)
+    file <- normalizePath(file, mustWork = TRUE)
+    checkmate::assert_character(file, len = 1L)
 
     if (verbose) {
         message("The issues will be read from ", file, ".")
@@ -475,19 +478,22 @@ get_labels_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
 get_labels_local <- function(
-    file = NULL,
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = getOption("IssueTrackeR.dataset.name"),
     verbose = TRUE
 ) {
-    file <- normalizePath(file, mustWork = TRUE)
-    checkmate::assert_character(file, len = 1L)
+    checkmate::assert_character(dataset_dir, len = 1L)
+    checkmate::assert_character(dataset_name, len = 1L)
     checkmate::assert_flag(verbose)
 
-    if (dir.exists(file)) {
-        stop("The path corresponds to a directory.", call. = FALSE)
+    if (is.null(dataset_name) || !nzchar(dataset_name)) {
+        dataset_name <- "list_labels.yaml"
+    } else {
+        dataset_name <- paste0("list_labels_", dataset_name, ".yaml")
     }
-    if (tools::file_ext(file) != "yaml") {
-        stop("The path should lead to a yaml file.", call. = FALSE)
-    }
+    file <- file.path(dataset_dir, dataset_name)
+    file <- normalizePath(file, mustWork = TRUE)
+    checkmate::assert_character(file, len = 1L)
 
     if (verbose) {
         message("The labels will be read from ", file, ".")
@@ -681,19 +687,22 @@ get_milestones_gitlab <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
 get_milestones_local <- function(
-    file = NULL,
+    dataset_dir = getOption("IssueTrackeR.dataset.dir"),
+    dataset_name = getOption("IssueTrackeR.dataset.name"),
     verbose = TRUE
 ) {
-    file <- normalizePath(file, mustWork = TRUE)
-    checkmate::assert_character(file, len = 1L)
+    checkmate::assert_character(dataset_dir, len = 1L)
+    checkmate::assert_character(dataset_name, len = 1L)
     checkmate::assert_flag(verbose)
 
-    if (dir.exists(file)) {
-        stop("The path corresponds to a directory.", call. = FALSE)
+    if (is.null(dataset_name) || !nzchar(dataset_name)) {
+        dataset_name <- "list_milestones.yaml"
+    } else {
+        dataset_name <- paste0("list_milestones_", dataset_name, ".yaml")
     }
-    if (tools::file_ext(file) != "yaml") {
-        stop("The path should lead to a yaml file.", call. = FALSE)
-    }
+    file <- file.path(dataset_dir, dataset_name)
+    file <- normalizePath(file, mustWork = TRUE)
+    checkmate::assert_character(file, len = 1L)
 
     if (verbose) {
         message("The milestones will be read from ", file, ".")

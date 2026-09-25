@@ -18,7 +18,7 @@ init_selector(source, ...)
 \itemize{
 \item For GitHub: \code{owner}, \code{repo}
 \item For GitLab: \code{project_id}
-\item For local: \code{file}
+\item For local: \code{dataset_name}, \code{dataset_dir}
 }}
 }
 \value{
@@ -45,12 +45,10 @@ gh_sel <- init_selector(
 # GitLab selector for multiple projects
 gl_sel <- init_selector(source = "GitLab", project_id = c(4578, 2384))
 
-# Local selector for a YAML file
+# Local selector for a dataset
 local_sel <- init_selector(
     source = "local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    dataset_name = "my_dataset",
+    dataset_dir = "/path/to/data"
 )
 }
