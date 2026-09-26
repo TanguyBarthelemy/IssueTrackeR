@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/selectors.html">The role of selector in {IssueTrackeR}</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -103,16 +113,14 @@ a formatted output.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">issues_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
-<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="st">"list_issues.yaml"</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display one issue</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">my_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1058</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -125,7 +133,7 @@ a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display several issues</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">my_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1058</span> ──</span>
@@ -249,10 +257,11 @@ a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Selector n°1</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">source</span>: local </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">file</span>: /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">dataset_name</span>: NULL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">dataset_dir</span>: /home/runner/work/_temp/Library/IssueTrackeR/data_issues </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of one issue</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">my_issues</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1049</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Labels:</span> </span>
@@ -270,7 +279,7 @@ a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display the summary of</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">all_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">my_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues.</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1058 ✔ Completed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1049 🟢 Open </span>

@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/selectors.html">The role of selector in {IssueTrackeR}</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -88,15 +98,13 @@ information. Default is <code>TRUE</code>.</p></dd>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">issues_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
-<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="st">"list_issues.yaml"</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">all_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">get_resolution_times</span><span class="op">(</span><span class="va">all_issues</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">get_resolution_times</span><span class="op">(</span><span class="va">my_issues</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]   247440  2593293   795772    40354     2516    74744     3186     7006</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [9]    29159  6409589     1822     1412  4173975  2005572  3816811    46108</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [17]  3003183 11589816  2998485  3001027 19179668    11707   106626  2052102</span>

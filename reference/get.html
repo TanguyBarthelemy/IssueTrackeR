@@ -26,6 +26,16 @@ with their labels and milestones."><meta property="og:image" content="/logo.svg"
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/selectors.html">The role of selector in {IssueTrackeR}</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -115,33 +125,20 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">online_selector</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Repo: IssueTrackeR  owner: TanguyBarthelemy </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">issues</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 25 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 24 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#69</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#70</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> `init_selector` should accept a `dataset_name` and `dataset_dir` arg instead of </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Ajouter un argument `negate` à `with_labels`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> To match with the writing step, `init_selector` should accept a `dataset_name` and `dataset_dir `arg instead of `file`.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> So `update_database` should be able to accept a init_selector with `source = "local"`.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> L'idée est d'ajouter un argument `negate` à `with_labels` qui permettrait de dire le contraire d'une proposition. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] Replace `file` by `dataset_name` and `dataset_dir` in `init_selector` </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] In `get_XXX_local`, match the</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Par exemple:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#68</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> New vignette on selectors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Qu'est ce qu'un selector ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Quels types de source il peut contenir ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Comment est ce qu'il se créé ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Comment est ce qu'il s'affiche ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Comment ajouter un nouveau selector à une liste de selectors ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Comment retirer un selector d'une liste de selectors ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Comment extraire un selector d'une liste ?</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Comment s'a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels("bug")` désigne toutes les issues qui ont le label `"bug"`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels("bug", negate = TRUE)` qui ne l'ont pas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels(c("bug", "dev"))` désigne toutes les issues qu</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -494,7 +491,7 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 GitHub v2.0.0             2026-10-31      &lt;NA&gt; TanguyBarthelemy  open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   nb_issues_open nb_issues_closed         repo            owner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1              6                0 IssueTrackeR TanguyBarthelemy</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2             17                9 IssueTrackeR TanguyBarthelemy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2             15               11 IssueTrackeR TanguyBarthelemy</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                            url</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/2</span>
@@ -502,33 +499,17 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># From local</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">local_issues_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">local_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
-<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="st">"list_issues.yaml"</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">local_labels_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
-<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="st">"list_labels.yaml"</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">local_milestones_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
-<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="st">"list_milestones.yaml"</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_issues_selector</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_selector</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
-<span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_labels_selector</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu">get_labels</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_selector</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The labels will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_labels.yaml.</span>
-<span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu">get_milestones</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_milestones_selector</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">milestones</span> <span class="op">&lt;-</span> <span class="fu">get_milestones</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_selector</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The milestones will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_milestones.yaml.</span>
 </code></pre></div>
     </div>
