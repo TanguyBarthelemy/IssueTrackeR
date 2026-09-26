@@ -75,7 +75,7 @@ The main way to create a selector is using the `init_selector()` function.
 
 ```{r create_selector}
 # Creating a simple GitHub selector
-my_sel <- init_selector(
+itr_sel <- init_selector(
     source = "GitHub",
     owner = "TanguyBarthelemy",
     repo = "IssueTrackeR"
@@ -87,7 +87,7 @@ my_sel <- init_selector(
 When you `print()` a `SelectorTB` object, it provides a formatted summary showing the number of selectors and the details for each one.
 
 ```{r display_selector}
-print(my_sel)
+print(itr_sel)
 ```
 
 ## Manipulating a list of selectors
@@ -106,9 +106,8 @@ sel1 <- init_selector(
 )
 sel2 <- init_selector(
     source = "local",
-    file = system.file(
-        "data_issues", "list_issues.yaml", package = "IssueTrackeR"
-    )
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"), 
+    dataset_name = NULL
 )
 
 combined_sel <- merge_selector(sel1, sel2)
@@ -132,8 +131,8 @@ Use `remove_nth()` to remove a selector at a specific position.
 # Let's create a list of 3 selectors to demonstrate
 sel3 <- init_selector(
     source = "GitHub",
-    owner = "TanguyBarthelemy",
-    repo = "IssueTrackeR"
+    owner = "rstudio",
+    repo = "rstudio"
 )
 list_sel <- merge_selector(sel1, sel2, sel3)
 
@@ -157,5 +156,5 @@ options(IssueTrackeR.selector = sel1)
 # Note: This requires a working environment/token to actually run get_issues()
 
 # Reset the option
-options(IssueTrackeR.selector = init_selector())
+reset_options()
 ```
