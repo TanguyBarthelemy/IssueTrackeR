@@ -326,7 +326,18 @@ get_labels <- function(selector, verbose = TRUE, ...) {
         if (verbose) {
             message("The selector is empty.")
         }
-        return(NULL)
+        list_labels <- data.frame(
+            source = character(0L),
+            name = character(0L),
+            description = character(0L),
+            color = character(0L),
+            repo = character(0L),
+            owner = character(0L),
+            url = character(0L),
+            stringsAsFactors = FALSE
+        )
+        class(list_labels) <- c("LabelsTB", "data.frame")
+        return(list_labels)
     } else if (length(selector) == 1L) {
         sel_args <- selector[[1L]]
         sel_args <- sel_args[names(sel_args) != "source"]
@@ -496,7 +507,23 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
         if (verbose) {
             message("The selector is empty.")
         }
-        return(NULL)
+        milestones <- data.frame(
+            source = character(0L),
+            title = character(0L),
+            description = character(0L),
+            due_on = format_timestamp(character(0L)),
+            closed_at = format_timestamp(character(0L)),
+            creator = character(0L),
+            state = character(0L),
+            nb_issues_open = integer(0L),
+            nb_issues_closed = integer(0L),
+            repo = character(0L),
+            owner = character(0L),
+            url = character(0L),
+            stringsAsFactors = FALSE
+        )
+        class(milestones) <- c("MilestonesTB", "data.frame")
+        return(milestones)
     } else if (length(selector) == 1L) {
         sel_args <- selector[[1L]]
         sel_args <- sel_args[names(sel_args) != "source"]
