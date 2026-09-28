@@ -83,10 +83,10 @@
 <span><span class="co"># Default S3 method</span></span>
 <span><span class="fu">new_issues</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  <span class="va">title</span>,</span>
-<span>  <span class="va">body</span>,</span>
-<span>  <span class="va">number</span>,</span>
-<span>  <span class="va">state</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  body <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  number <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="cn">NA_integer_</span><span class="op">)</span>,</span>
 <span>  closed_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="cn">NA_integer_</span><span class="op">)</span>,</span>
 <span>  closed_by <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
@@ -150,7 +150,7 @@ closed the issues.</p></dd>
 
 
 <dt id="arg-labels">labels<a class="anchor" aria-label="anchor" href="#arg-labels"></a></dt>
-<dd><p>a list of vector string (or missing). The labels of the issues.</p></dd>
+<dd><p>a list of vector string (or NULL). The labels of the issues.</p></dd>
 
 
 <dt id="arg-comments">comments<a class="anchor" aria-label="anchor" href="#arg-comments"></a></dt>
@@ -158,7 +158,7 @@ closed the issues.</p></dd>
 
 
 <dt id="arg-milestone">milestone<a class="anchor" aria-label="anchor" href="#arg-milestone"></a></dt>
-<dd><p>a vector of string (or missing). The milestones of the
+<dd><p>a vector of string (or NULL). The milestones of the
 issues.</p></dd>
 
 

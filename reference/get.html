@@ -125,7 +125,7 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">online_selector</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Repo: IssueTrackeR  owner: TanguyBarthelemy </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">issues</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 24 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 19 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#70</span> ──</span>
@@ -139,25 +139,6 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels("bug")` désigne toutes les issues qui ont le label `"bug"`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels("bug", negate = TRUE)` qui ne l'ont pas</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels(c("bug", "dev"))` désigne toutes les issues qu</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#66</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Bug: no class with no selector</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ``` r</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> library("IssueTrackeR")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Currently, the default options are:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - location for datasets: /tmp/Rtmp5CLf0Q/data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - name for the datasets: fqkvb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - selector:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Attaching package: 'IssueTrackeR'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; The following objects are masked from 'package:base':</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt;     append, sample, write</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> class(get_labels(init_</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -181,25 +162,6 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#64</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] roxygen2_valid_inherit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ Ensure functions referenced by `@inheritParams` and `@inheritDotParams` exist within the</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   package. Use `pkg::func` syntax for external functions.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:137</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/update_database.R:35</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_issues.R:49</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_repo.R:20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/write.R:159</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#63</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] roxygen2_duplicate_params</span>
@@ -217,26 +179,6 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#62</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_object_usage_linter</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ avoid defining variables that are never used and ensure all referenced objects are defined</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   or imported.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R:339:19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:241:15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:264:17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:278:17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R:290:21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     ... and 64 more lines</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are results </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#61</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_r_file_names</span>
@@ -249,43 +191,6 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are results from the [{goodpractice}](https://github.com/ropensci-review-tools/goodpractice) packa</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#60</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_test_file_names</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ name test files to mirror the R source file they test, e.g. R/my_function.R should have</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   tests/testthat/test-my_function.R.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/comments.R</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/contributor.R</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/format.R</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/IssueTrackeR-package.R</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     ... and 4 more lines</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are resu</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#59</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_no_missing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ avoid using `missing()` to check whether arguments were supplied. The tidyverse style guide</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   recommends using `NULL` defaults with `is.null()` instead, as `missing()` makes functions</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   difficult to call programmatically.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_issues.R:308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/wrangling_issues.R:442</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting wit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -491,7 +396,7 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 GitHub v2.0.0             2026-10-31      &lt;NA&gt; TanguyBarthelemy  open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   nb_issues_open nb_issues_closed         repo            owner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1              6                0 IssueTrackeR TanguyBarthelemy</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2             15               11 IssueTrackeR TanguyBarthelemy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              9               16 IssueTrackeR TanguyBarthelemy</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                            url</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/2</span>
