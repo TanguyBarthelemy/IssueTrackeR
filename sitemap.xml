@@ -26,6 +26,12 @@
 <url><loc>/reference/get_issues_github.html</loc></url>
 <url><loc>/reference/get_issues_gitlab.html</loc></url>
 <url><loc>/reference/get_issues_local.html</loc></url>
+<url><loc>/reference/get_labels_github.html</loc></url>
+<url><loc>/reference/get_labels_gitlab.html</loc></url>
+<url><loc>/reference/get_labels_local.html</loc></url>
+<url><loc>/reference/get_milestones_github.html</loc></url>
+<url><loc>/reference/get_milestones_gitlab.html</loc></url>
+<url><loc>/reference/get_milestones_local.html</loc></url>
 <url><loc>/reference/get_nbr_comments.html</loc></url>
 <url><loc>/reference/get_resolution_times.html</loc></url>
 <url><loc>/reference/get_still_open.html</loc></url>
