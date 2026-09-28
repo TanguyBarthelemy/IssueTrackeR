@@ -105,7 +105,7 @@
 #'
 #' @param x an object of class \code{IssuesTB}, \code{LabelsTB} or
 #' \code{MilestonesTB}.
-#' @inheritParams get
+#' @inheritParams get_issues
 #' @param dataset_dir The destination directory where the YAML file will be
 #'   saved. By default, the system's temporary directory is used (`tempdir()`).
 #' @param dataset_name The name of the output file (without extension).

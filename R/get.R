@@ -32,8 +32,6 @@
 #' The function \code{get_milestones} returns a list representing milestones
 #' with simpler structure (with title, description and due_on).
 #'
-#' @export
-#'
 #' @name get
 #'
 #' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
@@ -68,6 +66,10 @@
 #' labels <- get_labels(selector = local_selector)
 #' milestones <- get_milestones(selector = local_selector)
 #'
+NULL
+
+#' @export
+#' @rdname get
 get_issues <- function(selector, verbose = TRUE, ...) {
     if (is_empty(selector)) {
         if (verbose) {
@@ -316,7 +318,6 @@ get_issues_local <- function(
     )
     return(issues)
 }
-
 
 #' @export
 #' @rdname get

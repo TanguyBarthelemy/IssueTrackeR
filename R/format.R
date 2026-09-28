@@ -55,7 +55,7 @@ format_timestamp <- function(x) {
 #' milestones.
 #' @param urls A character vector of issue URLs for which comments should be
 #'   formatted.
-#' @inheritParams get
+#' @inheritParams get_issues
 #'
 #' @returns
 #' - `format_labels_github`: A data frame with columns: `name`, `description`,
@@ -135,7 +135,6 @@ format_timestamp <- function(x) {
 #' @noRd
 #'
 NULL
-
 
 #' @rdname format
 #' @noRd

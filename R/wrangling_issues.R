@@ -13,7 +13,7 @@
 #' issue.
 #' @param labels a vector string (or missing). The labels of the issue.
 #' @param milestone a string (or missing). The milestone of the issue.
-#' @inheritParams get
+#' @inheritParams get_issues
 #' @inheritParams get_all_repos
 #' @inheritParams new_issues
 #' @param url a string. The URL of the API to the GitHub issue.

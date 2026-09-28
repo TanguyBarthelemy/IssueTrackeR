@@ -4,7 +4,7 @@
 #' Update the different local database (issues, labels and milestones) with the
 #' online reference.
 #'
-#' @inheritParams get
+#' @inheritParams get_issues
 #' @inheritParams write
 #' @param \dots Additional arguments for connecting to the GitLab.
 #' (See the documentation of \code{\link[IssueTrackeR]{get}} to have more
