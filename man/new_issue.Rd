@@ -63,9 +63,9 @@ the issue is still open or \code{"closed"} if the issue is now closed.}
 \item{closed_by}{a string. The GitHub username of the person who closed the
 issue.}
 
-\item{labels}{a vector string (or missing). The labels of the issue.}
+\item{labels}{a vector string (or NULL). The labels of the issue.}
 
-\item{milestone}{a string (or missing). The milestone of the issue.}
+\item{milestone}{a string (or NULL). The milestone of the issue.}
 
 \item{repo}{Character string containing the repository name}
 

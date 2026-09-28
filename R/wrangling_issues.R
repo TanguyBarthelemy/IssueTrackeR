@@ -11,8 +11,8 @@
 #' @param closed_at a date (or timestamp). The closing date of the issue.
 #' @param closed_by a string. The GitHub username of the person who closed the
 #' issue.
-#' @param labels a vector string (or missing). The labels of the issue.
-#' @param milestone a string (or missing). The milestone of the issue.
+#' @param labels a vector string (or NULL). The labels of the issue.
+#' @param milestone a string (or NULL). The milestone of the issue.
 #' @inheritParams get_issues
 #' @inheritParams get_all_repos
 #' @inheritParams new_issues
@@ -196,8 +196,8 @@ new_issue.default <- function(
 #' issues.
 #' @param closed_by a vector of string. The GitHub usernames of the person who
 #' closed the issues.
-#' @param labels a list of vector string (or missing). The labels of the issues.
-#' @param milestone a vector of string (or missing). The milestones of the
+#' @param labels a list of vector string (or NULL). The labels of the issues.
+#' @param milestone a vector of string (or NULL). The milestones of the
 #' issues.
 #' @param owner Character string containing the owner name
 #' @param repo Character string containing the repository name
@@ -307,10 +307,10 @@ new_issues.NULL <- function(x, ...) {
 #' @importFrom checkmate assert_list
 new_issues.default <- function(
     x,
-    title,
-    body,
-    number,
-    state,
+    title = NULL,
+    body = NULL,
+    number = NULL,
+    state = NULL,
     created_at = as.Date(NA_integer_),
     closed_at = as.Date(NA_integer_),
     closed_by = NA_character_,
@@ -326,7 +326,7 @@ new_issues.default <- function(
     state_reason = NA_character_,
     ...
 ) {
-    if (missing(title) && missing(body) && missing(number) && missing(state)) {
+    if (is.null(title) && is.null(body) && is.null(number) && is.null(state)) {
         title <- character(0L)
         body <- character(0L)
         number <- integer(0L)
@@ -360,7 +360,7 @@ new_issues.default <- function(
     checkmate::assert_character(assignee)
     checkmate::assert_character(state_reason)
 
-    if (missing(labels)) {
+    if (length(labels) == 0L) {
         labels <- rep(
             x = list(data.frame(
                 name = character(0L),
@@ -370,7 +370,7 @@ new_issues.default <- function(
             times = length(title)
         )
     }
-    if (missing(comments)) {
+    if (length(comments) == 0L) {
         comments <- rep(
             x = list(data.frame(
                 text = character(0L),

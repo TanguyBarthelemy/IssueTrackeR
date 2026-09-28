@@ -24,10 +24,10 @@ new_issues(x = NULL, ...)
 
 \method{new_issues}{default}(
   x,
-  title,
-  body,
-  number,
-  state,
+  title = NULL,
+  body = NULL,
+  number = NULL,
+  state = NULL,
   created_at = as.Date(NA_integer_),
   closed_at = as.Date(NA_integer_),
   closed_by = NA_character_,
@@ -68,11 +68,11 @@ issues.}
 \item{closed_by}{a vector of string. The GitHub usernames of the person who
 closed the issues.}
 
-\item{labels}{a list of vector string (or missing). The labels of the issues.}
+\item{labels}{a list of vector string (or NULL). The labels of the issues.}
 
 \item{comments}{a list of vector string. The comments of the issues.}
 
-\item{milestone}{a vector of string (or missing). The milestones of the
+\item{milestone}{a vector of string (or NULL). The milestones of the
 issues.}
 
 \item{repo}{Character string containing the repository name}
