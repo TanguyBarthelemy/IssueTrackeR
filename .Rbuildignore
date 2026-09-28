@@ -49,6 +49,12 @@ heylogs.properties
 ^man/get_issues_github\.Rd$
 ^man/get_issues_gitlab\.Rd$
 ^man/get_issues_local\.Rd$
+^man/get_labels_github\.Rd$
+^man/get_labels_gitlab\.Rd$
+^man/get_labels_local\.Rd$
+^man/get_milestones_github\.Rd$
+^man/get_milestones_gitlab\.Rd$
+^man/get_milestones_local\.Rd$
 ^man/get_dates_vec\.Rd$
 ^man/get_resolution_times\.Rd$
 ^man/plot_resolution_bars\.Rd$

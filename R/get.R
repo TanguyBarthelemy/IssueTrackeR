@@ -361,8 +361,31 @@ get_labels <- function(selector, verbose = TRUE, ...) {
     return(list_labels)
 }
 
+#' @title Get Labels from GitHub Repository
+#'
+#' @description
+#' Internal function to fetch labels from a GitHub repository using the GitHub
+#' API.
+#'
+#' @param repo Character. GitHub repository name.
+#' @param owner Character. GitHub repository owner.
+#' @param verbose Logical. If TRUE, displays progress messages.
+#'   Default: TRUE.
+#' @param ... Not used.
+#'
+#' @returns A data frame of class `LabelsTB` containing label information:
+#'
+#' - `source`,
+#' - `name`,
+#' - `description`,
+#' - `color`,
+#' - `repo`,
+#' - `owner`,
+#' - `url`.
+#'
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
+#' @dev
 get_labels_github <- function(
     repo = NULL,
     owner = NULL,
@@ -413,10 +436,30 @@ get_labels_github <- function(
     return(list_labels)
 }
 
+#' @title Get Labels from GitLab Project
+#'
+#' @description
+#' Internal function to fetch labels from a GitLab project using the GitLab API.
+#'
+#' @param project_id Integer. GitLab project ID.
+#' @param verbose Logical. If TRUE, displays progress messages. Default: TRUE.
+#' @param ... Additional arguments passed to the GitLab API call.
+#'
+#' @returns A data frame of class `LabelsTB` containing label information:
+#'
+#' - `source`,
+#' - `name`,
+#' - `description`,
+#' - `color`,
+#' - `repo`,
+#' - `owner`,
+#' - `url`.
+#'
 #' @importFrom gitlabr gl_get_project
 #' @importFrom gitlabr gitlab
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
+#' @dev
 get_labels_gitlab <- function(
     project_id,
     verbose = TRUE,
@@ -466,10 +509,32 @@ get_labels_gitlab <- function(
     return(list_labels)
 }
 
+#' @title Get Labels from Local YAML File
+#'
+#' @description
+#' Internal function to read labels from a local YAML file.
+#'
+#' @param dataset_dir Character. Path to the directory containing the YAML file.
+#'   Default: value of option IssueTrackeR.dataset.dir.
+#' @param dataset_name Character. Name of the YAML file (without extension).
+#'   Default: value of option IssueTrackeR.dataset.name.
+#' @param verbose Logical. If TRUE, displays progress messages. Default: TRUE.
+#'
+#' @returns A data frame of class LabelsTB containing label information:
+#'
+#' - `source`,
+#' - `name`,
+#' - `description`,
+#' - `color`,
+#' - `repo`,
+#' - `owner`,
+#' - `url`.
+#'
 #' @importFrom tools file_ext
 #' @importFrom checkmate assert_character
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
+#' @dev
 get_labels_local <- function(
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = getOption("IssueTrackeR.dataset.name"),
@@ -547,8 +612,38 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
     return(milestones)
 }
 
+#' @title Get Milestones from GitHub Repository
+#'
+#' @description
+#' Internal function to fetch milestones from a GitHub repository using the
+#' GitHub API.
+#'
+#' @param repo Character. GitHub repository name.
+#' @param owner Character. GitHub repository owner.
+#' @param state Character. Milestone state: "open", "closed", or "all".
+#'   Default: "open".
+#' @param verbose Logical. If TRUE, displays progress messages.
+#'   Default: TRUE.
+#'
+#' @returns A data frame of class `MilestonesTB` containing milestone
+#' information:
+#'
+#' - `source`,
+#' - `title`,
+#' - `description`,
+#' - `due_on`,
+#' - `closed_at`,
+#' - `creator`,
+#' - `stat`e
+#' - `nb_issues_open`,
+#' - `nb_issues_closed`,
+#' - `repo`,
+#' - `owner`,
+#' - `url`.
+#'
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
+#' @dev
 get_milestones_github <- function(
     repo = NULL,
     owner = NULL,
@@ -605,11 +700,40 @@ get_milestones_github <- function(
     return(milestones)
 }
 
-
+#' @title Get Milestones from GitLab Project
+#'
+#' @description
+#' Internal function to fetch milestones from a GitLab project using the
+#' GitLab API.
+#'
+#' @param project_id Integer. GitLab project ID.
+#' @param state Character. Milestone state: "open", "closed", or "all".
+#'   Default: "open".
+#' @param verbose Logical. If TRUE, displays progress messages.
+#'   Default: TRUE.
+#' @param ... Additional arguments passed to the GitLab API call.
+#'
+#' @returns A data frame of class `MilestonesTB` containing milestone
+#' information:
+#'
+#' - `source`,
+#' - `title`,
+#' - `description`,
+#' - `due_on`,
+#' - `closed_at`,
+#' - `creator`,
+#' - `stat`e
+#' - `nb_issues_open`,
+#' - `nb_issues_closed`,
+#' - `repo`,
+#' - `owner`,
+#' - `url`.
+#'
 #' @importFrom gitlabr gl_get_project
 #' @importFrom gitlabr gitlab
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
+#' @dev
 get_milestones_gitlab <- function(
     project_id,
     state = c("open", "opened", "closed", "all"),
@@ -691,10 +815,25 @@ get_milestones_gitlab <- function(
     return(milestones)
 }
 
+#' @title Get Milestones from Local YAML File
+#'
+#' @description
+#' Internal function to read milestones from a local YAML file.
+#'
+#' @param dataset_dir Character. Path to the directory containing the YAML file.
+#'   Default: value of option IssueTrackeR.dataset.dir.
+#' @param dataset_name Character. Name of the YAML file (without extension).
+#'   Default: value of option IssueTrackeR.dataset.name.
+#' @param verbose Logical. If TRUE, displays progress messages.
+#'   Default: TRUE.
+#'
+#' @returns A data frame of class MilestonesTB containing milestone information.
+#'
 #' @importFrom tools file_ext
 #' @importFrom checkmate assert_character
 #' @importFrom checkmate assert_flag
 #' @importFrom yaml yaml.load
+#' @dev
 get_milestones_local <- function(
     dataset_dir = getOption("IssueTrackeR.dataset.dir"),
     dataset_name = getOption("IssueTrackeR.dataset.name"),

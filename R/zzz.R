@@ -1,4 +1,5 @@
 #' @keywords internal
+#' @noRd
 .onAttach <- function(libname, pkgname) {
     packageStartupMessage(
         "Currently, the default options are:",
@@ -12,6 +13,7 @@
 }
 
 #' @keywords internal
+#' @noRd
 .onLoad <- function(libname, pkgname) {
     reset_options(verbose = FALSE)
 }
