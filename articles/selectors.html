@@ -101,7 +101,7 @@ information (issues, labels, milestones, etc.).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/TanguyBarthelemy/IssueTrackeR" class="external-link">"IssueTrackeR"</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Currently, the default options are:</span></span>
-<span><span class="co">#&gt; - location for datasets: /tmp/RtmpPqFGNz/data</span></span>
+<span><span class="co">#&gt; - location for datasets: /tmp/RtmpgqFlDh/data</span></span>
 <span><span class="co">#&gt; - name for the datasets: mwlef</span></span>
 <span><span class="co">#&gt; - selector:</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -138,35 +138,28 @@ use the <code>dataset_dir</code> argument to look for files following
 the pattern <code>list_issues_&lt;dataset_name&gt;.yaml</code>,
 <code>list_labels_&lt;dataset_name&gt;.yaml</code>, or
 <code>list_milestones_&lt;dataset_name&gt;.yaml</code>.</p>
-<pre><code><span><span class="co">#&gt; <span style="font-weight: bold;">There is 1 selector.</span> </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co"><span style="font-weight: bold;">#&gt; Selector n°1</span> </span></span>
-<span><span class="co">#&gt; <span style="text-decoration: underline;">source</span>: GitHub </span></span>
-<span><span class="co">#&gt; <span style="text-decoration: underline;">repo</span>: IssueTrackeR </span></span>
-<span><span class="co">#&gt; <span style="text-decoration: underline;">owner</span>: TanguyBarthelemy</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">There is 1 selector.</span> </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co"><span style="font-weight: bold;">#&gt; Selector n°1</span> </span></span>
-<span><span class="co">#&gt; <span style="text-decoration: underline;">source</span>: GitLab </span></span>
-<span><span class="co">#&gt; <span style="text-decoration: underline;">project_id</span>: 4578</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">There is 1 selector.</span> </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co"><span style="font-weight: bold;">#&gt; Selector n°1</span> </span></span>
-<span><span class="co">#&gt; <span style="text-decoration: underline;">source</span>: local </span></span>
-<span><span class="co">#&gt; <span style="text-decoration: underline;">dataset_name</span>: NULL </span></span>
-<span><span class="co">#&gt; <span style="text-decoration: underline;">dataset_dir</span>: /home/runner/work/_temp/Library/IssueTrackeR/data_issues</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="how-to-create-a-selector">How to create a selector?<a class="anchor" aria-label="anchor" href="#how-to-create-a-selector"></a>
 </h3>
 <p>The main way to create a selector is using the
 <code><a href="../reference/init_selector.html">init_selector()</a></code> function.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Creating a simple GitHub selector</span></span>
-<span><span class="va">itr_sel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/init_selector.html">init_selector</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># GitHub selector</span></span>
+<span><span class="va">gh_sel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/init_selector.html">init_selector</a></span><span class="op">(</span></span>
 <span>    source <span class="op">=</span> <span class="st">"GitHub"</span>,</span>
 <span>    owner <span class="op">=</span> <span class="st">"TanguyBarthelemy"</span>,</span>
 <span>    repo <span class="op">=</span> <span class="st">"IssueTrackeR"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># GitLab selector</span></span>
+<span><span class="va">gl_sel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/init_selector.html">init_selector</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"GitLab"</span>, project_id <span class="op">=</span> <span class="fl">4578L</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Local selector</span></span>
+<span><span class="va">local_sel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/init_selector.html">init_selector</a></span><span class="op">(</span></span>
+<span>    source <span class="op">=</span> <span class="st">"local"</span>,</span>
+<span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span>
+<span>    dataset_name <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -175,14 +168,28 @@ the pattern <code>list_issues_&lt;dataset_name&gt;.yaml</code>,
 <p>When you <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> a <code>SelectorTB</code> object, it
 provides a formatted summary showing the number of selectors and the
 details for each one.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">itr_sel</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Displaying them</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">gh_sel</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">There is 1 selector.</span> </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co"><span style="font-weight: bold;">#&gt; Selector n°1</span> </span></span>
 <span><span class="co">#&gt; <span style="text-decoration: underline;">source</span>: GitHub </span></span>
 <span><span class="co">#&gt; <span style="text-decoration: underline;">repo</span>: IssueTrackeR </span></span>
-<span><span class="co">#&gt; <span style="text-decoration: underline;">owner</span>: TanguyBarthelemy</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="text-decoration: underline;">owner</span>: TanguyBarthelemy</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">gl_sel</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">There is 1 selector.</span> </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co"><span style="font-weight: bold;">#&gt; Selector n°1</span> </span></span>
+<span><span class="co">#&gt; <span style="text-decoration: underline;">source</span>: GitLab </span></span>
+<span><span class="co">#&gt; <span style="text-decoration: underline;">project_id</span>: 4578</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">local_sel</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">There is 1 selector.</span> </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co"><span style="font-weight: bold;">#&gt; Selector n°1</span> </span></span>
+<span><span class="co">#&gt; <span style="text-decoration: underline;">source</span>: local </span></span>
+<span><span class="co">#&gt; <span style="text-decoration: underline;">dataset_name</span>: NULL </span></span>
+<span><span class="co">#&gt; <span style="text-decoration: underline;">dataset_dir</span>: /home/runner/work/_temp/Library/IssueTrackeR/data_issues</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="manipulating-a-list-of-selectors">Manipulating a list of selectors<a class="anchor" aria-label="anchor" href="#manipulating-a-list-of-selectors"></a>
@@ -190,11 +197,11 @@ details for each one.</p>
 <p>Since a <code>SelectorTB</code> is a list, you can combine, extract,
 or remove selectors.</p>
 <div class="section level4">
-<h4 id="adding-a-new-selector-to-a-list">Adding a new selector to a list<a class="anchor" aria-label="anchor" href="#adding-a-new-selector-to-a-list"></a>
+<h4 id="adding-a-new-selector-to-a-list-of-selectors">Adding a new selector to a list of selectors<a class="anchor" aria-label="anchor" href="#adding-a-new-selector-to-a-list-of-selectors"></a>
 </h4>
 <p>Use <code><a href="../reference/merge_selector.html">merge_selector()</a></code> to combine multiple selectors into
 one.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sel1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/init_selector.html">init_selector</a></span><span class="op">(</span></span>
 <span>    source <span class="op">=</span> <span class="st">"GitHub"</span>,</span>
 <span>    owner <span class="op">=</span> <span class="st">"TanguyBarthelemy"</span>,</span>
@@ -221,11 +228,11 @@ one.</p>
 <span><span class="co">#&gt; <span style="text-decoration: underline;">dataset_dir</span>: /home/runner/work/_temp/Library/IssueTrackeR/data_issues</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="extracting-a-selector-from-a-list">Extracting a selector from a list<a class="anchor" aria-label="anchor" href="#extracting-a-selector-from-a-list"></a>
+<h4 id="extracting-a-selector-from-a-list-of-selectors">Extracting a selector from a list of selectors<a class="anchor" aria-label="anchor" href="#extracting-a-selector-from-a-list-of-selectors"></a>
 </h4>
 <p>Use <code><a href="../reference/extract_nth.html">extract_nth()</a></code> to retrieve a specific selector by its
 index.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">extracted</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_nth.html">extract_nth</a></span><span class="op">(</span><span class="va">combined_sel</span>, <span class="fl">1L</span><span class="op">)</span></span>
 <span><span class="co">#&gt; The 1th selector will be extracted.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">extracted</span><span class="op">)</span></span>
@@ -237,11 +244,11 @@ index.</p>
 <span><span class="co">#&gt; <span style="text-decoration: underline;">owner</span>: TanguyBarthelemy</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="removing-a-selector-from-a-list">Removing a selector from a list<a class="anchor" aria-label="anchor" href="#removing-a-selector-from-a-list"></a>
+<h4 id="removing-a-selector-from-a-list-of-selectors">Removing a selector from a list of selectors<a class="anchor" aria-label="anchor" href="#removing-a-selector-from-a-list-of-selectors"></a>
 </h4>
 <p>Use <code><a href="../reference/remove_nth.html">remove_nth()</a></code> to remove a selector at a specific
 position.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let's create a list of 3 selectors to demonstrate</span></span>
 <span><span class="va">sel3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/init_selector.html">init_selector</a></span><span class="op">(</span></span>
 <span>    source <span class="op">=</span> <span class="st">"GitHub"</span>,</span>
@@ -275,7 +282,7 @@ position.</p>
 <strong>default selector</strong> used by retrieval functions (like
 <code><a href="../reference/get.html">get_issues()</a></code>, <code><a href="../reference/get.html">get_labels()</a></code>, etc.) when no
 <code>selector</code> argument is explicitly provided.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Check the current default (usually empty)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.selector"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">No selectors</span></span></span>
@@ -287,9 +294,9 @@ position.</p>
 <span><span class="co"># Note: This requires a working environment/token to actually run get_issues()</span></span>
 <span></span>
 <span><span class="co"># Reset the option</span></span>
-<span><span class="fu"><a href="../reference/reset_options.html">reset_options</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/IssueTrackeR-options.html">reset_options</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reset the default options to: </span></span>
-<span><span class="co">#&gt; - location for datasets:  /tmp/RtmpPqFGNz/data </span></span>
+<span><span class="co">#&gt; - location for datasets:  /tmp/RtmpgqFlDh/data </span></span>
 <span><span class="co">#&gt; - name for the datasets:  oodfi </span></span>
 <span><span class="co">#&gt; - selector: NULL</span></span></code></pre></div>
 </div>

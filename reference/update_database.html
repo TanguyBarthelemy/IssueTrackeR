@@ -79,29 +79,30 @@ online reference.</p>
 
 
 <dl><dt id="arg-selector">selector<a class="anchor" aria-label="anchor" href="#arg-selector"></a></dt>
-<dd><p>A <code>SelectorTB</code> object (to define the range of the repo /
-source used). Created with <code><a href="init_selector.html">init_selector()</a></code>.</p></dd>
+<dd><p>A <code>SelectorTB</code> object to check. See the
+corresponding vignettes:
+<a href="https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html" class="external-link">https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html</a>
+to have more information about selectors.</p></dd>
 
 
 <dt id="arg-dataset-dir">dataset_dir<a class="anchor" aria-label="anchor" href="#arg-dataset-dir"></a></dt>
-<dd><p>The destination directory where the YAML file will be
-saved. By default, the system's temporary directory is used (<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>).</p></dd>
+<dd><p>Character. Path to the directory containing the YAML file.
+Default: value of option <code>IssueTrackeR.dataset.dir</code>.</p></dd>
 
 
 <dt id="arg-dataset-name">dataset_name<a class="anchor" aria-label="anchor" href="#arg-dataset-name"></a></dt>
-<dd><p>The name of the output file (without extension).
-By default, the name is <code>"object.yaml"</code>.</p></dd>
+<dd><p>Character. Name of the dataset.
+Default: value of option <code>IssueTrackeR.dataset.name</code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>A boolean indicating whether to print additional
-information. Default is <code>TRUE</code>.</p></dd>
+information.
+Default is <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments for connecting to the GitLab.
-(See the documentation of <code><a href="get.html">get</a></code> to have more
-information on theses parameters)</p></dd>
+<dd><p>Currently not used.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -124,15 +125,15 @@ information on theses parameters)</p></dd>
 <span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Repo: jdplus-revisions  owner: jdemetra </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpNOUdLV/list_issues_bkyok.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpFjwfcB/list_issues_bkyok.yaml.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Repo: jdplus-revisions  owner: jdemetra </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading labels... Done!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12 labels found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpNOUdLV/list_labels_bkyok.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpFjwfcB/list_labels_bkyok.yaml.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Repo: jdplus-revisions  owner: jdemetra </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading milestones... </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Done! 0 milestones found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpNOUdLV/list_milestones_bkyok.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpFjwfcB/list_milestones_bkyok.yaml.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

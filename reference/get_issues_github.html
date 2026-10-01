@@ -78,31 +78,35 @@ Filters out pull requests and formats the results.</p>
 
 
 <dl><dt id="arg-repo">repo<a class="anchor" aria-label="anchor" href="#arg-repo"></a></dt>
-<dd><p>A character string specifying the GitHub repository name (only
-taken into account if <code>source</code> is set to <code>"online"</code>).</p></dd>
+<dd><p>Character. Repositories name.</p></dd>
 
 
 <dt id="arg-owner">owner<a class="anchor" aria-label="anchor" href="#arg-owner"></a></dt>
-<dd><p>A character string specifying the GitHub owner (only taken
-into account if <code>source</code> is set to <code>"online"</code>).</p></dd>
+<dd><p>Character. GitHub repository owner . GitHub owner (user or
+organization).</p></dd>
 
 
 <dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p>a character string that is either <code>"open"</code> (by default) if
-you want to fetch only open issues from GitHub, <code>"closed"</code> if you want
-to fetch only closed issues from GitHub or <code>"all"</code> if you want to fetch
-all issues from GitHub (closed and open).
-Only taken into account if <code>source</code> is set to <code>"online"</code>.</p></dd>
+<dd><p>Character string that is either by default <code>"open"</code> (or
+<code>opened</code>) if you want to fetch only open issues (or milestones),
+<code>"closed"</code> if you want to fetch only closed issues (or milestones) or
+<code>"all"</code> if you want to fetch all issues (or milestones) (closed and
+open).</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>A boolean indicating whether to print additional
-information. Default is <code>TRUE</code>.</p></dd>
+information.
+Default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>An <code>IssuesTB</code> object containing the issues from the repository.</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>If repo is <code>NULL</code>, all repositories for the owner will be included.</p>
     </div>
 
     <div id="ref-examples">

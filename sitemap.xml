@@ -7,6 +7,7 @@
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
 <url><loc>/news/index.html</loc></url>
+<url><loc>/reference/IssueTrackeR-options.html</loc></url>
 <url><loc>/reference/IssueTrackeR-package.html</loc></url>
 <url><loc>/reference/add_n_years.html</loc></url>
 <url><loc>/reference/append.html</loc></url>
@@ -54,7 +55,6 @@
 <url><loc>/reference/print-issues.html</loc></url>
 <url><loc>/reference/rbind-issues.html</loc></url>
 <url><loc>/reference/remove_nth.html</loc></url>
-<url><loc>/reference/reset_options.html</loc></url>
 <url><loc>/reference/sample-issues.html</loc></url>
 <url><loc>/reference/subset.html</loc></url>
 <url><loc>/reference/summary.html</loc></url>

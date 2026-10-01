@@ -113,23 +113,24 @@
 
 
 <dt id="arg-dataset-dir">dataset_dir<a class="anchor" aria-label="anchor" href="#arg-dataset-dir"></a></dt>
-<dd><p>The destination directory where the YAML file will be
-saved. By default, the system's temporary directory is used (<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>).</p></dd>
+<dd><p>Character. Path to the directory containing the YAML file.
+Default: value of option <code>IssueTrackeR.dataset.dir</code>.</p></dd>
 
 
 <dt id="arg-dataset-name">dataset_name<a class="anchor" aria-label="anchor" href="#arg-dataset-name"></a></dt>
-<dd><p>The name of the output file (without extension).
-By default, the name is <code>"object.yaml"</code>.</p></dd>
+<dd><p>Character. Name of the dataset.
+Default: value of option <code>IssueTrackeR.dataset.name</code>.</p></dd>
 
 
 <dt id="arg-overwrite">overwrite<a class="anchor" aria-label="anchor" href="#arg-overwrite"></a></dt>
-<dd><p>Boolean. If the dataset file already exists,
-should it be overwrite? Default is TRUE.</p></dd>
+<dd><p>Boolean indicating whether to overwrite the file if it
+already exists. Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>A boolean indicating whether to print additional
-information. Default is <code>TRUE</code>.</p></dd>
+information.
+Default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -139,12 +140,13 @@ successful and an error otherwise.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>Depending on the object, the defaults value of the argument
-<code>dataset_name</code> (by default) is:</p>
+    <p>Depending on the object, <code>dataset_name = NULL</code> or <code>dataset_name = ""</code>, the
+defaults value of the file name:</p>
 <ul><li><p><code>"list_issues.yaml"</code> for issues;</p></li>
 <li><p><code>"list_labels.yaml"</code> for labels;</p></li>
 <li><p><code>"list_milestones.yaml"</code> for milestones.</p></li>
-</ul></div>
+</ul><p>The objects will be written in the <code>dataset_dir</code>.</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
@@ -163,23 +165,23 @@ successful and an error otherwise.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">write</span><span class="op">(</span>x <span class="op">=</span> <span class="va">issues</span>, dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The file already exists and will be overwritten.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpNOUdLV/list_issues_bkyok.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpFjwfcB/list_issues_bkyok.yaml.</span>
 <span class="r-in"><span><span class="fu">write</span><span class="op">(</span>x <span class="op">=</span> <span class="va">labels</span>, dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The file already exists and will be overwritten.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpNOUdLV/list_labels_bkyok.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpFjwfcB/list_labels_bkyok.yaml.</span>
 <span class="r-in"><span><span class="fu">write</span><span class="op">(</span>x <span class="op">=</span> <span class="va">milestones</span>, dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The file already exists and will be overwritten.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpNOUdLV/list_milestones_bkyok.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpFjwfcB/list_milestones_bkyok.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">write</span><span class="op">(</span>x <span class="op">=</span> <span class="va">issues</span>, dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 dataset_name <span class="op">=</span> <span class="st">"my_issues"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpNOUdLV/list_issues_my_issues.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpFjwfcB/list_issues_my_issues.yaml.</span>
 <span class="r-in"><span><span class="fu">write</span><span class="op">(</span>x <span class="op">=</span> <span class="va">labels</span>, dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 dataset_name <span class="op">=</span> <span class="st">"my_labels"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpNOUdLV/list_labels_my_labels.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpFjwfcB/list_labels_my_labels.yaml.</span>
 <span class="r-in"><span><span class="fu">write</span><span class="op">(</span>x <span class="op">=</span> <span class="va">milestones</span>, dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 dataset_name <span class="op">=</span> <span class="st">"my_milestones"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpNOUdLV/list_milestones_my_milestones.yaml.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The datasets will be exported to /tmp/RtmpFjwfcB/list_milestones_my_milestones.yaml.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

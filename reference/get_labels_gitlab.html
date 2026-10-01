@@ -71,15 +71,21 @@
 
 
 <dl><dt id="arg-project-id">project_id<a class="anchor" aria-label="anchor" href="#arg-project-id"></a></dt>
-<dd><p>Integer. GitLab project ID.</p></dd>
+<dd><p>Integer. GitLab project ID(s). Can be a vector to select
+multiple projects.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Logical. If TRUE, displays progress messages. Default: TRUE.</p></dd>
+<dd><p>A boolean indicating whether to print additional
+information.
+Default is <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to the GitLab API call.</p></dd>
+<dd><p>Additional arguments to connect to the GitLab as <code>gitlab_url</code>
+and <code>private_token</code>.
+(See the documentation of <code><a href="get.html">get</a></code> to have more
+information on theses parameters)</p></dd>
 
 </dl></div>
     <div id="value">

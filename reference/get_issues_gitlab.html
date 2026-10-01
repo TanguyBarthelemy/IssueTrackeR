@@ -76,19 +76,22 @@
 
 
 <dl><dt id="arg-project-id">project_id<a class="anchor" aria-label="anchor" href="#arg-project-id"></a></dt>
-<dd><p>Integer. GitLab project ID.</p></dd>
+<dd><p>Integer. GitLab project ID(s). Can be a vector to select
+multiple projects.</p></dd>
 
 
 <dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p>a character string that is either <code>"open"</code> if
-you want to fetch only open issues from GitHub, <code>"closed"</code> if you want
-to fetch only closed issues from GitHub or <code>"all"</code> (by default) if you
-want to fetch all issues from GitHub (closed and open).</p></dd>
+<dd><p>Character string that is either by default <code>"open"</code> (or
+<code>opened</code>) if you want to fetch only open issues (or milestones),
+<code>"closed"</code> if you want to fetch only closed issues (or milestones) or
+<code>"all"</code> if you want to fetch all issues (or milestones) (closed and
+open).</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>A boolean indicating whether to print additional
-information. Default is <code>TRUE</code>.</p></dd>
+information.
+Default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div id="value">

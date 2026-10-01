@@ -77,17 +77,23 @@ with their labels and milestones.</p>
 
 
 <dl><dt id="arg-selector">selector<a class="anchor" aria-label="anchor" href="#arg-selector"></a></dt>
-<dd><p>A <code>SelectorTB</code> object (to define the range of the repo /
-source used). Created with <code><a href="init_selector.html">init_selector()</a></code>.</p></dd>
+<dd><p>A <code>SelectorTB</code> object to check. See the
+corresponding vignettes:
+<a href="https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html" class="external-link">https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html</a>
+to have more information about selectors.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>A boolean indicating whether to print additional
-information. Default is <code>TRUE</code>.</p></dd>
+information.
+Default is <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Other parameters for GitLab as <code>gitlab_url</code> and <code>private_token</code>.</p></dd>
+<dd><p>Additional arguments to connect to the GitLab as <code>gitlab_url</code>
+and <code>private_token</code>.
+(See the documentation of <code>get</code> to have more
+information on theses parameters)</p></dd>
 
 </dl></div>
     <div id="value">
@@ -125,9 +131,39 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">online_selector</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Repo: IssueTrackeR  owner: TanguyBarthelemy </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">issues</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 18 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 21 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#74</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> `get_labels_github()` whould work if `repo = NULL`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> As for `get_issues_github()` if `repo = NULL`, `get_labels_github()` should looks for every repo of a owner.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#73</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Ajouter exemple print labels</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Ajouter un exemple de print() d'un objet labelsTB</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#72</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> New extraction function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Créer des fonction d'extraction pour chaque éléments des issues.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Les fonctions s'appelleront `extract_title_github` et prendront un `raw_issues` comme paramètre (en accord avec #71).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> On fera une fonction par item et une séries de fonction GitHub et une séries de fonction GitLab (si besoin ?).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#71</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> `raw_object` have class</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The object from `gh::gh` has classes `gh_response`. We should had S3-method according to this class.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#70</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Ajouter un argument `negate` à `with_labels`</span>
@@ -139,23 +175,6 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels("bug")` désigne toutes les issues qui ont le label `"bug"`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels("bug", negate = TRUE)` qui ne l'ont pas</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels(c("bug", "dev"))` désigne toutes les issues qu</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#63</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] roxygen2_duplicate_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ use `@inheritParams` to avoid duplicating parameter documentation. Identical `@param`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   descriptions across files suggest shared docs should be inherited from a single source.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R:34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R:93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/finding-objects.R:133</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/plot.R:56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     R/plot.R:122</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     ... and 46 more li</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -376,7 +395,7 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 GitHub v2.0.0             2026-10-31      &lt;NA&gt; TanguyBarthelemy  open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   nb_issues_open nb_issues_closed         repo            owner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1              6                0 IssueTrackeR TanguyBarthelemy</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2              8               17 IssueTrackeR TanguyBarthelemy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              8               18 IssueTrackeR TanguyBarthelemy</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                            url</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/2</span>

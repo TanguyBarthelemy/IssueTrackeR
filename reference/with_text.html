@@ -80,8 +80,60 @@ body, or comments of a GitHub Issue object or a collection of Issues.</p>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to <code><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl()</a></code>, such as <code>pattern</code>
-and <code>ignore.case</code>.</p></dd>
+<dd><p>Arguments passed on to <code><a href="https://rdrr.io/r/base/grep.html" class="external-link">base::grepl</a></code></p><dl><dt><code>pattern</code></dt>
+<dd><p>character string containing a <a href="https://rdrr.io/r/base/regex.html" class="external-link">regular expression</a>
+    (or character string for <code>fixed = TRUE</code>) to be matched
+    in the given character vector.  Coerced by
+    <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></code> to a character string if possible.  If a
+    character vector of length 2 or more is supplied, the first element
+    is used with a warning.  Missing values are allowed except for
+    <code>regexpr</code>, <code>gregexpr</code> and <code>regexec</code>.</p></dd>
+
+    <dt><code>x,text</code></dt>
+<dd><p>a character vector where matches are sought, or an
+    object which can be coerced by <code>as.character</code> to a character
+    vector.  <a href="https://rdrr.io/r/base/LongVectors.html" class="external-link">Long vectors</a> are supported.</p></dd>
+
+    <dt><code>ignore.case</code></dt>
+<dd><p>logical. if <code>FALSE</code>, the pattern matching is <em>case
+      sensitive</em> and if <code>TRUE</code>, case is ignored during matching.</p></dd>
+
+    <dt><code>perl</code></dt>
+<dd><p>logical.  Should Perl-compatible regexps be used?</p></dd>
+
+    <dt><code>value</code></dt>
+<dd><p>logical. If <code>FALSE</code>, a vector containing the (<code>integer</code>)
+    indices of the matches determined by <code>grep</code> is returned, and if
+    <code>TRUE</code>, a vector containing the matching elements themselves is
+    returned.</p></dd>
+
+    <dt><code>fixed</code></dt>
+<dd><p>logical. If <code>TRUE</code>, <code>pattern</code> is a string to be
+    matched as is.  Overrides all conflicting arguments.</p></dd>
+
+    <dt><code>useBytes</code></dt>
+<dd><p>logical.  If <code>TRUE</code> the matching is done
+    byte-by-byte rather than character-by-character.  See
+    ‘Details’.</p></dd>
+
+    <dt><code>invert</code></dt>
+<dd><p>logical. If <code>TRUE</code> return indices or values for
+    elements that do <em>not</em> match.</p></dd>
+
+    <dt><code>replacement</code></dt>
+<dd><p>a replacement for the matched pattern in <code>sub</code> and
+    <code>gsub</code>.  Coerced to character if possible.  For
+    <code>fixed = FALSE</code> this can include backreferences <code>"\1"</code> to
+    <code>"\9"</code> to parenthesized subexpressions of <code>pattern</code>.  For
+    <code>perl = TRUE</code> only, it can also contain <code>"\U"</code> or
+    <code>"\L"</code> to convert the rest of the replacement to upper or
+    lower case and <code>"\E"</code> to end case conversion.  If a
+    character vector of length 2 or more is supplied, the first element
+    is used with a warning.  If <code>NA</code>, all elements in the result
+    corresponding to matches will be set to <code>NA</code>.</p></dd>
+
+
+</dl></dd>
 
 
 <dt id="arg-in-title">in_title<a class="anchor" aria-label="anchor" href="#arg-in-title"></a></dt>

@@ -59,7 +59,7 @@ numbers of newly created and newly closed issues.
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot an IssuesTB object</h1>
+    <h1>Plot an <code>IssuesTB</code> object</h1>
     <small class="dont-index">Source: <a href="https://github.com/TanguyBarthelemy/IssueTrackeR/blob/develop/R/plot.R" class="external-link"><code>R/plot.R</code></a></small>
     <div class="hidden name"><code>plot-issues.Rd</code></div>
     </div>
@@ -79,7 +79,10 @@ numbers of newly created and newly closed issues.</p></li>
 <span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">3L</span>,</span>
 <span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'ContributionsTB'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,12 +100,12 @@ The default is <code>"historic"</code>.</p></dd>
 
 
 <dt id="arg-by">by<a class="anchor" aria-label="anchor" href="#arg-by"></a></dt>
-<dd><p>Character. The category</p></dd>
+<dd><p>Character. The category. Default: <code>"creator"</code>.</p></dd>
 
 
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
-<dd><p>Integer specifying the number of age classes to display when
-<code>type = "historic"</code>.</p></dd>
+<dd><p>Integer specifying the number of age classes.
+Default: <code>3</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -134,7 +137,8 @@ creation to the current date.</p>
 displayed in two forms:</p><ul><li><p>bar plot with categories from time</p></li>
 <li><p>ECDF to show the cumulative distribution of issues resolution times on a
 log scale</p></li>
-</ul></div>
+</ul><p><code>n</code> is only used when <code>type = "historic"</code>.</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
