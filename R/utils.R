@@ -48,7 +48,7 @@ is_dark <- function(colr) {
 #' Recursively replaces every `NULL` values in an object with a specified
 #' default value.
 #'
-#' @param x An R object
+#' @param x A scalar, a vector or a list.
 #' @param default The default value to replace `NULL` with.
 #'
 #' @returns

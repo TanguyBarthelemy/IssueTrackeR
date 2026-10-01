@@ -1,16 +1,16 @@
-#' @title Display IssueTB, IssuesTB or SelectorTB object
+#' @title Display `IssueTB`, `IssuesTB`, `LabelsTB` or `SelectorTB` object
 #'
 #' @description
-#' Display IssueTB, IssuesTB or SelectorTB with formatted output in the console
+#' Display `IssueTB`, `IssuesTB`, `LabelsTB` or `SelectorTB` with formatted output in the console
 #'
-#' @param x An object of class \code{IssueTB}, \code{IssuesTB} or
+#' @param x An object of class \code{IssueTB}, \code{IssuesTB}, `LabelsTB` or
 #'   \code{SelectorTB}.
-#' @param \dots Currently not used.
+#' @inheritParams count_issues
 #'
 #' @details
 #' This function displays an issue (\code{IssueTB} object), a list of issues
-#' (\code{IssuesTB} object) or a list of selectors (`SelectorTB` objects) with
-#' a formatted output.
+#' (\code{IssuesTB} object) , a list of labels (\code{LabelsTB} object) or a
+#' list of selectors (`SelectorTB` objects) with a formatted output.
 #'
 #' @returns The object `x` invisibly.
 #'

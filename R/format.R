@@ -39,23 +39,22 @@ format_timestamp <- function(x) {
 #' issues, and milestones from the GitHub API.
 #'
 #' @param raw_issues a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' issues.
+#'   \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
+#'   issues.
 #' @param raw_comments a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' comments.
+#'   \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
+#'   comments.
 #' @param raw_labels a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' labels.
+#'   \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
+#'   labels.
 #' @param raw_milestone Raw milestone. Subset of a \code{gh_response} object
-#' output from the function \code{\link[gh]{gh}} which contains all the data
-#' and metadata for a GitHub milestone.
+#'   output from the function \code{\link[gh]{gh}} which contains all the data
+#'   and metadata for a GitHub milestone.
 #' @param raw_milestones a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' milestones.
-#' @param urls A character vector of issue URLs for which comments should be
-#'   formatted.
-#' @inheritParams get_issues
+#'   \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
+#'   milestones.
+#' @param urls A character vector of issue HTML URLs for which comments should
+#'   be formatted.
 #'
 #' @returns
 #' - `format_labels_github`: A data frame with columns: `name`, `description`,
@@ -237,7 +236,7 @@ format_issues_github <- function(
             }
         })
 
-    issues <- new_issues.default(
+    issues <- new_issues(
         url = urls,
         html_url = vapply(
             X = raw_issues,

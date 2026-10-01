@@ -13,21 +13,22 @@ update_database(
 )
 }
 \arguments{
-\item{selector}{A \code{SelectorTB} object (to define the range of the repo /
-source used). Created with \code{\link[=init_selector]{init_selector()}}.}
+\item{selector}{A \code{SelectorTB} object to check. See the
+corresponding vignettes:
+\url{https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html}
+to have more information about selectors.}
 
-\item{dataset_dir}{The destination directory where the YAML file will be
-saved. By default, the system's temporary directory is used (\code{tempdir()}).}
+\item{dataset_dir}{Character. Path to the directory containing the YAML file.
+Default: value of option \code{IssueTrackeR.dataset.dir}.}
 
-\item{dataset_name}{The name of the output file (without extension).
-By default, the name is \code{"object.yaml"}.}
+\item{dataset_name}{Character. Name of the dataset.
+Default: value of option \code{IssueTrackeR.dataset.name}.}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 
-\item{\dots}{Additional arguments for connecting to the GitLab.
-(See the documentation of \code{\link[IssueTrackeR]{get}} to have more
-information on theses parameters)}
+\item{...}{Currently not used.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE}.

@@ -12,15 +12,23 @@ get_milestones_gitlab(
 )
 }
 \arguments{
-\item{project_id}{Integer. GitLab project ID.}
+\item{project_id}{Integer. GitLab project ID(s). Can be a vector to select
+multiple projects.}
 
-\item{state}{Character. Milestone state: "open", "closed", or "all".
-Default: "open".}
+\item{state}{Character string that is either by default \code{"open"} (or
+\code{opened}) if you want to fetch only open issues (or milestones),
+\code{"closed"} if you want to fetch only closed issues (or milestones) or
+\code{"all"} if you want to fetch all issues (or milestones) (closed and
+open).}
 
-\item{verbose}{Logical. If TRUE, displays progress messages.
-Default: TRUE.}
+\item{verbose}{A boolean indicating whether to print additional
+information.
+Default is \code{TRUE}.}
 
-\item{...}{Additional arguments passed to the GitLab API call.}
+\item{\dots}{Additional arguments to connect to the GitLab as \code{gitlab_url}
+and \code{private_token}.
+(See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+information on theses parameters)}
 }
 \value{
 A data frame of class \code{MilestonesTB} containing milestone

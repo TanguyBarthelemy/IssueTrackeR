@@ -18,13 +18,14 @@ remove_nth(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB} or \code{SelectorTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
 \item{n}{Integer. Position of the element to remove. 1 is for the first
 element.}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 }
 \value{
 If \code{x} is a \code{IssuesTB}, it returns the list of issues (a \code{IssuesTB}

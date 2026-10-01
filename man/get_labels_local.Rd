@@ -12,15 +12,17 @@ get_labels_local(
 }
 \arguments{
 \item{dataset_dir}{Character. Path to the directory containing the YAML file.
-Default: value of option IssueTrackeR.dataset.dir.}
+Default: value of option \code{IssueTrackeR.dataset.dir}.}
 
-\item{dataset_name}{Character. Name of the YAML file (without extension).
-Default: value of option IssueTrackeR.dataset.name.}
+\item{dataset_name}{Character. Name of the dataset.
+Default: value of option \code{IssueTrackeR.dataset.name}.}
 
-\item{verbose}{Logical. If TRUE, displays progress messages. Default: TRUE.}
+\item{verbose}{A boolean indicating whether to print additional
+information.
+Default is \code{TRUE}.}
 }
 \value{
-A data frame of class LabelsTB containing label information:
+A data frame of class \code{LabelsTB} containing label information:
 \itemize{
 \item \code{source},
 \item \code{name},

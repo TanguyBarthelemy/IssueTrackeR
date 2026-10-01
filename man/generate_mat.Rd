@@ -15,9 +15,9 @@ generate_mat(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
-\item{by}{Character. The category}
+\item{by}{Character. The category. Default: \code{"creator"}.}
 
 \item{n}{Number of item to create. Default: \code{5}.}
 }

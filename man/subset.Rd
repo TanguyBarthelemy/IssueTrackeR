@@ -7,7 +7,7 @@
 \method{subset}{IssuesTB}(x, ...)
 }
 \arguments{
-\item{x}{An object of class \code{IssuesTB}.}
+\item{x}{object to be subsetted.}
 
 \item{...}{further arguments to be passed to or from other methods.}
 }

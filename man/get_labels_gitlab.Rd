@@ -7,11 +7,17 @@
 get_labels_gitlab(project_id, verbose = TRUE, ...)
 }
 \arguments{
-\item{project_id}{Integer. GitLab project ID.}
+\item{project_id}{Integer. GitLab project ID(s). Can be a vector to select
+multiple projects.}
 
-\item{verbose}{Logical. If TRUE, displays progress messages. Default: TRUE.}
+\item{verbose}{A boolean indicating whether to print additional
+information.
+Default is \code{TRUE}.}
 
-\item{...}{Additional arguments passed to the GitLab API call.}
+\item{\dots}{Additional arguments to connect to the GitLab as \code{gitlab_url}
+and \code{private_token}.
+(See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+information on theses parameters)}
 }
 \value{
 A data frame of class \code{LabelsTB} containing label information:

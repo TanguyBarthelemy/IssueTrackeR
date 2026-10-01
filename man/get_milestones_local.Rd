@@ -12,16 +12,17 @@ get_milestones_local(
 }
 \arguments{
 \item{dataset_dir}{Character. Path to the directory containing the YAML file.
-Default: value of option IssueTrackeR.dataset.dir.}
+Default: value of option \code{IssueTrackeR.dataset.dir}.}
 
-\item{dataset_name}{Character. Name of the YAML file (without extension).
-Default: value of option IssueTrackeR.dataset.name.}
+\item{dataset_name}{Character. Name of the dataset.
+Default: value of option \code{IssueTrackeR.dataset.name}.}
 
-\item{verbose}{Logical. If TRUE, displays progress messages.
-Default: TRUE.}
+\item{verbose}{A boolean indicating whether to print additional
+information.
+Default is \code{TRUE}.}
 }
 \value{
-A data frame of class MilestonesTB containing milestone information.
+A data frame of class \code{MilestonesTB} containing milestone information.
 }
 \description{
 Internal function to read milestones from a local YAML file.

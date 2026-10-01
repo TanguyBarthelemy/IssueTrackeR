@@ -10,7 +10,11 @@ init_selector_gitlab(project_id = NULL, ...)
 \item{project_id}{Integer. GitLab project ID(s). Can be a vector to select
 multiple projects.}
 
-\item{...}{Additional arguments to pass to the selector.}
+\item{\dots}{Additional arguments to pass to the selector.
+For example to connect to the GitLab as \code{gitlab_url} and \code{private_token}.
+(See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+information on theses parameters)
+Or also \code{state}.}
 }
 \value{
 A \code{SelectorTB} object configured for GitLab projects.

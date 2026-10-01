@@ -33,7 +33,7 @@ sampled issues.
 \description{
 Generic function for drawing a random sample from an object.
 
-For objects of class IssuesTB, this method returns a random subset
+For objects of class \code{IssuesTB}, this method returns a random subset
 of the issues.
 }
 \details{

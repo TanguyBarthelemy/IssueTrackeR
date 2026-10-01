@@ -12,20 +12,20 @@ get_issues_github(
 )
 }
 \arguments{
-\item{repo}{A character string specifying the GitHub repository name (only
-taken into account if \code{source} is set to \code{"online"}).}
+\item{repo}{Character. Repositories name.}
 
-\item{owner}{A character string specifying the GitHub owner (only taken
-into account if \code{source} is set to \code{"online"}).}
+\item{owner}{Character. GitHub repository owner . GitHub owner (user or
+organization).}
 
-\item{state}{a character string that is either \code{"open"} (by default) if
-you want to fetch only open issues from GitHub, \code{"closed"} if you want
-to fetch only closed issues from GitHub or \code{"all"} if you want to fetch
-all issues from GitHub (closed and open).
-Only taken into account if \code{source} is set to \code{"online"}.}
+\item{state}{Character string that is either by default \code{"open"} (or
+\code{opened}) if you want to fetch only open issues (or milestones),
+\code{"closed"} if you want to fetch only closed issues (or milestones) or
+\code{"all"} if you want to fetch all issues (or milestones) (closed and
+open).}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 }
 \value{
 An \code{IssuesTB} object containing the issues from the repository.
@@ -33,6 +33,9 @@ An \code{IssuesTB} object containing the issues from the repository.
 \description{
 Fetches issues from a GitHub repository using the GitHub API.
 Filters out pull requests and formats the results.
+}
+\details{
+If repo is \code{NULL}, all repositories for the owner will be included.
 }
 \examples{
 \dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}

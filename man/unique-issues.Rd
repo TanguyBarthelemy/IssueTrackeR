@@ -3,7 +3,7 @@
 \name{unique-issues}
 \alias{unique-issues}
 \alias{unique.IssuesTB}
-\title{Unique issues of an IssuesTB Object}
+\title{Unique issues of an \code{IssuesTB} Object}
 \usage{
 \method{unique}{IssuesTB}(x, incomparables = FALSE, ...)
 }
@@ -22,7 +22,7 @@
 An \code{IssuesTB} object containing only unique issues.
 }
 \description{
-Keep only different issues from a IssuesTB Object
+Keep only different issues from a \code{IssuesTB} Object
 }
 \details{
 This method is consistent with \code{\link[base:unique]{base::unique()}}. For details about the

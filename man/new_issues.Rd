@@ -46,9 +46,9 @@ new_issues(x = NULL, ...)
 }
 \arguments{
 \item{x}{a object representing a list of issues (\code{IssuesTB} object, a
-\code{list} or a \code{data.frame})}
+\code{list} or a \code{data.frame}) or a single issue (\code{IssueTB} class)}
 
-\item{\dots}{Other information we would like to add to the issue.}
+\item{...}{Currently not used.}
 
 \item{title}{a vector of string. The titles of the issues.}
 
@@ -65,7 +65,7 @@ issues.}
 \item{closed_at}{a vector of date (or timestamp). The closing date of the
 issues.}
 
-\item{closed_by}{a vector of string. The GitHub usernames of the person who
+\item{closed_by}{a vector of string. The usernames of the person who
 closed the issues.}
 
 \item{labels}{a list of vector string (or NULL). The labels of the issues.}
@@ -75,18 +75,18 @@ closed the issues.}
 \item{milestone}{a vector of string (or NULL). The milestones of the
 issues.}
 
-\item{repo}{Character string containing the repository name}
+\item{repo}{Character. Repositories name.}
 
-\item{owner}{Character string containing the owner name}
+\item{owner}{Character string containing the owners name.}
 
-\item{url}{a vector of string. The URLs of the API to the GitHub issues.}
+\item{url}{a vector of string. The URLs of the API to the issues.}
 
-\item{html_url}{a vector of string. The URLs to the GitHub issues.}
+\item{html_url}{a vector of string. The URLs to the issues.}
 
-\item{creator}{a vector of string. The GitHub usernames of the creator of the
+\item{creator}{a vector of string. The usernames of the creator of the
 issues.}
 
-\item{assignee}{a vector of string. The GitHub usernames of the assignee of
+\item{assignee}{a vector of string. The usernames of the assignee of
 the issues.}
 
 \item{state_reason}{a vector of string. \code{"open"}, \code{"completed"},

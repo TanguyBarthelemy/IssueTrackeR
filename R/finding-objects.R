@@ -4,15 +4,14 @@
 #' Generic function to filter issues with a given text pattern in the title,
 #' body, or comments of a GitHub Issue object or a collection of Issues.
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @param in_title Boolean. Does the function search for text in the title?
 #' (Default \code{TRUE})
 #' @param in_body Boolean. Does the function search for text in the body?
 #' (Default \code{TRUE})
 #' @param in_comments Boolean. Does the function search for text in the
 #' comments? (Default \code{TRUE})
-#' @param \dots Additional arguments passed to [grepl()], such as \code{pattern}
-#' and \code{ignore.case}.
+#' @inheritDotParams base::grepl
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
@@ -66,8 +65,7 @@ with_text.IssuesTB <- function(
 #' Generic function to filter issues with labels
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param \dots Additional arguments passed to [grepl()], such as \code{pattern}
-#' and \code{ignore.case}.
+#' @inheritDotParams base::grepl
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
@@ -100,10 +98,10 @@ with_labels.IssuesTB <- function(x, ...) {
 #' @description
 #' Function to filter issues with (or without) comments.
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @param negate boolean indicating if we are searching for issues WITHOUT
 #' comments. Default is \code{FALSE}.
-#' @param \dots Currently not used.
+#' @inheritParams count_issues
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
@@ -187,10 +185,9 @@ get_nbr_comments.IssuesTB <- function(x) {
 #' @description
 #' Retrieve the name of the last commentator
 #'
-#' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#' @param \dots Currently not used.
+#' @inheritParams get_nbr_comments x
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
 #'
 #' @returns A string with the name of the last person which leaves a comment.
 #' If there is no comments, it returns an empty string.
@@ -252,9 +249,8 @@ author_last_comment.IssuesTB <- function(x, verbose = TRUE, ...) {
 #' @param x An object of class \code{IssuesTB} or `SelectorTB`.
 #' @param n Integer. Position of the element to extract. 1 is for the first
 #'   element.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#' @param \dots Currently not used.
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
 #'
 #' @returns If `x` is a `IssuesTB`, it returns the nth issue as a `IssueTB`
 #' object. If `x` is a `SelectorTB`, it returns the nth selector as a
@@ -351,12 +347,11 @@ extract_nth.default <- function(...) {
 #' Remove the nth issue from a `IssuesTB` object or the nth selector from a
 #' `SelectorTB` object.
 #'
-#' @param x An object of class \code{IssuesTB} or `SelectorTB`.
+#' @inheritParams extract_nth x
 #' @param n Integer. Position of the element to remove. 1 is for the first
 #'   element.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#' @param \dots Currently not used.
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
 #'
 #' @returns If `x` is a `IssuesTB`, it returns the list of issues (a `IssuesTB`
 #' object) without the nth issue.

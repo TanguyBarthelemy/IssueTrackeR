@@ -7,13 +7,16 @@
 is_empty(selector)
 }
 \arguments{
-\item{selector}{A \code{SelectorTB} object to check.}
+\item{selector}{A \code{SelectorTB} object to check. See the
+corresponding vignettes:
+\url{https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html}
+to have more information about selectors.}
 }
 \value{
 \code{TRUE} if the selector is empty, \code{FALSE} otherwise.
 }
 \description{
-Checks whether a SelectorTB object contains any elements.
+Checks whether a \code{SelectorTB} object contains any elements.
 }
 \examples{
 empty_sel <- IssueTrackeR:::empty_selector()

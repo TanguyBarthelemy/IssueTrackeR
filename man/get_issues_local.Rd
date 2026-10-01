@@ -12,15 +12,16 @@ get_issues_local(
 }
 \arguments{
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 
 \item{file}{Character. Path to the YAML file containing issues.}
 }
 \value{
-An IssuesTB object containing the issues from the YAML file.
+An \code{IssuesTB} object containing the issues from the YAML file.
 }
 \description{
-Reads issues from a local YAML file and formats them into an IssuesTB object.
+Reads issues from a local YAML file and formats them into an \code{IssuesTB} object.
 }
 \examples{
 my_issues <- IssueTrackeR:::get_issues_local(

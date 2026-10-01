@@ -13,9 +13,8 @@
 #' issue.
 #' @param labels a vector string (or NULL). The labels of the issue.
 #' @param milestone a string (or NULL). The milestone of the issue.
-#' @inheritParams get_issues
-#' @inheritParams get_all_repos
-#' @inheritParams new_issues
+#' @param owner Character. Owner name.
+#' @param repo Character. Repository name.
 #' @param url a string. The URL of the API to the GitHub issue.
 #' @param html_url a string. The URL to the GitHub issue.
 #' @param comments vector of string (the comments of the issue)
@@ -23,7 +22,7 @@
 #' @param assignee a string. The GitHub username of the assignee of the issue.
 #' @param state_reason a string. \code{"open"}, \code{"completed"},
 #' \code{"reopened"}, \code{"not_planned"} or \code{"duplicate"}.
-#' @param \dots Other information we would like to add to the issue.
+#' @inheritParams count_issues
 #'
 #' @returns a \code{IssueTB} object.
 #' @export
@@ -184,7 +183,7 @@ new_issue.default <- function(
 #' @title Create a new \code{IssuesTB} object
 #'
 #' @param x a object representing a list of issues (\code{IssuesTB} object, a
-#' \code{list} or a \code{data.frame})
+#' \code{list} or a \code{data.frame}) or a single issue (\code{IssueTB} class)
 #' @param title a vector of string. The titles of the issues.
 #' @param state a vector of string that is either \code{"open"} (by default) if
 #' the issues are still open or \code{"closed"} if the issues are now closed.
@@ -194,23 +193,23 @@ new_issue.default <- function(
 #' issues.
 #' @param closed_at a vector of date (or timestamp). The closing date of the
 #' issues.
-#' @param closed_by a vector of string. The GitHub usernames of the person who
+#' @param closed_by a vector of string. The usernames of the person who
 #' closed the issues.
 #' @param labels a list of vector string (or NULL). The labels of the issues.
 #' @param milestone a vector of string (or NULL). The milestones of the
 #' issues.
-#' @param owner Character string containing the owner name
-#' @param repo Character string containing the repository name
-#' @param url a vector of string. The URLs of the API to the GitHub issues.
-#' @param html_url a vector of string. The URLs to the GitHub issues.
+#' @param owner Character string containing the owners name.
+#' @param repo Character. Repositories name.
+#' @param url a vector of string. The URLs of the API to the issues.
+#' @param html_url a vector of string. The URLs to the issues.
 #' @param comments a list of vector string. The comments of the issues.
-#' @param creator a vector of string. The GitHub usernames of the creator of the
+#' @param creator a vector of string. The usernames of the creator of the
 #'  issues.
-#' @param assignee a vector of string. The GitHub usernames of the assignee of
+#' @param assignee a vector of string. The usernames of the assignee of
 #' the issues.
 #' @param state_reason a vector of string. \code{"open"}, \code{"completed"},
 #' \code{"reopened"}, \code{"not_planned"} or \code{"duplicate"}.
-#' @param \dots Other information we would like to add to the issue.
+#' @inheritParams count_issues
 #'
 #' @returns a \code{IssuesTB} object.
 #' @export
@@ -412,8 +411,10 @@ new_issues.default <- function(
 
 #' @title Extraction and replacement of information in issues
 #'
-#' @param x An object of class \code{IssuesTB}.
-#' @inheritParams base::`[`
+#' @inheritParams with_labels x
+#' @inheritParams base::`[` i
+#' @inheritParams base::`[` j
+#' @inheritParams base::`[` drop
 #'
 #' @returns Information inside the `IssuesTB` object
 #'
@@ -513,7 +514,7 @@ append.IssuesTB <- function(x, values, after = nrow(x)) {
         return(append(x, values = new_issues(values), after = after))
     } else {
         stop(
-            "This function requires a IssueTB or IssuesTB object ",
+            "This function requires a `IssueTB` or `IssuesTB` object ",
             "for `values` argument.",
             call. = FALSE
         )
@@ -580,7 +581,7 @@ rbind.IssuesTB <- function(...) {
 
 #' @rdname subset
 #' @inherit base::subset
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @exportS3Method subset IssuesTB
 #' @method subset IssuesTB
 #' @export
@@ -602,10 +603,12 @@ subset.IssuesTB <- function(x, ...) {
 #' @description
 #' Generic function for drawing a random sample from an object.
 #'
-#' For objects of class IssuesTB, this method returns a random subset
+#' For objects of class `IssuesTB`, this method returns a random subset
 #' of the issues.
 #'
-#' @inheritParams base::sample
+#' @inheritParams base::sample size
+#' @inheritParams base::sample replace
+#' @inheritParams base::sample prob
 #'
 #' @returns
 #' - For `IssuesTB` objects, an object of the same class containing the
@@ -626,7 +629,7 @@ sample <- function(x, size, replace = FALSE, prob = NULL) {
     UseMethod("sample")
 }
 
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @examples
 #' issues_selector <- init_selector(
 #'     source = "Local",
@@ -662,12 +665,13 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
     base::sample(x = x, size = size, replace = replace, prob = prob)
 }
 
-#' @title Unique issues of an IssuesTB Object
+#' @title Unique issues of an `IssuesTB` Object
 #'
 #' @description
-#' Keep only different issues from a IssuesTB Object
+#' Keep only different issues from a `IssuesTB` Object
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
+#' @inheritParams base::unique incomparables
 #' @inheritParams base::unique
 #'
 #' @returns
@@ -703,9 +707,8 @@ unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
 #' @description
 #' Generic function to count the number of issues in a list of issues.
 #'
-#' @param x An object of class \code{IssuesTB}.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#' @inheritParams with_labels x
+#' @inheritParams reset_options verbose
 #' @param \dots Currently not used.
 #'
 #' @returns Integer. The number of issues.

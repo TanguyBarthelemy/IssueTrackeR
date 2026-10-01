@@ -14,13 +14,19 @@ get_labels(selector, verbose = TRUE, ...)
 get_milestones(selector, verbose = TRUE, ...)
 }
 \arguments{
-\item{selector}{A \code{SelectorTB} object (to define the range of the repo /
-source used). Created with \code{\link[=init_selector]{init_selector()}}.}
+\item{selector}{A \code{SelectorTB} object to check. See the
+corresponding vignettes:
+\url{https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html}
+to have more information about selectors.}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 
-\item{\dots}{Other parameters for GitLab as \code{gitlab_url} and \code{private_token}.}
+\item{\dots}{Additional arguments to connect to the GitLab as \code{gitlab_url}
+and \code{private_token}.
+(See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+information on theses parameters)}
 }
 \value{
 The function \code{get_issues} returns an object of class \code{IssuesTB}. It

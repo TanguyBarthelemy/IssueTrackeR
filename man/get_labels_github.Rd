@@ -7,17 +7,19 @@
 get_labels_github(repo = NULL, owner = NULL, verbose = TRUE, ...)
 }
 \arguments{
-\item{repo}{Character. GitHub repository name.}
+\item{repo}{Character. Repositories name.}
 
-\item{owner}{Character. GitHub repository owner.}
+\item{owner}{Character. GitHub repository owner . GitHub owner (user or
+organization).}
 
-\item{verbose}{Logical. If TRUE, displays progress messages.
-Default: TRUE.}
+\item{verbose}{A boolean indicating whether to print additional
+information.
+Default is \code{TRUE}.}
 
-\item{...}{Not used.}
+\item{...}{Currently not used.}
 }
 \value{
-A data frame of class \code{LabelsTB} containing label information:
+A \code{data.frame} of class \code{LabelsTB} containing label information:
 \itemize{
 \item \code{source},
 \item \code{name},
@@ -31,5 +33,8 @@ A data frame of class \code{LabelsTB} containing label information:
 \description{
 Internal function to fetch labels from a GitHub repository using the GitHub
 API.
+}
+\details{
+If repo is \code{NULL}, all repositories for the owner will be included.
 }
 \keyword{internal}

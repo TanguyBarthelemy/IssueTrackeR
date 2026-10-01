@@ -15,9 +15,10 @@ generate_age_mat(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
-\item{n}{Number of age categories to create. Default: \code{3}.}
+\item{n}{Integer specifying the number of age classes.
+Default: \code{3}.}
 }
 \value{
 \code{ts} matrix of open issue counts by age category.

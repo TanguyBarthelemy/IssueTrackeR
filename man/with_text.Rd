@@ -12,8 +12,45 @@ with_text(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{\dots}{Additional arguments passed to \code{\link[=grepl]{grepl()}}, such as \code{pattern}
-and \code{ignore.case}.}
+\item{...}{
+  Arguments passed on to \code{\link[base:grepl]{base::grepl}}
+  \describe{
+    \item{\code{pattern}}{character string containing a \link[base]{regular expression}
+    (or character string for \code{fixed = TRUE}) to be matched
+    in the given character vector.  Coerced by
+    \code{\link[base]{as.character}} to a character string if possible.  If a
+    character vector of length 2 or more is supplied, the first element
+    is used with a warning.  Missing values are allowed except for
+    \code{regexpr}, \code{gregexpr} and \code{regexec}.}
+    \item{\code{x,text}}{a character vector where matches are sought, or an
+    object which can be coerced by \code{as.character} to a character
+    vector.  \link[base]{Long vectors} are supported.}
+    \item{\code{ignore.case}}{logical. if \code{FALSE}, the pattern matching is \emph{case
+      sensitive} and if \code{TRUE}, case is ignored during matching.}
+    \item{\code{perl}}{logical.  Should Perl-compatible regexps be used?}
+    \item{\code{value}}{logical. If \code{FALSE}, a vector containing the (\code{integer})
+    indices of the matches determined by \code{grep} is returned, and if
+    \code{TRUE}, a vector containing the matching elements themselves is
+    returned.}
+    \item{\code{fixed}}{logical. If \code{TRUE}, \code{pattern} is a string to be
+    matched as is.  Overrides all conflicting arguments.}
+    \item{\code{useBytes}}{logical.  If \code{TRUE} the matching is done
+    byte-by-byte rather than character-by-character.  See
+    \sQuote{Details}.}
+    \item{\code{invert}}{logical. If \code{TRUE} return indices or values for
+    elements that do \emph{not} match.}
+    \item{\code{replacement}}{a replacement for the matched pattern in \code{sub} and
+    \code{gsub}.  Coerced to character if possible.  For
+    \code{fixed = FALSE} this can include backreferences \code{"\1"} to
+    \code{"\9"} to parenthesized subexpressions of \code{pattern}.  For
+    \code{perl = TRUE} only, it can also contain \code{"\U"} or
+    \code{"\L"} to convert the rest of the replacement to upper or
+    lower case and \code{"\E"} to end case conversion.  If a
+    character vector of length 2 or more is supplied, the first element
+    is used with a warning.  If \code{NA}, all elements in the result
+    corresponding to matches will be set to \code{NA}.
+  }
+  }}
 
 \item{in_title}{Boolean. Does the function search for text in the title?
 (Default \code{TRUE})}

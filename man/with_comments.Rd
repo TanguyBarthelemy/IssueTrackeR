@@ -12,7 +12,7 @@ with_comments(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
 \item{negate}{boolean indicating if we are searching for issues WITHOUT
 comments. Default is \code{FALSE}.}

@@ -33,10 +33,9 @@ get_dates_vec <- function(x) {
 #' @description
 #' Calculates the time taken to resolve issues in seconds.
 #'
-#' @param x An object of class \code{IssuesTB}.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#' @param \dots Currently not used.
+#' @inheritParams with_labels x
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
 #'
 #' @returns Integer vector of resolution times in seconds.
 #'
@@ -82,7 +81,7 @@ get_resolution_times.IssuesTB <- function(x, verbose = TRUE, ...) {
 #' @method get_resolution_times default
 get_resolution_times.default <- function(...) {
     stop(
-        "The function requires a IssuesTB object!",
+        "The function requires a `IssuesTB` object!",
         call. = FALSE
     )
 }
@@ -94,9 +93,8 @@ get_resolution_times.default <- function(...) {
 #' in predefined time categories (< 1 day, 1-7 days, 7-30 days, 1 month-1 year,
 #' 1-3 years, > 3 years).
 #'
-#' @param x An object of class \code{IssuesTB}.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#' @inheritParams with_labels x
+#' @inheritParams reset_options verbose
 #'
 #' @returns Invisibly returns `NULL`.
 #'
@@ -174,9 +172,8 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
 #' resolution times on a log scale (1 hour, 1 day, 1 week, 1 month, 1 year,
 #' 3 years).
 #'
-#' @param x An object of class \code{IssuesTB}.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#' @inheritParams with_labels x
+#' @inheritParams reset_options verbose
 #'
 #' @returns Invisibly returns `NULL`.
 #'
@@ -348,10 +345,10 @@ add_n_years <- function(x, n) {
 
 #' @title Count Still Open Issues Over Time
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @param lag Numeric. Number of years to look back for "still open" issues.
 #'   Default is 0.
-#' @param \dots Currently not used.
+#' @inheritParams count_issues
 #'
 #' @returns `ts` object with still open issues counts per month.
 #'
@@ -407,9 +404,9 @@ get_still_open.default <- function(...) {
 
 #' @title Generate Age Matrix of Open Issues
 #'
-#' @param x An object of class \code{IssuesTB}.
-#' @param n Number of age categories to create. Default: `3`.
-#' @param \dots Currently not used.
+#' @inheritParams with_labels x
+#' @inheritParams plot.IssuesTB n
+#' @inheritParams count_issues
 #'
 #' @returns `ts` matrix of open issue counts by age category.
 #'
@@ -456,17 +453,17 @@ generate_age_mat.IssuesTB <- function(x, n = 3L, ...) {
 #' @method generate_age_mat default
 generate_age_mat.default <- function(...) {
     stop(
-        "The function requires a IssuesTB object!",
+        "The function requires a `IssuesTB` object!",
         call. = FALSE
     )
 }
 
 #' @title Generate Matrix of Open Issues by Categories
 #'
-#' @param x An object of class \code{IssuesTB}.
-#' @param by Character. The category
+#' @inheritParams with_labels x
+#' @inheritParams plot.IssuesTB by
 #' @param n Number of item to create. Default: `5`.
-#' @param \dots Currently not used.
+#' @inheritParams count_issues
 #'
 #' @returns `ts` matrix of open issue counts by categories.
 #'
@@ -550,7 +547,7 @@ generate_mat.IssuesTB <- function(x, by = "creator", n = 5L, ...) {
 #' @method generate_mat default
 generate_mat.default <- function(...) {
     stop(
-        "The function requires a IssuesTB object!",
+        "The function requires a `IssuesTB` object!",
         call. = FALSE
     )
 }
@@ -627,7 +624,7 @@ plot_area_chart <- function(categorised_mat, title = "Number of issues") {
 
 #' @title Plot Issue Creation, Closed, and Backlog Over Time
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #'
 #' @returns Invisibly returns NULL.
 #'
@@ -717,7 +714,7 @@ plot_created_closed <- function(x) {
     return(NULL)
 }
 
-#' @title Plot an IssuesTB object
+#' @title Plot an `IssuesTB` object
 #'
 #' @description
 #' Visualize the evolution of an issue tracker backlog.
@@ -729,14 +726,14 @@ plot_created_closed <- function(x) {
 #'   numbers of newly created and newly closed issues.
 #' }
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @param type Character string indicating which plot to produce.
 #'   Accepted values are \code{"historic"} and \code{"created-closed"}.
 #'   The default is \code{"historic"}.
-#' @param by Character. The category
-#' @param n Integer specifying the number of age classes to display when
-#'   \code{type = "historic"}.
-#' @param \dots Currently not used.
+#' @param by Character. The category. Default: `"creator"`.
+#' @param n Integer specifying the number of age classes.
+#'   Default: `3`.
+#' @inheritParams count_issues
 #'
 #' @details
 #' When \code{type = "historic"}, a stacked area chart is produced showing
@@ -765,6 +762,8 @@ plot_created_closed <- function(x) {
 #' - ECDF to show the cumulative distribution of issues resolution times on a
 #'   log scale
 #'
+#' `n` is only used when \code{type = "historic"}.
+#'
 #' @returns
 #' Invisibly returns \code{x}.
 #'
@@ -786,12 +785,13 @@ plot_created_closed <- function(x) {
 #'
 #' @name plot-issues
 #'
+NULL
+
+#' @rdname plot-issues
 #' @method plot IssuesTB
 #' @exportS3Method base::plot
 #' @export
-#'
 #' @importFrom withr with_par
-#'
 plot.IssuesTB <- function(
     x,
     type = c("historic", "area-chart", "created-closed", "resolution-time"),
@@ -826,6 +826,7 @@ plot.IssuesTB <- function(
     return(invisible(x))
 }
 
+#' @rdname plot-issues
 #' @exportS3Method plot ContributionsTB
 #' @method plot ContributionsTB
 #' @export

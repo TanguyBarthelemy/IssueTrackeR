@@ -12,15 +12,20 @@ get_milestones_github(
 )
 }
 \arguments{
-\item{repo}{Character. GitHub repository name.}
+\item{repo}{Character. Repositories name.}
 
-\item{owner}{Character. GitHub repository owner.}
+\item{owner}{Character. GitHub repository owner . GitHub owner (user or
+organization).}
 
-\item{state}{Character. Milestone state: "open", "closed", or "all".
-Default: "open".}
+\item{state}{Character string that is either by default \code{"open"} (or
+\code{opened}) if you want to fetch only open issues (or milestones),
+\code{"closed"} if you want to fetch only closed issues (or milestones) or
+\code{"all"} if you want to fetch all issues (or milestones) (closed and
+open).}
 
-\item{verbose}{Logical. If TRUE, displays progress messages.
-Default: TRUE.}
+\item{verbose}{A boolean indicating whether to print additional
+information.
+Default is \code{TRUE}.}
 }
 \value{
 A data frame of class \code{MilestonesTB} containing milestone
@@ -43,5 +48,8 @@ information:
 \description{
 Internal function to fetch milestones from a GitHub repository using the
 GitHub API.
+}
+\details{
+If repo is \code{NULL}, all repositories for the owner will be included.
 }
 \keyword{internal}

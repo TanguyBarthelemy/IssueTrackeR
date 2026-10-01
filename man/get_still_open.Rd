@@ -15,7 +15,7 @@ get_still_open(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
 \item{lag}{Numeric. Number of years to look back for "still open" issues.
 Default is 0.}

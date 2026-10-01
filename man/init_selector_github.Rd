@@ -7,12 +7,12 @@
 init_selector_github(owner = NULL, repo = NULL, ...)
 }
 \arguments{
-\item{owner}{Character. GitHub owner (user or organization).}
+\item{owner}{Character. GitHub repository owner . GitHub owner (user or
+organization).}
 
-\item{repo}{Character. GitHub repository name(s). If NULL, all repositories
-for the owner will be included.}
+\item{repo}{Character. Repositories name.}
 
-\item{...}{Additional arguments to pass to the selector.}
+\item{\dots}{Additional arguments to pass to the selector as \code{state}.}
 }
 \value{
 A \code{SelectorTB} object configured for GitHub repositories.
@@ -21,6 +21,9 @@ Returns an empty selector if \code{owner} is \code{NULL}.
 \description{
 Creates a selector for GitHub repositories. If no repository is specified,
 it automatically fetches all repositories for the given owner.
+}
+\details{
+If repo is \code{NULL}, all repositories for the owner will be included.
 }
 \examples{
 # Select a specific repository

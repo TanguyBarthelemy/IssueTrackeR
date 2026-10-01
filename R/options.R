@@ -1,16 +1,23 @@
 #' @title Reset options
 #'
 #' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#'   information.
+#'   Default is \code{TRUE}.
 #'
 #' @returns `NULL` invisibly
-#' @export
 #'
 #' @examples
 #' set.seed(5L)
 #' getOption("IssueTrackeR.dataset.name")
 #' reset_options()
 #' getOption("IssueTrackeR.dataset.name")
+#'
+#' @name IssueTrackeR-options
+#'
+NULL
+
+#' @rdname IssueTrackeR-options
+#' @export
 reset_options <- function(verbose = TRUE) {
     dataset_dir <- file.path(tempdir(), "data") |>
         normalizePath(mustWork = FALSE)

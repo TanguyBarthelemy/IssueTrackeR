@@ -7,7 +7,8 @@
 get_all_repos(owner, public = TRUE, private = TRUE, verbose = TRUE)
 }
 \arguments{
-\item{owner}{Character string containing the owner name}
+\item{owner}{Character. GitHub repository owner . GitHub owner (user or
+organization).}
 
 \item{public}{Boolean. Should we include public repos?
 (Default \code{TRUE})}
@@ -16,7 +17,8 @@ get_all_repos(owner, public = TRUE, private = TRUE, verbose = TRUE)
 (Default \code{TRUE})}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 }
 \value{
 A string with the list of repo of a user or an organisation.

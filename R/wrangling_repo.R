@@ -3,12 +3,13 @@
 #' @description
 #' Returns a list of repos.
 #'
-#' @param owner Character string containing the owner name
-#' @inheritParams get_issues
+#' @param owner Character. GitHub repository owner . GitHub owner (user or
+#'   organization).
 #' @param public Boolean. Should we include public repos?
 #' (Default \code{TRUE})
 #' @param private Boolean. Should we include private repos?
 #' (Default \code{TRUE})
+#' @inheritParams reset_options verbose
 #'
 #' @returns A string with the list of repo of a user or an organisation.
 #'

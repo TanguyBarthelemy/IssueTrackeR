@@ -7,7 +7,7 @@
 null_to_default(x, default)
 }
 \arguments{
-\item{x}{An R object}
+\item{x}{A scalar, a vector or a list.}
 
 \item{default}{The default value to replace \code{NULL} with.}
 }

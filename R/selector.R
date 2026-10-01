@@ -1,9 +1,9 @@
 #' @title Check if a selector is Empty
 #'
 #' @description
-#' Checks whether a SelectorTB object contains any elements.
+#' Checks whether a `SelectorTB` object contains any elements.
 #'
-#' @param selector A `SelectorTB` object to check.
+#' @inheritParams get_issues selector
 #'
 #' @returns `TRUE` if the selector is empty, `FALSE` otherwise.
 #'
@@ -40,10 +40,10 @@ empty_selector <- function() {
     return(selector)
 }
 
-#' @title Initialise a SelectorTB object
+#' @title Initialise a `SelectorTB` object
 #'
 #' @description
-#' Creates a SelectorTB object for specifying data sources (GitHub, GitLab, or
+#' Creates a `SelectorTB` object for specifying data sources (GitHub, GitLab, or
 #' local).
 #' The selector can be used to fetch issues from different sources.
 #'
@@ -51,7 +51,7 @@ empty_selector <- function() {
 #'   - \code{"GitHub"} if you want to fetch information from GitHub
 #'   - \code{"GitLab"} if you want to fetch information from GitLab
 #'   - or \code{"local"} if you want to fetch information locally.
-#' @param ... Additional arguments specific to the source type:
+#' @param \dots Additional arguments specific to the source type:
 #'          - For GitHub: `owner`, `repo`
 #'          - For GitLab: `project_id`
 #'          - For local: `dataset_name`, `dataset_dir`
@@ -62,6 +62,12 @@ empty_selector <- function() {
 #' `SelectorTB` objects define data sources for retrieving issues from
 #' GitHub, GitLab, or local YAML files. They allow combining multiple sources
 #' into a single query using \code{merge_selector()}.
+#'
+#' See the
+#'   corresponding vignettes:
+#'   <https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html>
+#'   to have more information about selectors.
+#' Also see `vignette("selectors")`
 #'
 #' @examples
 #' # GitHub selector for a specific repository
@@ -110,13 +116,15 @@ init_selector <- function(source, ...) {
 #' Creates a selector for GitHub repositories. If no repository is specified,
 #' it automatically fetches all repositories for the given owner.
 #'
-#' @param owner Character. GitHub owner (user or organization).
-#' @param repo Character. GitHub repository name(s). If NULL, all repositories
-#'        for the owner will be included.
-#' @param ... Additional arguments to pass to the selector.
+#' @inheritParams get_all_repos owner
+#' @inheritParams new_issues repo
+#' @param \dots Additional arguments to pass to the selector as `state`.
 #'
 #' @returns A `SelectorTB` object configured for GitHub repositories.
 #'          Returns an empty selector if `owner` is `NULL`.
+#'
+#' @details
+#' If repo is `NULL`, all repositories for the owner will be included.
 #'
 #' @examples
 #' # Select a specific repository
@@ -168,8 +176,12 @@ init_selector_github <- function(owner = NULL, repo = NULL, ...) {
 #' Creates a selector for GitLab projects.
 #'
 #' @param project_id Integer. GitLab project ID(s). Can be a vector to select
-#'        multiple projects.
-#' @param ... Additional arguments to pass to the selector.
+#'   multiple projects.
+#' @param \dots Additional arguments to pass to the selector.
+#'   For example to connect to the GitLab as `gitlab_url` and `private_token`.
+#'   (See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+#'   information on theses parameters)
+#'   Or also `state`.
 #'
 #' @returns A `SelectorTB` object configured for GitLab projects.
 #'          Returns an empty selector if `project_id` is `NULL`.
@@ -205,12 +217,11 @@ init_selector_gitlab <- function(project_id = NULL, ...) {
 #' @description
 #' Creates a selector for local YAML files containing issue data.
 #'
-#' @param dataset_name Character. The name of the dataset (e.g., "my_dataset").
-#' @param dataset_dir Character. The directory where the dataset files are
-#'   located.
+#' @inheritParams write dataset_name
+#' @inheritParams write dataset_dir
 #'
 #' @returns A `SelectorTB` object configured for local YAML files.
-#'
+#' #'
 #' @examples
 #' # Select a local dataset
 #' local_sel <- IssueTrackeR:::init_selector_local(

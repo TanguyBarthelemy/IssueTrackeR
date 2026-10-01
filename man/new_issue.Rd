@@ -45,7 +45,7 @@ new_issue(x = NULL, ...)
 \item{x}{a object representing an issue (\code{IssueTB} object, a \code{list}
 or a \code{data.frame})}
 
-\item{\dots}{Other information we would like to add to the issue.}
+\item{...}{Currently not used.}
 
 \item{title}{a string. The title of the issue.}
 
@@ -67,9 +67,9 @@ issue.}
 
 \item{milestone}{a string (or NULL). The milestone of the issue.}
 
-\item{repo}{Character string containing the repository name}
+\item{repo}{Character. Repository name.}
 
-\item{owner}{Character string containing the owner name}
+\item{owner}{Character. Owner name.}
 
 \item{url}{a string. The URL of the API to the GitHub issue.}
 

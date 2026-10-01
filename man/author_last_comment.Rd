@@ -15,10 +15,11 @@ author_last_comment(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssueTB} or \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 }
 \value{
 A string with the name of the last person which leaves a comment.

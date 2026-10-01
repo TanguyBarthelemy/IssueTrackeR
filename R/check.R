@@ -31,8 +31,8 @@
 #' - `weird_msg()`: Generic error message for unknown errors
 #'
 #' @param msg Character string containing the error message or API URL
-#' @param owner Character string containing the owner name
-#' @param repo Character string containing the repository name
+#' @inheritParams get_all_repos owner
+#' @inheritParams init_selector_github repo
 #'
 #' @returns For detection functions: `TRUE` if the error condition is met.
 #' For message functions: Character vector with the error message.

@@ -33,3 +33,10 @@ Maintenant, que mettre à la place ?
 On va donc distinguer de cas de figure concernant nos objets (issues, milestones et labels) :
 - Les objets qui devrait être présents mais sont actuellement vides (pour une milestone, ce sont le titre, la description, le createur...) -> on va mettre une valeur par défault
 - Les objets qui (dans ce cas précis) ont des raisons d'être absent (par exemple pour une milestones, la due_date, le closed_at...) -> on va mettre un `NA`
+
+## Arguments documentation
+
+Certains arguments sont utilisés dans différentes fonctions. Il faut les documenter mais à partir du moment où ils ont le même sens, autant les documenter une seule fois et ré-utiliser la documentation.
+
+Voilà quelle fonction documente quel paramètre :
+- `reset_options` documente `verbose`

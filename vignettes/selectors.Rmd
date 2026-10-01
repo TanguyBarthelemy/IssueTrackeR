@@ -28,7 +28,7 @@ if (Sys.getenv("GITLAB_TRACTORTOM_API") != "") {
 
 In {IssueTrackeR}, a **selector** is a fundamental object used to specify the data sources from which you want to retrieve information (issues, labels, milestones, etc.).
 
-```{r loading-IssueTrackeR}
+```{r loading-IssueTrackeR, eval = TRUE, echo = TRUE}
 library("IssueTrackeR")
 ```
 
@@ -46,7 +46,13 @@ A selector can contain different types of sources:
     
 **Note**: When using `source = "local"`, functions `get_issues()`, `get_labels()` and `get_milestones()` and `update_database()` will use the `dataset_dir` argument to look for files following the pattern `list_issues_<dataset_name>.yaml`, `list_labels_<dataset_name>.yaml`, or `list_milestones_<dataset_name>.yaml`.
 
-```{r different-sources, eval = TRUE, echo = FALSE}
+
+## How to create a selector?
+
+The main way to create a selector is using the `init_selector()` function.
+
+```{r different-sources, eval = TRUE, echo = TRUE}
+# GitHub selector
 gh_sel <- init_selector(
     source = "GitHub",
     owner = "TanguyBarthelemy",
@@ -62,43 +68,29 @@ local_sel <- init_selector(
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
     dataset_name = NULL
 )
-
-# Inspecting them
-print(gh_sel)
-print(gl_sel)
-print(local_sel)
 ```
 
-## How to create a selector?
-
-The main way to create a selector is using the `init_selector()` function.
-
-```{r create_selector}
-# Creating a simple GitHub selector
-itr_sel <- init_selector(
-    source = "GitHub",
-    owner = "TanguyBarthelemy",
-    repo = "IssueTrackeR"
-)
-```
 
 ## How is it displayed?
 
 When you `print()` a `SelectorTB` object, it provides a formatted summary showing the number of selectors and the details for each one.
 
-```{r display_selector}
-print(itr_sel)
+```{r display_selector, eval = TRUE, echo = TRUE}
+# Displaying them
+print(gh_sel)
+print(gl_sel)
+print(local_sel)
 ```
 
 ## Manipulating a list of selectors
 
 Since a `SelectorTB` is a list, you can combine, extract, or remove selectors.
 
-### Adding a new selector to a list
+### Adding a new selector to a list of selectors
 
 Use `merge_selector()` to combine multiple selectors into one.
 
-```{r add_selector}
+```{r add_selector, eval = TRUE, echo = TRUE}
 sel1 <- init_selector(
     source = "GitHub",
     owner = "TanguyBarthelemy",
@@ -114,20 +106,20 @@ combined_sel <- merge_selector(sel1, sel2)
 print(combined_sel)
 ```
 
-### Extracting a selector from a list
+### Extracting a selector from a list of selectors
 
 Use `extract_nth()` to retrieve a specific selector by its index.
 
-```{r extract_selector}
+```{r extract_selector, eval = TRUE, echo = TRUE}
 extracted <- extract_nth(combined_sel, 1L)
 print(extracted)
 ```
 
-### Removing a selector from a list
+### Removing a selector from a list of selectors
 
 Use `remove_nth()` to remove a selector at a specific position.
 
-```{r remove_selector}
+```{r remove_selector, eval = TRUE, echo = TRUE}
 # Let's create a list of 3 selectors to demonstrate
 sel3 <- init_selector(
     source = "GitHub",
@@ -145,7 +137,7 @@ print(reduced_sel)
 
 The package provides a global option `IssueTrackeR.selector`. This option defines the **default selector** used by retrieval functions (like `get_issues()`, `get_labels()`, etc.) when no `selector` argument is explicitly provided.
 
-```{r global_option}
+```{r global_option, eval = TRUE, echo = TRUE}
 # Check the current default (usually empty)
 getOption("IssueTrackeR.selector")
 

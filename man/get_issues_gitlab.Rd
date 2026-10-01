@@ -12,15 +12,18 @@ get_issues_gitlab(
 )
 }
 \arguments{
-\item{project_id}{Integer. GitLab project ID.}
+\item{project_id}{Integer. GitLab project ID(s). Can be a vector to select
+multiple projects.}
 
-\item{state}{a character string that is either \code{"open"} if
-you want to fetch only open issues from GitHub, \code{"closed"} if you want
-to fetch only closed issues from GitHub or \code{"all"} (by default) if you
-want to fetch all issues from GitHub (closed and open).}
+\item{state}{Character string that is either by default \code{"open"} (or
+\code{opened}) if you want to fetch only open issues (or milestones),
+\code{"closed"} if you want to fetch only closed issues (or milestones) or
+\code{"all"} if you want to fetch all issues (or milestones) (closed and
+open).}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 }
 \value{
 An \code{IssuesTB} object containing the issues from the specified

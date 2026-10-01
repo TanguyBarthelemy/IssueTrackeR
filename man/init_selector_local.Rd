@@ -11,13 +11,15 @@ init_selector_local(
 )
 }
 \arguments{
-\item{dataset_dir}{Character. The directory where the dataset files are
-located.}
+\item{dataset_dir}{Character. Path to the directory containing the YAML file.
+Default: value of option \code{IssueTrackeR.dataset.dir}.}
 
-\item{dataset_name}{Character. The name of the dataset (e.g., "my_dataset").}
+\item{dataset_name}{Character. Name of the dataset.
+Default: value of option \code{IssueTrackeR.dataset.name}.}
 }
 \value{
 A \code{SelectorTB} object configured for local YAML files.
+#'
 }
 \description{
 Creates a selector for local YAML files containing issue data.

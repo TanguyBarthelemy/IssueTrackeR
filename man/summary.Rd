@@ -16,7 +16,7 @@
 \arguments{
 \item{object}{a \code{IssueTB} or \code{IssuesTB} object.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
 \item{with_labels}{Boolean. Display the labels with the list of issues.
 Default is \code{FALSE}.}

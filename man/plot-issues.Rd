@@ -3,7 +3,8 @@
 \name{plot-issues}
 \alias{plot-issues}
 \alias{plot.IssuesTB}
-\title{Plot an IssuesTB object}
+\alias{plot.ContributionsTB}
+\title{Plot an \code{IssuesTB} object}
 \usage{
 \method{plot}{IssuesTB}(
   x,
@@ -12,6 +13,8 @@
   n = 3L,
   ...
 )
+
+\method{plot}{ContributionsTB}(x, ...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
@@ -20,12 +23,12 @@
 Accepted values are \code{"historic"} and \code{"created-closed"}.
 The default is \code{"historic"}.}
 
-\item{by}{Character. The category}
+\item{by}{Character. The category. Default: \code{"creator"}.}
 
-\item{n}{Integer specifying the number of age classes to display when
-\code{type = "historic"}.}
+\item{n}{Integer specifying the number of age classes.
+Default: \code{3}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 }
 \value{
 Invisibly returns \code{x}.
@@ -68,6 +71,8 @@ displayed in two forms:
 \item ECDF to show the cumulative distribution of issues resolution times on a
 log scale
 }
+
+\code{n} is only used when \code{type = "historic"}.
 }
 \examples{
 issues_selector <- init_selector(

@@ -43,19 +43,20 @@ write(x, ...)
 \item{x}{an object of class \code{IssuesTB}, \code{LabelsTB} or
 \code{MilestonesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
-\item{dataset_dir}{The destination directory where the YAML file will be
-saved. By default, the system's temporary directory is used (\code{tempdir()}).}
+\item{dataset_dir}{Character. Path to the directory containing the YAML file.
+Default: value of option \code{IssueTrackeR.dataset.dir}.}
 
-\item{dataset_name}{The name of the output file (without extension).
-By default, the name is \code{"object.yaml"}.}
+\item{dataset_name}{Character. Name of the dataset.
+Default: value of option \code{IssueTrackeR.dataset.name}.}
 
-\item{overwrite}{Boolean. If the dataset file already exists,
-should it be overwrite? Default is TRUE.}
+\item{overwrite}{Boolean indicating whether to overwrite the file if it
+already exists. Defaults to \code{TRUE}.}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was
@@ -65,14 +66,16 @@ successful and an error otherwise.
 Save datasets in a yaml file
 }
 \details{
-Depending on the object, the defaults value of the argument
-\code{dataset_name} (by default) is:
+Depending on the object, \code{dataset_name = NULL} or \code{dataset_name = ""}, the
+defaults value of the file name:
 
 \itemize{
 \item \code{"list_issues.yaml"} for issues;
 \item \code{"list_labels.yaml"} for labels;
 \item \code{"list_milestones.yaml"} for milestones.
 }
+
+The objects will be written in the \code{dataset_dir}.
 }
 \examples{
 local_selector <- init_selector(

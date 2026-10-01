@@ -18,7 +18,8 @@ count_issues(x, ...)
 \item{\dots}{Currently not used.}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 }
 \value{
 Integer. The number of issues.

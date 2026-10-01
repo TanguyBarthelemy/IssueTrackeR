@@ -4,11 +4,15 @@
 #' use \code{\link[gh]{gh}} to ask the API of GitHub and et a list of issues
 #' with their labels and milestones.
 #'
-#' @param selector A `SelectorTB` object (to define the range of the repo /
-#'   source used). Created with [`init_selector()`].
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#' @param \dots Other parameters for GitLab as `gitlab_url` and `private_token`.
+#' @param selector A `SelectorTB` object to check. See the
+#'   corresponding vignettes:
+#'   <https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html>
+#'   to have more information about selectors.
+#' @inheritParams reset_options verbose
+#' @param \dots Additional arguments to connect to the GitLab as `gitlab_url`
+#'   and `private_token`.
+#'   (See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+#'   information on theses parameters)
 #'
 #' @details
 #' The functions of get type are useful to retrieve object related to issues
@@ -105,19 +109,20 @@ get_issues <- function(selector, verbose = TRUE, ...) {
 #' Fetches issues from a GitHub repository using the GitHub API.
 #' Filters out pull requests and formats the results.
 #'
-#' @param repo A character string specifying the GitHub repository name (only
-#' taken into account if \code{source} is set to \code{"online"}).
-#' @param owner A character string specifying the GitHub owner (only taken
-#' into account if \code{source} is set to \code{"online"}).
-#' @param state a character string that is either \code{"open"} (by default) if
-#' you want to fetch only open issues from GitHub, \code{"closed"} if you want
-#' to fetch only closed issues from GitHub or \code{"all"} if you want to fetch
-#' all issues from GitHub (closed and open).
-#' Only taken into account if \code{source} is set to \code{"online"}.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#' @inheritParams init_selector_github repo
+#' @inheritParams get_all_repos owner
+#' @param state Character string that is either by default \code{"open"} (or
+#'   `opened`) if you want to fetch only open issues (or milestones),
+#'   \code{"closed"} if you want to fetch only closed issues (or milestones) or
+#'   \code{"all"} if you want to fetch all issues (or milestones) (closed and
+#'   open).
+#' @inheritParams reset_options verbose
 #'
 #' @returns An `IssuesTB` object containing the issues from the repository.
+#'
+#' @details
+#' If repo is `NULL`, all repositories for the owner will be included.
+#'
 #' @dev
 #'
 #' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
@@ -192,13 +197,9 @@ get_issues_github <- function(
 #' @description
 #' Internal function to fetch issues from GitLab API for a specific project.
 #'
-#' @param project_id Integer. GitLab project ID.
-#' @param state a character string that is either \code{"open"} if
-#' you want to fetch only open issues from GitHub, \code{"closed"} if you want
-#' to fetch only closed issues from GitHub or \code{"all"} (by default) if you
-#' want to fetch all issues from GitHub (closed and open).
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#' @inheritParams init_selector_gitlab project_id
+#' @inheritParams get_issues_github state
+#' @inheritParams reset_options verbose
 #'
 #' @returns An `IssuesTB` object containing the issues from the specified
 #' project.
@@ -243,13 +244,12 @@ get_issues_gitlab <- function(
 #' @title Get Issues from Local YAML File
 #'
 #' @description
-#' Reads issues from a local YAML file and formats them into an IssuesTB object.
+#' Reads issues from a local YAML file and formats them into an `IssuesTB` object.
 #'
 #' @param file Character. Path to the YAML file containing issues.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#' @inheritParams reset_options verbose
 #'
-#' @returns An IssuesTB object containing the issues from the YAML file.
+#' @returns An `IssuesTB` object containing the issues from the YAML file.
 #'
 #' @examples
 #' my_issues <- IssueTrackeR:::get_issues_local(
@@ -367,13 +367,15 @@ get_labels <- function(selector, verbose = TRUE, ...) {
 #' Internal function to fetch labels from a GitHub repository using the GitHub
 #' API.
 #'
-#' @param repo Character. GitHub repository name.
-#' @param owner Character. GitHub repository owner.
-#' @param verbose Logical. If TRUE, displays progress messages.
-#'   Default: TRUE.
-#' @param ... Not used.
+#' @inheritParams init_selector_github repo
+#' @inheritParams get_all_repos owner
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
 #'
-#' @returns A data frame of class `LabelsTB` containing label information:
+#' @details
+#' If repo is `NULL`, all repositories for the owner will be included.
+#'
+#' @returns A `data.frame` of class `LabelsTB` containing label information:
 #'
 #' - `source`,
 #' - `name`,
@@ -441,9 +443,12 @@ get_labels_github <- function(
 #' @description
 #' Internal function to fetch labels from a GitLab project using the GitLab API.
 #'
-#' @param project_id Integer. GitLab project ID.
-#' @param verbose Logical. If TRUE, displays progress messages. Default: TRUE.
-#' @param ... Additional arguments passed to the GitLab API call.
+#' @inheritParams init_selector_gitlab project_id
+#' @inheritParams reset_options verbose
+#' @param \dots Additional arguments to connect to the GitLab as `gitlab_url`
+#'   and `private_token`.
+#'   (See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+#'   information on theses parameters)
 #'
 #' @returns A data frame of class `LabelsTB` containing label information:
 #'
@@ -514,13 +519,11 @@ get_labels_gitlab <- function(
 #' @description
 #' Internal function to read labels from a local YAML file.
 #'
-#' @param dataset_dir Character. Path to the directory containing the YAML file.
-#'   Default: value of option IssueTrackeR.dataset.dir.
-#' @param dataset_name Character. Name of the YAML file (without extension).
-#'   Default: value of option IssueTrackeR.dataset.name.
-#' @param verbose Logical. If TRUE, displays progress messages. Default: TRUE.
+#' @inheritParams write dataset_name
+#' @inheritParams write dataset_dir
+#' @inheritParams reset_options verbose
 #'
-#' @returns A data frame of class LabelsTB containing label information:
+#' @returns A data frame of class `LabelsTB` containing label information:
 #'
 #' - `source`,
 #' - `name`,
@@ -618,12 +621,13 @@ get_milestones <- function(selector, verbose = TRUE, ...) {
 #' Internal function to fetch milestones from a GitHub repository using the
 #' GitHub API.
 #'
-#' @param repo Character. GitHub repository name.
-#' @param owner Character. GitHub repository owner.
-#' @param state Character. Milestone state: "open", "closed", or "all".
-#'   Default: "open".
-#' @param verbose Logical. If TRUE, displays progress messages.
-#'   Default: TRUE.
+#' @inheritParams init_selector_github repo
+#' @inheritParams get_all_repos owner
+#' @inheritParams get_issues_github state
+#' @inheritParams reset_options verbose
+#'
+#' @details
+#' If repo is `NULL`, all repositories for the owner will be included.
 #'
 #' @returns A data frame of class `MilestonesTB` containing milestone
 #' information:
@@ -706,12 +710,13 @@ get_milestones_github <- function(
 #' Internal function to fetch milestones from a GitLab project using the
 #' GitLab API.
 #'
-#' @param project_id Integer. GitLab project ID.
-#' @param state Character. Milestone state: "open", "closed", or "all".
-#'   Default: "open".
-#' @param verbose Logical. If TRUE, displays progress messages.
-#'   Default: TRUE.
-#' @param ... Additional arguments passed to the GitLab API call.
+#' @inheritParams init_selector_gitlab project_id
+#' @inheritParams get_issues_github state
+#' @inheritParams reset_options verbose
+#' @param \dots Additional arguments to connect to the GitLab as `gitlab_url`
+#'   and `private_token`.
+#'   (See the documentation of \code{\link[IssueTrackeR]{get}} to have more
+#'   information on theses parameters)
 #'
 #' @returns A data frame of class `MilestonesTB` containing milestone
 #' information:
@@ -820,14 +825,11 @@ get_milestones_gitlab <- function(
 #' @description
 #' Internal function to read milestones from a local YAML file.
 #'
-#' @param dataset_dir Character. Path to the directory containing the YAML file.
-#'   Default: value of option IssueTrackeR.dataset.dir.
-#' @param dataset_name Character. Name of the YAML file (without extension).
-#'   Default: value of option IssueTrackeR.dataset.name.
-#' @param verbose Logical. If TRUE, displays progress messages.
-#'   Default: TRUE.
+#' @inheritParams write dataset_name
+#' @inheritParams write dataset_dir
+#' @inheritParams reset_options verbose
 #'
-#' @returns A data frame of class MilestonesTB containing milestone information.
+#' @returns A data frame of class `MilestonesTB` containing milestone information.
 #'
 #' @importFrom tools file_ext
 #' @importFrom checkmate assert_character

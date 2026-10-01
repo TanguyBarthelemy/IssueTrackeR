@@ -5,12 +5,9 @@
 #' to a YAML file.
 #'
 #' @param x An R object to export.
-#' @inheritParams write
-#' @param overwrite A boolean indicating whether to overwrite the file if it
-#'   already exists. Defaults to `TRUE`.
-#' @param verbose A boolean indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#' @param \dots Currently not used.
+#' @inheritParams write overwrite
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
 #'
 #' @returns
 #' The function returns **invisibly** the full path of the written YAML file.
@@ -105,24 +102,26 @@
 #'
 #' @param x an object of class \code{IssuesTB}, \code{LabelsTB} or
 #' \code{MilestonesTB}.
-#' @inheritParams get_issues
-#' @param dataset_dir The destination directory where the YAML file will be
-#'   saved. By default, the system's temporary directory is used (`tempdir()`).
-#' @param dataset_name The name of the output file (without extension).
-#'   By default, the name is `"object.yaml"`.
-#' @param overwrite Boolean. If the dataset file already exists,
-#'   should it be overwrite? Default is TRUE.
-#' @param \dots Currently not used.
+#' @param dataset_dir Character. Path to the directory containing the YAML file.
+#'   Default: value of option `IssueTrackeR.dataset.dir`.
+#' @param dataset_name Character. Name of the dataset.
+#'   Default: value of option `IssueTrackeR.dataset.name`.
+#' @param overwrite Boolean indicating whether to overwrite the file if it
+#'   already exists. Defaults to `TRUE`.
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
 #'
 #' @details
-#' Depending on the object, the defaults value of the argument
-#' \code{dataset_name} (by default) is:
+#' Depending on the object, `dataset_name = NULL` or `dataset_name = ""`, the
+#' defaults value of the file name:
 #'
 #' \itemize{
 #' \item \code{"list_issues.yaml"} for issues;
 #' \item \code{"list_labels.yaml"} for labels;
 #' \item \code{"list_milestones.yaml"} for milestones.
 #' }
+#'
+#' The objects will be written in the `dataset_dir`.
 #'
 #' @returns invisibly (with \code{invisible()}) \code{TRUE} if the export was
 #' successful and an error otherwise.

@@ -10,7 +10,8 @@ plot_resolution_ecdf(x, verbose = TRUE)
 \item{x}{An object of class \code{IssuesTB}.}
 
 \item{verbose}{A boolean indicating whether to print additional
-information. Default is \code{TRUE}.}
+information.
+Default is \code{TRUE}.}
 }
 \value{
 Invisibly returns \code{NULL}.

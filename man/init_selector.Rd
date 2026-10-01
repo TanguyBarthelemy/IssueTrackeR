@@ -2,7 +2,7 @@
 % Please edit documentation in R/selector.R
 \name{init_selector}
 \alias{init_selector}
-\title{Initialise a SelectorTB object}
+\title{Initialise a \code{SelectorTB} object}
 \usage{
 init_selector(source, ...)
 }
@@ -14,7 +14,7 @@ init_selector(source, ...)
 \item or \code{"local"} if you want to fetch information locally.
 }}
 
-\item{...}{Additional arguments specific to the source type:
+\item{\dots}{Additional arguments specific to the source type:
 \itemize{
 \item For GitHub: \code{owner}, \code{repo}
 \item For GitLab: \code{project_id}
@@ -25,7 +25,7 @@ init_selector(source, ...)
 A \code{SelectorTB} object configured for the specified source.
 }
 \description{
-Creates a SelectorTB object for specifying data sources (GitHub, GitLab, or
+Creates a \code{SelectorTB} object for specifying data sources (GitHub, GitLab, or
 local).
 The selector can be used to fetch issues from different sources.
 }
@@ -33,6 +33,12 @@ The selector can be used to fetch issues from different sources.
 \code{SelectorTB} objects define data sources for retrieving issues from
 GitHub, GitLab, or local YAML files. They allow combining multiple sources
 into a single query using \code{merge_selector()}.
+
+See the
+corresponding vignettes:
+\url{https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html}
+to have more information about selectors.
+Also see \code{vignette("selectors")}
 }
 \examples{
 # GitHub selector for a specific repository
