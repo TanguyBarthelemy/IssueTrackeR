@@ -1,7 +1,8 @@
 #' @title Display `IssueTB`, `IssuesTB`, `LabelsTB` or `SelectorTB` object
 #'
 #' @description
-#' Display `IssueTB`, `IssuesTB`, `LabelsTB` or `SelectorTB` with formatted output in the console
+#' Display `IssueTB`, `IssuesTB`, `LabelsTB` or `SelectorTB` with formatted
+#' output in the console
 #'
 #' @param x An object of class \code{IssueTB}, \code{IssuesTB}, `LabelsTB` or
 #'   \code{SelectorTB}.

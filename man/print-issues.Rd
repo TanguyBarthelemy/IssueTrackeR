@@ -35,7 +35,8 @@
 The object \code{x} invisibly.
 }
 \description{
-Display \code{IssueTB}, \code{IssuesTB}, \code{LabelsTB} or \code{SelectorTB} with formatted output in the console
+Display \code{IssueTB}, \code{IssuesTB}, \code{LabelsTB} or \code{SelectorTB} with formatted
+output in the console
 }
 \details{
 This function displays an issue (\code{IssueTB} object), a list of issues

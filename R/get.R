@@ -244,7 +244,8 @@ get_issues_gitlab <- function(
 #' @title Get Issues from Local YAML File
 #'
 #' @description
-#' Reads issues from a local YAML file and formats them into an `IssuesTB` object.
+#' Reads issues from a local YAML file and formats them into an `IssuesTB`
+#' object.
 #'
 #' @param file Character. Path to the YAML file containing issues.
 #' @inheritParams reset_options verbose
@@ -829,7 +830,8 @@ get_milestones_gitlab <- function(
 #' @inheritParams write dataset_dir
 #' @inheritParams reset_options verbose
 #'
-#' @returns A data frame of class `MilestonesTB` containing milestone information.
+#' @returns A data frame of class `MilestonesTB` containing milestone
+#' information.
 #'
 #' @importFrom tools file_ext
 #' @importFrom checkmate assert_character

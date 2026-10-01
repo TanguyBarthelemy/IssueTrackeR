@@ -22,7 +22,8 @@ information.
 Default is \code{TRUE}.}
 }
 \value{
-A data frame of class \code{MilestonesTB} containing milestone information.
+A data frame of class \code{MilestonesTB} containing milestone
+information.
 }
 \description{
 Internal function to read milestones from a local YAML file.

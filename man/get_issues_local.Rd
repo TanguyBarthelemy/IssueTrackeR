@@ -21,7 +21,8 @@ Default is \code{TRUE}.}
 An \code{IssuesTB} object containing the issues from the YAML file.
 }
 \description{
-Reads issues from a local YAML file and formats them into an \code{IssuesTB} object.
+Reads issues from a local YAML file and formats them into an \code{IssuesTB}
+object.
 }
 \examples{
 my_issues <- IssueTrackeR:::get_issues_local(
