@@ -7,11 +7,11 @@
 \alias{[[<-.IssuesTB}
 \title{Extraction and replacement of information in issues}
 \usage{
-\method{`[`}{IssuesTB}(x, i, j, drop = TRUE)
+\method{[}{IssuesTB}(x, i, j, drop = TRUE)
 
-\method{`[`}{IssuesTB}(x, ...) <- value
+\method{[}{IssuesTB}(x, ...) <- value
 
-\method{`[[`}{IssuesTB}(x, ...) <- value
+\method{[[}{IssuesTB}(x, ...) <- value
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
@@ -21,6 +21,11 @@
 \item{j}{Optional. Indices or names for column selection.}
 
 \item{drop}{Boolean. If \code{TRUE}, drop \code{IssuesTB} structure. Default: \code{TRUE}.}
+
+\item{\dots}{Other parameters passed to extraction method}
+
+\item{value}{Replacement value. According to the column selected, it can be
+a numeric, a character, an integer or a timestamp (\code{POSIXct}).}
 }
 \value{
 Information inside the \code{IssuesTB} object

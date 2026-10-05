@@ -40,3 +40,38 @@ Certains arguments sont utilisés dans différentes fonctions. Il faut les docum
 
 Voilà quelle fonction documente quel paramètre :
 - `reset_options` documente `verbose`
+
+## Le choix de `@method`
+
+Pour les fonctions d'extraction, on ne met pas les quotes autour des noms de fonction dans le tag `@method`.
+
+Ainsi on écrira:
+
+```
+#' @method [ IssuesTB
+#' @method [<- IssuesTB
+...
+```
+
+et non
+
+```
+#' @method `[` IssuesTB
+#' @method `[<-` IssuesTB
+...
+```
+
+Car il insert des quotes dans la documentation et que cela génère l'erreur:
+
+```
+❯ checking Rd \usage sections ... WARNING
+  Bad \usage lines found in Rd file 'extraction-issues.Rd':
+    <unescaped bksl>method{`[`}{IssuesTB}(x, ...) <- value
+    <unescaped bksl>method{`[[`}{IssuesTB}(x, ...) <- value
+  
+  Functions with \usage entries need to have the appropriate \alias
+  entries, and all their arguments documented.
+  The \usage entries must correspond to syntactically valid R code.
+  See chapter ‘Writing R documentation files’ in the ‘Writing R
+  Extensions’ manual.
+```

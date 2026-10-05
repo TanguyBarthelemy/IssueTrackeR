@@ -415,6 +415,9 @@ new_issues.default <- function(
 #' @param i Integer. Indices of the issues to extract.
 #' @param j Optional. Indices or names for column selection.
 #' @param drop Boolean. If `TRUE`, drop `IssuesTB` structure. Default: `TRUE`.
+#' @param \dots Other parameters passed to extraction method
+#' @param value Replacement value. According to the column selected, it can be
+#'   a numeric, a character, an integer or a timestamp (`POSIXct`).
 #'
 #' @returns Information inside the `IssuesTB` object
 #'
@@ -433,7 +436,7 @@ new_issues.default <- function(
 #' open_issues[["number"]] <- seq_along(open_issues[["number"]])
 #'
 #' @exportS3Method `[` IssuesTB
-#' @method `[` IssuesTB
+#' @method [ IssuesTB
 #' @export
 #'
 #' @name extraction-issues
@@ -459,7 +462,7 @@ new_issues.default <- function(
 
 #' @rdname extraction-issues
 #' @exportS3Method `[<-` IssuesTB
-#' @method `[<-` IssuesTB
+#' @method [<- IssuesTB
 #' @export
 `[<-.IssuesTB` <- function(x, ..., value) {
     return(new_issues(NextMethod()))
@@ -467,7 +470,7 @@ new_issues.default <- function(
 
 #' @rdname extraction-issues
 #' @exportS3Method `[[<-` IssuesTB
-#' @method `[[<-` IssuesTB
+#' @method [[<- IssuesTB
 #' @export
 `[[<-.IssuesTB` <- function(x, ..., value) {
     return(new_issues(NextMethod()))
