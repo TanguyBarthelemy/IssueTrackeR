@@ -4,13 +4,14 @@
 \alias{is_empty}
 \title{Check if a selector is Empty}
 \usage{
-is_empty(selector)
+is_empty(selector = getOption("IssueTrackeR.selector"))
 }
 \arguments{
 \item{selector}{A \code{SelectorTB} object to check. See the
 corresponding vignettes:
 \url{https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html}
-to have more information about selectors.}
+to have more information about selectors.
+By default \code{getOption("IssueTrackeR.selector")}.}
 }
 \value{
 \code{TRUE} if the selector is empty, \code{FALSE} otherwise.

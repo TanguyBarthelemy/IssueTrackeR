@@ -16,7 +16,8 @@ update_database(
 \item{selector}{A \code{SelectorTB} object to check. See the
 corresponding vignettes:
 \url{https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html}
-to have more information about selectors.}
+to have more information about selectors.
+By default \code{getOption("IssueTrackeR.selector")}.}
 
 \item{dataset_dir}{Character. Path to the directory containing the YAML file.
 Default: value of option \code{IssueTrackeR.dataset.dir}.}

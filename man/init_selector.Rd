@@ -4,7 +4,7 @@
 \alias{init_selector}
 \title{Initialise a \code{SelectorTB} object}
 \usage{
-init_selector(source, ...)
+init_selector(source = NULL, ...)
 }
 \arguments{
 \item{source}{a character string that is either:

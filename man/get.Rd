@@ -7,17 +7,22 @@
 \alias{get_milestones}
 \title{Retrieve information from the issues of GitHub}
 \usage{
-get_issues(selector, verbose = TRUE, ...)
+get_issues(selector = getOption("IssueTrackeR.selector"), verbose = TRUE, ...)
 
-get_labels(selector, verbose = TRUE, ...)
+get_labels(selector = getOption("IssueTrackeR.selector"), verbose = TRUE, ...)
 
-get_milestones(selector, verbose = TRUE, ...)
+get_milestones(
+  selector = getOption("IssueTrackeR.selector"),
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{selector}{A \code{SelectorTB} object to check. See the
 corresponding vignettes:
 \url{https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html}
-to have more information about selectors.}
+to have more information about selectors.
+By default \code{getOption("IssueTrackeR.selector")}.}
 
 \item{verbose}{A boolean indicating whether to print additional
 information.

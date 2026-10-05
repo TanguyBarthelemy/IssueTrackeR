@@ -8,6 +8,7 @@
 #'   corresponding vignettes:
 #'   <https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html>
 #'   to have more information about selectors.
+#'   By default `getOption("IssueTrackeR.selector")`.
 #' @inheritParams reset_options verbose
 #' @param \dots Additional arguments to connect to the GitLab as `gitlab_url`
 #'   and `private_token`.
@@ -74,7 +75,11 @@ NULL
 
 #' @export
 #' @rdname get
-get_issues <- function(selector, verbose = TRUE, ...) {
+get_issues <- function(
+    selector = getOption("IssueTrackeR.selector"),
+    verbose = TRUE,
+    ...
+) {
     if (is_empty(selector)) {
         if (verbose) {
             message("The selector is empty.")
@@ -322,7 +327,11 @@ get_issues_local <- function(
 
 #' @export
 #' @rdname get
-get_labels <- function(selector, verbose = TRUE, ...) {
+get_labels <- function(
+    selector = getOption("IssueTrackeR.selector"),
+    verbose = TRUE,
+    ...
+) {
     if (is_empty(selector)) {
         if (verbose) {
             message("The selector is empty.")
@@ -571,7 +580,11 @@ get_labels_local <- function(
 
 #' @rdname get
 #' @export
-get_milestones <- function(selector, verbose = TRUE, ...) {
+get_milestones <- function(
+    selector = getOption("IssueTrackeR.selector"),
+    verbose = TRUE,
+    ...
+) {
     if (is_empty(selector)) {
         if (verbose) {
             message("The selector is empty.")

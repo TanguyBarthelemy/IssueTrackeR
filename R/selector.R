@@ -19,7 +19,7 @@
 #' IssueTrackeR:::is_empty(full_sel)  # Returns FALSE
 #' @dev
 #' @importFrom checkmate assert_class
-is_empty <- function(selector) {
+is_empty <- function(selector = getOption("IssueTrackeR.selector")) {
     checkmate::assert_class(selector, "SelectorTB")
     return(length(selector) == 0L)
 }
@@ -88,15 +88,19 @@ empty_selector <- function() {
 #' )
 #' @export
 #' @importFrom checkmate assert_character
-init_selector <- function(source, ...) {
-    sel_args <- list(...)
-    if (length(sel_args) == 0L) {
+init_selector <- function(source = NULL, ...) {
+    if (is.null(source)) {
         return(empty_selector())
     }
 
     checkmate::assert_character(source, len = 1L)
     source <- tolower(source)
     checkmate::assert_choice(source, choices = c("local", "github", "gitlab"))
+
+    sel_args <- list(...)
+    if (length(sel_args) == 0L && source != "local") {
+        return(empty_selector())
+    }
 
     selectors <- do.call(
         what = switch(
