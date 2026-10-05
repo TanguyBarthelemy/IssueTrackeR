@@ -222,7 +222,12 @@ extract_labels_github <- function(raw_issues) {
     return(labels_list)
 }
 
-extract_info_github <- function(raw_issues, info, type = character(1L), missing = NA_character_) {
+extract_info_github <- function(
+    raw_issues,
+    info,
+    type = character(1L),
+    missing = NA_character_
+) {
     output <- vapply(
         X = raw_issues,
         FUN = function(x) {
@@ -253,11 +258,36 @@ format_issues_github <- function(
 
     issues <- new_issues(
         url = urls,
-        html_url = extract_info_github(raw_issues, "html_url", type = character(1L), missing = NA_character_),
-        title = extract_info_github(raw_issues, "title", type = character(1L), missing = NA_character_),
-        state = extract_info_github(raw_issues, "state", type = character(1L), missing = NA_character_),
-        body = extract_info_github(raw_issues, "body", type = character(1L), missing = NA_character_),
-        number = extract_info_github(raw_issues, "number", type = integer(1L), missing = NA_integer_),
+        html_url = extract_info_github(
+            raw_issues,
+            "html_url",
+            type = character(1L),
+            missing = NA_character_
+        ),
+        title = extract_info_github(
+            raw_issues,
+            "title",
+            type = character(1L),
+            missing = NA_character_
+        ),
+        state = extract_info_github(
+            raw_issues,
+            "state",
+            type = character(1L),
+            missing = NA_character_
+        ),
+        body = extract_info_github(
+            raw_issues,
+            "body",
+            type = character(1L),
+            missing = NA_character_
+        ),
+        number = extract_info_github(
+            raw_issues,
+            "number",
+            type = integer(1L),
+            missing = NA_integer_
+        ),
         labels = extract_labels_github(raw_issues),
         milestone = vapply(
             X = raw_issues,
@@ -311,7 +341,12 @@ format_issues_github <- function(
             },
             FUN.VALUE = character(1L)
         ),
-        state_reason = extract_info_github(raw_issues, "state_reason", type = character(1L), missing = NA_character_),
+        state_reason = extract_info_github(
+            raw_issues,
+            "state_reason",
+            type = character(1L),
+            missing = NA_character_
+        ),
         owner = structurel$owner,
         repo = structurel$repo
     )
