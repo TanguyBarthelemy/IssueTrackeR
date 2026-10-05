@@ -65,11 +65,15 @@ with their labels and milestones.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_issues</span><span class="op">(</span><span class="va">selector</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.selector"</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">get_labels</span><span class="op">(</span><span class="va">selector</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">get_labels</span><span class="op">(</span>selector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.selector"</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">get_milestones</span><span class="op">(</span><span class="va">selector</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">get_milestones</span><span class="op">(</span></span>
+<span>  selector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.selector"</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -80,7 +84,8 @@ with their labels and milestones.</p>
 <dd><p>A <code>SelectorTB</code> object to check. See the
 corresponding vignettes:
 <a href="https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html" class="external-link">https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html</a>
-to have more information about selectors.</p></dd>
+to have more information about selectors.
+By default <code>getOption("IssueTrackeR.selector")</code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
@@ -131,7 +136,7 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-in"><span><span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu">get_issues</span><span class="op">(</span>selector <span class="op">=</span> <span class="va">online_selector</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Repo: IssueTrackeR  owner: TanguyBarthelemy </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">issues</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 21 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 20 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#74</span> ──</span>
@@ -175,21 +180,6 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels("bug")` désigne toutes les issues qui ont le label `"bug"`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels("bug", negate = TRUE)` qui ne l'ont pas</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - `with_labels(c("bug", "dev"))` désigne toutes les issues qu</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#61</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [goodpractice] tidyverse_r_file_names</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ✖ name R files using `-` or `_` to delimit words and use a .R extension, e.g.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   prefix-my_function.R. Avoid capital letters and spaces.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     ./R/IssueTrackeR-package.R</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ```</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *All the issues starting with [goodpractice] are results from the [{goodpractice}](https://github.com/ropensci-review-tools/goodpractice) packa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -394,8 +384,8 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 GitHub v2.1.0                   &lt;NA&gt;      &lt;NA&gt; TanguyBarthelemy  open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 GitHub v2.0.0             2026-10-31      &lt;NA&gt; TanguyBarthelemy  open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   nb_issues_open nb_issues_closed         repo            owner</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1              6                0 IssueTrackeR TanguyBarthelemy</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2              8               18 IssueTrackeR TanguyBarthelemy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1             10                0 IssueTrackeR TanguyBarthelemy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              7               19 IssueTrackeR TanguyBarthelemy</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                            url</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/2</span>

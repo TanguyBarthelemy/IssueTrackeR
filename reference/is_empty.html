@@ -63,7 +63,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_empty</span><span class="op">(</span><span class="va">selector</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_empty</span><span class="op">(</span>selector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"IssueTrackeR.selector"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -74,7 +74,8 @@
 <dd><p>A <code>SelectorTB</code> object to check. See the
 corresponding vignettes:
 <a href="https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html" class="external-link">https://tanguybarthelemy.github.io/IssueTrackeR/articles/selectors.html</a>
-to have more information about selectors.</p></dd>
+to have more information about selectors.
+By default <code>getOption("IssueTrackeR.selector")</code>.</p></dd>
 
 </dl></div>
     <div id="value">
