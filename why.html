@@ -88,6 +88,30 @@
 <p>Certains arguments sont utilisés dans différentes fonctions. Il faut les documenter mais à partir du moment où ils ont le même sens, autant les documenter une seule fois et ré-utiliser la documentation.</p>
 <p>Voilà quelle fonction documente quel paramètre : - <code>reset_options</code> documente <code>verbose</code></p>
 </div>
+<div class="section level2">
+<h2 id="le-choix-de-method">Le choix de <code>@method</code>
+<a class="anchor" aria-label="anchor" href="#le-choix-de-method"></a></h2>
+<p>Pour les fonctions d’extraction, on ne met pas les quotes autour des noms de fonction dans le tag <code>@method</code>.</p>
+<p>Ainsi on écrira:</p>
+<pre><code><span><span class="co">#' @method [ IssuesTB</span></span>
+<span><span class="co">#' @method [&lt;- IssuesTB</span></span>
+<span><span class="va">...</span></span></code></pre>
+<p>et non</p>
+<pre><code><span><span class="co">#' @method `[` IssuesTB</span></span>
+<span><span class="co">#' @method `[&lt;-` IssuesTB</span></span>
+<span><span class="va">...</span></span></code></pre>
+<p>Car il insert des quotes dans la documentation et que cela génère l’erreur:</p>
+<pre><code>❯ checking Rd \usage sections ... WARNING
+  Bad \usage lines found in Rd file 'extraction-issues.Rd':
+    &lt;unescaped bksl&gt;method{`[`}{IssuesTB}(x, ...) &lt;- value
+    &lt;unescaped bksl&gt;method{`[[`}{IssuesTB}(x, ...) &lt;- value
+
+  Functions with \usage entries need to have the appropriate \alias
+  entries, and all their arguments documented.
+  The \usage entries must correspond to syntactically valid R code.
+  See chapter ‘Writing R documentation files’ in the ‘Writing R
+  Extensions’ manual.</code></pre>
+</div>
 </div>
 
   </div>
