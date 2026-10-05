@@ -412,9 +412,9 @@ new_issues.default <- function(
 #' @title Extraction and replacement of information in issues
 #'
 #' @inheritParams with_labels x
-#' @inheritParams base::`[` i
-#' @inheritParams base::`[` j
-#' @inheritParams base::`[` drop
+#' @param i Integer. Indices of the issues to extract.
+#' @param j Optional. Indices or names for column selection.
+#' @param drop Boolean. If `TRUE`, drop `IssuesTB` structure. Default: `TRUE`.
 #'
 #' @returns Information inside the `IssuesTB` object
 #'
@@ -437,7 +437,6 @@ new_issues.default <- function(
 #' @export
 #'
 #' @name extraction-issues
-#' @noRd
 `[.IssuesTB` <- function(x, i, j, drop = TRUE) {
     output <- NextMethod("[")
     nb_args <- nargs() - !missing(drop)
@@ -458,7 +457,6 @@ new_issues.default <- function(
     return(output)
 }
 
-#' @noRd
 #' @rdname extraction-issues
 #' @exportS3Method `[<-` IssuesTB
 #' @method `[<-` IssuesTB
@@ -467,7 +465,6 @@ new_issues.default <- function(
     return(new_issues(NextMethod()))
 }
 
-#' @noRd
 #' @rdname extraction-issues
 #' @exportS3Method `[[<-` IssuesTB
 #' @method `[[<-` IssuesTB

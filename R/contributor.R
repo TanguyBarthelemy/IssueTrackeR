@@ -1,5 +1,32 @@
 #' @title Who contributes?
-#' @noRd
+#'
+#' @description
+#' Calculates the contributions of users to a project by counting
+#' the number of issues they opened, commented on, and closed.
+#'
+#' @inheritParams with_labels x
+#' @param n Integer. Maximum number of top contributors to display.
+#'   Contributions from other users are grouped under "other".
+#'   Default: \code{Inf} (shows all contributors individually).
+#'
+#' @returns A matrix of class \code{ContributionsTB} with users as columns
+#' and contribution types (opened, commented, closed) as rows.
+#' Each cell contains the count of contributions for that user and type.
+#'
+#' @examples
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
+#' )
+#' my_issues <- get_issues(selector = issues_selector)
+#'
+#' # Compute contributions for all users
+#' contributions <- compute_contribution(my_issues)
+#'
+#' # Compute contributions for top 5 users
+#' top_contributions <- compute_contribution(my_issues, n = 5)
+#' @export
 #' @name compute_contribution
 compute_contribution <- function(x, n) {
     UseMethod(generic = "compute_contribution", object = x)
