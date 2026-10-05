@@ -188,23 +188,7 @@ format_comments_github <- function(
     return(output)
 }
 
-#' @rdname format
-#' @noRd
-format_issues_github <- function(
-    raw_issues,
-    raw_comments,
-    verbose = TRUE
-) {
-    urls <- vapply(X = raw_issues, FUN = `[[`, "url", FUN.VALUE = character(1L))
-    structurel <- utils::strcapture(
-        "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
-        urls,
-        proto = data.frame(
-            owner = character(),
-            repo = character(),
-            stringsAsFactors = FALSE
-        )
-    )
+extract_labels_github <- function(raw_issues) {
     labels_list <- raw_issues |>
         lapply(FUN = `[[`, "labels") |>
         lapply(FUN = function(lbls) {
@@ -235,41 +219,46 @@ format_issues_github <- function(
                 )
             }
         })
+    return(labels_list)
+}
+
+extract_info_github <- function(raw_issues, info, type = character(1L), missing = NA_character_) {
+    output <- vapply(
+        X = raw_issues,
+        FUN = function(x) {
+            null_to_default(x[[info]], default = missing)
+        },
+        FUN.VALUE = type
+    )
+    return(output)
+}
+
+#' @rdname format
+#' @noRd
+format_issues_github <- function(
+    raw_issues,
+    raw_comments,
+    verbose = TRUE
+) {
+    urls <- vapply(X = raw_issues, FUN = `[[`, "url", FUN.VALUE = character(1L))
+    structurel <- utils::strcapture(
+        "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
+        urls,
+        proto = data.frame(
+            owner = character(),
+            repo = character(),
+            stringsAsFactors = FALSE
+        )
+    )
 
     issues <- new_issues(
         url = urls,
-        html_url = vapply(
-            X = raw_issues,
-            FUN = `[[`,
-            "html_url",
-            FUN.VALUE = character(1L)
-        ),
-        title = vapply(
-            X = raw_issues,
-            FUN = `[[`,
-            "title",
-            FUN.VALUE = character(1L)
-        ),
-        state = vapply(
-            X = raw_issues,
-            FUN = `[[`,
-            "state",
-            FUN.VALUE = character(1L)
-        ),
-        body = vapply(
-            X = raw_issues,
-            FUN = function(x) {
-                null_to_default(x$body, default = "")
-            },
-            FUN.VALUE = character(1L)
-        ),
-        number = vapply(
-            X = raw_issues,
-            FUN = `[[`,
-            "number",
-            FUN.VALUE = integer(1L)
-        ),
-        labels = labels_list,
+        html_url = extract_info_github(raw_issues, "html_url", type = character(1L), missing = NA_character_),
+        title = extract_info_github(raw_issues, "title", type = character(1L), missing = NA_character_),
+        state = extract_info_github(raw_issues, "state", type = character(1L), missing = NA_character_),
+        body = extract_info_github(raw_issues, "body", type = character(1L), missing = NA_character_),
+        number = extract_info_github(raw_issues, "number", type = integer(1L), missing = NA_integer_),
+        labels = extract_labels_github(raw_issues),
         milestone = vapply(
             X = raw_issues,
             FUN = function(x) {
@@ -322,13 +311,7 @@ format_issues_github <- function(
             },
             FUN.VALUE = character(1L)
         ),
-        state_reason = vapply(
-            X = raw_issues,
-            FUN = function(x) {
-                null_to_default(x$state_reason, default = "open")
-            },
-            FUN.VALUE = character(1L)
-        ),
+        state_reason = extract_info_github(raw_issues, "state_reason", type = character(1L), missing = NA_character_),
         owner = structurel$owner,
         repo = structurel$repo
     )
