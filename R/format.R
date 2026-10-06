@@ -223,6 +223,16 @@ format_issue_github <- function(
         x = raw_issue[["number"]],
         default = NA_integer_
     )
+    created_at <- raw_issue[["created_at"]] |>
+        null_to_default(default = NA_real_) |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+    closed_at <- raw_issue[["closed_at"]] |>
+        null_to_default(default = NA_real_) |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+    comments_n <- comments[comments$number == issue_number, ]
+    comments_n$number <- NULL
 
     issues <- new_issue(
         url = raw_issue[["url"]],
@@ -248,19 +258,9 @@ format_issue_github <- function(
             x = raw_issue[["milestone"]][["title"]],
             default = NA_character_
         ),
-        comments = subset(
-            x = comments,
-            number == issue_number,
-            select = -number
-        ),
-        created_at = raw_issue[["created_at"]] |>
-            null_to_default(default = NA_real_) |>
-            strptime(format = "%Y-%m-%dT%H:%M:%S") |>
-            format_timestamp(),
-        closed_at = raw_issue[["closed_at"]] |>
-            null_to_default(default = NA_real_) |>
-            strptime(format = "%Y-%m-%dT%H:%M:%S") |>
-            format_timestamp(),
+        comments = comments_n,
+        created_at = created_at,
+        closed_at = closed_at,
         closed_by = null_to_default(
             x = raw_issue[["closed_by"]][["login"]],
             default = NA_character_
@@ -323,17 +323,21 @@ format_issues_gitlab <- function(
         }) |>
         do.call(what = rbind)
 
-    issues_number <- as.integer(raw_issues[["iid"]])
     comments <- format_comments_github(
         raw_comments = list(),
         verbose = verbose
     )
+
+    issues_number <- as.integer(raw_issues[["iid"]])
+    comments_number <- comments$number
+    comments$number <- NULL
+
     comments_list <- split(
-        x = subset(x = comments, select = -number),
-        f = comments$number
+        x = comments,
+        f = comments_number
     ) |>
         lapply(FUN = `rownames<-`, NULL)
-    no_comment <- setdiff(issues_number, comments$number)
+    no_comment <- setdiff(issues_number, comments_number)
     comments_list <- c(
         comments_list,
         stats::setNames(
