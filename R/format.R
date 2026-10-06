@@ -248,7 +248,11 @@ format_issue_github <- function(
             x = raw_issue[["milestone"]][["title"]],
             default = NA_character_
         ),
-        comments = comments |> subset(number == issue_number, select = -number),
+        comments = subset(
+            x = comments,
+            number == issue_number,
+            select = -number
+        ),
         created_at = raw_issue[["created_at"]] |>
             null_to_default(default = NA_real_) |>
             strptime(format = "%Y-%m-%dT%H:%M:%S") |>
