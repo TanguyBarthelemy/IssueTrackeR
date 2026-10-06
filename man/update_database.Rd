@@ -44,7 +44,7 @@ online reference.
 jdemetra_selector <- init_selector(
     source = "GitHub",
     owner = "jdemetra",
-    repo = "jdplus-revisions",
+    repo = "jdplus-incubator",
     state = "all"
 )
 

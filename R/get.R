@@ -177,6 +177,10 @@ get_issues_github <- function(
     raw_issues <- raw_issues |>
         Filter(f = function(.x) is.null(.x$pull_request))
 
+    if (length(raw_issues) == 0L) {
+        return(new_issues())
+    }
+
     raw_comments <- try(expr = {
         gh::gh(
             repo = repo,
