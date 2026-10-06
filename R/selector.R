@@ -167,7 +167,7 @@ init_selector_github <- function(owner = NULL, repo = NULL, ...) {
         ))
     }
 
-    selector <- lapply(repo, \(r) {
+    selector <- lapply(repo, function(r) {
         list(source = "GitHub", repo = r, owner = owner, ...)
     })
     class(selector) <- "SelectorTB"
@@ -209,7 +209,7 @@ init_selector_gitlab <- function(project_id = NULL, ...) {
         )
         return(empty_selector())
     }
-    selector <- lapply(project_id, \(id) {
+    selector <- lapply(project_id, function(id) {
         list(source = "GitLab", project_id = id, ...)
     })
     class(selector) <- "SelectorTB"

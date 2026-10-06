@@ -139,15 +139,16 @@ NULL
 #' @noRd
 format_comments_github <- function(
     raw_comments,
-    urls,
     verbose = TRUE
 ) {
-    comments_urls <- vapply(
+    comments_number <- vapply(
         X = raw_comments,
         FUN = `[[`,
         "issue_url",
         FUN.VALUE = character(1L)
-    )
+    ) |>
+        sub(pattern = ".*/", replacement = "") |>
+        as.integer()
     comments_author <- vapply(
         X = raw_comments,
         FUN = Reduce,
@@ -161,12 +162,174 @@ format_comments_github <- function(
         "body",
         FUN.VALUE = character(1L)
     )
+    comments_list <- data.frame(
+        number = comments_number,
+        text = comments_bodies,
+        author = comments_author
+    )
+
+    return(comments_list)
+}
+
+extract_issue_labels_github <- function(raw_issue) {
+    raw_labels <- raw_issue[["labels"]]
+
+    if (length(raw_labels) == 0L) {
+        list_labels <- data.frame(
+            name = character(0L),
+            color = character(0L),
+            stringsAsFactors = FALSE
+        )
+    } else {
+        list_labels <- data.frame(
+            name = vapply(
+                X = raw_labels,
+                FUN = "[[",
+                "name",
+                FUN.VALUE = character(1L)
+            ),
+            color = paste0(
+                "#",
+                vapply(
+                    X = raw_labels,
+                    FUN = "[[",
+                    "color",
+                    FUN.VALUE = character(1L)
+                )
+            ),
+            stringsAsFactors = FALSE
+        )
+    }
+    return(list_labels)
+}
+
+#' @rdname format
+#' @noRd
+format_issue_github <- function(
+    raw_issue,
+    comments,
+    verbose = TRUE
+) {
+    structurel <- utils::strcapture(
+        "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
+        raw_issue[["url"]],
+        proto = data.frame(
+            owner = character(),
+            repo = character(),
+            stringsAsFactors = FALSE
+        )
+    )
+    issue_number <- null_to_default(
+        x = raw_issue[["number"]],
+        default = NA_integer_
+    )
+
+    issues <- new_issue(
+        url = raw_issue[["url"]],
+        html_url = null_to_default(
+            x = raw_issue[["html_url"]],
+            default = NA_character_
+        ),
+        title = null_to_default(
+            x = raw_issue[["title"]],
+            default = NA_character_
+        ),
+        state = null_to_default(
+            x = raw_issue[["state"]],
+            default = NA_character_
+        ),
+        body = null_to_default(
+            x = raw_issue[["body"]],
+            default = NA_character_
+        ),
+        number = issue_number,
+        labels = extract_issue_labels_github(raw_issue),
+        milestone = null_to_default(
+            x = raw_issue[["milestone"]][["title"]],
+            default = NA_character_
+        ),
+        comments = comments |> subset(number == issue_number, select = -number),
+        created_at = raw_issue[["created_at"]] |>
+            null_to_default(default = NA_real_) |>
+            strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+            format_timestamp(),
+        closed_at = raw_issue[["closed_at"]] |>
+            null_to_default(default = NA_real_) |>
+            strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+            format_timestamp(),
+        closed_by = null_to_default(
+            x = raw_issue[["closed_by"]][["login"]],
+            default = NA_character_
+        ),
+        creator = null_to_default(
+            x = raw_issue[["user"]][["login"]],
+            default = NA_character_
+        ),
+        assignee = null_to_default(
+            x = raw_issue[["assignee"]][["login"]],
+            default = NA_character_
+        ),
+        state_reason = null_to_default(
+            x = raw_issue[["state_reason"]],
+            default = NA_character_
+        ),
+        owner = structurel$owner,
+        repo = structurel$repo
+    )
+
+    return(issues)
+}
+
+#' @rdname format
+#' @noRd
+format_issues_github <- function(
+    raw_issues,
+    raw_comments,
+    verbose = TRUE
+) {
+    comments <- format_comments_github(
+        raw_comments = raw_comments,
+        verbose = verbose
+    )
+
+    issues <- lapply(
+        X = raw_issues,
+        FUN = format_issue_github,
+        comments = comments
+    ) |>
+        do.call(what = rbind)
+
+    return(issues)
+}
+
+format_issues_gitlab <- function(
+    raw_issues,
+    verbose = TRUE
+) {
+    if (nrow(raw_issues) == 0L) {
+        return(new_issues())
+    }
+    structurel <- strsplit(raw_issues[["references.full"]], split = "/|#") |>
+        lapply(function(x) {
+            data.frame(
+                owner = paste(x[seq_len(length(x) - 2L)], collapse = "/"),
+                repo = x[length(x) - 1L],
+                stringsAsFactors = FALSE
+            )
+        }) |>
+        do.call(what = rbind)
+
+    issues_number <- as.integer(raw_issues[["iid"]])
+    comments <- format_comments_github(
+        raw_comments = list(),
+        verbose = verbose
+    )
     comments_list <- split(
-        x = data.frame(text = comments_bodies, author = comments_author),
-        f = comments_urls
+        x = subset(x = comments, select = -number),
+        f = comments$number
     ) |>
         lapply(FUN = `rownames<-`, NULL)
-    no_comment <- setdiff(urls, comments_urls)
+    no_comment <- setdiff(issues_number, comments$number)
     comments_list <- c(
         comments_list,
         stats::setNames(
@@ -181,195 +344,7 @@ format_comments_github <- function(
             nm = no_comment
         )
     )
-
-    output <- comments_list[urls]
-    names(output) <- NULL
-
-    return(output)
-}
-
-extract_labels_github <- function(raw_issues) {
-    labels_list <- raw_issues |>
-        lapply(FUN = `[[`, "labels") |>
-        lapply(FUN = function(lbls) {
-            if (length(lbls) == 0L) {
-                data.frame(
-                    name = character(0L),
-                    color = character(0L),
-                    stringsAsFactors = FALSE
-                )
-            } else {
-                data.frame(
-                    name = vapply(
-                        X = lbls,
-                        FUN = "[[",
-                        "name",
-                        FUN.VALUE = character(1L)
-                    ),
-                    color = paste0(
-                        "#",
-                        vapply(
-                            X = lbls,
-                            FUN = "[[",
-                            "color",
-                            FUN.VALUE = character(1L)
-                        )
-                    ),
-                    stringsAsFactors = FALSE
-                )
-            }
-        })
-    return(labels_list)
-}
-
-extract_info_github <- function(
-    raw_issues,
-    info,
-    type = character(1L),
-    missing = NA_character_
-) {
-    output <- vapply(
-        X = raw_issues,
-        FUN = function(x) {
-            null_to_default(x[[info]], default = missing)
-        },
-        FUN.VALUE = type
-    )
-    return(output)
-}
-
-#' @rdname format
-#' @noRd
-format_issues_github <- function(
-    raw_issues,
-    raw_comments,
-    verbose = TRUE
-) {
-    urls <- vapply(X = raw_issues, FUN = `[[`, "url", FUN.VALUE = character(1L))
-    structurel <- utils::strcapture(
-        "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
-        urls,
-        proto = data.frame(
-            owner = character(),
-            repo = character(),
-            stringsAsFactors = FALSE
-        )
-    )
-
-    issues <- new_issues(
-        url = urls,
-        html_url = extract_info_github(
-            raw_issues,
-            "html_url",
-            type = character(1L),
-            missing = NA_character_
-        ),
-        title = extract_info_github(
-            raw_issues,
-            "title",
-            type = character(1L),
-            missing = NA_character_
-        ),
-        state = extract_info_github(
-            raw_issues,
-            "state",
-            type = character(1L),
-            missing = NA_character_
-        ),
-        body = extract_info_github(
-            raw_issues,
-            "body",
-            type = character(1L),
-            missing = NA_character_
-        ),
-        number = extract_info_github(
-            raw_issues,
-            "number",
-            type = integer(1L),
-            missing = NA_integer_
-        ),
-        labels = extract_labels_github(raw_issues),
-        milestone = vapply(
-            X = raw_issues,
-            FUN = function(x) {
-                null_to_default(x$milestone$title, default = NA_character_)
-            },
-            FUN.VALUE = character(1L)
-        ),
-        comments = format_comments_github(
-            raw_comments = raw_comments,
-            urls = urls
-        ),
-        created_at = vapply(
-            X = raw_issues,
-            FUN = function(.x) {
-                .x$created_at |>
-                    null_to_default(default = NA_real_) |>
-                    strptime(format = "%Y-%m-%dT%H:%M:%S") |>
-                    format_timestamp()
-            },
-            FUN.VALUE = double(1L)
-        ),
-        closed_at = vapply(
-            X = raw_issues,
-            FUN = function(.x) {
-                .x$closed_at |>
-                    null_to_default(default = NA_real_) |>
-                    strptime(format = "%Y-%m-%dT%H:%M:%S") |>
-                    format_timestamp()
-            },
-            FUN.VALUE = double(1L)
-        ),
-        closed_by = vapply(
-            X = raw_issues,
-            FUN = function(.x) {
-                null_to_default(.x$closed_by$login, default = NA_character_)
-            },
-            FUN.VALUE = character(1L)
-        ),
-        creator = vapply(
-            X = raw_issues,
-            FUN = Reduce,
-            f = `[[`,
-            x = c("user", "login"),
-            FUN.VALUE = character(1L)
-        ),
-        assignee = vapply(
-            X = raw_issues,
-            FUN = function(x) {
-                null_to_default(x$assignee$login, default = NA_character_)
-            },
-            FUN.VALUE = character(1L)
-        ),
-        state_reason = extract_info_github(
-            raw_issues,
-            "state_reason",
-            type = character(1L),
-            missing = NA_character_
-        ),
-        owner = structurel$owner,
-        repo = structurel$repo
-    )
-
-    return(issues)
-}
-
-format_issues_gitlab <- function(
-    raw_issues,
-    verbose = TRUE
-) {
-    if (nrow(raw_issues) == 0L) {
-        return(new_issues())
-    }
-    structurel <- strsplit(raw_issues[["references.full"]], split = "/|#") |>
-        lapply(\(x) {
-            data.frame(
-                owner = paste(x[seq_len(length(x) - 2L)], collapse = "/"),
-                repo = x[length(x) - 1L],
-                stringsAsFactors = FALSE
-            )
-        }) |>
-        do.call(what = rbind)
+    comments_list <- comments_list[issues_number]
 
     if (any(startsWith(colnames(raw_issues), "labels"))) {
         labels_list <- raw_issues[, startsWith(
@@ -409,16 +384,13 @@ format_issues_gitlab <- function(
         title = raw_issues[["title"]],
         state = raw_issues[["state"]],
         body = raw_issues[["description"]],
-        number = as.integer(raw_issues[["iid"]]),
+        number = issues_number,
         labels = labels_list,
         milestone = null_to_default(
             raw_issues[["milestone.title"]],
             default = NA_character_
         ),
-        comments = format_comments_github(
-            raw_comments = list(),
-            urls = raw_issues[["_links.self"]]
-        ),
+        comments = comments_list,
         created_at = created_at,
         closed_at = closed_at,
         closed_by = null_to_default(
@@ -449,7 +421,7 @@ format_labels_github <- function(raw_labels, verbose = TRUE) {
         FUN = base::`[`,
         c("name", "description", "color")
     ) |>
-        lapply(FUN = \(label) {
+        lapply(FUN = function(label) {
             label$color <- paste0("#", label$color)
             label$description <- null_to_default(
                 x = label$description,
