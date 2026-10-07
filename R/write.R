@@ -1,103 +1,3 @@
-#' @title Export an R Object to YAML
-#'
-#' @description
-#' This function exports an R object (such as a list, vector, data.frame, etc.)
-#' to a YAML file.
-#'
-#' @param x An R object to export.
-#' @inheritParams write overwrite
-#' @inheritParams reset_options verbose
-#' @inheritParams count_issues
-#'
-#' @returns
-#' The function returns **invisibly** the full path of the written YAML file.
-#' If the file already exists and `overwrite = FALSE`, it returns `FALSE`
-#' without writing.
-#'
-#' @details
-#' The function automatically handles directory creation when the path doesn't
-#' exist.
-#'
-#' @dev
-#' @importFrom yaml as.yaml
-#' @importFrom tools file_ext
-#' @importFrom tools file_path_sans_ext
-#' @importFrom checkmate assert_character
-#'
-#' @examples
-#' my_list <- list(name = "John", age = 30, city = "Paris")
-#' IssueTrackeR:::.write(my_list, dataset_name = "example_list")
-#'
-#' my_df <- data.frame(id = 1:3, value = c("A", "B", "C"))
-#' my_data_dir <- tempfile("data")
-#' IssueTrackeR:::.write(
-#'     x = my_df,
-#'     dataset_dir = my_data_dir,
-#'     dataset_name = "my_dataframe"
-#' )
-#'
-#' IssueTrackeR:::.write(
-#'     x = my_list,
-#'     dataset_name = "example_list",
-#'     overwrite = FALSE
-#' )
-.write <- function(
-    x,
-    dataset_dir = tempdir(),
-    dataset_name = "object.yaml",
-    overwrite = TRUE,
-    verbose = TRUE,
-    ...
-) {
-    checkmate::assert_character(dataset_name, len = 1L, null.ok = TRUE)
-
-    output_file <- basename(dataset_name)
-    ext_file <- tools::file_ext(output_file)
-    if (ext_file %in% c("yaml", "yml")) {
-        output_file <- output_file |>
-            basename() |>
-            tools::file_path_sans_ext()
-    } else if (nzchar(ext_file)) {
-        stop(
-            "The `dataset_name` argument must be a name",
-            " or a file with a YAML extension (.yml or .yaml).",
-            call. = FALSE
-        )
-    }
-    output_path <- file.path(dataset_dir, output_file) |>
-        paste0(".yaml") |>
-        normalizePath(mustWork = FALSE)
-
-    if (file.exists(output_path) && !overwrite) {
-        if (verbose) {
-            message(
-                "The file already exists and won't be overwritten. ",
-                "To overwrite this file, please set `overwrite = TRUE`."
-            )
-        }
-        return(invisible(FALSE))
-    }
-
-    if (file.exists(output_path) && verbose) {
-        message("The file already exists and will be overwritten.")
-    }
-
-    if (!dir.exists(dataset_dir)) {
-        dir.create(dataset_dir)
-    }
-    if (verbose) {
-        message("The datasets will be exported to ", output_path, ".")
-    }
-    x_yaml <- yaml::as.yaml(x, precision = 22L, indent = 2L)
-    writeLines(
-        text = enc2utf8(x_yaml),
-        con = output_path,
-        useBytes = TRUE
-    )
-    output_path <- normalizePath(output_path, mustWork = TRUE)
-    return(invisible(output_path))
-}
-
 #' @title Save datasets in a yaml file
 #'
 #' @param x an object of class \code{IssuesTB}, \code{LabelsTB} or
@@ -231,4 +131,104 @@ write.default <- function(...) {
         "This function requires a IssuesTB, LabelsTB or MilestonesTB object.",
         call. = FALSE
     )
+}
+
+#' @title Export an R Object to YAML
+#'
+#' @description
+#' This function exports an R object (such as a list, vector, data.frame, etc.)
+#' to a YAML file.
+#'
+#' @param x An R object to export.
+#' @inheritParams write overwrite
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
+#'
+#' @returns
+#' The function returns **invisibly** the full path of the written YAML file.
+#' If the file already exists and `overwrite = FALSE`, it returns `FALSE`
+#' without writing.
+#'
+#' @details
+#' The function automatically handles directory creation when the path doesn't
+#' exist.
+#'
+#' @dev
+#' @importFrom yaml as.yaml
+#' @importFrom tools file_ext
+#' @importFrom tools file_path_sans_ext
+#' @importFrom checkmate assert_character
+#'
+#' @examples
+#' my_list <- list(name = "John", age = 30, city = "Paris")
+#' IssueTrackeR:::.write(my_list, dataset_name = "example_list")
+#'
+#' my_df <- data.frame(id = 1:3, value = c("A", "B", "C"))
+#' my_data_dir <- tempfile("data")
+#' IssueTrackeR:::.write(
+#'     x = my_df,
+#'     dataset_dir = my_data_dir,
+#'     dataset_name = "my_dataframe"
+#' )
+#'
+#' IssueTrackeR:::.write(
+#'     x = my_list,
+#'     dataset_name = "example_list",
+#'     overwrite = FALSE
+#' )
+.write <- function(
+    x,
+    dataset_dir = tempdir(),
+    dataset_name = "object.yaml",
+    overwrite = TRUE,
+    verbose = TRUE,
+    ...
+) {
+    checkmate::assert_character(dataset_name, len = 1L, null.ok = TRUE)
+
+    output_file <- basename(dataset_name)
+    ext_file <- tools::file_ext(output_file)
+    if (ext_file %in% c("yaml", "yml")) {
+        output_file <- output_file |>
+            basename() |>
+            tools::file_path_sans_ext()
+    } else if (nzchar(ext_file)) {
+        stop(
+            "The `dataset_name` argument must be a name",
+            " or a file with a YAML extension (.yml or .yaml).",
+            call. = FALSE
+        )
+    }
+    output_path <- file.path(dataset_dir, output_file) |>
+        paste0(".yaml") |>
+        normalizePath(mustWork = FALSE)
+
+    if (file.exists(output_path) && !overwrite) {
+        if (verbose) {
+            message(
+                "The file already exists and won't be overwritten. ",
+                "To overwrite this file, please set `overwrite = TRUE`."
+            )
+        }
+        return(invisible(FALSE))
+    }
+
+    if (file.exists(output_path) && verbose) {
+        message("The file already exists and will be overwritten.")
+    }
+
+    if (!dir.exists(dataset_dir)) {
+        dir.create(dataset_dir)
+    }
+    if (verbose) {
+        message("The datasets will be exported to ", output_path, ".")
+    }
+    x_yaml <- yaml::as.yaml(x, precision = 22L, indent = 2L)
+    writeLines(
+        text = enc2utf8(x_yaml),
+        con = output_path,
+        useBytes = TRUE
+    )
+    output_path <- normalizePath(output_path, mustWork = TRUE)
+    return(invisible(output_path))
 }

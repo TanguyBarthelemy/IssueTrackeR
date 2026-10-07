@@ -108,6 +108,103 @@ get_issues <- function(
     return(issues)
 }
 
+#' @export
+#' @rdname get
+get_labels <- function(
+    selector = getOption("IssueTrackeR.selector"),
+    verbose = TRUE,
+    ...
+) {
+    if (is_empty(selector)) {
+        if (verbose) {
+            message("The selector is empty.")
+        }
+        list_labels <- data.frame(
+            source = character(0L),
+            name = character(0L),
+            description = character(0L),
+            color = character(0L),
+            repo = character(0L),
+            owner = character(0L),
+            url = character(0L),
+            stringsAsFactors = FALSE
+        )
+        class(list_labels) <- c("LabelsTB", "data.frame")
+        return(list_labels)
+    } else if (length(selector) == 1L) {
+        sel_args <- selector[[1L]]
+        sel_args <- sel_args[names(sel_args) != "source"]
+        list_labels <- do.call(
+            what = switch(
+                selector[[1L]][["source"]],
+                GitHub = get_labels_github,
+                GitLab = get_labels_gitlab,
+                local = get_labels_local
+            ),
+            args = c(sel_args, list(..., verbose = verbose))
+        )
+        return(list_labels)
+    }
+
+    list_labels <- selector |>
+        seq_along() |>
+        lapply(FUN = extract_nth, x = selector, verbose = FALSE) |>
+        lapply(FUN = get_labels, verbose = verbose) |>
+        do.call(what = rbind)
+    return(list_labels)
+}
+
+#' @rdname get
+#' @export
+get_milestones <- function(
+    selector = getOption("IssueTrackeR.selector"),
+    verbose = TRUE,
+    ...
+) {
+    if (is_empty(selector)) {
+        if (verbose) {
+            message("The selector is empty.")
+        }
+        milestones <- data.frame(
+            source = character(0L),
+            title = character(0L),
+            description = character(0L),
+            due_on = format_timestamp(character(0L)),
+            closed_at = format_timestamp(character(0L)),
+            creator = character(0L),
+            state = character(0L),
+            nb_issues_open = integer(0L),
+            nb_issues_closed = integer(0L),
+            repo = character(0L),
+            owner = character(0L),
+            url = character(0L),
+            stringsAsFactors = FALSE
+        )
+        class(milestones) <- c("MilestonesTB", "data.frame")
+        return(milestones)
+    } else if (length(selector) == 1L) {
+        sel_args <- selector[[1L]]
+        sel_args <- sel_args[names(sel_args) != "source"]
+        milestones <- do.call(
+            what = switch(
+                selector[[1L]][["source"]],
+                GitHub = get_milestones_github,
+                GitLab = get_milestones_gitlab,
+                local = get_milestones_local
+            ),
+            args = c(sel_args, list(..., verbose = verbose))
+        )
+        return(milestones)
+    }
+
+    milestones <- selector |>
+        seq_along() |>
+        lapply(FUN = extract_nth, x = selector, verbose = FALSE) |>
+        lapply(FUN = get_milestones, verbose = verbose) |>
+        do.call(what = rbind)
+    return(milestones)
+}
+
 #' @title Get Issues from GitHub Repository
 #'
 #' @description
@@ -329,52 +426,6 @@ get_issues_local <- function(
     return(issues)
 }
 
-#' @export
-#' @rdname get
-get_labels <- function(
-    selector = getOption("IssueTrackeR.selector"),
-    verbose = TRUE,
-    ...
-) {
-    if (is_empty(selector)) {
-        if (verbose) {
-            message("The selector is empty.")
-        }
-        list_labels <- data.frame(
-            source = character(0L),
-            name = character(0L),
-            description = character(0L),
-            color = character(0L),
-            repo = character(0L),
-            owner = character(0L),
-            url = character(0L),
-            stringsAsFactors = FALSE
-        )
-        class(list_labels) <- c("LabelsTB", "data.frame")
-        return(list_labels)
-    } else if (length(selector) == 1L) {
-        sel_args <- selector[[1L]]
-        sel_args <- sel_args[names(sel_args) != "source"]
-        list_labels <- do.call(
-            what = switch(
-                selector[[1L]][["source"]],
-                GitHub = get_labels_github,
-                GitLab = get_labels_gitlab,
-                local = get_labels_local
-            ),
-            args = c(sel_args, list(..., verbose = verbose))
-        )
-        return(list_labels)
-    }
-
-    list_labels <- selector |>
-        seq_along() |>
-        lapply(FUN = extract_nth, x = selector, verbose = FALSE) |>
-        lapply(FUN = get_labels, verbose = verbose) |>
-        do.call(what = rbind)
-    return(list_labels)
-}
-
 #' @title Get Labels from GitHub Repository
 #'
 #' @description
@@ -580,57 +631,6 @@ get_labels_local <- function(
 
     class(list_labels) <- c("LabelsTB", "data.frame")
     return(list_labels)
-}
-
-#' @rdname get
-#' @export
-get_milestones <- function(
-    selector = getOption("IssueTrackeR.selector"),
-    verbose = TRUE,
-    ...
-) {
-    if (is_empty(selector)) {
-        if (verbose) {
-            message("The selector is empty.")
-        }
-        milestones <- data.frame(
-            source = character(0L),
-            title = character(0L),
-            description = character(0L),
-            due_on = format_timestamp(character(0L)),
-            closed_at = format_timestamp(character(0L)),
-            creator = character(0L),
-            state = character(0L),
-            nb_issues_open = integer(0L),
-            nb_issues_closed = integer(0L),
-            repo = character(0L),
-            owner = character(0L),
-            url = character(0L),
-            stringsAsFactors = FALSE
-        )
-        class(milestones) <- c("MilestonesTB", "data.frame")
-        return(milestones)
-    } else if (length(selector) == 1L) {
-        sel_args <- selector[[1L]]
-        sel_args <- sel_args[names(sel_args) != "source"]
-        milestones <- do.call(
-            what = switch(
-                selector[[1L]][["source"]],
-                GitHub = get_milestones_github,
-                GitLab = get_milestones_gitlab,
-                local = get_milestones_local
-            ),
-            args = c(sel_args, list(..., verbose = verbose))
-        )
-        return(milestones)
-    }
-
-    milestones <- selector |>
-        seq_along() |>
-        lapply(FUN = extract_nth, x = selector, verbose = FALSE) |>
-        lapply(FUN = get_milestones, verbose = verbose) |>
-        do.call(what = rbind)
-    return(milestones)
 }
 
 #' @title Get Milestones from GitHub Repository

@@ -7,42 +7,6 @@ state_table <- c(
     duplicated = "\U27BF Duplicated"
 )
 
-prepare_label_display <- function(x, html_url) {
-    if (nrow(x) == 0L) {
-        return("")
-    }
-
-    labels_name <- x$name
-    labels_bgcolor <- x$color
-
-    labels_color <- c("grey8", "ivory")[is_dark(x$color) + 1L]
-    labels_url <- paste0(
-        gsub(
-            x = html_url,
-            pattern = "\\/[^\\/]*\\/[^\\/]*$",
-            replacement = "/labels/"
-        ),
-        utils::URLencode(labels_name)
-    )
-
-    output <- vapply(
-        X = seq_along(labels_name),
-        FUN = function(k) {
-            label_style <- crayon::combine_styles(
-                crayon::make_style(labels_color[k]),
-                crayon::make_style(labels_bgcolor[k], bg = TRUE)
-            )
-            cli::style_hyperlink(
-                text = label_style(labels_name[k]),
-                url = labels_url[k]
-            )
-        },
-        FUN.VALUE = character(1L)
-    ) |>
-        paste(collapse = ", ")
-    return(output)
-}
-
 #' @title Compute a summary of an issue or a list of issues
 #'
 #' @param object a \code{IssueTB} or \code{IssuesTB} object.
@@ -161,4 +125,40 @@ summary.LabelsTB <- function(object, ...) {
 
     class(object) <- c("summary.LabelsTB", "data.frame")
     return(object)
+}
+
+prepare_label_display <- function(x, html_url) {
+    if (nrow(x) == 0L) {
+        return("")
+    }
+
+    labels_name <- x$name
+    labels_bgcolor <- x$color
+
+    labels_color <- c("grey8", "ivory")[is_dark(x$color) + 1L]
+    labels_url <- paste0(
+        gsub(
+            x = html_url,
+            pattern = "\\/[^\\/]*\\/[^\\/]*$",
+            replacement = "/labels/"
+        ),
+        utils::URLencode(labels_name)
+    )
+
+    output <- vapply(
+        X = seq_along(labels_name),
+        FUN = function(k) {
+            label_style <- crayon::combine_styles(
+                crayon::make_style(labels_color[k]),
+                crayon::make_style(labels_bgcolor[k], bg = TRUE)
+            )
+            cli::style_hyperlink(
+                text = label_style(labels_name[k]),
+                url = labels_url[k]
+            )
+        },
+        FUN.VALUE = character(1L)
+    ) |>
+        paste(collapse = ", ")
+    return(output)
 }

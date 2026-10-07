@@ -1,45 +1,3 @@
-#' @title Check if a selector is Empty
-#'
-#' @description
-#' Checks whether a `SelectorTB` object contains any elements.
-#'
-#' @inheritParams get_issues selector
-#'
-#' @returns `TRUE` if the selector is empty, `FALSE` otherwise.
-#'
-#' @examples
-#' empty_sel <- IssueTrackeR:::empty_selector()
-#' IssueTrackeR:::is_empty(empty_sel)  # Returns TRUE
-#'
-#' full_sel <- init_selector(
-#'     source = "GitHub",
-#'     owner = "TanguyBarthelemy",
-#'     repo = "IssueTrackeR"
-#' )
-#' IssueTrackeR:::is_empty(full_sel)  # Returns FALSE
-#' @dev
-#' @importFrom checkmate assert_class
-is_empty <- function(selector = getOption("IssueTrackeR.selector")) {
-    checkmate::assert_class(selector, "SelectorTB")
-    return(length(selector) == 0L)
-}
-
-#' @title Create an Empty Selector Object
-#'
-#' @description
-#' Creates an empty selector object of class `SelectorTB`.
-#'
-#' @returns An empty `SelectorTB` object.
-#'
-#' @examples
-#' empty_sel <- IssueTrackeR:::empty_selector()
-#' @dev
-empty_selector <- function() {
-    selector <- list()
-    class(selector) <- "SelectorTB"
-    return(selector)
-}
-
 #' @title Initialise a `SelectorTB` object
 #'
 #' @description
@@ -113,6 +71,79 @@ init_selector <- function(source = NULL, ...) {
     )
     return(selectors)
 }
+
+#' @title Merge Multiple Selectors
+#'
+#' @description
+#' Combines multiple selector objects into a single selector.
+#' Useful for fetching issues from multiple sources in one operation.
+#'
+#' @param \dots `SelectorTB` objects to merge.
+#'
+#' @returns A merged `SelectorTB` object containing all elements from the input
+#' selectors.
+#'
+#' @examples
+#' s1 <- init_selector(
+#'     source = "GitHub",
+#'     owner = "TanguyBarthelemy",
+#'     repo = "IssueTrackeR"
+#' )
+#' s2 <- init_selector(source = "GitHub", owner = "TractorTom", repo = NULL)
+#' merged <- merge_selector(s1, s2)
+#' @export
+merge_selector <- function(...) {
+    selectors <- list(...)
+    if (length(selectors) == 0L) {
+        return(empty_selector())
+    }
+    selector <- do.call(selectors, what = c)
+    class(selector) <- "SelectorTB"
+    return(selector)
+}
+
+#' @title Check if a selector is Empty
+#'
+#' @description
+#' Checks whether a `SelectorTB` object contains any elements.
+#'
+#' @inheritParams get_issues selector
+#'
+#' @returns `TRUE` if the selector is empty, `FALSE` otherwise.
+#'
+#' @examples
+#' empty_sel <- IssueTrackeR:::empty_selector()
+#' IssueTrackeR:::is_empty(empty_sel)  # Returns TRUE
+#'
+#' full_sel <- init_selector(
+#'     source = "GitHub",
+#'     owner = "TanguyBarthelemy",
+#'     repo = "IssueTrackeR"
+#' )
+#' IssueTrackeR:::is_empty(full_sel)  # Returns FALSE
+#' @dev
+#' @importFrom checkmate assert_class
+is_empty <- function(selector = getOption("IssueTrackeR.selector")) {
+    checkmate::assert_class(selector, "SelectorTB")
+    return(length(selector) == 0L)
+}
+
+#' @title Create an Empty Selector Object
+#'
+#' @description
+#' Creates an empty selector object of class `SelectorTB`.
+#'
+#' @returns An empty `SelectorTB` object.
+#'
+#' @examples
+#' empty_sel <- IssueTrackeR:::empty_selector()
+#' @dev
+empty_selector <- function() {
+    selector <- list()
+    class(selector) <- "SelectorTB"
+    return(selector)
+}
+
 
 #' @title Initialize GitHub Selector
 #'
@@ -255,36 +286,6 @@ init_selector_local <- function(
         dataset_name = dataset_name,
         dataset_dir = dataset_dir
     ))
-    class(selector) <- "SelectorTB"
-    return(selector)
-}
-
-#' @title Merge Multiple Selectors
-#'
-#' @description
-#' Combines multiple selector objects into a single selector.
-#' Useful for fetching issues from multiple sources in one operation.
-#'
-#' @param \dots `SelectorTB` objects to merge.
-#'
-#' @returns A merged `SelectorTB` object containing all elements from the input
-#' selectors.
-#'
-#' @examples
-#' s1 <- init_selector(
-#'     source = "GitHub",
-#'     owner = "TanguyBarthelemy",
-#'     repo = "IssueTrackeR"
-#' )
-#' s2 <- init_selector(source = "GitHub", owner = "TractorTom", repo = NULL)
-#' merged <- merge_selector(s1, s2)
-#' @export
-merge_selector <- function(...) {
-    selectors <- list(...)
-    if (length(selectors) == 0L) {
-        return(empty_selector())
-    }
-    selector <- do.call(selectors, what = c)
     class(selector) <- "SelectorTB"
     return(selector)
 }
