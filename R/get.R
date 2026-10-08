@@ -91,8 +91,8 @@ get_issues <- function(
         issues <- do.call(
             what = switch(
                 selector[[1L]][["source"]],
-                GitHub = get_issues_github,
-                GitLab = get_issues_gitlab,
+                GitHub = get_issues_gh,
+                GitLab = get_issues_gl,
                 local = get_issues_local
             ),
             args = c(sel_args, list(..., verbose = verbose))
@@ -137,8 +137,8 @@ get_labels <- function(
         list_labels <- do.call(
             what = switch(
                 selector[[1L]][["source"]],
-                GitHub = get_labels_github,
-                GitLab = get_labels_gitlab,
+                GitHub = get_labels_gh,
+                GitLab = get_labels_gl,
                 local = get_labels_local
             ),
             args = c(sel_args, list(..., verbose = verbose))
@@ -188,8 +188,8 @@ get_milestones <- function(
         milestones <- do.call(
             what = switch(
                 selector[[1L]][["source"]],
-                GitHub = get_milestones_github,
-                GitLab = get_milestones_gitlab,
+                GitHub = get_milestones_gh,
+                GitLab = get_milestones_gl,
                 local = get_milestones_local
             ),
             args = c(sel_args, list(..., verbose = verbose))
@@ -211,7 +211,7 @@ get_milestones <- function(
 #' Fetches issues from a GitHub repository using the GitHub API.
 #' Filters out pull requests and formats the results.
 #'
-#' @inheritParams init_selector_github repo
+#' @inheritParams init_selector_gh repo
 #' @inheritParams get_all_repos owner
 #' @param state Character string that is either by default \code{"open"} (or
 #'   `opened`) if you want to fetch only open issues (or milestones),
@@ -229,11 +229,11 @@ get_milestones <- function(
 #'
 #' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
 #' \donttest{
-#' my_issues1 <- IssueTrackeR:::get_issues_github(
+#' my_issues1 <- IssueTrackeR:::get_issues_gh(
 #'     owner = "rjdverse",
 #'     repo = "rjd3toolkit"
 #' )
-#' my_issues2 <- IssueTrackeR:::get_issues_github(
+#' my_issues2 <- IssueTrackeR:::get_issues_gh(
 #'     owner = "TanguyBarthelemy",
 #'     repo = "IssueTrackeR",
 #'     state = "all"
@@ -242,7 +242,7 @@ get_milestones <- function(
 #'
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
-get_issues_github <- function(
+get_issues_gh <- function(
     repo = NULL,
     owner = NULL,
     state = c("open", "opened", "closed", "all"),
@@ -289,7 +289,7 @@ get_issues_github <- function(
     })
     check_response(raw_comments)
 
-    issues <- format_issues_github(
+    issues <- format_issues_gh(
         raw_issues = raw_issues,
         raw_comments = raw_comments,
         verbose = verbose
@@ -303,8 +303,8 @@ get_issues_github <- function(
 #' @description
 #' Internal function to fetch issues from GitLab API for a specific project.
 #'
-#' @inheritParams init_selector_gitlab project_id
-#' @inheritParams get_issues_github state
+#' @inheritParams init_selector_gl project_id
+#' @inheritParams get_issues_gh state
 #' @inheritParams reset_options verbose
 #'
 #' @returns An `IssuesTB` object containing the issues from the specified
@@ -313,14 +313,14 @@ get_issues_github <- function(
 #' @examples
 #' \dontrun{
 #' # Get issues from a GitLab project
-#' my_issues <- IssueTrackeR:::get_issues_gitlab(project_id = 4578)
+#' my_issues <- IssueTrackeR:::get_issues_gl(project_id = 4578)
 #' }
 #'
 #' @dev
 #' @importFrom gitlabr gl_list_issues
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
-get_issues_gitlab <- function(
+get_issues_gl <- function(
     project_id,
     state = c("open", "opened", "closed", "all"),
     verbose = TRUE,
@@ -342,7 +342,7 @@ get_issues_gitlab <- function(
         state = state,
         ...
     )
-    issues <- format_issues_gitlab(raw_issues)
+    issues <- format_issues_gl(raw_issues)
 
     return(issues)
 }
@@ -432,7 +432,7 @@ get_issues_local <- function(
 #' Internal function to fetch labels from a GitHub repository using the GitHub
 #' API.
 #'
-#' @inheritParams init_selector_github repo
+#' @inheritParams init_selector_gh repo
 #' @inheritParams get_all_repos owner
 #' @inheritParams reset_options verbose
 #' @inheritParams count_issues
@@ -453,7 +453,7 @@ get_issues_local <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 #' @dev
-get_labels_github <- function(
+get_labels_gh <- function(
     repo = NULL,
     owner = NULL,
     verbose = TRUE,
@@ -477,7 +477,7 @@ get_labels_github <- function(
     })
     check_response(raw_labels)
 
-    list_labels <- format_labels_github(
+    list_labels <- format_labels_gh(
         raw_labels = raw_labels,
         verbose = verbose
     )
@@ -508,7 +508,7 @@ get_labels_github <- function(
 #' @description
 #' Internal function to fetch labels from a GitLab project using the GitLab API.
 #'
-#' @inheritParams init_selector_gitlab project_id
+#' @inheritParams init_selector_gl project_id
 #' @inheritParams reset_options verbose
 #' @param \dots Additional arguments to connect to the GitLab as `gitlab_url`
 #'   and `private_token`.
@@ -530,7 +530,7 @@ get_labels_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 #' @dev
-get_labels_gitlab <- function(
+get_labels_gl <- function(
     project_id,
     verbose = TRUE,
     ...
@@ -639,9 +639,9 @@ get_labels_local <- function(
 #' Internal function to fetch milestones from a GitHub repository using the
 #' GitHub API.
 #'
-#' @inheritParams init_selector_github repo
+#' @inheritParams init_selector_gh repo
 #' @inheritParams get_all_repos owner
-#' @inheritParams get_issues_github state
+#' @inheritParams get_issues_gh state
 #' @inheritParams reset_options verbose
 #'
 #' @details
@@ -666,7 +666,7 @@ get_labels_local <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_character
 #' @dev
-get_milestones_github <- function(
+get_milestones_gh <- function(
     repo = NULL,
     owner = NULL,
     state = c("open", "opened", "closed", "all"),
@@ -695,7 +695,7 @@ get_milestones_github <- function(
     })
     check_response(raw_milestones)
 
-    milestones <- format_milestones_github(raw_milestones, verbose = verbose)
+    milestones <- format_milestones_gh(raw_milestones, verbose = verbose)
     if (nrow(milestones) > 0L) {
         milestones <- cbind(milestones, repo = repo, owner = owner)
         col_names <- c(
@@ -728,8 +728,8 @@ get_milestones_github <- function(
 #' Internal function to fetch milestones from a GitLab project using the
 #' GitLab API.
 #'
-#' @inheritParams init_selector_gitlab project_id
-#' @inheritParams get_issues_github state
+#' @inheritParams init_selector_gl project_id
+#' @inheritParams get_issues_gh state
 #' @inheritParams reset_options verbose
 #' @param \dots Additional arguments to connect to the GitLab as `gitlab_url`
 #'   and `private_token`.
@@ -757,7 +757,7 @@ get_milestones_github <- function(
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 #' @dev
-get_milestones_gitlab <- function(
+get_milestones_gl <- function(
     project_id,
     state = c("open", "opened", "closed", "all"),
     verbose = TRUE,

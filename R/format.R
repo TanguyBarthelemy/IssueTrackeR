@@ -57,14 +57,14 @@ format_timestamp <- function(x) {
 #'   be formatted.
 #'
 #' @returns
-#' - `format_labels_github`: A data frame with columns: `name`, `description`,
+#' - `format_labels_gh`: A data frame with columns: `name`, `description`,
 #'   `color`.
-#' - `format_comments_github`: A list of data frames with columns: `text`,
+#' - `format_comments_gh`: A list of data frames with columns: `text`,
 #'   `author`.
-#' - `format_issues_github`: A list of IssuesTB objects with complete issue
+#' - `format_issues_gh`: A list of IssuesTB objects with complete issue
 #'   data.
-#' - `format_milestone_github`: A data frame with milestone information.
-#' - `format_milestones_github`: A list representing milestones with `title`,
+#' - `format_milestone_gh`: A data frame with milestone information.
+#' - `format_milestones_gh`: A list representing milestones with `title`,
 #'   `description` and `due_on` date)
 #'
 #' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
@@ -77,7 +77,7 @@ format_timestamp <- function(x) {
 #'    .limit = Inf,
 #'    .progress = FALSE
 #' )
-#' IssueTrackeR:::format_labels_github(raw_labels)
+#' IssueTrackeR:::format_labels_gh(raw_labels)
 #'
 #' # Formatting milestone
 #' raw_milestones <- gh::gh(
@@ -89,7 +89,7 @@ format_timestamp <- function(x) {
 #'     .progress = FALSE
 #' )
 #' raw_milestone <- raw_milestones[[5L]]
-#' IssueTrackeR:::format_milestone_github(raw_milestone)
+#' IssueTrackeR:::format_milestone_gh(raw_milestone)
 #'
 #' # Formatting milestones
 #' milestones_jdplus_main <- gh::gh(
@@ -100,7 +100,7 @@ format_timestamp <- function(x) {
 #'     .limit = Inf,
 #'     .progress = FALSE
 #'  )
-#' IssueTrackeR:::format_milestones_github(milestones_jdplus_main)
+#' IssueTrackeR:::format_milestones_gh(milestones_jdplus_main)
 #'
 #' # Formatting issues
 #' raw_issues <- gh::gh(
@@ -118,12 +118,12 @@ format_timestamp <- function(x) {
 #'     .limit = Inf,
 #'     .progress = FALSE
 #' )
-#' formatted_comments <- IssueTrackeR:::format_comments_github(
+#' formatted_comments <- IssueTrackeR:::format_comments_gh(
 #'     raw_comments,
 #'     urls
 #' )
 #'
-#' formatted_issues <- IssueTrackeR:::format_issues_github(
+#' formatted_issues <- IssueTrackeR:::format_issues_gh(
 #'     raw_issues = raw_issues,
 #'     raw_comments = raw_comments,
 #'     verbose = FALSE
@@ -137,7 +137,7 @@ NULL
 
 #' @rdname format
 #' @noRd
-format_comments_github <- function(
+format_comments_gh <- function(
     raw_comments,
     verbose = TRUE
 ) {
@@ -184,7 +184,7 @@ generate_empty_comments_list <- function(issues_number) {
     return(comments_list)
 }
 
-extract_labels_from_raw_issue_github <- function(raw_issue) {
+extract_labels_issue_gh <- function(raw_issue) {
     raw_labels <- raw_issue[["labels"]]
 
     if (length(raw_labels) == 0L) {
@@ -216,7 +216,7 @@ extract_labels_from_raw_issue_github <- function(raw_issue) {
     return(list_labels)
 }
 
-extract_labels_from_raw_issues_gitlab <- function(raw_issues) {
+extract_labels_issues_gl <- function(raw_issues) {
     if (any(startsWith(colnames(raw_issues), "labels"))) {
         list_labels <- raw_issues[, startsWith(
             colnames(raw_issues),
@@ -244,7 +244,7 @@ extract_labels_from_raw_issues_gitlab <- function(raw_issues) {
     return(list_labels)
 }
 
-extract_url_from_raw_issue_github <- function(raw_issue) {
+extract_url_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["url"]],
         default = NA_character_
@@ -252,7 +252,7 @@ extract_url_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_state_from_raw_issue_github <- function(raw_issue) {
+extract_state_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["state"]],
         default = NA_character_
@@ -260,7 +260,7 @@ extract_state_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_title_from_raw_issue_github <- function(raw_issue) {
+extract_title_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["title"]],
         default = NA_character_
@@ -268,7 +268,7 @@ extract_title_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_body_from_raw_issue_github <- function(raw_issue) {
+extract_body_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["body"]],
         default = NA_character_
@@ -276,7 +276,7 @@ extract_body_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_number_from_raw_issue_github <- function(raw_issue) {
+extract_number_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["number"]],
         default = NA_integer_
@@ -284,7 +284,7 @@ extract_number_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_html_url_from_raw_issue_github <- function(raw_issue) {
+extract_html_url_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["html_url"]],
         default = NA_character_
@@ -292,7 +292,7 @@ extract_html_url_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_milestone_from_raw_issue_github <- function(raw_issue) {
+extract_milestone_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["milestone"]][["title"]],
         default = NA_character_
@@ -300,7 +300,7 @@ extract_milestone_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_state_reason_from_raw_issue_github <- function(raw_issue) {
+extract_state_reason_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["state_reason"]],
         default = NA_character_
@@ -308,7 +308,7 @@ extract_state_reason_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_created_at_from_raw_issue_github <- function(raw_issue) {
+extract_created_at_issue_gh <- function(raw_issue) {
     output <- raw_issue[["created_at"]] |>
         null_to_default(default = NA_real_) |>
         strptime(format = "%Y-%m-%dT%H:%M:%S") |>
@@ -316,7 +316,7 @@ extract_created_at_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_closed_at_from_raw_issue_github <- function(raw_issue) {
+extract_closed_at_issue_gh <- function(raw_issue) {
     output <- raw_issue[["closed_at"]] |>
         null_to_default(default = NA_real_) |>
         strptime(format = "%Y-%m-%dT%H:%M:%S") |>
@@ -324,7 +324,7 @@ extract_closed_at_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_closed_by_from_raw_issue_github <- function(raw_issue) {
+extract_closed_by_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["closed_by"]][["login"]],
         default = NA_character_
@@ -332,7 +332,7 @@ extract_closed_by_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_creator_from_raw_issue_github <- function(raw_issue) {
+extract_creator_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["creator"]][["login"]],
         default = NA_character_
@@ -340,7 +340,7 @@ extract_creator_from_raw_issue_github <- function(raw_issue) {
     return(output)
 }
 
-extract_assignee_from_raw_issue_github <- function(raw_issue) {
+extract_assignee_issue_gh <- function(raw_issue) {
     output <- null_to_default(
         x = raw_issue[["assignee"]][["login"]],
         default = NA_character_
@@ -350,7 +350,7 @@ extract_assignee_from_raw_issue_github <- function(raw_issue) {
 
 #' @rdname format
 #' @noRd
-format_issue_github <- function(
+format_issue_gh <- function(
     raw_issue,
     comments,
     verbose = TRUE
@@ -364,26 +364,26 @@ format_issue_github <- function(
             stringsAsFactors = FALSE
         )
     )
-    issue_number <- extract_number_from_raw_issue_github(raw_issue)
+    issue_number <- extract_number_issue_gh(raw_issue)
     comments_n <- comments[comments$number == issue_number, ]
     comments_n$number <- NULL
 
     issues <- new_issue(
-        url = extract_url_from_raw_issue_github(raw_issue),
-        html_url = extract_html_url_from_raw_issue_github(raw_issue),
-        title = extract_title_from_raw_issue_github(raw_issue),
-        state = extract_state_from_raw_issue_github(raw_issue),
-        body = extract_body_from_raw_issue_github(raw_issue),
+        url = extract_url_issue_gh(raw_issue),
+        html_url = extract_html_url_issue_gh(raw_issue),
+        title = extract_title_issue_gh(raw_issue),
+        state = extract_state_issue_gh(raw_issue),
+        body = extract_body_issue_gh(raw_issue),
         number = issue_number,
-        labels = extract_labels_from_raw_issue_github(raw_issue),
-        milestone = extract_milestone_from_raw_issue_github(raw_issue),
+        labels = extract_labels_issue_gh(raw_issue),
+        milestone = extract_milestone_issue_gh(raw_issue),
         comments = comments_n,
-        created_at = extract_created_at_from_raw_issue_github(raw_issue),
-        closed_at = extract_closed_at_from_raw_issue_github(raw_issue),
-        closed_by = extract_closed_by_from_raw_issue_github(raw_issue),
-        creator = extract_creator_from_raw_issue_github(raw_issue),
-        assignee = extract_assignee_from_raw_issue_github(raw_issue),
-        state_reason = extract_state_reason_from_raw_issue_github(raw_issue),
+        created_at = extract_created_at_issue_gh(raw_issue),
+        closed_at = extract_closed_at_issue_gh(raw_issue),
+        closed_by = extract_closed_by_issue_gh(raw_issue),
+        creator = extract_creator_issue_gh(raw_issue),
+        assignee = extract_assignee_issue_gh(raw_issue),
+        state_reason = extract_state_reason_issue_gh(raw_issue),
         owner = structurel$owner,
         repo = structurel$repo
     )
@@ -393,19 +393,19 @@ format_issue_github <- function(
 
 #' @rdname format
 #' @noRd
-format_issues_github <- function(
+format_issues_gh <- function(
     raw_issues,
     raw_comments,
     verbose = TRUE
 ) {
-    comments <- format_comments_github(
+    comments <- format_comments_gh(
         raw_comments = raw_comments,
         verbose = verbose
     )
 
     issues <- lapply(
         X = raw_issues,
-        FUN = format_issue_github,
+        FUN = format_issue_gh,
         comments = comments
     ) |>
         do.call(what = rbind)
@@ -413,7 +413,7 @@ format_issues_github <- function(
     return(issues)
 }
 
-format_issues_gitlab <- function(
+format_issues_gl <- function(
     raw_issues,
     verbose = TRUE
 ) {
@@ -432,7 +432,7 @@ format_issues_gitlab <- function(
 
     issues_number <- as.integer(raw_issues[["iid"]])
     comments_list <- generate_empty_comments_list(issues_number = issues_number)
-    list_labels <- extract_labels_from_raw_issues_gitlab(raw_issues)
+    list_labels <- extract_labels_issues_gl(raw_issues)
     created_at <- raw_issues[["created_at"]] |>
         strptime(format = "%Y-%m-%dT%H:%M:%S") |>
         format_timestamp()
@@ -475,7 +475,7 @@ format_issues_gitlab <- function(
 
 #' @rdname format
 #' @noRd
-format_labels_github <- function(raw_labels, verbose = TRUE) {
+format_labels_gh <- function(raw_labels, verbose = TRUE) {
     if (verbose) {
         cat("Reading labels... ")
     }
@@ -501,7 +501,7 @@ format_labels_github <- function(raw_labels, verbose = TRUE) {
 
 #' @rdname format
 #' @noRd
-format_milestone_github <- function(raw_milestone, verbose = TRUE) {
+format_milestone_gh <- function(raw_milestone, verbose = TRUE) {
     if (verbose) {
         cat("\t- ", raw_milestone[["title"]], "... Done!\n")
     }
@@ -541,12 +541,12 @@ format_milestone_github <- function(raw_milestone, verbose = TRUE) {
 
 #' @rdname format
 #' @noRd
-format_milestones_github <- function(raw_milestones, verbose = TRUE) {
+format_milestones_gh <- function(raw_milestones, verbose = TRUE) {
     if (verbose) {
         cat("Reading milestones... \n")
     }
     milestones <- raw_milestones |>
-        lapply(FUN = format_milestone_github, verbose = verbose) |>
+        lapply(FUN = format_milestone_gh, verbose = verbose) |>
         do.call(what = rbind) |>
         as.data.frame()
 

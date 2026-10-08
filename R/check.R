@@ -32,7 +32,7 @@
 #'
 #' @param msg Character string containing the error message or API URL
 #' @inheritParams get_all_repos owner
-#' @inheritParams init_selector_github repo
+#' @inheritParams init_selector_gh repo
 #'
 #' @returns For detection functions: `TRUE` if the error condition is met.
 #' For message functions: Character vector with the error message.

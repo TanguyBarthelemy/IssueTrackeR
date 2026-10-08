@@ -63,8 +63,8 @@ init_selector <- function(source = NULL, ...) {
     selectors <- do.call(
         what = switch(
             source,
-            github = init_selector_github,
-            gitlab = init_selector_gitlab,
+            github = init_selector_gh,
+            gitlab = init_selector_gl,
             local = init_selector_local
         ),
         args = sel_args
@@ -163,23 +163,23 @@ empty_selector <- function() {
 #'
 #' @examples
 #' # Select a specific repository
-#' gh_sel <- IssueTrackeR:::init_selector_github(
+#' gh_sel <- IssueTrackeR:::init_selector_gh(
 #'     owner = "TanguyBarthelemy",
 #'     repo = "IssueTrackeR"
 #' )
 #'
 #' # Select all repositories for an owner
-#' tb_sel <- IssueTrackeR:::init_selector_github(owner = "TanguyBarthelemy")
+#' tb_sel <- IssueTrackeR:::init_selector_gh(owner = "TanguyBarthelemy")
 #'
 #' # Select multiple repositories
-#' multi_repo_sel <- IssueTrackeR:::init_selector_github(
+#' multi_repo_sel <- IssueTrackeR:::init_selector_gh(
 #'     owner = "TanguyBarthelemy",
 #'     repo = c("IssueTrackeR", "AnotherRepo")
 #' )
 #' @importFrom checkmate assert_character
 #' @dev
 #'
-init_selector_github <- function(owner = NULL, repo = NULL, ...) {
+init_selector_gh <- function(owner = NULL, repo = NULL, ...) {
     checkmate::assert_character(owner, null.ok = TRUE)
     checkmate::assert_character(repo, null.ok = TRUE)
 
@@ -187,11 +187,11 @@ init_selector_github <- function(owner = NULL, repo = NULL, ...) {
         warning("There is no owner Please provide a owner.", call. = FALSE)
         return(empty_selector())
     } else if (length(owner) > 1L) {
-        selector <- lapply(owner, init_selector_github, repo = repo, ...) |>
+        selector <- lapply(owner, init_selector_gh, repo = repo, ...) |>
             do.call(what = merge_selector)
         return(selector)
     } else if (is.null(repo)) {
-        return(init_selector_github(
+        return(init_selector_gh(
             owner = owner,
             repo = get_all_repos(owner),
             ...
@@ -224,14 +224,14 @@ init_selector_github <- function(owner = NULL, repo = NULL, ...) {
 #' @dev
 #' @examples
 #' # Select a single project
-#' gl_sel <- IssueTrackeR:::init_selector_gitlab(project_id = 8425)
+#' gl_sel <- IssueTrackeR:::init_selector_gl(project_id = 8425)
 #'
 #' # Select multiple projects
-#' multi_project_sel <- IssueTrackeR:::init_selector_gitlab(
+#' multi_project_sel <- IssueTrackeR:::init_selector_gl(
 #'     project_id = c(2153, 7865, 6542)
 #' )
 #' @importFrom checkmate assert_integerish
-init_selector_gitlab <- function(project_id = NULL, ...) {
+init_selector_gl <- function(project_id = NULL, ...) {
     checkmate::assert_integerish(project_id, null.ok = TRUE)
     if (is.null(project_id)) {
         warning(
