@@ -184,7 +184,7 @@ generate_empty_comments_list <- function(issues_number) {
     return(comments_list)
 }
 
-extract_issue_labels_github <- function(raw_issue) {
+extract_labels_from_raw_issue_github <- function(raw_issue) {
     raw_labels <- raw_issue[["labels"]]
 
     if (length(raw_labels) == 0L) {
@@ -216,7 +216,7 @@ extract_issue_labels_github <- function(raw_issue) {
     return(list_labels)
 }
 
-extract_issues_labels_gitlab <- function(raw_issues) {
+extract_labels_from_raw_issues_gitlab <- function(raw_issues) {
     if (any(startsWith(colnames(raw_issues), "labels"))) {
         list_labels <- raw_issues[, startsWith(
             colnames(raw_issues),
@@ -244,6 +244,110 @@ extract_issues_labels_gitlab <- function(raw_issues) {
     return(list_labels)
 }
 
+extract_url_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["url"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_state_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["state"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_title_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["title"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_body_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["body"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_number_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["number"]],
+        default = NA_integer_
+    )
+    return(output)
+}
+
+extract_html_url_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["html_url"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_milestone_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["milestone"]][["title"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_state_reason_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["state_reason"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_created_at_from_raw_issue_github <- function(raw_issue) {
+    output <- raw_issue[["created_at"]] |>
+        null_to_default(default = NA_real_) |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+    return(output)
+}
+
+extract_closed_at_from_raw_issue_github <- function(raw_issue) {
+    output <- raw_issue[["closed_at"]] |>
+        null_to_default(default = NA_real_) |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+    return(output)
+}
+
+extract_closed_by_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["closed_by"]][["login"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_creator_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["creator"]][["login"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_assignee_from_raw_issue_github <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["assignee"]][["login"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
 #' @rdname format
 #' @noRd
 format_issue_github <- function(
@@ -260,64 +364,26 @@ format_issue_github <- function(
             stringsAsFactors = FALSE
         )
     )
-    issue_number <- null_to_default(
-        x = raw_issue[["number"]],
-        default = NA_integer_
-    )
-    created_at <- raw_issue[["created_at"]] |>
-        null_to_default(default = NA_real_) |>
-        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
-        format_timestamp()
-    closed_at <- raw_issue[["closed_at"]] |>
-        null_to_default(default = NA_real_) |>
-        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
-        format_timestamp()
+    issue_number <- extract_number_from_raw_issue_github(raw_issue)
     comments_n <- comments[comments$number == issue_number, ]
     comments_n$number <- NULL
 
     issues <- new_issue(
-        url = raw_issue[["url"]],
-        html_url = null_to_default(
-            x = raw_issue[["html_url"]],
-            default = NA_character_
-        ),
-        title = null_to_default(
-            x = raw_issue[["title"]],
-            default = NA_character_
-        ),
-        state = null_to_default(
-            x = raw_issue[["state"]],
-            default = NA_character_
-        ),
-        body = null_to_default(
-            x = raw_issue[["body"]],
-            default = NA_character_
-        ),
+        url = extract_url_from_raw_issue_github(raw_issue),
+        html_url = extract_html_url_from_raw_issue_github(raw_issue),
+        title = extract_title_from_raw_issue_github(raw_issue),
+        state = extract_state_from_raw_issue_github(raw_issue),
+        body = extract_body_from_raw_issue_github(raw_issue),
         number = issue_number,
-        labels = extract_issue_labels_github(raw_issue),
-        milestone = null_to_default(
-            x = raw_issue[["milestone"]][["title"]],
-            default = NA_character_
-        ),
+        labels = extract_labels_from_raw_issue_github(raw_issue),
+        milestone = extract_milestone_from_raw_issue_github(raw_issue),
         comments = comments_n,
-        created_at = created_at,
-        closed_at = closed_at,
-        closed_by = null_to_default(
-            x = raw_issue[["closed_by"]][["login"]],
-            default = NA_character_
-        ),
-        creator = null_to_default(
-            x = raw_issue[["user"]][["login"]],
-            default = NA_character_
-        ),
-        assignee = null_to_default(
-            x = raw_issue[["assignee"]][["login"]],
-            default = NA_character_
-        ),
-        state_reason = null_to_default(
-            x = raw_issue[["state_reason"]],
-            default = NA_character_
-        ),
+        created_at = extract_created_at_from_raw_issue_github(raw_issue),
+        closed_at = extract_closed_at_from_raw_issue_github(raw_issue),
+        closed_by = extract_closed_by_from_raw_issue_github(raw_issue),
+        creator = extract_creator_from_raw_issue_github(raw_issue),
+        assignee = extract_assignee_from_raw_issue_github(raw_issue),
+        state_reason = extract_state_reason_from_raw_issue_github(raw_issue),
         owner = structurel$owner,
         repo = structurel$repo
     )
@@ -366,7 +432,7 @@ format_issues_gitlab <- function(
 
     issues_number <- as.integer(raw_issues[["iid"]])
     comments_list <- generate_empty_comments_list(issues_number = issues_number)
-    list_labels <- extract_issues_labels_gitlab(raw_issues)
+    list_labels <- extract_labels_from_raw_issues_gitlab(raw_issues)
     created_at <- raw_issues[["created_at"]] |>
         strptime(format = "%Y-%m-%dT%H:%M:%S") |>
         format_timestamp()
