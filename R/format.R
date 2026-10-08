@@ -171,6 +171,19 @@ format_comments_github <- function(
     return(comments_list)
 }
 
+generate_empty_comments_list <- function(issues_number) {
+    comments_list <- rep(
+        x = list(data.frame(
+            text = character(0L),
+            author = character(0L),
+            stringsAsFactors = FALSE
+        )),
+        times = length(issues_number)
+    )
+    names(comments_list) <- issues_number
+    return(comments_list)
+}
+
 extract_issue_labels_github <- function(raw_issue) {
     raw_labels <- raw_issue[["labels"]]
 
@@ -198,6 +211,34 @@ extract_issue_labels_github <- function(raw_issue) {
                 )
             ),
             stringsAsFactors = FALSE
+        )
+    }
+    return(list_labels)
+}
+
+extract_issues_labels_gitlab <- function(raw_issues) {
+    if (any(startsWith(colnames(raw_issues), "labels"))) {
+        list_labels <- raw_issues[, startsWith(
+            colnames(raw_issues),
+            "labels"
+        )] |>
+            t() |>
+            as.data.frame() |>
+            lapply(FUN = function(x) {
+                data.frame(
+                    name = x[!is.na(x)],
+                    color = rep(NA_character_, length(x[!is.na(x)]))
+                )
+            }) |>
+            unname()
+    } else {
+        list_labels <- rep(
+            x = list(data.frame(
+                name = character(0L),
+                color = character(0L),
+                stringsAsFactors = FALSE
+            )),
+            times = nrow(raw_issues)
         )
     }
     return(list_labels)
@@ -323,61 +364,9 @@ format_issues_gitlab <- function(
         }) |>
         do.call(what = rbind)
 
-    comments <- format_comments_github(
-        raw_comments = list(),
-        verbose = verbose
-    )
-
     issues_number <- as.integer(raw_issues[["iid"]])
-    comments_number <- comments$number
-    comments$number <- NULL
-
-    comments_list <- split(
-        x = comments,
-        f = comments_number
-    ) |>
-        lapply(FUN = `rownames<-`, NULL)
-    no_comment <- setdiff(issues_number, comments_number)
-    comments_list <- c(
-        comments_list,
-        stats::setNames(
-            object = rep(
-                x = list(data.frame(
-                    text = character(0L),
-                    author = character(0L),
-                    stringsAsFactors = FALSE
-                )),
-                times = length(no_comment)
-            ),
-            nm = no_comment
-        )
-    )
-    comments_list <- comments_list[issues_number]
-
-    if (any(startsWith(colnames(raw_issues), "labels"))) {
-        labels_list <- raw_issues[, startsWith(
-            colnames(raw_issues),
-            "labels"
-        )] |>
-            t() |>
-            as.data.frame() |>
-            lapply(FUN = function(x) {
-                data.frame(
-                    name = x[!is.na(x)],
-                    color = rep(NA_character_, length(x[!is.na(x)]))
-                )
-            }) |>
-            unname()
-    } else {
-        labels_list <- rep(
-            x = list(data.frame(
-                name = character(0L),
-                color = character(0L),
-                stringsAsFactors = FALSE
-            )),
-            times = nrow(raw_issues)
-        )
-    }
+    comments_list <- generate_empty_comments_list(issues_number = issues_number)
+    list_labels <- extract_issues_labels_gitlab(raw_issues)
     created_at <- raw_issues[["created_at"]] |>
         strptime(format = "%Y-%m-%dT%H:%M:%S") |>
         format_timestamp()
@@ -393,7 +382,7 @@ format_issues_gitlab <- function(
         state = raw_issues[["state"]],
         body = raw_issues[["description"]],
         number = issues_number,
-        labels = labels_list,
+        labels = list_labels,
         milestone = null_to_default(
             raw_issues[["milestone.title"]],
             default = NA_character_
