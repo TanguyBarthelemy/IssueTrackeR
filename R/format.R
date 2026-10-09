@@ -362,7 +362,7 @@ extract_structurel_issue_gh <- function(raw_issue) {
     return(structurel)
 }
 
-extract_structurel_issues_gl <- function(raw_issue) {
+extract_structurel_issues_gl <- function(raw_issues) {
     structurel <- strsplit(raw_issues[["references.full"]], split = "/|#") |>
         lapply(function(x) {
             data.frame(
