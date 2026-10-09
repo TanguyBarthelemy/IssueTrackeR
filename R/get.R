@@ -774,21 +774,7 @@ get_milestones_gl <- function(
     )
 
     if (nrow(raw_milestones) == 0L) {
-        milestones <- data.frame(
-            source = character(0L),
-            title = character(0L),
-            description = character(0L),
-            due_on = format_timestamp(character(0L)),
-            closed_at = format_timestamp(character(0L)),
-            creator = character(0L),
-            state = character(0L),
-            nb_issues_open = integer(0L),
-            nb_issues_closed = integer(0L),
-            repo = character(0L),
-            owner = character(0L),
-            url = character(0L),
-            stringsAsFactors = FALSE
-        )
+        return(create_empty_milestones())
     } else {
         milestones <- data.frame(
             source = gsub(
@@ -826,6 +812,26 @@ get_milestones_gl <- function(
         cat("Done!", nrow(milestones), "milestones found.\n", sep = " ")
     }
 
+    class(milestones) <- c("MilestonesTB", "data.frame")
+    return(milestones)
+}
+
+create_empty_milestones <- function() {
+    milestones <- data.frame(
+        source = character(0L),
+        title = character(0L),
+        description = character(0L),
+        due_on = format_timestamp(character(0L)),
+        closed_at = format_timestamp(character(0L)),
+        creator = character(0L),
+        state = character(0L),
+        nb_issues_open = integer(0L),
+        nb_issues_closed = integer(0L),
+        repo = character(0L),
+        owner = character(0L),
+        url = character(0L),
+        stringsAsFactors = FALSE
+    )
     class(milestones) <- c("MilestonesTB", "data.frame")
     return(milestones)
 }
