@@ -775,38 +775,38 @@ get_milestones_gl <- function(
 
     if (nrow(raw_milestones) == 0L) {
         return(create_empty_milestones())
-    } else {
-        milestones <- data.frame(
-            source = gsub(
-                x = structurel$web_url,
-                pattern = paste0(structurel$path_with_namespace, "$"),
-                replacement = ""
-            ),
-            title = null_to_default(
-                raw_milestones[["title"]],
-                default = NA_character_
-            ),
-            description = null_to_default(
-                raw_milestones[["description"]],
-                default = NA_character_
-            ),
-            due_on = format_timestamp(null_to_default(
-                raw_milestones[["due_date"]],
-                default = NA_character_
-            )),
-            closed_at = format_timestamp(NA_character_),
-            creator = NA_character_,
-            state = null_to_default(
-                raw_milestones[["state"]],
-                default = NA_character_
-            ),
-            nb_issues_open = NA_integer_,
-            nb_issues_closed = NA_integer_,
-            repo = structurel$path,
-            owner = structurel$namespace.full_path,
-            url = raw_milestones$web_url
-        )
     }
+
+    milestones <- data.frame(
+        source = gsub(
+            x = structurel$web_url,
+            pattern = paste0(structurel$path_with_namespace, "$"),
+            replacement = ""
+        ),
+        title = null_to_default(
+            raw_milestones[["title"]],
+            default = NA_character_
+        ),
+        description = null_to_default(
+            raw_milestones[["description"]],
+            default = NA_character_
+        ),
+        due_on = format_timestamp(null_to_default(
+            raw_milestones[["due_date"]],
+            default = NA_character_
+        )),
+        closed_at = format_timestamp(NA_character_),
+        creator = NA_character_,
+        state = null_to_default(
+            raw_milestones[["state"]],
+            default = NA_character_
+        ),
+        nb_issues_open = NA_integer_,
+        nb_issues_closed = NA_integer_,
+        repo = structurel$path,
+        owner = structurel$namespace.full_path,
+        url = raw_milestones$web_url
+    )
 
     if (verbose) {
         cat("Done!", nrow(milestones), "milestones found.\n", sep = " ")
