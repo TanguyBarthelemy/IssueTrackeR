@@ -184,7 +184,7 @@ extract_labels_issue_gh <- function(raw_issue) {
     raw_labels <- raw_issue[["labels"]]
 
     if (length(raw_labels) == 0L) {
-        list_labels <- create_empty_labels_list()
+        list_labels <- create_empty_labels_list()[[1L]]
     } else {
         list_labels <- data.frame(
             name = vapply(
