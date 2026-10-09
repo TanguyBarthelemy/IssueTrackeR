@@ -5,6 +5,7 @@ try({
             source = "GitHub",
             owner = "TanguyBarthelemy",
             repo = "IssueTrackeR"
-        )
+        ),
+        cli.hyperlink = TRUE
     )
 })

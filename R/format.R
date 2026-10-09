@@ -348,6 +348,33 @@ extract_assignee_issue_gh <- function(raw_issue) {
     return(output)
 }
 
+#' @importFrom utils strcapture
+extract_structurel_issue_gh <- function(raw_issue) {
+    structurel <- utils::strcapture(
+        pattern = "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
+        x = extract_url_issue_gh(raw_issue = raw_issue),
+        proto = data.frame(
+            owner = character(),
+            repo = character(),
+            stringsAsFactors = FALSE
+        )
+    )
+    return(structurel)
+}
+
+extract_structurel_issues_gl <- function(raw_issue) {
+    structurel <- strsplit(raw_issues[["references.full"]], split = "/|#") |>
+        lapply(function(x) {
+            data.frame(
+                owner = paste(x[seq_len(length(x) - 2L)], collapse = "/"),
+                repo = x[length(x) - 1L],
+                stringsAsFactors = FALSE
+            )
+        }) |>
+        do.call(what = rbind)
+    return(structurel)
+}
+
 #' @rdname format
 #' @noRd
 format_issue_gh <- function(
@@ -355,15 +382,7 @@ format_issue_gh <- function(
     comments,
     verbose = TRUE
 ) {
-    structurel <- utils::strcapture(
-        "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
-        raw_issue[["url"]],
-        proto = data.frame(
-            owner = character(),
-            repo = character(),
-            stringsAsFactors = FALSE
-        )
-    )
+    structurel <- extract_structurel_issue_gh(raw_issue)
     issue_number <- extract_number_issue_gh(raw_issue)
     comments_n <- comments[comments$number == issue_number, ]
     comments_n$number <- NULL
@@ -420,16 +439,7 @@ format_issues_gl <- function(
     if (nrow(raw_issues) == 0L) {
         return(new_issues())
     }
-    structurel <- strsplit(raw_issues[["references.full"]], split = "/|#") |>
-        lapply(function(x) {
-            data.frame(
-                owner = paste(x[seq_len(length(x) - 2L)], collapse = "/"),
-                repo = x[length(x) - 1L],
-                stringsAsFactors = FALSE
-            )
-        }) |>
-        do.call(what = rbind)
-
+    structurel <- extract_structurel_issues_gl(raw_issues)
     issues_number <- as.integer(raw_issues[["iid"]])
     comments_list <- generate_empty_comments_list(issues_number = issues_number)
     list_labels <- extract_labels_issues_gl(raw_issues)

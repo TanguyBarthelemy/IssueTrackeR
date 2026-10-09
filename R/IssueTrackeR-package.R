@@ -14,7 +14,7 @@
 #' @importFrom tools file_path_sans_ext file_ext
 #' @importFrom grDevices col2rgb hcl.colors
 #' @importFrom stats setNames
-#' @importFrom utils strcapture URLencode
+#' @importFrom utils URLencode
 #' @importFrom graphics polygon legend abline rect lines
 ## usethis namespace: end
 NULL
