@@ -56,40 +56,11 @@ get_all_repos <- function(
     list_repo <- NULL
 
     if (public) {
-        list_public_repo <- try({
-            gh::gh(
-                endpoint = endpoint,
-                owner = owner,
-                .limit = Inf,
-                .progress = FALSE
-            )
-        })
-        check_response(list_public_repo)
-        list_public_repo <- vapply(
-            X = list_public_repo,
-            FUN = "[[",
-            "name",
-            FUN.VALUE = character(1L)
-        )
-
-        list_repo <- c(list_repo, list_public_repo)
+        list_repo <- c(list_repo, get_public_repos(endpoint, owner))
     }
 
     if (private) {
-        list_private_repo <- try({
-            gh::gh(
-                endpoint = "/user/repos",
-                .limit = Inf,
-                visibility = "private",
-                .progress = FALSE
-            )
-        })
-        check_response(list_private_repo)
-        list_private_repo <- list_private_repo |>
-            Filter(f = \(.x) .x$owner$login == owner) |>
-            vapply(FUN = "[[", "name", FUN.VALUE = character(1L))
-
-        list_repo <- c(list_repo, list_private_repo)
+        list_repo <- c(list_repo, get_private_repos(owner))
     }
 
     list_repo <- unique(list_repo)
@@ -98,4 +69,39 @@ get_all_repos <- function(
         cat(" Done!\n")
     }
     return(list_repo)
+}
+
+get_public_repos <- function(endpoint, owner) {
+    raw_list_public_repo <- try({
+        gh::gh(
+            endpoint = endpoint,
+            owner = owner,
+            .limit = Inf,
+            .progress = FALSE
+        )
+    })
+    check_response(raw_list_public_repo)
+    list_public_repo <- vapply(
+        X = raw_list_public_repo,
+        FUN = "[[",
+        "name",
+        FUN.VALUE = character(1L)
+    )
+    return(list_public_repo)
+}
+
+get_private_repos <- function(owner) {
+    raw_list_private_repo <- try({
+        gh::gh(
+            endpoint = "/user/repos",
+            .limit = Inf,
+            visibility = "private",
+            .progress = FALSE
+        )
+    })
+    check_response(raw_list_private_repo)
+    list_private_repo <- raw_list_private_repo |>
+        Filter(f = \(.x) .x$owner$login == owner) |>
+        vapply(FUN = "[[", "name", FUN.VALUE = character(1L))
+    return(list_private_repo)
 }
