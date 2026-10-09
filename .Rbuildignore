@@ -42,8 +42,12 @@ cran-comments.md
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 
+^\.Rprofile$
+^\.Renviron$
+
 heylogs.properties
 ^data-raw$
+
 ^man/check_response\.Rd$
 ^man/format_timestamp\.Rd$
 ^man/get_issues_gh\.Rd$
