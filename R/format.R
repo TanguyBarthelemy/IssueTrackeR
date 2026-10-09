@@ -173,11 +173,7 @@ format_comments_gh <- function(
 
 generate_empty_comments_list <- function(issues_number) {
     comments_list <- rep(
-        x = list(data.frame(
-            text = character(0L),
-            author = character(0L),
-            stringsAsFactors = FALSE
-        )),
+        x = create_empty_comments_list(),
         times = length(issues_number)
     )
     names(comments_list) <- issues_number
@@ -188,11 +184,7 @@ extract_labels_issue_gh <- function(raw_issue) {
     raw_labels <- raw_issue[["labels"]]
 
     if (length(raw_labels) == 0L) {
-        list_labels <- data.frame(
-            name = character(0L),
-            color = character(0L),
-            stringsAsFactors = FALSE
-        )
+        list_labels <- create_empty_labels_list()
     } else {
         list_labels <- data.frame(
             name = vapply(
@@ -233,11 +225,7 @@ extract_labels_issues_gl <- function(raw_issues) {
             unname()
     } else {
         list_labels <- rep(
-            x = list(data.frame(
-                name = character(0L),
-                color = character(0L),
-                stringsAsFactors = FALSE
-            )),
+            x = create_empty_labels_list(),
             times = nrow(raw_issues)
         )
     }

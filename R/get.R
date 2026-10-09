@@ -395,11 +395,7 @@ get_issues_local <- function(
         X = raw_yaml$comments,
         FUN = function(comments) {
             if (length(comments$text) == 0L) {
-                return(data.frame(
-                    text = character(0L),
-                    author = character(0L),
-                    stringsAsFactors = FALSE
-                ))
+                return(create_empty_comments_list()[[1L]])
             }
             return(data.frame(comments))
         }
@@ -409,11 +405,7 @@ get_issues_local <- function(
         X = raw_yaml$labels,
         FUN = function(lbls) {
             if (length(lbls$name) == 0L) {
-                return(data.frame(
-                    name = character(0L),
-                    color = character(0L),
-                    stringsAsFactors = FALSE
-                ))
+                return(create_empty_labels_list()[[1L]])
             }
             return(data.frame(lbls))
         }
