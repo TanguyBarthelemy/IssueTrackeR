@@ -141,8 +141,13 @@ new_issue.default <- function(
     created_at <- format_timestamp(created_at)
     closed_at <- format_timestamp(closed_at)
 
-    all_args <- lapply(issue_items, get, envir = environment(), inherits = FALSE)
-    names(all_args) <- args_name
+    all_args <- lapply(
+        issue_items,
+        get,
+        envir = environment(),
+        inherits = FALSE
+    )
+    names(all_args) <- issue_items
 
     do.call(what = assert_issue, args = all_args)
     issue <- do.call(
@@ -318,7 +323,12 @@ new_issues.default <- function(
     created_at <- format_timestamp(created_at)
     closed_at <- format_timestamp(closed_at)
 
-    all_args <- lapply(issue_items, get, envir = environment(), inherits = FALSE)
+    all_args <- lapply(
+        issue_items,
+        get,
+        envir = environment(),
+        inherits = FALSE
+    )
     names(all_args) <- issue_items
     do.call(what = assert_issues, args = all_args)
 
