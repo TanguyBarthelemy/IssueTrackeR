@@ -694,12 +694,7 @@ plot_created_closed <- function(x) {
     )
 
     # backlog
-    graphics::lines(
-        dates,
-        still_open,
-        lwd = 2L,
-        col = "black"
-    )
+    graphics::lines(dates, still_open, lwd = 2L, col = "black")
 
     graphics::legend(
         "topleft",

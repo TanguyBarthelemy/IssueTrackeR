@@ -295,8 +295,8 @@ new_issues.default <- function(
     body = NULL,
     number = NULL,
     state = NULL,
-    created_at = as.Date(NA_integer_),
-    closed_at = as.Date(NA_integer_),
+    created_at = NA_integer_,
+    closed_at = NA_integer_,
     closed_by = NA_character_,
     labels = list(),
     comments = list(),
@@ -310,7 +310,7 @@ new_issues.default <- function(
     state_reason = NA_character_,
     ...
 ) {
-    if (is.null(title) && is.null(body) && is.null(number) && is.null(state)) {
+    if (is.null(title) || is.null(body) || is.null(number) || is.null(state)) {
         return(create_empty_issues())
     }
 
@@ -326,6 +326,9 @@ new_issues.default <- function(
             times = length(title)
         )
     }
+    number <- as.integer(number)
+    created_at <- format_timestamp(created_at)
+    closed_at <- format_timestamp(closed_at)
 
     assert_issues(
         title,
@@ -348,15 +351,15 @@ new_issues.default <- function(
     )
 
     issues <- data.frame(
-        number = as.integer(number),
+        number = number,
         title = title,
         body = body,
         state = state,
         url = url,
         html_url = html_url,
         milestone = milestone,
-        created_at = format_timestamp(created_at),
-        closed_at = format_timestamp(closed_at),
+        created_at = created_at,
+        closed_at = closed_at,
         closed_by = closed_by,
         creator = creator,
         assignee = assignee,
@@ -372,6 +375,7 @@ new_issues.default <- function(
 
     return(issues)
 }
+
 assert_issues <- function(
     title = NULL,
     body = NULL,
