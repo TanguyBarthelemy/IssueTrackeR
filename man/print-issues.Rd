@@ -26,7 +26,7 @@
 
 \method{print}{summary.LabelsTB}(x, ...)
 
-\method{print}{ContributionsTB}(x)
+\method{print}{ContributionsTB}(x, ...)
 }
 \arguments{
 \item{x}{An object of class \code{IssueTB}, \code{IssuesTB}, \code{LabelsTB} or
