@@ -327,7 +327,7 @@ new_issues.default <- function(
     closed_at <- format_timestamp(closed_at)
 
     args_name <- setdiff(
-        names(as.list(match.call(expand.dots = FALSE)))[-1],
+        names(as.list(match.call(expand.dots = FALSE)))[-1L],
         c("labels", "comments")
     )
     all_args <- lapply(args_name, get, envir = environment(), inherits = FALSE)
