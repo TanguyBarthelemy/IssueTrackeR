@@ -357,7 +357,7 @@ print_classement <- function(x) {
 #' @exportS3Method print ContributionsTB
 #' @method print ContributionsTB
 #' @export
-print.ContributionsTB <- function(x) {
+print.ContributionsTB <- function(x, ...) {
     cat(crayon::bold("Issues opened:\n"))
     to_opener <- x[1L, x[1L, ] > 0L] |> sort(decreasing = TRUE)
     print_classement(to_opener)
