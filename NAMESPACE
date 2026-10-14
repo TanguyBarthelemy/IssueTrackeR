@@ -101,6 +101,7 @@ importFrom(checkmate,
   assert_list,
   assert_number,
   assert_numeric,
+  assert_posixct,
   assert_scalar
 )
 importFrom(cli,

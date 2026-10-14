@@ -376,6 +376,10 @@ new_issues.default <- function(
     return(issues)
 }
 
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_list
+#' @importFrom checkmate assert_posixct
 assert_issues <- function(
     title = NULL,
     body = NULL,
@@ -399,8 +403,8 @@ assert_issues <- function(
     checkmate::assert_character(body)
     checkmate::assert_integer(number)
     checkmate::assert_character(state)
-    checkmate::assert_numeric(created_at)
-    checkmate::assert_numeric(closed_at)
+    checkmate::assert_posixct(created_at)
+    checkmate::assert_posixct(closed_at)
     checkmate::assert_character(closed_by)
     checkmate::assert_character(milestone)
     checkmate::assert_character(repo)
@@ -414,6 +418,12 @@ assert_issues <- function(
     checkmate::assert_list(comments)
 }
 
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_list
+#' @importFrom checkmate assert_posixct
+#' @importFrom checkmate assert_scalar
+#' @importFrom checkmate assert_data_frame
 assert_issue <- function(
     title = NA_character_,
     body = NA_character_,
@@ -437,8 +447,8 @@ assert_issue <- function(
     checkmate::assert_character(body)
     checkmate::assert_integer(number)
     checkmate::assert_character(state)
-    checkmate::assert_numeric(created_at)
-    checkmate::assert_numeric(closed_at)
+    checkmate::assert_posixct(created_at)
+    checkmate::assert_posixct(closed_at)
     checkmate::assert_character(closed_by)
     checkmate::assert_character(milestone)
     checkmate::assert_character(repo)
