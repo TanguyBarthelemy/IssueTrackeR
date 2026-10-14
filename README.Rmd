@@ -87,10 +87,7 @@ selector2 <- init_selector(
 # Select list of issues from local files
 selector3 <- init_selector(
     source = "local",
-    file = file.path(
-        system.file("data_issues", package = "IssueTrackeR"),
-        "list_issues.yaml"
-    )
+    file = system.file("data_issues", "list_issues.yaml", package = "IssueTrackeR")
 )
 
 selector_issues <- merge_selector(selector1, selector2, selector3)
@@ -136,8 +133,8 @@ write(
 You can filter the output based on its content using the `with_text()` function:
 
 ```{r filter, eval = TRUE, echo = TRUE}
-filtered_issues <- my_issues |> 
-    with_labels("bug") |> 
+filtered_issues <- my_issues |>
+    with_labels("bug") |>
     with_text("format") |>
     with_comments()
 ```

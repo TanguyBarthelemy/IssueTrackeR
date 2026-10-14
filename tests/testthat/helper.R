@@ -57,23 +57,23 @@ expect_issues <- function(x) {
     expect_identical(
         names(x),
         c(
-            "number",
             "title",
             "body",
+            "number",
             "state",
-            "url",
-            "html_url",
-            "milestone",
             "created_at",
             "closed_at",
             "closed_by",
+            "labels",
+            "comments",
+            "milestone",
+            "repo",
+            "owner",
+            "url",
+            "html_url",
             "creator",
             "assignee",
-            "state_reason",
-            "owner",
-            "repo",
-            "labels",
-            "comments"
+            "state_reason"
         )
     )
 }
@@ -99,40 +99,40 @@ expect_issue <- function(x) {
     expect_identical(
         names(x),
         c(
-            "number",
             "title",
             "body",
+            "number",
             "state",
-            "url",
-            "html_url",
-            "milestone",
             "created_at",
             "closed_at",
             "closed_by",
+            "labels",
+            "comments",
+            "milestone",
+            "repo",
+            "owner",
+            "url",
+            "html_url",
             "creator",
             "assignee",
-            "state_reason",
-            "owner",
-            "repo",
-            "labels",
-            "comments"
+            "state_reason"
         )
     )
 }
 
-# selector <- init_selector(
-#     source = "GitHub",
-#     repo = "jdplus-main",
-#     owner = "jdemetra",
-#     state = "closed"
-# )
-# tested_issues <- get_issues(selector, verbose = FALSE) |>
-#     subset(number %in% c(963, 958, 347, 323, 311, 154))
-# write(
-#     x = tested_issues,
-#     dataset_dir = testthat::test_path("data"),
-#     dataset_name = NULL
-# )
+selector <- init_selector(
+    source = "GitHub",
+    repo = "jdplus-main",
+    owner = "jdemetra",
+    state = "closed"
+)
+tested_issues <- get_issues(selector = selector, verbose = FALSE) |>
+    subset(number %in% c(963, 958, 347, 323, 311, 154))
+write(
+    x = tested_issues,
+    dataset_dir = testthat::test_path("data"),
+    dataset_name = NULL
+)
 
 local_selector <- init_selector(
     source = "Local",

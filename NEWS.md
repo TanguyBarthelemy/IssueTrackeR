@@ -18,7 +18,24 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * `plot` now takes a `by` argument to display area chart by any variable in the list of issues. [#51](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/51)
 * `format_XXX` functions are renamed `format_XXX_github`
 * `write_to_datasets()` is renamed `write()` [#19](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/19)
-
+* The issue fields are now ordrered as :
+    * "title
+    * body
+    * number
+    * state
+    * created_at
+    * closed_at
+    * closed_by
+    * labels
+    * comments
+    * milestone
+    * repo
+    * owner
+    * url
+    * html_url
+    * creator
+    * assignee
+    * state_reason
 
 ## [1.5.0] - 2026-08-24
 

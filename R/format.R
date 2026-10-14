@@ -322,7 +322,7 @@ extract_closed_by_issue_gh <- function(raw_issue) {
 
 extract_creator_issue_gh <- function(raw_issue) {
     output <- null_to_default(
-        x = raw_issue[["creator"]][["login"]],
+        x = raw_issue[["user"]][["login"]],
         default = NA_character_
     )
     return(output)
@@ -424,6 +424,7 @@ format_issue_gh <- function(
     issue_number <- extract_number_issue_gh(raw_issue)
     comments_n <- comments[comments$number == issue_number, ]
     comments_n$number <- NULL
+    rownames(comments_n) <- NULL
 
     issues <- new_issue(
         url = extract_url_issue_gh(raw_issue),

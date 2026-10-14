@@ -1,8 +1,8 @@
 test_that("with_text works", {
-    fix_issue <- with_text(tested_issues, "fix")
-    expect_issues(fix_issue)
-    expect_identical(nrow(fix_issue), 1L)
-    expect_identical(fix_issue[["title"]], "seasonal filter not shown in X-11")
+    fix_issues <- with_text(tested_issues, "fix")
+    expect_issues(fix_issues)
+    expect_identical(nrow(fix_issues), 1L)
+    expect_identical(fix_issues[["title"]], "seasonal filter not shown in X-11")
 
     typo_issue <- with_text(tested_issues, "typo")
     expect_issues(typo_issue)

@@ -3,21 +3,21 @@
 #' @param x a object representing an issue (\code{IssueTB} object, a \code{list}
 #' or a \code{data.frame})
 #' @param title a string. The title of the issue.
-#' @param state a string that is either \code{"open"} (by default) if
-#' the issue is still open or \code{"closed"} if the issue is now closed.
 #' @param body a string. The body (text) of the issue.
 #' @param number a string. The number of the issue.
+#' @param state a string that is either \code{"open"} (by default) if
+#' the issue is still open or \code{"closed"} if the issue is now closed.
 #' @param created_at a date (or timestamp). The creation date of the issue.
 #' @param closed_at a date (or timestamp). The closing date of the issue.
 #' @param closed_by a string. The GitHub username of the person who closed the
 #' issue.
 #' @param labels a vector string (or NULL). The labels of the issue.
+#' @param comments vector of string (the comments of the issue)
 #' @param milestone a string (or NULL). The milestone of the issue.
-#' @param owner Character. Owner name.
 #' @param repo Character. Repository name.
+#' @param owner Character. Owner name.
 #' @param url a string. The URL of the API to the GitHub issue.
 #' @param html_url a string. The URL to the GitHub issue.
-#' @param comments vector of string (the comments of the issue)
 #' @param creator a string. The GitHub username of the creator of the issue.
 #' @param assignee a string. The GitHub username of the assignee of the issue.
 #' @param state_reason a string. \code{"open"}, \code{"completed"},
@@ -102,61 +102,34 @@ new_issue.default <- function(
     body = NA_character_,
     number = NA_integer_,
     state = NA_character_,
-    created_at = as.Date(NA_integer_),
-    closed_at = as.Date(NA_integer_),
+    created_at = format_timestamp(NA_integer_),
+    closed_at = format_timestamp(NA_integer_),
     closed_by = NA_character_,
     labels = NULL,
+    comments = NULL,
     milestone = NA_character_,
     repo = NA_character_,
     owner = NA_character_,
     url = NA_character_,
     html_url = NA_character_,
-    comments = NULL,
     creator = NA_character_,
     assignee = NA_character_,
     state_reason = NA_character_,
     ...
 ) {
-    assert_issue(
-        title = title,
-        body = body,
-        number = number,
-        state = state,
-        created_at = created_at,
-        closed_at = closed_at,
-        closed_by = closed_by,
-        labels = labels,
-        milestone = milestone,
-        repo = repo,
-        url = url,
-        owner = owner,
-        html_url = html_url,
-        comments = comments,
-        creator = creator,
-        assignee = assignee,
-        state_reason = state_reason
-    )
+    number <- as.integer(number)
+    created_at <- format_timestamp(created_at)
+    closed_at <- format_timestamp(closed_at)
 
-    issue <- list(
-        number = as.integer(number),
-        title = title,
-        body = body,
-        state = state,
-        url = url,
-        html_url = html_url,
-        milestone = milestone,
-        created_at = format_timestamp(created_at),
-        closed_at = format_timestamp(closed_at),
-        closed_by = closed_by,
-        creator = creator,
-        assignee = assignee,
-        state_reason = state_reason,
-        owner = owner,
-        repo = repo,
-        labels = labels,
-        comments = comments
-    )
+    args_name <- names(as.list(match.call(expand.dots = FALSE)))[-1L]
+    all_args <- lapply(args_name, get, envir = environment(), inherits = FALSE)
+    names(all_args) <- args_name
 
+    do.call(what = assert_issue, args = all_args)
+    issue <- do.call(
+        what = list,
+        args = all_args
+    )
     class(issue) <- "IssueTB"
     return(issue)
 }
@@ -166,10 +139,10 @@ new_issue.default <- function(
 #' @param x a object representing a list of issues (\code{IssuesTB} object, a
 #' \code{list} or a \code{data.frame}) or a single issue (\code{IssueTB} class)
 #' @param title a vector of string. The titles of the issues.
-#' @param state a vector of string that is either \code{"open"} (by default) if
-#' the issues are still open or \code{"closed"} if the issues are now closed.
 #' @param body a vector of string. The bodies (text) of the issues.
 #' @param number a vector of string. The numbers of the issues.
+#' @param state a vector of string that is either \code{"open"} (by default) if
+#' the issues are still open or \code{"closed"} if the issues are now closed.
 #' @param created_at a vector of date (or timestamp). The creation date of the
 #' issues.
 #' @param closed_at a vector of date (or timestamp). The closing date of the
@@ -177,13 +150,13 @@ new_issue.default <- function(
 #' @param closed_by a vector of string. The usernames of the person who
 #' closed the issues.
 #' @param labels a list of vector string (or NULL). The labels of the issues.
+#' @param comments a list of vector string. The comments of the issues.
 #' @param milestone a vector of string (or NULL). The milestones of the
 #' issues.
-#' @param owner Character string containing the owners name.
 #' @param repo Character. Repositories name.
+#' @param owner Character string containing the owners name.
 #' @param url a vector of string. The URLs of the API to the issues.
 #' @param html_url a vector of string. The URLs to the issues.
-#' @param comments a list of vector string. The comments of the issues.
 #' @param creator a vector of string. The usernames of the creator of the
 #'  issues.
 #' @param assignee a vector of string. The usernames of the assignee of
@@ -291,8 +264,8 @@ new_issues.default <- function(
     body = NULL,
     number = NULL,
     state = NULL,
-    created_at = NA_integer_,
-    closed_at = NA_integer_,
+    created_at = format_timestamp(NA_integer_),
+    closed_at = format_timestamp(NA_integer_),
     closed_by = NA_character_,
     labels = list(),
     comments = list(),
@@ -326,14 +299,12 @@ new_issues.default <- function(
     created_at <- format_timestamp(created_at)
     closed_at <- format_timestamp(closed_at)
 
-    args_name <- setdiff(
-        names(as.list(match.call(expand.dots = FALSE)))[-1L],
-        c("labels", "comments")
-    )
+    args_name <- names(as.list(match.call(expand.dots = FALSE)))[-1L]
     all_args <- lapply(args_name, get, envir = environment(), inherits = FALSE)
     names(all_args) <- args_name
-
     do.call(what = assert_issues, args = all_args)
+
+    all_args[names(all_args) %in% c("labels", "comments")] <- NULL
     issues <- do.call(
         what = data.frame,
         args = c(all_args, stringsAsFactors = FALSE)
@@ -341,6 +312,26 @@ new_issues.default <- function(
     issues$labels <- labels
     issues$comments <- comments
 
+    issues_names <- c(
+        "title",
+        "body",
+        "number",
+        "state",
+        "created_at",
+        "closed_at",
+        "closed_by",
+        "labels",
+        "comments",
+        "milestone",
+        "repo",
+        "owner",
+        "url",
+        "html_url",
+        "creator",
+        "assignee",
+        "state_reason"
+    )
+    issues <- issues[, c(issues_names)]
     class(issues) <- c("IssuesTB", "data.frame")
 
     return(issues)
@@ -688,8 +679,8 @@ assert_issues <- function(
     body = NULL,
     number = NULL,
     state = NULL,
-    created_at = as.Date(NA_integer_),
-    closed_at = as.Date(NA_integer_),
+    created_at = format_timestamp(NA_integer_),
+    closed_at = format_timestamp(NA_integer_),
     closed_by = NA_character_,
     labels = list(),
     comments = list(),
@@ -732,16 +723,16 @@ assert_issue <- function(
     body = NA_character_,
     number = NA_integer_,
     state = NA_character_,
-    created_at = as.Date(NA_integer_),
-    closed_at = as.Date(NA_integer_),
+    created_at = format_timestamp(NA_integer_),
+    closed_at = format_timestamp(NA_integer_),
     closed_by = NA_character_,
     labels = NULL,
+    comments = NULL,
     milestone = NA_character_,
     repo = NA_character_,
     owner = NA_character_,
     url = NA_character_,
     html_url = NA_character_,
-    comments = NULL,
     creator = NA_character_,
     assignee = NA_character_,
     state_reason = NA_character_
@@ -791,6 +782,8 @@ create_empty_issues <- function() {
         created_at = format_timestamp(as.Date(character(0L))),
         closed_at = format_timestamp(as.Date(character(0L))),
         closed_by = character(0L),
+        labels = NULL,
+        comments = NULL,
         milestone = character(0L),
         repo = character(0L),
         owner = character(0L),
@@ -798,9 +791,7 @@ create_empty_issues <- function() {
         html_url = character(0L),
         creator = character(0L),
         assignee = character(0L),
-        state_reason = character(0L),
-        labels = NULL,
-        comments = NULL
+        state_reason = character(0L)
     ))
 }
 

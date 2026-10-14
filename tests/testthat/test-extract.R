@@ -29,7 +29,7 @@ l <- list(
         owner = "jdemetra",
         repo = "jdplus-main",
         labels = data.frame(name = "bug", color = "#d73a4a"),
-        comments = data.frame(text = character(0), author = character(0))
+        comments = data.frame(text = character(0L), author = character(0L))
     ),
     list(data.frame(name = "bug", color = "#d73a4a")),
     new_issue(
@@ -54,60 +54,63 @@ l <- list(
             author = "palatej"
         )
     ),
-    list(data.frame(name = character(0), color = character(0)))
+    list(data.frame(name = character(0L), color = character(0L)))
 )
 
 test_that("[ function is good", {
     testthat::expect_identical(tested_issues2[], tested_issues2)
-    testthat::expect_identical(tested_issues2[1], l[[1L]])
+    testthat::expect_identical(tested_issues2[3L], l[[1L]])
     testthat::expect_identical(
         tested_issues2["labels"],
         list(labels = l[[2L]]) |>
             structure(row.names = c(1L, 4L, 6L), class = "data.frame")
     )
-    testthat::expect_identical(tested_issues2[1, ], l[[3L]])
-    testthat::expect_identical(tested_issues2[1, , drop = TRUE], l[[3L]])
+    testthat::expect_identical(tested_issues2[1L, ], l[[3L]])
+    testthat::expect_identical(tested_issues2[1L, , drop = TRUE], l[[3L]])
     testthat::expect_identical(
-        tested_issues2[1, , drop = FALSE],
-        new_issues(l[[3]])
+        tested_issues2[1L, , drop = FALSE],
+        new_issues(l[[3L]])
     )
 
     testthat::expect_warning(testthat::expect_identical(
-        tested_issues2[1, drop = TRUE],
+        tested_issues2[3L, drop = TRUE],
         l[[1L]]
     ))
     testthat::expect_warning(testthat::expect_identical(
-        tested_issues2[1, drop = FALSE],
+        tested_issues2[3L, drop = FALSE],
         l[[1L]]
     ))
     testthat::expect_identical(tested_issues2[, "labels"], l[[2L]])
-    testthat::expect_identical(tested_issues2[, 1], l[[1]][[1]])
-    testthat::expect_identical(tested_issues2[, 1, drop = TRUE], l[[1]][[1]])
-    testthat::expect_identical(tested_issues2[, 1, drop = FALSE], l[[1]])
+    testthat::expect_identical(tested_issues2[, 3L], l[[1L]][[1L]])
+    testthat::expect_identical(tested_issues2[, 3L, drop = TRUE], l[[1L]][[1L]])
+    testthat::expect_identical(tested_issues2[, 3L, drop = FALSE], l[[1]])
 
-    testthat::expect_identical(tested_issues2[1, "labels"], l[[4L]])
+    testthat::expect_identical(tested_issues2[1L, "labels"], l[[4L]])
     testthat::expect_identical(
-        tested_issues2[1, "labels", drop = TRUE],
+        tested_issues2[1L, "labels", drop = TRUE],
         l[[4L]]
     )
     testthat::expect_identical(
-        tested_issues2[1, "labels", drop = FALSE],
+        tested_issues2[1L, "labels", drop = FALSE],
         list(labels = l[[4L]]) |>
             structure(row.names = 1L, class = "data.frame")
     )
 
-    testthat::expect_identical(tested_issues2[2, ], l[[5]])
-    testthat::expect_identical(tested_issues2[3, "labels"], l[[6]])
-    testthat::expect_identical(tested_issues2[3, "labels", drop = TRUE], l[[6]])
+    testthat::expect_identical(tested_issues2[2L, ], l[[5L]])
+    testthat::expect_identical(tested_issues2[3L, "labels"], l[[6L]])
     testthat::expect_identical(
-        tested_issues2[3, "labels", drop = FALSE],
-        list(labels = l[[6]]) |>
+        tested_issues2[3L, "labels", drop = TRUE],
+        l[[6L]]
+    )
+    testthat::expect_identical(
+        tested_issues2[3L, "labels", drop = FALSE],
+        list(labels = l[[6L]]) |>
             structure(row.names = 6L, class = "data.frame")
     )
-    testthat::expect_identical(tested_issues2[3, 1], 154L)
-    testthat::expect_identical(tested_issues2[3, 1, drop = TRUE], 154L)
+    testthat::expect_identical(tested_issues2[3L, 3L], 154L)
+    testthat::expect_identical(tested_issues2[3L, 3L, drop = TRUE], 154L)
     testthat::expect_identical(
-        tested_issues2[3, 1, drop = FALSE],
+        tested_issues2[3L, 3L, drop = FALSE],
         data.frame(number = 154L, row.names = 6L)
     )
 })

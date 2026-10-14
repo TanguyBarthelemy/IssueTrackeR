@@ -25,16 +25,16 @@ new_issue(x = NULL, ...)
   body = NA_character_,
   number = NA_integer_,
   state = NA_character_,
-  created_at = as.Date(NA_integer_),
-  closed_at = as.Date(NA_integer_),
+  created_at = format_timestamp(NA_integer_),
+  closed_at = format_timestamp(NA_integer_),
   closed_by = NA_character_,
   labels = NULL,
+  comments = NULL,
   milestone = NA_character_,
   repo = NA_character_,
   owner = NA_character_,
   url = NA_character_,
   html_url = NA_character_,
-  comments = NULL,
   creator = NA_character_,
   assignee = NA_character_,
   state_reason = NA_character_,
@@ -65,6 +65,8 @@ issue.}
 
 \item{labels}{a vector string (or NULL). The labels of the issue.}
 
+\item{comments}{vector of string (the comments of the issue)}
+
 \item{milestone}{a string (or NULL). The milestone of the issue.}
 
 \item{repo}{Character. Repository name.}
@@ -74,8 +76,6 @@ issue.}
 \item{url}{a string. The URL of the API to the GitHub issue.}
 
 \item{html_url}{a string. The URL to the GitHub issue.}
-
-\item{comments}{vector of string (the comments of the issue)}
 
 \item{creator}{a string. The GitHub username of the creator of the issue.}
 
