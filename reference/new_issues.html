@@ -87,8 +87,8 @@
 <span>  body <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  number <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="cn">NA_integer_</span><span class="op">)</span>,</span>
-<span>  closed_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="cn">NA_integer_</span><span class="op">)</span>,</span>
+<span>  created_at <span class="op">=</span> <span class="cn">NA_integer_</span>,</span>
+<span>  closed_at <span class="op">=</span> <span class="cn">NA_integer_</span>,</span>
 <span>  closed_by <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  comments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -211,7 +211,9 @@ the issues.</p></dd>
 <span class="r-in"><span>    number <span class="op">=</span> <span class="fl">2L</span>,</span></span>
 <span class="r-in"><span>    created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in assert_issue(title = title, body = body, number = number, state = state,     created_at = created_at, closed_at = closed_at, closed_by = closed_by,     labels = labels, milestone = milestone, repo = repo, url = url,     owner = owner, html_url = html_url, comments = comments,     creator = creator, assignee = assignee, state_reason = state_reason):</span> Assertion on 'created_at' failed: Must be of type 'POSIXct', not 'Date'.</span>
 <span class="r-in"><span><span class="va">issues2</span> <span class="op">&lt;-</span> <span class="fu">new_issues</span><span class="op">(</span>x <span class="op">=</span> <span class="va">issue1</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'issue1' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Custom issues</span></span></span>
 <span class="r-in"><span><span class="va">issues3</span> <span class="op">&lt;-</span> <span class="fu">new_issues</span><span class="op">(</span></span></span>

@@ -194,6 +194,7 @@ issue.</p></dd>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Empty issue</span></span></span>
 <span class="r-in"><span><span class="va">issue1</span> <span class="op">&lt;-</span> <span class="fu">new_issue</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in assert_issue(title = title, body = body, number = number, state = state,     created_at = created_at, closed_at = closed_at, closed_by = closed_by,     labels = labels, milestone = milestone, repo = repo, url = url,     owner = owner, html_url = html_url, comments = comments,     creator = creator, assignee = assignee, state_reason = state_reason):</span> Assertion on 'created_at' failed: Must be of type 'POSIXct', not 'Date'.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Custom issue</span></span></span>
 <span class="r-in"><span><span class="va">issue2</span> <span class="op">&lt;-</span> <span class="fu">new_issue</span><span class="op">(</span></span></span>
@@ -202,25 +203,15 @@ issue.</p></dd>
 <span class="r-in"><span>    number <span class="op">=</span> <span class="fl">47L</span>,</span></span>
 <span class="r-in"><span>    created_at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in assert_issue(title = title, body = body, number = number, state = state,     created_at = created_at, closed_at = closed_at, closed_by = closed_by,     labels = labels, milestone = milestone, repo = repo, url = url,     owner = owner, html_url = html_url, comments = comments,     creator = creator, assignee = assignee, state_reason = state_reason):</span> Assertion on 'created_at' failed: Must be of type 'POSIXct', not 'Date'.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dput.html" class="external-link">dput</a></span><span class="op">(</span><span class="va">issue1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> structure(list(number = NA_integer_, title = NA_character_, body = NA_character_, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     state = NA_character_, url = NA_character_, html_url = NA_character_, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     milestone = NA_character_, created_at = structure(NA_real_, tzone = "UTC", class = c("POSIXct", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     "POSIXt")), closed_at = structure(NA_real_, tzone = "UTC", class = c("POSIXct", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     "POSIXt")), closed_by = NA_character_, creator = NA_character_, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     assignee = NA_character_, state_reason = NA_character_, owner = NA_character_, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     repo = NA_character_, labels = NULL, comments = NULL), class = "IssueTB")</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'issue1' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dput.html" class="external-link">dput</a></span><span class="op">(</span><span class="va">issue2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> structure(list(number = 47L, title = "Nouvelle issue", body = "Un nouveau bug pour la fonction...", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     state = NA_character_, url = NA_character_, html_url = NA_character_, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     milestone = NA_character_, created_at = structure(1791936000, tzone = "UTC", class = c("POSIXct", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     "POSIXt")), closed_at = structure(NA_real_, tzone = "UTC", class = c("POSIXct", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     "POSIXt")), closed_by = NA_character_, creator = NA_character_, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     assignee = NA_character_, state_reason = NA_character_, owner = NA_character_, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     repo = NA_character_, labels = NULL, comments = NULL), class = "IssueTB")</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'issue2' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">issue3</span> <span class="op">&lt;-</span> <span class="fu">new_issue</span><span class="op">(</span>x <span class="op">=</span> <span class="va">issue2</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'issue2' not found</span>
 </code></pre></div>
     </div>
   </div>
