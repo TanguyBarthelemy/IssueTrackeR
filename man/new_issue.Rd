@@ -91,19 +91,15 @@ a \code{IssueTB} object.
 Create a new \code{IssueTB} object
 }
 \examples{
-# Empty issue
-issue1 <- new_issue()
-
 # Custom issue
-issue2 <- new_issue(
+issue <- new_issue(
     title = "Nouvelle issue",
     body = "Un nouveau bug pour la fonction...",
     number = 47L,
     created_at = Sys.Date()
 )
 
-dput(issue1)
-dput(issue2)
+dput(issue)
 
-issue3 <- new_issue(x = issue2)
+issue2 <- new_issue(x = issue)
 }
