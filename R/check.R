@@ -140,6 +140,12 @@ is_api_down <- function(msg) {
     ))
 }
 
+#' @noRd
+#' @rdname github_errors
+is_404 <- function(cond, msg) {
+    return(inherits(x = cond, what = "http_error_404") || is_not_found(msg))
+}
+
 timeout_msg <- c(
     " The GitHub API request timed out. \U1F553\n",
     "\u2192 Check your network connection\n",
@@ -227,6 +233,42 @@ weird_msg <- function(msg) {
     ))
 }
 
+
+#' @noRd
+#' @rdname github_errors
+stop_404 <- function(msg) {
+    url_repo <- msg |>
+        sub(
+            pattern = ".*api.github.com/",
+            replacement = "api.github.com/"
+        ) |>
+        sub(pattern = "\033\\]8.*$", replacement = "")
+
+    if (is_repo_call(url_repo)) {
+        repo_path <- sub(
+            pattern = "^.*/repos/",
+            replacement = "",
+            x = url_repo,
+            fixed = FALSE
+        )
+        parts <- strsplit(x = repo_path, split = "/", fixed = TRUE)[[1L]]
+        owner <- parts[1L]
+        repo <- parts[2L]
+        stop(wrong_repo_msg(owner, repo), call. = FALSE)
+    } else if (is_user_call(url_repo)) {
+        owner <- sub("^.*/users/", "", url_repo)
+        owner <- sub("\\?.*$", "", owner)
+        stop(wrong_username_msg(owner), call. = FALSE)
+    } else if (is_orgs_call(url_repo)) {
+        owner <- sub(pattern = "^.*/orgs/", "", url_repo)
+        owner <- sub(pattern = "/.*$", "", owner)
+        owner <- sub(pattern = "\\?.*$", "", owner)
+        stop(wrong_org_name_msg(owner), call. = FALSE)
+    } else {
+        stop(no_resource_msg, call. = FALSE)
+    }
+}
+
 #' @title Check and Handle GitHub API Errors Message
 #'
 #' @description
@@ -272,39 +314,8 @@ check_response <- function(x) {
         stop(op_cancel_msg, call. = FALSE)
     } else if (is_api_down(msg)) {
         stop(api_down_msg, call. = FALSE)
-    } else if (
-        inherits(x = cond, what = "http_error_404") || is_not_found(msg)
-    ) {
-        url_repo <- msg |>
-            sub(
-                pattern = ".*api.github.com/",
-                replacement = "api.github.com/"
-            ) |>
-            sub(pattern = "\033\\]8.*$", replacement = "")
-
-        if (is_repo_call(url_repo)) {
-            repo_path <- sub(
-                pattern = "^.*/repos/",
-                replacement = "",
-                x = url_repo,
-                fixed = FALSE
-            )
-            parts <- strsplit(x = repo_path, split = "/", fixed = TRUE)[[1L]]
-            owner <- parts[1L]
-            repo <- parts[2L]
-            stop(wrong_repo_msg(owner, repo), call. = FALSE)
-        } else if (is_user_call(url_repo)) {
-            owner <- sub("^.*/users/", "", url_repo)
-            owner <- sub("\\?.*$", "", owner)
-            stop(wrong_username_msg(owner), call. = FALSE)
-        } else if (is_orgs_call(url_repo)) {
-            owner <- sub(pattern = "^.*/orgs/", "", url_repo)
-            owner <- sub(pattern = "/.*$", "", owner)
-            owner <- sub(pattern = "\\?.*$", "", owner)
-            stop(wrong_org_name_msg(owner), call. = FALSE)
-        } else {
-            stop(no_resource_msg, call. = FALSE)
-        }
+    } else if (is_404(cond, msg)) {
+        stop_404(msg)
     } else if (has_no_http(msg)) {
         stop(no_http_msg, call. = FALSE)
     } else {

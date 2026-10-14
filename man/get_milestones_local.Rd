@@ -28,4 +28,3 @@ information.
 \description{
 Internal function to read milestones from a local YAML file.
 }
-\keyword{internal}

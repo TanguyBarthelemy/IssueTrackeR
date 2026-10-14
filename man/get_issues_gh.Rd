@@ -52,4 +52,3 @@ my_issues2 <- IssueTrackeR:::get_issues_gh(
 }
 \dontshow{\}) # examplesIf}
 }
-\keyword{internal}

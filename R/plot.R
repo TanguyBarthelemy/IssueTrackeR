@@ -651,7 +651,6 @@ plot_area_chart <- function(categorised_mat, title = "Number of issues") {
 #' @importFrom graphics legend
 plot_created_closed <- function(x) {
     dates <- get_dates_vec(x$created_at)
-
     new_created <- bin_count(x$created_at, dates)
     new_closed <- bin_count(x$closed_at, dates)
     still_open <- cumsum(new_created) - cumsum(new_closed)
@@ -660,7 +659,6 @@ plot_created_closed <- function(x) {
         -max(new_closed) * 1.2,
         max(c(new_created, still_open)) * 1.2
     )
-
     plot(
         dates,
         still_open,
@@ -670,10 +668,7 @@ plot_created_closed <- function(x) {
         ylab = "Number of issues",
         main = "Evolution of Open Issues"
     )
-
     graphics::abline(h = 0L, col = "grey70")
-
-    # ouvertures
     graphics::rect(
         xleft = dates - 10L,
         ybottom = 0L,
@@ -682,8 +677,6 @@ plot_created_closed <- function(x) {
         col = col_open_issues,
         border = NA
     )
-
-    # fermetures
     graphics::rect(
         xleft = dates - 10L,
         ybottom = -new_closed,
@@ -692,10 +685,7 @@ plot_created_closed <- function(x) {
         col = col_closed_issues,
         border = NA
     )
-
-    # backlog
     graphics::lines(dates, still_open, lwd = 2L, col = "black")
-
     graphics::legend(
         "topleft",
         legend = c("Still open", "New created", "New closed"),
@@ -705,7 +695,6 @@ plot_created_closed <- function(x) {
         pt.cex = 2L,
         bty = "n"
     )
-
     return(NULL)
 }
 

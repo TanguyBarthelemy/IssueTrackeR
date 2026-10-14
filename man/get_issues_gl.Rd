@@ -39,4 +39,3 @@ my_issues <- IssueTrackeR:::get_issues_gl(project_id = 4578)
 }
 
 }
-\keyword{internal}

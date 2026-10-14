@@ -52,4 +52,3 @@ GitHub API.
 \details{
 If repo is \code{NULL}, all repositories for the owner will be included.
 }
-\keyword{internal}

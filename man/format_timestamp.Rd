@@ -30,4 +30,3 @@ IssueTrackeR:::format_timestamp(1743694674.9)
 IssueTrackeR:::format_timestamp(Sys.Date())
 
 }
-\keyword{internal}

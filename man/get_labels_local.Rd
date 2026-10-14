@@ -36,4 +36,3 @@ A data frame of class \code{LabelsTB} containing label information:
 \description{
 Internal function to read labels from a local YAML file.
 }
-\keyword{internal}
