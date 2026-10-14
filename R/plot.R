@@ -817,7 +817,7 @@ plot.ContributionsTB <- function(x, ...) {
             new = list(
                 mfrow = ifelse(
                     sum(rowSums(x) > 0L) == 4L,
-                    list(c(2, 2)),
+                    list(c(2L, 2L)),
                     list(c(1L, sum(rowSums(x) > 0L)))
                 )[[1L]]
             ),
