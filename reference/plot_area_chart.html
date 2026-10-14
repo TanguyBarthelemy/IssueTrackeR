@@ -93,6 +93,15 @@ where each coloured area represents a category of open issues over time.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-in"><span><span class="va">age_mat</span> <span class="op">&lt;-</span> <span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu"><a href="generate_age_mat.html">generate_age_mat</a></span><span class="op">(</span><span class="va">my_issues</span>, <span class="fl">3L</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">IssueTrackeR</span><span class="fu">:::</span><span class="fu">plot_area_chart</span><span class="op">(</span><span class="va">age_mat</span><span class="op">)</span></span></span>

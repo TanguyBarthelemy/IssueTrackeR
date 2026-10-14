@@ -202,8 +202,12 @@ issue.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dput.html" class="external-link">dput</a></span><span class="op">(</span><span class="va">issue</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> structure(list(title = "Nouvelle issue", body = "Un nouveau bug pour la fonction...", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     number = 47L, created_at = structure(1791936000, tzone = "UTC", class = c("POSIXct", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     "POSIXt"))), class = "IssueTB")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     number = 47L, state = NA_character_, created_at = structure(1791936000, tzone = "UTC", class = c("POSIXct", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "POSIXt")), closed_at = structure(NA_real_, tzone = "UTC", class = c("POSIXct", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "POSIXt")), closed_by = NA_character_, labels = NULL, comments = NULL, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     milestone = NA_character_, repo = NA_character_, owner = NA_character_, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     url = NA_character_, html_url = NA_character_, creator = NA_character_, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     assignee = NA_character_, state_reason = NA_character_), class = "IssueTB")</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">issue2</span> <span class="op">&lt;-</span> <span class="fu">new_issue</span><span class="op">(</span>x <span class="op">=</span> <span class="va">issue</span><span class="op">)</span></span></span>
 </code></pre></div>
