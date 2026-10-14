@@ -141,8 +141,7 @@ new_issue.default <- function(
     created_at <- format_timestamp(created_at)
     closed_at <- format_timestamp(closed_at)
 
-    args_name <- names(as.list(match.call(expand.dots = FALSE)))[-1L]
-    all_args <- lapply(args_name, get, envir = environment(), inherits = FALSE)
+    all_args <- lapply(issue_items, get, envir = environment(), inherits = FALSE)
     names(all_args) <- args_name
 
     do.call(what = assert_issue, args = all_args)
@@ -319,9 +318,8 @@ new_issues.default <- function(
     created_at <- format_timestamp(created_at)
     closed_at <- format_timestamp(closed_at)
 
-    args_name <- names(as.list(match.call(expand.dots = FALSE)))[-1L]
-    all_args <- lapply(args_name, get, envir = environment(), inherits = FALSE)
-    names(all_args) <- args_name
+    all_args <- lapply(issue_items, get, envir = environment(), inherits = FALSE)
+    names(all_args) <- issue_items
     do.call(what = assert_issues, args = all_args)
 
     all_args[names(all_args) %in% c("labels", "comments")] <- NULL
@@ -332,8 +330,10 @@ new_issues.default <- function(
     issues$labels <- labels
     issues$comments <- comments
 
-    issues_names <- issue_items
-    issues <- issues[, c(issues_names)]
+    print(colnames(issues))
+    print(names(issues))
+    print(setdiff(issue_items, colnames(issues)))
+    issues <- issues[, c(issue_items)]
     class(issues) <- c("IssuesTB", "data.frame")
 
     return(issues)

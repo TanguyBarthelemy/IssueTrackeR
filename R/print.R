@@ -229,7 +229,7 @@ print.summary.IssuesTB <- function(x, ...) {
 }
 
 print_one_label <- function(labels) {
-    formatted_label <- labels_owner$formatted_label
+    formatted_label <- labels$formatted_label
     owner <- labels$owner
     repo <- labels$repo
 
