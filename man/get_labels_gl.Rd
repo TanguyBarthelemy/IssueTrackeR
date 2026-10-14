@@ -34,3 +34,4 @@ A data frame of class \code{LabelsTB} containing label information:
 \description{
 Internal function to fetch labels from a GitLab project using the GitLab API.
 }
+\keyword{internal}

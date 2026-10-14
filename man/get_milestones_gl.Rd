@@ -52,3 +52,4 @@ information:
 Internal function to fetch milestones from a GitLab project using the
 GitLab API.
 }
+\keyword{internal}

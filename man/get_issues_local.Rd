@@ -30,3 +30,4 @@ my_issues <- IssueTrackeR:::get_issues_local(
     dataset_name = NULL
 )
 }
+\keyword{internal}

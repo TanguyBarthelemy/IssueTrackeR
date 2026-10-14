@@ -32,3 +32,4 @@ The function handles these specific error cases:
 a <- try(gh::gh("/repos/owner/nonexistent"))
 try(IssueTrackeR:::check_response(a))
 }
+\keyword{internal}
