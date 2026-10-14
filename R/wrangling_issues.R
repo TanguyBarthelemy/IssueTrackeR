@@ -330,43 +330,17 @@ new_issues.default <- function(
     created_at <- format_timestamp(created_at)
     closed_at <- format_timestamp(closed_at)
 
-    assert_issues(
-        title,
-        body,
-        number,
-        state,
-        created_at,
-        closed_at,
-        closed_by,
-        labels,
-        comments,
-        milestone,
-        repo,
-        owner,
-        url,
-        html_url,
-        creator,
-        assignee,
-        state_reason
+    args_name <- setdiff(
+        names(as.list(match.call(expand.dots = FALSE)))[-1],
+        c("labels", "comments")
     )
+    all_args <- lapply(args_name, get, envir = environment(), inherits = FALSE)
+    names(all_args) <- args_name
 
-    issues <- data.frame(
-        number = number,
-        title = title,
-        body = body,
-        state = state,
-        url = url,
-        html_url = html_url,
-        milestone = milestone,
-        created_at = created_at,
-        closed_at = closed_at,
-        closed_by = closed_by,
-        creator = creator,
-        assignee = assignee,
-        state_reason = state_reason,
-        owner = owner,
-        repo = repo,
-        stringsAsFactors = FALSE
+    do.call(what = assert_issues, args = all_args)
+    issues <- do.call(
+        what = data.frame,
+        args = c(all_args, stringsAsFactors = FALSE)
     )
     issues$labels <- labels
     issues$comments <- comments
