@@ -228,6 +228,26 @@ print.summary.IssuesTB <- function(x, ...) {
     return(invisible(x))
 }
 
+print_one_label <- function(labels) {
+    formatted_label <- labels_owner$formatted_label
+    owner <- labels$owner
+    repo <- labels$repo
+
+    cat(
+        paste0(
+            "\n- ",
+            cli::style_hyperlink(
+                text = file.path(owner, repo, fsep = "/"),
+                url = file.path("https://github.com", owner, repo, fsep = "/")
+            ),
+            ":"
+        ),
+        formatted_label,
+        sep = ", "
+    )
+    return(NULL)
+}
+
 #' @rdname print-issues
 #' @exportS3Method print LabelsTB
 #' @method print LabelsTB
@@ -238,7 +258,7 @@ print.LabelsTB <- function(x, ...) {
         is_dark(x$labels_bgcolor) + 1L
     ]
     x$labels_url <- x$url
-    x$formated_label <- vapply(
+    x$formatted_label <- vapply(
         X = seq_len(nrow(x)),
         FUN = function(k) {
             label_style <- crayon::combine_styles(
@@ -268,24 +288,7 @@ print.LabelsTB <- function(x, ...) {
         owner_name <- couples$owner[id]
         repo_name <- couples$repo[id]
         labels_owner <- x[x$owner == owner_name & x$repo == repo_name, ]
-
-        cat(
-            paste0(
-                "\n- ",
-                cli::style_hyperlink(
-                    text = file.path(owner_name, repo_name, fsep = "/"),
-                    url = file.path(
-                        "https://github.com",
-                        owner_name,
-                        repo_name,
-                        fsep = "/"
-                    )
-                ),
-                ":"
-            ),
-            labels_owner$formated_label,
-            sep = ", "
-        )
+        print_one_label(labels_owner)
     }
     cat("\n")
     return(invisible(x))
@@ -327,7 +330,11 @@ print.summary.LabelsTB <- function(x, ...) {
                 ),
                 ":"
             ),
-            paste0(labels_owner$formated_label, ": ", labels_owner$description),
+            paste0(
+                labels_owner$formatted_label,
+                ": ",
+                labels_owner$description
+            ),
             sep = "\n    - "
         )
     }

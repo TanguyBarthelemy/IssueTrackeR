@@ -1,3 +1,23 @@
+issue_items <- c(
+    "title",
+    "body",
+    "number",
+    "state",
+    "created_at",
+    "closed_at",
+    "closed_by",
+    "labels",
+    "comments",
+    "milestone",
+    "repo",
+    "owner",
+    "url",
+    "html_url",
+    "creator",
+    "assignee",
+    "state_reason"
+)
+
 #' @title Create a new \code{IssueTB} object
 #'
 #' @param x a object representing an issue (\code{IssueTB} object, a \code{list}
@@ -312,25 +332,7 @@ new_issues.default <- function(
     issues$labels <- labels
     issues$comments <- comments
 
-    issues_names <- c(
-        "title",
-        "body",
-        "number",
-        "state",
-        "created_at",
-        "closed_at",
-        "closed_by",
-        "labels",
-        "comments",
-        "milestone",
-        "repo",
-        "owner",
-        "url",
-        "html_url",
-        "creator",
-        "assignee",
-        "state_reason"
-    )
+    issues_names <- issue_items
     issues <- issues[, c(issues_names)]
     class(issues) <- c("IssuesTB", "data.frame")
 

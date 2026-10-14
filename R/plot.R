@@ -151,7 +151,6 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
         las = 1L,
         ylim = c(0.0, max(counts) * 1.15)
     )
-
     graphics::text(
         bp,
         counts,
@@ -159,9 +158,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
         pos = 3L,
         cex = 0.9
     )
-
     graphics::box()
-
     return(invisible(NULL))
 }
 
@@ -221,7 +218,6 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
 
     x_ecdf <- sort(resolution_time)
     y_ecdf <- seq_along(x_ecdf) / length(x_ecdf)
-
     cond <- ticks >= min(x_ecdf) & ticks <= max(x_ecdf)
 
     plot(
@@ -234,7 +230,6 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
         xlab = "Time",
         ylab = "Proportion of issues"
     )
-
     graphics::axis(
         side = 1L,
         at = ticks[cond],

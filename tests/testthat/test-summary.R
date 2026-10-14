@@ -155,7 +155,7 @@ test_that("summary has good structure", {
         )
     )
     expect_identical(
-        s3[["formated_label"]],
+        s3[["formatted_label"]],
         c(
             "bug",
             "dependencies",
@@ -183,7 +183,7 @@ test_that("summary has good structure", {
             "labels_bgcolor",
             "labels_color",
             "labels_url",
-            "formated_label"
+            "formatted_label"
         )
     )
     # Testing dimensions

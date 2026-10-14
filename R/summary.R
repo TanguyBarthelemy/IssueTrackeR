@@ -108,7 +108,7 @@ summary.LabelsTB <- function(object, ...) {
         utils::URLencode(object$name),
         fsep = "/"
     )
-    object$formated_label <- vapply(
+    object$formatted_label <- vapply(
         X = seq_len(nrow(object)),
         FUN = function(k) {
             label_style <- crayon::combine_styles(
