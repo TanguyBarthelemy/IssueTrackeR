@@ -346,148 +346,6 @@ new_issues.default <- function(
     return(issues)
 }
 
-#' @importFrom checkmate assert_character
-#' @importFrom checkmate assert_integer
-#' @importFrom checkmate assert_list
-#' @importFrom checkmate assert_posixct
-assert_issues <- function(
-    title = NULL,
-    body = NULL,
-    number = NULL,
-    state = NULL,
-    created_at = as.Date(NA_integer_),
-    closed_at = as.Date(NA_integer_),
-    closed_by = NA_character_,
-    labels = list(),
-    comments = list(),
-    milestone = NA_character_,
-    repo = NA_character_,
-    owner = NA_character_,
-    url = NA_character_,
-    html_url = NA_character_,
-    creator = NA_character_,
-    assignee = NA_character_,
-    state_reason = NA_character_
-) {
-    checkmate::assert_character(title)
-    checkmate::assert_character(body)
-    checkmate::assert_integer(number)
-    checkmate::assert_character(state)
-    checkmate::assert_posixct(created_at)
-    checkmate::assert_posixct(closed_at)
-    checkmate::assert_character(closed_by)
-    checkmate::assert_character(milestone)
-    checkmate::assert_character(repo)
-    checkmate::assert_character(owner)
-    checkmate::assert_character(url)
-    checkmate::assert_character(html_url)
-    checkmate::assert_character(creator)
-    checkmate::assert_character(assignee)
-    checkmate::assert_character(state_reason)
-    checkmate::assert_list(labels)
-    checkmate::assert_list(comments)
-}
-
-#' @importFrom checkmate assert_character
-#' @importFrom checkmate assert_integer
-#' @importFrom checkmate assert_list
-#' @importFrom checkmate assert_posixct
-#' @importFrom checkmate assert_scalar
-#' @importFrom checkmate assert_data_frame
-assert_issue <- function(
-    title = NA_character_,
-    body = NA_character_,
-    number = NA_integer_,
-    state = NA_character_,
-    created_at = as.Date(NA_integer_),
-    closed_at = as.Date(NA_integer_),
-    closed_by = NA_character_,
-    labels = NULL,
-    milestone = NA_character_,
-    repo = NA_character_,
-    owner = NA_character_,
-    url = NA_character_,
-    html_url = NA_character_,
-    comments = NULL,
-    creator = NA_character_,
-    assignee = NA_character_,
-    state_reason = NA_character_
-) {
-    checkmate::assert_character(title)
-    checkmate::assert_character(body)
-    checkmate::assert_integer(number)
-    checkmate::assert_character(state)
-    checkmate::assert_posixct(created_at)
-    checkmate::assert_posixct(closed_at)
-    checkmate::assert_character(closed_by)
-    checkmate::assert_character(milestone)
-    checkmate::assert_character(repo)
-    checkmate::assert_character(owner)
-    checkmate::assert_character(url)
-    checkmate::assert_character(html_url)
-    checkmate::assert_character(creator)
-    checkmate::assert_character(assignee)
-    checkmate::assert_character(state_reason)
-
-    checkmate::assert_scalar(title, na.ok = TRUE)
-    checkmate::assert_scalar(body, na.ok = TRUE)
-    checkmate::assert_scalar(number, na.ok = TRUE)
-    checkmate::assert_scalar(state, na.ok = TRUE)
-    checkmate::assert_scalar(created_at, na.ok = TRUE)
-    checkmate::assert_scalar(closed_at, na.ok = TRUE)
-    checkmate::assert_scalar(closed_by, na.ok = TRUE)
-    checkmate::assert_scalar(milestone, na.ok = TRUE)
-    checkmate::assert_scalar(repo, na.ok = TRUE)
-    checkmate::assert_scalar(owner, na.ok = TRUE)
-    checkmate::assert_scalar(url, na.ok = TRUE)
-    checkmate::assert_scalar(html_url, na.ok = TRUE)
-    checkmate::assert_scalar(creator, na.ok = TRUE)
-    checkmate::assert_scalar(assignee, na.ok = TRUE)
-    checkmate::assert_scalar(state_reason, na.ok = TRUE)
-
-    checkmate::assert_data_frame(labels, null.ok = TRUE)
-    checkmate::assert_data_frame(comments, null.ok = TRUE)
-}
-
-create_empty_issues <- function() {
-    return(new_issues(
-        title = character(0L),
-        body = character(0L),
-        number = integer(0L),
-        state = character(0L),
-        created_at = format_timestamp(as.Date(character(0L))),
-        closed_at = format_timestamp(as.Date(character(0L))),
-        closed_by = character(0L),
-        milestone = character(0L),
-        repo = character(0L),
-        owner = character(0L),
-        url = character(0L),
-        html_url = character(0L),
-        creator = character(0L),
-        assignee = character(0L),
-        state_reason = character(0L),
-        labels = NULL,
-        comments = NULL
-    ))
-}
-
-create_empty_labels_list <- function() {
-    return(list(data.frame(
-        name = character(0L),
-        color = character(0L),
-        stringsAsFactors = FALSE
-    )))
-}
-
-create_empty_comments_list <- function() {
-    return(list(data.frame(
-        text = character(0L),
-        author = character(0L),
-        stringsAsFactors = FALSE
-    )))
-}
-
-
 #' @title Extraction and replacement of information in issues
 #'
 #' @inheritParams with_labels x
@@ -819,4 +677,145 @@ count_issues.IssuesTB <- function(x, verbose = TRUE, ...) {
 #' @export
 count_issues.default <- function(...) {
     stop("`x` should be a `IssuesTB` object.", call. = FALSE)
+}
+
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_list
+#' @importFrom checkmate assert_posixct
+assert_issues <- function(
+    title = NULL,
+    body = NULL,
+    number = NULL,
+    state = NULL,
+    created_at = as.Date(NA_integer_),
+    closed_at = as.Date(NA_integer_),
+    closed_by = NA_character_,
+    labels = list(),
+    comments = list(),
+    milestone = NA_character_,
+    repo = NA_character_,
+    owner = NA_character_,
+    url = NA_character_,
+    html_url = NA_character_,
+    creator = NA_character_,
+    assignee = NA_character_,
+    state_reason = NA_character_
+) {
+    checkmate::assert_character(title)
+    checkmate::assert_character(body)
+    checkmate::assert_integer(number)
+    checkmate::assert_character(state)
+    checkmate::assert_posixct(created_at)
+    checkmate::assert_posixct(closed_at)
+    checkmate::assert_character(closed_by)
+    checkmate::assert_character(milestone)
+    checkmate::assert_character(repo)
+    checkmate::assert_character(owner)
+    checkmate::assert_character(url)
+    checkmate::assert_character(html_url)
+    checkmate::assert_character(creator)
+    checkmate::assert_character(assignee)
+    checkmate::assert_character(state_reason)
+    checkmate::assert_list(labels)
+    checkmate::assert_list(comments)
+}
+
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_list
+#' @importFrom checkmate assert_posixct
+#' @importFrom checkmate assert_scalar
+#' @importFrom checkmate assert_data_frame
+assert_issue <- function(
+    title = NA_character_,
+    body = NA_character_,
+    number = NA_integer_,
+    state = NA_character_,
+    created_at = as.Date(NA_integer_),
+    closed_at = as.Date(NA_integer_),
+    closed_by = NA_character_,
+    labels = NULL,
+    milestone = NA_character_,
+    repo = NA_character_,
+    owner = NA_character_,
+    url = NA_character_,
+    html_url = NA_character_,
+    comments = NULL,
+    creator = NA_character_,
+    assignee = NA_character_,
+    state_reason = NA_character_
+) {
+    checkmate::assert_character(title)
+    checkmate::assert_character(body)
+    checkmate::assert_integer(number)
+    checkmate::assert_character(state)
+    checkmate::assert_posixct(created_at)
+    checkmate::assert_posixct(closed_at)
+    checkmate::assert_character(closed_by)
+    checkmate::assert_character(milestone)
+    checkmate::assert_character(repo)
+    checkmate::assert_character(owner)
+    checkmate::assert_character(url)
+    checkmate::assert_character(html_url)
+    checkmate::assert_character(creator)
+    checkmate::assert_character(assignee)
+    checkmate::assert_character(state_reason)
+
+    checkmate::assert_scalar(title, na.ok = TRUE)
+    checkmate::assert_scalar(body, na.ok = TRUE)
+    checkmate::assert_scalar(number, na.ok = TRUE)
+    checkmate::assert_scalar(state, na.ok = TRUE)
+    checkmate::assert_scalar(created_at, na.ok = TRUE)
+    checkmate::assert_scalar(closed_at, na.ok = TRUE)
+    checkmate::assert_scalar(closed_by, na.ok = TRUE)
+    checkmate::assert_scalar(milestone, na.ok = TRUE)
+    checkmate::assert_scalar(repo, na.ok = TRUE)
+    checkmate::assert_scalar(owner, na.ok = TRUE)
+    checkmate::assert_scalar(url, na.ok = TRUE)
+    checkmate::assert_scalar(html_url, na.ok = TRUE)
+    checkmate::assert_scalar(creator, na.ok = TRUE)
+    checkmate::assert_scalar(assignee, na.ok = TRUE)
+    checkmate::assert_scalar(state_reason, na.ok = TRUE)
+
+    checkmate::assert_data_frame(labels, null.ok = TRUE)
+    checkmate::assert_data_frame(comments, null.ok = TRUE)
+}
+
+create_empty_issues <- function() {
+    return(new_issues(
+        title = character(0L),
+        body = character(0L),
+        number = integer(0L),
+        state = character(0L),
+        created_at = format_timestamp(as.Date(character(0L))),
+        closed_at = format_timestamp(as.Date(character(0L))),
+        closed_by = character(0L),
+        milestone = character(0L),
+        repo = character(0L),
+        owner = character(0L),
+        url = character(0L),
+        html_url = character(0L),
+        creator = character(0L),
+        assignee = character(0L),
+        state_reason = character(0L),
+        labels = NULL,
+        comments = NULL
+    ))
+}
+
+create_empty_labels_list <- function() {
+    return(list(data.frame(
+        name = character(0L),
+        color = character(0L),
+        stringsAsFactors = FALSE
+    )))
+}
+
+create_empty_comments_list <- function() {
+    return(list(data.frame(
+        text = character(0L),
+        author = character(0L),
+        stringsAsFactors = FALSE
+    )))
 }
