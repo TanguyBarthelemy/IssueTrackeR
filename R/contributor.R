@@ -45,46 +45,32 @@ compute_contribution.IssuesTB <- function(x, n = Inf) {
         checkmate::assert_integerish(n, len = 1L, lower = 1L)
     }
 
-    opener <- table(x$creator)
-    if (n < length(opener)) {
-        head_opener <- opener |> sort(decreasing = TRUE) |> utils::head(n)
-        other_opener <- opener |>
-            sort(decreasing = TRUE) |>
-            utils::tail(-n) |>
-            sum()
-        opener <- c(head_opener, other = other_opener)
-    }
+    opener <- table(x$creator) |> regroup_vect(n = n)
     commenter <- x$comments |>
         lapply(FUN = `[[`, "author") |>
         do.call(what = c) |>
-        table()
-    if (n < length(commenter)) {
-        head_commenter <- commenter |> sort(decreasing = TRUE) |> utils::head(n)
-        other_commenter <- commenter |>
-            sort(decreasing = TRUE) |>
-            utils::tail(-n) |>
-            sum()
-        commenter <- c(head_commenter, other = other_commenter)
-    }
-    closer <- table(x$closed_by)
-    if (n < length(closer)) {
-        head_closer <- closer |> sort(decreasing = TRUE) |> utils::head(n)
-        other_closer <- closer |>
-            sort(decreasing = TRUE) |>
-            utils::tail(-n) |>
-            sum()
-        closer <- c(head_closer, other = other_closer)
-    }
+        table() |>
+        regroup_vect(n = n)
+    closer <- table(x$closed_by) |> regroup_vect(n = n)
+    assignee <- table(x$assignee) |> regroup_vect(n = n)
 
-    all_id <- unique(c(names(opener), names(commenter), names(closer)))
+    all_id <- unique(c(
+        names(opener),
+        names(commenter),
+        names(closer),
+        names(assignee)
+    ))
+
     opener[setdiff(all_id, names(opener))] <- 0L
     opener <- opener[all_id]
     commenter[setdiff(all_id, names(commenter))] <- 0L
     commenter <- commenter[all_id]
     closer[setdiff(all_id, names(closer))] <- 0L
     closer <- closer[all_id]
+    assignee[setdiff(all_id, names(assignee))] <- 0L
+    assignee <- assignee[all_id]
 
-    contributions <- rbind(opener, commenter, closer)
+    contributions <- rbind(opener, commenter, closer, assignee)
     class(contributions) <- "ContributionsTB"
     return(contributions)
 }
@@ -98,4 +84,16 @@ compute_contribution.default <- function(x, n) {
         "This function requires a IssuesTB object.",
         call. = FALSE
     )
+}
+
+regroup_vect <- function(x, n) {
+    if (n < length(x)) {
+        head_x <- x |> sort(decreasing = TRUE) |> utils::head(n)
+        other_x <- x |>
+            sort(decreasing = TRUE) |>
+            utils::tail(-n) |>
+            sum()
+        x <- c(head_x, other = other_x)
+    }
+    return(x)
 }

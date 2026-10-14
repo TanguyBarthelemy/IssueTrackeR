@@ -814,12 +814,18 @@ plot.IssuesTB <- function(
 plot.ContributionsTB <- function(x, ...) {
     if (any(x > 0L)) {
         withr::with_par(
-            new = list(mfrow = c(1L, sum(rowSums(x) > 0L))),
+            new = list(
+                mfrow = ifelse(
+                    sum(rowSums(x) > 0L) == 4L,
+                    list(c(2, 2)),
+                    list(c(1L, sum(rowSums(x) > 0L)))
+                )[[1L]]
+            ),
             code = {
                 if (any(x[1L, ] > 0L)) {
                     graphics::pie(
                         x[1L, ][x[1L, ] > 0L],
-                        main = "Nb Issues open"
+                        main = "Nb Issues opened"
                     )
                 }
                 if (any(x[2L, ] > 0L)) {
@@ -832,6 +838,12 @@ plot.ContributionsTB <- function(x, ...) {
                     graphics::pie(
                         x[3L, ][x[3L, ] > 0L],
                         main = "Nb Issues closed"
+                    )
+                }
+                if (any(x[4L, ] > 0L)) {
+                    graphics::pie(
+                        x[4L, ][x[4L, ] > 0L],
+                        main = "Nb Issues assigned"
                     )
                 }
             }

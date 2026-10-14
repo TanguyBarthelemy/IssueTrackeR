@@ -9,6 +9,7 @@
 \alias{print.summary.IssuesTB}
 \alias{print.LabelsTB}
 \alias{print.summary.LabelsTB}
+\alias{print.ContributionsTB}
 \title{Display \code{IssueTB}, \code{IssuesTB}, \code{LabelsTB} or \code{SelectorTB} object}
 \usage{
 \method{print}{IssueTB}(x, ...)
@@ -24,6 +25,8 @@
 \method{print}{LabelsTB}(x, ...)
 
 \method{print}{summary.LabelsTB}(x, ...)
+
+\method{print}{ContributionsTB}(x)
 }
 \arguments{
 \item{x}{An object of class \code{IssueTB}, \code{IssuesTB}, \code{LabelsTB} or

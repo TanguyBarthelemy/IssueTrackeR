@@ -340,9 +340,6 @@ new_issues.default <- function(
     issues$labels <- labels
     issues$comments <- comments
 
-    print(colnames(issues))
-    print(names(issues))
-    print(setdiff(issue_items, colnames(issues)))
     issues <- issues[, c(issue_items)]
     class(issues) <- c("IssuesTB", "data.frame")
 

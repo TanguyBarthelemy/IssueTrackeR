@@ -340,3 +340,39 @@ print.summary.LabelsTB <- function(x, ...) {
     }
     return(invisible(x))
 }
+
+print_classement <- function(x) {
+    x_no_other <- x[names(x) != "other"]
+    cat(
+        paste0(seq_along(x), ") ", names(x), ": ", x, " issues \n"),
+        "Other: ",
+        x["other"],
+        " issues",
+        sep = ""
+    )
+    return(invisible(x))
+}
+
+#' @rdname print-issues
+#' @exportS3Method print ContributionsTB
+#' @method print ContributionsTB
+#' @export
+print.ContributionsTB <- function(x) {
+    cat(crayon::bold("Issues opened:\n"))
+    to_opener <- x[1L, x[1L, ] > 0L] |> sort(decreasing = TRUE)
+    print_classement(to_opener)
+
+    cat(crayon::bold("\n\nIssues commented:\n"))
+    to_commenter <- x[2L, x[2L, ] > 0L] |> sort(decreasing = TRUE)
+    print_classement(to_commenter)
+
+    cat(crayon::bold("\n\nIssues closed:\n"))
+    to_closer <- x[3L, x[3L, ] > 0L] |> sort(decreasing = TRUE)
+    print_classement(to_closer)
+
+    cat(crayon::bold("\n\nIssues assigned:\n"))
+    to_assign <- x[4L, x[4L, ] > 0L] |> sort(decreasing = TRUE)
+    print_classement(to_assign)
+
+    return(invisible(x))
+}
