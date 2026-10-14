@@ -41,6 +41,6 @@ Encoding: UTF-8
 Language: en-GB
 LazyData: TRUE
 Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace", "devtag::dev_roclet"))
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1
 Config/Needs/build: moodymudskipper/devtag
 VignetteBuilder: knitr
