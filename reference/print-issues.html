@@ -84,7 +84,10 @@ output in the console</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'summary.LabelsTB'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'ContributionsTB'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -120,15 +123,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">my_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
@@ -147,15 +141,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">my_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1058</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Friedman Test function calls QS Test in SeasonalityTests</span>
@@ -166,15 +151,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1049</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Different Default Thresholds for Combined Seasonality Test Between Versions 2.2.</span>
@@ -184,15 +160,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1039</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Older WS are read not correctly</span>
@@ -207,15 +174,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1029</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Seasonal component in X11 spec : if set to NO, no info displayed in GUI</span>
@@ -234,15 +192,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1028</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Lack of documentation regarding assignment of roots in SEATS</span>
@@ -252,15 +201,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1023</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> OpenSSF badge</span>
@@ -271,15 +211,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The link is https://www.bestpractices.dev/</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1006</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Benchmarking Results includes forecast observations beyond the input series</span>
@@ -290,15 +221,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1004</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Outlier type and position are missing in Matrix |&gt; Outliers</span>
@@ -314,15 +236,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#1002</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Fix warnings when running CLI with Java25+</span>
@@ -337,15 +250,6 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "title"        "body"         "number"       "state"        "created_at"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "closed_at"    "closed_by"    "milestone"    "repo"         "owner"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "url"          "html_url"     "creator"      "assignee"     "state_reason"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "labels"       "comments"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue jdemetra/jdplus-main#989</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Fix parsing of legacy TS meta</span>
