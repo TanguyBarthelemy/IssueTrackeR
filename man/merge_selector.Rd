@@ -23,6 +23,8 @@ s1 <- init_selector(
     owner = "TanguyBarthelemy",
     repo = "IssueTrackeR"
 )
+\donttest{
 s2 <- init_selector(source = "GitHub", owner = "TractorTom", repo = NULL)
 merged <- merge_selector(s1, s2)
+}
 }

@@ -28,7 +28,7 @@
 #' top_contributions <- compute_contribution(my_issues, n = 5)
 #' @export
 #' @name compute_contribution
-compute_contribution <- function(x, n) {
+compute_contribution <- function(x, n = Inf) {
     UseMethod(generic = "compute_contribution", object = x)
 }
 

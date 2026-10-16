@@ -6,7 +6,7 @@
 \alias{compute_contribution.default}
 \title{Who contributes?}
 \usage{
-compute_contribution(x, n)
+compute_contribution(x, n = Inf)
 
 \method{compute_contribution}{IssuesTB}(x, n = Inf)
 
