@@ -27,7 +27,7 @@ A string with the list of repo of a user or an organisation.
 Returns a list of repos.
 }
 \examples{
-\dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
+\dontshow{if (check_github_connection(timeout = 5, verbose = FALSE)) withAutoprint(\{ # examplesIf}
 \donttest{
 get_all_repos("rjdverse")
 }

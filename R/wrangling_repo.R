@@ -13,7 +13,7 @@
 #'
 #' @returns A string with the list of repo of a user or an organisation.
 #'
-#' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
+#' @examplesIf check_github_connection(timeout = 5, verbose = FALSE)
 #' \donttest{
 #' get_all_repos("rjdverse")
 #' }

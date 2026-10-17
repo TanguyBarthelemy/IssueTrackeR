@@ -90,3 +90,50 @@ null_to_default <- function(x, default) {
     }
     return(x)
 }
+
+#' @title Check GitHub Connection
+#'
+#' @description
+#' A helper function to verify if a GitHub connection is active and has
+#' sufficient rate limit remaining. This is intended for internal use
+#' or testing.
+#'
+#' @param timeout Numeric. Timeout in seconds for the API call. Default is 10.
+#' @param verbose Boolean. Should messages be printed?
+#'
+#' @return Boolean. `TRUE` if the connection is valid and rate limit
+#'   is above a threshold, `FALSE` otherwise.
+#'
+#' @examples
+#' # Check if we can connect to GitHub
+#' check_github_connection()
+#'
+#' @export
+#'
+#' @importFrom gh gh_token_exists gh
+#' @importFrom checkmate assert_flag assert_number
+check_github_connection <- function(timeout = 60, verbose = TRUE) {
+    checkmate::assert_number(timeout, lower = 1)
+    checkmate::assert_flag(verbose)
+
+    if (!gh::gh_token_exists()) {
+        if (verbose) message("No GitHub token found.")
+        return(FALSE)
+    }
+
+    # We use tryCatch to handle potential network timeouts/errors
+    res <- tryCatch({
+        # We call the rate_limit endpoint explicitly to apply the timeout
+        limit <- gh::gh(
+            endpoint = "rate_limit",
+            config = list(timeout = timeout)
+        )
+        # Accessing the core resource remaining count
+        limit$resources$core$remaining > 0
+    }, error = function(e) {
+        if (verbose) message("Error checking GitHub rate limit: ", e$message)
+        return(FALSE)
+    })
+
+    return(res)
+}

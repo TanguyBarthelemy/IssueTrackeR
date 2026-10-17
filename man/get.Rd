@@ -62,7 +62,7 @@ function:
 }
 }
 \examples{
-\dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
+\dontshow{if (check_github_connection(timeout = 5, verbose = FALSE)) withAutoprint(\{ # examplesIf}
 
 \donttest{
 # From online

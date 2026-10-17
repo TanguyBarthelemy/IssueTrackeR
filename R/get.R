@@ -39,7 +39,7 @@
 #'
 #' @name get
 #'
-#' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
+#' @examplesIf check_github_connection(timeout = 5, verbose = FALSE)
 #'
 #' \donttest{
 #' # From online
@@ -227,7 +227,7 @@ get_milestones <- function(
 #'
 #' @dev
 #'
-#' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
+#' @examplesIf check_github_connection(timeout = 5, verbose = FALSE)
 #' \donttest{
 #' my_issues1 <- IssueTrackeR:::get_issues_gh(
 #'     owner = "rjdverse",

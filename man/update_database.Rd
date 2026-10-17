@@ -39,7 +39,7 @@ Update the different local database (issues, labels and milestones) with the
 online reference.
 }
 \examples{
-\dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
+\dontshow{if (check_github_connection(timeout = 5, verbose = FALSE)) withAutoprint(\{ # examplesIf}
 \donttest{
 jdemetra_selector <- init_selector(
     source = "GitHub",

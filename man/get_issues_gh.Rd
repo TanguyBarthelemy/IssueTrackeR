@@ -38,7 +38,7 @@ Filters out pull requests and formats the results.
 If repo is \code{NULL}, all repositories for the owner will be included.
 }
 \examples{
-\dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
+\dontshow{if (check_github_connection(timeout = 5, verbose = FALSE)) withAutoprint(\{ # examplesIf}
 \donttest{
 my_issues1 <- IssueTrackeR:::get_issues_gh(
     owner = "rjdverse",

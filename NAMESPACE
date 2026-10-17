@@ -71,6 +71,7 @@ S3method(write,MilestonesTB)
 S3method(write,default)
 export(append)
 export(author_last_comment)
+export(check_github_connection)
 export(compute_contribution)
 export(count_issues)
 export(extract_nth)
@@ -120,6 +121,7 @@ importFrom(gh,
   gh,
   gh_rate_limit,
   gh_token,
+  gh_token_exists,
   gh_whoami
 )
 importFrom(gitlabr,

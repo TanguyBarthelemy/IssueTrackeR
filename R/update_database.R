@@ -12,7 +12,7 @@
 #' @returns invisibly (with \code{invisible()}) \code{TRUE}.
 #' @export
 #'
-#' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
+#' @examplesIf check_github_connection(timeout = 5, verbose = FALSE)
 #' \donttest{
 #' jdemetra_selector <- init_selector(
 #'     source = "GitHub",
