@@ -22,19 +22,6 @@
 #' considered dark.
 #'
 #' @importFrom grDevices col2rgb
-#'
-#' @examples
-#' # Check a hexadecimal color
-#' IssueTrackeR:::is_dark("#000000")  # black is dark
-#' IssueTrackeR:::is_dark("#FFFFFF")  # white is light
-#'
-#' # Check a named color
-#' IssueTrackeR:::is_dark("navy")
-#' IssueTrackeR:::is_dark("yellow")
-#'
-#' # Check an RGB vector
-#' IssueTrackeR:::is_dark(grDevices::rgb(0, 0, 0))
-#' IssueTrackeR:::is_dark(grDevices::rgb(255, 255, 255, maxColorValue = 255))
 #' @dev
 is_dark <- function(colr) {
     col1 <- grDevices::col2rgb(colr) * c(299L, 587L, 114L)
@@ -91,18 +78,34 @@ null_to_default <- function(x, default) {
     return(x)
 }
 
-#' @title Check GitHub Connection
+#' @importFrom checkmate assert_flag
+#' @importFrom gh gh_token_exists
+.check_github_token <- function(verbose = TRUE) {
+    checkmate::assert_flag(verbose)
+    token_exists <- gh::gh_token_exists()
+    if (!token_exists && verbose) {
+        message("No GitHub token found.")
+    }
+    return(token_exists)
+}
+
+#' @importFrom gh gh_rate_limit
+#' @importFrom checkmate assert_flag
+.check_github_rate_limit <- function(verbose = TRUE) {
+    checkmate::assert_flag(verbose)
+    rate_limit <- gh::gh_rate_limit()$resources$core$remaining > 0
+    if (!rate_limit && verbose) {
+        message("GitHub rate limit exceeded or error occurred.")
+    }
+    return(rate_limit)
+}
+
+#' @title Check GitHub connection
 #'
-#' @description
-#' A helper function to verify if a GitHub connection is active and has
-#' sufficient rate limit remaining. This is intended for internal use
-#' or testing.
-#'
-#' @param timeout Numeric. Timeout in seconds for the API call. Default is 10.
 #' @param verbose Boolean. Should messages be printed?
 #'
 #' @return Boolean. `TRUE` if the connection is valid and rate limit
-#'   is above a threshold, `FALSE` otherwise.
+#'   is positive, `FALSE` otherwise.
 #'
 #' @examples
 #' # Check if we can connect to GitHub
@@ -110,30 +113,17 @@ null_to_default <- function(x, default) {
 #'
 #' @export
 #'
-#' @importFrom gh gh_token_exists gh
-#' @importFrom checkmate assert_flag assert_number
-check_github_connection <- function(timeout = 60, verbose = TRUE) {
-    checkmate::assert_number(timeout, lower = 1)
+#' @importFrom checkmate assert_flag
+check_github_connection <- function(verbose = TRUE) {
     checkmate::assert_flag(verbose)
 
-    if (!gh::gh_token_exists()) {
-        if (verbose) message("No GitHub token found.")
+    if (!.check_github_token(verbose)) {
         return(FALSE)
     }
 
-    # We use tryCatch to handle potential network timeouts/errors
-    res <- tryCatch({
-        # We call the rate_limit endpoint explicitly to apply the timeout
-        limit <- gh::gh(
-            endpoint = "rate_limit",
-            config = list(timeout = timeout)
-        )
-        # Accessing the core resource remaining count
-        limit$resources$core$remaining > 0
-    }, error = function(e) {
-        if (verbose) message("Error checking GitHub rate limit: ", e$message)
+    if (!.check_github_rate_limit(verbose)) {
         return(FALSE)
-    })
+    }
 
-    return(res)
+    return(TRUE)
 }

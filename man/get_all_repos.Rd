@@ -27,9 +27,7 @@ A string with the list of repo of a user or an organisation.
 Returns a list of repos.
 }
 \examples{
-\dontshow{if (check_github_connection(timeout = 5, verbose = FALSE)) withAutoprint(\{ # examplesIf}
 \donttest{
 get_all_repos("rjdverse")
 }
-\dontshow{\}) # examplesIf}
 }

@@ -30,17 +30,4 @@ colour.
 If the luminance is below a 123 (on a scale of 0-255), the colour is
 considered dark.
 }
-\examples{
-# Check a hexadecimal color
-IssueTrackeR:::is_dark("#000000")  # black is dark
-IssueTrackeR:::is_dark("#FFFFFF")  # white is light
-
-# Check a named color
-IssueTrackeR:::is_dark("navy")
-IssueTrackeR:::is_dark("yellow")
-
-# Check an RGB vector
-IssueTrackeR:::is_dark(grDevices::rgb(0, 0, 0))
-IssueTrackeR:::is_dark(grDevices::rgb(255, 255, 255, maxColorValue = 255))
-}
 \keyword{internal}

@@ -62,7 +62,7 @@ function:
 }
 }
 \examples{
-\dontshow{if (check_github_connection(timeout = 5, verbose = FALSE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (check_github_connection(verbose = FALSE)) withAutoprint(\{ # examplesIf}
 
 \donttest{
 # From online

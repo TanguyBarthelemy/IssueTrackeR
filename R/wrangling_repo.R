@@ -13,7 +13,7 @@
 #'
 #' @returns A string with the list of repo of a user or an organisation.
 #'
-#' @examplesIf check_github_connection(timeout = 5, verbose = FALSE)
+#' @examples
 #' \donttest{
 #' get_all_repos("rjdverse")
 #' }

@@ -67,7 +67,7 @@ format_timestamp <- function(x) {
 #' - `format_milestones_gh`: A list representing milestones with `title`,
 #'   `description` and `due_on` date)
 #'
-#' @examplesIf check_github_connection(timeout = 5, verbose = FALSE)
+#' @examplesIf check_github_connection(verbose = FALSE)
 #' \donttest{
 #' # Formatting labels
 #' raw_labels <- gh::gh(

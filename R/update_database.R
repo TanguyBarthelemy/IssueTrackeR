@@ -12,19 +12,21 @@
 #' @returns invisibly (with \code{invisible()}) \code{TRUE}.
 #' @export
 #'
-#' @examplesIf check_github_connection(timeout = 5, verbose = FALSE)
+#' @examples
 #' \donttest{
-#' jdemetra_selector <- init_selector(
-#'     source = "GitHub",
-#'     owner = "jdemetra",
-#'     repo = "jdplus-incubator",
-#'     state = "all"
-#' )
+#' if (check_github_connection(verbose = FALSE)) {
+#'     jdemetra_selector <- init_selector(
+#'         source = "GitHub",
+#'         owner = "jdemetra",
+#'         repo = "jdplus-incubator",
+#'         state = "all"
+#'     )
 #'
-#' update_database(
-#'     selector = jdemetra_selector,
-#'     dataset_dir = tempdir()
-#' )
+#'     update_database(
+#'         selector = jdemetra_selector,
+#'         dataset_dir = tempdir()
+#'     )
+#' }
 #' }
 #'
 update_database <- function(

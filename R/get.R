@@ -39,7 +39,7 @@
 #'
 #' @name get
 #'
-#' @examplesIf check_github_connection(timeout = 5, verbose = FALSE)
+#' @examplesIf check_github_connection(verbose = FALSE)
 #'
 #' \donttest{
 #' # From online
@@ -227,7 +227,7 @@ get_milestones <- function(
 #'
 #' @dev
 #'
-#' @examplesIf check_github_connection(timeout = 5, verbose = FALSE)
+#' @examplesIf check_github_connection(verbose = FALSE)
 #' \donttest{
 #' my_issues1 <- IssueTrackeR:::get_issues_gh(
 #'     owner = "rjdverse",
