@@ -17,7 +17,9 @@ is positive, \code{FALSE} otherwise.
 Check GitHub connection
 }
 \examples{
+\donttest{
 # Check if we can connect to GitHub
 check_github_connection()
+}
 
 }

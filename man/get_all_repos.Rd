@@ -28,6 +28,8 @@ Returns a list of repos.
 }
 \examples{
 \donttest{
-get_all_repos("rjdverse")
+if (check_github_connection(verbose = FALSE)) {
+    get_all_repos("rjdverse")
+}
 }
 }

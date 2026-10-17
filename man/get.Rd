@@ -62,24 +62,24 @@ function:
 }
 }
 \examples{
-\dontshow{if (check_github_connection(verbose = FALSE)) withAutoprint(\{ # examplesIf}
-
 \donttest{
-# From online
+if (check_github_connection(verbose = FALSE)) {
+    # From online
 
-online_selector <- init_selector(
-    source = "GitHub",
-    owner = "TanguyBarthelemy",
-    repo = "IssueTrackeR"
-)
-issues <- get_issues(selector = online_selector)
-print(issues)
+    online_selector <- init_selector(
+        source = "GitHub",
+        owner = "TanguyBarthelemy",
+        repo = "IssueTrackeR"
+    )
+    issues <- get_issues(selector = online_selector)
+    print(issues)
 
-labels <- get_labels(selector = online_selector)
-print(labels)
+    labels <- get_labels(selector = online_selector)
+    print(labels)
 
-milestones <- get_milestones(selector = online_selector)
-print(milestones)
+    milestones <- get_milestones(selector = online_selector)
+    print(milestones)
+}
 }
 
 # From local
@@ -93,5 +93,5 @@ local_selector <- init_selector(
 issues <- get_issues(selector = local_selector)
 labels <- get_labels(selector = local_selector)
 milestones <- get_milestones(selector = local_selector)
-\dontshow{\}) # examplesIf}
+
 }

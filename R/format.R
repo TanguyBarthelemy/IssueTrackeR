@@ -69,65 +69,67 @@ format_timestamp <- function(x) {
 #'
 #' @examplesIf check_github_connection(verbose = FALSE)
 #' \donttest{
-#' # Formatting labels
-#' raw_labels <- gh::gh(
-#'    repo = "rjdemetra",
-#'    owner = "rjdverse",
-#'    endpoint = "/repos/:owner/:repo/labels",
-#'    .limit = Inf,
-#'    .progress = FALSE
-#' )
-#' IssueTrackeR:::format_labels_gh(raw_labels)
+#' if (check_github_connection(verbose = FALSE)) {
+#'     # Formatting labels
+#'     raw_labels <- gh::gh(
+#'        repo = "rjdemetra",
+#'        owner = "rjdverse",
+#'        endpoint = "/repos/:owner/:repo/labels",
+#'        .limit = Inf,
+#'        .progress = FALSE
+#'     )
+#'     IssueTrackeR:::format_labels_gh(raw_labels)
 #'
-#' # Formatting milestone
-#' raw_milestones <- gh::gh(
-#'     repo = "jdplus-main",
-#'     owner = "jdemetra",
-#'     endpoint = "/repos/:owner/:repo/milestones",
-#'     state = "all",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#' )
-#' raw_milestone <- raw_milestones[[5L]]
-#' IssueTrackeR:::format_milestone_gh(raw_milestone)
+#'     # Formatting milestone
+#'     raw_milestones <- gh::gh(
+#'         repo = "jdplus-main",
+#'         owner = "jdemetra",
+#'         endpoint = "/repos/:owner/:repo/milestones",
+#'         state = "all",
+#'         .limit = Inf,
+#'         .progress = FALSE
+#'     )
+#'     raw_milestone <- raw_milestones[[5L]]
+#'     IssueTrackeR:::format_milestone_gh(raw_milestone)
 #'
-#' # Formatting milestones
-#' milestones_jdplus_main <- gh::gh(
-#'     repo = "jdplus-main",
-#'     owner = "jdemetra",
-#'     endpoint = "/repos/:owner/:repo/milestones",
-#'     state = "all",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#'  )
-#' IssueTrackeR:::format_milestones_gh(milestones_jdplus_main)
+#'     # Formatting milestones
+#'     milestones_jdplus_main <- gh::gh(
+#'         repo = "jdplus-main",
+#'         owner = "jdemetra",
+#'         endpoint = "/repos/:owner/:repo/milestones",
+#'         state = "all",
+#'         .limit = Inf,
+#'         .progress = FALSE
+#'     )
+#'     IssueTrackeR:::format_milestones_gh(milestones_jdplus_main)
 #'
-#' # Formatting issues
-#' raw_issues <- gh::gh(
-#'     repo = "rjdemetra",
-#'     owner = "rjdverse",
-#'     endpoint = "/repos/:owner/:repo/issues",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#' )
-#' urls <- vapply(X = raw_issues, FUN = `[[`, "url", FUN.VALUE = character(1L))
-#' raw_comments <- gh::gh(
-#'     repo = "rjdemetra",
-#'     owner = "rjdverse",
-#'     endpoint = "/repos/:owner/:repo/issues/comments",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#' )
-#' formatted_comments <- IssueTrackeR:::format_comments_gh(
-#'     raw_comments,
-#'     urls
-#' )
+#'     # Formatting issues
+#'     raw_issues <- gh::gh(
+#'         repo = "rjdemetra",
+#'         owner = "rjdverse",
+#'         endpoint = "/repos/:owner/:repo/issues",
+#'         .limit = Inf,
+#'         .progress = FALSE
+#'     )
+#'     urls <- vapply(X = raw_issues, FUN = `[[`, "url", FUN.VALUE = character(1L))
+#'     raw_comments <- gh::gh(
+#'         repo = "rjdemetra",
+#'         owner = "rjdverse",
+#'         endpoint = "/repos/:owner/:repo/issues/comments",
+#'         .limit = Inf,
+#'         .progress = FALSE
+#'     )
+#'     formatted_comments <- IssueTrackeR:::format_comments_gh(
+#'         raw_comments,
+#'         urls
+#'     )
 #'
-#' formatted_issues <- IssueTrackeR:::format_issues_gh(
-#'     raw_issues = raw_issues,
-#'     raw_comments = raw_comments,
-#'     verbose = FALSE
-#' )
+#'     formatted_issues <- IssueTrackeR:::format_issues_gh(
+#'         raw_issues = raw_issues,
+#'         raw_comments = raw_comments,
+#'         verbose = FALSE
+#'     )
+#' }
 #' }
 #'
 #' @name format

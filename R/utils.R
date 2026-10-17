@@ -108,8 +108,10 @@ null_to_default <- function(x, default) {
 #'   is positive, `FALSE` otherwise.
 #'
 #' @examples
+#' \donttest{
 #' # Check if we can connect to GitHub
 #' check_github_connection()
+#' }
 #'
 #' @export
 #'

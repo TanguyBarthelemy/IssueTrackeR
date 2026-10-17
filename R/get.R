@@ -39,24 +39,25 @@
 #'
 #' @name get
 #'
-#' @examplesIf check_github_connection(verbose = FALSE)
-#'
+#' @examples
 #' \donttest{
-#' # From online
+#' if (check_github_connection(verbose = FALSE)) {
+#'     # From online
 #'
-#' online_selector <- init_selector(
-#'     source = "GitHub",
-#'     owner = "TanguyBarthelemy",
-#'     repo = "IssueTrackeR"
-#' )
-#' issues <- get_issues(selector = online_selector)
-#' print(issues)
+#'     online_selector <- init_selector(
+#'         source = "GitHub",
+#'         owner = "TanguyBarthelemy",
+#'         repo = "IssueTrackeR"
+#'     )
+#'     issues <- get_issues(selector = online_selector)
+#'     print(issues)
 #'
-#' labels <- get_labels(selector = online_selector)
-#' print(labels)
+#'     labels <- get_labels(selector = online_selector)
+#'     print(labels)
 #'
-#' milestones <- get_milestones(selector = online_selector)
-#' print(milestones)
+#'     milestones <- get_milestones(selector = online_selector)
+#'     print(milestones)
+#' }
 #' }
 #'
 #' # From local
@@ -227,17 +228,19 @@ get_milestones <- function(
 #'
 #' @dev
 #'
-#' @examplesIf check_github_connection(verbose = FALSE)
+#' @examples
 #' \donttest{
-#' my_issues1 <- IssueTrackeR:::get_issues_gh(
-#'     owner = "rjdverse",
-#'     repo = "rjd3toolkit"
-#' )
-#' my_issues2 <- IssueTrackeR:::get_issues_gh(
-#'     owner = "TanguyBarthelemy",
-#'     repo = "IssueTrackeR",
-#'     state = "all"
-#' )
+#' if (check_github_connection(verbose = FALSE)) {
+#'     my_issues1 <- IssueTrackeR:::get_issues_gh(
+#'         owner = "rjdverse",
+#'         repo = "rjd3toolkit"
+#'     )
+#'     my_issues2 <- IssueTrackeR:::get_issues_gh(
+#'         owner = "TanguyBarthelemy",
+#'         repo = "IssueTrackeR",
+#'         state = "all"
+#'     )
+#' }
 #' }
 #'
 #' @importFrom checkmate assert_flag

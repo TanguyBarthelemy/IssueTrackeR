@@ -15,7 +15,9 @@
 #'
 #' @examples
 #' \donttest{
-#' get_all_repos("rjdverse")
+#' if (check_github_connection(verbose = FALSE)) {
+#'     get_all_repos("rjdverse")
+#' }
 #' }
 #' @export
 get_all_repos <- function(
