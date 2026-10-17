@@ -93,7 +93,7 @@ null_to_default <- function(x, default) {
 #' @importFrom checkmate assert_flag
 .check_github_rate_limit <- function(verbose = TRUE) {
     checkmate::assert_flag(verbose)
-    rate_limit <- gh::gh_rate_limit()$resources$core$remaining > 0L
+    rate_limit <- gh::gh_rate_limit()$remaining > 0L
     if (!rate_limit && verbose) {
         message("GitHub rate limit exceeded or error occurred.")
     }
