@@ -3,25 +3,62 @@
 \name{IssueTrackeR-options}
 \alias{IssueTrackeR-options}
 \alias{reset_options}
-\title{Reset options}
+\alias{set_default_dataset_dir}
+\alias{get_default_dataset_dir}
+\alias{set_default_dataset_name}
+\alias{get_default_dataset_name}
+\alias{set_default_selector}
+\alias{get_default_selector}
+\title{Set, get and reset options}
 \usage{
 reset_options(verbose = TRUE)
+
+set_default_dataset_dir(path)
+
+get_default_dataset_dir()
+
+set_default_dataset_name(name)
+
+get_default_dataset_name()
+
+set_default_selector(selector)
+
+get_default_selector()
 }
 \arguments{
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
+
+\item{path}{Character. Representing a directory path.}
+
+\item{name}{Character. Representing the name of the option.}
+
+\item{selector}{An object of class \code{SelectorTB}.}
 }
 \value{
-\code{NULL} invisibly
+\itemize{
+\item \code{get_...}: The value of the requested option.
+\item \code{set_...}: The value assigned, invisibly.
+\item \code{reset_options}: \code{NULL} invisibly.
+}
 }
 \description{
-Reset options
+Options to manage the default configuration of datasets and selectors.
 }
 \examples{
-set.seed(5L)
-getOption("IssueTrackeR.dataset.name")
+# Resetting options
 reset_options()
-getOption("IssueTrackeR.dataset.name")
+
+# Working with default dataset directory
+get_default_dataset_dir()
+set_default_dataset_dir("/tmp/my_data")
+
+# Working with default dataset name
+get_default_dataset_name()
+set_default_dataset_name("my_dataset")
+
+# Working with default selector
+sel <- init_selector(source = "GitHub", owner = "test", repo = "test")
+set_default_selector(sel)
+get_default_selector()
 
 }

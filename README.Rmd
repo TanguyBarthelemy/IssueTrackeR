@@ -26,6 +26,7 @@ knitr::opts_chunk[["set"]](
 [![CodeFactor](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker/badge)](https://www.codefactor.io/repository/github/tanguybarthelemy/issuetracker)
 <!-- badges: end -->
 
+
 **{IssueTrackeR}** is an R package designed to retrieve and manage GitHub issues directly within R. This package allows users to efficiently track and handle issues from their GitHub repositories.
 
 This package relies a lot on the package [{gh}](https://github.com/r-lib/gh) to use the GitHub API and retrieve data from GitHub.

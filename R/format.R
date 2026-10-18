@@ -111,7 +111,12 @@ format_timestamp <- function(x) {
 #'         .limit = Inf,
 #'         .progress = FALSE
 #'     )
-#'     urls <- vapply(X = raw_issues, FUN = `[[`, "url", FUN.VALUE = character(1L))
+#'     urls <- vapply(
+#'         X = raw_issues,
+#'         FUN = `[[`,
+#'         "url",
+#'         FUN.VALUE = character(1L)
+#'     )
 #'     raw_comments <- gh::gh(
 #'         repo = "rjdemetra",
 #'         owner = "rjdverse",

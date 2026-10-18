@@ -17,9 +17,7 @@ author_last_comment(x, ...)
 
 \item{...}{Currently not used.}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 A string with the name of the last person which leaves a comment.

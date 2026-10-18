@@ -12,9 +12,7 @@ get_labels_gh(repo = NULL, owner = NULL, verbose = TRUE, ...)
 \item{owner}{Character. GitHub repository owner . GitHub owner (user or
 organization).}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 
 \item{...}{Currently not used.}
 }

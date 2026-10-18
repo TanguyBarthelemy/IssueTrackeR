@@ -21,9 +21,7 @@ multiple projects.}
 \code{"all"} if you want to fetch all issues (or milestones) (closed and
 open).}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 An \code{IssuesTB} object containing the issues from the specified

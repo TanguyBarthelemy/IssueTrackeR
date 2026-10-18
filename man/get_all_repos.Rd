@@ -16,9 +16,7 @@ organization).}
 \item{private}{Boolean. Should we include private repos?
 (Default \code{TRUE})}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 A string with the list of repo of a user or an organisation.

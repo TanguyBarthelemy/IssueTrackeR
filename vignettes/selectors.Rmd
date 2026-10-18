@@ -137,16 +137,19 @@ print(reduced_sel)
 
 The package provides a global option `IssueTrackeR.selector`. This option defines the **default selector** used by retrieval functions (like `get_issues()`, `get_labels()`, etc.) when no `selector` argument is explicitly provided.
 
-```{r global_option, eval = TRUE, echo = TRUE}
-# Check the current default (usually empty)
-getOption("IssueTrackeR.selector")
+```{r set_option, eval = TRUE, echo = TRUE}
+# Check the current default
+get_default_selector()
 
 # Set a default selector
-options(IssueTrackeR.selector = sel1)
+set_default_selector(sel1)
+get_default_selector()
+```
 
-# Now, get_issues() will use sel1 by default
-# Note: This requires a working environment/token to actually run get_issues()
+Now, `get_issues()` will use `sel1` by default
 
-# Reset the option
+You can reset the options to their default value (when loading for the first time the package).
+
+```{r reset_option, eval = TRUE, echo = TRUE}
 reset_options()
 ```

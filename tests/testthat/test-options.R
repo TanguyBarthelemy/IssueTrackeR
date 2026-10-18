@@ -1,17 +1,22 @@
-test_that("options are set", {
-    dataset_dir <- file.path(tempdir(), "data") |>
-        normalizePath(mustWork = FALSE)
-
-    # nolint start undesirable_function_linter
-    options(IssueTrackeR.dataset.dir = "tested_dir")
-    options(IssueTrackeR.dataset.name = "new_name")
-    # nolint end
-
-    expect_identical(getOption("IssueTrackeR.dataset.dir"), "tested_dir")
-    expect_identical(getOption("IssueTrackeR.dataset.name"), "new_name")
-
-    set.seed(5L)
-    expect_null(reset_options())
-    expect_identical(getOption("IssueTrackeR.dataset.dir"), dataset_dir)
-    expect_identical(getOption("IssueTrackeR.dataset.name"), "bkyok")
+test_that("set_default_dataset_dir works", {
+    path <- "/tmp/test_dir"
+    set_default_dataset_dir(path)
+    expect_identical(get_default_dataset_dir(), path)
+    expect_identical(getOption("IssueTrackeR.dataset.dir"), path)
 })
+
+test_that("set_default_dataset_name works", {
+    set_default_dataset_name("my_name")
+    expect_identical(get_default_dataset_name(), "my_name")
+    expect_identical(getOption("IssueTrackeR.dataset.name"), "my_name")
+})
+
+test_that("set_default_selector works", {
+    sel <- list(source = "GitHub", owner = "test", repo = "test")
+    class(sel) <- c("SelectorTB", "list")
+
+    set_default_selector(sel)
+    expect_identical(get_default_selector(), sel)
+    expect_identical(getOption("IssueTrackeR.selector"), sel)
+})
+

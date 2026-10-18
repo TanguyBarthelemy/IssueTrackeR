@@ -54,9 +54,7 @@ Default: value of option \code{IssueTrackeR.dataset.name}.}
 \item{overwrite}{Boolean indicating whether to overwrite the file if it
 already exists. Defaults to \code{TRUE}.}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 invisibly (with \code{invisible()}) \code{TRUE} if the export was

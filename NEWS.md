@@ -13,6 +13,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New ways of selecting repositories with selector objects (`SelectorTB` class).  [#3](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/3)
 * New method `print()` for selector objects (`SelectorTB` class) [#67](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/67)
 * New function `check_github_connection()` to check if GitHub connection is valid
+* New functions to set and get the current options used: 
+    * `set_default_dataset_dir()`
+    * `get_default_dataset_dir()`
+    * `set_default_dataset_name()`
+    * `get_default_dataset_name()`
+    * `set_default_selector()`
+    * `get_default_selector()`
 
 ### Changed
 

@@ -9,9 +9,7 @@ plot_resolution_bars(x, verbose = TRUE)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 Invisibly returns \code{NULL}.

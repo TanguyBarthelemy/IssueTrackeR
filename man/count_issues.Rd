@@ -17,9 +17,7 @@ count_issues(x, ...)
 
 \item{\dots}{Currently not used.}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 Integer. The number of issues.

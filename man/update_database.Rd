@@ -25,9 +25,7 @@ Default: value of option \code{IssueTrackeR.dataset.dir}.}
 \item{dataset_name}{Character. Name of the dataset.
 Default: value of option \code{IssueTrackeR.dataset.name}.}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 
 \item{...}{Currently not used.}
 }

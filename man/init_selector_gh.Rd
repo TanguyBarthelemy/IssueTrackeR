@@ -33,7 +33,7 @@ gh_sel <- IssueTrackeR:::init_selector_gh(
 )
 
 # Select all repositories for an owner
-tb_sel <- IssueTrackeR:::init_selector_gh(owner = "TanguyBarthelemy")
+tb_sel <- IssueTrackeR:::init_selector_gh(owner = "TractorTom")
 
 # Select multiple repositories
 multi_repo_sel <- IssueTrackeR:::init_selector_gh(

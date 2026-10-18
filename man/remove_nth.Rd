@@ -23,9 +23,7 @@ remove_nth(x, ...)
 \item{n}{Integer. Position of the element to remove. 1 is for the first
 element.}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 If \code{x} is a \code{IssuesTB}, it returns the list of issues (a \code{IssuesTB}

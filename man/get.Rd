@@ -24,9 +24,7 @@ corresponding vignettes:
 to have more information about selectors.
 By default \code{getOption("IssueTrackeR.selector")}.}
 
-\item{verbose}{A boolean indicating whether to print additional
-information.
-Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 
 \item{\dots}{Additional arguments to connect to the GitLab as \code{gitlab_url}
 and \code{private_token}.

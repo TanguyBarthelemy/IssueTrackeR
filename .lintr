@@ -12,6 +12,9 @@ linters: lintr::all_linters(
     )
 encoding: "UTF-8"
 exclusions: list(
+    "R/options.R" = list(
+        undesirable_function_linter = Inf
+    ),
     "tests" = list(
         undesirable_operator_linter = Inf
     ),
