@@ -7,19 +7,21 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-18
+
 ### Added
 
 * Support for GitLab repositories [#15](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/15)
 * New ways of selecting repositories with selector objects (`SelectorTB` class).  [#3](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/3)
 * New method `print()` for selector objects (`SelectorTB` class) [#67](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/67)
 * New function `check_github_connection()` to check if GitHub connection is valid
-* New functions to set and get the current options used: 
-    * `set_default_dataset_dir()`
-    * `get_default_dataset_dir()`
-    * `set_default_dataset_name()`
-    * `get_default_dataset_name()`
-    * `set_default_selector()`
-    * `get_default_selector()`
+* New functions to set and get the current options used:
+  * `set_default_dataset_dir()`
+  * `get_default_dataset_dir()`
+  * `set_default_dataset_name()`
+  * `get_default_dataset_name()`
+  * `set_default_selector()`
+  * `get_default_selector()`
 
 ### Changed
 
@@ -27,23 +29,23 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * `format_XXX()` functions are renamed `format_XXX_github()`
 * `write_to_datasets()` is renamed `write()` [#19](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/19)
 * The issue fields are now ordered as :
-    * "title
-    * body
-    * number
-    * state
-    * created_at
-    * closed_at
-    * closed_by
-    * labels
-    * comments
-    * milestone
-    * repo
-    * owner
-    * url
-    * html_url
-    * creator
-    * assignee
-    * state_reason
+  * "title
+  * body
+  * number
+  * state
+  * created_at
+  * closed_at
+  * closed_by
+  * labels
+  * comments
+  * milestone
+  * repo
+  * owner
+  * url
+  * html_url
+  * creator
+  * assignee
+  * state_reason
 
 ## [1.5.0] - 2026-08-24
 
@@ -180,7 +182,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New CHANGELOG (`NEWS.md`)
 * Documentation for `logic_reducer()`, `no_milestones()`, `vgrepl()` and `simple_sort`
 
-[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.5.0...v2.0.0
 [1.5.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.1...v1.4.0
