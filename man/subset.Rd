@@ -7,7 +7,7 @@
 \method{subset}{IssuesTB}(x, ...)
 }
 \arguments{
-\item{x}{An object of class \code{IssuesTB}.}
+\item{x}{object to be subsetted.}
 
 \item{...}{further arguments to be passed to or from other methods.}
 }
@@ -56,12 +56,12 @@ This is a generic function, with methods supplied for matrices, data
 }
 
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-open_issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
+open_issues <- get_issues(selector = issues_selector)
 new_issues <- subset(open_issues, number < 150)
 }
 \seealso{

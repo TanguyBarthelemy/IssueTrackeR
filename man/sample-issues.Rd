@@ -33,7 +33,7 @@ sampled issues.
 \description{
 Generic function for drawing a random sample from an object.
 
-For objects of class IssuesTB, this method returns a random subset
+For objects of class \code{IssuesTB}, this method returns a random subset
 of the issues.
 }
 \details{
@@ -43,12 +43,12 @@ cases, refer to the original documentation:
 https://stat.ethz.ch/R-manual/R-devel/library/base/html/sample.html
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-open_issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
+open_issues <- get_issues(selector = issues_selector)
 new_issues <- sample(open_issues, size = 5L)
 }
 \seealso{

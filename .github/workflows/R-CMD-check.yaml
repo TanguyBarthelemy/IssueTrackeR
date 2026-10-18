@@ -43,6 +43,8 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.WORKFLOW_TOKEN }}
+      GITLAB_SSPCLOUD_API: ${{ secrets.GITLAB_SSPCLOUD_API }}
+      GITLAB_TRACTORTOM_API: ${{ secrets.GITLAB_TRACTORTOM_API }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:

@@ -15,9 +15,10 @@ generate_age_mat(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
-\item{n}{Number of age categories to create. Default: \code{3}.}
+\item{n}{Integer specifying the number of age classes.
+Default: \code{3}.}
 }
 \value{
 \code{ts} matrix of open issue counts by age category.
@@ -26,13 +27,13 @@ generate_age_mat(x, ...)
 Generate Age Matrix of Open Issues
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-age_matrix <- IssueTrackeR:::generate_age_mat(issues, n = 2)
+my_issues <- get_issues(selector = issues_selector)
+age_matrix <- IssueTrackeR:::generate_age_mat(my_issues, n = 2)
 
 }
 \keyword{internal}

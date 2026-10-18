@@ -17,8 +17,7 @@ count_issues(x, ...)
 
 \item{\dots}{Currently not used.}
 
-\item{verbose}{A logical value indicating whether to print additional
-information. Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 Integer. The number of issues.
@@ -27,11 +26,12 @@ Integer. The number of issues.
 Generic function to count the number of issues in a list of issues.
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
+issues_selector <- init_selector(
+    source = "Local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "open_issues.yaml"
+    dataset_name = NULL
 )
+my_issues <- get_issues(selector = issues_selector)
 
-count_issues(all_issues)
+count_issues(my_issues)
 }

@@ -25,16 +25,16 @@ new_issue(x = NULL, ...)
   body = NA_character_,
   number = NA_integer_,
   state = NA_character_,
-  created_at = as.Date(NA_integer_),
-  closed_at = as.Date(NA_integer_),
+  created_at = format_timestamp(NA_integer_),
+  closed_at = format_timestamp(NA_integer_),
   closed_by = NA_character_,
   labels = NULL,
+  comments = NULL,
   milestone = NA_character_,
   repo = NA_character_,
   owner = NA_character_,
   url = NA_character_,
   html_url = NA_character_,
-  comments = NULL,
   creator = NA_character_,
   assignee = NA_character_,
   state_reason = NA_character_,
@@ -45,7 +45,7 @@ new_issue(x = NULL, ...)
 \item{x}{a object representing an issue (\code{IssueTB} object, a \code{list}
 or a \code{data.frame})}
 
-\item{\dots}{Other information we would like to add to the issue.}
+\item{...}{Currently not used.}
 
 \item{title}{a string. The title of the issue.}
 
@@ -63,23 +63,19 @@ the issue is still open or \code{"closed"} if the issue is now closed.}
 \item{closed_by}{a string. The GitHub username of the person who closed the
 issue.}
 
-\item{labels}{a vector string (or missing). The labels of the issue.}
+\item{labels}{a vector string (or NULL). The labels of the issue.}
 
-\item{milestone}{a string (or missing). The milestone of the issue.}
+\item{comments}{vector of string (the comments of the issue)}
 
-\item{repo}{A character string specifying the GitHub repository name (only
-taken into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.repo}.}
+\item{milestone}{a string (or NULL). The milestone of the issue.}
 
-\item{owner}{A character string specifying the GitHub owner (only taken
-into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.owner}.}
+\item{repo}{Character. Repository name.}
+
+\item{owner}{Character. Owner name.}
 
 \item{url}{a string. The URL of the API to the GitHub issue.}
 
 \item{html_url}{a string. The URL to the GitHub issue.}
-
-\item{comments}{vector of string (the comments of the issue)}
 
 \item{creator}{a string. The GitHub username of the creator of the issue.}
 
@@ -95,16 +91,15 @@ a \code{IssueTB} object.
 Create a new \code{IssueTB} object
 }
 \examples{
-# Empty issue
-issue1 <- new_issue()
-
 # Custom issue
-issue1 <- new_issue(
+issue <- new_issue(
     title = "Nouvelle issue",
     body = "Un nouveau bug pour la fonction...",
     number = 47L,
     created_at = Sys.Date()
 )
 
-issue2 <- new_issue(x = issue1)
+dput(issue)
+
+issue2 <- new_issue(x = issue)
 }

@@ -3,14 +3,18 @@
 \name{plot-issues}
 \alias{plot-issues}
 \alias{plot.IssuesTB}
-\title{Plot an IssuesTB object}
+\alias{plot.ContributionsTB}
+\title{Plot an \code{IssuesTB} object}
 \usage{
 \method{plot}{IssuesTB}(
   x,
-  type = c("historic", "author", "created-closed", "resolution-time"),
+  type = c("historic", "area-chart", "created-closed", "resolution-time"),
+  by = NULL,
   n = 3L,
   ...
 )
+
+\method{plot}{ContributionsTB}(x, ...)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
@@ -19,10 +23,12 @@
 Accepted values are \code{"historic"} and \code{"created-closed"}.
 The default is \code{"historic"}.}
 
-\item{n}{Integer specifying the number of age classes to display when
-\code{type = "historic"}.}
+\item{by}{Character. The category. Default: \code{"creator"}.}
 
-\item{\dots}{Currently not used.}
+\item{n}{Integer specifying the number of age classes.
+Default: \code{3}.}
+
+\item{...}{Currently not used.}
 }
 \value{
 Invisibly returns \code{x}.
@@ -46,8 +52,9 @@ The first classes correspond to one-year intervals (\code{0-1y},
 \code{1-2y}, ..., \code{(n-1)-ny}) and the last class groups all issues
 older than \code{n} years.
 
-When \code{type = "author"}, the same graph as \code{type = "historic"} but
-this time with the number of open issues by author over time.
+When \code{type = "area-chart"}, the same graph as \code{type = "historic"}
+but this time with the number of issues by categories over time. The
+argument \code{by} is mandatory to specify which category to display.
 
 When \code{type = "created-closed"}, the total number of open issues is
 displayed together with the monthly numbers of newly created and newly
@@ -64,24 +71,23 @@ displayed in two forms:
 \item ECDF to show the cumulative distribution of issues resolution times on a
 log scale
 }
+
+\code{n} is only used when \code{type = "historic"}.
 }
 \examples{
-all_issues <- rbind(
-    get_issues(
-        source = "local",
-        dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-        dataset_name = "open_issues.yaml"
-    ),
-    get_issues(
-        source = "local",
-        dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-        dataset_name = "closed_issues.yaml"
-    )
+issues_selector <- init_selector(
+    source = "Local",
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
+my_issues <- get_issues(selector = issues_selector)
 
-plot(all_issues, type = "historic")
-plot(all_issues, type = "author")
-plot(all_issues, type = "created-closed")
-plot(all_issues, type = "resolution-time")
+plot(my_issues, type = "historic")
+plot(my_issues, type = "created-closed")
+plot(my_issues, type = "resolution-time")
+plot(my_issues, type = "area-chart", by = "closed_by")
+plot(my_issues, type = "area-chart", by = "milestone", n = 5)
+plot(my_issues, type = "area-chart", by = "state_reason", n = 5)
+plot(my_issues, type = "area-chart", by = "repo", n = 5)
 
 }

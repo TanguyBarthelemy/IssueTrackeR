@@ -1,44 +1,66 @@
+issue_items <- c(
+    "title",
+    "body",
+    "number",
+    "state",
+    "created_at",
+    "closed_at",
+    "closed_by",
+    "labels",
+    "comments",
+    "milestone",
+    "repo",
+    "owner",
+    "url",
+    "html_url",
+    "creator",
+    "assignee",
+    "state_reason"
+)
+
 #' @title Create a new \code{IssueTB} object
 #'
 #' @param x a object representing an issue (\code{IssueTB} object, a \code{list}
 #' or a \code{data.frame})
 #' @param title a string. The title of the issue.
-#' @param state a string that is either \code{"open"} (by default) if
-#' the issue is still open or \code{"closed"} if the issue is now closed.
 #' @param body a string. The body (text) of the issue.
 #' @param number a string. The number of the issue.
+#' @param state a string that is either \code{"open"} (by default) if
+#' the issue is still open or \code{"closed"} if the issue is now closed.
 #' @param created_at a date (or timestamp). The creation date of the issue.
 #' @param closed_at a date (or timestamp). The closing date of the issue.
 #' @param closed_by a string. The GitHub username of the person who closed the
 #' issue.
-#' @param labels a vector string (or missing). The labels of the issue.
-#' @param milestone a string (or missing). The milestone of the issue.
-#' @inheritParams get
+#' @param labels a vector string (or NULL). The labels of the issue.
+#' @param comments vector of string (the comments of the issue)
+#' @param milestone a string (or NULL). The milestone of the issue.
+#' @param repo Character. Repository name.
+#' @param owner Character. Owner name.
 #' @param url a string. The URL of the API to the GitHub issue.
 #' @param html_url a string. The URL to the GitHub issue.
-#' @param comments vector of string (the comments of the issue)
 #' @param creator a string. The GitHub username of the creator of the issue.
 #' @param assignee a string. The GitHub username of the assignee of the issue.
 #' @param state_reason a string. \code{"open"}, \code{"completed"},
 #' \code{"reopened"}, \code{"not_planned"} or \code{"duplicate"}.
-#' @param \dots Other information we would like to add to the issue.
+#' @inheritParams count_issues
 #'
 #' @returns a \code{IssueTB} object.
 #' @export
 #'
 #' @examples
-#' # Empty issue
-#' issue1 <- new_issue()
-#'
 #' # Custom issue
-#' issue1 <- new_issue(
+#' issue <- new_issue(
 #'     title = "Nouvelle issue",
 #'     body = "Un nouveau bug pour la fonction...",
 #'     number = 47L,
 #'     created_at = Sys.Date()
 #' )
 #'
-#' issue2 <- new_issue(x = issue1)
+#' dput(issue)
+#'
+#' issue2 <- new_issue(x = issue)
+#' @name new_issue
+#'
 new_issue <- function(x = NULL, ...) {
     UseMethod("new_issue", x)
 }
@@ -100,77 +122,38 @@ new_issue.default <- function(
     body = NA_character_,
     number = NA_integer_,
     state = NA_character_,
-    created_at = as.Date(NA_integer_),
-    closed_at = as.Date(NA_integer_),
+    created_at = format_timestamp(NA_integer_),
+    closed_at = format_timestamp(NA_integer_),
     closed_by = NA_character_,
     labels = NULL,
+    comments = NULL,
     milestone = NA_character_,
     repo = NA_character_,
     owner = NA_character_,
     url = NA_character_,
     html_url = NA_character_,
-    comments = NULL,
     creator = NA_character_,
     assignee = NA_character_,
     state_reason = NA_character_,
     ...
 ) {
+    number <- as.integer(number)
+    created_at <- format_timestamp(created_at)
+    closed_at <- format_timestamp(closed_at)
 
-    checkmate::assert_character(title)
-    checkmate::assert_character(body)
-    checkmate::assert_integer(number)
-    checkmate::assert_character(state)
-    checkmate::assert_numeric(created_at)
-    checkmate::assert_numeric(closed_at)
-    checkmate::assert_character(closed_by)
-    checkmate::assert_character(milestone)
-    checkmate::assert_character(repo)
-    checkmate::assert_character(owner)
-    checkmate::assert_character(url)
-    checkmate::assert_character(html_url)
-    checkmate::assert_character(creator)
-    checkmate::assert_character(assignee)
-    checkmate::assert_character(state_reason)
-
-    checkmate::assert_scalar(title, na.ok = TRUE)
-    checkmate::assert_scalar(body, na.ok = TRUE)
-    checkmate::assert_scalar(number, na.ok = TRUE)
-    checkmate::assert_scalar(state, na.ok = TRUE)
-    checkmate::assert_scalar(created_at, na.ok = TRUE)
-    checkmate::assert_scalar(closed_at, na.ok = TRUE)
-    checkmate::assert_scalar(closed_by, na.ok = TRUE)
-    checkmate::assert_scalar(milestone, na.ok = TRUE)
-    checkmate::assert_scalar(repo, na.ok = TRUE)
-    checkmate::assert_scalar(owner, na.ok = TRUE)
-    checkmate::assert_scalar(url, na.ok = TRUE)
-    checkmate::assert_scalar(html_url, na.ok = TRUE)
-    checkmate::assert_scalar(creator, na.ok = TRUE)
-    checkmate::assert_scalar(assignee, na.ok = TRUE)
-    checkmate::assert_scalar(state_reason, na.ok = TRUE)
-
-    checkmate::assert_data_frame(labels, null.ok = TRUE)
-    checkmate::assert_data_frame(comments, null.ok = TRUE)
-
-    issue <- list(
-        number = as.integer(number),
-        title = title,
-        body = body,
-        state = state,
-        url = url,
-        html_url = html_url,
-        milestone = milestone,
-        created_at = format_timestamp(created_at),
-        closed_at = format_timestamp(closed_at),
-        closed_by = closed_by,
-        creator = creator,
-        assignee = assignee,
-        state_reason = state_reason,
-        owner = owner,
-        repo = repo,
-        labels = labels,
-        comments = comments
+    all_args <- lapply(
+        issue_items,
+        get,
+        envir = environment(),
+        inherits = FALSE
     )
+    names(all_args) <- issue_items
 
+    do.call(what = assert_issue, args = all_args)
+    issue <- do.call(
+        what = list,
+        args = all_args
+    )
     class(issue) <- "IssueTB"
     return(issue)
 }
@@ -178,32 +161,33 @@ new_issue.default <- function(
 #' @title Create a new \code{IssuesTB} object
 #'
 #' @param x a object representing a list of issues (\code{IssuesTB} object, a
-#' \code{list} or a \code{data.frame})
+#' \code{list} or a \code{data.frame}) or a single issue (\code{IssueTB} class)
 #' @param title a vector of string. The titles of the issues.
-#' @param state a vector of string that is either \code{"open"} (by default) if
-#' the issues are still open or \code{"closed"} if the issues are now closed.
 #' @param body a vector of string. The bodies (text) of the issues.
 #' @param number a vector of string. The numbers of the issues.
+#' @param state a vector of string that is either \code{"open"} (by default) if
+#' the issues are still open or \code{"closed"} if the issues are now closed.
 #' @param created_at a vector of date (or timestamp). The creation date of the
 #' issues.
 #' @param closed_at a vector of date (or timestamp). The closing date of the
 #' issues.
-#' @param closed_by a vector of string. The GitHub usernames of the person who
+#' @param closed_by a vector of string. The usernames of the person who
 #' closed the issues.
-#' @param labels a list of vector string (or missing). The labels of the issues.
-#' @param milestone a vector of string (or missing). The milestones of the
-#' issues.
-#' @inheritParams get
-#' @param url a vector of string. The URLs of the API to the GitHub issues.
-#' @param html_url a vector of string. The URLs to the GitHub issues.
+#' @param labels a list of vector string (or NULL). The labels of the issues.
 #' @param comments a list of vector string. The comments of the issues.
-#' @param creator a vector of string. The GitHub usernames of the creator of the
+#' @param milestone a vector of string (or NULL). The milestones of the
+#' issues.
+#' @param repo Character. Repositories name.
+#' @param owner Character string containing the owners name.
+#' @param url a vector of string. The URLs of the API to the issues.
+#' @param html_url a vector of string. The URLs to the issues.
+#' @param creator a vector of string. The usernames of the creator of the
 #'  issues.
-#' @param assignee a vector of string. The GitHub usernames of the assignee of
+#' @param assignee a vector of string. The usernames of the assignee of
 #' the issues.
 #' @param state_reason a vector of string. \code{"open"}, \code{"completed"},
 #' \code{"reopened"}, \code{"not_planned"} or \code{"duplicate"}.
-#' @param \dots Other information we would like to add to the issue.
+#' @inheritParams count_issues
 #'
 #' @returns a \code{IssuesTB} object.
 #' @export
@@ -239,7 +223,7 @@ new_issue.default <- function(
 #'     number = 1:2,
 #'     created_at = c(Sys.Date() - 30, Sys.Date())
 #' )
-#' @rdname new_issues
+#' @name new_issues
 #'
 new_issues <- function(x = NULL, ...) {
     UseMethod("new_issues", x)
@@ -283,6 +267,14 @@ new_issues.list <- function(x, ...) {
 }
 
 #' @rdname new_issues
+#' @exportS3Method new_issues NULL
+#' @method new_issues NULL
+#' @export
+new_issues.NULL <- function(x, ...) {
+    return(new_issues.default(...))
+}
+
+#' @rdname new_issues
 #' @exportS3Method new_issues default
 #' @method new_issues default
 #' @export
@@ -292,12 +284,12 @@ new_issues.list <- function(x, ...) {
 #' @importFrom checkmate assert_list
 new_issues.default <- function(
     x,
-    title,
-    body,
-    number,
-    state,
-    created_at = as.Date(NA_integer_),
-    closed_at = as.Date(NA_integer_),
+    title = NULL,
+    body = NULL,
+    number = NULL,
+    state = NULL,
+    created_at = format_timestamp(NA_integer_),
+    closed_at = format_timestamp(NA_integer_),
     closed_by = NA_character_,
     labels = list(),
     comments = list(),
@@ -311,85 +303,44 @@ new_issues.default <- function(
     state_reason = NA_character_,
     ...
 ) {
-    if (missing(title) && missing(body) && missing(number) && missing(state)) {
-        title <- character(0L)
-        body <- character(0L)
-        number <- integer(0L)
-        state <- character(0L)
-        created_at <- format_timestamp(as.Date(character(0L)))
-        closed_at <- format_timestamp(as.Date(character(0L)))
-        closed_by <- character(0L)
-        milestone <- character(0L)
-        repo <- character(0L)
-        owner <- character(0L)
-        url <- character(0L)
-        html_url <- character(0L)
-        creator <- character(0L)
-        assignee <- character(0L)
-        state_reason <- character(0L)
+    if (is.null(title) || is.null(body) || is.null(number) || is.null(state)) {
+        return(create_empty_issues())
     }
 
-    checkmate::assert_character(title)
-    checkmate::assert_character(body)
-    checkmate::assert_integer(number)
-    checkmate::assert_character(state)
-    checkmate::assert_numeric(created_at)
-    checkmate::assert_numeric(closed_at)
-    checkmate::assert_character(closed_by)
-    checkmate::assert_character(milestone)
-    checkmate::assert_character(repo)
-    checkmate::assert_character(owner)
-    checkmate::assert_character(url)
-    checkmate::assert_character(html_url)
-    checkmate::assert_character(creator)
-    checkmate::assert_character(assignee)
-    checkmate::assert_character(state_reason)
-
-    if (missing(labels)) {
+    if (length(labels) == 0L) {
         labels <- rep(
-            x = list(data.frame(
-                name = character(0L),
-                color = character(0L),
-                stringsAsFactors = FALSE
-            )),
+            x = create_empty_labels_list(),
             times = length(title)
         )
     }
-    if (missing(comments)) {
+    if (length(comments) == 0L) {
         comments <- rep(
-            x = list(data.frame(
-                text = character(0L),
-                author = character(0L),
-                stringsAsFactors = FALSE
-            )),
+            x = create_empty_comments_list(),
             times = length(title)
         )
     }
+    number <- as.integer(number)
+    created_at <- format_timestamp(created_at)
+    closed_at <- format_timestamp(closed_at)
 
-    checkmate::assert_list(labels)
-    checkmate::assert_list(comments)
+    all_args <- lapply(
+        issue_items,
+        get,
+        envir = environment(),
+        inherits = FALSE
+    )
+    names(all_args) <- issue_items
+    do.call(what = assert_issues, args = all_args)
 
-    issues <- data.frame(
-        number = as.integer(number),
-        title = title,
-        body = body,
-        state = state,
-        url = url,
-        html_url = html_url,
-        milestone = milestone,
-        created_at = format_timestamp(created_at),
-        closed_at = format_timestamp(closed_at),
-        closed_by = closed_by,
-        creator = creator,
-        assignee = assignee,
-        state_reason = state_reason,
-        owner = owner,
-        repo = repo,
-        stringsAsFactors = FALSE
+    all_args[names(all_args) %in% c("labels", "comments")] <- NULL
+    issues <- do.call(
+        what = data.frame,
+        args = c(all_args, stringsAsFactors = FALSE)
     )
     issues$labels <- labels
     issues$comments <- comments
 
+    issues <- issues[, c(issue_items)]
     class(issues) <- c("IssuesTB", "data.frame")
 
     return(issues)
@@ -397,18 +348,24 @@ new_issues.default <- function(
 
 #' @title Extraction and replacement of information in issues
 #'
-#' @param x An object of class \code{IssuesTB}.
-#' @inheritParams base::`[`
+#' @inheritParams with_labels x
+#' @param i Integer. Indices of the issues to extract.
+#' @param j Optional. Indices or names for column selection.
+#' @param drop Boolean. If `TRUE`, drop `IssuesTB` structure. Default: `TRUE`.
+#' @param \dots Other parameters passed to extraction method
+#' @param value Replacement value. According to the column selected, it can be
+#'   a numeric, a character, an integer or a timestamp (`POSIXct`).
 #'
 #' @returns Information inside the `IssuesTB` object
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
+#'
 #' first_issue <- open_issues[1, ]
 #' number <- open_issues[1, 1]
 #' state <- open_issues[1, "state"]
@@ -416,24 +373,22 @@ new_issues.default <- function(
 #' open_issues[["number"]] <- seq_along(open_issues[["number"]])
 #'
 #' @exportS3Method `[` IssuesTB
-#' @method `[` IssuesTB
+#' @method [ IssuesTB
 #' @export
 #'
 #' @name extraction-issues
-#' @noRd
 `[.IssuesTB` <- function(x, i, j, drop = TRUE) {
     output <- NextMethod("[")
-    Narg <- nargs() - !missing(drop)
+    nb_args <- nargs() - !missing(drop)
     # Cas sélection de colonne
     if (!missing(j)) {
         if (length(j) > 1L || !drop) {
             return(as.data.frame(output))
         }
         return(output)
-    } else if (Narg == 2L && !missing(i)) {
+    } else if (nb_args == 2L && !missing(i)) {
         return(as.data.frame(output))
     }
-
     output <- new_issues(output)
     if (drop && nrow(output) == 1L) {
         return(new_issue(output))
@@ -441,19 +396,17 @@ new_issues.default <- function(
     return(output)
 }
 
-#' @noRd
 #' @rdname extraction-issues
 #' @exportS3Method `[<-` IssuesTB
-#' @method `[<-` IssuesTB
+#' @method [<- IssuesTB
 #' @export
 `[<-.IssuesTB` <- function(x, ..., value) {
     return(new_issues(NextMethod()))
 }
 
-#' @noRd
 #' @rdname extraction-issues
 #' @exportS3Method `[[<-` IssuesTB
-#' @method `[[<-` IssuesTB
+#' @method [[<- IssuesTB
 #' @export
 `[[<-.IssuesTB` <- function(x, ..., value) {
     return(new_issues(NextMethod()))
@@ -472,18 +425,13 @@ append <- function(x, values, after = length(x)) {
 #' @method append IssuesTB
 #' @export
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' closed_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "closed_issues.yaml"
-#' )
-#' new_issues <- append(open_issues, closed_issues)
+#' my_issues <- get_issues(selector = issues_selector)
+#' new_issues <- append(my_issues, my_issues)
 append.IssuesTB <- function(x, values, after = nrow(x)) {
     if (after > nrow(x)) {
         after <- nrow(x)
@@ -502,7 +450,7 @@ append.IssuesTB <- function(x, values, after = nrow(x)) {
         return(append(x, values = new_issues(values), after = after))
     } else {
         stop(
-            "This function requires a IssueTB or IssuesTB object ",
+            "This function requires a `IssueTB` or `IssuesTB` object ",
             "for `values` argument.",
             call. = FALSE
         )
@@ -531,12 +479,12 @@ append.default <- function(x, values, after = length(x)) {
 #'
 #' @name rbind-issues
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- rbind(open_issues[1, ], open_issues[-1, ])
 #' @exportS3Method rbind IssueTB
 #' @method rbind IssueTB
@@ -553,18 +501,13 @@ rbind.IssueTB <- function(...) {
 #' @method rbind IssuesTB
 #' @export
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
-#' closed_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "closed_issues.yaml"
-#' )
-#' new_issues <- rbind(open_issues, closed_issues)
+#' open_issues <- get_issues(selector = issues_selector)
+#' new_issues <- rbind(open_issues, open_issues)
 rbind.IssuesTB <- function(...) {
     list(...) |>
         lapply(FUN = new_issues) |>
@@ -574,17 +517,17 @@ rbind.IssuesTB <- function(...) {
 
 #' @rdname subset
 #' @inherit base::subset
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @exportS3Method subset IssuesTB
 #' @method subset IssuesTB
 #' @export
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- subset(open_issues, number < 150)
 subset.IssuesTB <- function(x, ...) {
     output <- new_issues(NextMethod())
@@ -596,10 +539,12 @@ subset.IssuesTB <- function(x, ...) {
 #' @description
 #' Generic function for drawing a random sample from an object.
 #'
-#' For objects of class IssuesTB, this method returns a random subset
+#' For objects of class `IssuesTB`, this method returns a random subset
 #' of the issues.
 #'
-#' @inheritParams base::sample
+#' @inheritParams base::sample size
+#' @inheritParams base::sample replace
+#' @inheritParams base::sample prob
 #'
 #' @returns
 #' - For `IssuesTB` objects, an object of the same class containing the
@@ -620,14 +565,14 @@ sample <- function(x, size, replace = FALSE, prob = NULL) {
     UseMethod("sample")
 }
 
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- sample(open_issues, size = 5L)
 #' @rdname sample-issues
 #' @exportS3Method sample IssuesTB
@@ -656,12 +601,13 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
     base::sample(x = x, size = size, replace = replace, prob = prob)
 }
 
-#' @title Unique issues of an IssuesTB Object
+#' @title Unique issues of an `IssuesTB` Object
 #'
 #' @description
-#' Keep only different issues from a IssuesTB Object
+#' Keep only different issues from a `IssuesTB` Object
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
+#' @inheritParams base::unique incomparables
 #' @inheritParams base::unique
 #'
 #' @returns
@@ -674,12 +620,12 @@ sample.default <- function(x, size, replace = FALSE, prob = NULL) {
 #' https://stat.ethz.ch/R-manual/R-devel/library/base/html/unique.html
 #'
 #' @examples
-#' path <- system.file("data_issues", package = "IssueTrackeR")
-#' open_issues <- get_issues(
-#'     source = "local",
-#'     dataset_dir = path,
-#'     dataset_name = "open_issues.yaml"
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
 #' )
+#' open_issues <- get_issues(selector = issues_selector)
 #' new_issues <- unique(open_issues)
 #'
 #' @seealso [base::unique()], [base::duplicated()]
@@ -697,21 +643,21 @@ unique.IssuesTB <- function(x, incomparables = FALSE, ...) {
 #' @description
 #' Generic function to count the number of issues in a list of issues.
 #'
-#' @param x An object of class \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
-#' information. Default is \code{TRUE}.
+#' @inheritParams with_labels x
+#' @inheritParams reset_options verbose
 #' @param \dots Currently not used.
 #'
 #' @returns Integer. The number of issues.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
+#' issues_selector <- init_selector(
+#'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = NULL
 #' )
+#' my_issues <- get_issues(selector = issues_selector)
 #'
-#' count_issues(all_issues)
+#' count_issues(my_issues)
 #' @export
 count_issues <- function(x, ...) {
     UseMethod("count_issues", x)
@@ -731,4 +677,145 @@ count_issues.IssuesTB <- function(x, verbose = TRUE, ...) {
 #' @export
 count_issues.default <- function(...) {
     stop("`x` should be a `IssuesTB` object.", call. = FALSE)
+}
+
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_list
+#' @importFrom checkmate assert_posixct
+assert_issues <- function(
+    title = NULL,
+    body = NULL,
+    number = NULL,
+    state = NULL,
+    created_at = format_timestamp(NA_integer_),
+    closed_at = format_timestamp(NA_integer_),
+    closed_by = NA_character_,
+    labels = list(),
+    comments = list(),
+    milestone = NA_character_,
+    repo = NA_character_,
+    owner = NA_character_,
+    url = NA_character_,
+    html_url = NA_character_,
+    creator = NA_character_,
+    assignee = NA_character_,
+    state_reason = NA_character_
+) {
+    checkmate::assert_character(title)
+    checkmate::assert_character(body)
+    checkmate::assert_integer(number)
+    checkmate::assert_character(state)
+    checkmate::assert_posixct(created_at)
+    checkmate::assert_posixct(closed_at)
+    checkmate::assert_character(closed_by)
+    checkmate::assert_character(milestone)
+    checkmate::assert_character(repo)
+    checkmate::assert_character(owner)
+    checkmate::assert_character(url)
+    checkmate::assert_character(html_url)
+    checkmate::assert_character(creator)
+    checkmate::assert_character(assignee)
+    checkmate::assert_character(state_reason)
+    checkmate::assert_list(labels)
+    checkmate::assert_list(comments)
+}
+
+#' @importFrom checkmate assert_character
+#' @importFrom checkmate assert_integer
+#' @importFrom checkmate assert_list
+#' @importFrom checkmate assert_posixct
+#' @importFrom checkmate assert_scalar
+#' @importFrom checkmate assert_data_frame
+assert_issue <- function(
+    title = NA_character_,
+    body = NA_character_,
+    number = NA_integer_,
+    state = NA_character_,
+    created_at = format_timestamp(NA_integer_),
+    closed_at = format_timestamp(NA_integer_),
+    closed_by = NA_character_,
+    labels = NULL,
+    comments = NULL,
+    milestone = NA_character_,
+    repo = NA_character_,
+    owner = NA_character_,
+    url = NA_character_,
+    html_url = NA_character_,
+    creator = NA_character_,
+    assignee = NA_character_,
+    state_reason = NA_character_
+) {
+    checkmate::assert_character(title)
+    checkmate::assert_character(body)
+    checkmate::assert_integer(number)
+    checkmate::assert_character(state)
+    checkmate::assert_posixct(created_at)
+    checkmate::assert_posixct(closed_at)
+    checkmate::assert_character(closed_by)
+    checkmate::assert_character(milestone)
+    checkmate::assert_character(repo)
+    checkmate::assert_character(owner)
+    checkmate::assert_character(url)
+    checkmate::assert_character(html_url)
+    checkmate::assert_character(creator)
+    checkmate::assert_character(assignee)
+    checkmate::assert_character(state_reason)
+
+    checkmate::assert_scalar(title, na.ok = TRUE)
+    checkmate::assert_scalar(body, na.ok = TRUE)
+    checkmate::assert_scalar(number, na.ok = TRUE)
+    checkmate::assert_scalar(state, na.ok = TRUE)
+    checkmate::assert_scalar(created_at, na.ok = TRUE)
+    checkmate::assert_scalar(closed_at, na.ok = TRUE)
+    checkmate::assert_scalar(closed_by, na.ok = TRUE)
+    checkmate::assert_scalar(milestone, na.ok = TRUE)
+    checkmate::assert_scalar(repo, na.ok = TRUE)
+    checkmate::assert_scalar(owner, na.ok = TRUE)
+    checkmate::assert_scalar(url, na.ok = TRUE)
+    checkmate::assert_scalar(html_url, na.ok = TRUE)
+    checkmate::assert_scalar(creator, na.ok = TRUE)
+    checkmate::assert_scalar(assignee, na.ok = TRUE)
+    checkmate::assert_scalar(state_reason, na.ok = TRUE)
+
+    checkmate::assert_data_frame(labels, null.ok = TRUE)
+    checkmate::assert_data_frame(comments, null.ok = TRUE)
+}
+
+create_empty_issues <- function() {
+    return(new_issues(
+        title = character(0L),
+        body = character(0L),
+        number = integer(0L),
+        state = character(0L),
+        created_at = format_timestamp(as.Date(character(0L))),
+        closed_at = format_timestamp(as.Date(character(0L))),
+        closed_by = character(0L),
+        labels = NULL,
+        comments = NULL,
+        milestone = character(0L),
+        repo = character(0L),
+        owner = character(0L),
+        url = character(0L),
+        html_url = character(0L),
+        creator = character(0L),
+        assignee = character(0L),
+        state_reason = character(0L)
+    ))
+}
+
+create_empty_labels_list <- function() {
+    return(list(data.frame(
+        name = character(0L),
+        color = character(0L),
+        stringsAsFactors = FALSE
+    )))
+}
+
+create_empty_comments_list <- function() {
+    return(list(data.frame(
+        text = character(0L),
+        author = character(0L),
+        stringsAsFactors = FALSE
+    )))
 }

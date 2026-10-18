@@ -1,35 +1,42 @@
-#' @title Display IssueTB and IssuesTB object
+#' @title Display `IssueTB`, `IssuesTB`, `LabelsTB` or `SelectorTB` object
 #'
 #' @description
-#' Display IssueTB and IssuesTB with formatted output in the console
+#' Display `IssueTB`, `IssuesTB`, `LabelsTB` or `SelectorTB` with formatted
+#' output in the console
 #'
-#' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
-#' @param \dots Currently not used.
+#' @param x An object of class \code{IssueTB}, \code{IssuesTB}, `LabelsTB` or
+#'   \code{SelectorTB}.
+#' @inheritParams count_issues
 #'
 #' @details
-#' This function displays an issue (\code{IssueTB} object) or a list of issues
-#' (\code{IssuesTB} object) with a formatted output.
+#' This function displays an issue (\code{IssueTB} object), a list of issues
+#' (\code{IssuesTB} object) , a list of labels (\code{LabelsTB} object) or a
+#' list of selectors (`SelectorTB` objects) with a formatted output.
 #'
-#' @returns invisibly (with \code{invisible()}) \code{NULL}.
+#' @returns The object `x` invisibly.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
+#' issues_selector <- init_selector(
+#'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = NULL
 #' )
+#' my_issues <- get_issues(selector = issues_selector)
 #'
 #' # Display one issue
-#' print(all_issues[1, ])
+#' print(my_issues[1, ])
 #'
 #' # Display several issues
-#' print(all_issues[1:10, ])
+#' print(my_issues[1:10, ])
+#'
+#' # Display a selector
+#' print(issues_selector)
 #'
 #' # Display the summary of one issue
-#' summary(all_issues[2, ])
+#' summary(my_issues[2, ])
 #'
 #' # Display the summary of
-#' summary(all_issues[1:10, ])
+#' summary(my_issues[1:10, ])
 #' @name print-issues
 #'
 #' @exportS3Method print IssueTB
@@ -92,6 +99,46 @@ print.IssuesTB <- function(x, ...) {
         cat("\n")
         print(x[id_issue, , drop = TRUE])
     }
+    return(invisible(x))
+}
+
+#' @rdname print-issues
+#' @exportS3Method print SelectorTB
+#' @method print SelectorTB
+#' @export
+print.SelectorTB <- function(x, ...) {
+    cat(
+        crayon::bold(
+            switch(
+                EXPR = as.character(length(x)),
+                "0" = "No selectors",
+                "1" = "There is 1 selector.",
+                paste("There are", length(x), "selectors.")
+            )
+        ),
+        "\n"
+    )
+
+    if (is_empty(x)) {
+        return(invisible(x))
+    }
+
+    for (id_selector in seq_along(x)) {
+        selector <- x[[id_selector]]
+
+        txt_selector <- paste(
+            crayon::underline(names(selector)),
+            as.character(selector),
+            sep = ": "
+        ) |>
+            c(
+                crayon::bold(paste0("\nSelector n\U00B0", id_selector)),
+                ... = _
+            ) |>
+            paste("\n")
+        cat(txt_selector, sep = "")
+    }
+
     return(invisible(x))
 }
 
@@ -181,6 +228,26 @@ print.summary.IssuesTB <- function(x, ...) {
     return(invisible(x))
 }
 
+print_one_label <- function(labels) {
+    formatted_label <- labels$formatted_label
+    owner <- labels$owner
+    repo <- labels$repo
+
+    cat(
+        paste0(
+            "\n- ",
+            cli::style_hyperlink(
+                text = file.path(owner, repo, fsep = "/"),
+                url = file.path("https://github.com", owner, repo, fsep = "/")
+            ),
+            ":"
+        ),
+        formatted_label,
+        sep = ", "
+    )
+    return(NULL)
+}
+
 #' @rdname print-issues
 #' @exportS3Method print LabelsTB
 #' @method print LabelsTB
@@ -188,17 +255,10 @@ print.summary.IssuesTB <- function(x, ...) {
 print.LabelsTB <- function(x, ...) {
     x$labels_bgcolor <- x$color
     x$labels_color <- c("grey8", "ivory")[
-        isDark(x$labels_bgcolor) + 1L
+        is_dark(x$labels_bgcolor) + 1L
     ]
-    x$labels_url <- file.path(
-        "https://github.com",
-        x$owner,
-        x$repo,
-        "labels",
-        utils::URLencode(x$name),
-        fsep = "/"
-    )
-    x$formated_label <- vapply(
+    x$labels_url <- x$url
+    x$formatted_label <- vapply(
         X = seq_len(nrow(x)),
         FUN = function(k) {
             label_style <- crayon::combine_styles(
@@ -228,24 +288,7 @@ print.LabelsTB <- function(x, ...) {
         owner_name <- couples$owner[id]
         repo_name <- couples$repo[id]
         labels_owner <- x[x$owner == owner_name & x$repo == repo_name, ]
-
-        cat(
-            paste0(
-                "\n- ",
-                cli::style_hyperlink(
-                    text = paste(owner_name, repo_name, sep = "/"),
-                    url = paste(
-                        "https://github.com",
-                        owner_name,
-                        repo_name,
-                        sep = "/"
-                    )
-                ),
-                ":"
-            ),
-            labels_owner$formated_label,
-            sep = ", "
-        )
+        print_one_label(labels_owner)
     }
     cat("\n")
     return(invisible(x))
@@ -277,7 +320,7 @@ print.summary.LabelsTB <- function(x, ...) {
             paste0(
                 "\n- ",
                 cli::style_hyperlink(
-                    text = paste(owner_name, repo_name, sep = "/"),
+                    text = file.path(owner_name, repo_name, fsep = "/"),
                     url = file.path(
                         "https://github.com",
                         owner_name,
@@ -287,9 +330,49 @@ print.summary.LabelsTB <- function(x, ...) {
                 ),
                 ":"
             ),
-            paste0(labels_owner$formated_label, ": ", labels_owner$description),
+            paste0(
+                labels_owner$formatted_label,
+                ": ",
+                labels_owner$description
+            ),
             sep = "\n    - "
         )
     }
+    return(invisible(x))
+}
+
+print_classement <- function(x) {
+    xwo <- x[names(x) != "other"]
+    cat(
+        paste0(seq_along(xwo), ") ", names(xwo), ": ", xwo, " issues \n"),
+        "Other: ",
+        x["other"],
+        " issues",
+        sep = ""
+    )
+    return(invisible(x))
+}
+
+#' @rdname print-issues
+#' @exportS3Method print ContributionsTB
+#' @method print ContributionsTB
+#' @export
+print.ContributionsTB <- function(x, ...) {
+    cat(crayon::bold("Issues opened:\n"))
+    to_opener <- sort(x[1L, x[1L, ] > 0L], decreasing = TRUE)
+    print_classement(to_opener)
+
+    cat(crayon::bold("\n\nIssues commented:\n"))
+    to_commenter <- sort(x[2L, x[2L, ] > 0L], decreasing = TRUE)
+    print_classement(to_commenter)
+
+    cat(crayon::bold("\n\nIssues closed:\n"))
+    to_closer <- sort(x[3L, x[3L, ] > 0L], decreasing = TRUE)
+    print_classement(to_closer)
+
+    cat(crayon::bold("\n\nIssues assigned:\n"))
+    to_assign <- sort(x[4L, x[4L, ] > 0L], decreasing = TRUE)
+    print_classement(to_assign)
+
     return(invisible(x))
 }

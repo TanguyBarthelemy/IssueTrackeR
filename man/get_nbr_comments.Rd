@@ -23,12 +23,15 @@ different issues in \code{x}.
 Number of comments of an Issue or set of issues
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
+issues_selector <- init_selector(
+    source = "Local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "open_issues.yaml"
+    dataset_name = NULL
 )
-get_nbr_comments(all_issues)
-get_nbr_comments(all_issues[1L, ])
+
+my_issues <- get_issues(selector = issues_selector)
+
+get_nbr_comments(my_issues)
+get_nbr_comments(my_issues[1L, ])
 
 }

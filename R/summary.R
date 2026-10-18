@@ -7,46 +7,10 @@ state_table <- c(
     duplicated = "\U27BF Duplicated"
 )
 
-prepare_label_display <- function(x, html_url) {
-    if (nrow(x) == 0L) {
-        return("")
-    }
-
-    labels_name <- x$name
-    labels_bgcolor <- x$color
-
-    labels_color <- c("grey8", "ivory")[isDark(x$color) + 1L]
-    labels_url <- paste0(
-        gsub(
-            x = html_url,
-            pattern = "\\/[^\\/]*\\/[^\\/]*$",
-            replacement = "/labels/"
-        ),
-        utils::URLencode(labels_name)
-    )
-
-    output <- vapply(
-        X = seq_along(labels_name),
-        FUN = function(k) {
-            label_style <- crayon::combine_styles(
-                crayon::make_style(labels_color[k]),
-                crayon::make_style(labels_bgcolor[k], bg = TRUE)
-            )
-            cli::style_hyperlink(
-                text = label_style(labels_name[k]),
-                url = labels_url[k]
-            )
-        },
-        FUN.VALUE = character(1L)
-    ) |>
-        paste(collapse = ", ")
-    return(output)
-}
-
 #' @title Compute a summary of an issue or a list of issues
 #'
 #' @param object a \code{IssueTB} or \code{IssuesTB} object.
-#' @param \dots Currently not used.
+#' @inheritParams count_issues
 #'
 #' @details
 #' This function compute the summary of an issue (\code{IssueTB} object) with
@@ -57,17 +21,18 @@ prepare_label_display <- function(x, html_url) {
 #' @returns invisibly (with \code{invisible()}) \code{NULL}.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
+#' issues_selector <- init_selector(
+#'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = NULL
 #' )
+#' my_issues <- get_issues(selector = issues_selector)
 #'
 #' # Summarise one issue
-#' summary(all_issues[1, ])
+#' summary(my_issues[1, ])
 #'
 #' # Summarise several issues
-#' summary(all_issues[1:10, ])
+#' summary(my_issues[1:10, ])
 #' @name summary
 #'
 #' @exportS3Method summary IssueTB
@@ -133,7 +98,7 @@ summary.IssuesTB <- function(object, with_labels = FALSE, ...) {
 summary.LabelsTB <- function(object, ...) {
     object$labels_bgcolor <- object$color
     object$labels_color <- c("grey8", "ivory")[
-        isDark(object$labels_bgcolor) + 1L
+        is_dark(object$labels_bgcolor) + 1L
     ]
     object$labels_url <- file.path(
         "https://github.com",
@@ -143,7 +108,7 @@ summary.LabelsTB <- function(object, ...) {
         utils::URLencode(object$name),
         fsep = "/"
     )
-    object$formated_label <- vapply(
+    object$formatted_label <- vapply(
         X = seq_len(nrow(object)),
         FUN = function(k) {
             label_style <- crayon::combine_styles(
@@ -160,4 +125,40 @@ summary.LabelsTB <- function(object, ...) {
 
     class(object) <- c("summary.LabelsTB", "data.frame")
     return(object)
+}
+
+prepare_label_display <- function(x, html_url) {
+    if (nrow(x) == 0L) {
+        return("")
+    }
+
+    labels_name <- x$name
+    labels_bgcolor <- x$color
+
+    labels_color <- c("grey8", "ivory")[is_dark(x$color) + 1L]
+    labels_url <- paste0(
+        gsub(
+            x = html_url,
+            pattern = "\\/[^\\/]*\\/[^\\/]*$",
+            replacement = "/labels/"
+        ),
+        utils::URLencode(labels_name)
+    )
+
+    output <- vapply(
+        X = seq_along(labels_name),
+        FUN = function(k) {
+            label_style <- crayon::combine_styles(
+                crayon::make_style(labels_color[k]),
+                crayon::make_style(labels_bgcolor[k], bg = TRUE)
+            )
+            cli::style_hyperlink(
+                text = label_style(labels_name[k]),
+                url = labels_url[k]
+            )
+        },
+        FUN.VALUE = character(1L)
+    ) |>
+        paste(collapse = ", ")
+    return(output)
 }

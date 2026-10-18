@@ -1,3 +1,13 @@
+test_that("is_dark works for bright colours", {
+    expect_false(is_dark("white"))
+    expect_false(is_dark("#00AEB7"))
+})
+
+test_that("is_dark works for dark colour", {
+    expect_true(is_dark("black"))
+    expect_true(is_dark("#0800D6"))
+})
+
 test_that("null_to_default works with scalar", {
     expect_identical(null_to_default(NULL, default = 4L), 4L)
     expect_identical(null_to_default(4L, default = NULL), 4L)

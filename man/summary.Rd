@@ -16,7 +16,7 @@
 \arguments{
 \item{object}{a \code{IssueTB} or \code{IssuesTB} object.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
 \item{with_labels}{Boolean. Display the labels with the list of issues.
 Default is \code{FALSE}.}
@@ -34,15 +34,16 @@ For a list of issues (\code{IssuesTB} object), it just summarise the
 information with statistics by modalities.
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
+issues_selector <- init_selector(
+    source = "Local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "open_issues.yaml"
+    dataset_name = NULL
 )
+my_issues <- get_issues(selector = issues_selector)
 
 # Summarise one issue
-summary(all_issues[1, ])
+summary(my_issues[1, ])
 
 # Summarise several issues
-summary(all_issues[1:10, ])
+summary(my_issues[1:10, ])
 }

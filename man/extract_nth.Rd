@@ -3,42 +3,51 @@
 \name{extract_nth}
 \alias{extract_nth}
 \alias{extract_nth.IssuesTB}
+\alias{extract_nth.SelectorTB}
 \alias{extract_nth.default}
-\title{Extract the nth Issue from an List of Issues}
+\title{Extract the nth Item from an List}
 \usage{
 extract_nth(x, ...)
 
 \method{extract_nth}{IssuesTB}(x, n, verbose = TRUE, ...)
 
+\method{extract_nth}{SelectorTB}(x, n, verbose = TRUE, ...)
+
 \method{extract_nth}{default}(...)
 }
 \arguments{
-\item{x}{An object of class \code{IssuesTB}.}
+\item{x}{An object of class \code{IssuesTB} or \code{SelectorTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
 \item{n}{Integer. Position of the element to extract. 1 is for the first
 element.}
 
-\item{verbose}{A logical value indicating whether to print additional
-information. Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
-The nth issue as a \code{IssueTB} object.
-If \code{n} exceeds the number of issues, returns the last issue with a
-warning. Returns \code{NULL} if the issues list is empty.
+If \code{x} is a \code{IssuesTB}, it returns the nth issue as a \code{IssueTB}
+object. If \code{x} is a \code{SelectorTB}, it returns the nth selector as a
+\code{SelectorTB} object.
+If \code{n} exceeds the number of issues or selector, returns the last
+issue / selector with a warning.
+
+Returns \code{NULL} if the list is empty.
 }
 \description{
-Extract the nth issue from a \code{IssuesTB} object.
+Extract the nth issue from a \code{IssuesTB} object or the nth selector from a
+\code{SelectorTB} object.
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
+issues_selector <- init_selector(
+    source = "Local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "open_issues.yaml"
+    dataset_name = NULL
 )
 
-first_issue <- extract_nth(all_issues, 1)
-third_issue <- extract_nth(all_issues, 3)
+my_issues <- get_issues(selector = issues_selector)
+
+first_issue <- extract_nth(my_issues, 1)
+third_issue <- extract_nth(my_issues, 3)
 
 }

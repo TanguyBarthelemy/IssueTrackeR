@@ -59,3 +59,6 @@ README.html
 
 data/
 .positai
+inst/doc
+/doc/
+/Meta/

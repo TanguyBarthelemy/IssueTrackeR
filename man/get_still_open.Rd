@@ -15,7 +15,7 @@ get_still_open(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
 \item{lag}{Numeric. Number of years to look back for "still open" issues.
 Default is 0.}
@@ -27,13 +27,14 @@ Default is 0.}
 Count Still Open Issues Over Time
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
-open_issues <- IssueTrackeR:::get_still_open(issues, lag = 1L)
+my_issues <- get_issues(selector = issues_selector)
+
+IssueTrackeR:::get_still_open(my_issues, lag = 1L)
 
 }
 \keyword{internal}

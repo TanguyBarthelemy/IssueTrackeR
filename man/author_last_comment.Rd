@@ -15,10 +15,9 @@ author_last_comment(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssueTB} or \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
-\item{verbose}{A logical value indicating whether to print additional
-information. Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 A string with the name of the last person which leaves a comment.
@@ -28,12 +27,13 @@ If there is no comments, it returns an empty string.
 Retrieve the name of the last commentator
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
+issues_selector <- init_selector(
+    source = "Local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "open_issues.yaml"
+    dataset_name = NULL
 )
-author_last_comment(all_issues)
-author_last_comment(all_issues[1L, ])
+my_issues <- get_issues(selector = issues_selector)
+author_last_comment(my_issues)
+author_last_comment(my_issues[1L, ])
 
 }

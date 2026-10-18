@@ -15,10 +15,9 @@ get_resolution_times(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
-\item{verbose}{A logical value indicating whether to print additional
-information. Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 Integer vector of resolution times in seconds.
@@ -27,12 +26,13 @@ Integer vector of resolution times in seconds.
 Calculates the time taken to resolve issues in seconds.
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
+issues_selector <- init_selector(
+    source = "Local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "closed_issues.yaml"
+    dataset_name = NULL
 )
+my_issues <- get_issues(selector = issues_selector)
 
-IssueTrackeR:::get_resolution_times(all_issues)
+IssueTrackeR:::get_resolution_times(my_issues)
 }
 \keyword{internal}

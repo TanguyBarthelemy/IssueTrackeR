@@ -7,9 +7,8 @@
 get_all_repos(owner, public = TRUE, private = TRUE, verbose = TRUE)
 }
 \arguments{
-\item{owner}{A character string specifying the GitHub owner (only taken
-into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.owner}.}
+\item{owner}{Character. GitHub repository owner . GitHub owner (user or
+organization).}
 
 \item{public}{Boolean. Should we include public repos?
 (Default \code{TRUE})}
@@ -17,8 +16,7 @@ Defaults to the package option \code{IssueTrackeR.owner}.}
 \item{private}{Boolean. Should we include private repos?
 (Default \code{TRUE})}
 
-\item{verbose}{A logical value indicating whether to print additional
-information. Default is \code{TRUE}.}
+\item{verbose}{Boolean indicating whether to print additional information.}
 }
 \value{
 A string with the list of repo of a user or an organisation.
@@ -27,9 +25,9 @@ A string with the list of repo of a user or an organisation.
 Returns a list of repos.
 }
 \examples{
-\dontshow{if (gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0) withAutoprint(\{ # examplesIf}
 \donttest{
-get_all_repos("rjdverse")
+if (check_github_connection(verbose = FALSE)) {
+    get_all_repos("rjdverse")
 }
-\dontshow{\}) # examplesIf}
+}
 }

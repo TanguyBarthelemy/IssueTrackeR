@@ -3,7 +3,7 @@
 \name{unique-issues}
 \alias{unique-issues}
 \alias{unique.IssuesTB}
-\title{Unique issues of an IssuesTB Object}
+\title{Unique issues of an \code{IssuesTB} Object}
 \usage{
 \method{unique}{IssuesTB}(x, incomparables = FALSE, ...)
 }
@@ -22,7 +22,7 @@
 An \code{IssuesTB} object containing only unique issues.
 }
 \description{
-Keep only different issues from a IssuesTB Object
+Keep only different issues from a \code{IssuesTB} Object
 }
 \details{
 This method is consistent with \code{\link[base:unique]{base::unique()}}. For details about the
@@ -31,12 +31,12 @@ documentation:
 https://stat.ethz.ch/R-manual/R-devel/library/base/html/unique.html
 }
 \examples{
-path <- system.file("data_issues", package = "IssueTrackeR")
-open_issues <- get_issues(
-    source = "local",
-    dataset_dir = path,
-    dataset_name = "open_issues.yaml"
+issues_selector <- init_selector(
+    source = "Local",
+    dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+    dataset_name = NULL
 )
+open_issues <- get_issues(selector = issues_selector)
 new_issues <- unique(open_issues)
 
 }

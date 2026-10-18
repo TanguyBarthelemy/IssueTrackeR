@@ -4,25 +4,25 @@
 #' Generic function to filter issues with a given text pattern in the title,
 #' body, or comments of a GitHub Issue object or a collection of Issues.
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @param in_title Boolean. Does the function search for text in the title?
 #' (Default \code{TRUE})
 #' @param in_body Boolean. Does the function search for text in the body?
 #' (Default \code{TRUE})
 #' @param in_comments Boolean. Does the function search for text in the
 #' comments? (Default \code{TRUE})
-#' @param \dots Additional arguments passed to [grepl()], such as \code{pattern}
-#' and \code{ignore.case}.
+#' @inheritDotParams base::grepl
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
+#' issues_selector <- init_selector(
+#'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = NULL
 #' )
-#' with_text(all_issues, pattern = "Excel")
+#' my_issues <- get_issues(selector = issues_selector)
+#' with_text(my_issues, pattern = "Excel")
 #'
 #' @rdname with_text
 #' @export
@@ -65,18 +65,18 @@ with_text.IssuesTB <- function(
 #' Generic function to filter issues with labels
 #'
 #' @param x An object of class \code{IssuesTB}.
-#' @param \dots Additional arguments passed to [grepl()], such as \code{pattern}
-#' and \code{ignore.case}.
+#' @inheritDotParams base::grepl
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
+#' issues_selector <- init_selector(
+#'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = NULL
 #' )
-#' with_labels(all_issues, pattern = "Bug")
+#' my_issues <- get_issues(selector = issues_selector)
+#' with_labels(my_issues, pattern = "Bug")
 #'
 #' @rdname with_labels
 #' @export
@@ -98,21 +98,22 @@ with_labels.IssuesTB <- function(x, ...) {
 #' @description
 #' Function to filter issues with (or without) comments.
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @inheritParams with_labels x
 #' @param negate boolean indicating if we are searching for issues WITHOUT
 #' comments. Default is \code{FALSE}.
-#' @param \dots Currently not used.
+#' @inheritParams count_issues
 #'
 #' @returns An object \code{IssuesTB} with issues that satisfy the condition.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
+#' issues_selector <- init_selector(
+#'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = NULL
 #' )
-#' with_comments(all_issues)
-#' with_comments(all_issues, negate = TRUE)
+#' my_issues <- get_issues(selector = issues_selector)
+#' with_comments(my_issues)
+#' with_comments(my_issues, negate = TRUE)
 #'
 #' @rdname with_comments
 #' @export
@@ -144,13 +145,16 @@ with_comments.IssuesTB <- function(x, negate = FALSE, ...) {
 #' different issues in \code{x}.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
+#' issues_selector <- init_selector(
+#'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = NULL
 #' )
-#' get_nbr_comments(all_issues)
-#' get_nbr_comments(all_issues[1L, ])
+#'
+#' my_issues <- get_issues(selector = issues_selector)
+#'
+#' get_nbr_comments(my_issues)
+#' get_nbr_comments(my_issues[1L, ])
 #'
 #' @rdname get_nbr_comments
 #' @export
@@ -181,22 +185,22 @@ get_nbr_comments.IssuesTB <- function(x) {
 #' @description
 #' Retrieve the name of the last commentator
 #'
-#' @param x An object of class \code{IssueTB} or \code{IssuesTB}.
-#' @param verbose A logical value indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#' @param \dots Currently not used.
+#' @inheritParams get_nbr_comments x
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
 #'
 #' @returns A string with the name of the last person which leaves a comment.
 #' If there is no comments, it returns an empty string.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
+#' issues_selector <- init_selector(
+#'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = NULL
 #' )
-#' author_last_comment(all_issues)
-#' author_last_comment(all_issues[1L, ])
+#' my_issues <- get_issues(selector = issues_selector)
+#' author_last_comment(my_issues)
+#' author_last_comment(my_issues[1L, ])
 #'
 #' @rdname author_last_comment
 #' @export
@@ -236,31 +240,37 @@ author_last_comment.IssuesTB <- function(x, verbose = TRUE, ...) {
     return(authors)
 }
 
-#' @title Extract the nth Issue from an List of Issues
+#' @title Extract the nth Item from an List
 #'
 #' @description
-#' Extract the nth issue from a `IssuesTB` object.
+#' Extract the nth issue from a `IssuesTB` object or the nth selector from a
+#' `SelectorTB` object.
 #'
-#' @param x An object of class \code{IssuesTB}.
+#' @param x An object of class \code{IssuesTB} or `SelectorTB`.
 #' @param n Integer. Position of the element to extract. 1 is for the first
 #'   element.
-#' @param verbose A logical value indicating whether to print additional
-#' information. Default is \code{TRUE}.
-#' @param \dots Currently not used.
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
 #'
-#' @returns The nth issue as a `IssueTB` object.
-#' If \code{n} exceeds the number of issues, returns the last issue with a
-#' warning. Returns `NULL` if the issues list is empty.
+#' @returns If `x` is a `IssuesTB`, it returns the nth issue as a `IssueTB`
+#' object. If `x` is a `SelectorTB`, it returns the nth selector as a
+#' `SelectorTB` object.
+#' If \code{n} exceeds the number of issues or selector, returns the last
+#' issue / selector with a warning.
+#'
+#' Returns `NULL` if the list is empty.
 #'
 #' @examples
-#' all_issues <- get_issues(
-#'     source = "local",
+#' issues_selector <- init_selector(
+#'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-#'     dataset_name = "open_issues.yaml"
+#'     dataset_name = NULL
 #' )
 #'
-#' first_issue <- extract_nth(all_issues, 1)
-#' third_issue <- extract_nth(all_issues, 3)
+#' my_issues <- get_issues(selector = issues_selector)
+#'
+#' first_issue <- extract_nth(my_issues, 1)
+#' third_issue <- extract_nth(my_issues, 3)
 #'
 #' @name extract_nth
 #' @export
@@ -295,9 +305,124 @@ extract_nth.IssuesTB <- function(x, n, verbose = TRUE, ...) {
 }
 
 #' @rdname extract_nth
+#' @exportS3Method extract_nth SelectorTB
+#' @method extract_nth SelectorTB
+#' @export
+extract_nth.SelectorTB <- function(x, n, verbose = TRUE, ...) {
+    if (length(x) == 0L) {
+        if (verbose) {
+            message("The list of selector is empty. No selector to extract.")
+        }
+        output <- empty_selector()
+    } else if (n > length(x)) {
+        if (verbose) {
+            warning(
+                "n > number of selectors The last selector will be extracted.",
+                call. = FALSE
+            )
+        }
+        output <- x[length(x)]
+        class(output) <- "SelectorTB"
+    } else {
+        if (verbose) {
+            message("The ", n, "th selector will be extracted.")
+        }
+        output <- x[n]
+        class(output) <- "SelectorTB"
+    }
+    return(output)
+}
+
+#' @rdname extract_nth
 #' @exportS3Method extract_nth default
 #' @method extract_nth default
 #' @export
 extract_nth.default <- function(...) {
-    stop("`x` should be a `IssuesTB` object.", call. = FALSE)
+    stop("`x` should be a `IssuesTB` or a `SelectorTB` object.", call. = FALSE)
+}
+
+#' @title Remove the nth Item from an List
+#'
+#' @description
+#' Remove the nth issue from a `IssuesTB` object or the nth selector from a
+#' `SelectorTB` object.
+#'
+#' @inheritParams extract_nth x
+#' @param n Integer. Position of the element to remove. 1 is for the first
+#'   element.
+#' @inheritParams reset_options verbose
+#' @inheritParams count_issues
+#'
+#' @returns If `x` is a `IssuesTB`, it returns the list of issues (a `IssuesTB`
+#' object) without the nth issue.
+#' If `x` is a `SelectorTB`, it returns the list of selector (a `SelectorTB`
+#' object) without the nth selector
+#' If \code{n} exceeds the number of issues or selector, returns the initial
+#' list with a warning.
+#'
+#' @examples
+#' issues_selector <- init_selector(
+#'     source = "Local",
+#'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
+#'     dataset_name = NULL
+#' )
+#' my_issues <- get_issues(selector = issues_selector)
+#' issues_wo_1 <- remove_nth(my_issues, 1)
+#' issues_wo_3 <- remove_nth(my_issues, 3)
+#'
+#' @name remove_nth
+#' @export
+remove_nth <- function(x, ...) {
+    UseMethod("remove_nth", x)
+}
+
+#' @rdname remove_nth
+#' @exportS3Method remove_nth IssuesTB
+#' @method remove_nth IssuesTB
+#' @export
+remove_nth.IssuesTB <- function(x, n, verbose = TRUE, ...) {
+    if (n > nrow(x)) {
+        if (verbose) {
+            warning(
+                "n > number of issues. No issues will be removed.",
+                call. = FALSE
+            )
+        }
+        return(x)
+    } else {
+        if (verbose) {
+            message("The ", n, "th issue will be removed")
+        }
+        return(x[-n, , drop = FALSE])
+    }
+}
+
+#' @rdname remove_nth
+#' @exportS3Method remove_nth SelectorTB
+#' @method remove_nth SelectorTB
+#' @export
+remove_nth.SelectorTB <- function(x, n, verbose = TRUE, ...) {
+    if (n > length(x)) {
+        if (verbose) {
+            warning(
+                "n > number of selectors. No selector will be removed.",
+                call. = FALSE
+            )
+        }
+        return(x)
+    }
+    if (verbose) {
+        message("The ", n, "th selector will be removed")
+    }
+    output <- x[-n]
+    class(output) <- "SelectorTB"
+    return(output)
+}
+
+#' @rdname remove_nth
+#' @exportS3Method remove_nth default
+#' @method remove_nth default
+#' @export
+remove_nth.default <- function(...) {
+    stop("`x` should be a `IssuesTB` or a `SelectorTB` object.", call. = FALSE)
 }

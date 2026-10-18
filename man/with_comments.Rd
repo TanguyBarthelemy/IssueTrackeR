@@ -12,7 +12,7 @@ with_comments(x, ...)
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
 
-\item{\dots}{Currently not used.}
+\item{...}{Currently not used.}
 
 \item{negate}{boolean indicating if we are searching for issues WITHOUT
 comments. Default is \code{FALSE}.}
@@ -24,12 +24,13 @@ An object \code{IssuesTB} with issues that satisfy the condition.
 Function to filter issues with (or without) comments.
 }
 \examples{
-all_issues <- get_issues(
-    source = "local",
+issues_selector <- init_selector(
+    source = "Local",
     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
-    dataset_name = "open_issues.yaml"
+    dataset_name = NULL
 )
-with_comments(all_issues)
-with_comments(all_issues, negate = TRUE)
+my_issues <- get_issues(selector = issues_selector)
+with_comments(my_issues)
+with_comments(my_issues, negate = TRUE)
 
 }

@@ -1,7 +1,7 @@
 test_that("summary has good structure", {
-    s1 <- summary(my_issues, with_labels = FALSE)
-    s2 <- summary(my_issues, with_labels = TRUE)
-    s3 <- summary(my_labels)
+    s1 <- summary(tested_issues, with_labels = FALSE)
+    s2 <- summary(tested_issues, with_labels = TRUE)
+    s3 <- summary(tested_labels)
 
     testthat::expect_type(s1, "list")
     testthat::expect_s3_class(s1, "summary.IssuesTB")
@@ -155,7 +155,7 @@ test_that("summary has good structure", {
         )
     )
     expect_identical(
-        s3[["formated_label"]],
+        s3[["formatted_label"]],
         c(
             "bug",
             "dependencies",
@@ -183,7 +183,7 @@ test_that("summary has good structure", {
             "labels_bgcolor",
             "labels_color",
             "labels_url",
-            "formated_label"
+            "formatted_label"
         )
     )
     # Testing dimensions

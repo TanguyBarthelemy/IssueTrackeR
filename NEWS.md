@@ -7,12 +7,52 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-18
+
+### Added
+
+* Support for GitLab repositories [#15](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/15)
+* New ways of selecting repositories with selector objects (`SelectorTB` class).  [#3](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/3)
+* New method `print()` for selector objects (`SelectorTB` class) [#67](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/67)
+* New function `check_github_connection()` to check if GitHub connection is valid
+* New functions to set and get the current options used:
+  * `set_default_dataset_dir()`
+  * `get_default_dataset_dir()`
+  * `set_default_dataset_name()`
+  * `get_default_dataset_name()`
+  * `set_default_selector()`
+  * `get_default_selector()`
+
+### Changed
+
+* `plot` now takes a `by` argument to display area chart by any variable in the list of issues. [#51](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/51)
+* `format_XXX()` functions are renamed `format_XXX_github()`
+* `write_to_datasets()` is renamed `write()` [#19](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/19)
+* The issue fields are now ordered as :
+  * "title
+  * body
+  * number
+  * state
+  * created_at
+  * closed_at
+  * closed_by
+  * labels
+  * comments
+  * milestone
+  * repo
+  * owner
+  * url
+  * html_url
+  * creator
+  * assignee
+  * state_reason
+
 ## [1.5.0] - 2026-08-24
 
 ### Added
 
 * New methods to plot resolution time and author in `plot()` [#14](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/14) and [#40](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/40)
-* `plot_resolution_bars` and `plot_resolution_ecdf` function to plot resolution time object.
+* `plot_resolution_bars` and `plot_resolution_ecdf()` function to plot resolution time object.
 * `extract_nth()` returns the nth issue of a list of issues [#42](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/42)
 * `count_issues()` returns the number of issues in a list of issues [#35](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/35)
 * New field `created_by` in issues
@@ -40,7 +80,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New function to plot issues
 * New checked case if internet connection is down
 * Display of the default options at the start of the package [#7](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/7)
-* New function `reset_options` to reset the default options [#4](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/4)
+* New function `reset_options()` to reset the default options [#4](https://github.com/TanguyBarthelemy/IssueTrackeR/issues/4)
 * Argument `with_labels` display the labels with the issue in a summary call of a list of issues
 
 ### Changed
@@ -142,7 +182,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New CHANGELOG (`NEWS.md`)
 * Documentation for `logic_reducer()`, `no_milestones()`, `vgrepl()` and `simple_sort`
 
-[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.5.0...v2.0.0
 [1.5.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/TanguyBarthelemy/IssueTrackeR/compare/v1.3.1...v1.4.0

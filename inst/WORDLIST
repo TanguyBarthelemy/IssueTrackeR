@@ -1,14 +1,12 @@
 etc
 
-IssueTB
-IssuesTB
-
 booleans
 Booleans
 
 Codecov
 CodeFactor
 
+GitLab
 GH
 gh
 tidyverse
@@ -37,3 +35,4 @@ Subassignment
 subsettable
 nonzero
 aging
+backreferences

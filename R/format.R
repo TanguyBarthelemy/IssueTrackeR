@@ -39,91 +39,572 @@ format_timestamp <- function(x) {
 #' issues, and milestones from the GitHub API.
 #'
 #' @param raw_issues a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' issues.
+#'   \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
+#'   issues.
 #' @param raw_comments a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' comments.
+#'   \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
+#'   comments.
 #' @param raw_labels a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' labels.
+#'   \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
+#'   labels.
 #' @param raw_milestone Raw milestone. Subset of a \code{gh_response} object
-#' output from the function \code{\link[gh]{gh}} which contains all the data
-#' and metadata for a GitHub milestone.
+#'   output from the function \code{\link[gh]{gh}} which contains all the data
+#'   and metadata for a GitHub milestone.
 #' @param raw_milestones a \code{gh_response} object output from the function
-#' \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
-#' milestones.
-#' @param urls A character vector of issue URLs for which comments should be
-#'   formatted.
-#' @inheritParams get
+#'   \code{\link[gh]{gh}} which contains all the data and metadata for GitHub
+#'   milestones.
+#' @param urls A character vector of issue HTML URLs for which comments should
+#'   be formatted.
 #'
 #' @returns
-#' - `format_labels`: A data frame with columns: `name`, `description`, `color`.
-#' - `format_comments`: A list of data frames with columns: `text`, `author`.
-#' - `format_issues`: A list of IssuesTB objects with complete issue data.
-#' - `format_milestone`: A data frame with milestone information.
-#' - `format_milestones`: A list representing milestones with `title`,
+#' - `format_labels_gh`: A data frame with columns: `name`, `description`,
+#'   `color`.
+#' - `format_comments_gh`: A list of data frames with columns: `text`,
+#'   `author`.
+#' - `format_issues_gh`: A list of IssuesTB objects with complete issue
+#'   data.
+#' - `format_milestone_gh`: A data frame with milestone information.
+#' - `format_milestones_gh`: A list representing milestones with `title`,
 #'   `description` and `due_on` date)
 #'
-#' @examplesIf gh::gh_token_exists() && gh::gh_rate_limit()$remaining > 0
+#' @examples
 #' \donttest{
-#' # Formatting labels
-#' raw_labels <- gh::gh(
-#'    repo = "rjdemetra",
-#'    owner = "rjdverse",
-#'    endpoint = "/repos/:owner/:repo/labels",
-#'    .limit = Inf,
-#'    .progress = FALSE
-#' )
-#' IssueTrackeR:::format_labels(raw_labels)
+#' if (check_github_connection(verbose = FALSE)) {
+#'     # Formatting labels
+#'     raw_labels <- gh::gh(
+#'        repo = "rjdemetra",
+#'        owner = "rjdverse",
+#'        endpoint = "/repos/:owner/:repo/labels",
+#'        .limit = Inf,
+#'        .progress = FALSE
+#'     )
+#'     IssueTrackeR:::format_labels_gh(raw_labels)
 #'
-#' # Formatting milestone
-#' raw_milestones <- gh::gh(
-#'     repo = "jdplus-main",
-#'     owner = "jdemetra",
-#'     endpoint = "/repos/:owner/:repo/milestones",
-#'     state = "all",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#' )
-#' raw_milestone <- raw_milestones[[5L]]
-#' IssueTrackeR:::format_milestone(raw_milestone)
+#'     # Formatting milestone
+#'     raw_milestones <- gh::gh(
+#'         repo = "jdplus-main",
+#'         owner = "jdemetra",
+#'         endpoint = "/repos/:owner/:repo/milestones",
+#'         state = "all",
+#'         .limit = Inf,
+#'         .progress = FALSE
+#'     )
+#'     raw_milestone <- raw_milestones[[5L]]
+#'     IssueTrackeR:::format_milestone_gh(raw_milestone)
 #'
-#' # Formatting milestones
-#' milestones_jdplus_main <- gh::gh(
-#'     repo = "jdplus-main",
-#'     owner = "jdemetra",
-#'     endpoint = "/repos/:owner/:repo/milestones",
-#'     state = "all",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#'  )
-#' IssueTrackeR:::format_milestones(milestones_jdplus_main)
+#'     # Formatting milestones
+#'     milestones_jdplus_main <- gh::gh(
+#'         repo = "jdplus-main",
+#'         owner = "jdemetra",
+#'         endpoint = "/repos/:owner/:repo/milestones",
+#'         state = "all",
+#'         .limit = Inf,
+#'         .progress = FALSE
+#'     )
+#'     IssueTrackeR:::format_milestones_gh(milestones_jdplus_main)
 #'
-#' # Formatting issues
-#' raw_issues <- gh::gh(
-#'     repo = "rjdemetra",
-#'     owner = "rjdverse",
-#'     endpoint = "/repos/:owner/:repo/issues",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#' )
-#' urls <- vapply(X = raw_issues, FUN = `[[`, "url", FUN.VALUE = character(1L))
-#' raw_comments <- gh::gh(
-#'     repo = "rjdemetra",
-#'     owner = "rjdverse",
-#'     endpoint = "/repos/:owner/:repo/issues/comments",
-#'     .limit = Inf,
-#'     .progress = FALSE
-#' )
-#' formatted_comments <- IssueTrackeR:::format_comments(raw_comments, urls)
+#'     # Formatting issues
+#'     raw_issues <- gh::gh(
+#'         repo = "rjdemetra",
+#'         owner = "rjdverse",
+#'         endpoint = "/repos/:owner/:repo/issues",
+#'         .limit = Inf,
+#'         .progress = FALSE
+#'     )
+#'     urls <- vapply(
+#'         X = raw_issues,
+#'         FUN = `[[`,
+#'         "url",
+#'         FUN.VALUE = character(1L)
+#'     )
+#'     raw_comments <- gh::gh(
+#'         repo = "rjdemetra",
+#'         owner = "rjdverse",
+#'         endpoint = "/repos/:owner/:repo/issues/comments",
+#'         .limit = Inf,
+#'         .progress = FALSE
+#'     )
+#'     formatted_comments <- IssueTrackeR:::format_comments_gh(
+#'         raw_comments,
+#'         urls
+#'     )
 #'
-#' formatted_issues <- IssueTrackeR:::format_issues(raw_issues = raw_issues,
-#'                             raw_comments = raw_comments,
-#'                             verbose = FALSE)
+#'     formatted_issues <- IssueTrackeR:::format_issues_gh(
+#'         raw_issues = raw_issues,
+#'         raw_comments = raw_comments,
+#'         verbose = FALSE
+#'     )
+#' }
 #' }
 #'
 #' @name format
 #' @noRd
 #'
 NULL
+
+#' @rdname format
+#' @noRd
+format_comments_gh <- function(
+    raw_comments,
+    verbose = TRUE
+) {
+    comments_number <- vapply(
+        X = raw_comments,
+        FUN = `[[`,
+        "issue_url",
+        FUN.VALUE = character(1L)
+    ) |>
+        sub(pattern = ".*/", replacement = "") |>
+        as.integer()
+    comments_author <- vapply(
+        X = raw_comments,
+        FUN = Reduce,
+        f = `[[`,
+        x = c("user", "login"),
+        FUN.VALUE = character(1L)
+    )
+    comments_bodies <- vapply(
+        X = raw_comments,
+        FUN = `[[`,
+        "body",
+        FUN.VALUE = character(1L)
+    )
+    comments_list <- data.frame(
+        number = comments_number,
+        text = comments_bodies,
+        author = comments_author
+    )
+
+    return(comments_list)
+}
+
+generate_empty_comments_list <- function(issues_number) {
+    comments_list <- rep(
+        x = create_empty_comments_list(),
+        times = length(issues_number)
+    )
+    names(comments_list) <- issues_number
+    return(comments_list)
+}
+
+extract_labels_issue_gh <- function(raw_issue) {
+    raw_labels <- raw_issue[["labels"]]
+
+    if (length(raw_labels) == 0L) {
+        list_labels <- create_empty_labels_list()[[1L]]
+    } else {
+        list_labels <- data.frame(
+            name = vapply(
+                X = raw_labels,
+                FUN = "[[",
+                "name",
+                FUN.VALUE = character(1L)
+            ),
+            color = paste0(
+                "#",
+                vapply(
+                    X = raw_labels,
+                    FUN = "[[",
+                    "color",
+                    FUN.VALUE = character(1L)
+                )
+            ),
+            stringsAsFactors = FALSE
+        )
+    }
+    return(list_labels)
+}
+
+extract_labels_issues_gl <- function(raw_issues) {
+    if (any(startsWith(colnames(raw_issues), "labels"))) {
+        list_labels <- raw_issues[, startsWith(
+            colnames(raw_issues),
+            "labels"
+        )] |>
+            t() |>
+            as.data.frame() |>
+            lapply(FUN = function(x) {
+                data.frame(
+                    name = x[!is.na(x)],
+                    color = rep(NA_character_, length(x[!is.na(x)]))
+                )
+            }) |>
+            unname()
+    } else {
+        list_labels <- rep(
+            x = create_empty_labels_list(),
+            times = nrow(raw_issues)
+        )
+    }
+    return(list_labels)
+}
+
+extract_url_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["url"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_state_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["state"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_title_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["title"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_body_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["body"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_number_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["number"]],
+        default = NA_integer_
+    )
+    return(output)
+}
+
+extract_html_url_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["html_url"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_milestone_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["milestone"]][["title"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_state_reason_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["state_reason"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_created_at_issue_gh <- function(raw_issue) {
+    output <- raw_issue[["created_at"]] |>
+        null_to_default(default = NA_real_) |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+    return(output)
+}
+
+extract_closed_at_issue_gh <- function(raw_issue) {
+    output <- raw_issue[["closed_at"]] |>
+        null_to_default(default = NA_real_) |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+    return(output)
+}
+
+extract_closed_by_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["closed_by"]][["login"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_creator_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["user"]][["login"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+extract_assignee_issue_gh <- function(raw_issue) {
+    output <- null_to_default(
+        x = raw_issue[["assignee"]][["login"]],
+        default = NA_character_
+    )
+    return(output)
+}
+
+#' @importFrom utils strcapture
+extract_structurel_issue_gh <- function(raw_issue) {
+    structurel <- utils::strcapture(
+        pattern = "^https://api.github.com/repos/([^/]+)/([^/]+)/issues/\\d+$",
+        x = extract_url_issue_gh(raw_issue = raw_issue),
+        proto = data.frame(
+            owner = character(),
+            repo = character(),
+            stringsAsFactors = FALSE
+        )
+    )
+    return(structurel)
+}
+
+extract_structurel_issues_gl <- function(raw_issues) {
+    structurel <- strsplit(raw_issues[["references.full"]], split = "/|#") |>
+        lapply(function(x) {
+            data.frame(
+                owner = paste(x[seq_len(length(x) - 2L)], collapse = "/"),
+                repo = x[length(x) - 1L],
+                stringsAsFactors = FALSE
+            )
+        }) |>
+        do.call(what = rbind)
+    return(structurel)
+}
+
+#' @rdname format
+#' @noRd
+format_milestones_gl <- function(
+    raw_milestones,
+    structurel,
+    verbose = TRUE
+) {
+    if (nrow(raw_milestones) == 0L) {
+        return(create_empty_milestones())
+    }
+
+    milestones <- data.frame(
+        source = gsub(
+            x = structurel$web_url,
+            pattern = paste0(structurel$path_with_namespace, "$"),
+            replacement = ""
+        ),
+        title = null_to_default(
+            raw_milestones[["title"]],
+            default = NA_character_
+        ),
+        description = null_to_default(
+            raw_milestones[["description"]],
+            default = NA_character_
+        ),
+        due_on = format_timestamp(null_to_default(
+            raw_milestones[["due_date"]],
+            default = NA_character_
+        )),
+        closed_at = format_timestamp(NA_character_),
+        creator = NA_character_,
+        state = null_to_default(
+            raw_milestones[["state"]],
+            default = NA_character_
+        ),
+        nb_issues_open = NA_integer_,
+        nb_issues_closed = NA_integer_,
+        repo = structurel$path,
+        owner = structurel$namespace.full_path,
+        url = raw_milestones$web_url
+    )
+
+    if (verbose) {
+        cat("Done!", nrow(milestones), "milestones found.\n", sep = " ")
+    }
+
+    class(milestones) <- c("MilestonesTB", "data.frame")
+    return(milestones)
+}
+
+#' @rdname format
+#' @noRd
+format_issue_gh <- function(
+    raw_issue,
+    comments,
+    verbose = TRUE
+) {
+    structurel <- extract_structurel_issue_gh(raw_issue)
+    issue_number <- extract_number_issue_gh(raw_issue)
+    comments_n <- comments[comments$number == issue_number, ]
+    comments_n$number <- NULL
+    rownames(comments_n) <- NULL
+
+    issues <- new_issue(
+        url = extract_url_issue_gh(raw_issue),
+        html_url = extract_html_url_issue_gh(raw_issue),
+        title = extract_title_issue_gh(raw_issue),
+        state = extract_state_issue_gh(raw_issue),
+        body = extract_body_issue_gh(raw_issue),
+        number = issue_number,
+        labels = extract_labels_issue_gh(raw_issue),
+        milestone = extract_milestone_issue_gh(raw_issue),
+        comments = comments_n,
+        created_at = extract_created_at_issue_gh(raw_issue),
+        closed_at = extract_closed_at_issue_gh(raw_issue),
+        closed_by = extract_closed_by_issue_gh(raw_issue),
+        creator = extract_creator_issue_gh(raw_issue),
+        assignee = extract_assignee_issue_gh(raw_issue),
+        state_reason = extract_state_reason_issue_gh(raw_issue),
+        owner = structurel$owner,
+        repo = structurel$repo
+    )
+
+    return(issues)
+}
+
+#' @rdname format
+#' @noRd
+format_issues_gh <- function(
+    raw_issues,
+    raw_comments,
+    verbose = TRUE
+) {
+    comments <- format_comments_gh(
+        raw_comments = raw_comments,
+        verbose = verbose
+    )
+
+    issues <- lapply(
+        X = raw_issues,
+        FUN = format_issue_gh,
+        comments = comments
+    ) |>
+        do.call(what = rbind)
+
+    return(issues)
+}
+
+format_issues_gl <- function(
+    raw_issues,
+    verbose = TRUE
+) {
+    if (nrow(raw_issues) == 0L) {
+        return(new_issues())
+    }
+    structurel <- extract_structurel_issues_gl(raw_issues)
+    issues_number <- as.integer(raw_issues[["iid"]])
+    comments_list <- generate_empty_comments_list(issues_number = issues_number)
+    list_labels <- extract_labels_issues_gl(raw_issues)
+    created_at <- raw_issues[["created_at"]] |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+    closed_at <- raw_issues[["closed_at"]] |>
+        null_to_default(default = NA_character_) |>
+        strptime(format = "%Y-%m-%dT%H:%M:%S") |>
+        format_timestamp()
+
+    issues <- new_issues(
+        url = raw_issues[["_links.self"]],
+        html_url = raw_issues[["web_url"]],
+        title = raw_issues[["title"]],
+        state = raw_issues[["state"]],
+        body = raw_issues[["description"]],
+        number = issues_number,
+        labels = list_labels,
+        milestone = null_to_default(
+            raw_issues[["milestone.title"]],
+            default = NA_character_
+        ),
+        comments = comments_list,
+        created_at = created_at,
+        closed_at = closed_at,
+        closed_by = null_to_default(
+            raw_issues[["closed_by.username"]],
+            default = NA_character_
+        ),
+        creator = raw_issues[["author.username"]],
+        assignee = null_to_default(
+            raw_issues[["assignee.username"]],
+            default = NA_character_
+        ),
+        state_reason = NA_character_,
+        owner = structurel[["owner"]],
+        repo = structurel[["repo"]]
+    )
+
+    return(issues)
+}
+
+#' @rdname format
+#' @noRd
+format_labels_gh <- function(raw_labels, verbose = TRUE) {
+    if (verbose) {
+        cat("Reading labels... ")
+    }
+    new_labels_structure <- lapply(
+        X = raw_labels,
+        FUN = base::`[`,
+        c("name", "description", "color")
+    ) |>
+        lapply(FUN = function(label) {
+            label$color <- paste0("#", label$color)
+            label$description <- null_to_default(
+                x = label$description,
+                default = ""
+            )
+            return(as.data.frame(label))
+        }) |>
+        do.call(what = rbind)
+    if (verbose) {
+        cat("Done!\n", nrow(new_labels_structure), " labels found.\n", sep = "")
+    }
+    return(new_labels_structure)
+}
+
+#' @rdname format
+#' @noRd
+format_milestone_gh <- function(raw_milestone, verbose = TRUE) {
+    if (verbose) {
+        cat("\t- ", raw_milestone[["title"]], "... Done!\n")
+    }
+    description <- null_to_default(
+        x = raw_milestone[["description"]],
+        default = ""
+    )
+    due_on <- format_timestamp(null_to_default(
+        x = raw_milestone[["due_on"]],
+        default = NA_real_
+    ))
+    closed_at <- format_timestamp(null_to_default(
+        x = raw_milestone[["closed_at"]],
+        default = NA_real_
+    ))
+    creator <- null_to_default(
+        x = raw_milestone[["creator"]][["login"]],
+        default = NA_character_
+    )
+
+    output <- data.frame(
+        source = "GitHub",
+        title = raw_milestone[["title"]],
+        description = description,
+        due_on = due_on,
+        closed_at = closed_at,
+        creator = creator,
+        state = raw_milestone[["state"]],
+        nb_issues_open = raw_milestone[["open_issues"]],
+        nb_issues_closed = raw_milestone[["closed_issues"]],
+        url = raw_milestone[["html_url"]],
+        stringsAsFactors = FALSE
+    )
+
+    return(output)
+}
+
+#' @rdname format
+#' @noRd
+format_milestones_gh <- function(raw_milestones, verbose = TRUE) {
+    if (verbose) {
+        cat("Reading milestones... \n")
+    }
+    milestones <- raw_milestones |>
+        lapply(FUN = format_milestone_gh, verbose = verbose) |>
+        do.call(what = rbind) |>
+        as.data.frame()
+
+    return(milestones)
+}

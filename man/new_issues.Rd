@@ -6,6 +6,7 @@
 \alias{new_issues.IssuesTB}
 \alias{new_issues.data.frame}
 \alias{new_issues.list}
+\alias{new_issues.NULL}
 \alias{new_issues.default}
 \title{Create a new \code{IssuesTB} object}
 \usage{
@@ -19,14 +20,16 @@ new_issues(x = NULL, ...)
 
 \method{new_issues}{list}(x, ...)
 
+\method{new_issues}{`NULL`}(x, ...)
+
 \method{new_issues}{default}(
   x,
-  title,
-  body,
-  number,
-  state,
-  created_at = as.Date(NA_integer_),
-  closed_at = as.Date(NA_integer_),
+  title = NULL,
+  body = NULL,
+  number = NULL,
+  state = NULL,
+  created_at = format_timestamp(NA_integer_),
+  closed_at = format_timestamp(NA_integer_),
   closed_by = NA_character_,
   labels = list(),
   comments = list(),
@@ -43,9 +46,9 @@ new_issues(x = NULL, ...)
 }
 \arguments{
 \item{x}{a object representing a list of issues (\code{IssuesTB} object, a
-\code{list} or a \code{data.frame})}
+\code{list} or a \code{data.frame}) or a single issue (\code{IssueTB} class)}
 
-\item{\dots}{Other information we would like to add to the issue.}
+\item{...}{Currently not used.}
 
 \item{title}{a vector of string. The titles of the issues.}
 
@@ -62,32 +65,28 @@ issues.}
 \item{closed_at}{a vector of date (or timestamp). The closing date of the
 issues.}
 
-\item{closed_by}{a vector of string. The GitHub usernames of the person who
+\item{closed_by}{a vector of string. The usernames of the person who
 closed the issues.}
 
-\item{labels}{a list of vector string (or missing). The labels of the issues.}
+\item{labels}{a list of vector string (or NULL). The labels of the issues.}
 
 \item{comments}{a list of vector string. The comments of the issues.}
 
-\item{milestone}{a vector of string (or missing). The milestones of the
+\item{milestone}{a vector of string (or NULL). The milestones of the
 issues.}
 
-\item{repo}{A character string specifying the GitHub repository name (only
-taken into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.repo}.}
+\item{repo}{Character. Repositories name.}
 
-\item{owner}{A character string specifying the GitHub owner (only taken
-into account if \code{source} is set to \code{"online"}).
-Defaults to the package option \code{IssueTrackeR.owner}.}
+\item{owner}{Character string containing the owners name.}
 
-\item{url}{a vector of string. The URLs of the API to the GitHub issues.}
+\item{url}{a vector of string. The URLs of the API to the issues.}
 
-\item{html_url}{a vector of string. The URLs to the GitHub issues.}
+\item{html_url}{a vector of string. The URLs to the issues.}
 
-\item{creator}{a vector of string. The GitHub usernames of the creator of the
+\item{creator}{a vector of string. The usernames of the creator of the
 issues.}
 
-\item{assignee}{a vector of string. The GitHub usernames of the assignee of
+\item{assignee}{a vector of string. The usernames of the assignee of
 the issues.}
 
 \item{state_reason}{a vector of string. \code{"open"}, \code{"completed"},
