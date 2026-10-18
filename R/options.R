@@ -85,7 +85,7 @@ get_default_dataset_dir <- function() {
 #' @export
 #' @rdname IssueTrackeR-options
 set_default_dataset_name <- function(name) {
-    checkmate::assert_character(name, min.chars = 1)
+    checkmate::assert_character(name, min.chars = 1L)
     options(IssueTrackeR.dataset.name = name)
 }
 
