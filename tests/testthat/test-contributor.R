@@ -36,14 +36,17 @@ test_that("compute_contribution fails for non-IssuesTB object", {
 })
 
 test_that("regroup_vect works correctly", {
-    x <- c(10, 8, 5, 3, 2, 1)
+    x <- c(10L, 8L, 5L, 3L, 2L, 1L)
 
     # n = 2: top 2 kept, rest summed
-    expect_equal(regroup_vect(x, n = 2), c(10, 8, other = 11))
+    expect_equal(regroup_vect(x, n = 2L), c(10L, 8L, other = 11L))
 
     # n = Inf: no regrouping
     expect_equal(regroup_vect(x, n = Inf), x)
 
     # n > length: no regrouping
-    expect_equal(regroup_vect(x, n = 10), x)
+    expect_equal(regroup_vect(x, n = 10L), x)
+
+    # n > length: no regrouping
+    expect_equal(regroup_vect(x, n = 6L), x)
 })
