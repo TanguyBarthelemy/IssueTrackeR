@@ -21,6 +21,7 @@ testthat::test_that("get works for GitHub", {
 
 testthat::test_that("get works for GitLab", {
     skip_if_not(nzchar(Sys.getenv("GITLAB_SSPCLOUD_API")))
+    skip_if_no_gitlab(Sys.getenv("GITLAB_SSPCLOUD_API"))
 
     gitlabr::set_gitlab_connection(
         gitlab_url = "https://git.lab.sspcloud.fr",
@@ -43,6 +44,7 @@ testthat::test_that("get works for GitLab", {
     testthat::expect_s3_class(milestones, "MilestonesTB")
 
     skip_if_not(nzchar(Sys.getenv("GITLAB_TRACTORTOM_API")))
+    skip_if_no_gitlab(Sys.getenv("GITLAB_TRACTORTOM_API"))
     gitlabr::set_gitlab_connection(
         gitlab_url = "https://gitlab.com",
         private_token = Sys.getenv("GITLAB_TRACTORTOM_API")

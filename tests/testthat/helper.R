@@ -21,6 +21,46 @@ skip_if_no_github <- function(has_scope = NULL) {
     }
 }
 
+skip_if_no_gitlab <- function(token) {
+    testthat::skip_if_offline("gitlab.com")
+    testthat::skip_on_cran()
+
+    if (!nzchar(token)) {
+        testthat::skip("No GitLab token")
+    }
+
+    # Test the API connection and authentication
+    response <- tryCatch(
+        httr2::request("https://gitlab.com/api/v4/user") |>
+            httr2::req_headers(`PRIVATE-TOKEN` = token) |>
+            httr2::req_error(is_error = function(resp) FALSE) |>
+            httr2::req_perform(),
+        error = function(e) NULL
+    )
+
+    if (is.null(response)) {
+        testthat::skip("Cannot connect to GitLab API")
+    }
+
+    status <- httr2::resp_status(response)
+
+    if (status == 401 || status == 403) {
+        testthat::skip("GitLab token is invalid or lacks permissions")
+    }
+
+    if (status == 429L) {
+        testthat::skip("GitLab API rate limit exceeded")
+    }
+
+    if (status >= 500L) {
+        testthat::skip("GitLab API is temporarily unavailable")
+    }
+
+    if (status >= 400L) {
+        testthat::skip("GitLab API request failed")
+    }
+}
+
 test_scopes <- function() {
     # whoami fails on GHA
     whoami <- rlang::env_cache(
