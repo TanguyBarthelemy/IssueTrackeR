@@ -116,13 +116,15 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">issues_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">local_selector</span> <span class="op">&lt;-</span> <span class="fu"><a href="init_selector.html">init_selector</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    source <span class="op">=</span> <span class="st">"Local"</span>,</span></span>
 <span class="r-in"><span>    dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data_issues"</span>, package <span class="op">=</span> <span class="st">"IssueTrackeR"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    dataset_name <span class="op">=</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">issues_selector</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_issues</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_selector</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The issues will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_issues.yaml.</span>
+<span class="r-in"><span><span class="va">my_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.html">get_labels</a></span><span class="op">(</span>selector <span class="op">=</span> <span class="va">local_selector</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The labels will be read from /home/runner/work/_temp/Library/IssueTrackeR/data_issues/list_labels.yaml.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display one issue</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">my_issues</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
@@ -257,7 +259,7 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parsing of legacy TS meta fails on Java25+ with some regional settings (`-Duser.language=fr -Duser.region=BE`)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Display a selector</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">issues_selector</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">local_selector</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There is 1 selector.</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Selector n°1</span> </span>
@@ -283,7 +285,7 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img width="773" height="456" alt="Image" src="https://github.com/user-attachments/assets/72172828-2d4a-478b-bb92-ba50c6fffb23" /&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Display the summary of</span></span></span>
+<span class="r-in"><span><span class="co"># Display the summary of issues</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">my_issues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 10 issues.</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1058 ✔ Completed </span>
@@ -296,6 +298,39 @@ list of selectors (<code>SelectorTB</code> objects) with a formatted output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1004 🟢 Open </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#1002 ✔ Completed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main#989 ✔ Completed </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Display the labels</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">my_labels</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There is 1 repo.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:, <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span>, <span style="color: #FFFFFF; background-color: #0087FF;">dependencies</span>, <span style="color: #FFFFFF; background-color: #0087D7;">documentation</span>, <span style="color: #1C1C1C; background-color: #D7D7FF;">duplicate</span>, <span style="color: #1C1C1C; background-color: #AFFFFF;">enhancement</span>, <span style="color: #FFFFFF; background-color: #080808;">github_actions</span>, <span style="color: #FFFFFF; background-color: #8787FF;">good first issue</span>, <span style="color: #FFFFFF; background-color: #00AF87;">help wanted</span>, <span style="color: #1C1C1C; background-color: #FFFF87;">invalid</span>, <span style="color: #1C1C1C; background-color: #FFAF00;">java</span>, <span style="color: #1C1C1C; background-color: #FF87FF;">question</span>, <span style="color: #1C1C1C; background-color: #EEEEEE;">wontfix</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Display the summary of labels</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">my_labels</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 12 labels.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - jdemetra/jdplus-main:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #FFFFFF; background-color: #FF5F5F;">bug</span>: Something isn't working</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #FFFFFF; background-color: #0087FF;">dependencies</span>: Pull requests that update a dependency file</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #FFFFFF; background-color: #0087D7;">documentation</span>: Improvements or additions to documentation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #1C1C1C; background-color: #D7D7FF;">duplicate</span>: This issue or pull request already exists</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #1C1C1C; background-color: #AFFFFF;">enhancement</span>: New feature or request</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #FFFFFF; background-color: #080808;">github_actions</span>: Pull requests that update GitHub Actions code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #FFFFFF; background-color: #8787FF;">good first issue</span>: Good for newcomers</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #FFFFFF; background-color: #00AF87;">help wanted</span>: Extra attention is needed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #1C1C1C; background-color: #FFFF87;">invalid</span>: This doesn't seem right</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #1C1C1C; background-color: #FFAF00;">java</span>: Pull requests that update Java code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #1C1C1C; background-color: #FF87FF;">question</span>: Further information is requested</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - <span style="color: #1C1C1C; background-color: #EEEEEE;">wontfix</span>: This will not be worked on</span>
 </code></pre></div>
     </div>
   </div>
