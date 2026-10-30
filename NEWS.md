@@ -7,6 +7,19 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+* All GitHub and GitLab API calls are now routed through dedicated internal
+  wrapper functions (see `R/api.R`), so that the API layer can be mocked in
+  tests with `testthat::local_mocked_bindings()`. The exported API is
+  unchanged.
+
+### Fixed
+
+* `get_milestones_gl()` did not forward its `verbose` argument to
+  `format_milestones_gl()`, so the message "Done! N milestones found." was
+  always displayed.
+
 ## [2.0.0] - 2026-10-18
 
 ### Added

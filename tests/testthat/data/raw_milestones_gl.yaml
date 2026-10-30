@@ -1,0 +1,18 @@
+id:
+- '1'
+- '2'
+title:
+- v1.0.0
+- v0.1.0
+description:
+- First release
+- .na.character
+due_date:
+- '2024-03-01'
+- .na.character
+state:
+- active
+- closed
+web_url:
+- https://gitlab.com/gitlab-org/gitlab/-/milestones/1
+- https://gitlab.com/gitlab-org/gitlab/-/milestones/2

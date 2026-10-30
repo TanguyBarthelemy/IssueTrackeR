@@ -186,7 +186,7 @@ init_selector_gh <- function(owner = NULL, repo = NULL, ...) {
     checkmate::assert_character(repo, null.ok = TRUE)
 
     if (is.null(owner)) {
-        warning("There is no owner Please provide a owner.", call. = FALSE)
+        warning("There is no owner. Please provide an owner.", call. = FALSE)
         return(empty_selector())
     } else if (length(owner) > 1L) {
         selector <- lapply(owner, init_selector_gh, repo = repo, ...) |>

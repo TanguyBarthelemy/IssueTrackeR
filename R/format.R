@@ -370,6 +370,15 @@ extract_structurel_issues_gl <- function(raw_issues) {
     return(structurel)
 }
 
+extract_state_issues_gl <- function(raw_issues) {
+    output <- null_to_default(
+        x = raw_issues[["state"]],
+        default = NA_character_
+    )
+    output[output == "opened"] <- "open"
+    return(output)
+}
+
 #' @rdname format
 #' @noRd
 format_milestones_gl <- function(
@@ -501,7 +510,7 @@ format_issues_gl <- function(
         url = raw_issues[["_links.self"]],
         html_url = raw_issues[["web_url"]],
         title = raw_issues[["title"]],
-        state = raw_issues[["state"]],
+        state = extract_state_issues_gl(raw_issues),
         body = raw_issues[["description"]],
         number = issues_number,
         labels = list_labels,

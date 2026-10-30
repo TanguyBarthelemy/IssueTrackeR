@@ -37,14 +37,7 @@ get_all_repos <- function(
         return(NULL)
     }
 
-    info_owner <- try(expr = {
-        gh::gh(
-            endpoint = "/users/:owner",
-            owner = owner,
-            .limit = Inf,
-            .progress = FALSE
-        )
-    })
+    info_owner <- try(expr = .api_owner_gh(owner = owner))
     check_response(info_owner)
 
     owner_type <- info_owner$type
@@ -75,12 +68,7 @@ get_all_repos <- function(
 
 get_public_repos <- function(endpoint, owner) {
     raw_list_public_repo <- try({
-        gh::gh(
-            endpoint = endpoint,
-            owner = owner,
-            .limit = Inf,
-            .progress = FALSE
-        )
+        .api_repos_gh(endpoint = endpoint, owner = owner)
     })
     check_response(raw_list_public_repo)
     list_public_repo <- vapply(
@@ -94,12 +82,7 @@ get_public_repos <- function(endpoint, owner) {
 
 get_private_repos <- function(owner) {
     raw_list_private_repo <- try({
-        gh::gh(
-            endpoint = "/user/repos",
-            .limit = Inf,
-            visibility = "private",
-            .progress = FALSE
-        )
+        .api_private_repos_gh()
     })
     check_response(raw_list_private_repo)
     list_private_repo <- raw_list_private_repo |>

@@ -1,0 +1,6 @@
+- name: bug
+  description: Something is not working
+  color: d73a4a
+- name: enhancement
+  description: ~
+  color: a2eeef

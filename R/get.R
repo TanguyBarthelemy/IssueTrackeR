@@ -262,16 +262,13 @@ get_issues_gh <- function(
     if (verbose) {
         cat("Repo:", repo, " owner:", owner, "\n")
     }
-    raw_issues <- try(expr = {
-        gh::gh(
-            repo = repo,
+    raw_issues <- try(
+        expr = .api_issues_gh(
             owner = owner,
-            endpoint = "/repos/:owner/:repo/issues",
-            state = state,
-            .limit = Inf,
-            .progress = FALSE
+            repo = repo,
+            state = state
         )
-    })
+    )
     check_response(raw_issues)
 
     raw_issues <- raw_issues |>
@@ -281,15 +278,12 @@ get_issues_gh <- function(
         return(new_issues())
     }
 
-    raw_comments <- try(expr = {
-        gh::gh(
-            repo = repo,
+    raw_comments <- try(
+        expr = .api_comments_gh(
             owner = owner,
-            endpoint = "/repos/:owner/:repo/issues/comments",
-            .limit = Inf,
-            .progress = FALSE
+            repo = repo
         )
-    })
+    )
     check_response(raw_comments)
 
     issues <- format_issues_gh(
@@ -320,7 +314,6 @@ get_issues_gh <- function(
 #' }
 #'
 #' @dev
-#' @importFrom gitlabr gl_list_issues
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 get_issues_gl <- function(
@@ -340,8 +333,8 @@ get_issues_gl <- function(
         cat("Project id:", project_id, "\n")
     }
 
-    raw_issues <- gitlabr::gl_list_issues(
-        project = project_id,
+    raw_issues <- .api_issues_gl(
+        project_id = project_id,
         state = state,
         ...
     )
@@ -461,15 +454,12 @@ get_labels_gh <- function(
     if (verbose) {
         cat("Repo:", repo, " owner:", owner, "\n")
     }
-    raw_labels <- try(expr = {
-        gh::gh(
-            repo = repo,
+    raw_labels <- try(
+        expr = .api_labels_gh(
             owner = owner,
-            endpoint = "/repos/:owner/:repo/labels",
-            .limit = Inf,
-            .progress = FALSE
+            repo = repo
         )
-    })
+    )
     check_response(raw_labels)
 
     list_labels <- format_labels_gh(
@@ -520,8 +510,6 @@ get_labels_gh <- function(
 #' - `owner`,
 #' - `url`.
 #'
-#' @importFrom gitlabr gl_get_project
-#' @importFrom gitlabr gitlab
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 #' @dev
@@ -536,11 +524,8 @@ get_labels_gl <- function(
     if (verbose) {
         cat("Project id:", project_id, "\n")
     }
-    structurel <- gitlabr::gl_get_project(project = project_id, ...)
-    raw_labels <- gitlabr::gitlab(
-        req = c("projects", project_id, "labels"),
-        ...
-    )
+    structurel <- .api_project_gl(project_id = project_id, ...)
+    raw_labels <- .api_labels_gl(project_id = project_id, ...)
     if (nrow(raw_labels) == 0L) {
         return(NULL)
     }
@@ -678,16 +663,13 @@ get_milestones_gh <- function(
     if (verbose) {
         cat("Repo:", repo, " owner:", owner, "\n")
     }
-    raw_milestones <- try(expr = {
-        gh::gh(
-            repo = repo,
+    raw_milestones <- try(
+        expr = .api_milestones_gh(
             owner = owner,
-            endpoint = "/repos/:owner/:repo/milestones",
-            state = state,
-            .limit = Inf,
-            .progress = FALSE
+            repo = repo,
+            state = state
         )
-    })
+    )
     check_response(raw_milestones)
 
     milestones <- format_milestones_gh(raw_milestones, verbose = verbose)
@@ -747,8 +729,6 @@ get_milestones_gh <- function(
 #' - `owner`,
 #' - `url`.
 #'
-#' @importFrom gitlabr gl_get_project
-#' @importFrom gitlabr gitlab
 #' @importFrom checkmate assert_flag
 #' @importFrom checkmate assert_count
 #' @dev
@@ -769,12 +749,12 @@ get_milestones_gl <- function(
         cat("Project id:", project_id, "\n")
     }
     milestones <- format_milestones_gl(
-        raw_milestones = gitlabr::gitlab(
-            req = c("projects", project_id, "milestones"),
-            state = "all",
+        raw_milestones = .api_milestones_gl(
+            project_id = project_id,
             ...
         ),
-        structurel = gitlabr::gl_get_project(project = project_id, ...)
+        structurel = .api_project_gl(project_id = project_id, ...),
+        verbose = verbose
     )
     return(milestones)
 }

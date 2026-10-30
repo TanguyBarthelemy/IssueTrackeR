@@ -1,6 +1,6 @@
 skip_if_no_github <- function(has_scope = NULL) {
-    testthat::skip_if_offline("github.com")
     testthat::skip_on_cran()
+    testthat::skip_if_offline("github.com")
 
     if (gh::gh_token() == "") {
         testthat::skip("No GitHub token")
@@ -21,22 +21,32 @@ skip_if_no_github <- function(has_scope = NULL) {
     }
 }
 
-skip_if_no_gitlab <- function(token) {
-    testthat::skip_if_offline("gitlab.com")
+skip_if_no_gitlab <- function(token = NULL, gitlab_url = "https://gitlab.com") {
     testthat::skip_on_cran()
+    testthat::skip_if_offline(httr2::url_parse(gitlab_url)$hostname)
 
-    if (!nzchar(token)) {
-        testthat::skip("No GitLab token")
+    if (!is.null(token)) {
+        if (!nzchar(token)) {
+            testthat::skip("No GitLab token")
+        }
+
+        # Test the API connection and authentication
+        response <- tryCatch(
+            httr2::request(paste0(gitlab_url, "/api/v4/user")) |>
+                httr2::req_headers(`PRIVATE-TOKEN` = token) |>
+                httr2::req_error(is_error = function(resp) FALSE) |>
+                httr2::req_perform(),
+            error = function(e) NULL
+        )
+    } else {
+        # Test the API connection and authentication
+        response <- tryCatch(
+            httr2::request(paste0(gitlab_url, "/api/v4/user")) |>
+                httr2::req_error(is_error = function(resp) FALSE) |>
+                httr2::req_perform(),
+            error = function(e) NULL
+        )
     }
-
-    # Test the API connection and authentication
-    response <- tryCatch(
-        httr2::request("https://gitlab.com/api/v4/user") |>
-            httr2::req_headers(`PRIVATE-TOKEN` = token) |>
-            httr2::req_error(is_error = function(resp) FALSE) |>
-            httr2::req_perform(),
-        error = function(e) NULL
-    )
 
     if (is.null(response)) {
         testthat::skip("Cannot connect to GitLab API")
@@ -83,8 +93,9 @@ expect_issues <- function(x) {
     expect_in(x[["state"]], c("open", "closed"))
     testthat::expect_s3_class(x[["created_at"]], "POSIXct")
     testthat::expect_s3_class(x[["closed_at"]], "POSIXct")
+    # GitLab issues have no state_reason, so NA is allowed
     expect_in(
-        x[["state_reason"]],
+        x[["state_reason"]][!is.na(x[["state_reason"]])],
         c(
             "open",
             "reopened",
@@ -160,6 +171,46 @@ expect_issue <- function(x) {
     )
 }
 
+expect_labels <- function(x) {
+    testthat::expect_type(x, "list")
+    testthat::expect_s3_class(x, "LabelsTB")
+    expect_identical(ncol(x), 7L)
+    expect_identical(
+        names(x),
+        c("source", "name", "description", "color", "repo", "owner", "url")
+    )
+    for (col in names(x)) {
+        testthat::expect_type(x[[col]], "character")
+    }
+}
+
+expect_milestones <- function(x) {
+    testthat::expect_type(x, "list")
+    testthat::expect_s3_class(x, "MilestonesTB")
+    expect_identical(ncol(x), 12L)
+    # "active" is the GitLab equivalent of GitHub's "open"
+    expect_in(x[["state"]], c("open", "active", "closed"))
+    testthat::expect_s3_class(x[["due_on"]], "POSIXct")
+    testthat::expect_s3_class(x[["closed_at"]], "POSIXct")
+    expect_identical(
+        names(x),
+        c(
+            "source",
+            "title",
+            "description",
+            "due_on",
+            "closed_at",
+            "creator",
+            "state",
+            "nb_issues_open",
+            "nb_issues_closed",
+            "repo",
+            "owner",
+            "url"
+        )
+    )
+}
+
 # selector <- init_selector(
 #     source = "GitHub",
 #     repo = "jdplus-main",
@@ -173,6 +224,23 @@ expect_issue <- function(x) {
 #     dataset_dir = testthat::test_path("data"),
 #     dataset_name = NULL
 # )
+
+# Load a raw API fixture from tests/testthat/data.
+# Fixtures ending in "_gl" are GitLab responses (column-mapped YAML, i.e.
+# the flattened data.frames returned by gitlabr); the other fixtures are
+# GitHub responses (a YAML list of API objects).
+load_raw <- function(name) {
+    path <- testthat::test_path("data", paste0(name, ".yaml"))
+    raw <- yaml::yaml.load_file(path)
+    if (endsWith(name, "_gl")) {
+        return(as.data.frame(
+            raw,
+            check.names = FALSE,
+            stringsAsFactors = FALSE
+        ))
+    }
+    return(raw)
+}
 
 local_selector <- init_selector(
     source = "Local",

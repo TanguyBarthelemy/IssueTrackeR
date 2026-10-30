@@ -1,0 +1,20 @@
+- title: v1.0.0
+  description: First release
+  due_on: '2024-03-01T00:00:00Z'
+  closed_at: ~
+  creator:
+    login: creator1
+  state: open
+  open_issues: 2
+  closed_issues: 1
+  html_url: https://github.com/TanguyBarthelemy/IssueTrackeR/milestones/1
+- title: v0.1.0
+  description: ~
+  due_on: ~
+  closed_at: '2024-01-01T00:00:00Z'
+  creator:
+    login: creator1
+  state: closed
+  open_issues: 0
+  closed_issues: 3
+  html_url: https://github.com/TanguyBarthelemy/IssueTrackeR/milestones/2

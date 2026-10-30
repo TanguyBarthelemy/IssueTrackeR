@@ -79,21 +79,19 @@ null_to_default <- function(x, default) {
 }
 
 #' @importFrom checkmate assert_flag
-#' @importFrom gh gh_token_exists
 .check_github_token <- function(verbose = TRUE) {
     checkmate::assert_flag(verbose)
-    token_exists <- gh::gh_token_exists()
+    token_exists <- .api_token_gh()
     if (!token_exists && verbose) {
         message("No GitHub token found.")
     }
     return(token_exists)
 }
 
-#' @importFrom gh gh_rate_limit
 #' @importFrom checkmate assert_flag
 .check_github_rate_limit <- function(verbose = TRUE) {
     checkmate::assert_flag(verbose)
-    rate_limit <- gh::gh_rate_limit()$remaining > 0L
+    rate_limit <- .api_rate_limit_gh()$remaining > 0L
     if (!rate_limit && verbose) {
         message("GitHub rate limit exceeded or error occurred.")
     }
