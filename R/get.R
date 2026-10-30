@@ -273,6 +273,7 @@ get_issues_gh <- function(
 
     raw_issues <- raw_issues |>
         Filter(f = function(.x) is.null(.x$pull_request))
+    class(raw_issues) <- c("gh_response", "list")
 
     if (length(raw_issues) == 0L) {
         return(new_issues())
@@ -287,7 +288,7 @@ get_issues_gh <- function(
     check_response(raw_comments)
 
     issues <- format_issues_gh(
-        raw_issues = raw_issues,
+        x = raw_issues,
         raw_comments = raw_comments,
         verbose = verbose
     )
@@ -463,7 +464,7 @@ get_labels_gh <- function(
     check_response(raw_labels)
 
     list_labels <- format_labels_gh(
-        raw_labels = raw_labels,
+        x = raw_labels,
         verbose = verbose
     )
 

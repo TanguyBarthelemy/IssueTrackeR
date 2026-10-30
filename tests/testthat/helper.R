@@ -239,6 +239,7 @@ load_raw <- function(name) {
             stringsAsFactors = FALSE
         ))
     }
+    class(raw) <- c("gh_response", "list")
     return(raw)
 }
 

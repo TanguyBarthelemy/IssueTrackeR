@@ -4,7 +4,7 @@
 \alias{check_response}
 \title{Check and Handle GitHub API Errors Message}
 \usage{
-check_response(x)
+check_response(x, ...)
 }
 \arguments{
 \item{x}{A try-error object returned from a API call}

@@ -130,7 +130,7 @@ format_timestamp <- function(x) {
 #'     )
 #'
 #'     formatted_issues <- IssueTrackeR:::format_issues_gh(
-#'         raw_issues = raw_issues,
+#'         x = raw_issues,
 #'         raw_comments = raw_comments,
 #'         verbose = FALSE
 #'     )
@@ -144,12 +144,18 @@ NULL
 
 #' @rdname format
 #' @noRd
-format_comments_gh <- function(
-    raw_comments,
-    verbose = TRUE
-) {
+format_comments_gh <- function(x, ...) {
+    UseMethod("format_comments_gh")
+}
+
+#' @rdname format
+#' @noRd
+#' @exportS3Method format_comments_gh gh_response
+#' @method format_comments_gh gh_response
+#' @export
+format_comments_gh.gh_response <- function(x, verbose = TRUE, ...) {
     comments_number <- vapply(
-        X = raw_comments,
+        X = x,
         FUN = `[[`,
         "issue_url",
         FUN.VALUE = character(1L)
@@ -157,14 +163,14 @@ format_comments_gh <- function(
         sub(pattern = ".*/", replacement = "") |>
         as.integer()
     comments_author <- vapply(
-        X = raw_comments,
+        X = x,
         FUN = Reduce,
         f = `[[`,
         x = c("user", "login"),
         FUN.VALUE = character(1L)
     )
     comments_bodies <- vapply(
-        X = raw_comments,
+        X = x,
         FUN = `[[`,
         "body",
         FUN.VALUE = character(1L)
@@ -176,6 +182,15 @@ format_comments_gh <- function(
     )
 
     return(comments_list)
+}
+
+#' @rdname format
+#' @noRd
+#' @exportS3Method format_comments_gh default
+#' @method format_comments_gh default
+#' @export
+format_comments_gh.default <- function(x, ...) {
+    stop("`x` should be a `gh_response` object.", call. = FALSE)
 }
 
 generate_empty_comments_list <- function(issues_number) {
@@ -467,24 +482,43 @@ format_issue_gh <- function(
 
 #' @rdname format
 #' @noRd
-format_issues_gh <- function(
-    raw_issues,
+format_issues_gh <- function(x, ...) {
+    UseMethod("format_issues_gh")
+}
+
+#' @rdname format
+#' @noRd
+#' @exportS3Method format_issues_gh gh_response
+#' @method format_issues_gh gh_response
+#' @export
+format_issues_gh.gh_response <- function(
+    x,
     raw_comments,
-    verbose = TRUE
+    verbose = TRUE,
+    ...
 ) {
     comments <- format_comments_gh(
-        raw_comments = raw_comments,
+        x = raw_comments,
         verbose = verbose
     )
 
     issues <- lapply(
-        X = raw_issues,
+        X = x,
         FUN = format_issue_gh,
         comments = comments
     ) |>
         do.call(what = rbind)
 
     return(issues)
+}
+
+#' @rdname format
+#' @noRd
+#' @exportS3Method format_issues_gh default
+#' @method format_issues_gh default
+#' @export
+format_issues_gh.default <- function(x, ...) {
+    stop("`x` should be a `gh_response` object.", call. = FALSE)
 }
 
 format_issues_gl <- function(
@@ -540,12 +574,21 @@ format_issues_gl <- function(
 
 #' @rdname format
 #' @noRd
-format_labels_gh <- function(raw_labels, verbose = TRUE) {
+format_labels_gh <- function(x, ...) {
+    UseMethod("format_labels_gh")
+}
+
+#' @rdname format
+#' @noRd
+#' @exportS3Method format_labels_gh gh_response
+#' @method format_labels_gh gh_response
+#' @export
+format_labels_gh.gh_response <- function(x, verbose = TRUE, ...) {
     if (verbose) {
         cat("Reading labels... ")
     }
     new_labels_structure <- lapply(
-        X = raw_labels,
+        X = x,
         FUN = base::`[`,
         c("name", "description", "color")
     ) |>
@@ -562,6 +605,15 @@ format_labels_gh <- function(raw_labels, verbose = TRUE) {
         cat("Done!\n", nrow(new_labels_structure), " labels found.\n", sep = "")
     }
     return(new_labels_structure)
+}
+
+#' @rdname format
+#' @noRd
+#' @exportS3Method format_labels_gh default
+#' @method format_labels_gh default
+#' @export
+format_labels_gh.default <- function(x, ...) {
+    stop("`x` should be a `gh_response` object.", call. = FALSE)
 }
 
 #' @rdname format
@@ -606,14 +658,32 @@ format_milestone_gh <- function(raw_milestone, verbose = TRUE) {
 
 #' @rdname format
 #' @noRd
-format_milestones_gh <- function(raw_milestones, verbose = TRUE) {
+format_milestones_gh <- function(x, ...) {
+    UseMethod("format_milestones_gh")
+}
+
+#' @rdname format
+#' @noRd
+#' @exportS3Method format_milestones_gh gh_response
+#' @method format_milestones_gh gh_response
+#' @export
+format_milestones_gh.gh_response <- function(x, verbose = TRUE, ...) {
     if (verbose) {
         cat("Reading milestones... \n")
     }
-    milestones <- raw_milestones |>
+    milestones <- x |>
         lapply(FUN = format_milestone_gh, verbose = verbose) |>
         do.call(what = rbind) |>
         as.data.frame()
 
     return(milestones)
+}
+
+#' @rdname format
+#' @noRd
+#' @exportS3Method format_milestones_gh default
+#' @method format_milestones_gh default
+#' @export
+format_milestones_gh.default <- function(x, ...) {
+    stop("`x` should be a `gh_response` object.", call. = FALSE)
 }

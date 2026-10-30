@@ -293,7 +293,26 @@ stop_404 <- function(msg) {
 #' a <- try(gh::gh("/repos/owner/nonexistent"))
 #' try(IssueTrackeR:::check_response(a))
 #' @dev
-check_response <- function(x) {
+#' @name check_response
+check_response <- function(x, ...) {
+    UseMethod("check_response")
+}
+
+#' @rdname check_response
+#' @noRd
+#' @exportS3Method check_response gh_response
+#' @method check_response gh_response
+#' @export
+check_response.gh_response <- function(x, ...) {
+    return(invisible(NULL))
+}
+
+#' @rdname check_response
+#' @noRd
+#' @exportS3Method check_response default
+#' @method check_response default
+#' @export
+check_response.default <- function(x, ...) {
     if (!inherits(x, "try-error")) {
         return(invisible(NULL))
     }
