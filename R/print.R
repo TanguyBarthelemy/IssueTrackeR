@@ -16,12 +16,13 @@
 #' @returns The object `x` invisibly.
 #'
 #' @examples
-#' issues_selector <- init_selector(
+#' local_selector <- init_selector(
 #'     source = "Local",
 #'     dataset_dir = system.file("data_issues", package = "IssueTrackeR"),
 #'     dataset_name = NULL
 #' )
-#' my_issues <- get_issues(selector = issues_selector)
+#' my_issues <- get_issues(selector = local_selector)
+#' my_labels <- get_labels(selector = local_selector)
 #'
 #' # Display one issue
 #' print(my_issues[1, ])
@@ -30,13 +31,19 @@
 #' print(my_issues[1:10, ])
 #'
 #' # Display a selector
-#' print(issues_selector)
+#' print(local_selector)
 #'
 #' # Display the summary of one issue
 #' summary(my_issues[2, ])
 #'
-#' # Display the summary of
+#' # Display the summary of issues
 #' summary(my_issues[1:10, ])
+#'
+#' # Display the labels
+#' print(my_labels)
+#'
+#' # Display the summary of labels
+#' summary(my_labels)
 #' @name print-issues
 #'
 #' @exportS3Method print IssueTB
