@@ -19,4 +19,3 @@ test_that("set_default_selector works", {
     expect_identical(get_default_selector(), sel)
     expect_identical(getOption("IssueTrackeR.selector"), sel)
 })
-

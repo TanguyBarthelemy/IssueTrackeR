@@ -4,15 +4,43 @@ test_that("compute_contribution works for IssuesTB object", {
 
     contributions <- compute_contribution(tested_issues)
 
+    # Testing class
     expect_s3_class(contributions, "ContributionsTB")
-    expect_equal(nrow(contributions), 4)
 
-    # Basic check to ensure it's not all zeros and contains expected row names
-    expect_true(any(contributions > 0))
-    expect_true(all(
-        c("opener", "commenter", "closer", "assignee") %in%
-            rownames(contributions)
-    ))
+    # Testing type
+    expect_type(contributions, type = "integer")
+    # Testing column values
+    expect_identical(
+        contributions[, 1L],
+        c(opener = 1L, commenter = 0L, closer = 0L, assignee = 0L)
+    )
+    expect_identical(
+        contributions[, 2L],
+        c(opener = 4L, commenter = 0L, closer = 4L, assignee = 3L)
+    )
+    expect_identical(
+        contributions[, 3L],
+        c(opener = 1L, commenter = 3L, closer = 2L, assignee = 1L)
+    )
+    expect_identical(
+        contributions[, 4L],
+        c(opener = 0L, commenter = 1L, closer = 0L, assignee = 0L)
+    )
+    # Testing column names
+    expect_identical(
+        colnames(contributions),
+        c("AQLT", "charphi", "palatej", "ChristianeHofer")
+    )
+    # Testing row names
+    expect_identical(
+        rownames(contributions),
+        c("opener", "commenter", "closer", "assignee")
+    )
+    # Testing dimensions
+    expect_identical(
+        dim(contributions),
+        c(4L, 4L)
+    )
 })
 
 test_that("compute_contribution with n parameter works", {
@@ -39,14 +67,14 @@ test_that("regroup_vect works correctly", {
     x <- c(10L, 8L, 5L, 3L, 2L, 1L)
 
     # n = 2: top 2 kept, rest summed
-    expect_equal(regroup_vect(x, n = 2L), c(10L, 8L, other = 11L))
+    expect_identical(regroup_vect(x, n = 2L), c(10L, 8L, other = 11L))
 
     # n = Inf: no regrouping
-    expect_equal(regroup_vect(x, n = Inf), x)
+    expect_identical(regroup_vect(x, n = Inf), x)
 
     # n > length: no regrouping
-    expect_equal(regroup_vect(x, n = 10L), x)
+    expect_identical(regroup_vect(x, n = 10L), x)
 
     # n > length: no regrouping
-    expect_equal(regroup_vect(x, n = 6L), x)
+    expect_identical(regroup_vect(x, n = 6L), x)
 })
