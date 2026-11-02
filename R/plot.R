@@ -189,20 +189,25 @@ plot_resolution_bars <- function(x, n = 3L, verbose = TRUE) {
 
 regroup_class <- function(x, n) {
     checkmate::assert_count(n, positive = TRUE)
-
     if (n >= length(x)) {
         return(x)
     }
-    k <- 1L
-    while (length(x) > n) {
-        if (x[k] >= sum(x) / n) {
-            k <- k + 1L
-        } else {
-            x[k + 1L] <- x[k] + x[k + 1L]
-            x <- x[-k]
-        }
+    id <- which.min(x)
+    if (id == 1L) {
+        x[2L] <- sum(x[1L:2L])
+        x <- x[-1L]
+        return(regroup_class(x, n))
+    } else if (id == length(x)) {
+        x[id] <- sum(x[(id - 1L):id])
+        x <- x[-(id - 1L)]
+    } else if (x[id + 1L] > x[id - 1L]) {
+        x[id] <- sum(x[(id - 1L):id])
+        x <- x[-(id - 1L)]
+    } else {
+        x[id + 1L] <- sum(x[id:(id + 1L)])
+        x <- x[-id]
     }
-    return(x)
+    return(regroup_class(x, n))
 }
 
 
