@@ -141,9 +141,61 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">milestones</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Repo: IssueTrackeR  owner: TanguyBarthelemy </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 13 issues. </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">There are 15 issues. </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#80</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Duplicated warning</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ``` r</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> library("IssueTrackeR")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Currently, the default options are:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - location for datasets: /tmp/RtmpYwIItq/data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - name for the datasets: lovsq</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - selector:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Attaching package: 'IssueTrackeR'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; The following objects are masked from 'package:base':</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt;     append, sample, write</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> my_selector &lt;- init_se</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#79</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Message not indicative</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> When we try to plot a chart with wrong item, the error message is not very indicative:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ``` r</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> library("IssueTrackeR")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Currently, the default options are:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - location for datasets: /tmp/RtmpuT1qo5/data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - name for the datasets: hosgz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - selector:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Attaching package: 'IssueTrackeR'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; The following objects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#78</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> [Bug] Don't display missing infos</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dans l'exemple suivant, il y a un bug d'affchage pour les issues commentées, closed et assigned. Aussi, il y a une champ Other (vide) qui ne devrait pas apparaitre dans les issues ouvertes :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ``` r</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> library("IssueTrackeR")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; Currently, the default options are:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - location for datasets: /tmp/RtmpcYHHds/data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #&gt; - name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#77</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> Concernant les labels et les comments...</span>
@@ -165,12 +217,6 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] Comments</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - [ ] State reason</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#71</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Title:</span> `raw_object` have class</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="text-decoration: underline;">Text:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The object from `gh::gh` has classes `gh_response`. We should had S3-method according to this class.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Issue TanguyBarthelemy/IssueTrackeR#70</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -341,7 +387,7 @@ function:</p><ul><li><p>defaults is <code>"list_issues.yaml"</code> for <code>ge
 <span class="r-out co"><span class="r-pr">#&gt;</span>   source  title description     due_on closed_at          creator state</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 GitHub v2.1.0             2027-02-28      &lt;NA&gt; TanguyBarthelemy  open</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   nb_issues_open nb_issues_closed         repo            owner</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1              7                3 IssueTrackeR TanguyBarthelemy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1              6                4 IssueTrackeR TanguyBarthelemy</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                            url</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 https://github.com/TanguyBarthelemy/IssueTrackeR/milestone/7</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>

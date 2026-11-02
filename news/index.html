@@ -66,6 +66,7 @@
 <div class="section level4">
 <h4 id="changed-2-0-0-9000">Changed<a class="anchor" aria-label="anchor" href="#changed-2-0-0-9000"></a></h4>
 <ul><li>All GitHub and GitLab API calls are now routed through dedicated internal wrapper functions (see <code>R/api.R</code>), so that the API layer can be mocked in tests with <code><a href="https://testthat.r-lib.org/reference/local_mocked_bindings.html" class="external-link">testthat::local_mocked_bindings()</a></code>. The exported API is unchanged.</li>
+<li>plot with resolution-time now accepts a <code>n</code> argument to specify the number of groups to display.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="fixed-2-0-0-9000">Fixed<a class="anchor" aria-label="anchor" href="#fixed-2-0-0-9000"></a></h4>
