@@ -4,10 +4,13 @@
 \alias{plot_resolution_bars}
 \title{Plot Issue Resolution Time Distribution}
 \usage{
-plot_resolution_bars(x, verbose = TRUE)
+plot_resolution_bars(x, n = 3L, verbose = TRUE)
 }
 \arguments{
 \item{x}{An object of class \code{IssuesTB}.}
+
+\item{n}{Integer specifying the number of age classes.
+Default: \code{3}.}
 
 \item{verbose}{Boolean indicating whether to print additional information.}
 }

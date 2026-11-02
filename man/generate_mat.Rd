@@ -19,7 +19,7 @@ generate_mat(x, ...)
 
 \item{by}{Character. The category. Default: \code{"creator"}.}
 
-\item{n}{Number of item to create. Default: \code{5}.}
+\item{n}{Integer. Number of item to create. Default: \code{5}.}
 }
 \value{
 \code{ts} matrix of open issue counts by categories.

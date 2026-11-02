@@ -13,6 +13,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   wrapper functions (see `R/api.R`), so that the API layer can be mocked in
   tests with `testthat::local_mocked_bindings()`. The exported API is
   unchanged.
+* plot with resolution-time now accepts a `n` argument to specify the number of groups to display.
 
 ### Fixed
 

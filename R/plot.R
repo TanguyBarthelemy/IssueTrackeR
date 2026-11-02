@@ -59,14 +59,22 @@ get_resolution_times <- function(x, ...) {
 #' @exportS3Method get_resolution_times IssuesTB
 #' @method get_resolution_times IssuesTB
 get_resolution_times.IssuesTB <- function(x, verbose = TRUE, ...) {
-    if (all(is.na(x$closed_at))) {
+    if (nrow(x) == 0L) {
+        if (verbose) {
+            warning("x contains no issues.", call. = FALSE)
+        }
+        return(integer(0L))
+    }
+    differences <- rep(NA_integer_, nrow(x))
+    is_closed <- !is.na(x$closed_at)
+    if (!any(is_closed)) {
         if (verbose) {
             warning("x contains no closed issues.", call. = FALSE)
         }
-        return(invisible(NULL))
+        return(differences)
     }
-    x_solved <- x[!is.na(x$closed_at), ]
-    differences <- difftime(
+    x_solved <- x[is_closed, ]
+    differences[is_closed] <- difftime(
         time1 = x_solved$closed_at,
         time2 = x_solved$created_at,
         units = "secs"
@@ -94,6 +102,7 @@ get_resolution_times.default <- function(...) {
 #' 1-3 years, > 3 years).
 #'
 #' @inheritParams with_labels x
+#' @inheritParams generate_age_mat n
 #' @inheritParams reset_options verbose
 #'
 #' @returns Invisibly returns `NULL`.
@@ -113,8 +122,9 @@ get_resolution_times.default <- function(...) {
 #' @importFrom graphics barplot
 #'
 #' @dev
-plot_resolution_bars <- function(x, verbose = TRUE) {
-    resolution_time <- get_resolution_times(x, verbose = FALSE) / 86400.0
+plot_resolution_bars <- function(x, n = 3L, verbose = TRUE) {
+    resolution_time <- get_resolution_times(x, verbose = FALSE) / 60L
+    resolution_time <- resolution_time[!is.na(resolution_time)]
     if (length(resolution_time) == 0L) {
         if (verbose) {
             warning("x contains no closed issues.", call. = FALSE)
@@ -123,13 +133,27 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
     }
     resolution_time <- resolution_time[!is.na(resolution_time)]
 
-    breaks <- c(0L, 1L, 7L, 30L, 365L, 3L * 365L, max(resolution_time) + 1L)
+    breaks <- c(
+        0L,
+        1L,
+        60L,
+        60L * 24L,
+        60L * 24L * 7L,
+        60L * 24L * 30L,
+        60L * 24L * 91L,
+        60L * 24L * 365L,
+        60L * 24L * 3L * 365L,
+        max(resolution_time) + 1L
+    )
     axis_labels <- c(
+        "< 1 min",
+        "< 1 hour",
         "< 1 day",
-        "1-7 days",
-        "7-30 days",
-        "1 month-1 year",
-        "1-3 years",
+        "< 1 week",
+        "< 1 month",
+        "< 1 quarter",
+        "< 1 year",
+        "< 3 years",
         "> 3 years"
     )
     classes <- cut(
@@ -139,7 +163,8 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
         right = FALSE,
         include.lowest = TRUE
     )
-    counts <- table(classes)
+    counts <- table(classes) |>
+        regroup_class(n = n)
 
     bp <- graphics::barplot(
         counts,
@@ -161,6 +186,25 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
     graphics::box()
     return(invisible(NULL))
 }
+
+regroup_class <- function(x, n) {
+    checkmate::assert_count(n, positive = TRUE)
+
+    if (n >= length(x)) {
+        return(x)
+    }
+    k <- 1L
+    while (length(x) > n) {
+        if (x[k] >= sum(x) / n) {
+            k <- k + 1L
+        } else {
+            x[k + 1L] <- x[k] + x[k + 1L]
+            x <- x[-k]
+        }
+    }
+    return(x)
+}
+
 
 #' @title Plot Empirical Cumulative Distribution of Resolution Times
 #'
@@ -189,6 +233,7 @@ plot_resolution_bars <- function(x, verbose = TRUE) {
 #'
 plot_resolution_ecdf <- function(x, verbose = TRUE) {
     resolution_time <- (1L + get_resolution_times(x, verbose = FALSE)) / 3600.0
+    resolution_time <- resolution_time[!is.na(resolution_time)]
     if (length(resolution_time) == 0L) {
         if (verbose) {
             warning("x contains no closed issues.", call. = FALSE)
@@ -202,8 +247,9 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
         24L,
         24L * 7L,
         24L * 30L,
+        24L * 91L,
         24L * 365L,
-        3L * 365L * 24L,
+        24L * 3L * 365L,
         max(resolution_time) + 1L
     )
     axis_labels <- c(
@@ -211,6 +257,7 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
         "1 day",
         "1 week",
         "1 month",
+        "1 quarter",
         "1 year",
         "3 years",
         "> 3 years"
@@ -227,7 +274,7 @@ plot_resolution_ecdf <- function(x, verbose = TRUE) {
         log = "x",
         xaxt = "n",
         main = "Cumulative distribution",
-        xlab = "Time",
+        xlab = "Time unit",
         ylab = "Proportion of issues"
     )
     graphics::axis(
@@ -457,7 +504,7 @@ generate_age_mat.default <- function(...) {
 #'
 #' @inheritParams with_labels x
 #' @inheritParams plot.IssuesTB by
-#' @param n Number of item to create. Default: `5`.
+#' @param n Integer. Number of item to create. Default: `5`.
 #' @inheritParams count_issues
 #'
 #' @returns `ts` matrix of open issue counts by categories.
@@ -797,7 +844,7 @@ plot.IssuesTB <- function(
         "resolution-time" = withr::with_par(
             new = list(mfrow = c(1L, 2L)),
             code = {
-                plot_resolution_bars(x)
+                plot_resolution_bars(x, n)
                 plot_resolution_ecdf(x)
             }
         )
