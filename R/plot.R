@@ -165,6 +165,12 @@ plot_resolution_bars <- function(x, n = 3L, verbose = TRUE) {
     )
     counts <- table(classes) |>
         regroup_class(n = n)
+    names(counts)[length(counts)] <- gsub(
+        x = names(counts)[length(counts) - 1L],
+        pattern = "<",
+        replacement = ">",
+        fixed = TRUE
+    )
 
     bp <- graphics::barplot(
         counts,
